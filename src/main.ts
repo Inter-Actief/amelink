@@ -1,11 +1,10 @@
 import './assets/main.css'
 
-import { createApp } from 'vue'
+import { createApp, h, provide } from 'vue'
 
 // Apollo
-import { ApolloClient, InMemoryCache } from '@apollo/client/core'
-import { createApolloProvider } from '@vue/apollo-option'
-import VueApolloComponents from '@vue/apollo-components'
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client/core'
+import { DefaultApolloClient } from '@vue/apollo-composable'
 
 // Other plugins/frameworks
 import { createPinia } from 'pinia'
@@ -16,18 +15,21 @@ import App from './App.vue'
 import router from './router'
 import * as Sentry from '@sentry/vue'
 
-const apolloProvider = createApolloProvider({
-    defaultClient: new ApolloClient({
-        uri: import.meta.env.VITE_AMELIE_GRAPHQL_API,
-        cache: new InMemoryCache(),
-    }),
+const link = createHttpLink({ uri: import.meta.env.VITE_AMELIE_GRAPHQL_API })
+const cache = new InMemoryCache()
+const apolloClient = new ApolloClient({ link, cache })
+
+const app = createApp({
+    setup() {
+        provide(DefaultApolloClient, apolloClient)
+    },
+
+    render() {
+        return h(App)
+    },
 })
 
-const app = createApp(App)
-
 app.use(createPinia())
-app.use(apolloProvider)
-app.use(VueApolloComponents)
 app.use(router)
 app.use(gettext)
 app.use(PrimeVue, {
@@ -37,7 +39,6 @@ app.use(PrimeVue, {
 })
 
 // Sentry
-//TODO: Test if works
 if (import.meta.env.VITE_SENTRY_DSN) {
     Sentry.init({
         app,

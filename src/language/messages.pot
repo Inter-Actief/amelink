@@ -2,6 +2,10 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 
+#: src\gettext.ts:18
+msgid "My translation message"
+msgstr ""
+
 #: src\views\AboutView.vue:4
 msgid "Translate me"
 msgstr ""

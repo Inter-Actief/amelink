@@ -9,10 +9,3 @@ export default createGettext({
     defaultLanguage: 'en',
     translations,
 })
-
-// To use gettext on backend:
-// import gettext from '/gettext'
-
-// const { $gettext } = gettext
-
-// const myTest = $gettext('My translation message')
