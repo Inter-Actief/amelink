@@ -1,0 +1,7 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: src\views\AboutView.vue:4
+msgid "Translate me"
+msgstr ""
