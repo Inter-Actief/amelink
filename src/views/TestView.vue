@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>Hey!</h1>
         {{ result?.activities }}
     </div>
 </template>
@@ -21,7 +22,7 @@ const query = graphql(/* GraphQL */`
     }
 `)
 
-const { result } = useQuery(query)
+const { result, loading, error } = useQuery(query)
 </script>
 
 <style scoped></style>
