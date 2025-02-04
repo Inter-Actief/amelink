@@ -1,3 +1,5 @@
+import './assets/styles/style.scss'
+
 import { createApp, h, provide } from 'vue'
 
 // Apollo

@@ -1,6 +1,5 @@
-@use '_variables' as *;
-@use '_fonts' as *;
-@use '_main' as *;
-
-@use '_form' as *;
-@use '_swiper' as *;
+@use './variables' as *;
+@use './fonts' as *;
+@use './main' as *;
+@use './form' as *;
+@use './swiper' as *;
