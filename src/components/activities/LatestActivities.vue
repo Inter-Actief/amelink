@@ -32,14 +32,17 @@ import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { appState } from '@/main.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { excerptText, formattedData, getItemValue } from '../../functions/functions.ts'
 import Cards from '@/components/ui/Cards.vue'
+import { useGettext } from 'vue3-gettext'
 
+const gettext = useGettext();
 const route = useRoute()
 const perpage = ref(5)
-const page = ref(route.query.page ? parseInt(route.query.page) : 1)
+
+//TODO: Create a global
+const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 //, begin_Gt: "${new Date().toISOString()}"
@@ -49,7 +52,7 @@ const query = computed(
     activities(limit: ${perpage.value}, begin_Gt: "2023-05-21T09:32:52.706Z" ) {
       results {
         id
-        description${appState.language}
+        description${gettext.current.capitalize()}
         summary
         begin
         photos {
@@ -72,7 +75,7 @@ const totalCount = computed(() => (queryResults.value ? queryResults.value.total
 
 const date = new Date()
 
-const imageSrc = (src) => {
+const imageSrc = (src: string) => {
     if (!src) {
         return '/src/assets/images/placeholder.jpg'
     }

@@ -26,6 +26,10 @@ const emit = defineEmits(['update:modelValue'])
 const onEditorInput = (event: any) => {
     emit('update:modelValue', event)
 }
+const onEditorReady = () => {
+    // console.log('Editor is ready')
+}
+
 </script>
 
 <style>

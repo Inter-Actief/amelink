@@ -19,18 +19,19 @@
 
 <script setup lang="ts">
 import EpaButton from '@/components/ui/EpaButton.vue'
+import type { RouteLocationRaw } from 'vue-router'
 
-const props = defineProps({
-    to: String,
-    title: String,
-    date: String,
-    text: String,
-    buttonText: String,
-    imageSrc: String,
-    imageWidth: Number,
-    imageHeight: Number,
-    imageAlt: String,
-})
+const props = defineProps<{
+    to: RouteLocationRaw | undefined,
+    title: string,
+    date: string,
+    text: string,
+    buttonText: string,
+    imageSrc: string,
+    imageWidth: number,
+    imageHeight: number,
+    imageAlt: string,
+}>()
 
 const htmlElement = () => {
     return props.to ? 'router-link' : 'div'

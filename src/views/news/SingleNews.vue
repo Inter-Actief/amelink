@@ -41,7 +41,7 @@ const query = computed(
     newsItem(id: "${props.id}") {
       content${appState.language}
       content
-      title${appState.language}
+      title${gettext.current.capitalize()}
       title
       publicationDate
       author

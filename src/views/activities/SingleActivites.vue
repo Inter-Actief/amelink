@@ -52,8 +52,8 @@ const query = computed(
 	() => gql`
   query MyQuery {
     activity(id: "${props.id}") {
-      description${appState.language}
-      summary${appState.language}
+      description${gettext.current.capitalize()}
+      summary${gettext.current.capitalize()}
       begin
       id
       summary

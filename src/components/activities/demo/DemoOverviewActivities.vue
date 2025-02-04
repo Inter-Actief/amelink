@@ -52,8 +52,8 @@ const query = computed(
       results {
         id
         begin
-        description${appState.language}
-        summary${appState.language}
+        description${gettext.current.capitalize()}
+        summary${gettext.current.capitalize()}
         summary
         description
         activityLabel {

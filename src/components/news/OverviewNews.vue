@@ -45,8 +45,8 @@ const query = computed(
     newsItems(limit: ${perpage.value}, offset: ${offset.value}) {
       results {
         id
-        title${gettext.current}
-        introduction${gettext.current}
+        title${gettext.current.capitalize()}
+        introduction${gettext.current.capitalize()}
         title
         introduction
         publicationDate

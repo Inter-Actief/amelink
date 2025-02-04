@@ -1,5 +1,5 @@
 <template>
-    <div :class="['field choicefield checkboxfield', field.class]">
+    <div :class="['field choicefield checkboxfield', field?.class]">
         <FormLabel :field="field" :formid="formid" :id="id" />
 
         <ul>
@@ -17,17 +17,26 @@ import { ref, watch } from 'vue'
 import { getFormFieldID } from '@/functions/functions.ts'
 import FormLabel from '@/components/forms/fields/extras/FormLabel.vue'
 
-const props = defineProps({
-    field: Object,
-    formid: Number,
+//TODO: Better typing for props
+//TODO: Make this form field accessible to all field types
+interface Field {
+    id?: string;
+    class?: string;
+    choices?: Array<{ label: string; value: boolean }>;
+    required?: boolean;
+}
+
+const props = defineProps<{
+    field: Field | undefined,
+    formid: number,
     modelValue: {
-        type: Array,
+        type: Array<any>,
         default: () => [],
     },
     disabled: Boolean,
-})
+}>()
 
-const id = props.field.id ? props.field.id : getFormFieldID()
+const id = props?.field?.id ? props.field.id : getFormFieldID()
 const internalValue = ref(...props.modelValue)
 
 watch(internalValue, (newValue) => {

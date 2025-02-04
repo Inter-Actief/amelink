@@ -10,7 +10,7 @@
         <div class="item">
             <div class="key">{{ $gettext('What') }}</div>
             <div class="value">
-                {{ props.item.activityLabel[`explanation${appState.language}`] }}
+                {{ props.item.activityLabel[`explanation${gettext.current.capitalize()}`] }}
             </div>
         </div>
 
@@ -30,7 +30,7 @@
 
         <div class="item">
             <div class="key">{{ $gettext('Label') }}</div>
-            <div class="value">{{ props.item.activityLabel[`name${appState.language}`] }}</div>
+            <div class="value">{{ props.item.activityLabel[`name${gettext.current.capitalize()}`] }}</div>
         </div>
 
         <div class="item">
@@ -47,7 +47,8 @@
 
 <script setup lang="ts">
 import { formattedData, formattedTime } from '@/functions/functions'
-import { appState } from '@/main'
+import { useGettext } from 'vue3-gettext';
+const gettext = useGettext();
 
 const props = defineProps(['item'])
 </script>
