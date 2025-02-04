@@ -1,8 +1,10 @@
 import { marked } from 'marked'
 import { ref } from 'vue'
-import { appState } from '@/main'
+import { useGettext } from 'vue3-gettext'
+const gettext = useGettext()
 
-export const formattedData = (timestamp, lang = 'En') => {
+// TODO: Test if timestamp type is indeed a number
+export const formattedData = (timestamp: number, lang = 'En') => {
     const date = new Date(timestamp)
 
     const day = String(date.getDate()).padStart(2, '0')
@@ -28,7 +30,7 @@ export const formattedData = (timestamp, lang = 'En') => {
     ]
     const monthIndex = date.getMonth()
 
-    if (appState.language === 'Nl') {
+    if (gettext.current === 'nl') {
         daysOfWeek = [
             'Zondag',
             'Maandag',
@@ -57,7 +59,7 @@ export const formattedData = (timestamp, lang = 'En') => {
     return `${daysOfWeek[dayOfWeekIndex]} ${day} ${months[monthIndex]} ${year}`
 }
 
-export const formattedDataShort = (timestamp) => {
+export const formattedDataShort = (timestamp: number) => {
     const date = new Date(timestamp)
 
     const day = String(date.getDate()).padStart(2, '0')
@@ -66,7 +68,7 @@ export const formattedDataShort = (timestamp) => {
     return `${day}-${month}`
 }
 
-export const formattedTime = (timestamp) => {
+export const formattedTime = (timestamp: number) => {
     const date = new Date(timestamp)
 
     // Get the hours and minutes
@@ -77,12 +79,13 @@ export const formattedTime = (timestamp) => {
     return `${hours}:${minutes}`
 }
 
-export const markedText = (text: string) => {
+//TODO: Make other functions await this function
+export const markedText = async (text: string) => {
     if (text === undefined) {
         return text
     }
 
-    let markedtext: string = marked(text)
+    let markedtext: string = await marked(text)
     markedtext = markedtext.replace(/src="\//g, 'src="https://www.inter-actief.utwente.nl/')
 
     return markedtext
@@ -102,12 +105,14 @@ export const excerptText = (text: string) => {
     return text
 }
 
-export const getItemValue = (item: object, key) => {
+export const getItemValue = (item: object, key: any) => {
     if (!item) {
         return null
     }
-    if (item[`${key}${appState.language}`]) {
-        return item[`${key}${appState.language}`]
+
+    //TODO: Figure out what this is
+    if (item[`${key}${gettext.current}`]) {
+        return item[`${key}${gettext.current}`]
     } else if (item[`${key}`]) {
         return item[`${key}`]
     }
@@ -143,7 +148,7 @@ export const closeMobileMenu = () => {
     document.body.classList.remove('freeze')
 }
 
-export const toggleSubMenu = (index) => {
+export const toggleSubMenu = (index: any) => {
     openSubMenu.value = openSubMenu.value === index ? null : index
 }
 

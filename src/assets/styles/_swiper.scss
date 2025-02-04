@@ -1,3 +1,5 @@
+@use './variables' as vars;
+
 .swiper {
   &:not(:hover) {
     .swiper-button-prev,
@@ -10,10 +12,10 @@
   .swiper-button-next {
     transition: 300ms;
     padding: 1.5rem;
-    background-color: $primary-color;
+    background-color: vars.$primary-color;
     width: 5rem;
     height: 5rem;
-    border-radius: $border-radius;
+    border-radius: vars.$border-radius;
     top: 50%;
     transform: translateY(-50%);
 

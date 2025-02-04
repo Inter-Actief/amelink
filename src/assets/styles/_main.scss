@@ -1,3 +1,5 @@
+@use './variables' as vars;
+
 html {
   font-size: 62.5%;
 }
@@ -39,19 +41,19 @@ img {
   }
 
   &.light {
-    background-color: $color_light2;
+    background-color: vars.$color_light2;
   }
 
   &.blue {
-    background-color: $color_blue;
+    background-color: vars.$color_blue;
   }
 
   &.lightblue {
-    background-color: $color_lightblue;
+    background-color: vars.$color_lightblue;
   }
 
   &.darkblue {
-    background-color: $color_darkblue;
+    background-color: vars.$color_darkblue;
   }
 
   &.static {
@@ -66,17 +68,17 @@ img {
   position: relative;
   z-index: 9;
   width: 90%;
-  max-width: $row-max-width;
+  max-width: vars.$row-max-width;
   margin: 0 auto;
   padding: 3rem 0;
-  gap: $gap_l;
+  gap: vars.$gap_l;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
 }
 
 .container {
   width: 90%;
-  max-width: $row-max-width;
+  max-width: vars.$row-max-width;
   margin: 0 auto;
 }
 
@@ -84,7 +86,7 @@ img {
   grid-column: 1 / -1;
   min-width: 0;
   display: grid;
-  gap: $gap;
+  gap: vars.$gap;
   height: fit-content;
 
   &.heightauto {
@@ -145,7 +147,7 @@ img {
   max-width: 100%;
 }
 
-@media only screen and (max-width: $screen-lg) {
+@media only screen and (max-width: vars.$screen-lg) {
   .ia_column.span3 {
     grid-column: span 6;
   }
@@ -161,13 +163,13 @@ img {
   }
 }
 
-@media only screen and (max-width: $screen-lg) {
+@media only screen and (max-width: vars.$screen-lg) {
   .ia_row {
-    gap: $gap;
+    gap: vars.$gap;
   }
 }
 
-@media only screen and (max-width: $screen-lm) {
+@media only screen and (max-width: vars.$screen-lm) {
   .ia_column.ia_span3 {
     grid-column: span 12;
   }

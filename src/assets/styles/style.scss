@@ -1,5 +1,5 @@
-@use './variables' as *;
-@use './fonts' as *;
-@use './main' as *;
-@use './form' as *;
-@use './swiper' as *;
+@forward './variables';
+@forward './fonts';
+@forward './main';
+@forward './form';
+@forward './swiper';

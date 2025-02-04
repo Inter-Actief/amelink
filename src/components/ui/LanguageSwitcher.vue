@@ -1,57 +1,39 @@
 <template>
     <div class="language_switcher">
         <div class="language_switcher_head">
-            <img :src="`/src/assets/images/flags/${locale}.svg`" />
-            <svg
-                width="16"
-                height="8"
-                viewBox="0 0 16 8"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
+            <img :src="`/src/assets/images/flags/${gettext.current}.svg`" />
+            <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M15.7585 1.26798L8.52697 7.81322C8.24857 8.0618 7.83109 8.0618 7.55246 7.81322L0.240435 1.26798C-0.057737 0.958903 -0.0818271 0.540736 0.186346 0.240746C0.47179 -0.0728798 0.931775 -0.0683344 1.21495 0.186202L7.99972 6.29509L14.7858 0.186202C15.0856 -0.0809249 15.5445 -0.0574716 15.814 0.2402C16.0813 0.540735 16.0585 0.958903 15.7585 1.26798Z"
-                    fill="#fff"
-                />
+                    fill="#fff" />
             </svg>
         </div>
 
         <div class="language_switcher_dorpdown">
             <div class="inner">
-                <div @click="changeLanguage('Nl')">
-                    <img
-                        width="22"
-                        height="16"
-                        aria-label="lang nl"
-                        :src="`/src/assets/images/flags/nl.svg`"
-                    />
-                </div>
-                <div @click="changeLanguage('En')">
-                    <img
-                        width="22"
-                        height="16"
-                        aria-label="lang en"
-                        :src="`/src/assets/images/flags/en.svg`"
-                    />
-                </div>
+                <template v-for="lang in gettext.available">
+                    <div @click="changeLanguage(lang)">
+                        <img width="22" height="16" :aria-label="`lang ${lang}`"
+                            :src="`/src/assets/images/flags/${lang}.svg`" />
+                    </div>
+                </template>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { appState } from '@/main'
-import { useI18n } from 'vue-i18n'
 import { closeMobileMenu } from '@/functions/functions'
+import { useGettext } from 'vue3-gettext'
+const gettext = useGettext();
 
-const { t, locale } = useI18n()
-
-function changeLanguage(newLanguage) {
-    if (appState.language === newLanguage) {
+//TODO: Make this in a language functions util / pinia store
+function changeLanguage(newLanguage: string) {
+    if (gettext.current === newLanguage) {
         return
     }
-    appState.language = newLanguage
-    locale.value = newLanguage.toLowerCase()
+
+    gettext.current = newLanguage;
 
     localStorage.setItem('locale', newLanguage)
 

@@ -1,11 +1,13 @@
+@use './variables' as vars;
+
 /*Forms*/
 .ia_form {
   display: grid;
-  gap: $gap_sm;
+  gap: vars.$gap_sm;
 
   .fields {
     display: grid;
-    gap: $gap_xs;
+    gap: vars.$gap_xs;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(auto-fill, auto);
     width: 100%;
@@ -20,7 +22,7 @@
         font-size: 1.6rem;
 
         > span {
-          color: $color_red;
+          color: vars.$color_red;
         }
       }
 
@@ -35,13 +37,13 @@
         border: 0.1rem solid transparent;
         background: #fff;
         padding: 1.2rem 1.5rem;
-        border-radius: $border-radius;
+        border-radius: vars.$border-radius;
         display: block;
         width: 100%;
         font-size: inherit;
 
         &:focus {
-          border: 0.1rem solid $card_border_color;
+          border: 0.1rem solid vars.$card_border_color;
         }
 
         &:disabled {
@@ -174,7 +176,7 @@
     grid-column: span 12;
   }
 
-  @media only screen and (max-width: $screen-lm) {
+  @media only screen and (max-width: vars.$screen-lm) {
     &.span3 {
       grid-column: span 6;
     }
@@ -190,7 +192,7 @@
     }
   }
 
-  @media only screen and (max-width: $screen-sm) {
+  @media only screen and (max-width: vars.$screen-sm) {
     &.span3 {
       grid-column: span 12;
     }
@@ -279,6 +281,6 @@
 .form_box {
   width: 100%;
   padding: 4rem;
-  background-color: $color_light2;
-  border-radius: $border-radius;
+  background-color: vars.$color_light2;
+  border-radius: vars.$border-radius;
 }
