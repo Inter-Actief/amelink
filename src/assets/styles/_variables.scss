@@ -1,0 +1,72 @@
+//Screen
+$screen-xs: 38rem;
+$screen-sm: 48rem;
+$screen-lm: 64rem;
+$screen-md: 76.8rem;
+$screen-lg: 98rem;
+$screen-xl: 120rem;
+$screen-xxl: 140rem;
+$screen-xxxl: 192rem;
+
+//colors
+$color_white: #FFF;
+$color_light: #EDEDED;
+$color_purple: #DD53FF;
+$color_blue: #1D428A;
+$color_darkblue: #354786;
+$color_lightblue: #43C7FF;
+$color_red: #DA5F5F;
+$color_dark: #0D1016;
+$color_dark-hover: #24262B;
+$color_black: #000;
+
+$color_light2: rgba($color_blue, 0.05);
+
+//colors
+$primary-color: $color_blue;
+$secondary-color: $color_lightblue;
+$background-color: $color_light;
+
+//general
+$row-extra-small: 80rem;
+$row-small: 100rem;
+$row-default: 120rem;
+$row-large: 150rem;
+$row-big: 160rem;
+$row-full: 100%;
+
+$row-width: 90%;
+$row-max-width: $row-large;
+
+$gap-l: 6rem;
+$gap: 3rem;
+$gap_sm: 1.5rem;
+$gap_xs: 1rem;
+$gap_xxs: 0.5rem;
+
+
+$border-radius: 0.8rem;
+$border-radius-full: 100%;
+$border-color: rgba($color_blue, 0.5);
+
+//Fonts
+$font-family: 'Inter';
+$font-size: 1.8rem;
+$font-size-small: 1.5rem;
+$font-size-extra-small: 1.3rem;
+$font-size-large: 2rem;
+$line-height: 2.52rem;
+$text-color: #1E1E1E;
+$text-color-light: #fff;
+
+//buttons
+$button-background-color: $primary-color;
+$button-background-color-hover: $secondary-color;
+$button-text-color: $text-color-light;
+$button-border-radius: $border-radius;
+
+
+//cards full #1d428b0d
+$card_background_color: rgba($color_blue, 0.05);
+$card_border_color: rgba($color_blue, 0.5);
+
