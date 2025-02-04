@@ -1,23 +1,20 @@
 <template>
-
-    <header id="header" :class="[(isDesktop ? '' : 'mobile')]">
-
+    <header id="header" :class="[isDesktop ? '' : 'mobile']">
         <div class="ia_section">
             <div class="ia_row">
-
                 <div id="header_logo" class="ia_column">
-                    <Logo/>
+                    <Logo />
                 </div>
 
                 <div id="header_info" class="ia_column">
-
-                    <SearchToggle v-if="isDesktop"/>
+                    <SearchToggle v-if="isDesktop" />
 
                     <EpaButton
                         v-if="isTablet || isDesktop"
                         href="https://www.inter-actief.utwente.nl/oidc/authenticate/"
                         target="_blank"
-                        :class="['white', isTablet ? 'small' : '']">
+                        :class="['white', isTablet ? 'small' : '']"
+                    >
                         {{ $t('Become a member') }}
                     </EpaButton>
 
@@ -25,48 +22,41 @@
                         v-if="isTablet || isDesktop"
                         href="https://www.inter-actief.utwente.nl/oidc/authenticate/"
                         target="_blank"
-                        :class="['white', isTablet ? 'small' : '']">
+                        :class="['white', isTablet ? 'small' : '']"
+                    >
                         {{ $t('Sign-in') }}
                     </EpaButton>
 
                     <button class="mobilemenubutton" v-if="!isDesktop" @click="toggleMobileMenu()">
-                        <EpaIcon icon="menu"/>
+                        <EpaIcon icon="menu" />
                     </button>
-
                 </div>
 
                 <div v-if="isDesktop" id="header_menu" class="ia_column">
                     <MainMenu location="header" />
                 </div>
-
             </div>
         </div>
 
-        <div id="mobilemenu" v-if="!isDesktop" :class="[(openMobileMenu ? 'open' : '')]">
+        <div id="mobilemenu" v-if="!isDesktop" :class="[openMobileMenu ? 'open' : '']">
             <div class="mobile_menu_inner">
                 <MainMenu location="mobilemenu" animation="true" search="true" info="true" />
             </div>
         </div>
-
     </header>
-
-
-
 </template>
 
-<script setup>
-import Logo from "@/components/ui/Logo.vue";
-import MainMenu from "@/components/menu/MainMenu.vue";
-import EpaButton from "@/components/ui/EpaButton.vue";
-import {isDesktop, isTablet, openMobileMenu, toggleMobileMenu} from "@/functions/functions";
-import EpaIcon from "@/components/ui/EpaIcon.vue";
-import SearchToggle from "@/components/ui/SearchToggle.vue";
-import Search from "@/components/ui/Search.vue";
-
+<script setup lang="ts">
+import Logo from '@/components/ui/Logo.vue'
+import MainMenu from '@/components/menu/MainMenu.vue'
+import EpaButton from '@/components/ui/EpaButton.vue'
+import { isDesktop, isTablet, openMobileMenu, toggleMobileMenu } from '@/functions/functions'
+import EpaIcon from '@/components/ui/EpaIcon.vue'
+import SearchToggle from '@/components/ui/SearchToggle.vue'
+import Search from '@/components/ui/Search.vue'
 </script>
 
 <style scoped lang="scss">
-
 #header {
     background-color: $primary-color;
     color: $color_white;
@@ -121,9 +111,7 @@ import Search from "@/components/ui/Search.vue";
         visibility: hidden;
     }
 
-
     &.mobile {
-
         .ia_section {
             height: 7.5rem;
             align-items: center;
@@ -133,7 +121,6 @@ import Search from "@/components/ui/Search.vue";
             z-index: 2;
             background-color: $primary-color;
         }
-
 
         #mobilemenu {
             width: 100%;
@@ -153,9 +140,7 @@ import Search from "@/components/ui/Search.vue";
                 transform: translateY(0);
 
                 .mobile_menu_inner {
-
                     .mobile_menu_info {
-
                     }
                 }
             }
@@ -178,7 +163,5 @@ import Search from "@/components/ui/Search.vue";
             }
         }
     }
-
-
 }
 </style>

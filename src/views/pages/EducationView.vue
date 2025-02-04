@@ -1,69 +1,61 @@
 <template>
-
     <div class="ia_section">
         <div class="ia_row">
-
             <div class="ia_column span4 heightauto">
-
                 <div class="education_sidebar">
-
                     <div class="head">{{ $t('Information') }}</div>
 
                     <div class="education_menu">
-
                         <div class="menu">
                             <div class="title">{{ $t('General') }}</div>
 
                             <div class="items">
                                 <div class="item" v-for="item in queryItems" :key="item">
-                                    <div class="name" @click="scrolltop(`item_${item.id}`)" >{{ getItemValue(item, 'name') }}</div>
+                                    <div class="name" @click="scrolltop(`item_${item.id}`)">
+                                        {{ getItemValue(item, 'name') }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
 
             <div class="ia_column span8">
-
                 <div class="education">
-                    <div class="item" v-for="item in queryItems" :key="item" :id="`item_${item.id}`">
-
+                    <div
+                        class="item"
+                        v-for="item in queryItems"
+                        :key="item"
+                        :id="`item_${item.id}`"
+                    >
                         <div class="title">
                             <h1>{{ getItemValue(item, 'name') }}</h1>
                         </div>
 
                         <div class="text">
-                            <div v-html="markedText( getItemValue(item, 'content') )"></div>
+                            <div v-html="markedText(getItemValue(item, 'content'))"></div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
-
-
 </template>
 
 <script setup lang="ts">
-
-import {inject, onMounted, onUnmounted} from 'vue';
-import {useQuery} from '@vue/apollo-composable'
+import { inject, onMounted, onUnmounted } from 'vue'
+import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
-import {computed, ref, watch} from "vue";
-import {getItemValue, markedText} from "@/functions/functions";
+import { computed, ref, watch } from 'vue'
+import { getItemValue, markedText } from '@/functions/functions'
 
-const props = defineProps(['id', 'slug']);
+const props = defineProps(['id', 'slug'])
 
-const appState = inject('appState');
+const appState = inject('appState')
 
-const query = computed(() => gql`
+const query = computed(
+    () => gql`
 
   query MyQuery {
       educationpages {
@@ -77,59 +69,54 @@ const query = computed(() => gql`
         }
       }
   }
-`);
+`,
+)
 
-const {result, loading, error, refetch} = useQuery(query);
+const { result, loading, error, refetch } = useQuery(query)
 
-const queryResults = computed(() => result.value?.educationpages);
-const queryItems = computed(() => queryResults.value ? queryResults.value.results : null)
-
+const queryResults = computed(() => result.value?.educationpages)
+const queryItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 
 watch(queryItems, (newValue, oldValue) => {
     if (newValue) {
-        education_sidebar();
+        education_sidebar()
     }
-});
+})
 
 function education_sidebar() {
     setTimeout(() => {
-            const element = document.querySelector('.education_sidebar');
-            const height = element.offsetHeight;
+        const element = document.querySelector('.education_sidebar')
+        const height = element.offsetHeight
 
-            if (window.innerHeight > height + 60) {
-                element.classList.add('sticky');
-            } else {
-                element.classList.remove('sticky');
-            }
+        if (window.innerHeight > height + 60) {
+            element.classList.add('sticky')
+        } else {
+            element.classList.remove('sticky')
         }
-        , 100);
+    }, 100)
 }
-
 
 function scrolltop(item: string) {
     if (item === null) {
-        return;
+        return
     }
 
     window.scrollTo({
         top: document.getElementById(item).offsetTop,
-        behavior: 'smooth'
-    });
+        behavior: 'smooth',
+    })
 }
 
 onMounted(() => {
-    window.addEventListener('resize', education_sidebar);
-    education_sidebar();
-});
+    window.addEventListener('resize', education_sidebar)
+    education_sidebar()
+})
 
 // Remove event listener when the component is unmounted
 onUnmounted(() => {
-    window.removeEventListener('resize', education_sidebar);
-});
-
-
+    window.removeEventListener('resize', education_sidebar)
+})
 </script>
-
 
 <style scoped lang="scss">
 .education {
@@ -137,7 +124,7 @@ onUnmounted(() => {
     gap: $gap;
 
     .item {
-        border: 0 solid #EDEDED;
+        border: 0 solid #ededed;
         padding: 4rem;
         display: grid;
         gap: $gap;
@@ -150,7 +137,6 @@ onUnmounted(() => {
         }
     }
 }
-
 
 .education_sidebar {
     height: fit-content;
@@ -191,7 +177,8 @@ onUnmounted(() => {
                     cursor: pointer;
                     width: fit-content;
                     transition: 300ms;
-                    background: linear-gradient(currentColor, currentColor) bottom / 0 0.2rem no-repeat;
+                    background: linear-gradient(currentColor, currentColor) bottom / 0 0.2rem
+                        no-repeat;
                     background-position: left bottom;
 
                     &:hover {

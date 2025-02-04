@@ -1,9 +1,10 @@
 <template>
     <div v-if="totalItems > 0" class="pagination">
         <ul>
-
             <li>
-                <button @click="prevPage" :disabled="currentPage === 1">{{ $t('Previous') }}</button>
+                <button @click="prevPage" :disabled="currentPage === 1">
+                    {{ $t('Previous') }}
+                </button>
             </li>
 
             <li>
@@ -11,38 +12,40 @@
             </li>
 
             <li>
-                <button @click="nextPage" :disabled="currentPage >= totalPages">{{ $t('Next') }}</button>
+                <button @click="nextPage" :disabled="currentPage >= totalPages">
+                    {{ $t('Next') }}
+                </button>
             </li>
         </ul>
     </div>
 </template>
 
-<script setup>
-import {computed, defineEmits, ref} from 'vue';
-import {useRouter} from "vue-router";
+<script setup lang="ts">
+import { computed, defineEmits, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-const props = defineProps(['totalItems', 'itemsPerPage', 'page']);
-const router = useRouter();
-const currentPage = ref(props.page);
-const totalPages = computed(() => Math.ceil(props.totalItems / props.itemsPerPage));
+const props = defineProps(['totalItems', 'itemsPerPage', 'page'])
+const router = useRouter()
+const currentPage = ref(props.page)
+const totalPages = computed(() => Math.ceil(props.totalItems / props.itemsPerPage))
 
 const prevPage = () => {
     if (currentPage.value > 1) {
-        currentPage.value--;
-        emits('prev');
-        router.push({query: {page: currentPage.value}});
+        currentPage.value--
+        emits('prev')
+        router.push({ query: { page: currentPage.value } })
     }
-};
+}
 
-const emits = defineEmits(['next', 'prev']);
+const emits = defineEmits(['next', 'prev'])
 
 const nextPage = () => {
     if (currentPage.value < totalPages.value) {
-        currentPage.value++;
-        emits('next');
-        router.push({query: {page: currentPage.value}});
+        currentPage.value++
+        emits('next')
+        router.push({ query: { page: currentPage.value } })
     }
-};
+}
 </script>
 
 <style scoped lang="scss">

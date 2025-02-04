@@ -1,10 +1,9 @@
 <template>
-
     <div class="ia_section">
         <div class="ia_row">
             <div class="ia_column span6">
-
-                <div><h4>Contact us</h4>
+                <div>
+                    <h4>Contact us</h4>
                     <ul>
                         <li>Zilverling, kamer E208</li>
                         <li>Drienerlolaan 5</li>
@@ -12,27 +11,19 @@
                         <li>The Netherlands</li>
                     </ul>
                 </div>
-
             </div>
             <div class="ia_column span6">
-
-                <ContactForm/>
-
+                <ContactForm />
             </div>
-
         </div>
     </div>
 
-
     <div class="ia_section googlemaps">
-        <GoogleMaps/>
+        <GoogleMaps />
     </div>
-
 </template>
 
 <script setup lang="ts">
-
-import ContactForm from "@/components/forms/ContactForm.vue";
-import GoogleMaps from "@/components/footer/GoogleMaps.vue";
-
+import ContactForm from '@/components/forms/ContactForm.vue'
+import GoogleMaps from '@/components/footer/GoogleMaps.vue'
 </script>

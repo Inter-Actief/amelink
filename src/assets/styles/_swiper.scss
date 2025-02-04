@@ -1,29 +1,29 @@
 .swiper {
-    &:not(:hover) {
-        .swiper-button-prev,
-        .swiper-button-next {
-        opacity: 0;
-        }
-    }
-
+  &:not(:hover) {
     .swiper-button-prev,
     .swiper-button-next {
-        transition: 300ms;
-        padding: 1.5rem;
-        background-color: $primary-color;
-        width: 5rem;
-        height: 5rem;
-        border-radius: $border-radius;
-        top: 50%;
-        transform: translateY(-50%);
-
-        &:after {
-            color: #fff;
-            font-size: 2rem;
-        }
-
-        &.swiper-button-disabled {
-            pointer-events: none;
-        }
+      opacity: 0;
     }
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    transition: 300ms;
+    padding: 1.5rem;
+    background-color: $primary-color;
+    width: 5rem;
+    height: 5rem;
+    border-radius: $border-radius;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &:after {
+      color: #fff;
+      font-size: 2rem;
+    }
+
+    &.swiper-button-disabled {
+      pointer-events: none;
+    }
+  }
 }

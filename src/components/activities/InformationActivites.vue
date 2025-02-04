@@ -1,8 +1,5 @@
-
 <template>
-
     <div class="activity_information" v-if="props.item">
-
         <h2>{{ $t('Who, what, where, when...') }}</h2>
 
         <div class="item">
@@ -12,7 +9,9 @@
 
         <div class="item">
             <div class="key">{{ $t('What') }}</div>
-            <div class="value">{{ props.item.activityLabel[`explanation${appState.language}`] }}</div>
+            <div class="value">
+                {{ props.item.activityLabel[`explanation${appState.language}`] }}
+            </div>
         </div>
 
         <div class="item">
@@ -22,7 +21,11 @@
 
         <div class="item">
             <div class="key">{{ $t('When') }}</div>
-            <div class="value">{{ formattedData( props.item.enrollmentBegin ) }} {{ $t('from') }} {{ formattedTime( props.item.enrollmentBegin ) }} {{ $t('until') }} {{ formattedTime( props.item.enrollmentEnd ) }}</div>
+            <div class="value">
+                {{ formattedData(props.item.enrollmentBegin) }} {{ $t('from') }}
+                {{ formattedTime(props.item.enrollmentBegin) }} {{ $t('until') }}
+                {{ formattedTime(props.item.enrollmentEnd) }}
+            </div>
         </div>
 
         <div class="item">
@@ -33,31 +36,23 @@
         <div class="item">
             <div class="key">{{ $t('Costs') }}</div>
             <div class="value">
-                <template v-if="props.item.hasCosts">
-                    {{ props.item.price }} euro
-                </template>
+                <template v-if="props.item.hasCosts"> {{ props.item.price }} euro </template>
                 <template v-else>
                     {{ $t('Free') }}
                 </template>
             </div>
         </div>
-
     </div>
-
 </template>
 
 <script setup lang="ts">
+import { formattedData, formattedTime } from '@/functions/functions'
+import { appState } from '@/main'
 
-import {formattedData, formattedTime} from "@/functions/functions";
-import {appState} from "@/main";
-
-const props = defineProps(['item']);
-
+const props = defineProps(['item'])
 </script>
 
-
 <style scoped lang="scss">
-
 .activity_information {
     width: 100%;
     padding: 4rem;
@@ -77,5 +72,4 @@ const props = defineProps(['item']);
         }
     }
 }
-
 </style>

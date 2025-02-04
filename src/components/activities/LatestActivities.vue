@@ -1,61 +1,58 @@
 <template>
-
-
-
     <div class="latestactivities">
-
         <div class="bar">
             <span>{{ $t('Actual Activities') }}</span>
-            <EpaButton
-                :to="{ name: 'activities', params: { } }"
-                class="link small">
+            <EpaButton :to="{ name: 'activities', params: {} }" class="link small">
                 {{ $t('View all activities') }}
             </EpaButton>
         </div>
 
         <div class="items">
-            <template
-                v-if="newsItems !== null"
-                v-for="item in newsItems"
-                :key="item"
-            >
-                <Cards
-                    :title="getItemValue(item, 'summary')"
-                    :date="formattedData(item.begin)"
-                    :text="excerptText( getItemValue(item, 'description') )"
-                    :to="{ name: 'singleactivities', params: { id: item.id } }"
-                    buttonText="Enroll now!"
-                    :imageSrc="imageSrc(item.photos?.[0]?.thumbMedium)"
-                    :imageAlt="getItemValue(item, 'summary')"
-                    :imageHeight="item.photos?.[0]?.thumbMediumHeight ? item.photos?.[0]?.thumbMediumHeight : ''"
-                    :imageWidth="item.photos?.[0]?.thumbMediumWidth ? item.photos?.[0]?.thumbMediumWidth : ''"
-                />
-
-            </template>
+            <div v-if="newsItems !== null">
+                <template v-for="item in newsItems" :key="item">
+                    <Cards
+                        :title="getItemValue(item, 'summary')"
+                        :date="formattedData(item.begin)"
+                        :text="excerptText(getItemValue(item, 'description'))"
+                        :to="{ name: 'singleactivities', params: { id: item.id } }"
+                        buttonText="Enroll now!"
+                        :imageSrc="imageSrc(item.photos?.[0]?.thumbMedium)"
+                        :imageAlt="getItemValue(item, 'summary')"
+                        :imageHeight="
+                            item.photos?.[0]?.thumbMediumHeight
+                                ? item.photos?.[0]?.thumbMediumHeight
+                                : ''
+                        "
+                        :imageWidth="
+                            item.photos?.[0]?.thumbMediumWidth
+                                ? item.photos?.[0]?.thumbMediumWidth
+                                : ''
+                        "
+                    />
+                </template>
+            </div>
         </div>
-
     </div>
-
-
 </template>
 
-<script setup>
-import {useQuery} from '@vue/apollo-composable'
+<script setup lang="ts">
+import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
-import {computed, ref} from "vue";
-import {useRoute} from "vue-router";
-import {appState} from "@/main.ts";
-import EpaButton from "@/components/ui/EpaButton.vue";
-import {excerptText, formattedData, getItemValue} from "../../functions/functions.ts";
-import Cards from "@/components/ui/Cards.vue";
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { appState } from '@/main.ts'
+import EpaButton from '@/components/ui/EpaButton.vue'
+import { excerptText, formattedData, getItemValue } from '../../functions/functions.ts'
+import Cards from '@/components/ui/Cards.vue'
 
-const route = useRoute();
-const perpage = ref(5);
-const page = ref((route.query.page ? parseInt(route.query.page) : 1));
-const offset = ref((page.value > 1 ? ((page.value - 1) * perpage.value) : 0));
+const route = useRoute()
+const perpage = ref(5)
+const page = ref(route.query.page ? parseInt(route.query.page) : 1)
+const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 //, begin_Gt: "${new Date().toISOString()}"
-const query = computed(() => gql`
+const query = computed(
+    () => gql`
   query MyQuery {
     activities(limit: ${perpage.value}, begin_Gt: "2023-05-21T09:32:52.706Z" ) {
       results {
@@ -73,28 +70,26 @@ const query = computed(() => gql`
       totalCount
     }
   }
-`);
+`,
+)
 
-const {result, loading, error, refetch} = useQuery(query);
-const queryResults = computed(() => result.value?.activities);
-const newsItems = computed(() => queryResults.value ? queryResults.value.results : null)
-const totalCount = computed(() => queryResults.value ? queryResults.value.totalCount : null)
+const { result, loading, error, refetch } = useQuery(query)
+const queryResults = computed(() => result.value?.activities)
+const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
+const totalCount = computed(() => (queryResults.value ? queryResults.value.totalCount : null))
 
-const date = new Date();
+const date = new Date()
 
 const imageSrc = (src) => {
-
-    if( !src ) {
-        return "/src/assets/images/placeholder.jpg";
+    if (!src) {
+        return '/src/assets/images/placeholder.jpg'
     }
 
-    return `https://media.ia.utwente.nl/amelie/${src}`;
+    return `https://media.ia.utwente.nl/amelie/${src}`
 }
-
 </script>
 
 <style scoped lang="scss">
-
 .latestactivities {
     border-radius: $border-radius $border-radius 0 0;
     color: #000;
@@ -124,5 +119,4 @@ const imageSrc = (src) => {
         }
     }
 }
-
 </style>

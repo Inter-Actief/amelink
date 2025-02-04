@@ -1,176 +1,174 @@
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 body {
-    color: #1D428A;
-    font-family: Inter;
-    font-size: 1.8rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.4em;
+  color: #1d428a;
+  font-family: Inter;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4em;
 
-    &.freeze {
-        overflow: hidden;
-    }
+  &.freeze {
+    overflow: hidden;
+  }
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
-    margin: 0;
-    font-weight: normal;
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
 }
 
 img {
-    display: block;
-    max-width: 100%;
+  display: block;
+  max-width: 100%;
 }
 
 .ia_section {
-    position: relative;
-    padding: 3rem 0;
-    background-position: center;
-    background-size: cover;
+  position: relative;
+  padding: 3rem 0;
+  background-position: center;
+  background-size: cover;
 
-    &.clean {
-        padding: 0;
-    }
+  &.clean {
+    padding: 0;
+  }
 
-    &.light {
-        background-color: $color_light2;
-    }
+  &.light {
+    background-color: $color_light2;
+  }
 
-    &.blue {
-        background-color: $color_blue;
-    }
+  &.blue {
+    background-color: $color_blue;
+  }
 
-    &.lightblue {
-        background-color: $color_lightblue;
-    }
+  &.lightblue {
+    background-color: $color_lightblue;
+  }
 
-    &.darkblue {
-        background-color: $color_darkblue;
-    }
+  &.darkblue {
+    background-color: $color_darkblue;
+  }
 
-    &.static {
-        position: static;
-        .ia_row {
-            position: static;
-        }
+  &.static {
+    position: static;
+    .ia_row {
+      position: static;
     }
+  }
 }
 
 .ia_row {
-    position: relative;
-    z-index: 9;
-    width: 90%;
-    max-width: $row-max-width;
-    margin: 0 auto;
-    padding: 3rem 0;
-    gap: $gap_l;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
+  position: relative;
+  z-index: 9;
+  width: 90%;
+  max-width: $row-max-width;
+  margin: 0 auto;
+  padding: 3rem 0;
+  gap: $gap_l;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
 }
 
 .container {
-    width: 90%;
-    max-width: $row-max-width;
-    margin: 0 auto;
+  width: 90%;
+  max-width: $row-max-width;
+  margin: 0 auto;
 }
 
 .ia_column {
-    grid-column: 1 / -1;
-    min-width: 0;
-    display: grid;
-    gap: $gap;
-    height: fit-content;
+  grid-column: 1 / -1;
+  min-width: 0;
+  display: grid;
+  gap: $gap;
+  height: fit-content;
 
-    &.heightauto {
-        height: auto;
-    }
+  &.heightauto {
+    height: auto;
+  }
 
-    &.span1 {
-        grid-column: span 1;
-    }
+  &.span1 {
+    grid-column: span 1;
+  }
 
-    &.span2 {
-        grid-column: span 2;
-    }
+  &.span2 {
+    grid-column: span 2;
+  }
 
-    &.span3 {
-        grid-column: span 3;
-    }
+  &.span3 {
+    grid-column: span 3;
+  }
 
-    &.span4 {
-        grid-column: span 4;
-    }
+  &.span4 {
+    grid-column: span 4;
+  }
 
-    &.span5 {
-        grid-column: span 5;
-    }
+  &.span5 {
+    grid-column: span 5;
+  }
 
-    &.span6 {
-        grid-column: span 6;
-    }
+  &.span6 {
+    grid-column: span 6;
+  }
 
-    &.span7 {
-        grid-column: span 7;
-    }
+  &.span7 {
+    grid-column: span 7;
+  }
 
-    &.span8 {
-        grid-column: span 8;
-    }
+  &.span8 {
+    grid-column: span 8;
+  }
 
-    &.span9 {
-        grid-column: span 9;
-    }
+  &.span9 {
+    grid-column: span 9;
+  }
 
-    &.span10 {
-        grid-column: span 10;
-    }
+  &.span10 {
+    grid-column: span 10;
+  }
 
-    &.span11 {
-        grid-column: span 11;
-    }
+  &.span11 {
+    grid-column: span 11;
+  }
 
-    &.span12 {
-        grid-column: span 12;
-    }
+  &.span12 {
+    grid-column: span 12;
+  }
 }
 
 .ia_module {
-    width: 100%;
-    max-width: 100%;
-}
-
-
-
-@media only screen and (max-width: $screen-lg) {
-    .ia_column.span3 {
-        grid-column: span 6;
-    }
-    .ia_column.span4,
-    .ia_column.span5,
-    .ia_column.span6,
-    .ia_column.span7,
-    .ia_column.span8,
-    .ia_column.span9,
-    .ia_column.span10,
-    .ia_column.span11 {
-        grid-column: span 12;
-    }
+  width: 100%;
+  max-width: 100%;
 }
 
 @media only screen and (max-width: $screen-lg) {
-    .ia_row {
-        gap: $gap
-    }
+  .ia_column.span3 {
+    grid-column: span 6;
+  }
+  .ia_column.span4,
+  .ia_column.span5,
+  .ia_column.span6,
+  .ia_column.span7,
+  .ia_column.span8,
+  .ia_column.span9,
+  .ia_column.span10,
+  .ia_column.span11 {
+    grid-column: span 12;
+  }
+}
+
+@media only screen and (max-width: $screen-lg) {
+  .ia_row {
+    gap: $gap;
+  }
 }
 
 @media only screen and (max-width: $screen-lm) {
-    .ia_column.ia_span3 {
-        grid-column: span 12;
-    }
+  .ia_column.ia_span3 {
+    grid-column: span 12;
+  }
 }

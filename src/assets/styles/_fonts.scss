@@ -13,7 +13,7 @@ h2 {
 }
 
 h3 {
-  font-size: 2.0rem;
+  font-size: 2rem;
   line-height: normal;
   font-weight: 700;
 }
@@ -24,22 +24,37 @@ h4 {
   font-weight: 700;
 }
 
+$p_spacing: 1.8rem;
 
-$p_spacing : 1.8rem;
-
-p:not(:last-child) { padding-bottom: $p_spacing; }
+p:not(:last-child) {
+  padding-bottom: $p_spacing;
+}
 
 .text {
-  h1:not(:last-child) { padding-bottom: $p_spacing; }
-  h2:not(:last-child) { padding-bottom: $p_spacing; }
-  h3:not(:last-child) { padding-bottom: $p_spacing; }
-  h4:not(:last-child) { padding-bottom: $p_spacing; }
-  h5:not(:last-child) { padding-bottom: $p_spacing; }
-  h6:not(:last-child) { padding-bottom: $p_spacing; }
+  h1:not(:last-child) {
+    padding-bottom: $p_spacing;
+  }
+  h2:not(:last-child) {
+    padding-bottom: $p_spacing;
+  }
+  h3:not(:last-child) {
+    padding-bottom: $p_spacing;
+  }
+  h4:not(:last-child) {
+    padding-bottom: $p_spacing;
+  }
+  h5:not(:last-child) {
+    padding-bottom: $p_spacing;
+  }
+  h6:not(:last-child) {
+    padding-bottom: $p_spacing;
+  }
 
   ul:not(:last-child),
   ol:not(:last-child),
-  img:not(:last-child) { padding-bottom: $p_spacing; }
+  img:not(:last-child) {
+    padding-bottom: $p_spacing;
+  }
 
   strong {
     font-weight: 700;

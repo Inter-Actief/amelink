@@ -9,15 +9,15 @@ $screen-xxl: 140rem;
 $screen-xxxl: 192rem;
 
 //colors
-$color_white: #FFF;
-$color_light: #EDEDED;
-$color_purple: #DD53FF;
-$color_blue: #1D428A;
+$color_white: #fff;
+$color_light: #ededed;
+$color_purple: #dd53ff;
+$color_blue: #1d428a;
 $color_darkblue: #354786;
-$color_lightblue: #43C7FF;
-$color_red: #DA5F5F;
-$color_dark: #0D1016;
-$color_dark-hover: #24262B;
+$color_lightblue: #43c7ff;
+$color_red: #da5f5f;
+$color_dark: #0d1016;
+$color_dark-hover: #24262b;
 $color_black: #000;
 
 $color_light2: rgba($color_blue, 0.05);
@@ -44,7 +44,6 @@ $gap_sm: 1.5rem;
 $gap_xs: 1rem;
 $gap_xxs: 0.5rem;
 
-
 $border-radius: 0.8rem;
 $border-radius-full: 100%;
 $border-color: rgba($color_blue, 0.5);
@@ -56,7 +55,7 @@ $font-size-small: 1.5rem;
 $font-size-extra-small: 1.3rem;
 $font-size-large: 2rem;
 $line-height: 2.52rem;
-$text-color: #1E1E1E;
+$text-color: #1e1e1e;
 $text-color-light: #fff;
 
 //buttons
@@ -65,8 +64,6 @@ $button-background-color-hover: $secondary-color;
 $button-text-color: $text-color-light;
 $button-border-radius: $border-radius;
 
-
 //cards full #1d428b0d
 $card_background_color: rgba($color_blue, 0.05);
 $card_border_color: rgba($color_blue, 0.5);
-

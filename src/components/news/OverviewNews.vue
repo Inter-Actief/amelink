@@ -1,16 +1,9 @@
 <template>
-
     <h1>{{ $t('News page') }}</h1>
 
     <div id="newsitems" class="newsitems cards">
-        <div class="item"
-             v-if="newsItems !== null"
-             v-for="item in newsItems"
-             :key="item"
-        >
-
+        <div class="item" v-if="newsItems !== null" v-for="item in newsItems" :key="item">
             <router-link :to="{ name: 'singlenews', params: { id: item.id } }">
-
                 <div class="body">
                     <div class="info">
                         <div class="title">
@@ -22,11 +15,8 @@
                 </div>
 
                 <EpaButton class="link readmore" icon="readmore">{{ $t('Read more') }}</EpaButton>
-
             </router-link>
-
         </div>
-
     </div>
 
     <Pagination
@@ -37,25 +27,25 @@
         @prev="handlePrevPage"
         @select="handleSelectPage"
     />
-
 </template>
 
-<script setup>
-import {useQuery} from '@vue/apollo-composable'
+<script setup lang="ts">
+import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
-import {computed, ref} from "vue";
-import Pagination from "@/components/ui/Pagination.vue";
-import {useRoute} from "vue-router";
-import {appState} from "@/main.ts";
-import {formattedData, getItemValue} from '@/functions/functions.ts';
-import EpaButton from "@/components/ui/EpaButton.vue";
+import { computed, ref } from 'vue'
+import Pagination from '@/components/ui/Pagination.vue'
+import { useRoute } from 'vue-router'
+import { appState } from '@/main.ts'
+import { formattedData, getItemValue } from '@/functions/functions.ts'
+import EpaButton from '@/components/ui/EpaButton.vue'
 
-const route = useRoute();
-const perpage = ref(10);
-const page = ref((route.query.page ? parseInt(route.query.page) : 1));
-const offset = ref((page.value > 1 ? ((page.value - 1) * perpage.value) : 0));
+const route = useRoute()
+const perpage = ref(10)
+const page = ref(route.query.page ? parseInt(route.query.page) : 1)
+const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
-const query = computed(() => gql`
+const query = computed(
+    () => gql`
   query MyQuery {
     newsItems(limit: ${perpage.value}, offset: ${offset.value}) {
       results {
@@ -69,52 +59,48 @@ const query = computed(() => gql`
       totalCount
     }
   }
-`);
+`,
+)
 
-const {result, loading, error, refetch} = useQuery(query);
+const { result, loading, error, refetch } = useQuery(query)
 
+const queryResults = computed(() => result.value?.newsItems)
 
-const queryResults = computed(() => result.value?.newsItems);
+console.log(queryResults)
 
-console.log(queryResults);
-
-const newsItems = computed(() => queryResults.value ? queryResults.value.results : null)
-const totalCount = computed(() => queryResults.value ? queryResults.value.totalCount : null)
-
+const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
+const totalCount = computed(() => (queryResults.value ? queryResults.value.totalCount : null))
 
 function handleNextPage() {
-    page.value++;
-    offset.value = (page.value > 1 ? ((page.value - 1) * perpage.value) : 0);
-    refetch();
-    scrolltop();
+    page.value++
+    offset.value = page.value > 1 ? (page.value - 1) * perpage.value : 0
+    refetch()
+    scrolltop()
 }
 
 function handlePrevPage() {
-    page.value--;
-    offset.value = (page.value > 1 ? ((page.value - 1) * perpage.value) : 0);
-    refetch();
-    scrolltop();
+    page.value--
+    offset.value = page.value > 1 ? (page.value - 1) * perpage.value : 0
+    refetch()
+    scrolltop()
 }
 
 function handleSelectPage(select) {
-    page.value = select;
-    offset.value = (page.value > 1 ? ((page.value - 1) * perpage.value) : 0);
-    refetch();
-    scrolltop();
+    page.value = select
+    offset.value = page.value > 1 ? (page.value - 1) * perpage.value : 0
+    refetch()
+    scrolltop()
 }
 
 function scrolltop() {
     window.scrollTo({
         top: document.getElementById('newsitems').offsetTop,
-        behavior: 'instant'
-    });
+        behavior: 'instant',
+    })
 }
-
 </script>
 
-
 <style scoped lang="scss">
-
 .newsitems {
     display: grid;
     gap: 0 $gap-l;
@@ -161,7 +147,7 @@ function scrolltop() {
         }
     }
 
-    .item:not(:nth-last-child(-n+2)) {
+    .item:not(:nth-last-child(-n + 2)) {
         border-bottom: 0.1rem solid $border-color;
     }
 
@@ -180,5 +166,4 @@ function scrolltop() {
         grid-template-columns: repeat(1, minmax(0, 1fr));
     }
 }
-
 </style>

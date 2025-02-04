@@ -1,9 +1,9 @@
 <template>
-
     <EpaButton
         :to="{ name: 'singleactivities', params: { id: props.id } }"
         class="link return"
-        bicon="return">
+        bicon="return"
+    >
         {{ $t('Back to activity') }}
     </EpaButton>
 
@@ -15,15 +15,13 @@
             v-for="(photo, index) in queryItem.photos"
             :key="photo"
         >
-
             <div>
                 <img
                     v-if="photo?.thumbMedium"
                     :src="`https://media.ia.utwente.nl/amelie/${photo?.thumbMedium}`"
                     @click="showImage(index)"
-                >
+                />
             </div>
-
         </template>
 
         <VueEasyLightbox
@@ -33,28 +31,28 @@
             :index="currentIndex"
             @hide="handleHide"
         />
-
     </div>
 
     <EpaButton
         :to="{ name: 'singleactivities', params: { id: props.id } }"
         class="link return"
-        bicon="return">
+        bicon="return"
+    >
         {{ $t('Back to activity') }}
     </EpaButton>
-
 </template>
 
 <script setup lang="ts">
-import {appState} from "@/main.ts";
-import {useQuery} from '@vue/apollo-composable'
+import { appState } from '@/main.ts'
+import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
-import {computed, ref, watch} from "vue";
-import EpaButton from "@/components/ui/EpaButton.vue";
-import VueEasyLightbox from 'vue-easy-lightbox';
+import { computed, ref, watch } from 'vue'
+import EpaButton from '@/components/ui/EpaButton.vue'
+import VueEasyLightbox from 'vue-easy-lightbox'
 
-const props = defineProps(['id']);
-const query = computed(() => gql`
+const props = defineProps(['id'])
+const query = computed(
+    () => gql`
   query MyQuery {
     activity(id: "${props.id}") {
       description${appState.language}
@@ -71,47 +69,48 @@ const query = computed(() => gql`
       }
     }
   }
-`);
+`,
+)
 
-const {result, loading, error, refetch} = useQuery(query);
-const queryResults = computed(() => result.value?.activity);
-const queryItem = computed(() => queryResults.value ? queryResults.value : null)
+const { result, loading, error, refetch } = useQuery(query)
+const queryResults = computed(() => result.value?.activity)
+const queryItem = computed(() => (queryResults.value ? queryResults.value : null))
 
 const title = computed(() => {
     if (queryResults.value) {
-        if ( queryResults.value[`summary${appState.language}`] ) {
-            return queryResults.value[`summary${appState.language}`];
+        if (queryResults.value[`summary${appState.language}`]) {
+            return queryResults.value[`summary${appState.language}`]
         } else if (queryResults.value.summary) {
-            return queryResults.value.summary;
+            return queryResults.value.summary
         }
     }
-    return null;
-});
+    return null
+})
 
-const visible = ref(false);
-const currentIndex = ref(0);
-const imageUrls = ref([]);
+const visible = ref(false)
+const currentIndex = ref(0)
+const imageUrls = ref([])
 
 const imagePhotosUrls = () => {
     if (queryResults.value?.photos?.length > 0) {
-        imageUrls.value = queryResults.value.photos.map(photo => `https://media.ia.utwente.nl/amelie/${photo?.thumbLarge}`);
+        imageUrls.value = queryResults.value.photos.map(
+            (photo) => `https://media.ia.utwente.nl/amelie/${photo?.thumbLarge}`,
+        )
     }
-    return imageUrls.value;
+    return imageUrls.value
 }
 
-const showImage = (index : number) => {
-    currentIndex.value = index;
-    visible.value = true;
-};
+const showImage = (index: number) => {
+    currentIndex.value = index
+    visible.value = true
+}
 
 const handleHide = () => {
-    visible.value = false;
-};
-
+    visible.value = false
+}
 </script>
 
 <style scoped lang="scss">
-
 .photo_albums {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -145,5 +144,4 @@ const handleHide = () => {
         max-height: initial;
     }
 }
-
 </style>

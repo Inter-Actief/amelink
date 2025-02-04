@@ -1,63 +1,61 @@
 <template>
-
     <div id="activities" class="activities cards">
-        <div class="item"
-             v-if="items !== null"
-             v-for="item in items"
-             :key="item"
-        >
-
-            <router-link :to="{ name: 'singleactivities', params: { id: item.id } }">
-
-                <div class="body">
-                    <div class="info">
-                        <div class="title">
-                            <h2>{{ getItemValue(item, 'summary') }}</h2>
-                            <div class="label" :style="[`background-color: #${item.activityLabel.color}`]">
-                                {{ item.activityLabel[`name${appState.language}`] }}
+        <div v-if="items !== null">
+            <div class="item" v-for="item in items" :key="item">
+                <router-link :to="{ name: 'singleactivities', params: { id: item.id } }">
+                    <div class="body">
+                        <div class="info">
+                            <div class="title">
+                                <h2>{{ getItemValue(item, 'summary') }}</h2>
+                                <div
+                                    class="label"
+                                    :style="[`background-color: #${item.activityLabel.color}`]"
+                                >
+                                    {{ item.activityLabel[`name${appState.language}`] }}
+                                </div>
                             </div>
+                            <div class="date">{{ formattedData(item.begin) }}</div>
                         </div>
-                        <div class="date">{{formattedData(item.begin)}}</div>
+                        <div class="excerpt">
+                            {{ excerptText(getItemValue(item, 'description')) }}
+                        </div>
                     </div>
-
-                    <div class="excerpt">{{ excerptText( getItemValue(item, 'description') ) }}</div>
-                </div>
-
-                <EpaButton
-                    class="link readmore"
-                    icon="readmore">
-                    {{ $t('Read more') }}
-                </EpaButton>
-
-            </router-link>
-
+                    <EpaButton class="link readmore" icon="readmore">
+                        {{ $t('Read more') }}
+                    </EpaButton>
+                </router-link>
+            </div>
         </div>
-
     </div>
 
-    <PaginationNext :totalItems="totalCount" :itemsPerPage="perpage" :page="page" @next="handleNextPage"
-                @prev="handlePrevPage" @select="handleSelectPage"/>
-
+    <PaginationNext
+        :totalItems="totalCount"
+        :itemsPerPage="perpage"
+        :page="page"
+        @next="handleNextPage"
+        @prev="handlePrevPage"
+        @select="handleSelectPage"
+    />
 </template>
 
-<script setup>
-import {useQuery} from '@vue/apollo-composable'
+<script setup lang="ts">
+import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
-import {computed, ref} from "vue";
-import {useRoute} from "vue-router";
-import {appState} from "@/main.ts";
-import {formattedData, excerptText, getItemValue} from '@/functions/functions.ts';
-import EpaButton from "@/components/ui/EpaButton.vue";
-import PaginationNext from "@/components/ui/PaginationNext.vue";
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { appState } from '@/main.ts'
+import { formattedData, excerptText, getItemValue } from '@/functions/functions.ts'
+import EpaButton from '@/components/ui/EpaButton.vue'
+import PaginationNext from '@/components/ui/PaginationNext.vue'
 
-
-const route = useRoute();
-const perpage = ref(10);
-const page = ref((route.query.page ? parseInt(route.query.page) : 1));
-const offset = ref((page.value > 1 ? ((page.value - 1) * perpage.value) : 0));
+const route = useRoute()
+const perpage = ref(10)
+const page = ref(route.query.page ? parseInt(route.query.page) : 1)
+const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 //begin_Gt: "${new Date().toISOString()}"
-const query = computed(() => gql`
+const query = computed(
+    () => gql`
   query MyQuery {
     activities(limit: ${perpage.value}, offset: ${offset.value}, begin_Gt: "2022-10-26T18:00:00+00:00", ordering: "begin,desc" ) {
       results {
@@ -77,42 +75,39 @@ const query = computed(() => gql`
       totalCount
     }
   }
-`);
+`,
+)
 
-const {result, loading, error, refetch} = useQuery(query);
+const { result, loading, error, refetch } = useQuery(query)
 
-const queryResults = computed(() => result.value?.activities);
-const items = computed(() => queryResults.value ? queryResults.value.results : null)
-const totalCount = computed(() => queryResults.value ? queryResults.value.totalCount : null)
-
+const queryResults = computed(() => result.value?.activities)
+const items = computed(() => (queryResults.value ? queryResults.value.results : null))
+const totalCount = computed(() => (queryResults.value ? queryResults.value.totalCount : null))
 
 function handleNextPage() {
-    page.value++;
-    offset.value = (page.value > 1 ? ((page.value - 1) * perpage.value) : 0);
-    refetch();
+    page.value++
+    offset.value = page.value > 1 ? (page.value - 1) * perpage.value : 0
+    refetch()
 }
 
 function handlePrevPage() {
-    page.value--;
-    offset.value = (page.value > 1 ? ((page.value - 1) * perpage.value) : 0);
-    refetch();
+    page.value--
+    offset.value = page.value > 1 ? (page.value - 1) * perpage.value : 0
+    refetch()
 }
 
 function handleSelectPage(select) {
-    page.value = select;
-    offset.value = (page.value > 1 ? ((page.value - 1) * perpage.value) : 0);
-    refetch();
+    page.value = select
+    offset.value = page.value > 1 ? (page.value - 1) * perpage.value : 0
+    refetch()
 }
-
 </script>
 
 <style scoped lang="scss">
-
 .activities {
     display: grid;
     gap: 0 $gap-l;
     grid-template-columns: repeat(1, minmax(0, 1fr));
-
 
     .item {
         padding: 3rem 0;
@@ -125,7 +120,7 @@ function handleSelectPage(select) {
             height: 100%;
         }
 
-        &:not(:nth-last-child(-n+1)) {
+        &:not(:nth-last-child(-n + 1)) {
             border-bottom: 0.1rem solid $border-color;
         }
 
@@ -184,5 +179,4 @@ function handleSelectPage(select) {
         }
     }
 }
-
 </style>

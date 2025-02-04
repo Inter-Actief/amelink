@@ -2,92 +2,103 @@
     <div v-if="totalItems > 0" class="pagination">
         <ul>
             <li>
-                <button @click="goToPage(1)" :disabled="currentPage === 1">{{ $t('First') }}</button>
+                <button @click="goToPage(1)" :disabled="currentPage === 1">
+                    {{ $t('First') }}
+                </button>
             </li>
 
             <li v-for="pageNumber in displayedPages">
                 <span v-if="pageNumber === '...'">...</span>
-                <button v-else @click="goToPage(pageNumber)"
-                        :class="[(parseInt(currentPage) === parseInt(pageNumber) ? 'active' : '')]">{{ pageNumber }}
+                <button
+                    v-else
+                    @click="goToPage(pageNumber)"
+                    :class="[parseInt(currentPage) === parseInt(pageNumber) ? 'active' : '']"
+                >
+                    {{ pageNumber }}
                 </button>
             </li>
 
             <li>
-                <button @click="goToPage(totalPages)" :disabled="currentPage >= totalPages">{{ $t('Last') }}</button>
+                <button @click="goToPage(totalPages)" :disabled="currentPage >= totalPages">
+                    {{ $t('Last') }}
+                </button>
             </li>
-
         </ul>
     </div>
 </template>
 
-<script setup>
-import {computed, defineEmits, ref, watch} from 'vue';
-import {useRouter} from "vue-router";
+<script setup lang="ts">
+import { computed, defineEmits, ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
 
-const props = defineProps(['totalItems', 'itemsPerPage', 'page']);
+const props = defineProps(['totalItems', 'itemsPerPage', 'page'])
 
-const router = useRouter();
+const router = useRouter()
 
-const currentPage = ref(props.page);
-const totalPages = computed(() => Math.ceil(props.totalItems / props.itemsPerPage));
-const displayedPages = ref([]);
+const currentPage = ref(props.page)
+const totalPages = computed(() => Math.ceil(props.totalItems / props.itemsPerPage))
+const displayedPages = ref([])
 
 watch([currentPage, totalPages], () => {
-    createPagination();
-});
+    createPagination()
+})
 
-createPagination();
+createPagination()
 
-function createPagination()
-{
-    const extend = 2;
-    const pages = [];
+function createPagination() {
+    const extend = 2
+    const pages = []
 
-    let dotPushed = false;
+    let dotPushed = false
 
     if (totalPages.value === 0) {
-        return;
+        return
     }
 
     for (let i = 1; i <= totalPages.value; i++) {
+        console.log(i)
 
-        console.log(i);
-
-        if (i <= (parseInt(currentPage.value) + extend) && i >= (parseInt(currentPage.value) - extend)  || i === 2 || i === totalPages.value - 1 || i === 1 || i === totalPages.value)
-        {
-            console.log(i);
-            pages.push(i);
-            dotPushed = false;
+        if (
+            (i <= parseInt(currentPage.value) + extend &&
+                i >= parseInt(currentPage.value) - extend) ||
+            i === 2 ||
+            i === totalPages.value - 1 ||
+            i === 1 ||
+            i === totalPages.value
+        ) {
+            console.log(i)
+            pages.push(i)
+            dotPushed = false
         } else if (!dotPushed && i !== 1 && i !== totalPages.value) {
-            pages.push('...');
-            dotPushed = true;
+            pages.push('...')
+            dotPushed = true
         }
     }
 
-    displayedPages.value = pages;
+    displayedPages.value = pages
 }
 
 const prevPage = () => {
     if (currentPage.value > 1) {
-        currentPage.value--;
-        emits('prev');
-        router.push({query: {page: currentPage.value}});
+        currentPage.value--
+        emits('prev')
+        router.push({ query: { page: currentPage.value } })
     }
-};
+}
 
-const emits = defineEmits(['next', 'prev']);
+const emits = defineEmits(['next', 'prev'])
 
 const nextPage = () => {
     if (currentPage.value < totalPages.value) {
-        currentPage.value++;
-        emits('next');
-        router.push({query: {page: currentPage.value}});
+        currentPage.value++
+        emits('next')
+        router.push({ query: { page: currentPage.value } })
     }
-};
+}
 
 function goToPage(pageNumber) {
-    currentPage.value = pageNumber;
-    emits('select', pageNumber);
+    currentPage.value = pageNumber
+    emits('select', pageNumber)
 }
 </script>
 

@@ -1,5 +1,4 @@
 <template>
-
     <component :is="htmlElement()" class="item" :to="to">
         <div class="image" v-if="imageSrc">
             <img :src="imageSrc" :width="imageWidth" :height="imageHeight" :alt="imageAlt" />
@@ -11,52 +10,44 @@
                 <div class="text" v-if="text">{{ text }}</div>
             </div>
 
-            <EpaButton
-                v-if="buttonText"
-                class="full"
-                icon="readmore">
+            <EpaButton v-if="buttonText" class="full" icon="readmore">
                 {{ $t(buttonText) }}
             </EpaButton>
         </div>
     </component>
-
 </template>
 
 <script setup lang="ts">
-
-import EpaButton from "@/components/ui/EpaButton.vue";
+import EpaButton from '@/components/ui/EpaButton.vue'
 
 const props = defineProps({
-    'to' : String,
-    'title' : String,
-    'date': String,
-    'text': String,
-    'buttonText': String,
-    'imageSrc' : String,
-    'imageWidth' : Number,
-    'imageHeight' : Number,
-    'imageAlt' : String
-});
+    to: String,
+    title: String,
+    date: String,
+    text: String,
+    buttonText: String,
+    imageSrc: String,
+    imageWidth: Number,
+    imageHeight: Number,
+    imageAlt: String,
+})
 
 const htmlElement = () => {
-    return ( props.to ? 'router-link' : 'div' );
+    return props.to ? 'router-link' : 'div'
 }
-
 </script>
 
 <style scoped lang="scss">
-
 .item {
     background: #fff;
-    border: 0.1rem solid #F2ECE7;
+    border: 0.1rem solid #f2ece7;
     color: inherit;
     display: grid;
     gap: $gap_sm;
     grid-template-rows: 26rem auto;
-    box-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.0);
+    box-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0);
     transition: 300ms;
     text-decoration: none;
-
 
     .content {
         padding: 1.5rem;
@@ -77,7 +68,7 @@ const htmlElement = () => {
     .image {
         position: relative;
         overflow: hidden;
-        border: 0 solid #F2ECE7;
+        border: 0 solid #f2ece7;
         border-radius: 0;
 
         img {
@@ -91,7 +82,6 @@ const htmlElement = () => {
             }
         }
     }
-
 
     button {
         cursor: pointer;
@@ -107,10 +97,8 @@ const htmlElement = () => {
         font-size: inherit;
     }
 
-
     &:hover {
         box-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.1);
     }
 }
-
 </style>

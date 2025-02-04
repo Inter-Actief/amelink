@@ -1,5 +1,4 @@
 <template>
-
     <component
         :is="htmlElement()"
         :to="props.to"
@@ -10,23 +9,21 @@
         :target="props.target"
         :rel="props.rel"
     >
-
-        <EpaIcon v-if="props.bicon" :icon="props.bicon"/>
+        <EpaIcon v-if="props.bicon" :icon="props.bicon" />
         <template v-else></template>
 
-        <span><slot></slot></span>
+        <span>
+            <slot></slot>
+        </span>
 
-        <EpaIcon v-if="props.loading && props.disabled" icon="loading"/>
-        <EpaIcon v-else-if="props.icon" :icon="props.icon"/>
+        <EpaIcon v-if="props.loading && props.disabled" icon="loading" />
+        <EpaIcon v-else-if="props.icon" :icon="props.icon" />
         <template v-else></template>
-
     </component>
-
 </template>
 
-<script setup>
-
-import EpaIcon from "./EpaIcon.vue";
+<script setup lang="ts">
+import EpaIcon from './EpaIcon.vue'
 
 const props = defineProps([
     'icon',
@@ -38,17 +35,15 @@ const props = defineProps([
     'href',
     'to',
     'target',
-    'rel'
-]);
+    'rel',
+])
 
 const htmlElement = () => {
-    return ( props.to ? 'router-link' : props.href ? 'a' : 'button' );
+    return props.to ? 'router-link' : props.href ? 'a' : 'button'
 }
-
 </script>
 
 <style scoped lang="scss">
-
 .epa_button {
     padding: 1rem 2.5rem;
     border-radius: $button-border-radius;
@@ -66,7 +61,6 @@ const htmlElement = () => {
     font-family: inherit;
     font-size: inherit;
 
-
     .active,
     &:hover {
         background-color: $button-background-color-hover;
@@ -79,7 +73,7 @@ const htmlElement = () => {
         &.loading {
             animation-name: buttonloading;
             animation-duration: 0.5s;
-            animation-iteration-count:infinite;
+            animation-iteration-count: infinite;
             animation-timing-function: ease-in-out;
             animation-fill-mode: both;
             animation-delay: 0s;
@@ -109,12 +103,12 @@ const htmlElement = () => {
         width: 100%;
         justify-content: space-between;
     }
+
     &.bottom {
         margin-top: auto;
     }
 
-    &:not(.link)
-    {
+    &:not(.link) {
         &.white {
             color: $primary-color;
             background-color: $color_white;
@@ -173,6 +167,13 @@ const htmlElement = () => {
     }
 }
 
-@keyframes buttonloading { 0%{ transform: rotate(0deg); } 100%{ transform: rotate(360deg);} }
+@keyframes buttonloading {
+    0% {
+        transform: rotate(0deg);
+    }
 
+    100% {
+        transform: rotate(360deg);
+    }
+}
 </style>

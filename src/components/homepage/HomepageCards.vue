@@ -1,70 +1,60 @@
 <template>
+    <div class="homepage_cards">
+        <template v-if="cards !== null" v-for="item in cards" :key="item">
+            <router-link :class="['item', item.class]" :to="{ name: item.routername, params: {} }">
+                <div class="image">
+                    <img
+                        class="placeholder"
+                        width="1600"
+                        height="1067"
+                        src="@/assets/images/ia_placeholder.png"
+                    />
+                </div>
 
-  <div class="homepage_cards">
-
-    <template
-        v-if="cards !== null"
-        v-for="item in cards"
-        :key="item"
-    >
-
-      <router-link :class="['item', item.class]" :to="{ name: item.routername, params: {  } }">
-
-        <div class="image">
-          <img class="placeholder" width="1600" height="1067" src="@/assets/images/ia_placeholder.png"/>
-        </div>
-
-        <div class="content">
-          <div class="title">{{ item.name }}</div>
-        </div>
-
-      </router-link>
-
-    </template>
-
-  </div>
-
+                <div class="content">
+                    <div class="title">{{ item.name }}</div>
+                </div>
+            </router-link>
+        </template>
+    </div>
 </template>
 
 <script setup lang="ts">
-
 const cards = [
-  {
-    'routername' : 'activities',
-    'img' : '',
-    'name' : 'Activities',
-    'class' : 'purple',
-  },
-  {
-    'routername' : 'news',
-    'img' : '',
-    'name' : 'News',
-    'class' : 'blue',
-  },
-  {
-    'routername' : 'education',
-    'img' : '',
-    'name' : 'Education',
-    'class' : 'red',
-  },
-  {
-    'routername' : 'home',
-    'img' : '',
-    'name' : 'Companies',
-    'class' : 'lightblue',
-  },
-  {
-    'routername' : 'home',
-    'img' : '',
-    'name' : 'Association',
-    'class' : 'default',
-  }
+    {
+        routername: 'activities',
+        img: '',
+        name: 'Activities',
+        class: 'purple',
+    },
+    {
+        routername: 'news',
+        img: '',
+        name: 'News',
+        class: 'blue',
+    },
+    {
+        routername: 'education',
+        img: '',
+        name: 'Education',
+        class: 'red',
+    },
+    {
+        routername: 'home',
+        img: '',
+        name: 'Companies',
+        class: 'lightblue',
+    },
+    {
+        routername: 'home',
+        img: '',
+        name: 'Association',
+        class: 'default',
+    },
 ]
-
 </script>
 
 <style scoped lang="scss">
-
 .homepage_cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -122,22 +112,21 @@ const cards = [
         }
 
         &.purple:hover .content {
-            background-color: rgba( $color_purple, 0.5 );
+            background-color: rgba($color_purple, 0.5);
         }
 
         &.lightblue:hover .content {
-            background-color: rgba( $color_lightblue, 0.5 );
+            background-color: rgba($color_lightblue, 0.5);
         }
 
         &.red:hover .content {
-            background-color: rgba( $color_red, 0.5 );
+            background-color: rgba($color_red, 0.5);
         }
 
         &.blue:hover .content {
-            background-color: rgba( $color_blue, 0.5 );
+            background-color: rgba($color_blue, 0.5);
         }
     }
-
 
     @media screen and (max-width: $screen-lg) {
         grid-template-columns: repeat(2, 1fr);
@@ -173,5 +162,4 @@ const cards = [
         }
     }
 }
-
 </style>

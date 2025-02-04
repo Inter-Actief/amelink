@@ -7,44 +7,54 @@
             <div v-if="images.length === 0" class="no-images">No images available</div>
             <div class="slider-wrapper">
                 <button class="nav-button prev" @click="prevSlide">❮</button>
-                <div class="slider" :style="{ transform: `translateX(-${currentSlideIndex * (100 / imagesPerSlide)}%)` }">
+                <div
+                    class="slider"
+                    :style="{
+                        transform: `translateX(-${currentSlideIndex * (100 / imagesPerSlide)}%)`,
+                    }"
+                >
                     <div v-for="(image, index) in images" :key="index" class="slide">
                         <div class="slide-content">
-                            <img :src="image.url" :alt="'Slide ' + (index + 1)" class="slide-image">
+                            <img
+                                :src="image.url"
+                                :alt="'Slide ' + (index + 1)"
+                                class="slide-image"
+                            />
                         </div>
                     </div>
                 </div>
                 <button class="nav-button next" @click="nextSlide">❯</button>
             </div>
             <div v-if="images.length > 0" class="dots">
-        <span
-            v-for="(image, index) in dots"
-            :key="index"
-            class="dot"
-            :class="{ active: index === currentSlideIndex }"
-            @click="changeSlide(index)"
-        ></span>
+                <span
+                    v-for="(image, index) in dots"
+                    :key="index"
+                    class="dot"
+                    :class="{ active: index === currentSlideIndex }"
+                    @click="changeSlide(index)"
+                ></span>
             </div>
         </div>
     </div>
 </template>
 
-<script setup>
-import {computed, onMounted, ref, watch} from 'vue';
-import { useQuery } from '@vue/apollo-composable';
-import gql from 'graphql-tag';
-import {appState} from "@/main.ts";
+<script setup lang="ts">
+import { computed, onMounted, ref, watch } from 'vue'
+import { useQuery } from '@vue/apollo-composable'
+import gql from 'graphql-tag'
+import { appState } from '@/main.ts'
 
-const currentSlideIndex = ref(0);
-const images = ref([]);
-const imagesPerSlide = 3;
-const dots = ref([]);
-const totalSliderWidth = ref(0);
+const currentSlideIndex = ref(0)
+const images = ref([])
+const imagesPerSlide = 3
+const dots = ref([])
+const totalSliderWidth = ref(0)
 
-const BASE_URL = 'https://media.ia.utwente.nl/amelie/'; //TODO: move to .env or main.ts
-const endGtDate = "2023-05-21T09:32:52.706Z"; //TODO: change to date NOW()
+const BASE_URL = 'https://media.ia.utwente.nl/amelie/' //TODO: move to .env or main.ts
+const endGtDate = '2023-05-21T09:32:52.706Z' //TODO: change to date NOW()
 
-const query = computed(() => gql`
+const query = computed(
+    () => gql`
   query MyQuery {
     activities(end_Gt: "${endGtDate}", limit: 20) {
       results {
@@ -54,56 +64,62 @@ const query = computed(() => gql`
       }
     }
   }
-`);
+`,
+)
 
-const {result, loading, error, refetch } = useQuery(query);
+const { result, loading, error, refetch } = useQuery(query)
 
-watch(() => result.value, (newVal) => {
-    if (newVal) {
-        images.value = newVal?.activities?.results?.flatMap(activity =>
-            activity.photos.map(photo => ({ url: BASE_URL + photo.thumbMedium }))
-        ).slice(0, 20) ?? [];
-        updateSliderWidth();
-        updateDots();
-    }
-});
-
+watch(
+    () => result.value,
+    (newVal) => {
+        if (newVal) {
+            images.value =
+                newVal?.activities?.results
+                    ?.flatMap((activity) =>
+                        activity.photos.map((photo) => ({ url: BASE_URL + photo.thumbMedium })),
+                    )
+                    .slice(0, 20) ?? []
+            updateSliderWidth()
+            updateDots()
+        }
+    },
+)
 
 function updateSliderWidth() {
-    const sliderWrapper = document.querySelector('.slider-wrapper');
+    const sliderWrapper = document.querySelector('.slider-wrapper')
     if (sliderWrapper) {
-        totalSliderWidth.value = sliderWrapper.offsetWidth;
+        totalSliderWidth.value = sliderWrapper.offsetWidth
     }
 }
 
 function updateDots() {
-    dots.value = new Array(Math.ceil(images.value.length / imagesPerSlide)).fill(0);
+    dots.value = new Array(Math.ceil(images.value.length / imagesPerSlide)).fill(0)
 }
 
 const changeSlide = (index) => {
-    currentSlideIndex.value = index;
-};
+    currentSlideIndex.value = index
+}
 
 const nextSlide = () => {
     if (currentSlideIndex.value < dots.value.length - 1) {
-        currentSlideIndex.value += 1;
+        currentSlideIndex.value += 1
     } else {
-        currentSlideIndex.value = 0;
+        currentSlideIndex.value = 0
     }
-};
+}
 
 const prevSlide = () => {
     if (currentSlideIndex.value > 0) {
-        currentSlideIndex.value -= 1;
+        currentSlideIndex.value -= 1
     } else {
-        currentSlideIndex.value = dots.value.length - 1;
+        currentSlideIndex.value = dots.value.length - 1
     }
-};
+}
 
 onMounted(() => {
-    updateSliderWidth();
-    window.addEventListener('resize', updateSliderWidth);
-});
+    updateSliderWidth()
+    window.addEventListener('resize', updateSliderWidth)
+})
 </script>
 
 <style scoped lang="scss">
@@ -116,7 +132,9 @@ onMounted(() => {
     align-items: center;
 }
 
-.loading, .no-images, .error {
+.loading,
+.no-images,
+.error {
     text-align: center;
     padding: 1.25rem;
 }
@@ -125,7 +143,7 @@ onMounted(() => {
     color: red;
 }
 
-.activities-title{
+.activities-title {
     margin-left: 4rem;
 }
 

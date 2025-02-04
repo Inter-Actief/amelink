@@ -1,62 +1,107 @@
 <template>
-
-    <svg v-if="icon === 'loading'" class="loading" width="24" height="24" viewBox="0 0 24 24" fill="none"
-         xmlns="http://www.w3.org/2000/svg">
-        <path d="M14 15L10 19L14 23" stroke="currentColor"/>
+    <svg
+        v-if="icon === 'loading'"
+        class="loading"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path d="M14 15L10 19L14 23" stroke="currentColor" />
         <path
             d="M18.0622 8.5C18.7138 9.62862 19.0374 10.9167 18.9966 12.2193C18.9557 13.5219 18.5521 14.7872 17.8311 15.8728C17.11 16.9584 16.1003 17.8212 14.9155 18.364C13.7307 18.9067 12.4179 19.108 11.1249 18.9451"
-            stroke="currentColor" stroke-linecap="round"/>
-        <path d="M10 9L14 5L10 1" stroke="currentColor"/>
+            stroke="currentColor"
+            stroke-linecap="round"
+        />
+        <path d="M10 9L14 5L10 1" stroke="currentColor" />
         <path
             d="M5.93782 15.5C5.27676 14.355 4.95347 13.0462 5.0054 11.7251C5.05733 10.404 5.48234 9.12457 6.23124 8.03498C6.98013 6.9454 8.02229 6.09019 9.23708 5.56834C10.4519 5.04649 11.7896 4.87934 13.0955 5.08625"
-            stroke="currentColor" stroke-linecap="round"/>
+            stroke="currentColor"
+            stroke-linecap="round"
+        />
     </svg>
 
-    <svg v-else-if="icon === 'arrowright' || icon === 'return' || icon === 'readmore'" fill="currentColor"
-         xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 25.92 18" xml:space="preserve">
-      <path d="M16.965,0.266c-0.344-0.355-0.914-0.355-1.27,0
+    <svg
+        v-else-if="icon === 'arrowright' || icon === 'return' || icon === 'readmore'"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        x="0px"
+        y="0px"
+        viewBox="0 0 25.92 18"
+        xml:space="preserve"
+    >
+        <path
+            d="M16.965,0.266c-0.344-0.355-0.914-0.355-1.27,0
 			c-0.343,0.344-0.343,0.914,0,1.258l6.438,6.437H0.891C0.395,7.961,0,8.356,0,8.852c0,0.492,0.395,0.902,0.891,0.902h21.242
 			l-6.438,6.422c-0.343,0.356-0.343,0.93,0,1.27c0.356,0.355,0.926,0.355,1.27,0l7.961-7.961c0.355-0.344,0.355-0.914,0-1.254
-			L16.965,0.266z M16.965,0.266"/>
+			L16.965,0.266z M16.965,0.266"
+        />
     </svg>
 
-    <svg v-else-if="icon === 'arrowright' || icon === 'return' || icon === 'readmore'" width="17" viewBox="0 0 36 40"
-         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path d="M36 20.0242L16.111 0V13.7749H0.521973V26.2736H16.111V40L36 20.0242Z" fill="currentColor"></path>
+    <svg
+        v-else-if="icon === 'arrowright' || icon === 'return' || icon === 'readmore'"
+        width="17"
+        viewBox="0 0 36 40"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path
+            d="M36 20.0242L16.111 0V13.7749H0.521973V26.2736H16.111V40L36 20.0242Z"
+            fill="currentColor"
+        ></path>
     </svg>
 
-    <svg v-else-if="icon === 'angledown'" width="16" height="8" viewBox="0 0 16 8" fill="none"
-         xmlns="http://www.w3.org/2000/svg">
+    <svg
+        v-else-if="icon === 'angledown'"
+        width="16"
+        height="8"
+        viewBox="0 0 16 8"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <path
             d="M15.7585 1.26798L8.52697 7.81322C8.24857 8.0618 7.83109 8.0618 7.55246 7.81322L0.240435 1.26798C-0.057737 0.958903 -0.0818271 0.540736 0.186346 0.240746C0.47179 -0.0728798 0.931775 -0.0683344 1.21495 0.186202L7.99972 6.29509L14.7858 0.186202C15.0856 -0.0809249 15.5445 -0.0574716 15.814 0.2402C16.0813 0.540735 16.0585 0.958903 15.7585 1.26798Z"
-            fill="currentColor"/>
+            fill="currentColor"
+        />
     </svg>
 
-    <svg v-else-if="icon === 'home'" width="27" height="24" viewBox="0 0 27 24" fill="none"
-         xmlns="http://www.w3.org/2000/svg">
+    <svg
+        v-else-if="icon === 'home'"
+        width="27"
+        height="24"
+        viewBox="0 0 27 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <g clip-path="url(#clip0_649_615)">
             <path
                 d="M26.6016 10.7672C27.075 11.1703 27.1359 11.8781 26.7328 12.3516C26.3297 12.825 25.6219 12.8859 25.1484 12.4828L24 11.5078V20.25C24 22.3219 22.3219 24 20.25 24H6.75C4.67906 24 3 22.3219 3 20.25V11.5078L1.85297 12.4828C1.37906 12.8859 0.669373 12.825 0.267186 12.3516C-0.134768 11.8781 -0.0765958 11.1703 0.39717 10.7672L12.7734 0.267187C13.1906 -0.0890625 13.8094 -0.0890625 14.2266 0.267187L26.6016 10.7672ZM6.75 21.75H9V14.625C9 13.5891 9.83906 12.75 10.875 12.75H16.125C17.1609 12.75 18 13.5891 18 14.625V21.75H20.25C21.0797 21.75 21.75 21.0797 21.75 20.25V9.6L13.5 2.60016L5.25 9.6V20.25C5.25 21.0797 5.92031 21.75 6.75 21.75ZM11.25 21.75H15.75V15H11.25V21.75Z"
-                fill="currentColor"/>
+                fill="currentColor"
+            />
         </g>
         <defs>
             <clipPath id="clip0_649_615">
-                <rect width="27" height="24" fill="currentColor"/>
+                <rect width="27" height="24" fill="currentColor" />
             </clipPath>
         </defs>
     </svg>
 
-
-    <svg v-else-if="icon === 'menu'" width="26" height="20" viewBox="0 0 26 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0.826172 1.30435C0.826172 0.581522 1.40769 0 2.13052 0H23.8696C24.5925 0 25.174 0.581522 25.174 1.30435C25.174 2.02717 24.5925 2.6087 23.8696 2.6087H2.13052C1.40769 2.6087 0.826172 2.02717 0.826172 1.30435ZM0.826172 10C0.826172 9.27717 1.40769 8.69565 2.13052 8.69565H23.8696C24.5925 8.69565 25.174 9.27717 25.174 10C25.174 10.7228 24.5925 11.3043 23.8696 11.3043H2.13052C1.40769 11.3043 0.826172 10.7228 0.826172 10ZM25.174 18.6957C25.174 19.4185 24.5925 20 23.8696 20H2.13052C1.40769 20 0.826172 19.4185 0.826172 18.6957C0.826172 17.9728 1.40769 17.3913 2.13052 17.3913H23.8696C24.5925 17.3913 25.174 17.9728 25.174 18.6957Z" fill="currentColor"/>
+    <svg
+        v-else-if="icon === 'menu'"
+        width="26"
+        height="20"
+        viewBox="0 0 26 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path
+            d="M0.826172 1.30435C0.826172 0.581522 1.40769 0 2.13052 0H23.8696C24.5925 0 25.174 0.581522 25.174 1.30435C25.174 2.02717 24.5925 2.6087 23.8696 2.6087H2.13052C1.40769 2.6087 0.826172 2.02717 0.826172 1.30435ZM0.826172 10C0.826172 9.27717 1.40769 8.69565 2.13052 8.69565H23.8696C24.5925 8.69565 25.174 9.27717 25.174 10C25.174 10.7228 24.5925 11.3043 23.8696 11.3043H2.13052C1.40769 11.3043 0.826172 10.7228 0.826172 10ZM25.174 18.6957C25.174 19.4185 24.5925 20 23.8696 20H2.13052C1.40769 20 0.826172 19.4185 0.826172 18.6957C0.826172 17.9728 1.40769 17.3913 2.13052 17.3913H23.8696C24.5925 17.3913 25.174 17.9728 25.174 18.6957Z"
+            fill="currentColor"
+        />
     </svg>
-
-
-
 </template>
 
-<script setup>
-
-const props = defineProps(['icon']);
-
+<script setup lang="ts">
+const props = defineProps(['icon'])
 </script>

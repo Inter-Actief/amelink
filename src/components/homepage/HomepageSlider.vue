@@ -1,5 +1,4 @@
 <template>
-
     <swiper
         :slidesPerView="1"
         :spaceBetween="0"
@@ -11,22 +10,15 @@
         :modules="swiperModules"
         class="homepageslider"
     >
-
-        <template
-            v-if="newsItems !== null"
-            v-for="item in newsItems"
-            :key="item"
-        >
+        <template v-if="newsItems !== null" v-for="item in newsItems" :key="item">
             <swiper-slide class="item">
-
                 <router-link :to="{ name: 'singleactivities', params: { id: item.id } }">
-
                     <div class="image">
-
-                        <img v-if="item.photos?.[0]?.thumbMedium"
-                             :src="`https://media.ia.utwente.nl/amelie/${item.photos?.[0]?.thumbMedium}`">
-                        <img class="placeholder" v-else src="@/assets/images/placeholder.jpg"/>
-
+                        <img
+                            v-if="item.photos?.[0]?.thumbMedium"
+                            :src="`https://media.ia.utwente.nl/amelie/${item.photos?.[0]?.thumbMedium}`"
+                        />
+                        <img class="placeholder" v-else src="@/assets/images/placeholder.jpg" />
                     </div>
 
                     <div class="content">
@@ -35,37 +27,34 @@
                             <div class="date">{{ formattedData(item.begin) }}</div>
                         </div>
                     </div>
-
                 </router-link>
-
             </swiper-slide>
         </template>
-
     </swiper>
-
 </template>
 
-<script setup>
-import {useQuery} from '@vue/apollo-composable'
+<script setup lang="ts">
+import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
-import {computed, ref} from "vue";
-import {useRoute} from "vue-router";
-import {appState} from "@/main.ts";
-import {Swiper, SwiperSlide} from "swiper/vue";
-import {Navigation, EffectFade, Autoplay} from 'swiper/modules';
-import {formattedData, excerptText} from '@/functions/functions.ts';
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { appState } from '@/main.ts'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Navigation, EffectFade, Autoplay } from 'swiper/modules'
+import { formattedData, excerptText } from '@/functions/functions.ts'
 
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
 
-const swiperModules = [Navigation, Autoplay];
-const route = useRoute();
-const perpage = ref(5);
-const page = ref((route.query.page ? parseInt(route.query.page) : 1));
-const offset = ref((page.value > 1 ? ((page.value - 1) * perpage.value) : 0));
+const swiperModules = [Navigation, Autoplay]
+const route = useRoute()
+const perpage = ref(5)
+const page = ref(route.query.page ? parseInt(route.query.page) : 1)
+const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
-const query = computed(() => gql`
+const query = computed(
+    () => gql`
   query MyQuery {
     activities(limit: ${perpage.value}, begin_Gt: "2023-05-21T09:32:52.706Z" ) {
       results {
@@ -83,20 +72,18 @@ const query = computed(() => gql`
       totalCount
     }
   }
-`);
+`,
+)
 
-const {result, loading, error, refetch} = useQuery(query);
+const { result, loading, error, refetch } = useQuery(query)
 
-const queryResults = computed(() => result.value?.activities);
+const queryResults = computed(() => result.value?.activities)
 
-const newsItems = computed(() => queryResults.value ? queryResults.value.results : null)
-const totalCount = computed(() => queryResults.value ? queryResults.value.totalCount : null)
-
+const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
+const totalCount = computed(() => (queryResults.value ? queryResults.value.totalCount : null))
 </script>
 
-
 <style scoped lang="scss">
-
 .homepageslider {
     .item {
         color: inherit;
@@ -138,5 +125,4 @@ const totalCount = computed(() => queryResults.value ? queryResults.value.totalC
         }
     }
 }
-
 </style>

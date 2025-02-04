@@ -1,34 +1,27 @@
 <template>
-
     <div class="upcomingactivities">
-
         <div class="bar">
             <span>{{ $t('Upcoming Activities') }}</span>
-            <EpaButton
-                :to="{ name: 'activities', params: { } }"
-                class="link small">
+            <EpaButton :to="{ name: 'activities', params: {} }" class="link small">
                 {{ $t('View all activities') }}
             </EpaButton>
         </div>
 
         <div class="table">
-
             <div class="item head">
-                <div class="date">{{ $t('Date')}}</div>
-                <div class="type">{{ $t('Type')}}</div>
-                <div class="activity">{{ $t('Activity')}}</div>
+                <div class="date">{{ $t('Date') }}</div>
+                <div class="type">{{ $t('Type') }}</div>
+                <div class="activity">{{ $t('Activity') }}</div>
             </div>
 
-            <template
-                v-if="items !== null"
-                v-for="item in items"
-                :key="item"
-            >
-
+            <template v-if="items !== null" v-for="item in items" :key="item">
                 <div class="item">
                     <div class="date">{{ formattedDataShort(item.begin) }}</div>
                     <div class="type">
-                        <div class="label" :style="[`background-color: #${item.activityLabel.color}`]">
+                        <div
+                            class="label"
+                            :style="[`background-color: #${item.activityLabel.color}`]"
+                        >
                             {{ item.activityLabel[`name${appState.language}`] }}
                         </div>
                     </div>
@@ -36,42 +29,41 @@
                     <div class="activity">
                         <div class="content">
                             <div class="summary">{{ getItemValue(item, 'summary') }}</div>
-                            <div class="excerpt">{{ excerptText( getItemValue(item, 'description') ) }}</div>
+                            <div class="excerpt">
+                                {{ excerptText(getItemValue(item, 'description')) }}
+                            </div>
                         </div>
 
                         <EpaButton
                             :to="{ name: 'singleactivities', params: { id: item.id } }"
-                            class="readmore">
+                            class="readmore"
+                        >
                             {{ $t('Enroll now!') }}
                         </EpaButton>
                     </div>
                 </div>
-
             </template>
-
         </div>
-
     </div>
-
-
 </template>
 
-<script setup>
-import {useQuery} from '@vue/apollo-composable'
+<script setup lang="ts">
+import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
-import {computed, ref} from "vue";
-import {useRoute} from "vue-router";
-import {appState} from "@/main.ts";
-import EpaButton from "@/components/ui/EpaButton.vue";
-import {excerptText, formattedDataShort, getItemValue} from "@/functions/functions";
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { appState } from '@/main.ts'
+import EpaButton from '@/components/ui/EpaButton.vue'
+import { excerptText, formattedDataShort, getItemValue } from '@/functions/functions'
 
-const route = useRoute();
-const perpage = ref(5);
-const page = ref((route.query.page ? parseInt(route.query.page) : 1));
-const offset = ref((page.value > 1 ? ((page.value - 1) * perpage.value) : 0));
+const route = useRoute()
+const perpage = ref(5)
+const page = ref(route.query.page ? parseInt(route.query.page) : 1)
+const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 // , begin_Gt: "${new Date().toISOString()}"
-const query = computed(() => gql`
+const query = computed(
+    () => gql`
   query MyQuery {
     activities(limit: ${perpage.value}, begin_Gt: "2023-05-21T00:00:00+00:00") {
       results {
@@ -91,17 +83,15 @@ const query = computed(() => gql`
       totalCount
     }
   }
-`);
+`,
+)
 
-const {result, loading, error, refetch} = useQuery(query);
-const queryResults = computed(() => result.value?.activities);
-const items = computed(() => queryResults.value ? queryResults.value.results : null)
-
+const { result, loading, error, refetch } = useQuery(query)
+const queryResults = computed(() => result.value?.activities)
+const items = computed(() => (queryResults.value ? queryResults.value.results : null))
 </script>
 
-
 <style scoped lang="scss">
-
 .upcomingactivities {
     background: #fff;
     border-radius: $border-radius $border-radius 0 0;
@@ -161,5 +151,4 @@ const items = computed(() => queryResults.value ? queryResults.value.results : n
         gap: 1rem;
     }
 }
-
 </style>
