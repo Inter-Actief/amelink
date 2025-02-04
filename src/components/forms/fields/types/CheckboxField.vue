@@ -3,17 +3,10 @@
         <FormLabel :field="field" :formid="formid" :id="id" />
 
         <ul>
-            <li v-for="(choice, index) in field.choices">
-                <input
-                    type="checkbox"
-                    :name="`choice_${formid}_${id}_${index}`"
-                    :id="`choice_${formid}_${id}_${index}`"
-                    :required="field.required"
-                    v-model="choice.value"
-                    :value="choice.label"
-                    :disabled="disabled"
-                />
-                <label :for="`choice_${formid}_${id}_${index}`">{{ $t(choice.label) }}</label>
+            <li v-for="(choice, index) in field.choices" :key="index">
+                <input type="checkbox" :name="`choice_${formid}_${id}_${index}`" :id="`choice_${formid}_${id}_${index}`"
+                    :required="field.required" v-model="choice.value" :value="choice.label" :disabled="disabled" />
+                <label :for="`choice_${formid}_${id}_${index}`">{{ $gettext(choice.label) }}</label>
             </li>
         </ul>
     </div>

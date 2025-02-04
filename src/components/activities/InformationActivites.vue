@@ -1,44 +1,44 @@
 <template>
     <div class="activity_information" v-if="props.item">
-        <h2>{{ $t('Who, what, where, when...') }}</h2>
+        <h2>{{ $gettext('Who, what, where, when...') }}</h2>
 
         <div class="item">
-            <div class="key">{{ $t('Who') }}</div>
+            <div class="key">{{ $gettext('Who') }}</div>
             <div class="value">{{ props.item.organizer.name }}</div>
         </div>
 
         <div class="item">
-            <div class="key">{{ $t('What') }}</div>
+            <div class="key">{{ $gettext('What') }}</div>
             <div class="value">
                 {{ props.item.activityLabel[`explanation${appState.language}`] }}
             </div>
         </div>
 
         <div class="item">
-            <div class="key">{{ $t('Where') }}</div>
+            <div class="key">{{ $gettext('Where') }}</div>
             <div class="value">{{ props.item.location }}</div>
         </div>
 
         <div class="item">
-            <div class="key">{{ $t('When') }}</div>
+            <div class="key">{{ $gettext('When') }}</div>
             <div class="value">
-                {{ formattedData(props.item.enrollmentBegin) }} {{ $t('from') }}
-                {{ formattedTime(props.item.enrollmentBegin) }} {{ $t('until') }}
+                {{ formattedData(props.item.enrollmentBegin) }} {{ $gettext('from') }}
+                {{ formattedTime(props.item.enrollmentBegin) }} {{ $gettext('until') }}
                 {{ formattedTime(props.item.enrollmentEnd) }}
             </div>
         </div>
 
         <div class="item">
-            <div class="key">{{ $t('Label') }}</div>
+            <div class="key">{{ $gettext('Label') }}</div>
             <div class="value">{{ props.item.activityLabel[`name${appState.language}`] }}</div>
         </div>
 
         <div class="item">
-            <div class="key">{{ $t('Costs') }}</div>
+            <div class="key">{{ $gettext('Costs') }}</div>
             <div class="value">
                 <template v-if="props.item.hasCosts"> {{ props.item.price }} euro </template>
                 <template v-else>
-                    {{ $t('Free') }}
+                    {{ $gettext('Free') }}
                 </template>
             </div>
         </div>

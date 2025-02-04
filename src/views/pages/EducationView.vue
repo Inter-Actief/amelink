@@ -3,11 +3,11 @@
         <div class="ia_row">
             <div class="ia_column span4 heightauto">
                 <div class="education_sidebar">
-                    <div class="head">{{ $t('Information') }}</div>
+                    <div class="head">{{ $gettext('Information') }}</div>
 
                     <div class="education_menu">
                         <div class="menu">
-                            <div class="title">{{ $t('General') }}</div>
+                            <div class="title">{{ $gettext('General') }}</div>
 
                             <div class="items">
                                 <div class="item" v-for="item in queryItems" :key="item">
@@ -23,12 +23,7 @@
 
             <div class="ia_column span8">
                 <div class="education">
-                    <div
-                        class="item"
-                        v-for="item in queryItems"
-                        :key="item"
-                        :id="`item_${item.id}`"
-                    >
+                    <div class="item" v-for="item in queryItems" :key="item" :id="`item_${item.id}`">
                         <div class="title">
                             <h1>{{ getItemValue(item, 'name') }}</h1>
                         </div>
@@ -177,8 +172,7 @@ onUnmounted(() => {
                     cursor: pointer;
                     width: fit-content;
                     transition: 300ms;
-                    background: linear-gradient(currentColor, currentColor) bottom / 0 0.2rem
-                        no-repeat;
+                    background: linear-gradient(currentColor, currentColor) bottom / 0 0.2rem no-repeat;
                     background-position: left bottom;
 
                     &:hover {

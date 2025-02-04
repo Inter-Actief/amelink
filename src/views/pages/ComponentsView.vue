@@ -1,41 +1,41 @@
 <template>
-    <div class="ia_section">
-        <div class="ia_row">
-            <div class="ia_column">
-                <h1>{{ $t('Demo Table') }}</h1>
-                <DemoTable />
-            </div>
-        </div>
+	<div class="ia_section">
+		<div class="ia_row">
+			<div class="ia_column">
+				<h1>{{ $gettext('Demo Table') }}</h1>
+				<DemoTable />
+			</div>
+		</div>
 
-        <div class="ia_row">
-            <div class="ia_column span6">
-                <h1>{{ $t('Latest News') }}</h1>
-                <LatestNews />
-            </div>
-            <div class="ia_column span6">
-                <h1>{{ $t('Upcoming Activities') }}</h1>
-                <UpcomingActivities />
-            </div>
-        </div>
+		<div class="ia_row">
+			<div class="ia_column span6">
+				<h1>{{ $gettext('Latest News') }}</h1>
+				<LatestNews />
+			</div>
+			<div class="ia_column span6">
+				<h1>{{ $gettext('Upcoming Activities') }}</h1>
+				<UpcomingActivities />
+			</div>
+		</div>
 
-        <div class="ia_row">
-            <div class="ia_column">
-                <h1>{{ $t('Latest Activities') }}</h1>
-                <LatestActivities />
-            </div>
-            <div class="ia_column">
-                <h1>{{ $t('Editor') }}</h1>
-                <EditorForm />
-            </div>
-        </div>
+		<div class="ia_row">
+			<div class="ia_column">
+				<h1>{{ $gettext('Latest Activities') }}</h1>
+				<LatestActivities />
+			</div>
+			<div class="ia_column">
+				<h1>{{ $gettext('Editor') }}</h1>
+				<EditorForm />
+			</div>
+		</div>
 
-        <div class="ia_row">
-            <div class="ia_column">
-                <h1>{{ $t('Demo overview') }}</h1>
-                <DemoOverviewActivities />
-            </div>
-        </div>
-    </div>
+		<div class="ia_row">
+			<div class="ia_column">
+				<h1>{{ $gettext('Demo overview') }}</h1>
+				<DemoOverviewActivities />
+			</div>
+		</div>
+	</div>
 </template>
 
 <script setup lang="ts">

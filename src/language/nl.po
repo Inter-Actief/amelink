@@ -1,192 +1,195 @@
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src\components\activities\demo\DemoOverviewActivities.vue:21
 #: src\components\activities\OverviewActivities.vue:20
 #: src\components\news\OverviewNews.vue:17
 msgid "Read more"
-msgstr ""
+msgstr "Lees meer"
 
 #: src\components\activities\InformationActivites.vue:3
 msgid "Who, what, where, when..."
-msgstr ""
+msgstr "Wie, wat, waar, wanneer..."
 
 #: src\components\activities\InformationActivites.vue:6
 msgid "Who"
-msgstr ""
+msgstr "Wie"
 
 #: src\components\activities\InformationActivites.vue:11
 msgid "What"
-msgstr ""
+msgstr "Wat"
 
 #: src\components\activities\InformationActivites.vue:18
 msgid "Where"
-msgstr ""
+msgstr "Waar"
 
 #: src\components\activities\InformationActivites.vue:23
 msgid "When"
-msgstr ""
+msgstr "Wanneer"
 
 #: src\components\activities\InformationActivites.vue:25
 msgid "from"
-msgstr ""
+msgstr "van"
 
 #: src\components\activities\InformationActivites.vue:26
 msgid "until"
-msgstr ""
+msgstr "tot"
 
 #: src\components\activities\InformationActivites.vue:32
 msgid "Label"
-msgstr ""
+msgstr "Label"
 
 #: src\components\activities\InformationActivites.vue:37
 msgid "Costs"
-msgstr ""
+msgstr "Kosten"
 
 #: src\components\activities\InformationActivites.vue:41
 msgid "Free"
-msgstr ""
+msgstr "Gratis"
 
 #: src\components\activities\LatestActivities.vue:4
 msgid "Actual Activities"
-msgstr ""
+msgstr "Actuele Activiteiten"
 
 #: src\components\activities\LatestActivities.vue:6
 #: src\components\activities\UpcomingActivities.vue:6
 msgid "View all activities"
-msgstr ""
+msgstr "Alle activiteiten bekijken"
 
 #: src\components\activities\PastActivities.vue:5
 #: src\components\activities\UpcomingActivities.vue:12
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: src\components\activities\PastActivities.vue:7
 #: src\components\activities\UpcomingActivities.vue:14
 msgid "Activity"
-msgstr ""
+msgstr "Activiteit"
 
 #: src\components\activities\PastActivities.vue:9
 #: src\components\activities\PastActivities.vue:27
 msgid "Photos"
-msgstr ""
+msgstr "Foto's"
 
 #: src\components\activities\PhotosActivities.vue:3
 #: src\components\activities\PhotosActivities.vue:21
 msgid "Back to activity"
-msgstr ""
+msgstr "Terug naar activiteit"
 
 #: src\components\activities\UpcomingActivities.vue:4
 #: src\views\pages\ComponentsView.vue:16
 msgid "Upcoming Activities"
-msgstr ""
+msgstr "Aankomende activiteiten"
 
 #: src\components\activities\UpcomingActivities.vue:13
 msgid "Type"
-msgstr ""
+msgstr "Soort"
 
 #: src\components\activities\UpcomingActivities.vue:35
 msgid "Enroll now!"
-msgstr ""
+msgstr "Schrijf je nu in!"
 
 #: src\components\footer\ContactUs.vue:3
 msgid "Contact us"
-msgstr ""
+msgstr "Contacteer ons"
 
 #: src\components\footer\Footer.vue:10
 msgid "footer.text"
-msgstr ""
+msgstr "I.C.T.S.V. Inter-Actief is de studievereniging voor de studies Technical Computer Science en Business Information Technology en de bijbehorende masters aan de Universiteit Twente. Inter-Actief is opgericht op 12 maart 1981 en heeft circa 1400 leden, waarmee zij de grootste ICT-studievereniging van Nederland is."
 
 #: src\components\footer\OpenMaps.vue:2
 msgid "Open maps"
-msgstr ""
+msgstr "Open kaarten"
 
-#: src\components\forms\ContactForm.vue:8
-#: src\components\forms\EditorForm.vue:8
+#: src\components\forms\ContactForm.vue:8 src\components\forms\EditorForm.vue:8
 #: src\components\forms\EnrollForm.vue:8
 msgid "Send"
-msgstr ""
+msgstr "Versturen"
 
-#: src\components\header\Header.vue:15
-#: src\components\menu\MenuInfo.vue:5
+#: src\components\header\Header.vue:15 src\components\menu\MenuInfo.vue:5
 msgid "Become a member"
-msgstr ""
+msgstr "Word lid"
 
-#: src\components\header\Header.vue:21
-#: src\components\menu\MenuInfo.vue:10
+#: src\components\header\Header.vue:21 src\components\menu\MenuInfo.vue:10
 msgid "Sign-in"
-msgstr ""
+msgstr "Inloggen"
 
 #: src\components\news\LatestNews.vue:4
 msgid "News & Announcements"
-msgstr ""
+msgstr "Nieuws & Mededelingen"
 
 #: src\components\news\LatestNews.vue:6
 msgid "View all news"
-msgstr ""
+msgstr "Al het nieuws bekijken"
 
 #: src\components\news\OverviewNews.vue:2
 msgid "News page"
-msgstr ""
+msgstr "Nieuws pagina"
 
 #: src\components\ui\Pagination.vue:6
 msgid "First"
-msgstr ""
+msgstr "Eerste"
 
 #: src\components\ui\Pagination.vue:20
 msgid "Last"
-msgstr ""
+msgstr "Laatste"
 
 #: src\components\ui\PaginationNext.vue:6
 msgid "Previous"
-msgstr ""
+msgstr "Vorige"
 
 #: src\components\ui\PaginationNext.vue:11
 msgid "Page"
-msgstr ""
+msgstr "Pagina"
 
 #: src\components\ui\PaginationNext.vue:16
 msgid "Next"
-msgstr ""
+msgstr "Volgende"
 
 #: src\views\activities\ActivitiesView.vue:11
 msgid "Past activities"
-msgstr ""
+msgstr "Afgelopen activiteiten"
 
 #: src\views\activities\SingleActivites.vue:20
 msgid "View photos"
-msgstr ""
+msgstr "Bekijk foto's"
 
-#: src\views\activities\SingleActivites.vue:26
-#: src\views\news\SingleNews.vue:20
+#: src\views\activities\SingleActivites.vue:26 src\views\news\SingleNews.vue:20
 msgid "Return to overview"
-msgstr ""
+msgstr "Terug naar overzicht"
 
 #: src\views\pages\ComponentsView.vue:5
 msgid "Demo Table"
-msgstr ""
+msgstr "Demo Tabel"
 
 #: src\views\pages\ComponentsView.vue:12
 msgid "Latest News"
-msgstr ""
+msgstr "Laatste nieuws"
 
 #: src\views\pages\ComponentsView.vue:23
 msgid "Latest Activities"
-msgstr ""
+msgstr "Laatste activiteiten"
 
 #: src\views\pages\ComponentsView.vue:27
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #: src\views\pages\ComponentsView.vue:34
 msgid "Demo overview"
-msgstr ""
+msgstr "Demo overzicht"
 
 #: src\views\pages\EducationView.vue:6
 msgid "Information"
-msgstr ""
+msgstr "Informatie"
 
 #: src\views\pages\EducationView.vue:10
 msgid "General"
-msgstr ""
+msgstr "Algemeen"

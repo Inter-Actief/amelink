@@ -1,5 +1,6 @@
-@import 'fonts';
-@import 'main';
+@use '_variables' as *;
+@use '_fonts' as *;
+@use '_main' as *;
 
-@import 'form';
-@import 'swiper';
+@use '_form' as *;
+@use '_swiper' as *;

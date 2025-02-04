@@ -1,34 +1,26 @@
 <template>
     <div class="latestactivities">
         <div class="bar">
-            <span>{{ $t('Actual Activities') }}</span>
+            <span>{{ $gettext('Actual Activities') }}</span>
             <EpaButton :to="{ name: 'activities', params: {} }" class="link small">
-                {{ $t('View all activities') }}
+                {{ $gettext('View all activities') }}
             </EpaButton>
         </div>
 
         <div class="items">
             <div v-if="newsItems !== null">
                 <template v-for="item in newsItems" :key="item">
-                    <Cards
-                        :title="getItemValue(item, 'summary')"
-                        :date="formattedData(item.begin)"
+                    <Cards :title="getItemValue(item, 'summary')" :date="formattedData(item.begin)"
                         :text="excerptText(getItemValue(item, 'description'))"
-                        :to="{ name: 'singleactivities', params: { id: item.id } }"
-                        buttonText="Enroll now!"
-                        :imageSrc="imageSrc(item.photos?.[0]?.thumbMedium)"
-                        :imageAlt="getItemValue(item, 'summary')"
-                        :imageHeight="
-                            item.photos?.[0]?.thumbMediumHeight
-                                ? item.photos?.[0]?.thumbMediumHeight
-                                : ''
-                        "
-                        :imageWidth="
-                            item.photos?.[0]?.thumbMediumWidth
+                        :to="{ name: 'singleactivities', params: { id: item.id } }" buttonText="Enroll now!"
+                        :imageSrc="imageSrc(item.photos?.[0]?.thumbMedium)" :imageAlt="getItemValue(item, 'summary')"
+                        :imageHeight="item.photos?.[0]?.thumbMediumHeight
+                            ? item.photos?.[0]?.thumbMediumHeight
+                            : ''
+                            " :imageWidth="item.photos?.[0]?.thumbMediumWidth
                                 ? item.photos?.[0]?.thumbMediumWidth
                                 : ''
-                        "
-                    />
+                                " />
                 </template>
             </div>
         </div>

@@ -6,12 +6,9 @@
             <template v-for="(item, index) in menu" :key="item">
                 <li class="menu-item">
                     <span class="link">
-                        <component
-                            :is="htmlElement(item.route)"
-                            @click="item.route ? closeMobileMenu() : ''"
+                        <component :is="htmlElement(item.route)" @click="item.route ? closeMobileMenu() : ''"
                             :to="{ name: item.route, params: {} }"
-                            :style="animation ? { animationDelay: `${1 + index * 100}ms` } : ''"
-                        >
+                            :style="animation ? { animationDelay: `${1 + index * 100}ms` } : ''">
                             <template v-if="!item.icon">
                                 {{ item.name }}
                             </template>
@@ -24,19 +21,13 @@
                         <template v-else></template>
                     </span>
 
-                    <ul
-                        v-if="
-                            (item.subItems && openSubMenu === index) ||
-                            (item.subItems && location === 'header')
-                        "
-                        class="submenu"
-                    >
+                    <ul v-if="
+                        (item.subItems && openSubMenu === index) ||
+                        (item.subItems && location === 'header')
+                    " class="submenu">
                         <li class="subitem" v-for="sub in item.subItems" :key="sub">
-                            <component
-                                :is="htmlElement(sub.route)"
-                                @click="closeMobileMenu()"
-                                :to="{ name: sub.route, params: { id: sub.id, slug: sub.slug } }"
-                            >
+                            <component :is="htmlElement(sub.route)" @click="closeMobileMenu()"
+                                :to="{ name: sub.route, params: { id: sub.id, slug: sub.slug } }">
                                 {{ sub.name }}
                             </component>
                         </li>
@@ -44,10 +35,8 @@
                 </li>
             </template>
 
-            <li
-                :class="['menu-item', animation ? 'fade' : '']"
-                :style="animation ? { animationDelay: `${(menu.length + 2) * 100}ms` } : ''"
-            >
+            <li :class="['menu-item', animation ? 'fade' : '']"
+                :style="animation ? { animationDelay: `${(menu.length + 2) * 100}ms` } : ''">
                 <span class="link">
                     <LanguageSwitcher />
                 </span>
@@ -55,25 +44,19 @@
         </ul>
     </nav>
 
-    <MenuInfo
-        v-if="info"
-        :style="animation ? { animationDelay: `${(menu.length + 3) * 100}ms` } : ''"
-    />
+    <MenuInfo v-if="info" :style="animation ? { animationDelay: `${(menu.length + 3) * 100}ms` } : ''" />
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
 import EpaIcon from '@/components/ui/EpaIcon.vue'
 import { closeMobileMenu, openMobileMenu, openSubMenu, toggleSubMenu } from '@/functions/functions'
 import MenuInfo from '@/components/menu/MenuInfo.vue'
 import Search from '@/components/ui/Search.vue'
 
-const { t, locale } = useI18n() // Access the i18n instance
-
 const props = defineProps(['animation', 'location', 'search', 'info'])
 
-const htmlElement = (route) => {
+const htmlElement = (route: unknown) => {
     return route ? 'router-link' : 'span'
 }
 
@@ -159,7 +142,7 @@ const menu = [
             gap: $gap-xs;
             align-items: center;
 
-            > a {
+            >a {
                 position: relative;
 
                 &:before {
@@ -176,7 +159,7 @@ const menu = [
             }
 
             a.router-link-active:before,
-            &:hover > a:before {
+            &:hover>a:before {
                 width: 100%;
             }
         }
@@ -204,16 +187,16 @@ const menu = [
             transition: 300ms;
             list-style: none;
 
-            & > li {
-                > a {
+            &>li {
+                >a {
                     color: $primary-color;
                     border-radius: $border-radius;
                     padding: 0.5rem 1rem;
                     display: block;
                 }
 
-                > a.router-link-active,
-                &:hover > a {
+                >a.router-link-active,
+                &:hover>a {
                     background-color: $color_light2;
                 }
             }
@@ -251,7 +234,7 @@ const menu = [
             background-color: rgba(0, 0, 0, 0.1);
             margin: 1rem 0;
 
-            > li > a {
+            >li>a {
                 color: inherit;
             }
         }
@@ -259,8 +242,9 @@ const menu = [
 
     &.animation {
         li.menu-item {
-            > .link span,
-            > .link a {
+
+            >.link span,
+            >.link a {
                 animation-name: inherit;
                 animation-duration: 0.5s;
                 animation-iteration-count: 1;
@@ -282,6 +266,7 @@ const menu = [
 }
 
 #mobilemenu {
+
     .mobile_menu_info,
     .searchbar.fade {
         animation-name: inherit;
@@ -294,9 +279,10 @@ const menu = [
 }
 
 #mobilemenu.open {
-    .mainmenu > li.menu-item {
-        > .link span,
-        > .link a {
+    .mainmenu>li.menu-item {
+
+        >.link span,
+        >.link a {
             animation-name: menuitem;
         }
 

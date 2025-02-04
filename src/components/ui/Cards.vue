@@ -11,7 +11,7 @@
             </div>
 
             <EpaButton v-if="buttonText" class="full" icon="readmore">
-                {{ $t(buttonText) }}
+                {{ $gettext(buttonText) }}
             </EpaButton>
         </div>
     </component>
@@ -61,7 +61,7 @@ const htmlElement = () => {
         height: fit-content;
     }
 
-    .title > * {
+    .title>* {
         font-size: 2rem;
     }
 
