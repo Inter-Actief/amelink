@@ -6,7 +6,7 @@
             <div class="form_footer">
                 <EpaButton type="submit" class="ia_button" loading="true" :disabled="disabled">{{
                     $gettext('Send')
-                    }}</EpaButton>
+                }}</EpaButton>
             </div>
         </form>
     </div>

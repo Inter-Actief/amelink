@@ -56,7 +56,7 @@ import Search from '@/components/ui/Search.vue'
 
 const props = defineProps(['animation', 'location', 'search', 'info'])
 
-const htmlElement = (route: unknown) => {
+const htmlElement = (route: any) => {
     return route ? 'router-link' : 'span'
 }
 

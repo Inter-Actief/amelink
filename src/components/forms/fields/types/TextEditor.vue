@@ -1,7 +1,7 @@
 <template>
-    <div :class="['field editorfield', field.class]">
+    <div :class="['field editorfield', field?.class]">
         <FormLabel :field="field" :formid="formid" :id="id" />
-        <CKEditor :initcontent="''" :disabled="disabled" v-model="internalValue" />
+        <CKEditor :initcontent="''" :disabled="disabled" v-model="internalValue!" />
     </div>
 </template>
 
@@ -10,15 +10,11 @@ import { ref, watch } from 'vue'
 import CKEditor from '@/components/forms/fields/extras/CKEditor.vue'
 import { getFormFieldID } from '@/functions/functions.ts'
 import FormLabel from '@/components/forms/fields/extras/FormLabel.vue'
+import type { StringFieldProps } from './FormFieldTypes';
 
-const props = defineProps({
-    field: Object,
-    formid: Number,
-    modelValue: String,
-    disabled: Boolean,
-})
+const props = defineProps<StringFieldProps>();
 
-const id = props.field.id ? props.field.id : getFormFieldID()
+const id = props?.field?.id ? props.field.id as number : getFormFieldID()
 const internalValue = ref(props.modelValue)
 
 watch(internalValue, (newValue) => {

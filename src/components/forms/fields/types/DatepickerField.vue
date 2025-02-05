@@ -1,11 +1,9 @@
 <template>
-    <div
-        :class="[
-            'field datepickerfield',
-            field.class,
-            field.placeholder || isActive || modelValue ? 'active' : '',
-        ]"
-    >
+    <div :class="[
+        'field datepickerfield',
+        field?.class,
+        field?.placeholder || isActive || modelValue ? 'active' : '',
+    ]">
         <FormLabel :field="field" :formid="formid" :id="id" />
 
         <VueDatePicker v-model="internalValue" :format="dateFormat" :enable-time-picker="false" />
@@ -18,15 +16,11 @@ import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 import { getFormFieldID } from '@/functions/functions.ts'
 import FormLabel from '@/components/forms/fields/extras/FormLabel.vue'
+import type { StringFieldProps } from './FormFieldTypes'
 
-const props = defineProps({
-    field: Object,
-    formid: Number,
-    modelValue: String,
-    disabled: Boolean,
-})
+const props = defineProps<StringFieldProps>();
 
-const id = props.field.id ? props.field.id : getFormFieldID()
+const id = props?.field?.id ? props.field.id as number : getFormFieldID()
 const internalValue = ref(props.modelValue)
 
 watch(internalValue, (newValue) => {
@@ -37,7 +31,7 @@ const emit = defineEmits(['update:modelValue'])
 const dateFormat = ref('yyyy-MM-dd')
 const isActive = ref(false)
 
-const formatDate = (date) => {
+const formatDate = (date: any) => {
     const year = date.getFullYear()
     const month = String(date.getMonth() + 1).padStart(2, '0') // Months are zero-indexed
     const day = String(date.getDate()).padStart(2, '0')

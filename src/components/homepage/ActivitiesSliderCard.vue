@@ -7,45 +7,33 @@
             <div v-if="images.length === 0" class="no-images">No images available</div>
             <div class="slider-wrapper">
                 <button class="nav-button prev" @click="prevSlide">❮</button>
-                <div
-                    class="slider"
-                    :style="{
-                        transform: `translateX(-${currentSlideIndex * (100 / imagesPerSlide)}%)`,
-                    }"
-                >
+                <div class="slider" :style="{
+                    transform: `translateX(-${currentSlideIndex * (100 / imagesPerSlide)}%)`,
+                }">
                     <div v-for="(image, index) in images" :key="index" class="slide">
                         <div class="slide-content">
-                            <img
-                                :src="image.url"
-                                :alt="'Slide ' + (index + 1)"
-                                class="slide-image"
-                            />
+                            <img :src="image.url" :alt="'Slide ' + (index + 1)" class="slide-image" />
                         </div>
                     </div>
                 </div>
                 <button class="nav-button next" @click="nextSlide">❯</button>
             </div>
             <div v-if="images.length > 0" class="dots">
-                <span
-                    v-for="(image, index) in dots"
-                    :key="index"
-                    class="dot"
-                    :class="{ active: index === currentSlideIndex }"
-                    @click="changeSlide(index)"
-                ></span>
+                <span v-for="(image, index) in dots" :key="index" class="dot"
+                    :class="{ active: index === currentSlideIndex }" @click="changeSlide(index)"></span>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch, type Ref } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
-import gql from 'graphql-tag'
-import { appState } from '@/main.ts'
+import { graphql } from '@/gql'
+import type { ActivityType, AttachmentType } from "@/gql/graphql"
 
 const currentSlideIndex = ref(0)
-const images = ref([])
+const images: Ref<AttachmentType[]> = ref([])
 const imagesPerSlide = 3
 const dots = ref([])
 const totalSliderWidth = ref(0)
@@ -54,9 +42,9 @@ const BASE_URL = 'https://media.ia.utwente.nl/amelie/' //TODO: move to .env or m
 const endGtDate = '2023-05-21T09:32:52.706Z' //TODO: change to date NOW()
 
 const query = computed(
-    () => gql`
-  query MyQuery {
-    activities(end_Gt: "${endGtDate}", limit: 20) {
+    () => graphql`
+  query ActivitiesSliderCardQuery {
+    activities(filter: { end_Gt: "${endGtDate}" }, limit: 20) {
       results {
         photos {
           thumbMedium
@@ -76,7 +64,7 @@ watch(
             images.value =
                 newVal?.activities?.results
                     ?.flatMap((activity) =>
-                        activity.photos.map((photo) => ({ url: BASE_URL + photo.thumbMedium })),
+                        activity?.photos.map((photo: any) => ({ url: BASE_URL + photo.thumbMedium })),
                     )
                     .slice(0, 20) ?? []
             updateSliderWidth()
