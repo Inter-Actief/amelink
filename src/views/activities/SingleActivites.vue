@@ -82,7 +82,7 @@ const query = computed(
 // TODO: Add 'name' and 'explanation' to ActivityLabel
 
 const { result, loading, error, refetch } = useQuery(query, {
-    pageId: props.id
+    id: props.id
 })
 const queryResults = computed(() => result.value?.activity)
 const queryItem = computed(() => (queryResults.value ? queryResults.value : null))
