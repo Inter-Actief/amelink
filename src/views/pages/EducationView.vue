@@ -41,26 +41,28 @@
 <script setup lang="ts">
 import { inject, onMounted, onUnmounted } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
-import gql from 'graphql-tag'
+import { graphql } from '@/gql'
 import { computed, ref, watch } from 'vue'
 import { getItemValue, markedText } from '@/functions/functions'
+import { useGettext } from 'vue3-gettext'
 
 const props = defineProps(['id', 'slug'])
 
 const appState = inject('appState')
+const gettext = useGettext();
 
 const query = computed(
-    () => gql`
+    () => graphql`
 
-  query MyQuery {
+  query EducationViewQuery {
       educationpages {
         results {
           id
           slug
           name
           content
-          name${appState.language}
-          content${appState.language}
+          name${gettext.current.capitalize()}
+          content${gettext.current.capitalize()}
         }
       }
   }

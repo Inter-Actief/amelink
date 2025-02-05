@@ -36,6 +36,7 @@ import { useRoute } from 'vue-router'
 import { formattedData, excerptText, getItemValue } from '@/functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
+import { graphql } from '@/gql'
 
 const gettext = useGettext();
 const route = useRoute()
@@ -45,8 +46,8 @@ const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 //begin_Gt: "${new Date().toISOString()}"
 const query = computed(
-    () => gql`
-  query MyQuery {
+    () => graphql`
+  query OverviewActivitiesQuery {
     activities(limit: ${perpage.value}, offset: ${offset.value}, begin_Gt: "${new Date().toISOString()}", ordering: "begin,desc" ) {
       results {
         id

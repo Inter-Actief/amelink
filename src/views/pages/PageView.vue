@@ -11,22 +11,24 @@
 <script setup lang="ts">
 import { inject } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
-import gql from 'graphql-tag'
+import { graphql } from '@/gql'
 import { computed, ref, watch } from 'vue'
 import { getItemValue, markedText } from '@/functions/functions'
+import { useGettext } from 'vue3-gettext'
 
 const props = defineProps(['id', 'slug'])
 const appState = inject('appState')
+const gettext = useGettext();
 
 const query = computed(
-    () => gql`
-  query MyQuery {
+    () => graphql`
+  query PageViewQuery {
     page(id: "${props.id}") {
         name
         slug
         content
-        name${appState.language}
-        content${appState.language}
+        name${gettext.current.capitalize()}
+        content${gettext.current.capitalize()}
       }
   }
 `,

@@ -39,12 +39,12 @@ const dots = ref([])
 const totalSliderWidth = ref(0)
 
 const BASE_URL = 'https://media.ia.utwente.nl/amelie/' //TODO: move to .env or main.ts
-const endGtDate = '2023-05-21T09:32:52.706Z' //TODO: change to date NOW()
+const endGtDate = new Date() //TODO: change to date NOW()
 
 const query = computed(
     () => graphql`
   query ActivitiesSliderCardQuery {
-    activities(filter: { end_Gt: "${endGtDate}" }, limit: 20) {
+    activities(filter: { end_Gt: ${endGtDate}, limit: 20) {
       results {
         photos {
           thumbMedium
@@ -60,7 +60,8 @@ const { result, loading, error, refetch } = useQuery(query)
 watch(
     () => result.value,
     (newVal) => {
-        if (newVal) {
+        newVal?.activities?.results.
+            if(newVal) {
             images.value =
                 newVal?.activities?.results
                     ?.flatMap((activity) =>

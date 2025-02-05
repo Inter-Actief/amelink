@@ -41,6 +41,7 @@ import { useRoute } from 'vue-router'
 import { formattedDataShort, getItemValue } from '@/functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
+import { graphql } from '@/gql'
 
 const gettext = useGettext();
 const route = useRoute()
@@ -48,8 +49,8 @@ const perpage = ref(20)
 const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
 
 const query = computed(
-    () => gql`
-  query MyQuery {
+    () => graphql`
+  query PastActivitesQuery {
     activities(limit: ${perpage.value}, ordering: "begin,desc" begin_Lt: "${new Date().toISOString()}") {
       results {
         id

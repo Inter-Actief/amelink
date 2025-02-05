@@ -24,17 +24,17 @@
 
 <script setup lang="ts">
 import { useQuery } from '@vue/apollo-composable'
-import gql from 'graphql-tag'
 import { computed, ref, watch } from 'vue'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import VueEasyLightbox from 'vue-easy-lightbox'
 import { useGettext } from 'vue3-gettext'
+import { graphql } from '@/gql'
 
 const gettext = useGettext();
 const props = defineProps(['id'])
 const query = computed(
-    () => gql`
-  query MyQuery {
+    () => graphql`
+  query PhotosActivitiesQuery {
     activity(id: "${props.id}") {
       description${gettext.current.capitalize()}
       summary${gettext.current.capitalize()}

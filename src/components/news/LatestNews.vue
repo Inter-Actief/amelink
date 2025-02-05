@@ -24,13 +24,14 @@
 
 <script setup lang="ts">
 import { useQuery } from '@vue/apollo-composable'
-import gql from 'graphql-tag'
 import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { excerptText, formattedDataShort, getItemValue } from '../../functions/functions.ts'
-import { appState } from '@/main.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
+import { useGettext } from 'vue3-gettext'
+import { graphql } from '@/gql'
 
+const gettext = useGettext();
 const route = useRoute()
 const perpage = ref(5)
 const page = ref(route.query.page ? parseInt(route.query.page) : 1)
@@ -38,8 +39,8 @@ const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 //, begin_Gt: "${new Date().toISOString()}"
 const query = computed(
-    () => gql`
-  query MyQuery {
+    () => graphql`
+  query LatestNewsQuery {
     newsItems(limit: ${perpage.value}) {
       results {
         id

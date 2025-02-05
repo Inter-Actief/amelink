@@ -26,7 +26,6 @@
 
 <script setup lang="ts">
 import { useQuery } from '@vue/apollo-composable'
-import gql from 'graphql-tag'
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -36,6 +35,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { useGettext } from 'vue3-gettext'
+import { graphql } from '@/gql'
 
 const gettext = useGettext();
 const swiperModules = [Navigation, Autoplay]
@@ -46,12 +46,12 @@ const page = ref(route.query.page && typeof route.query.page === 'string' ? pars
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 const query = computed(
-    () => gql`
-  query MyQuery {
+    () => graphql`
+  query HomepageSliderQuery {
     activities(limit: ${perpage.value}, begin_Gt: "2023-05-21T09:32:52.706Z" ) {
       results {
         id
-        description${gettext.current}
+        description${gettext.current.capitalize()}
         summary
         begin
         photos {

@@ -36,6 +36,7 @@ import EpaButton from '@/components/ui/EpaButton.vue'
 import { excerptText, formattedData, getItemValue } from '../../functions/functions.ts'
 import Cards from '@/components/ui/Cards.vue'
 import { useGettext } from 'vue3-gettext'
+import { graphql } from '@/gql'
 
 const gettext = useGettext();
 const route = useRoute()
@@ -47,8 +48,8 @@ const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 //, begin_Gt: "${new Date().toISOString()}"
 const query = computed(
-    () => gql`
-  query MyQuery {
+    () => graphql`
+  query LatestActivitiesQuery {
     activities(limit: ${perpage.value}, begin_Gt: "2023-05-21T09:32:52.706Z" ) {
       results {
         id
