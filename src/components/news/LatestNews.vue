@@ -39,13 +39,13 @@ const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 //, begin_Gt: "${new Date().toISOString()}"
 const query = computed(
-    () => graphql`
-  query LatestNewsQuery {
-    newsItems(limit: ${perpage.value}) {
+    () => graphql(`
+  query LatestNewsQuery($limit: Int) {
+    newsItems(limit: $limit) {
       results {
         id
-        title${gettext.current.capitalize()}
-        introduction${gettext.current.capitalize()}
+        title
+        introduction
         title
         introduction
         publicationDate
@@ -53,7 +53,7 @@ const query = computed(
       totalCount
     }
   }
-`,
+`, { limit: perpage.value }),
 )
 
 const { result, loading, error, refetch } = useQuery(query)

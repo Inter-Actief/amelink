@@ -33,11 +33,11 @@ import { graphql } from '@/gql'
 const gettext = useGettext();
 const props = defineProps(['id'])
 const query = computed(
-    () => graphql`
-  query PhotosActivitiesQuery {
-    activity(id: "${props.id}") {
-      description${gettext.current.capitalize()}
-      summary${gettext.current.capitalize()}
+    () => graphql(`
+  query PhotosActivitiesQuery($id: ID) {
+    activity(id: $id) {
+      description
+      summary
       begin
       id
       summary
@@ -50,7 +50,7 @@ const query = computed(
       }
     }
   }
-`,
+`, { id: props.id }),
 )
 
 const { result, loading, error, refetch } = useQuery(query)

@@ -40,13 +40,11 @@ const page = ref(route.query.page && typeof route.query.page === 'string' ? pars
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 const query = computed(
-    () => graphql`
-  query OverviewNewsQuery {
-    newsItems(limit: ${perpage.value}, offset: ${offset.value}) {
+    () => graphql(`
+  query OverviewNewsQuery($limit: Int, $offset: Int) {
+    newsItems(limit: $limit, offset: $offset) {
       results {
         id
-        title${gettext.current.capitalize()}
-        introduction${gettext.current.capitalize()}
         title
         introduction
         publicationDate
@@ -54,8 +52,8 @@ const query = computed(
       totalCount
     }
   }
-`,
-)
+`, { limit: perpage.value, offset: offset.value },
+    )
 
 const { result, loading, error, refetch } = useQuery(query)
 

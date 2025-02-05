@@ -49,15 +49,14 @@ const perpage = ref(20)
 const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
 
 const query = computed(
-    () => graphql`
-  query PastActivitesQuery {
-    activities(limit: ${perpage.value}, ordering: "begin,desc" begin_Lt: "${new Date().toISOString()}") {
+    () => graphql(`
+  query PastActivitesQuery($limit: Int, $beginlt: DateTime) {
+    activities(limit: $limit, ordering: "begin,desc" begin_Lt: $beginlt) {
       results {
         id
         begin
-        description${gettext.current.capitalize()}
+        description
         summary
-        summary${gettext.current.capitalize()}
         photos {
             thumbMedium
             thumbMediumHeight
@@ -67,7 +66,7 @@ const query = computed(
       }
     }
   }
-`,
+`, { limit: perpage.value, beginlt: new Date() }),
 )
 
 const { result, loading, error, refetch } = useQuery(query)

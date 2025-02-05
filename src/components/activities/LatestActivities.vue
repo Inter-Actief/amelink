@@ -48,9 +48,9 @@ const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 //, begin_Gt: "${new Date().toISOString()}"
 const query = computed(
-    () => graphql`
-  query LatestActivitiesQuery {
-    activities(limit: ${perpage.value}, begin_Gt: "2023-05-21T09:32:52.706Z" ) {
+    () => graphql(`
+  query LatestActivitiesQuery($limit: Int) {
+    activities(limit: $limit, begin_Gt: "2023-05-21T09:32:52.706Z" ) {
       results {
         id
         description${gettext.current.capitalize()}
@@ -66,7 +66,7 @@ const query = computed(
       totalCount
     }
   }
-`,
+`, { limit: perpage.value }),
 )
 
 const { result, loading, error, refetch } = useQuery(query)

@@ -53,7 +53,6 @@ const gettext = useGettext();
 
 const query = computed(
     () => graphql`
-
   query EducationViewQuery {
       educationpages {
         results {
@@ -61,13 +60,14 @@ const query = computed(
           slug
           name
           content
-          name${gettext.current.capitalize()}
-          content${gettext.current.capitalize()}
         }
       }
   }
 `,
 )
+//   name${ gettext.current.capitalize() }
+//   content${ gettext.current.capitalize() }
+
 
 const { result, loading, error, refetch } = useQuery(query)
 

@@ -50,11 +50,9 @@ import { graphql } from '@/gql'
 const gettext = useGettext();
 const props = defineProps(['id'])
 const query = computed(
-    () => graphql`
-  query SingleActivitiesQuery {
-    activity(id: "${props.id}") {
-      description${gettext.current.capitalize()}
-      summary${gettext.current.capitalize()}
+    () => graphql(`
+  query SingleActivitiesQuery($id: ID) {
+    activity(id: $id) {
       begin
       id
       summary
@@ -68,8 +66,8 @@ const query = computed(
       hasCosts
       price
       activityLabel {
-          name${gettext.current.capitalize()}
-          explanation${gettext.current.capitalize()}
+          nameEn
+          explanationEn
       }
       organizer {
           name
@@ -78,10 +76,14 @@ const query = computed(
       enrollmentBegin
     }
   }
-`,
+`), // TODO: activityLabel.name or activityLabel.nameNl ?
 )
 
-const { result, loading, error, refetch } = useQuery(query)
+// TODO: Add 'name' and 'explanation' to ActivityLabel
+
+const { result, loading, error, refetch } = useQuery(query, {
+    pageId: props.id
+})
 const queryResults = computed(() => result.value?.activity)
 const queryItem = computed(() => (queryResults.value ? queryResults.value : null))
 </script>

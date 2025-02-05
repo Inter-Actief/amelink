@@ -36,9 +36,9 @@ const gettext = useGettext();
 const props = defineProps(['id'])
 
 const query = computed(
-    () => graphql`
-  query SingleNewsQuery {
-    newsItem(id: "${props.id}") {
+    () => graphql(`
+  query SingleNewsQuery($id: ID) {
+    newsItem(id: $id) {
       content${gettext.current.capitalize()}
       content
       title${gettext.current.capitalize()}
@@ -48,7 +48,7 @@ const query = computed(
       id
     }
   }
-`,
+`, { id: props.id }),
 )
 
 const { result, loading, error, refetch } = useQuery(query)

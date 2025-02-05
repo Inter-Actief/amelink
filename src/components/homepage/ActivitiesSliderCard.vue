@@ -42,9 +42,9 @@ const BASE_URL = 'https://media.ia.utwente.nl/amelie/' //TODO: move to .env or m
 const endGtDate = new Date() //TODO: change to date NOW()
 
 const query = computed(
-    () => graphql`
-  query ActivitiesSliderCardQuery {
-    activities(filter: { end_Gt: ${endGtDate}, limit: 20) {
+    () => graphql(`
+  query ActivitiesSliderCardQuery($endgt: DateTime!){
+    activities(filter: { end_Gt: $endgt, limit: 20) {
       results {
         photos {
           thumbMedium
@@ -52,7 +52,7 @@ const query = computed(
       }
     }
   }
-`,
+`, { endgt: endGtDate }),
 )
 
 const { result, loading, error, refetch } = useQuery(query)
@@ -60,8 +60,7 @@ const { result, loading, error, refetch } = useQuery(query)
 watch(
     () => result.value,
     (newVal) => {
-        newVal?.activities?.results.
-            if(newVal) {
+        if (newVal) {
             images.value =
                 newVal?.activities?.results
                     ?.flatMap((activity) =>

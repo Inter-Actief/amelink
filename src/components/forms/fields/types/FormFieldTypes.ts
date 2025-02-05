@@ -1,7 +1,4 @@
 import type { ModelValue } from '@vuepic/vue-datepicker'
-
-type Modify<T, R> = Omit<T, keyof R> & R
-
 export interface Choice {
     label: string
     value: boolean
@@ -15,23 +12,13 @@ export interface Field {
     placeholder?: string
 }
 
-export interface FieldProps {
+export interface FieldProps<T> {
     field: Field | undefined
     formid: number
-    modelValue: object
+    modelValue: T
     disabled: boolean
 }
 
-export type StringFieldProps = Modify<
-    FieldProps,
-    {
-        modelValue: string
-    }
->
+export type StringFieldProps = FieldProps<string>
 
-export type DateFieldProps = Modify<
-    FieldProps,
-    {
-        modelValue: ModelValue
-    }
->
+export type DateFieldProps = FieldProps<ModelValue>
