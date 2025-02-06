@@ -10,7 +10,7 @@
         <div class="item">
             <div class="key">{{ $gettext('What') }}</div>
             <div class="value">
-                {{ props.item.activityLabel[`explanation${gettext.current.capitalize()}`] }}
+                {{ getItemValue(props.item.activityLabel, 'explanation') }}
             </div>
         </div>
 
@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { formattedData, formattedTime } from '@/functions/functions'
+import { formattedData, formattedTime, getItemValue } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext';
 const gettext = useGettext();
 

@@ -1,25 +1,27 @@
 <template>
     <div id="activities" class="activities cards">
-        <div class="item" v-if="newsItems !== null" v-for="item in newsItems" :key="item">
-            <router-link :to="{ name: 'singleactivities', params: { id: item.id } }">
-                <div class="body">
-                    <div class="info">
-                        <div class="title">
-                            <h2>{{ getItemValue(item, 'summary') }}</h2>
-                            <div class="label" :style="[`background-color: #${item.activityLabel.color}`]">
-                                {{ item.activityLabel[`name${gettext.current.capitalize()}`] }}
+        <div class="item" v-if="newsItems !== null" v-for="item in newsItems" :key="item?.id">
+            <template v-if="item">
+                <router-link :to="{ name: 'singleactivities', params: { id: item.id } }">
+                    <div class="body">
+                        <div class="info">
+                            <div class="title">
+                                <h2>{{ getItemValue(item, 'summary') }}</h2>
+                                <div class="label" :style="[`background-color: #${item.activityLabel.color}`]">
+                                    {{ getItemValue(item.activityLabel, 'name') }}
+                                </div>
                             </div>
+                            <div class="date">{{ formattedData(item.begin) }}</div>
                         </div>
-                        <div class="date">{{ formattedData(item.begin) }}</div>
+
+                        <div class="excerpt">{{ excerptText(getItemValue(item, 'description')) }}</div>
                     </div>
 
-                    <div class="excerpt">{{ excerptText(getItemValue(item, 'description')) }}</div>
-                </div>
-
-                <EpaButton class="link readmore" icon="readmore">
-                    {{ $gettext('Read more') }}
-                </EpaButton>
-            </router-link>
+                    <EpaButton class="link readmore" icon="readmore">
+                        {{ $gettext('Read more') }}
+                    </EpaButton>
+                </router-link>
+            </template>
         </div>
     </div>
 
@@ -51,8 +53,6 @@ query OverviewActivitiesQuery($limit: Int, $offset: Int, $begingt: DateTime!) {
         results {
             id
             begin
-            description${gettext.current.capitalize()}
-            summary${gettext.current.capitalize()}
             summary
             description
             activityLabel {

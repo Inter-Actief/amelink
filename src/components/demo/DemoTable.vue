@@ -1,6 +1,6 @@
 <template>
     <div>
-        <DynamicTable :columns="columns" :rows="rows" min-width="100" />
+        <DynamicTable :columns="columns" :rows="rows" :min-width="100" />
     </div>
 </template>
 

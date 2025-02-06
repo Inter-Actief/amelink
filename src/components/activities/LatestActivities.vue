@@ -10,17 +10,19 @@
         <div class="items">
             <div v-if="newsItems !== null">
                 <template v-for="item in newsItems" :key="item">
-                    <Cards :title="getItemValue(item, 'summary')" :date="formattedData(item.begin)"
-                        :text="excerptText(getItemValue(item, 'description'))"
-                        :to="{ name: 'singleactivities', params: { id: item.id } }" buttonText="Enroll now!"
-                        :imageSrc="imageSrc(item.photos?.[0]?.thumbMedium)" :imageAlt="getItemValue(item, 'summary')"
-                        :imageHeight="item.photos?.[0]?.thumbMediumHeight
-                            ? item.photos?.[0]?.thumbMediumHeight
-                            : ''
-                            " :imageWidth="item.photos?.[0]?.thumbMediumWidth
-                                ? item.photos?.[0]?.thumbMediumWidth
-                                : ''
-                                " />
+                    <template v-if="item">
+                        <Cards :title="item?.summary ? item.summary : ''" :date="formattedData(item.begin)"
+                            :text="excerptText(item?.description ? item.description : '')"
+                            :to="{ name: 'singleactivities', params: { id: item.id } }" buttonText="Enroll now!"
+                            :imageSrc="imageSrc(item.photos?.[0]?.thumbMedium)"
+                            :imageAlt="item?.summary ? item?.summary : ''" :imageHeight="item.photos?.[0]?.thumbMediumHeight
+                                ? item.photos?.[0]?.thumbMediumHeight
+                                : 0
+                                " :imageWidth="item.photos?.[0]?.thumbMediumWidth
+                                    ? item.photos?.[0]?.thumbMediumWidth
+                                    : 0
+                                    " />
+                    </template>
                 </template>
             </div>
         </div>
@@ -53,7 +55,7 @@ const query = graphql(`
     activities(limit: $limit, begin_Gt: "2023-05-21T09:32:52.706Z" ) {
       results {
         id
-        description${gettext.current.capitalize()}
+        description
         summary
         begin
         photos {
@@ -75,7 +77,7 @@ const totalCount = computed(() => (queryResults.value ? queryResults.value.total
 
 const date = new Date()
 
-const imageSrc = (src: string) => {
+const imageSrc = (src: string | null | undefined) => {
     if (!src) {
         return '/src/assets/images/placeholder.jpg'
     }

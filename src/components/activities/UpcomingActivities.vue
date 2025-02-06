@@ -14,28 +14,31 @@
                 <div class="activity">{{ $gettext('Activity') }}</div>
             </div>
 
-            <template v-if="items !== null" v-for="item in items" :key="item">
-                <div class="item">
-                    <div class="date">{{ formattedDataShort(item.begin) }}</div>
-                    <div class="type">
-                        <div class="label" :style="[`background-color: #${item.activityLabel.color}`]">
-                            {{ item.activityLabel[`name${gettext.current.capitalize()}`] }}
-                        </div>
-                    </div>
+            <template v-if="items" v-for="item in items" :key="item">
+                <template v-if="item">
 
-                    <div class="activity">
-                        <div class="content">
-                            <div class="summary">{{ getItemValue(item, 'summary') }}</div>
-                            <div class="excerpt">
-                                {{ excerptText(getItemValue(item, 'description')) }}
+                    <div class="item">
+                        <div class="date">{{ formattedDataShort(item.begin) }}</div>
+                        <div class="type">
+                            <div class="label" :style="[`background-color: #${item.activityLabel.color}`]">
+                                {{ getItemValue(item.activityLabel, 'name') }}
                             </div>
                         </div>
 
-                        <EpaButton :to="{ name: 'singleactivities', params: { id: item.id } }" class="readmore">
-                            {{ $gettext('Enroll now!') }}
-                        </EpaButton>
+                        <div class="activity">
+                            <div class="content">
+                                <div class="summary">{{ item.summary }}</div>
+                                <div class="excerpt">
+                                    {{ excerptText(item?.description ? item.description : '') }}
+                                </div>
+                            </div>
+
+                            <EpaButton :to="{ name: 'singleactivities', params: { id: item.id } }" class="readmore">
+                                {{ $gettext('Enroll now!') }}
+                            </EpaButton>
+                        </div>
                     </div>
-                </div>
+                </template>
             </template>
         </div>
     </div>

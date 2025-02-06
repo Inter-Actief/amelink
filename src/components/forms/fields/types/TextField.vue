@@ -1,14 +1,14 @@
 <template>
     <div :class="[
         'field textfield',
-        field.class,
-        field.placeholder || isActive || modelValue ? 'active' : '',
+        props?.field?.class,
+        props?.field?.placeholder || isActive || modelValue ? 'active' : '',
     ]">
         <FormLabel :field="field" :formid="formid" :id="id" />
 
         <input type="text" :name="`input_${formid}_${id}`" :id="`input_${formid}_${id}`" v-model="internalValue"
-            :placeholder="field.placeholder" :required="field.required" :disabled="disabled" @focus="handleFocus"
-            @blur="handleBlur" />
+            :placeholder="props?.field?.placeholder" :required="props?.field?.required" :disabled="disabled"
+            @focus="handleFocus" @blur="handleBlur" />
     </div>
 </template>
 

@@ -92,7 +92,7 @@ export const markedText = async (text: string) => {
 }
 
 export const excerptText = (text: string) => {
-    if (text === undefined) {
+    if (text === undefined || text == '') {
         return text
     }
 
@@ -105,17 +105,20 @@ export const excerptText = (text: string) => {
     return text
 }
 
-export const getItemValue = (item: object, key: any) => {
+export const getItemValue = <T>(item: T, key: string) => {
     if (!item) {
-        return null
+        return ''
     }
 
-    //TODO: Figure out what this is
-    if (item[`${key}${gettext.current}`]) {
-        return item[`${key}${gettext.current}`]
-    } else if (item[`${key}`]) {
-        return item[`${key}`]
+    const capitalizedKey = `${key}${gettext.current.capitalize()}` as keyof T
+    if (item.hasOwnProperty(capitalizedKey)) {
+        return item[capitalizedKey as keyof T]
     }
+    if (item.hasOwnProperty(key)) {
+        return item[key as keyof T]
+    }
+
+    return ''
 }
 
 export const isDesktop = ref(window.innerWidth >= 980)

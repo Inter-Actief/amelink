@@ -9,25 +9,28 @@
                 <div class="photos">{{ $gettext('Photos') }}</div>
             </div>
 
-            <template v-if="queryItems !== null" v-for="item in queryItems" :key="item">
-                <div class="item">
-                    <div class="date">
-                        {{ formattedDataShort(item.begin) }}
+            <template v-if="queryItems">
+                <template v-for="item in queryItems" :key="item">
+                    <div class="item">
+                        <div class="date">
+                            {{ formattedDataShort(item?.begin) }}
+                        </div>
+                        <div class="activity">
+                            <EpaButton class="link" :to="{ name: 'singleactivities', params: { id: item?.id } }">
+                                <span class="title">
+                                    {{ getItemValue(item, 'summary') }}
+                                </span>
+                            </EpaButton>
+                        </div>
+                        <div class="photos">
+                            <EpaButton v-if="item?.photos?.length ? item.photos.length > 0 : false"
+                                :to="{ name: 'singleactivitiesphotos', params: { id: item?.id } }"
+                                class="link readmore">
+                                {{ $gettext('Photos') }}
+                            </EpaButton>
+                        </div>
                     </div>
-                    <div class="activity">
-                        <EpaButton class="link" :to="{ name: 'singleactivities', params: { id: item.id } }">
-                            <span class="title">
-                                {{ getItemValue(item, 'summary') }}
-                            </span>
-                        </EpaButton>
-                    </div>
-                    <div class="photos">
-                        <EpaButton v-if="item.photos.length > 0"
-                            :to="{ name: 'singleactivitiesphotos', params: { id: item.id } }" class="link readmore">
-                            {{ $gettext('Photos') }}
-                        </EpaButton>
-                    </div>
-                </div>
+                </template>
             </template>
         </div>
     </div>
@@ -69,7 +72,7 @@ const query = graphql(`
 
 const { result, loading, error, refetch } = useQuery(query, { limit: perpage.value, beginlt: new Date() })
 const queryResults = computed(() => result.value?.activities)
-const queryItems = computed(() => (queryResults.value ? queryResults.value.results : null))
+const queryItems = computed(() => (queryResults.value ? queryResults.value.results : []))
 </script>
 
 <style lang="scss" scoped>

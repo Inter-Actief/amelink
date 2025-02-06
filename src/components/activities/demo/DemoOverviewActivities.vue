@@ -1,17 +1,17 @@
 <template>
     <div id="activities" class="activities cards">
-        <div v-if="items !== null">
-            <div class="item" v-for="item in items" :key="item">
-                <router-link :to="{ name: 'singleactivities', params: { id: item.id } }">
+        <div v-if="items">
+            <div class="item" v-for="item in items" :key="item?.id">
+                <router-link :to="{ name: 'singleactivities', params: { id: item?.id } }">
                     <div class="body">
                         <div class="info">
                             <div class="title">
-                                <h2>{{ getItemValue(item, 'summary') }}</h2>
-                                <div class="label" :style="[`background-color: #${item.activityLabel.color}`]">
-                                    {{ item.activityLabel[`name${gettext.current.capitalize()}`] }}
+                                <h2>{{ item?.summary }}</h2>
+                                <div class="label" :style="[`background-color: #${item?.activityLabel.color}`]">
+                                    {{ getItemValue(item?.activityLabel, 'name') }}
                                 </div>
                             </div>
-                            <div class="date">{{ formattedData(item.begin) }}</div>
+                            <div class="date">{{ formattedData(item?.begin) }}</div>
                         </div>
                         <div class="excerpt">
                             {{ excerptText(getItemValue(item, 'description')) }}
@@ -42,7 +42,7 @@ import { graphql } from '@/gql'
 const gettext = useGettext();
 const route = useRoute()
 const perpage = ref(10)
-const page = ref(route.query.page ? parseInt(route.query.page) : 1)
+const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 //begin_Gt: "${new Date().toISOString()}"
@@ -85,7 +85,7 @@ function handlePrevPage() {
     refetch()
 }
 
-function handleSelectPage(select) {
+function handleSelectPage(select: any) {
     page.value = select
     offset.value = page.value > 1 ? (page.value - 1) * perpage.value : 0
     refetch()

@@ -2,7 +2,9 @@
     <div class="ia_section gray">
         <div class="ia_row">
             <div class="ia_column">
-                <div class="text" v-html="markedText(getItemValue(item, 'content'))"></div>
+                <template v-if="item">
+                    <div class="text" v-html="markedText(item?.content ? item.content : '')"></div>
+                </template>
             </div>
         </div>
     </div>
@@ -29,6 +31,6 @@ const query = graphql(`
   }
 `)
 
-const { result, loading, error, refetch } = useQuery(query, { pageId: props.id })
+const { result, loading, error, refetch } = useQuery(query, { pageId: props.id });
 const item = computed(() => result.value?.page)
 </script>

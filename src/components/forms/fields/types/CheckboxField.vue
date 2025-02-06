@@ -18,7 +18,8 @@ import { getFormFieldID } from '@/functions/functions.ts'
 import FormLabel from '@/components/forms/fields/extras/FormLabel.vue'
 import type { FieldProps } from './FormFieldTypes';
 
-const props = defineProps<FieldProps>();
+//TODO: This
+const props = defineProps<FieldProps<[]>>();
 
 const id = props?.field?.id ? props.field.id as number : getFormFieldID()
 // TODO: Test this
