@@ -46,8 +46,7 @@ const page = ref(route.query.page ? parseInt(route.query.page) : 1)
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 //begin_Gt: "${new Date().toISOString()}"
-const query = computed(
-    () => graphql(`
+const query = graphql(`
   query DemoOverviewActivitiesQuery($limit: Int, $offset: Int) {
     activities(limit: $limit, offset: $offset, begin_Gt: "2022-10-26T18:00:00+00:00", ordering: "begin,desc" ) {
       results {
@@ -66,10 +65,9 @@ const query = computed(
       totalCount
     }
   }
-`, { limit: perpage.value, offset: offset.value }),
-)
+`)
 
-const { result, loading, error, refetch } = useQuery(query)
+const { result, loading, error, refetch } = useQuery(query, { limit: perpage.value, offset: offset.value })
 
 const queryResults = computed(() => result.value?.activities)
 const items = computed(() => (queryResults.value ? queryResults.value.results : null))

@@ -48,8 +48,7 @@ const route = useRoute()
 const perpage = ref(20)
 const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
 
-const query = computed(
-    () => graphql(`
+const query = graphql(`
   query PastActivitesQuery($limit: Int, $beginlt: DateTime) {
     activities(limit: $limit, ordering: "begin,desc" begin_Lt: $beginlt) {
       results {
@@ -66,10 +65,9 @@ const query = computed(
       }
     }
   }
-`, { limit: perpage.value, beginlt: new Date() }),
-)
+`)
 
-const { result, loading, error, refetch } = useQuery(query)
+const { result, loading, error, refetch } = useQuery(query, { limit: perpage.value, beginlt: new Date() })
 const queryResults = computed(() => result.value?.activities)
 const queryItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 </script>

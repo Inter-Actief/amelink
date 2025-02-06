@@ -34,12 +34,11 @@ import { graphql } from '@/gql'
 const gettext = useGettext();
 const route = useRoute()
 const perpage = ref(5)
-const page = ref(route.query.page ? parseInt(route.query.page) : 1)
+const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 //, begin_Gt: "${new Date().toISOString()}"
-const query = computed(
-    () => graphql(`
+const query = graphql(`
   query LatestNewsQuery($limit: Int) {
     newsItems(limit: $limit) {
       results {
@@ -53,10 +52,9 @@ const query = computed(
       totalCount
     }
   }
-`, { limit: perpage.value }),
-)
+`)
 
-const { result, loading, error, refetch } = useQuery(query)
+const { result, loading, error, refetch } = useQuery(query, { limit: perpage.value })
 const queryResults = computed(() => result.value?.newsItems)
 const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 </script>
