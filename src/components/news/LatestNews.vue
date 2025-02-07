@@ -11,7 +11,7 @@
             <template v-if="newsItems !== null" v-for="item in newsItems" :key="item">
                 <div class="item">
                     <div class="info">
-                        <div class="date">{{ formattedDataShort(item.publicationDate) }}</div>
+                        <div class="date">{{ formattedDataShort(item?.publicationDate) }}</div>
                         <div class="title">{{ getItemValue(item, 'title') }}</div>
                     </div>
 

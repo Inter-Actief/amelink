@@ -31,7 +31,6 @@
 
 <script setup lang="ts">
 import { useQuery } from '@vue/apollo-composable'
-import gql from 'graphql-tag'
 import { computed, ref } from 'vue'
 import Pagination from '@/components/ui/Pagination.vue'
 import { useRoute } from 'vue-router'

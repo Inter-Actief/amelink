@@ -25,7 +25,7 @@
                         (item.subItems && openSubMenu === index) ||
                         (item.subItems && location === 'header')
                     " class="submenu">
-                        <li class="subitem" v-for="sub in item.subItems" :key="sub">
+                        <li class="subitem" v-for="sub in item.subItems" :key="sub.id">
                             <component :is="htmlElement(sub.route)" @click="closeMobileMenu()"
                                 :to="{ name: sub.route, params: { id: sub.id, slug: sub.slug } }">
                                 {{ sub.name }}

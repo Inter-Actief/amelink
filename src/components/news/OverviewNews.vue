@@ -2,14 +2,14 @@
     <h1>{{ $gettext('News page') }}</h1>
 
     <div id="newsitems" class="newsitems cards">
-        <div class="item" v-if="newsItems !== null" v-for="item in newsItems" :key="item">
-            <router-link :to="{ name: 'singlenews', params: { id: item.id } }">
+        <div class="item" v-if="newsItems !== null" v-for="item in newsItems" :key="item?.id">
+            <router-link :to="{ name: 'singlenews', params: { id: item?.id } }">
                 <div class="body">
                     <div class="info">
                         <div class="title">
                             <h2>{{ getItemValue(item, 'title') }}</h2>
                         </div>
-                        <div class="date">{{ formattedData(item.publicationDate) }}</div>
+                        <div class="date">{{ formattedData(item?.publicationDate) }}</div>
                     </div>
                     <div class="excerpt">{{ getItemValue(item, 'introduction') }}</div>
                 </div>
@@ -76,7 +76,7 @@ function handlePrevPage() {
     scrolltop()
 }
 
-function handleSelectPage(select) {
+function handleSelectPage(select: number) {
     page.value = select
     offset.value = page.value > 1 ? (page.value - 1) * perpage.value : 0
     refetch()
@@ -85,7 +85,7 @@ function handleSelectPage(select) {
 
 function scrolltop() {
     window.scrollTo({
-        top: document.getElementById('newsitems').offsetTop,
+        top: (document.getElementById('newsitems') as HTMLElement).offsetTop,
         behavior: 'instant',
     })
 }

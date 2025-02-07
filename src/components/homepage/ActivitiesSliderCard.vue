@@ -33,17 +33,19 @@ import { graphql } from '@/gql'
 import type { ActivityType, AttachmentType } from "@/gql/graphql"
 
 const currentSlideIndex = ref(0)
-const images: Ref<AttachmentType[]> = ref([])
+const images: Ref<{
+    url: string
+}[]> = ref([])
 const imagesPerSlide = 3
-const dots = ref([])
+const dots = ref<number[]>([])
 const totalSliderWidth = ref(0)
 
 const BASE_URL = 'https://media.ia.utwente.nl/amelie/' //TODO: move to .env or main.ts
 const endGtDate = new Date() //TODO: change to date NOW()
 
 const query = graphql(`
-  query ActivitiesSliderCardQuery($endgt: DateTime!){
-    activities(filter: { end_Gt: $endgt, limit: 20) {
+  query ActivitiesSliderCardQuery($endgt: DateTime){
+      activities(end_Gt: $endgt, limit: 20) {
       results {
         photos {
           thumbMedium
@@ -61,9 +63,10 @@ watch(
         if (newVal) {
             images.value =
                 newVal?.activities?.results
-                    ?.flatMap((activity) =>
-                        activity?.photos.map((photo: any) => ({ url: BASE_URL + photo.thumbMedium })),
+                    ?.flatMap(activity =>
+                        activity?.photos.map((photo: any) => photo ? { url: BASE_URL + photo.thumbMedium } : undefined),
                     )
+                    .filter((photo): photo is { url: string } => photo !== undefined)
                     .slice(0, 20) ?? []
             updateSliderWidth()
             updateDots()
@@ -72,7 +75,7 @@ watch(
 )
 
 function updateSliderWidth() {
-    const sliderWrapper = document.querySelector('.slider-wrapper')
+    const sliderWrapper = document.querySelector('.slider-wrapper') as HTMLElement
     if (sliderWrapper) {
         totalSliderWidth.value = sliderWrapper.offsetWidth
     }
@@ -82,7 +85,7 @@ function updateDots() {
     dots.value = new Array(Math.ceil(images.value.length / imagesPerSlide)).fill(0)
 }
 
-const changeSlide = (index) => {
+const changeSlide = (index: number) => {
     currentSlideIndex.value = index
 }
 

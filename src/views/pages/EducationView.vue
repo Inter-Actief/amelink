@@ -10,8 +10,8 @@
                             <div class="title">{{ $gettext('General') }}</div>
 
                             <div class="items">
-                                <div class="item" v-for="item in queryItems" :key="item">
-                                    <div class="name" @click="scrolltop(`item_${item.id}`)">
+                                <div class="item" v-for="item in queryItems" :key="item?.id">
+                                    <div class="name" @click="scrolltop(`item_${item?.id}`)">
                                         {{ getItemValue(item, 'name') }}
                                     </div>
                                 </div>
@@ -23,7 +23,7 @@
 
             <div class="ia_column span8">
                 <div class="education">
-                    <div class="item" v-for="item in queryItems" :key="item" :id="`item_${item.id}`">
+                    <div class="item" v-for="item in queryItems" :key="item?.id" :id="`item_${item?.id}`">
                         <div class="title">
                             <h1>{{ getItemValue(item, 'name') }}</h1>
                         </div>
@@ -80,7 +80,7 @@ watch(queryItems, (newValue, oldValue) => {
 
 function education_sidebar() {
     setTimeout(() => {
-        const element = document.querySelector('.education_sidebar')
+        const element = document.querySelector('.education_sidebar') as HTMLElement
         const height = element.offsetHeight
 
         if (window.innerHeight > height + 60) {
@@ -97,7 +97,7 @@ function scrolltop(item: string) {
     }
 
     window.scrollTo({
-        top: document.getElementById(item).offsetTop,
+        top: document.getElementById(item)!.offsetTop,
         behavior: 'smooth',
     })
 }

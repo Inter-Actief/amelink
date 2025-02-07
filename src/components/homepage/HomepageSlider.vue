@@ -5,17 +5,17 @@
     }" :navigation="true" :modules="swiperModules" class="homepageslider">
         <template v-if="newsItems !== null" v-for="item in newsItems" :key="item">
             <swiper-slide class="item">
-                <router-link :to="{ name: 'singleactivities', params: { id: item.id } }">
+                <router-link :to="{ name: 'singleactivities', params: { id: item?.id } }">
                     <div class="image">
-                        <img v-if="item.photos?.[0]?.thumbMedium"
+                        <img v-if="item?.photos?.[0]?.thumbMedium"
                             :src="`https://media.ia.utwente.nl/amelie/${item.photos?.[0]?.thumbMedium}`" />
                         <img class="placeholder" v-else src="@/assets/images/placeholder.jpg" />
                     </div>
 
                     <div class="content">
                         <div class="container">
-                            <div class="title">{{ item[`summary`] }}</div>
-                            <div class="date">{{ formattedData(item.begin) }}</div>
+                            <div class="title">{{ item?.summary }}</div>
+                            <div class="date">{{ formattedData(item?.begin) }}</div>
                         </div>
                     </div>
                 </router-link>

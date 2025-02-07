@@ -38,7 +38,6 @@
 
 <script setup lang="ts">
 import { useQuery } from '@vue/apollo-composable'
-import gql from 'graphql-tag'
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { formattedDataShort, getItemValue } from '@/functions/functions.ts'
