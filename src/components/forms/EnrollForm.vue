@@ -6,7 +6,7 @@
             <div class="form_footer">
                 <EpaButton type="submit" class="ia_button" loading="true" :disabled="disabled">{{
                     $gettext('Send')
-                }}</EpaButton>
+                    }}</EpaButton>
             </div>
         </form>
     </div>
@@ -17,6 +17,8 @@ import EpaButton from '@/components/ui/EpaButton.vue'
 import { ref } from 'vue'
 import { getFormID } from '@/functions/functions'
 import FormFields from '@/components/forms/fields/FormFields.vue'
+import { useGettext } from 'vue3-gettext';
+const { $gettext } = useGettext();
 
 const form_id = getFormID()
 const disabled = ref(false)

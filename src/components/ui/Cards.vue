@@ -20,6 +20,8 @@
 <script setup lang="ts">
 import EpaButton from '@/components/ui/EpaButton.vue'
 import type { RouteLocationRaw } from 'vue-router'
+import { useGettext } from 'vue3-gettext';
+const { $gettext } = useGettext();
 
 const props = defineProps<{
     to: RouteLocationRaw | undefined,

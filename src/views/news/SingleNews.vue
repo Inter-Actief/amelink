@@ -32,7 +32,7 @@ import { formattedData, getItemValue, markedText } from '@/functions/functions.t
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
 
-const gettext = useGettext();
+const { $gettext } = useGettext();
 const props = defineProps(['id'])
 
 const query = graphql(`

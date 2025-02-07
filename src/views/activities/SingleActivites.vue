@@ -47,7 +47,7 @@ import EnrollFrom from '@/components/forms/EnrollForm.vue'
 import { useGettext } from 'vue3-gettext'
 import { graphql } from '@/gql'
 
-const gettext = useGettext();
+const { $gettext } = useGettext();
 const props = defineProps(['id'])
 const query = graphql(`
   query SingleActivitiesQuery($id: ID) {

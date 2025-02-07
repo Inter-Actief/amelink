@@ -1,14 +1,18 @@
 <template>
-	<div>
-		<h4>{{ $gettext('Contact us') }}</h4>
+    <div>
+        <h4>{{ $gettext('Contact us') }}</h4>
 
-		<ul>
-			<li>Zilverling, kamer E208</li>
-			<li>Drienerlolaan 5</li>
-			<li>7522 NB Enschede</li>
-			<li>The Netherlands</li>
-		</ul>
-	</div>
+        <ul>
+            <li>Zilverling, kamer E208</li>
+            <li>Drienerlolaan 5</li>
+            <li>7522 NB Enschede</li>
+            <li>The Netherlands</li>
+        </ul>
+    </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useGettext } from 'vue3-gettext';
+
+const { $gettext } = useGettext();
+</script>

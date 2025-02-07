@@ -38,8 +38,7 @@ import { excerptText, formattedData, getItemValue } from '../../functions/functi
 import Cards from '@/components/ui/Cards.vue'
 import { useGettext } from 'vue3-gettext'
 import { graphql } from '@/gql'
-
-const gettext = useGettext();
+const { $gettext } = useGettext();
 const route = useRoute()
 const perpage = ref(5)
 

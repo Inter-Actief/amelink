@@ -27,7 +27,8 @@
 <script setup lang="ts">
 import { computed, defineEmits, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-
+import { useGettext } from 'vue3-gettext';
+const { $gettext } = useGettext();
 const props = defineProps(['totalItems', 'itemsPerPage', 'page'])
 
 const router = useRouter()

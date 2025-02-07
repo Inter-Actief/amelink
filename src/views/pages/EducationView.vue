@@ -49,7 +49,7 @@ import { useGettext } from 'vue3-gettext'
 const props = defineProps(['id', 'slug'])
 
 const appState = inject('appState')
-const gettext = useGettext();
+const { $gettext } = useGettext();
 
 const query = graphql(`
   query EducationViewQuery {

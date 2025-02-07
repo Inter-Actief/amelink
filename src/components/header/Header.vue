@@ -47,6 +47,9 @@ import EpaButton from '@/components/ui/EpaButton.vue'
 import { isDesktop, isTablet, openMobileMenu, toggleMobileMenu } from '@/functions/functions'
 import EpaIcon from '@/components/ui/EpaIcon.vue'
 import SearchToggle from '@/components/ui/SearchToggle.vue'
+import { useGettext } from 'vue3-gettext'
+const { $gettext } = useGettext();
+
 </script>
 
 <style scoped lang="scss">

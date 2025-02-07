@@ -1,7 +1,6 @@
 import { marked } from 'marked'
 import { ref } from 'vue'
-import { useGettext } from 'vue3-gettext'
-const gettext = useGettext()
+import gettext from '@/gettext'
 
 // TODO: Test if timestamp type is indeed a number
 export const formattedData = (timestamp: number, lang = 'En') => {

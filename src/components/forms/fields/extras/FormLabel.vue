@@ -8,6 +8,10 @@
 </template>
 
 <script setup lang="ts">
+import { useGettext } from 'vue3-gettext';
+
+const { $gettext } = useGettext();
+
 const props = defineProps({
     field: Object,
     formid: Number,

@@ -17,6 +17,8 @@ import { ref, watch } from 'vue'
 import { getFormFieldID } from '@/functions/functions.ts'
 import FormLabel from '@/components/forms/fields/extras/FormLabel.vue'
 import type { StringFieldProps } from './FormFieldTypes';
+import { useGettext } from 'vue3-gettext';
+const { $gettext } = useGettext();
 
 const props = defineProps<StringFieldProps>();
 

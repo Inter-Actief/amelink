@@ -32,7 +32,7 @@ import { graphql } from '@/gql'
 import { getItemValue } from '@/functions/functions'
 import type { AttachmentType } from '@/gql/graphql'
 
-const gettext = useGettext();
+const { $gettext } = useGettext();
 const props = defineProps(['id'])
 const query = graphql(`
   query PhotosActivitiesQuery($id: ID) {

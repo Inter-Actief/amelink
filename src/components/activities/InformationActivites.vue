@@ -50,6 +50,7 @@ import { formattedData, formattedTime, getItemValue } from '@/functions/function
 import { useGettext } from 'vue3-gettext';
 const gettext = useGettext();
 
+const { $gettext } = gettext;
 const props = defineProps(['item'])
 </script>
 
