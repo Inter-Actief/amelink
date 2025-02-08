@@ -1,0 +1,213 @@
+query LatestActivitiesQuery($limit: Int, $startDate: DateTime) {
+  activities(limit: $limit, begin_Gt: $startDate) {
+    results {
+      id
+      description
+      summary
+      begin
+      photos {
+        caption
+        thumbMedium
+        thumbMediumHeight
+        thumbMediumWidth
+      }
+    }
+    totalCount
+  }
+}
+
+query OverviewActivitiesQuery($limit: Int, $offset: Int, $startDate: DateTime!) {
+  activities(limit: $limit, offset: $offset, begin_Gt: $startDate, ordering: "begin,desc") {
+    results {
+      id
+      begin
+      summary
+      description
+      activityLabel {
+        nameNl
+        nameEn
+        color
+        active
+      }
+    }
+    totalCount
+  }
+}
+
+query PastActivitesQuery($limit: Int, $endDate: DateTime) {
+  activities(limit: $limit, ordering: "begin,desc", begin_Lt: $endDate) {
+    results {
+      id
+      begin
+      description
+      summary
+      photos {
+        thumbMedium
+        thumbMediumHeight
+        thumbMediumWidth
+        caption
+      }
+    }
+  }
+}
+
+query PhotosActivitiesQuery($id: ID) {
+  activity(id: $id) {
+    summary
+    begin
+    id
+    description
+    photos {
+      thumbMedium
+      thumbMediumHeight
+      thumbMediumWidth
+      thumbLarge
+    }
+  }
+}
+
+query UpcomingActivitiesQuery($limit: Int, $beginDate: DateTime) {
+  activities(limit: $limit, begin_Gt: $beginDate) {
+    results {
+      id
+      begin
+      description
+      summary
+      activityLabel {
+        nameNl
+        nameEn
+        color
+        active
+      }
+    }
+    totalCount
+  }
+}
+
+query DemoOverviewActivitiesQuery($limit: Int, $offset: Int, $beginDate: DateTime) {
+  activities(limit: $limit, offset: $offset, begin_Gt: $beginDate, ordering: "begin,desc") {
+    results {
+      id
+      begin
+      description
+      summary
+      description
+      activityLabel {
+        nameNl
+        nameEn
+        color
+        active
+      }
+    }
+    totalCount
+  }
+}
+
+query ActivitiesSliderCardQuery($endgt: DateTime, $limit: Int) {
+  activities(end_Gt: $endgt, limit: $limit) {
+    results {
+      photos {
+        thumbMedium
+      }
+    }
+  }
+}
+
+query HomepageSliderQuery($limit: Int, $beginDate: DateTime) {
+  activities(limit: $limit, begin_Gt: $beginDate) {
+    results {
+      id
+      description
+      summary
+      begin
+      photos {
+        caption
+        thumbMedium
+        thumbMediumHeight
+        thumbMediumWidth
+      }
+    }
+    totalCount
+  }
+}
+
+query LatestNewsQuery($limit: Int) {
+  newsItems(limit: $limit) {
+    results {
+      id
+      title
+      introduction
+      title
+      introduction
+      publicationDate
+    }
+    totalCount
+  }
+}
+
+query OverviewNewsQuery($limit: Int, $offset: Int) {
+  newsItems(limit: $limit, offset: $offset) {
+    results {
+      id
+      title
+      introduction
+      publicationDate
+    }
+    totalCount
+  }
+}
+
+query SingleActivitiesQuery($id: ID) {
+  activity(id: $id) {
+    begin
+    id
+    summary
+    description
+    photos {
+      thumbMedium
+      thumbMediumHeight
+      thumbMediumWidth
+    }
+    location
+    hasCosts
+    price
+    activityLabel {
+      nameEn
+      explanationEn
+    }
+    organizer {
+      name
+    }
+    enrollmentEnd
+    enrollmentBegin
+  }
+}
+
+query SingleNewsQuery($id: ID) {
+  newsItem(id: $id) {
+    content
+    title
+    publicationDate
+    author
+    id
+  }
+}
+
+query EducationViewQuery {
+  educationpages {
+    results {
+      id
+      slug
+      name
+      content
+    }
+  }
+}
+
+query PageViewQuery($pageId: ID) {
+  page(id: $pageId) {
+    name
+    slug
+    content
+  }
+}

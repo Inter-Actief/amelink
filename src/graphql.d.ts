@@ -1,0 +1,8 @@
+//www.npmjs.com/package/vite-plugin-graphql-loader
+
+declare module '*.gql' {
+    const Query: import('graphql').DocumentNode
+    export default Query
+    export const _queries: Record<string, import('graphql').DocumentNode>
+    export const _fragments: Record<string, import('graphql').FragmentDefinitionNode>
+}

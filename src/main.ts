@@ -1,12 +1,7 @@
-import './assets/main.css'
-
 import { createApp, h, provide } from 'vue'
-
-// Apollo
+import { addGlobalPrototypeMethods } from './functions/global'
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client/core'
 import { DefaultApolloClient } from '@vue/apollo-composable'
-
-// Other plugins/frameworks
 import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura' // For now a preset theme
@@ -14,6 +9,9 @@ import gettext from './gettext'
 import App from './App.vue'
 import router from './router'
 import * as Sentry from '@sentry/vue'
+
+// Add global prototype methods
+addGlobalPrototypeMethods()
 
 const link = createHttpLink({ uri: import.meta.env.VITE_AMELIE_GRAPHQL_API })
 const cache = new InMemoryCache()

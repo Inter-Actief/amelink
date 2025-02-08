@@ -12,6 +12,15 @@
     }
   ],
   "compilerOptions": {
-    "types": ["node"]
+    "types": ["node"],
+    "typeRoots": ["./node_modules/@types", "./src"],
+    "forceConsistentCasingInFileNames": true,
+    "plugins": [
+      {
+        "name": "@0no-co/graphqlsp",
+        "schema": "./schema.graphql"
+      }
+    ]
+    // "strict": true
   }
 }

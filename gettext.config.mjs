@@ -1,5 +1,5 @@
 export default {
     output: {
-        locales: ["en", "nl"],
+        locales: ['en', 'nl'],
     },
 }

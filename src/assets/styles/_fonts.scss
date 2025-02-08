@@ -1,0 +1,78 @@
+@use './variables' as vars;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+h1 {
+  font-size: 3.2rem;
+  line-height: normal;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2.4rem;
+  line-height: normal;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 2rem;
+  line-height: normal;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 1.8rem;
+  line-height: normal;
+  font-weight: 700;
+}
+
+$p_spacing: 1.8rem;
+
+p:not(:last-child) {
+  padding-bottom: $p_spacing;
+}
+
+.text {
+  h1:not(:last-child) {
+    padding-bottom: $p_spacing;
+  }
+  h2:not(:last-child) {
+    padding-bottom: $p_spacing;
+  }
+  h3:not(:last-child) {
+    padding-bottom: $p_spacing;
+  }
+  h4:not(:last-child) {
+    padding-bottom: $p_spacing;
+  }
+  h5:not(:last-child) {
+    padding-bottom: $p_spacing;
+  }
+  h6:not(:last-child) {
+    padding-bottom: $p_spacing;
+  }
+
+  ul:not(:last-child),
+  ol:not(:last-child),
+  img:not(:last-child) {
+    padding-bottom: $p_spacing;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  a {
+    text-decoration: none;
+    position: relative;
+    color: vars.$secondary-color;
+    transition: 300ms;
+    background: linear-gradient(currentColor, currentColor) bottom / 0 0.2rem no-repeat;
+    background-position: left bottom;
+
+    &:hover {
+      background-size: 100% 0.2rem;
+      color: vars.$secondary-color;
+      opacity: 1;
+    }
+  }
+}
