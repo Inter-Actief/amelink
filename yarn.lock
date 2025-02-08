@@ -6341,6 +6341,13 @@ vite-node@3.0.5:
     pathe "^2.0.2"
     vite "^5.0.0 || ^6.0.0"
 
+vite-plugin-graphql-codegen@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/vite-plugin-graphql-codegen/-/vite-plugin-graphql-codegen-3.5.0.tgz#caccb7838b9b5dbe095f9367a1c5df2c0c2480b9"
+  integrity sha512-K9SDS30BTdzHEjPDlfyB2K7zTBSrB8jBWxM+uR1Jo/bIZPT5IZKbZeTS2R1fGTIFbAuYUf4AWOVMsOZ4v/XcTw==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^5.1.0"
+
 vite-plugin-graphql-loader@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/vite-plugin-graphql-loader/-/vite-plugin-graphql-loader-4.0.4.tgz#cf6c599b3e5fa32bf2b768983da68f7beccc8486"

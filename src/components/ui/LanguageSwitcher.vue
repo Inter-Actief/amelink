@@ -11,7 +11,7 @@
 
         <div class="language_switcher_dorpdown">
             <div class="inner">
-                <template v-for="lang in gettext.available">
+                <template v-for="lang in Object.keys(gettext.available)">
                     <div @click="changeLanguage(lang)">
                         <img width="22" height="16" :aria-label="`lang ${lang}`"
                             :src="`/src/assets/images/flags/${lang}.svg`" />

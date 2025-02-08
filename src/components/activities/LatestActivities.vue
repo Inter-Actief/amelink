@@ -37,7 +37,6 @@ import EpaButton from '@/components/ui/EpaButton.vue'
 import { excerptText, formattedData, getItemValue } from '../../functions/functions.ts'
 import Cards from '@/components/ui/Cards.vue'
 import { useGettext } from 'vue3-gettext'
-import { getLatestActivities } from '@/services/queryService.ts'
 import { useQueryStore } from '@/stores/queryStore.ts'
 const { $gettext } = useGettext();
 const queries = useQueryStore();

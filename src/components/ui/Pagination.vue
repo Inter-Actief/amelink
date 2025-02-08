@@ -54,8 +54,6 @@ function createPagination() {
     }
 
     for (let i = 1; i <= totalPages.value; i++) {
-        console.log(i)
-
         if (
             (i <= parseInt(currentPage.value) + extend &&
                 i >= parseInt(currentPage.value) - extend) ||
@@ -64,7 +62,6 @@ function createPagination() {
             i === 1 ||
             i === totalPages.value
         ) {
-            console.log(i)
             pages.push(i)
             dotPushed = false
         } else if (!dotPushed && i !== 1 && i !== totalPages.value) {
