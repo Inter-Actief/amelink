@@ -11,17 +11,13 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue'
-import { useQuery } from '@vue/apollo-composable'
-import { graphql } from '@/gql'
 import { computed, ref, watch } from 'vue'
-import { getItemValue, markedText } from '@/functions/functions'
-import { useGettext } from 'vue3-gettext'
+import { markedText } from '@/functions/functions'
+import { useQueryStore } from '@/stores/queryStore'
+const queryStore = useQueryStore();
 
 const props = defineProps(['id', 'slug'])
-const gettext = useGettext();
 
-
-const { result, loading, error, refetch } = useQuery(query, { pageId: props.id });
-const item = computed(() => result.value?.page)
+const result = await queryStore.getPageViewQuery({ pageId: props.id })
+const item = computed(() => result.result.page)
 </script>

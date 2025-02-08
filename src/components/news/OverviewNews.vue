@@ -31,20 +31,19 @@ import { useRoute } from 'vue-router'
 import { formattedData, getItemValue } from '@/functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
-import { graphql } from '@/gql'
+import { useQueryStore } from '@/stores/queryStore'
 
 const { $gettext } = useGettext();
 const route = useRoute()
+const queries = useQueryStore();
 const perpage = ref(10)
 const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 
-const { result, loading, error, refetch } = useQuery(query, { limit: perpage.value, offset: offset.value })
+const { result, refetch } = await queries.getOverviewNewsQuery({ limit: perpage.value, offset: offset.value });
 
-const queryResults = computed(() => result.value?.newsItems)
-
-console.log(queryResults)
+const queryResults = computed(() => result.newsItems)
 
 const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 const totalCount = computed(() => (queryResults.value ? queryResults.value.totalCount : null))

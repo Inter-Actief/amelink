@@ -44,14 +44,15 @@ import { formattedDataShort, getItemValue } from '@/functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
 import { graphql } from '@/gql'
+import { useQueryStore } from '@/stores/queryStore'
 
 const { $gettext } = useGettext();
+const queries = useQueryStore();
 const route = useRoute()
 const perpage = ref(20)
 const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
 
-
-const { result, loading, error, refetch } = useQuery(query, { limit: perpage.value, beginlt: new Date() })
+const { result, refetch } = queries.getPastActivitiesQuery({ limit: perpage.value, endDate: new Date() })
 const queryResults = computed(() => result.value?.activities)
 const queryItems = computed(() => (queryResults.value ? queryResults.value.results : []))
 </script>

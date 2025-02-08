@@ -31,12 +31,14 @@ import { computed, ref, watch } from 'vue'
 import { formattedData, getItemValue, markedText } from '@/functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
+import { useQueryStore } from '@/stores/queryStore'
 
 const { $gettext } = useGettext();
+const queries = useQueryStore();
 const props = defineProps(['id'])
 
 
-const { result, loading, error, refetch } = useQuery(query, { id: props.id })
-const queryResults = computed(() => result.value?.newsItem)
+const { result, refetch } = await queries.getSingleNewsQuery({ id: props.id });
+const queryResults = computed(() => result.newsItem)
 const item = computed(() => (queryResults.value ? queryResults.value : null))
 </script>

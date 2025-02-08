@@ -1,8 +1,7 @@
 <template>
     <h1 class="activities-title">Upcoming activities</h1>
     <div class="slider-container">
-        <div v-if="loading" class="loading">Loading...</div>
-        <div v-else-if="error" class="error">Error: {{ error.message }}</div>
+        <div v-if="isLoading" class="loading">Loading...</div>
         <div v-else>
             <div v-if="images.length === 0" class="no-images">No images available</div>
             <div class="slider-wrapper">
@@ -28,10 +27,9 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch, type Ref } from 'vue'
-import { useQuery } from '@vue/apollo-composable'
-import { graphql } from '@/gql'
-import type { ActivityType, AttachmentType } from "@/gql/graphql"
+import { useQueryStore } from '@/stores/queryStore'
 
+const queries = useQueryStore();
 const currentSlideIndex = ref(0)
 const images: Ref<{
     url: string
@@ -39,29 +37,26 @@ const images: Ref<{
 const imagesPerSlide = 3
 const dots = ref<number[]>([])
 const totalSliderWidth = ref(0)
+const isLoading = ref(true);
 
 const BASE_URL = 'https://media.ia.utwente.nl/amelie/' //TODO: move to .env or main.ts
 const endGtDate = new Date() //TODO: change to date NOW()
 
 
-const { result, loading, error, refetch } = useQuery(query, { endgt: endGtDate })
+await queries.getActivitiesSliderCardQuery({ endgt: endGtDate })
+    .then(res => {
+        images.value =
+            res.result.activities?.results
+                ?.flatMap(activity =>
+                    activity?.photos.map((photo: any) => photo ? { url: BASE_URL + photo.thumbMedium } : undefined),
+                )
+                .filter((photo): photo is { url: string } => photo !== undefined)
+                .slice(0, 20) ?? []
+        updateSliderWidth()
+        updateDots()
 
-watch(
-    () => result.value,
-    (newVal) => {
-        if (newVal) {
-            images.value =
-                newVal?.activities?.results
-                    ?.flatMap(activity =>
-                        activity?.photos.map((photo: any) => photo ? { url: BASE_URL + photo.thumbMedium } : undefined),
-                    )
-                    .filter((photo): photo is { url: string } => photo !== undefined)
-                    .slice(0, 20) ?? []
-            updateSliderWidth()
-            updateDots()
-        }
-    },
-)
+        isLoading.value = false;
+    })
 
 function updateSliderWidth() {
     const sliderWrapper = document.querySelector('.slider-wrapper') as HTMLElement

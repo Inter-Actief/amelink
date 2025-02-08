@@ -23,19 +23,18 @@
 </template>
 
 <script setup lang="ts">
-import { useQuery } from '@vue/apollo-composable'
 import { computed, ref, watch } from 'vue'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import VueEasyLightbox from 'vue-easy-lightbox'
 import { useGettext } from 'vue3-gettext'
-import { graphql } from '@/gql'
 import { getItemValue } from '@/functions/functions'
-import type { AttachmentType } from '@/gql/graphql'
+import { useQueryStore } from '@/stores/queryStore'
 
+const queries = useQueryStore();
 const { $gettext } = useGettext();
 const props = defineProps(['id'])
 
-const { result, loading, error, refetch } = useQuery(query, { id: props.id })
+const { result, refetch } = queries.getPhotosActivitiesQuery({ id: props.id });
 const queryResults = computed(() => result.value?.activity)
 const queryItem = computed(() => (queryResults.value ? queryResults.value : null))
 

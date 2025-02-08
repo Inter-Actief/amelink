@@ -38,16 +38,18 @@ import EpaButton from '@/components/ui/EpaButton.vue'
 import PaginationNext from '@/components/ui/PaginationNext.vue'
 import { useGettext } from 'vue3-gettext'
 import { graphql } from '@/gql'
+import { useQueryStore } from '@/stores/queryStore'
 
 const { $gettext } = useGettext();
 const route = useRoute()
+const queries = useQueryStore();
 const perpage = ref(10)
 const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 //begin_Gt: "${new Date().toISOString()}"
 
-const { result, loading, error, refetch } = useQuery(query, { limit: perpage.value, offset: offset.value })
+const { result, refetch } = queries.getDemoOverviewActivitiesQuery({ limit: perpage.value, offset: offset.value });
 
 const queryResults = computed(() => result.value?.activities)
 const items = computed(() => (queryResults.value ? queryResults.value.results : null))

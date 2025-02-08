@@ -45,16 +45,13 @@ import EpaButton from '@/components/ui/EpaButton.vue'
 import InformationActivites from '@/components/activities/InformationActivites.vue'
 import EnrollFrom from '@/components/forms/EnrollForm.vue'
 import { useGettext } from 'vue3-gettext'
-import { graphql } from '@/gql'
+import { useQueryStore } from '@/stores/queryStore'
 
 const { $gettext } = useGettext();
 const props = defineProps(['id'])
+const queries = useQueryStore();
 
-// TODO: Add 'name' and 'explanation' to ActivityLabel
-
-const { result, loading, error, refetch } = useQuery(query, {
-    id: props.id
-})
-const queryResults = computed(() => result.value?.activity)
+const { result, refetch } = await queries.getSingleActivitiesQuery({ id: props.id });
+const queryResults = computed(() => result.activity)
 const queryItem = computed(() => (queryResults.value ? queryResults.value : null))
 </script>

@@ -38,7 +38,9 @@ import { excerptText, formattedData, getItemValue } from '../../functions/functi
 import Cards from '@/components/ui/Cards.vue'
 import { useGettext } from 'vue3-gettext'
 import { getLatestActivities } from '@/services/queryService.ts'
+import { useQueryStore } from '@/stores/queryStore.ts'
 const { $gettext } = useGettext();
+const queries = useQueryStore();
 const route = useRoute()
 const perpage = ref(5)
 
@@ -49,7 +51,7 @@ const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 //, begin_Gt: "${new Date().toISOString()}"
 //TODO: Begin_gt new date()
 
-const { result, loading, error, refetch } = getLatestActivities({ limit: perpage.value, startDate: new Date() });
+const { result, refetch } = queries.getLatestActivities({ limit: perpage.value, startDate: new Date() });
 const queryResults = computed(() => result.value?.activities)
 const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 const totalCount = computed(() => (queryResults.value ? queryResults.value.totalCount : null))

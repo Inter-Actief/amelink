@@ -23,13 +23,12 @@
 </template>
 
 <script setup lang="ts">
-import { useQuery } from '@vue/apollo-composable'
 import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { excerptText, formattedDataShort, getItemValue } from '../../functions/functions.ts'
+import { formattedDataShort, getItemValue } from '../../functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
-import { graphql } from '@/gql'
+import { useQueryStore } from '@/stores/queryStore.ts'
 
 const { $gettext } = useGettext();
 const route = useRoute()
@@ -37,9 +36,9 @@ const perpage = ref(5)
 const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
-//, begin_Gt: "${new Date().toISOString()}"
+const queries = useQueryStore();
 
-const { result, loading, error, refetch } = useQuery(query, { limit: perpage.value })
+const { result } = queries.getLatestNewsQuery({ limit: perpage.value });
 const queryResults = computed(() => result.value?.newsItems)
 const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 </script>

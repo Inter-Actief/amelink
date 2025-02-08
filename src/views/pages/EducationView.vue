@@ -45,19 +45,17 @@ import { graphql } from '@/gql'
 import { computed, ref, watch } from 'vue'
 import { getItemValue, markedText } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext'
+import { useQueryStore } from '@/stores/queryStore'
 
 const props = defineProps(['id', 'slug'])
 
 const appState = inject('appState')
+const queries = useQueryStore();
 const { $gettext } = useGettext();
 
-//   name${ gettext.current.capitalize() }
-//   content${ gettext.current.capitalize() }
+const { result, refetch } = await queries.getEducationViewQuery({});
 
-
-const { result, loading, error, refetch } = useQuery(query)
-
-const queryResults = computed(() => result.value?.educationpages)
+const queryResults = computed(() => result.educationpages)
 const queryItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 
 watch(queryItems, (newValue, oldValue) => {

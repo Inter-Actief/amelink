@@ -36,8 +36,10 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { useGettext } from 'vue3-gettext'
 import { graphql } from '@/gql'
+import { useQueryStore } from '@/stores/queryStore'
 
 const gettext = useGettext();
+const queries = useQueryStore();
 const swiperModules = [Navigation, Autoplay]
 const route = useRoute()
 const perpage = ref(5)
@@ -45,9 +47,9 @@ const perpage = ref(5)
 const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
-const { result, loading, error, refetch } = useQuery(query, { limit: perpage.value })
+const { result, refetch } = await queries.getHomepageSliderQuery({ limit: perpage.value });
 
-const queryResults = computed(() => result.value?.activities)
+const queryResults = computed(() => result.activities)
 
 const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 const totalCount = computed(() => (queryResults.value ? queryResults.value.totalCount : null))

@@ -16,8 +16,8 @@ query LatestActivitiesQuery($limit: Int, $startDate: DateTime) {
   }
 }
 
-query OverviewActivitiesQuery($limit: Int, $offset: Int, $begingt: DateTime!) {
-  activities(limit: $limit, offset: $offset, begin_Gt: $begingt, ordering: "begin,desc") {
+query OverviewActivitiesQuery($limit: Int, $offset: Int, $startDate: DateTime!) {
+  activities(limit: $limit, offset: $offset, begin_Gt: $startDate, ordering: "begin,desc") {
     results {
       id
       begin
@@ -34,8 +34,8 @@ query OverviewActivitiesQuery($limit: Int, $offset: Int, $begingt: DateTime!) {
   }
 }
 
-query PastActivitesQuery($limit: Int, $beginlt: DateTime) {
-  activities(limit: $limit, ordering: "begin,desc", begin_Lt: $beginlt) {
+query PastActivitesQuery($limit: Int, $endDate: DateTime) {
+  activities(limit: $limit, ordering: "begin,desc", begin_Lt: $endDate) {
     results {
       id
       begin
@@ -66,8 +66,8 @@ query PhotosActivitiesQuery($id: ID) {
   }
 }
 
-query UpcomingActivitiesQuery($limit: Int) {
-  activities(limit: $limit, begin_Gt: "2023-05-21T00:00:00+00:00") {
+query UpcomingActivitiesQuery($limit: Int, $beginDate: DateTime) {
+  activities(limit: $limit, begin_Gt: $beginDate) {
     results {
       id
       begin
@@ -84,13 +84,8 @@ query UpcomingActivitiesQuery($limit: Int) {
   }
 }
 
-query DemoOverviewActivitiesQuery($limit: Int, $offset: Int) {
-  activities(
-    limit: $limit
-    offset: $offset
-    begin_Gt: "2022-10-26T18:00:00+00:00"
-    ordering: "begin,desc"
-  ) {
+query DemoOverviewActivitiesQuery($limit: Int, $offset: Int, $beginDate: DateTime) {
+  activities(limit: $limit, offset: $offset, begin_Gt: $beginDate, ordering: "begin,desc") {
     results {
       id
       begin
@@ -108,8 +103,8 @@ query DemoOverviewActivitiesQuery($limit: Int, $offset: Int) {
   }
 }
 
-query ActivitiesSliderCardQuery($endgt: DateTime) {
-  activities(end_Gt: $endgt, limit: 20) {
+query ActivitiesSliderCardQuery($endgt: DateTime, $limit: Int) {
+  activities(end_Gt: $endgt, limit: $limit) {
     results {
       photos {
         thumbMedium
@@ -118,8 +113,8 @@ query ActivitiesSliderCardQuery($endgt: DateTime) {
   }
 }
 
-query HomepageSliderQuery($limit: Int) {
-  activities(limit: $limit, begin_Gt: "2023-05-21T09:32:52.706Z") {
+query HomepageSliderQuery($limit: Int, $beginDate: DateTime) {
+  activities(limit: $limit, begin_Gt: $beginDate) {
     results {
       id
       description
