@@ -37,7 +37,7 @@ import EpaButton from '@/components/ui/EpaButton.vue'
 import { excerptText, formattedData, getItemValue } from '../../functions/functions.ts'
 import Cards from '@/components/ui/Cards.vue'
 import { useGettext } from 'vue3-gettext'
-import { graphql } from '@/gql'
+import { getLatestActivities } from '@/services/queryService.ts'
 const { $gettext } = useGettext();
 const route = useRoute()
 const perpage = ref(5)
@@ -48,27 +48,8 @@ const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 //, begin_Gt: "${new Date().toISOString()}"
 //TODO: Begin_gt new date()
-const query = graphql(`
-  query LatestActivitiesQuery($limit: Int) {
-    activities(limit: $limit, begin_Gt: "2023-05-21T09:32:52.706Z" ) {
-      results {
-        id
-        description
-        summary
-        begin
-        photos {
-          caption
-          thumbMedium
-          thumbMediumHeight
-          thumbMediumWidth
-        }
-      }
-      totalCount
-    }
-  }
-`)
 
-const { result, loading, error, refetch } = useQuery(query, { limit: perpage.value })
+const { result, loading, error, refetch } = getLatestActivities({ limit: perpage.value, startDate: new Date() });
 const queryResults = computed(() => result.value?.activities)
 const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 const totalCount = computed(() => (queryResults.value ? queryResults.value.totalCount : null))

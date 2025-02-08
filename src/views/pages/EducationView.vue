@@ -51,18 +51,6 @@ const props = defineProps(['id', 'slug'])
 const appState = inject('appState')
 const { $gettext } = useGettext();
 
-const query = graphql(`
-  query EducationViewQuery {
-      educationpages {
-        results {
-          id
-          slug
-          name
-          content
-        }
-      }
-  }
-`)
 //   name${ gettext.current.capitalize() }
 //   content${ gettext.current.capitalize() }
 

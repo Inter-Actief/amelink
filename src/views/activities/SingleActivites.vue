@@ -49,33 +49,7 @@ import { graphql } from '@/gql'
 
 const { $gettext } = useGettext();
 const props = defineProps(['id'])
-const query = graphql(`
-  query SingleActivitiesQuery($id: ID) {
-    activity(id: $id) {
-      begin
-      id
-      summary
-      description
-      photos {
-          thumbMedium
-          thumbMediumHeight
-          thumbMediumWidth
-      }
-      location
-      hasCosts
-      price
-      activityLabel {
-          nameEn
-          explanationEn
-      }
-      organizer {
-          name
-      }
-      enrollmentEnd
-      enrollmentBegin
-    }
-  }
-`) // TODO: activityLabel.name or activityLabel.nameNl ?
+
 // TODO: Add 'name' and 'explanation' to ActivityLabel
 
 const { result, loading, error, refetch } = useQuery(query, {

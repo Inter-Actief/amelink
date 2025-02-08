@@ -35,17 +35,6 @@ import { useGettext } from 'vue3-gettext'
 const { $gettext } = useGettext();
 const props = defineProps(['id'])
 
-const query = graphql(`
-  query SingleNewsQuery($id: ID) {
-    newsItem(id: $id) {
-      content
-      title
-      publicationDate
-      author
-      id
-    }
-  }
-`)
 
 const { result, loading, error, refetch } = useQuery(query, { id: props.id })
 const queryResults = computed(() => result.value?.newsItem)

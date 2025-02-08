@@ -45,26 +45,6 @@ const perpage = ref(5)
 const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
-const query = graphql(`
-  query HomepageSliderQuery($limit: Int) {
-    activities(limit: $limit, begin_Gt: "2023-05-21T09:32:52.706Z" ) {
-      results {
-        id
-        description
-        summary
-        begin
-        photos {
-          caption
-          thumbMedium
-          thumbMediumHeight
-          thumbMediumWidth
-        }
-      }
-      totalCount
-    }
-  }
-`)
-
 const { result, loading, error, refetch } = useQuery(query, { limit: perpage.value })
 
 const queryResults = computed(() => result.value?.activities)

@@ -21,15 +21,6 @@ import { useGettext } from 'vue3-gettext'
 const props = defineProps(['id', 'slug'])
 const gettext = useGettext();
 
-const query = graphql(`
-  query PageViewQuery($pageId: ID) {
-    page(id: $pageId) {
-        name
-        slug
-        content
-      }
-  }
-`)
 
 const { result, loading, error, refetch } = useQuery(query, { pageId: props.id });
 const item = computed(() => result.value?.page)

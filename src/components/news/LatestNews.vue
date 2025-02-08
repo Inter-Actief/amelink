@@ -38,21 +38,6 @@ const page = ref(route.query.page && typeof route.query.page === 'string' ? pars
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 //, begin_Gt: "${new Date().toISOString()}"
-const query = graphql(`
-  query LatestNewsQuery($limit: Int) {
-    newsItems(limit: $limit) {
-      results {
-        id
-        title
-        introduction
-        title
-        introduction
-        publicationDate
-      }
-      totalCount
-    }
-  }
-`)
 
 const { result, loading, error, refetch } = useQuery(query, { limit: perpage.value })
 const queryResults = computed(() => result.value?.newsItems)

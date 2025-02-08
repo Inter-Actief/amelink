@@ -34,22 +34,6 @@ import type { AttachmentType } from '@/gql/graphql'
 
 const { $gettext } = useGettext();
 const props = defineProps(['id'])
-const query = graphql(`
-  query PhotosActivitiesQuery($id: ID) {
-    activity(id: $id) {
-      summary
-      begin
-      id
-      description
-      photos {
-          thumbMedium
-          thumbMediumHeight
-          thumbMediumWidth
-          thumbLarge
-      }
-    }
-  }
-`)
 
 const { result, loading, error, refetch } = useQuery(query, { id: props.id })
 const queryResults = computed(() => result.value?.activity)

@@ -6,7 +6,7 @@ const config: CodegenConfig = {
     overwrite: true,
     schema: process.env.VITE_AMELIE_GRAPHQL_API,
 
-    documents: ['src/**/*.vue', 'src/**/*.ts'],
+    documents: ['src/**/*.ts', 'src/**/*.gql'],
 
     generates: {
         'src/gql/': {
