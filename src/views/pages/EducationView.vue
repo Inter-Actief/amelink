@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="text">
-                            <div v-html="markedText(getItemValue(item, 'content'))"></div>
+                            <div v-html="processedContent[item?.id!]"></div>
                         </div>
                     </div>
                 </div>
@@ -39,30 +39,38 @@
 </template>
 
 <script setup lang="ts">
-import { inject, onMounted, onUnmounted } from 'vue'
-import { useQuery } from '@vue/apollo-composable'
-import { graphql } from '@/gql'
+import { onMounted, onUnmounted } from 'vue'
 import { computed, ref, watch } from 'vue'
 import { getItemValue, markedText } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext'
 import { useQueryStore } from '@/stores/queryStore'
 
-const props = defineProps(['id', 'slug'])
-
-const appState = inject('appState')
 const queries = useQueryStore();
 const { $gettext } = useGettext();
 
-const { result, refetch } = queries.getEducationViewQuery({});
+const { result } = queries.getEducationViewQuery({});
 
+const processedContent = ref<{ [key: string]: string }>({})
 const queryResults = computed(() => result.value?.educationpages)
 const queryItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 
-watch(queryItems, (newValue, oldValue) => {
-    if (newValue) {
-        education_sidebar()
+watch(queryItems, async (newItems) => {
+    if (!newItems) return;
+
+    const contentMap: { [key: string]: string } = { ...processedContent.value };
+
+    for (const item of newItems) {
+        if (item?.id) {
+            const newContent = getItemValue(item, 'content');
+            if (newContent && !contentMap[item.id] || contentMap[item.id] !== newContent) {
+                contentMap[item.id] = await markedText(newContent!);
+            }
+        }
     }
-})
+
+    processedContent.value = contentMap;
+    education_sidebar();
+}, { immediate: true });
 
 function education_sidebar() {
     setTimeout(() => {
