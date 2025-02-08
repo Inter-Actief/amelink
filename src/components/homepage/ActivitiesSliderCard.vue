@@ -1,7 +1,7 @@
 <template>
     <h1 class="activities-title">Upcoming activities</h1>
     <div class="slider-container">
-        <div v-if="isLoading" class="loading">Loading...</div>
+        <div v-if="loading" class="loading">Loading...</div>
         <div v-else>
             <div v-if="images.length === 0" class="no-images">No images available</div>
             <div class="slider-wrapper">
@@ -37,26 +37,24 @@ const images: Ref<{
 const imagesPerSlide = 3
 const dots = ref<number[]>([])
 const totalSliderWidth = ref(0)
-const isLoading = ref(true);
 
 const BASE_URL = 'https://media.ia.utwente.nl/amelie/' //TODO: move to .env or main.ts
 const endGtDate = new Date() //TODO: change to date NOW()
 
 
-await queries.getActivitiesSliderCardQuery({ endgt: endGtDate })
-    .then(res => {
-        images.value =
-            res.result.activities?.results
-                ?.flatMap(activity =>
-                    activity?.photos.map((photo: any) => photo ? { url: BASE_URL + photo.thumbMedium } : undefined),
-                )
-                .filter((photo): photo is { url: string } => photo !== undefined)
-                .slice(0, 20) ?? []
-        updateSliderWidth()
-        updateDots()
+const { result, loading } = queries.getActivitiesSliderCardQuery({ endgt: endGtDate })
 
-        isLoading.value = false;
-    })
+watch(result, (newValue) => {
+    images.value =
+        newValue?.activities?.results
+            ?.flatMap(activity =>
+                activity?.photos.map((photo: any) => photo ? { url: BASE_URL + photo.thumbMedium } : undefined),
+            )
+            .filter((photo): photo is { url: string } => photo !== undefined)
+            .slice(0, 20) ?? []
+    updateSliderWidth()
+    updateDots()
+})
 
 function updateSliderWidth() {
     const sliderWrapper = document.querySelector('.slider-wrapper') as HTMLElement

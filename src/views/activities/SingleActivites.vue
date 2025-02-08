@@ -51,7 +51,7 @@ const { $gettext } = useGettext();
 const props = defineProps(['id'])
 const queries = useQueryStore();
 
-const { result, refetch } = await queries.getSingleActivitiesQuery({ id: props.id });
-const queryResults = computed(() => result.activity)
+const { result, refetch } = queries.getSingleActivitiesQuery({ id: props.id });
+const queryResults = computed(() => result.value?.activity)
 const queryItem = computed(() => (queryResults.value ? queryResults.value : null))
 </script>

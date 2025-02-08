@@ -47,9 +47,9 @@ const perpage = ref(5)
 const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
-const { result, refetch } = await queries.getHomepageSliderQuery({ limit: perpage.value });
+const { result, refetch } = queries.getHomepageSliderQuery({ limit: perpage.value });
 
-const queryResults = computed(() => result.activities)
+const queryResults = computed(() => result.value?.activities)
 
 const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 const totalCount = computed(() => (queryResults.value ? queryResults.value.totalCount : null))

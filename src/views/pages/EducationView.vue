@@ -53,9 +53,9 @@ const appState = inject('appState')
 const queries = useQueryStore();
 const { $gettext } = useGettext();
 
-const { result, refetch } = await queries.getEducationViewQuery({});
+const { result, refetch } = queries.getEducationViewQuery({});
 
-const queryResults = computed(() => result.educationpages)
+const queryResults = computed(() => result.value?.educationpages)
 const queryItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 
 watch(queryItems, (newValue, oldValue) => {

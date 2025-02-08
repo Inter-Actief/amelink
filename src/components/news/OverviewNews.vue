@@ -41,9 +41,9 @@ const page = ref(route.query.page && typeof route.query.page === 'string' ? pars
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 
-const { result, refetch } = await queries.getOverviewNewsQuery({ limit: perpage.value, offset: offset.value });
+const { result, refetch } = queries.getOverviewNewsQuery({ limit: perpage.value, offset: offset.value });
 
-const queryResults = computed(() => result.newsItems)
+const queryResults = computed(() => result.value?.newsItems)
 
 const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 const totalCount = computed(() => (queryResults.value ? queryResults.value.totalCount : null))

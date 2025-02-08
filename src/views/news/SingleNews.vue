@@ -38,7 +38,7 @@ const queries = useQueryStore();
 const props = defineProps(['id'])
 
 
-const { result, refetch } = await queries.getSingleNewsQuery({ id: props.id });
-const queryResults = computed(() => result.newsItem)
+const { result, refetch } = queries.getSingleNewsQuery({ id: props.id });
+const queryResults = computed(() => result.value?.newsItem)
 const item = computed(() => (queryResults.value ? queryResults.value : null))
 </script>

@@ -18,6 +18,6 @@ const queryStore = useQueryStore();
 
 const props = defineProps(['id', 'slug'])
 
-const result = await queryStore.getPageViewQuery({ pageId: props.id })
-const item = computed(() => result.result.page)
+const { result } = queryStore.getPageViewQuery({ pageId: props.id })
+const item = computed(() => result.value?.page)
 </script>
