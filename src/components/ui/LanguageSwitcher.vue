@@ -9,7 +9,7 @@
             </svg>
         </div>
 
-        <div class="language_switcher_dorpdown">
+        <div class="language_switcher_dropdown">
             <div class="inner">
                 <template v-for="lang in Object.keys(gettext.available)">
                     <div @click="changeLanguage(lang)">
@@ -24,18 +24,14 @@
 
 <script setup lang="ts">
 import { closeMobileMenu } from '@/functions/functions'
+import { useLanguageStore } from '@/stores/languageStore';
 import { useGettext } from 'vue3-gettext'
 const gettext = useGettext();
+const langStore = useLanguageStore();
 
 //TODO: Make this in a language functions util / pinia store
 function changeLanguage(newLanguage: string) {
-    if (gettext.current === newLanguage) {
-        return
-    }
-
-    gettext.current = newLanguage;
-
-    localStorage.setItem('locale', newLanguage)
+    langStore.switchLanguage(newLanguage);
 
     closeMobileMenu()
 }
@@ -62,7 +58,7 @@ function changeLanguage(newLanguage: string) {
         max-width: 10rem;
     }
 
-    .language_switcher_dorpdown {
+    .language_switcher_dropdown {
         position: absolute;
         top: 100%;
         left: 50%;
@@ -88,7 +84,7 @@ function changeLanguage(newLanguage: string) {
     }
 
     &:hover {
-        .language_switcher_dorpdown {
+        .language_switcher_dropdown {
             visibility: visible;
         }
     }
@@ -104,7 +100,7 @@ function changeLanguage(newLanguage: string) {
             width: 100%;
         }
 
-        .language_switcher_dorpdown {
+        .language_switcher_dropdown {
             width: 100%;
             position: relative;
             top: 0;

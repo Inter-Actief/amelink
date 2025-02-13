@@ -6,6 +6,8 @@ RUN echo "Installing required Alpine packages..." && \
     apk --no-cache add gettext gettext-dev && \
     echo "Setting up JS environment..." && \
     yarn && \
+	echo "Generating graphQL types" && \
+    yarn codegen && \
     echo "Compiling translations..." && \
     yarn gettext:compile && \
     echo "Building application..." && \

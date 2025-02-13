@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useQuery, type UseQueryReturn } from '@vue/apollo-composable'
-import { toValue } from 'vue'
+import { toValue, watch } from 'vue'
 import { _queries } from '@/queries/queries.gql'
 
 import type {
@@ -34,6 +34,7 @@ import type {
     UpcomingActivitiesQueryQueryVariables,
 } from '@/gql/graphql'
 import type { DocumentNode, OperationVariables, ApolloQueryResult } from '@apollo/client/core'
+import { useLanguageStore } from './languageStore'
 
 export const useQueryStore = defineStore('queryStore', () => {
     /**
@@ -44,6 +45,23 @@ export const useQueryStore = defineStore('queryStore', () => {
         variables: V,
     ): UseQueryReturn<T, V> {
         return useQuery<T, V>(query, variables)
+    }
+
+    function useQueryWithLanguage<T, V extends OperationVariables>(
+        query: DocumentNode,
+        variables: V,
+    ) {
+        const languageStore = useLanguageStore()
+        const queryResult = useQuery<T, V>(query, variables)
+
+        watch(
+            () => languageStore.currentLanguage,
+            () => {
+                queryResult.refetch(variables)
+            },
+        )
+
+        return queryResult
     }
 
     // Specific query functions using fetchQuery

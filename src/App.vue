@@ -10,6 +10,10 @@
 import { RouterView } from 'vue-router'
 import Header from '@/components/header/Header.vue'
 import Footer from '@/components/footer/Footer.vue'
+import { useAuthStore } from './stores/authStore';
+
+const authStore = useAuthStore();
+authStore.setCSRFToken();
 </script>
 
 <style lang="scss"></style>
