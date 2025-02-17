@@ -24,8 +24,6 @@ export const useLanguageStore = defineStore('languageStore', () => {
             }),
             redirect: 'manual',
         }).then((returned) => {
-            console.log('Setlang returned with: ')
-            console.log(returned)
             localStorage.setItem('locale', lang)
             // Set language in store
             currentLanguage.value = lang

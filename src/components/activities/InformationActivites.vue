@@ -30,7 +30,7 @@
 
         <div class="item">
             <div class="key">{{ $gettext('Label') }}</div>
-            <div class="value">{{ props.item.activityLabel[`name${gettext.current.capitalize()}`] }}</div>
+            <div class="value">{{ props.item.activityLabel[`nameEn`] }}</div>
         </div>
 
         <div class="item">

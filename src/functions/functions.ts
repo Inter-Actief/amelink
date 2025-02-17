@@ -106,12 +106,16 @@ export const excerptText = (text: string) => {
     return text
 }
 
+function capitalizeFirstLetter(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
 export const getItemValue = <T>(item: T, key: string) => {
     if (!item) {
         return ''
     }
 
-    const capitalizedKey = `${key}${gettext.current.capitalize()}` as keyof T
+    const capitalizedKey = `${key}${capitalizeFirstLetter(gettext.current)}` as keyof T
     if (item.hasOwnProperty(capitalizedKey)) {
         return item[capitalizedKey as keyof T]
     }

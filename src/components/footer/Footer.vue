@@ -40,7 +40,7 @@
         </div>
 
         <div class="ia_row">
-            <div class="ia_column">2023 | Inter-Actief</div>
+            <div class="ia_column">{{ currentYear }} | Inter-Actief</div>
         </div>
 
         <GoogleMaps v-if="isDesktop" />
@@ -55,7 +55,9 @@ import GoogleMaps from '@/components/footer/GoogleMaps.vue'
 import OpenMaps from '@/components/footer/OpenMaps.vue'
 import { isDesktop } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext'
+import { ref } from 'vue'
 const { $gettext } = useGettext();
+const currentYear = ref(new Date().getFullYear())
 
 </script>
 

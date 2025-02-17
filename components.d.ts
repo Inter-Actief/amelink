@@ -37,6 +37,8 @@ declare module 'vue' {
     OpenMaps: typeof import('./src/components/footer/OpenMaps.vue')['default']
     OverviewActivities: typeof import('./src/components/activities/OverviewActivities.vue')['default']
     OverviewNews: typeof import('./src/components/news/OverviewNews.vue')['default']
+    Pagination: typeof import('./src/components/ui/Pagination.vue')['default']
+    Paginator: typeof import('./src/components/ui/Paginator.vue')['default']
     PastActivities: typeof import('./src/components/activities/PastActivities.vue')['default']
     PhotosActivities: typeof import('./src/components/activities/PhotosActivities.vue')['default']
     ProgressSpinner: typeof import('primevue/progressspinner')['default']

@@ -1,7 +1,13 @@
 @use './variables' as vars;
 
 html {
-  font-size: 62.5%;
+  font-size: 60%;
+  // Primevue uses this to control size
+}
+
+.p-component,
+.p-component * {
+  font-size: 100%;
 }
 
 body {

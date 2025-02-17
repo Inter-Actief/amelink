@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useQuery, type UseQueryReturn } from '@vue/apollo-composable'
-import { toValue, watch } from 'vue'
+import { ref, toValue, watch, type Ref } from 'vue'
 import { _queries } from '@/queries/queries.gql'
 
 import type {
@@ -36,41 +36,61 @@ import type {
 import type { DocumentNode, OperationVariables, ApolloQueryResult } from '@apollo/client/core'
 import { useLanguageStore } from './languageStore'
 
+export type queryOptions = {
+    cache?: boolean
+}
+
+export interface PaginatedQueryReturn<TResult, TVariables extends OperationVariables>
+    extends UseQueryReturn<TResult, TVariables> {
+    /** Tracks the currently selected page based on offset and limit */
+    selectedPage: Ref<number>
+}
+
 export const useQueryStore = defineStore('queryStore', () => {
+    const languageStore = useLanguageStore()
+    // TODO: Use caching, pagination, language and markedText with html-escape
+
     /**
      * Generic function to execute a GraphQL query and return a typed result with refetch capability.
+     * Pagination queries MUST use 'limit' and 'offset'
      */
     function fetchQuery<T, V extends OperationVariables>(
         query: DocumentNode,
         variables: V,
-    ): UseQueryReturn<T, V> {
-        console.log(query)
-        return useQuery<T, V>(query, variables)
-    }
+        queryOptions?: queryOptions,
+    ): PaginatedQueryReturn<T, V> {
+        // Default selectedpage
+        let selectedPage = ref(0)
 
-    function fetchQueryCaching<T, V extends OperationVariables>(
-        query: DocumentNode,
-        variables: V,
-    ): UseQueryReturn<T, V> {
-        return useQuery<T, V>(query, variables)
-    }
-
-    function fetchQueryPagination<T, V extends OperationVariables>(
-        query: DocumentNode,
-        variables: V,
-    ): UseQueryReturn<T, V> {
-        return useQuery<T, V>(query, variables)
-    }
-
-    //TODO: Merge all requests into this useQuery function as soon as
-    // pagination and language switching is working.
-    function useQueryWithLanguage<T, V extends OperationVariables>(
-        query: DocumentNode,
-        variables: V,
-    ) {
-        const languageStore = useLanguageStore()
         const queryResult = useQuery<T, V>(query, variables)
 
+        // Using pagination?
+        if (
+            typeof (variables as any).limit === 'number' &&
+            typeof (variables as any).offset === 'number'
+        ) {
+            selectedPage.value = Math.floor((variables as any).offset / (variables as any).limit)
+
+            // Watch to update in case of pagination
+            watch(
+                () => selectedPage.value,
+                (newValue) => {
+                    if (newValue == undefined) {
+                        return
+                    }
+
+                    const newOffset = newValue * (variables as any).limit
+
+                    // refetch with new variables for the limit and offset determined by page
+                    queryResult.refetch({
+                        ...variables,
+                        offset: newOffset,
+                    })
+                },
+            )
+        }
+
+        // Watch to update language
         watch(
             () => languageStore.currentLanguage,
             () => {
@@ -78,7 +98,17 @@ export const useQueryStore = defineStore('queryStore', () => {
             },
         )
 
-        return queryResult
+        return {
+            ...queryResult,
+            selectedPage,
+        }
+    }
+
+    function fetchQueryCaching<T, V extends OperationVariables>(
+        query: DocumentNode,
+        variables: V,
+    ): UseQueryReturn<T, V> {
+        return useQuery<T, V>(query, variables)
     }
 
     // Specific query functions using fetchQuery

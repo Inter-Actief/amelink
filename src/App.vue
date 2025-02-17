@@ -1,10 +1,9 @@
 <template>
     <Toast />
-
     <Header />
-
-    <RouterView />
-
+    <Transition name="fade" mode="out-in">
+        <RouterView />
+    </Transition>
     <Footer />
 </template>
 
@@ -15,9 +14,19 @@ import Footer from '@/components/footer/Footer.vue'
 import { useAuthStore } from './stores/authStore';
 import Toast from 'primevue/toast';
 
-
 const authStore = useAuthStore();
 authStore.setCSRFToken();
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+/* Enter and leave transitions */
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+</style>

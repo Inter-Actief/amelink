@@ -20,8 +20,7 @@
         </div>
     </div>
 
-    <!-- <Pagination :totalItems="totalCount" :itemsPerPage="perpage" :page="page" @next="handleNextPage"
-        @prev="handlePrevPage" @select="handleSelectPage" /> -->
+    <Pagination v-bind="query" />
 </template>
 
 <script setup lang="ts">
@@ -31,6 +30,7 @@ import { formattedData, getItemValue, markedText } from '@/functions/functions.t
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
 import { useQueryStore } from '@/stores/queryStore'
+import Pagination from '../ui/Pagination.vue'
 
 const { $gettext } = useGettext();
 const route = useRoute()
@@ -39,7 +39,8 @@ const perpage = ref(10)
 const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
-const { result, refetch, loading } = queries.getOverviewNewsQuery({ limit: perpage.value, offset: offset.value });
+const query = queries.getOverviewNewsQuery({ limit: perpage.value, offset: offset.value });
+const { result, refetch, loading, selectedPage } = query
 
 const queryResults = computed(() => result.value?.newsItems)
 
@@ -50,7 +51,6 @@ const processedExcerpts = ref<Record<string, string>>({})
 
 watch(newsItems, async (newItems: any) => {
     if (newItems) {
-        console.log(newItems)
         const excerpts: Record<string, string> = {}
         for (const item of newItems) {
             if (item?.introduction) {
