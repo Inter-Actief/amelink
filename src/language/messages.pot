@@ -3,7 +3,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 
 #: src\components\activities\demo\DemoOverviewActivities.vue:21
-#: src\components\activities\OverviewActivities.vue:20
+#: src\components\activities\OverviewActivities.vue:21
 #: src\components\news\OverviewNews.vue:17
 msgid "Read more"
 msgstr ""
@@ -68,7 +68,7 @@ msgid "Activity"
 msgstr ""
 
 #: src\components\activities\PastActivities.vue:9
-#: src\components\activities\PastActivities.vue:27
+#: src\components\activities\PastActivities.vue:29
 msgid "Photos"
 msgstr ""
 
@@ -86,7 +86,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: src\components\activities\UpcomingActivities.vue:35
+#: src\components\activities\UpcomingActivities.vue:37
 msgid "Enroll now!"
 msgstr ""
 
@@ -100,12 +100,6 @@ msgstr ""
 
 #: src\components\footer\OpenMaps.vue:2
 msgid "Open maps"
-msgstr ""
-
-#: src\components\forms\ContactForm.vue:8
-#: src\components\forms\EditorForm.vue:8
-#: src\components\forms\EnrollForm.vue:8
-msgid "Send"
 msgstr ""
 
 #: src\components\header\Header.vue:15
@@ -130,6 +124,9 @@ msgstr ""
 msgid "News page"
 msgstr ""
 
+#: src\components\ui\Cards.vue:14
+msgstr ""
+
 #: src\components\ui\Pagination.vue:6
 msgid "First"
 msgstr ""
@@ -150,6 +147,10 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
+#: src\views\activities\ActivitiesView.vue:5
+msgid "Activities you don't want to miss"
+msgstr ""
+
 #: src\views\activities\ActivitiesView.vue:11
 msgid "Past activities"
 msgstr ""
@@ -158,7 +159,7 @@ msgstr ""
 msgid "View photos"
 msgstr ""
 
-#: src\views\activities\SingleActivites.vue:26
+#: src\views\activities\SingleActivites.vue:25
 #: src\views\news\SingleNews.vue:20
 msgid "Return to overview"
 msgstr ""

@@ -1,101 +1,42 @@
 <template>
-    <div class="form_box">
-        <form v-if="fields" class="ia_form active_labels" @submit.prevent="handleSubmit">
-            <FormFields :formid="form_id" :fields="fields" :disabled="disabled" />
-
-            <div class="form_footer">
-                <EpaButton type="submit" class="ia_button" loading="true" :disabled="disabled">{{
-                    $gettext('Send')
-                    }}</EpaButton>
+    <div class="card flex justify-center">
+        <Form v-slot="$form" :initialValues :resolver @submit="onFormSubmit" class="flex flex-col gap-4 w-full large">
+            <div class="flex flex-col gap-1">
+                <InputText name="username" type="text" placeholder="Username" fluid />
+                <Message v-if="$form.username?.invalid" severity="error" size="small" variant="simple">{{
+                    $form.username.error?.message }}</Message>
             </div>
-        </form>
+            <Button type="submit" severity="secondary" label="Submit" />
+        </Form>
     </div>
 </template>
 
 <script setup lang="ts">
-import EpaButton from '@/components/ui/EpaButton.vue'
-import { ref } from 'vue'
-import FormFields from '@/components/forms/fields/FormFields.vue'
-import { getFormID } from '@/functions/functions'
-import { useGettext } from 'vue3-gettext';
-const { $gettext } = useGettext();
+import { reactive } from 'vue';
+import { useToast } from 'primevue/usetoast';
+import { yupResolver } from '@primevue/forms/resolvers/yup';
 
-const form_id = getFormID()
-const disabled = ref(false)
+import * as yup from "yup"
 
-interface PostFormField {
-    label: string
-    value: string | object
-}
+const toast = useToast();
 
-interface Field {
-    id?: string
-    type: string
-    label: string
-    name?: string
-    value?: string
-    placeholder?: string
-    class?: string
-    required?: boolean
-    choices?: { label: string; value: boolean | string }[]
-    fields?: Field[]
-}
+const initialValues = reactive({
+    username: ''
+});
 
-const fields = ref<Field[]>([
-    {
-        type: 'text',
-        label: 'Name',
-        name: '',
-        value: '',
-        class: '',
-    },
-    {
-        type: 'email',
-        label: 'Email',
-        name: '',
-        value: '',
-        class: '',
-    },
-    {
-        type: 'tel',
-        label: 'Phone',
-        name: '',
-        value: '',
-        class: '',
-    },
-    {
-        type: 'textarea',
-        label: 'Message',
-        name: '',
-        value: '',
-        class: '',
-    },
-])
+const resolver = yupResolver(
+    yup.object().shape({
+        username: yup.string().required('Username is required via Yup.')
+    })
+);
 
-const handleSubmit = () => {
-    disabled.value = true
-
-    const inputValuesNew = fields.value.reduce<PostFormField[]>((acc, field) => {
-        if (field.type === 'multiple' && Array.isArray(field.fields)) {
-            field.fields.forEach((subField) => {
-                acc.push({
-                    label: subField.label,
-                    value: subField.value ? subField.value : '',
-                })
-            })
-        }
-        if (field.type === 'checkbox') {
-            acc.push({
-                label: field.label,
-                value: field.choices ? field.choices : '',
-            })
-        } else {
-            acc.push({
-                label: field.label,
-                value: field.value ? field.value : '',
-            })
-        }
-        return acc
-    }, [])
-}
+const onFormSubmit = ({ valid }: { valid: boolean }) => {
+    if (valid) {
+        toast.add({
+            severity: 'success',
+            summary: 'Form is submitted.',
+            life: 3000
+        });
+    }
+};
 </script>

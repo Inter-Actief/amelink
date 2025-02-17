@@ -26,14 +26,10 @@ export const useAuthStore = defineStore('authStore', () => {
             return
         }
 
-        // Extract CSRF token from response headers
-        const csrfHeader = response.headers.get('X-CSRFToken')
-        if (csrfHeader) {
-            CSRFToken.value = csrfHeader
-            console.log('CSRF token set:', CSRFToken.value)
-        } else {
-            console.warn('No CSRF token found in response headers')
-        }
+        console.log('Fetched CSRF Token!')
+        console.log(response)
+        console.log(response.headers)
+        console.log(response.headers.get('x-csrftoken'))
     }
 
     return { getCSRFToken, setCSRFToken }

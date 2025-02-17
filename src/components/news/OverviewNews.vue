@@ -2,16 +2,17 @@
     <h1>{{ $gettext('News page') }}</h1>
 
     <div id="newsitems" class="newsitems cards">
-        <div class="item" v-if="newsItems !== null" v-for="item in newsItems" :key="item?.id">
+        <ProgressSpinner v-if="loading" />
+        <div class="item" v-else-if="newsItems !== null" v-for="item in newsItems" :key="item?.id">
             <router-link :to="{ name: 'singlenews', params: { id: item?.id } }">
                 <div class="body">
                     <div class="info">
                         <div class="title">
-                            <h2>{{ getItemValue(item, 'title') }}</h2>
+                            <h2>{{ item?.title }}</h2>
                         </div>
                         <div class="date">{{ formattedData(item?.publicationDate) }}</div>
                     </div>
-                    <div class="excerpt">{{ getItemValue(item, 'introduction') }}</div>
+                    <div class="excerpt" v-if="processedExcerpts" v-html="processedExcerpts[item!.id]"></div>
                 </div>
 
                 <EpaButton class="link readmore" icon="readmore">{{ $gettext('Read more') }}</EpaButton>
@@ -19,16 +20,14 @@
         </div>
     </div>
 
-    <Pagination :totalItems="totalCount" :itemsPerPage="perpage" :page="page" @next="handleNextPage"
-        @prev="handlePrevPage" @select="handleSelectPage" />
+    <!-- <Pagination :totalItems="totalCount" :itemsPerPage="perpage" :page="page" @next="handleNextPage"
+        @prev="handlePrevPage" @select="handleSelectPage" /> -->
 </template>
 
 <script setup lang="ts">
-import { useQuery } from '@vue/apollo-composable'
-import { computed, ref } from 'vue'
-import Pagination from '@/components/ui/Pagination.vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { formattedData, getItemValue } from '@/functions/functions.ts'
+import { formattedData, getItemValue, markedText } from '@/functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
 import { useQueryStore } from '@/stores/queryStore'
@@ -40,34 +39,27 @@ const perpage = ref(10)
 const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
-
-const { result, refetch } = queries.getOverviewNewsQuery({ limit: perpage.value, offset: offset.value });
+const { result, refetch, loading } = queries.getOverviewNewsQuery({ limit: perpage.value, offset: offset.value });
 
 const queryResults = computed(() => result.value?.newsItems)
 
 const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 const totalCount = computed(() => (queryResults.value ? queryResults.value.totalCount : null))
 
-function handleNextPage() {
-    page.value++
-    offset.value = page.value > 1 ? (page.value - 1) * perpage.value : 0
-    refetch()
-    scrolltop()
-}
+const processedExcerpts = ref<Record<string, string>>({})
 
-function handlePrevPage() {
-    page.value--
-    offset.value = page.value > 1 ? (page.value - 1) * perpage.value : 0
-    refetch()
-    scrolltop()
-}
-
-function handleSelectPage(select: number) {
-    page.value = select
-    offset.value = page.value > 1 ? (page.value - 1) * perpage.value : 0
-    refetch()
-    scrolltop()
-}
+watch(newsItems, async (newItems: any) => {
+    if (newItems) {
+        console.log(newItems)
+        const excerpts: Record<string, string> = {}
+        for (const item of newItems) {
+            if (item?.introduction) {
+                excerpts[item.id] = await markedText(item.introduction)
+            }
+        }
+        processedExcerpts.value = excerpts
+    }
+}, { immediate: true })
 
 function scrolltop() {
     window.scrollTo({

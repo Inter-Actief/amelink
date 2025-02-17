@@ -25,7 +25,6 @@
             </div>
             <div class="ia_column">
                 <h1>{{ $gettext('Editor') }}</h1>
-                <EditorForm />
             </div>
         </div>
 
@@ -42,7 +41,6 @@
 import LatestActivities from '@/components/activities/LatestActivities.vue'
 import LatestNews from '@/components/news/LatestNews.vue'
 import UpcomingActivities from '@/components/activities/UpcomingActivities.vue'
-import EditorForm from '@/components/forms/EditorForm.vue'
 import DemoOverviewActivities from '@/components/activities/demo/DemoOverviewActivities.vue'
 import DemoTable from '@/components/demo/DemoTable.vue'
 import { useGettext } from 'vue3-gettext'

@@ -29,7 +29,7 @@
 
             <div class="ia_column span6">
                 <InformationActivites :item="queryItem" />
-                <EnrollFrom />
+                <!-- <EnrollFrom /> -->
             </div>
         </div>
     </div>
@@ -40,7 +40,6 @@ import { computed, ref, watch } from 'vue'
 import { formattedData, getItemValue, markedText } from '@/functions/functions'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import InformationActivites from '@/components/activities/InformationActivites.vue'
-import EnrollFrom from '@/components/forms/EnrollForm.vue'
 import { useGettext } from 'vue3-gettext'
 import { useQueryStore } from '@/stores/queryStore'
 

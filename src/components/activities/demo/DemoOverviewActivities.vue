@@ -25,19 +25,16 @@
         </div>
     </div>
 
-    <PaginationNext :totalItems="totalCount" :itemsPerPage="perpage" :page="page" @next="handleNextPage"
-        @prev="handlePrevPage" @select="handleSelectPage" />
+    <!-- <PaginationNext :totalItems="totalCount" :itemsPerPage="perpage" :page="page" @next="handleNextPage"
+        @prev="handlePrevPage" @select="handleSelectPage" /> -->
 </template>
 
 <script setup lang="ts">
-import { useQuery } from '@vue/apollo-composable'
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { formattedData, excerptText, getItemValue } from '@/functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
-import PaginationNext from '@/components/ui/PaginationNext.vue'
 import { useGettext } from 'vue3-gettext'
-import { graphql } from '@/gql'
 import { useQueryStore } from '@/stores/queryStore'
 
 const { $gettext } = useGettext();

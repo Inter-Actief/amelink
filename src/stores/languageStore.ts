@@ -18,14 +18,13 @@ export const useLanguageStore = defineStore('languageStore', () => {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            mode: 'no-cors',
             credentials: 'include',
             body: new URLSearchParams({
                 language: lang,
-                csrfmiddlewaretoken: (await accountStore.getCSRFToken()).value,
             }),
             redirect: 'manual',
         }).then((returned) => {
+            console.log('Setlang returned with: ')
             console.log(returned)
             localStorage.setItem('locale', lang)
             // Set language in store

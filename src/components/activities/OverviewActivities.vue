@@ -1,6 +1,7 @@
 <template>
     <div id="activities" class="activities cards">
-        <div class="item" v-if="newsItems !== null" v-for="item in newsItems" :key="item?.id">
+        <ProgressSpinner v-if="loading" />
+        <div class="item" v-else-if="newsItems !== null" v-for="item in newsItems" :key="item?.id">
             <template v-if="item">
                 <router-link :to="{ name: 'singleactivities', params: { id: item.id } }">
                     <div class="body">
@@ -25,15 +26,15 @@
         </div>
     </div>
 
-    <Pagination :totalItems="totalCount" :itemsPerPage="perpage" :page="page" @next="handleNextPage"
-        @prev="handlePrevPage" @select="handleSelectPage" />
+    <!-- <Pagination :totalItems="totalCount" :itemsPerPage="perpage" :page="page" @next="handleNextPage"
+        @prev="handlePrevPage" @select="handleSelectPage" /> -->
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import Pagination from '@/components/ui/Pagination.vue'
 import { useRoute } from 'vue-router'
 import { formattedData, excerptText, getItemValue } from '@/functions/functions.ts'
+import ProgressSpinner from 'primevue/progressspinner';
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
 import { useQueryStore } from '@/stores/queryStore'
@@ -46,7 +47,7 @@ const page = ref(route.query.page && typeof route.query.page === 'string' ? pars
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
 
-const { result, refetch } = queries.getOverviewActivities({ limit: perpage.value, offset: offset.value, startDate: new Date() })
+const { result, refetch, loading } = queries.getOverviewActivities({ limit: perpage.value, offset: offset.value, startDate: new Date() })
 const queryResults = computed(() => result.value?.activities)
 const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 const totalCount = computed(() => (queryResults.value ? queryResults.value.totalCount : null))

@@ -44,9 +44,26 @@ export const useQueryStore = defineStore('queryStore', () => {
         query: DocumentNode,
         variables: V,
     ): UseQueryReturn<T, V> {
+        console.log(query)
         return useQuery<T, V>(query, variables)
     }
 
+    function fetchQueryCaching<T, V extends OperationVariables>(
+        query: DocumentNode,
+        variables: V,
+    ): UseQueryReturn<T, V> {
+        return useQuery<T, V>(query, variables)
+    }
+
+    function fetchQueryPagination<T, V extends OperationVariables>(
+        query: DocumentNode,
+        variables: V,
+    ): UseQueryReturn<T, V> {
+        return useQuery<T, V>(query, variables)
+    }
+
+    //TODO: Merge all requests into this useQuery function as soon as
+    // pagination and language switching is working.
     function useQueryWithLanguage<T, V extends OperationVariables>(
         query: DocumentNode,
         variables: V,

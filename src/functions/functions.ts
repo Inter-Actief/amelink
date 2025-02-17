@@ -1,6 +1,7 @@
 import { marked } from 'marked'
 import { ref } from 'vue'
 import gettext from '@/gettext'
+import sanitizeHtml from 'sanitize-html'
 
 // TODO: Test if timestamp type is indeed a number
 export const formattedData = (timestamp: number, lang = 'En') => {
@@ -85,9 +86,10 @@ export const markedText = async (text: string) => {
     }
 
     let markedtext: string = await marked(text)
-    markedtext = markedtext.replace(/src="\//g, 'src="https://www.inter-actief.utwente.nl/')
+    let sanitized = sanitizeHtml(markedtext)
+    sanitized = sanitized.replace(/src="\//g, 'src="https://www.inter-actief.utwente.nl/')
 
-    return markedtext
+    return sanitized
 }
 
 export const excerptText = (text: string) => {
