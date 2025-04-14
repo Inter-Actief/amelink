@@ -211,3 +211,10 @@ query PageViewQuery($pageId: ID) {
     content
   }
 }
+
+mutation SetLanguageMutation($languageCode: String!) {
+  setLanguage(languageCode: $languageCode) {
+    language
+    result
+  }
+}

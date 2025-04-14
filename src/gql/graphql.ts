@@ -49,42 +49,42 @@ export type ActivityLabelType = {
 
 export type ActivityType = {
   __typename?: 'ActivityType';
-  /** The absolute URL to an activity. */
+  /** De absolute URL naar een activiteit. */
   absoluteUrl?: Maybe<Scalars['String']['output']>;
   activityLabel: ActivityLabelType;
   /** Attachment ids */
   attachments?: Maybe<Array<Maybe<AttachmentType>>>;
   begin: Scalars['DateTime']['output'];
-  /** A link to the ICS file for this activity. */
+  /** Een link naar het ICS-bestand voor deze activiteit. */
   calendarUrl?: Maybe<Scalars['String']['output']>;
-  /** Whether the person that is currently signed-in can edit this activity. */
+  /** Of de huidig ingelogde persoon deze activiteit mag aanpassen. */
   canEdit?: Maybe<Scalars['Boolean']['output']>;
   canUnenroll: Scalars['Boolean']['output'];
   components: Array<ActivityType>;
-  /** A description of this activity in the preferred language of this user. */
+  /** Een beschrijving van deze activiteit in de voorkeurstaal van de gebruiker. */
   description?: Maybe<Scalars['String']['output']>;
   descriptionEn?: Maybe<Scalars['String']['output']>;
   descriptionNl: Scalars['String']['output'];
-  /** A brief description of this activity (always in english). */
+  /** Een korte beschrijving van deze activiteit (altijd in het Engels). */
   descriptionShort?: Maybe<Scalars['String']['output']>;
   dutchActivity: Scalars['Boolean']['output'];
   end: Scalars['DateTime']['output'];
   enrollment: Scalars['Boolean']['output'];
-  /** Whether this activity is almost full (<= 10 places left). */
+  /** Of deze activiteit bijna vol zit (<= 10 plaatsen over). */
   enrollmentAlmostFull?: Maybe<Scalars['Boolean']['output']>;
   /** If you want to add options, make sure your activity isn't open for enrollment right away */
   enrollmentBegin?: Maybe<Scalars['DateTime']['output']>;
-  /** Whether people can no longer enroll for this activity. */
+  /** Of mensen zich niet meer kunnen inschrijven voor deze activiteit. */
   enrollmentClosed?: Maybe<Scalars['Boolean']['output']>;
   enrollmentEnd?: Maybe<Scalars['DateTime']['output']>;
-  /** Whether this activity is full. */
+  /** Of deze activiteit vol zit. */
   enrollmentFull?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether people can still enroll for this activity. */
+  /** Of mensen zich nog kunnen inschrijven voor deze activiteit. */
   enrollmentOpen?: Maybe<Scalars['Boolean']['output']>;
   entireDay: Scalars['Boolean']['output'];
-  /** If there are any costs associated with this activity. */
+  /** Of er kosten zijn verbonden aan deze activiteit. */
   hasCosts?: Maybe<Scalars['Boolean']['output']>;
-  /** If there are any options for enrollments. */
+  /** Of er inschrijfopties zijn. */
   hasEnrollmentOptions?: Maybe<Scalars['Boolean']['output']>;
   id: Scalars['ID']['output'];
   /** Image of 175 by 275 pixels. */
@@ -92,20 +92,20 @@ export type ActivityType = {
   location: Scalars['String']['output'];
   maximum?: Maybe<Scalars['Int']['output']>;
   organizer: CommitteeType;
-  /** A URL that points to the picture gallery for this activity. */
+  /** Een URL die verwijst naar de fotogalerij van deze activiteit. */
   photoUrl?: Maybe<Scalars['String']['output']>;
   photos: Array<AttachmentType>;
   price: Scalars['Decimal']['output'];
-  /** Promotional text for this activity in the preferred language of this user. */
+  /** Promotietekst voor deze activiteit, in de voorkeurstaal van de gebruiker. */
   promo?: Maybe<Scalars['String']['output']>;
   /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
   promoEn: Scalars['String']['output'];
   /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
   promoNl: Scalars['String']['output'];
   public: Scalars['Boolean']['output'];
-  /** A URL to a random picture that was made at this activity. */
+  /** Een URL naar een willekeurige foto die gemaakt is bij deze activiteit. */
   randomPhotoUrl?: Maybe<Scalars['String']['output']>;
-  /** A summary of this activity in the preferred language of this user. */
+  /** Een samenvatting van deze activiteit in de voorkeurstaal van de gebruiker. */
   summary?: Maybe<Scalars['String']['output']>;
   summaryEn?: Maybe<Scalars['String']['output']>;
   summaryNl: Scalars['String']['output'];
@@ -174,7 +174,7 @@ export type CommitteeType = {
   functionSet?: Maybe<Array<Maybe<FunctionType>>>;
   groupPicture?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  /** Committee information (localized for user) */
+  /** Commissie-informatie (gelokaliseerd voor gebruiker) */
   information?: Maybe<Scalars['String']['output']>;
   informationEn: Scalars['String']['output'];
   informationNl: Scalars['String']['output'];
@@ -202,42 +202,42 @@ export type CommitteeTypeNodeConnection = {
 
 export type CompanyEventType = {
   __typename?: 'CompanyEventType';
-  /** The absolute URL to this event */
+  /** De absolute URL naar deze activiteit */
   absoluteUrl?: Maybe<Scalars['String']['output']>;
-  /** The label that belongs to this activity */
+  /** Het label behorende bij deze activiteit */
   activityLabel?: Maybe<ActivityLabelType>;
-  /** The type of activity */
+  /** Het soort activiteit */
   activityType?: Maybe<Scalars['String']['output']>;
   /** Attachment ids */
   attachments?: Maybe<Array<Maybe<AttachmentType>>>;
   begin: Scalars['DateTime']['output'];
-  /** The url to the ics for this activity */
+  /** De URL naar de ICS van deze activiteit */
   calendarUrl?: Maybe<Scalars['String']['output']>;
   company?: Maybe<CompanyType>;
   companyText: Scalars['String']['output'];
   companyUrl: Scalars['String']['output'];
-  /** A description of this activity in the preferred language of this user. */
+  /** Een beschrijving van deze activiteit in de voorkeurstaal van de gebruiker. */
   description?: Maybe<Scalars['String']['output']>;
   descriptionEn?: Maybe<Scalars['String']['output']>;
   descriptionNl: Scalars['String']['output'];
-  /** A brief description of this activity (always in english). */
+  /** Een korte beschrijving van deze activiteit (altijd in het Engels). */
   descriptionShort?: Maybe<Scalars['String']['output']>;
   dutchActivity: Scalars['Boolean']['output'];
   end: Scalars['DateTime']['output'];
   entireDay: Scalars['Boolean']['output'];
   id: Scalars['ID']['output'];
-  /** Whether this event is visible */
+  /** Of deze activiteit zichtbaar is */
   isVisible?: Maybe<Scalars['Boolean']['output']>;
   location: Scalars['String']['output'];
   organizer: CommitteeType;
-  /** Promotional text for this activity in the preferred language of this user. */
+  /** Promotietekst voor deze activiteit, in de voorkeurstaal van de gebruiker. */
   promo?: Maybe<Scalars['String']['output']>;
   /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
   promoEn: Scalars['String']['output'];
   /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
   promoNl: Scalars['String']['output'];
   public: Scalars['Boolean']['output'];
-  /** A summary of this activity in the preferred language of this user. */
+  /** Een samenvatting van deze activiteit in de voorkeurstaal van de gebruiker. */
   summary?: Maybe<Scalars['String']['output']>;
   summaryEn?: Maybe<Scalars['String']['output']>;
   summaryNl: Scalars['String']['output'];
@@ -262,15 +262,15 @@ export type CompanyType = {
   logo?: Maybe<Scalars['String']['output']>;
   logoHeight?: Maybe<Scalars['Int']['output']>;
   logoWidth?: Maybe<Scalars['Int']['output']>;
-  /** Name of the company */
+  /** Naam van het bedrijf */
   name?: Maybe<Scalars['String']['output']>;
   nameEn: Scalars['String']['output'];
   nameNl: Scalars['String']['output'];
-  /** Profile of the company */
+  /** Bedrijfsprofiel */
   profile?: Maybe<Scalars['String']['output']>;
   profileEn: Scalars['String']['output'];
   profileNl: Scalars['String']['output'];
-  /** Short description of the company */
+  /** Korte beschrijving van het bedrijf */
   shortDescription?: Maybe<Scalars['String']['output']>;
   shortDescriptionEn: Scalars['String']['output'];
   shortDescriptionNl: Scalars['String']['output'];
@@ -299,11 +299,11 @@ export type EducationEventType = {
   /** Attachment ids */
   attachments?: Maybe<Array<Maybe<AttachmentType>>>;
   begin: Scalars['DateTime']['output'];
-  /** A description of this activity in the preferred language of this user. */
+  /** Een beschrijving van deze activiteit in de voorkeurstaal van de gebruiker. */
   description?: Maybe<Scalars['String']['output']>;
   descriptionEn?: Maybe<Scalars['String']['output']>;
   descriptionNl: Scalars['String']['output'];
-  /** A brief description of this activity (always in english). */
+  /** Een korte beschrijving van deze activiteit (altijd in het Engels). */
   descriptionShort?: Maybe<Scalars['String']['output']>;
   dutchActivity: Scalars['Boolean']['output'];
   educationOrganizer: Scalars['String']['output'];
@@ -312,14 +312,14 @@ export type EducationEventType = {
   id: Scalars['ID']['output'];
   location: Scalars['String']['output'];
   organizer: CommitteeType;
-  /** Promotional text for this activity in the preferred language of this user. */
+  /** Promotietekst voor deze activiteit, in de voorkeurstaal van de gebruiker. */
   promo?: Maybe<Scalars['String']['output']>;
   /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
   promoEn: Scalars['String']['output'];
   /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
   promoNl: Scalars['String']['output'];
   public: Scalars['Boolean']['output'];
-  /** A summary of this activity in the preferred language of this user. */
+  /** Een samenvatting van deze activiteit in de voorkeurstaal van de gebruiker. */
   summary?: Maybe<Scalars['String']['output']>;
   summaryEn?: Maybe<Scalars['String']['output']>;
   summaryNl: Scalars['String']['output'];
@@ -338,7 +338,7 @@ export type EducationEventTypeNodeConnection = {
 export type EducationPageCategoryType = {
   __typename?: 'EducationPageCategoryType';
   id: Scalars['ID']['output'];
-  /** Category name (localized for user) */
+  /** Categorienaam (gelokaliseerd voor gebruiker) */
   name?: Maybe<Scalars['String']['output']>;
   nameEn: Scalars['String']['output'];
   nameNl: Scalars['String']['output'];
@@ -358,13 +358,13 @@ export type EducationPageCategoryTypeNodeConnection = {
 export type EducationPageType = {
   __typename?: 'EducationPageType';
   category: EducationPageCategoryType;
-  /** Page content (localized for user) */
+  /** Inhoud van de pagina (gelokaliseerd voor gebruiker) */
   content?: Maybe<Scalars['String']['output']>;
   contentEn: Scalars['String']['output'];
   contentNl: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   lastChanged: Scalars['DateTime']['output'];
-  /** Page name (localized for user) */
+  /** Naam van de pagina (gelokaliseerd voor gebruiker) */
   name?: Maybe<Scalars['String']['output']>;
   nameEn: Scalars['String']['output'];
   nameNl: Scalars['String']['output'];
@@ -414,15 +414,16 @@ export type FunctionType = {
   committee: CommitteeType;
   end?: Maybe<Scalars['Date']['output']>;
   function: Scalars['String']['output'];
-  /** This person is currently a member of this committee */
+  /** Deze persoon is op dit moment lid van deze commissie */
   isCurrentMember?: Maybe<Scalars['Boolean']['output']>;
-  /** Person name */
+  /** Naam van persoon */
   person?: Maybe<Scalars['String']['output']>;
 };
 
 export type GraphQlMutation = {
   __typename?: 'GraphQLMutation';
   educationalBouquet?: Maybe<EducationalBouquetMutationPayload>;
+  setLanguage?: Maybe<SetLanguageMutation>;
   /** Check if an authentication token is valid */
   verifyToken?: Maybe<Verify>;
 };
@@ -430,6 +431,11 @@ export type GraphQlMutation = {
 
 export type GraphQlMutationEducationalBouquetArgs = {
   input: EducationalBouquetMutationInput;
+};
+
+
+export type GraphQlMutationSetLanguageArgs = {
+  languageCode: Scalars['String']['input'];
 };
 
 
@@ -456,6 +462,8 @@ export type GraphQlQuery = {
   educationpageCategories?: Maybe<EducationPageCategoryTypeNodeConnection>;
   educationpageCategory?: Maybe<EducationPageCategoryType>;
   educationpages?: Maybe<EducationPageTypeNodeConnection>;
+  /** The currently active language */
+  languageCode?: Maybe<Scalars['String']['output']>;
   /** Information about the currently logged in user */
   me?: Maybe<UserType>;
   newsItem?: Maybe<NewsItemType>;
@@ -819,24 +827,24 @@ export type NewsItemType = {
   __typename?: 'NewsItemType';
   activities: Array<ActivityType>;
   attachments: Array<AttachmentType>;
-  /** Message author */
+  /** Auteur van bericht */
   author?: Maybe<Scalars['String']['output']>;
-  /** Message content (localized for user) */
+  /** Inhoud van bericht (gelokaliseerd voor gebruiker) */
   content?: Maybe<Scalars['String']['output']>;
   contentEn: Scalars['String']['output'];
   contentNl: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  /** Message introduction (localized for user) */
+  /** Introductie van bericht (gelokaliseerd voor gebruiker) */
   introduction?: Maybe<Scalars['String']['output']>;
   introductionEn?: Maybe<Scalars['String']['output']>;
   introductionNl: Scalars['String']['output'];
   /** Choose this option to pin the news item */
   pinned: Scalars['Boolean']['output'];
   publicationDate: Scalars['DateTime']['output'];
-  /** Publishing committee */
+  /** Publicerende commissie */
   publisher?: Maybe<Scalars['String']['output']>;
   slug: Scalars['String']['output'];
-  /** Message title (localized for user) */
+  /** Titel van bericht (gelokaliseerd voor gebruiker) */
   title?: Maybe<Scalars['String']['output']>;
   titleEn?: Maybe<Scalars['String']['output']>;
   titleNl: Scalars['String']['output'];
@@ -870,17 +878,17 @@ export type PageInfoExtra = {
 /** Type definition for a single Page */
 export type PageType = {
   __typename?: 'PageType';
-  /** Page content */
+  /** Inhoud van de pagina */
   content?: Maybe<Scalars['String']['output']>;
   contentEn: Scalars['String']['output'];
   contentNl: Scalars['String']['output'];
   educational: Scalars['Boolean']['output'];
   lastModified: Scalars['DateTime']['output'];
-  /** Page name */
+  /** Naam van de pagina */
   name?: Maybe<Scalars['String']['output']>;
   nameEn: Scalars['String']['output'];
   nameNl: Scalars['String']['output'];
-  /** Page slug */
+  /** Slug van de pagina */
   slug?: Maybe<Scalars['String']['output']>;
   slugEn: Scalars['String']['output'];
   slugNl: Scalars['String']['output'];
@@ -914,6 +922,12 @@ export type PublicationTypeType = {
   __typename?: 'PublicationTypeType';
   description?: Maybe<Scalars['String']['output']>;
   typeName: Scalars['String']['output'];
+};
+
+export type SetLanguageMutation = {
+  __typename?: 'SetLanguageMutation';
+  language?: Maybe<Scalars['String']['output']>;
+  result?: Maybe<Scalars['Boolean']['output']>;
 };
 
 /** Type definition of a single Television Banner */
@@ -965,14 +979,14 @@ export type VideoType = {
   description: Scalars['String']['output'];
   isFeatured: Scalars['Boolean']['output'];
   public: Scalars['Boolean']['output'];
-  /** Publishing committee */
+  /** Publicerende commissie */
   publisher?: Maybe<Scalars['String']['output']>;
   thumbnailUrl: Scalars['String']['output'];
   title: Scalars['String']['output'];
   videoId: Scalars['String']['output'];
-  /** Video type (Youtube or IA) */
+  /** Videotype (Youtube of IA) */
   videoType?: Maybe<Scalars['String']['output']>;
-  /** URL to the video */
+  /** URL naar de video */
   videoUrl?: Maybe<Scalars['String']['output']>;
 };
 
@@ -1129,6 +1143,13 @@ export type PageViewQueryQueryVariables = Exact<{
 
 export type PageViewQueryQuery = { __typename?: 'GraphQLQuery', page?: { __typename?: 'PageType', name?: string | null, slug?: string | null, content?: string | null } | null };
 
+export type SetLanguageMutationMutationVariables = Exact<{
+  languageCode: Scalars['String']['input'];
+}>;
+
+
+export type SetLanguageMutationMutation = { __typename?: 'GraphQLMutation', setLanguage?: { __typename?: 'SetLanguageMutation', language?: string | null, result?: boolean | null } | null };
+
 
 export const LatestActivitiesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LatestActivitiesQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTime"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"activities"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"begin_Gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"summary"}},{"kind":"Field","name":{"kind":"Name","value":"begin"}},{"kind":"Field","name":{"kind":"Name","value":"photos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"thumbMedium"}},{"kind":"Field","name":{"kind":"Name","value":"thumbMediumHeight"}},{"kind":"Field","name":{"kind":"Name","value":"thumbMediumWidth"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}}]}}]} as unknown as DocumentNode<LatestActivitiesQueryQuery, LatestActivitiesQueryQueryVariables>;
 export const OverviewActivitiesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"OverviewActivitiesQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTime"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"activities"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"begin_Gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}}},{"kind":"Argument","name":{"kind":"Name","value":"ordering"},"value":{"kind":"StringValue","value":"begin,desc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"begin"}},{"kind":"Field","name":{"kind":"Name","value":"summary"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"activityLabel"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nameNl"}},{"kind":"Field","name":{"kind":"Name","value":"nameEn"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"active"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}}]}}]} as unknown as DocumentNode<OverviewActivitiesQueryQuery, OverviewActivitiesQueryQueryVariables>;
@@ -1144,3 +1165,4 @@ export const SingleActivitiesQueryDocument = {"kind":"Document","definitions":[{
 export const SingleNewsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SingleNewsQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"newsItem"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"publicationDate"}},{"kind":"Field","name":{"kind":"Name","value":"author"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<SingleNewsQueryQuery, SingleNewsQueryQueryVariables>;
 export const EducationViewQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"EducationViewQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"educationpages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"content"}}]}}]}}]}}]} as unknown as DocumentNode<EducationViewQueryQuery, EducationViewQueryQueryVariables>;
 export const PageViewQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PageViewQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"pageId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"pageId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"content"}}]}}]}}]} as unknown as DocumentNode<PageViewQueryQuery, PageViewQueryQueryVariables>;
+export const SetLanguageMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SetLanguageMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"setLanguage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"languageCode"},"value":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"result"}}]}}]}}]} as unknown as DocumentNode<SetLanguageMutationMutation, SetLanguageMutationMutationVariables>;

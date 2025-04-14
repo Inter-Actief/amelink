@@ -1,47 +1,58 @@
 import { defineStore } from 'pinia'
-import { useQuery, type UseQueryReturn } from '@vue/apollo-composable'
+import {
+    useQuery,
+    type UseQueryReturn,
+    useMutation,
+    type UseMutationReturn,
+    provideApolloClient,
+} from '@vue/apollo-composable'
 import { ref, toValue, watch, type Ref } from 'vue'
 import { _queries } from '@/queries/queries.gql'
 
-import type {
-    ActivitiesSliderCardQueryQuery,
-    ActivitiesSliderCardQueryQueryVariables,
-    DemoOverviewActivitiesQueryQuery,
-    DemoOverviewActivitiesQueryQueryVariables,
-    EducationViewQueryQuery,
-    EducationViewQueryQueryVariables,
-    HomepageSliderQueryQuery,
-    HomepageSliderQueryQueryVariables,
-    LatestActivitiesQueryQuery,
-    LatestActivitiesQueryQueryVariables,
-    LatestNewsQueryQuery,
-    LatestNewsQueryQueryVariables,
-    OverviewActivitiesQueryQuery,
-    OverviewActivitiesQueryQueryVariables,
-    OverviewNewsQueryQuery,
-    OverviewNewsQueryQueryVariables,
-    PageViewQueryQuery,
-    PageViewQueryQueryVariables,
-    PastActivitesQueryQuery,
-    PastActivitesQueryQueryVariables,
-    PhotosActivitiesQueryQuery,
-    PhotosActivitiesQueryQueryVariables,
-    SingleActivitiesQueryQuery,
-    SingleActivitiesQueryQueryVariables,
-    SingleNewsQueryQuery,
-    SingleNewsQueryQueryVariables,
-    UpcomingActivitiesQueryQuery,
-    UpcomingActivitiesQueryQueryVariables,
+import {
+    type SetLanguageMutation,
+    type ActivitiesSliderCardQueryQuery,
+    type ActivitiesSliderCardQueryQueryVariables,
+    type DemoOverviewActivitiesQueryQuery,
+    type DemoOverviewActivitiesQueryQueryVariables,
+    type EducationViewQueryQuery,
+    type EducationViewQueryQueryVariables,
+    type HomepageSliderQueryQuery,
+    type HomepageSliderQueryQueryVariables,
+    type LatestActivitiesQueryQuery,
+    type LatestActivitiesQueryQueryVariables,
+    type LatestNewsQueryQuery,
+    type LatestNewsQueryQueryVariables,
+    type OverviewActivitiesQueryQuery,
+    type OverviewActivitiesQueryQueryVariables,
+    type OverviewNewsQueryQuery,
+    type OverviewNewsQueryQueryVariables,
+    type PageViewQueryQuery,
+    type PageViewQueryQueryVariables,
+    type PastActivitesQueryQuery,
+    type PastActivitesQueryQueryVariables,
+    type PhotosActivitiesQueryQuery,
+    type PhotosActivitiesQueryQueryVariables,
+    type SetLanguageMutationMutationVariables,
+    type SingleActivitiesQueryQuery,
+    type SingleActivitiesQueryQueryVariables,
+    type SingleNewsQueryQuery,
+    type SingleNewsQueryQueryVariables,
+    type UpcomingActivitiesQueryQuery,
+    type UpcomingActivitiesQueryQueryVariables,
 } from '@/gql/graphql'
 import type { DocumentNode, OperationVariables, ApolloQueryResult } from '@apollo/client/core'
 import { useLanguageStore } from './languageStore'
-
-export type queryOptions = {
-    cache?: boolean
-}
+import type { DocumentParameter } from '@vue/apollo-composable/dist/useQuery.js'
 
 export interface PaginatedQueryReturn<TResult, TVariables extends OperationVariables>
     extends UseQueryReturn<TResult, TVariables> {
+    /** Tracks the currently selected page based on offset and limit */
+    selectedPage: Ref<number>
+}
+
+export interface PaginatedMutationReturn<TResult, TVariables extends OperationVariables>
+    extends UseMutationReturn<TResult, TVariables> {
     /** Tracks the currently selected page based on offset and limit */
     selectedPage: Ref<number>
 }
@@ -54,15 +65,15 @@ export const useQueryStore = defineStore('queryStore', () => {
      * Generic function to execute a GraphQL query and return a typed result with refetch capability.
      * Pagination queries MUST use 'limit' and 'offset'
      */
-    function fetchQuery<T, V extends OperationVariables>(
-        query: DocumentNode,
+    // TODO: Use fetchMore https://v4.apollo.vuejs.org/guide-composable/pagination.html
+    function fetchQuery<TQuery, V extends OperationVariables>(
+        query: DocumentParameter<TQuery, V>,
         variables: V,
-        queryOptions?: queryOptions,
-    ): PaginatedQueryReturn<T, V> {
+    ): PaginatedQueryReturn<TQuery, V> {
         // Default selectedpage
         let selectedPage = ref(0)
 
-        const queryResult = useQuery<T, V>(query, variables)
+        const queryResult = useQuery<TQuery, V>(query, variables)
 
         // Using pagination?
         if (
@@ -104,11 +115,22 @@ export const useQueryStore = defineStore('queryStore', () => {
         }
     }
 
-    function fetchQueryCaching<T, V extends OperationVariables>(
-        query: DocumentNode,
+    function mutate<TQuery, V extends OperationVariables>(
+        mutation: DocumentNode,
         variables: V,
-    ): UseQueryReturn<T, V> {
-        return useQuery<T, V>(query, variables)
+    ): PaginatedMutationReturn<TQuery, V> {
+        const queryResult = useMutation<TQuery, V>(mutation, variables)
+
+        // selectedPage is -1; not supported yet
+        let selectedPage = ref(-1)
+        return { ...queryResult, selectedPage }
+    }
+
+    function setLanguageMutation(variables: SetLanguageMutationMutationVariables) {
+        return mutate<SetLanguageMutation, SetLanguageMutationMutationVariables>(
+            _queries.SetLanguageMutation,
+            variables,
+        )
     }
 
     // Specific query functions using fetchQuery
@@ -212,6 +234,7 @@ export const useQueryStore = defineStore('queryStore', () => {
 
     return {
         fetchQuery,
+        mutate,
         getLatestActivities,
         getOverviewActivities,
         getPastActivitiesQuery,
@@ -226,5 +249,7 @@ export const useQueryStore = defineStore('queryStore', () => {
         getSingleNewsQuery,
         getEducationViewQuery,
         getPageViewQuery,
+
+        setLanguageMutation,
     }
 })

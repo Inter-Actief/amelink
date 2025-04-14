@@ -1,33 +1,37 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import gettext from '@/gettext'
-import { useAuthStore } from '@/stores/authStore'
+import { useQueryStore } from '@/stores/queryStore'
+import type { SetLanguageMutationMutation } from '@/gql/graphql'
 
 export const useLanguageStore = defineStore('languageStore', () => {
-    const accountStore = useAuthStore()
     const currentLanguage = ref(gettext.current)
     const availableLanguages = Object.keys(gettext.available)
+    const queryStore = useQueryStore()
 
     // Private
     async function setLanguage(lang: string) {
         // Communicate to IA website
         let url = import.meta.env.VITE_AMELIE_API
 
-        fetch(`${url}i18n/setlang/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            credentials: 'include',
-            body: new URLSearchParams({
-                language: lang,
-            }),
-            redirect: 'manual',
-        }).then((returned) => {
+        const { mutate, loading, onDone } = queryStore.setLanguageMutation({
+            languageCode: lang,
+        })
+
+        onDone((returned) => {
+            if (!returned.data?.result) {
+                console.error('Error setting language')
+                return
+            }
+
+            alert('Language changed to ' + lang)
+
             localStorage.setItem('locale', lang)
             // Set language in store
             currentLanguage.value = lang
         })
+
+        mutate()
     }
 
     async function switchLanguage(lang?: string) {

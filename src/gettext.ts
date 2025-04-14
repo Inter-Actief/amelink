@@ -6,6 +6,6 @@ export default createGettext({
         en: 'English',
         nl: 'Nederlands',
     },
-    defaultLanguage: 'en',
+    defaultLanguage: 'en', // Make sure this is the same as the default language in the backend
     translations,
 })
