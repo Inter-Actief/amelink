@@ -26,7 +26,7 @@ const initialValues = reactive({
 
 const resolver = yupResolver(
     yup.object().shape({
-        username: yup.string().required('Username is required via Yup.')
+        username: yup.string().required('Username is required via Yup.'),
     })
 );
 

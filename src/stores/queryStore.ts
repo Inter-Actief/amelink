@@ -5,9 +5,11 @@ import {
     useMutation,
     type UseMutationReturn,
     provideApolloClient,
+    type UseMutationOptions,
 } from '@vue/apollo-composable'
 import { ref, toValue, watch, type Ref } from 'vue'
 import { _queries } from '@/queries/queries.gql'
+import { apolloClient } from '@/main' // Ensure this is exported from main.ts
 
 import {
     type SetLanguageMutation,
@@ -43,7 +45,7 @@ import {
 } from '@/gql/graphql'
 import type { DocumentNode, OperationVariables, ApolloQueryResult } from '@apollo/client/core'
 import { useLanguageStore } from './languageStore'
-import type { DocumentParameter } from '@vue/apollo-composable/dist/useQuery.js'
+import type { DocumentParameter, OptionsParameter } from '@vue/apollo-composable/dist/useQuery.js'
 
 export interface PaginatedQueryReturn<TResult, TVariables extends OperationVariables>
     extends UseQueryReturn<TResult, TVariables> {
@@ -58,7 +60,6 @@ export interface PaginatedMutationReturn<TResult, TVariables extends OperationVa
 }
 
 export const useQueryStore = defineStore('queryStore', () => {
-    const languageStore = useLanguageStore()
     // TODO: Use caching, pagination, language and markedText with html-escape
 
     /**
@@ -70,10 +71,13 @@ export const useQueryStore = defineStore('queryStore', () => {
         query: DocumentParameter<TQuery, V>,
         variables: V,
     ): PaginatedQueryReturn<TQuery, V> {
+        provideApolloClient(apolloClient)
         // Default selectedpage
         let selectedPage = ref(0)
 
-        const queryResult = useQuery<TQuery, V>(query, variables)
+        const queryResult = useQuery<TQuery, V>(query, variables, {
+            fetchPolicy: 'network-only',
+        })
 
         // Using pagination?
         if (
@@ -101,14 +105,6 @@ export const useQueryStore = defineStore('queryStore', () => {
             )
         }
 
-        // Watch to update language
-        watch(
-            () => languageStore.currentLanguage,
-            () => {
-                queryResult.refetch(variables)
-            },
-        )
-
         return {
             ...queryResult,
             selectedPage,
@@ -117,19 +113,24 @@ export const useQueryStore = defineStore('queryStore', () => {
 
     function mutate<TQuery, V extends OperationVariables>(
         mutation: DocumentNode,
-        variables: V,
+        options?: UseMutationOptions<TQuery, V>,
     ): PaginatedMutationReturn<TQuery, V> {
-        const queryResult = useMutation<TQuery, V>(mutation, variables)
+        const queryResult = useMutation<TQuery, V>(mutation, options)
 
         // selectedPage is -1; not supported yet
         let selectedPage = ref(-1)
         return { ...queryResult, selectedPage }
     }
 
-    function setLanguageMutation(variables: SetLanguageMutationMutationVariables) {
+    function setLanguageMutation(
+        options?: UseMutationOptions<SetLanguageMutation, SetLanguageMutationMutationVariables>,
+    ) {
         return mutate<SetLanguageMutation, SetLanguageMutationMutationVariables>(
             _queries.SetLanguageMutation,
-            variables,
+            {
+                ...options,
+                variables: options?.variables as SetLanguageMutationMutationVariables,
+            },
         )
     }
 

@@ -137,7 +137,6 @@ query LatestNewsQuery($limit: Int) {
       id
       title
       introduction
-      title
       introduction
       publicationDate
     }

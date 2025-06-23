@@ -2,47 +2,74 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import gettext from '@/gettext'
 import { useQueryStore } from '@/stores/queryStore'
-import type { SetLanguageMutationMutation } from '@/gql/graphql'
+import { provideApolloClient } from '@vue/apollo-composable'
+import { apolloClient } from '@/main' // Ensure this is exported from main.ts
 
 export const useLanguageStore = defineStore('languageStore', () => {
+    const queryStore = useQueryStore()
     const currentLanguage = ref(gettext.current)
     const availableLanguages = Object.keys(gettext.available)
-    const queryStore = useQueryStore()
+
+    async function loadLanguage() {
+        const defaultLanguage = import.meta.env.VITE_DEFAULT_LANGUAGE || 'en'
+
+        // Initialize current language from localStorage or fallback to default
+        const storedLocale = localStorage.getItem('locale')
+
+        currentLanguage.value =
+            storedLocale && availableLanguages.includes(storedLocale)
+                ? storedLocale
+                : defaultLanguage
+
+        // Set the current language in gettext
+        gettext.current = currentLanguage.value
+
+        // Set language to apollo
+        await setLanguage(currentLanguage.value)
+    }
 
     // Private
     async function setLanguage(lang: string) {
-        // Communicate to IA website
-        let url = import.meta.env.VITE_AMELIE_API
+        // Provide Apollo Client context
+        provideApolloClient(apolloClient)
 
         const { mutate, loading, onDone } = queryStore.setLanguageMutation({
-            languageCode: lang,
+            // refetchQueries: 'active',
         })
 
-        onDone((returned) => {
-            if (!returned.data?.result) {
+        onDone(async (returned) => {
+            //TODO: This type does not correspond to the actual type of the returned data
+            // @ts-ignore
+            if (!returned.data?.setLanguage.result) {
                 console.error('Error setting language')
                 return
             }
 
-            alert('Language changed to ' + lang)
-
             localStorage.setItem('locale', lang)
+
             // Set language in store
+            gettext.current = lang
             currentLanguage.value = lang
+
+            await apolloClient.refetchQueries({
+                include: 'active',
+            })
         })
 
-        mutate()
+        await mutate({
+            languageCode: lang,
+        })
     }
 
     async function switchLanguage(lang?: string) {
-        if (currentLanguage.value == lang) {
+        if (gettext.current == lang) {
             return
         }
 
         if (lang && Object.keys(gettext.available).includes(lang.toLowerCase())) {
             setLanguage(lang)
         } else {
-            let currentIndex = availableLanguages.indexOf(currentLanguage.value.toLowerCase())
+            let currentIndex = availableLanguages.indexOf(gettext.current.toLowerCase())
 
             // Go to next iterator in language available keys
             const nextIndex = (currentIndex + 1) % availableLanguages.length
@@ -50,5 +77,5 @@ export const useLanguageStore = defineStore('languageStore', () => {
         }
     }
 
-    return { currentLanguage, switchLanguage }
+    return { currentLanguage, switchLanguage, loadLanguage, availableLanguages }
 })

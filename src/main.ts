@@ -15,7 +15,7 @@ const link = createHttpLink({
     credentials: 'include',
 })
 const cache = new InMemoryCache()
-const apolloClient = new ApolloClient({ link, cache })
+export const apolloClient = new ApolloClient({ link, cache })
 
 const app = createApp({
     setup() {

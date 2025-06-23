@@ -12,6 +12,10 @@ import { RouterView } from 'vue-router'
 import Header from '@/components/header/Header.vue'
 import Footer from '@/components/footer/Footer.vue'
 import Toast from 'primevue/toast';
+import { useLanguageStore } from './stores/languageStore';
+
+const languageStore = useLanguageStore();
+languageStore.loadLanguage();
 </script>
 
 <style lang="scss">
