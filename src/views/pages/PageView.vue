@@ -18,14 +18,17 @@ import { useQueryStore } from '@/stores/queryStore'
 const queryStore = useQueryStore();
 const props = defineProps<{ id: string, slug?: string }>();
 
-const { result } = queryStore.getPageViewQuery({ pageId: props.id });
+watch(() => props.id, (newId) => {
+    refetch({ pageId: props.id });
+})
+
+const { result, refetch } = queryStore.getPageViewQuery({ pageId: props.id });
 const item = computed(() => result.value?.page);
 
 const processedContent = ref<string>('');
 
 // Process the `content` field when `item` changes
 watch(item, async (newItem) => {
-    console.log("Fetched about page!")
     if (newItem && newItem.content) {
         processedContent.value = await markedText(newItem.content);
     } else {

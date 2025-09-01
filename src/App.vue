@@ -2,9 +2,7 @@
     <div>
         <Toast />
         <Header />
-        <Transition name="fade" mode="out-in">
-            <RouterView />
-        </Transition>
+        <RouterView />
         <Footer />
     </div>
 </template>
@@ -16,7 +14,6 @@ import Footer from '@/components/footer/Footer.vue'
 import Toast from 'primevue/toast';
 import { useLanguageStore } from './stores/languageStore';
 import { useThemeStore } from './stores/themeStore';
-import { computed } from 'vue';
 
 const languageStore = useLanguageStore();
 const themeStore = useThemeStore();

@@ -8,7 +8,7 @@
                     <span class="link">
                         <component :is="htmlElement(item.route)" @click="item.route ? closeMobileMenu() : ''"
                             :to="{ name: item.route, params: {} }"
-                            :style="animation ? { animationDelay: `${1 + index * 100}ms` } : ''">
+                            :style="animation ? { animationDelay: `${(1 + index) * 100}ms` } : ''">
                             <template v-if="!item.icon">
                                 {{ item.name }}
                             </template>
