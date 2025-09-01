@@ -3,3 +3,8 @@
 @forward './main';
 @forward './form';
 @forward './swiper';
+
+// Tailwind CSS
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
