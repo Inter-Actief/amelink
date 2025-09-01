@@ -25,6 +25,7 @@ const processedContent = ref<string>('');
 
 // Process the `content` field when `item` changes
 watch(item, async (newItem) => {
+    console.log("Fetched about page!")
     if (newItem && newItem.content) {
         processedContent.value = await markedText(newItem.content);
     } else {

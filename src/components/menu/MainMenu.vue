@@ -35,10 +35,18 @@
                 </li>
             </template>
 
+            <!-- TODO: Put theme changer button and language switcher more to the right -->
+
             <li :class="['menu-item', animation ? 'fade' : '']"
                 :style="animation ? { animationDelay: `${(menu.length + 2) * 100}ms` } : ''">
                 <span class="link">
                     <LanguageSwitcher />
+                </span>
+            </li>
+
+            <li class="menu-item">
+                <span class="link">
+                    <ThemeSwitcher />
                 </span>
             </li>
         </ul>
@@ -53,6 +61,7 @@ import EpaIcon from '@/components/ui/EpaIcon.vue'
 import { closeMobileMenu, openMobileMenu, openSubMenu, toggleSubMenu } from '@/functions/functions'
 import MenuInfo from '@/components/menu/MenuInfo.vue'
 import Search from '@/components/ui/Search.vue'
+import ThemeSwitcher from '../ui/ThemeSwitcher.vue'
 
 const props = defineProps(['animation', 'location', 'search', 'info'])
 

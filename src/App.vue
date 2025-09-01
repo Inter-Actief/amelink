@@ -1,10 +1,12 @@
 <template>
-    <Toast />
-    <Header />
-    <Transition name="fade" mode="out-in">
-        <RouterView />
-    </Transition>
-    <Footer />
+    <div>
+        <Toast />
+        <Header />
+        <Transition name="fade" mode="out-in">
+            <RouterView />
+        </Transition>
+        <Footer />
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -13,9 +15,13 @@ import Header from '@/components/header/Header.vue'
 import Footer from '@/components/footer/Footer.vue'
 import Toast from 'primevue/toast';
 import { useLanguageStore } from './stores/languageStore';
+import { useThemeStore } from './stores/themeStore';
+import { computed } from 'vue';
 
 const languageStore = useLanguageStore();
+const themeStore = useThemeStore();
 languageStore.loadLanguage();
+themeStore.initialiseTheme();
 </script>
 
 <style lang="scss">

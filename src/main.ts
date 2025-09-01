@@ -34,6 +34,9 @@ app.use(ToastService)
 app.use(PrimeVue, {
     theme: {
         preset: iaPreset,
+        options: {
+            darkModeSelector: '.dark',
+        },
     },
 })
 
