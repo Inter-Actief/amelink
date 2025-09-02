@@ -36,6 +36,13 @@ app.use(PrimeVue, {
         preset: iaPreset,
         options: {
             darkModeSelector: '.dark',
+
+            // Custom CSS layer.
+            // Allowing one to overwrite the styling of PrimeVue components using Tailwind CSS.
+            cssLayer: {
+                name: 'primevue',
+                order: 'tailwind-base, primevue, tailwind-utilities'
+            }
         },
     },
 })
