@@ -421,8 +421,8 @@ export const iaPreset = definePreset(Aura, {
                     950: '#020617',
                 },
                 primary: {
-                    color: '{primary.500}',
-                    contrastColor: '#ffffff',
+                    color: '#1d428a',
+                    contrastColor: '#fafafa',
                     hoverColor: '{primary.600}',
                     activeColor: '{primary.700}',
                 },
@@ -546,8 +546,8 @@ export const iaPreset = definePreset(Aura, {
                     950: '#09090b',
                 },
                 primary: {
-                    color: '{primary.400}',
-                    contrastColor: '{surface.900}',
+                    color: '#1d428a',
+                    contrastColor: '{surface.50}',
                     hoverColor: '{primary.300}',
                     activeColor: '{primary.200}',
                 },

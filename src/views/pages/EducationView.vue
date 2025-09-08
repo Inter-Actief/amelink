@@ -2,9 +2,8 @@
     <div class="ia_section">
         <div class="ia_row">
             <div class="ia_column span4 heightauto">
-                <div class="education_sidebar">
+                <div class="education_sidebar sticky top-4">
                     <div class="head">{{ $gettext('Information') }}</div>
-
                     <div class="education_menu">
                         <div class="menu">
                             <div class="title">{{ $gettext('General') }}</div>
@@ -39,7 +38,6 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
 import { computed, ref, watch } from 'vue'
 import { getItemValue, markedText } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext'
@@ -69,21 +67,7 @@ watch(queryItems, async (newItems) => {
     }
 
     processedContent.value = contentMap;
-    education_sidebar();
 }, { immediate: true });
-
-function education_sidebar() {
-    setTimeout(() => {
-        const element = document.querySelector('.education_sidebar') as HTMLElement
-        const height = element.offsetHeight
-
-        if (window.innerHeight > height + 60) {
-            element.classList.add('sticky')
-        } else {
-            element.classList.remove('sticky')
-        }
-    }, 100)
-}
 
 function scrolltop(item: string) {
     if (item === null) {
@@ -95,16 +79,6 @@ function scrolltop(item: string) {
         behavior: 'smooth',
     })
 }
-
-onMounted(() => {
-    window.addEventListener('resize', education_sidebar)
-    education_sidebar()
-})
-
-// Remove event listener when the component is unmounted
-onUnmounted(() => {
-    window.removeEventListener('resize', education_sidebar)
-})
 </script>
 
 <style scoped lang="scss">

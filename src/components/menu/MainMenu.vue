@@ -1,14 +1,13 @@
 <template>
-    <Search class="fade" v-if="search" :style="animation ? { animationDelay: `100ms` } : ''" />
+    <!-- <Search class="fade" v-if="search" :style="animation ? { animationDelay: `100ms` } : ''" /> -->
 
     <nav>
-        <ul :class="['mainmenu', animation ? 'animation' : '']">
+        <ul class="flex flex-row list-none gap-4 items-center justify-between">
             <template v-for="(item, index) in menu" :key="item">
                 <li class="menu-item">
                     <span class="link">
                         <component :is="htmlElement(item.route)" @click="item.route ? closeMobileMenu() : ''"
-                            :to="{ name: item.route, params: {} }"
-                            :style="animation ? { animationDelay: `${(1 + index) * 100}ms` } : ''">
+                            :to="{ name: item.route, params: {} }">
                             <template v-if="!item.icon">
                                 {{ item.name }}
                             </template>
@@ -37,8 +36,7 @@
 
             <!-- TODO: Put theme changer button and language switcher more to the right -->
 
-            <li :class="['menu-item', animation ? 'fade' : '']"
-                :style="animation ? { animationDelay: `${(menu.length + 2) * 100}ms` } : ''">
+            <li :class="['menu-item', animation ? 'fade' : '']">
                 <span class="link">
                     <LanguageSwitcher />
                 </span>
@@ -132,86 +130,102 @@ const menu = [
 </script>
 
 <style scoped lang="scss">
-.mainmenu {
-    list-style: none;
-    display: flex;
-    gap: $gap_xs;
-    align-items: center;
-    padding: 0;
-    justify-content: space-between;
-
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
-
-    li.menu-item {
-        .link {
-            display: flex;
-            gap: $gap-xs;
-            align-items: center;
-
-            >a {
-                position: relative;
-
-                &:before {
-                    content: '';
-                    position: absolute;
-                    bottom: 0;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    height: 0.2rem;
-                    width: 0;
-                    transition: 300ms;
-                    background-color: #fff;
-                }
-            }
-
-            a.router-link-active:before,
-            &:hover>a:before {
-                width: 100%;
-            }
-        }
-
-        ul.submenu:hover,
-        &:hover ul.submenu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        ul.submenu {
-            padding: 1rem;
-            box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.3);
-            border-radius: $border-radius;
-            position: absolute;
-            z-index: 99;
-            min-width: 20rem;
-            text-align: left;
-            display: grid;
-            background-color: $color_white;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(1rem);
-            transition: 300ms;
-            list-style: none;
-
-            &>li {
-                >a {
-                    color: $primary-color;
-                    border-radius: $border-radius;
-                    padding: 0.5rem 1rem;
-                    display: block;
-                }
-
-                >a.router-link-active,
-                &:hover>a {
-                    background-color: $color_light2;
-                }
-            }
-        }
-    }
+.link:after,
+.link:hover:after {
+    width: 100%;
 }
+
+.link:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 0.2rem;
+    width: 0;
+    transition: width 300ms;
+    background-color: var(--p-primary-contrast)
+}
+
+// .mainmenu {
+//     list-style: none;
+//     gap: $gap_xs;
+//     align-items: center;
+//     padding: 0;
+//     justify-content: space-between;
+
+//     a {
+//         color: inherit;
+//         text-decoration: none;
+//     }
+
+//     li.menu-item {
+//         .link {
+//             display: flex;
+//             gap: $gap-xs;
+//             align-items: center;
+
+//             >a {
+//                 position: relative;
+
+//                 &:before {
+//                     content: '';
+//                     position: absolute;
+//                     bottom: 0;
+//                     left: 50%;
+//                     transform: translateX(-50%);
+//                     height: 0.2rem;
+//                     width: 0;
+//                     transition: 300ms;
+//                     background-color: #fff;
+//                 }
+//             }
+
+//             a.router-link-active:before,
+//             &:hover>a:before {
+//                 width: 100%;
+//             }
+//         }
+
+//         ul.submenu:hover,
+//         &:hover ul.submenu {
+//             opacity: 1;
+//             visibility: visible;
+//             transform: translateY(0);
+//         }
+
+//         ul.submenu {
+//             padding: 1rem;
+//             box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.3);
+//             border-radius: $border-radius;
+//             position: absolute;
+//             z-index: 99;
+//             min-width: 20rem;
+//             text-align: left;
+//             display: grid;
+//             background-color: $color_white;
+//             opacity: 0;
+//             visibility: hidden;
+//             transform: translateY(1rem);
+//             transition: 300ms;
+//             list-style: none;
+
+//             &>li {
+//                 >a {
+//                     color: $primary-color;
+//                     border-radius: $border-radius;
+//                     padding: 0.5rem 1rem;
+//                     display: block;
+//                 }
+
+//                 >a.router-link-active,
+//                 &:hover>a {
+//                     background-color: $color_light2;
+//                 }
+//             }
+//         }
+//     }
+// }
 
 #mobilemenu .mainmenu {
     display: grid;
