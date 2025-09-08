@@ -6,7 +6,7 @@
         </div>
 
         <div class="language_switcher_dropdown">
-            <div class="inner">
+            <div class="">
                 <template v-for="lang in Object.keys(gettext.available)">
                     <div @click="changeLanguage(lang)">
                         <img width="22" height="16" :aria-label="`lang ${lang}`"
@@ -26,10 +26,8 @@ import { ChevronDown } from 'lucide-vue-next';
 const gettext = useGettext();
 const langStore = useLanguageStore();
 
-//TODO: Make this in a language functions util / pinia store
 function changeLanguage(newLanguage: string) {
     langStore.switchLanguage(newLanguage);
-
     closeMobileMenu()
 }
 </script>

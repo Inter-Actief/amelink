@@ -8,6 +8,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ActivitiesSliderCard: typeof import('./src/components/homepage/ActivitiesSliderCard.vue')['default']
+    Avatar: typeof import('primevue/avatar')['default']
+    Badge: typeof import('primevue/badge')['default']
     Button: typeof import('primevue/button')['default']
     Cards: typeof import('./src/components/ui/Cards.vue')['default']
     ContactForm: typeof import('./src/components/forms/ContactForm.vue')['default']
@@ -48,5 +50,8 @@ declare module 'vue' {
     SearchToggle: typeof import('./src/components/ui/SearchToggle.vue')['default']
     ThemeSwitcher: typeof import('./src/components/ui/ThemeSwitcher.vue')['default']
     UpcomingActivities: typeof import('./src/components/activities/UpcomingActivities.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    Ripple: typeof import('primevue/ripple')['default']
   }
 }

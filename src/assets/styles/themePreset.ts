@@ -508,7 +508,7 @@ export const iaPreset = definePreset(Aura, {
                 },
                 navigation: {
                     item: {
-                        focusBackground: '{surface.100}',
+                        focusBackground: '{surface.1000}',
                         activeBackground: '{surface.100}',
                         color: '{text.color}',
                         focusColor: '{text.hover.color}',
@@ -528,6 +528,8 @@ export const iaPreset = definePreset(Aura, {
                         focusColor: '{surface.500}',
                         activeColor: '{surface.500}',
                     },
+                    background: '{primary.color}',
+                    menubar: {},
                 },
             },
             dark: {
