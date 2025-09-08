@@ -54,7 +54,6 @@ function changeLanguage(newLanguage: string) {
     }
 
     .language_switcher_dropdown {
-        z-index: 999;
         position: absolute;
         top: 100%;
         left: 50%;

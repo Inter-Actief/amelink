@@ -1,7 +1,7 @@
 import { definePreset } from '@primevue/themes'
-import Aura from '@primevue/themes/aura'
+import Lara from '@primevue/themes/lara'
 
-export const iaPreset = definePreset(Aura, {
+export const iaPreset = definePreset(Lara, {
     primitive: {
         borderRadius: {
             none: '0',
@@ -459,7 +459,7 @@ export const iaPreset = definePreset(Aura, {
                 },
                 text: {
                     color: '{surface.700}',
-                    hoverColor: '{surface.800}',
+                    hoverColor: '#43c7ff',
                     mutedColor: '{surface.500}',
                     hoverMutedColor: '{surface.600}',
                 },
@@ -528,8 +528,6 @@ export const iaPreset = definePreset(Aura, {
                         focusColor: '{surface.500}',
                         activeColor: '{surface.500}',
                     },
-                    background: '{primary.color}',
-                    menubar: {},
                 },
             },
             dark: {
@@ -586,7 +584,7 @@ export const iaPreset = definePreset(Aura, {
                 },
                 text: {
                     color: '{surface.0}',
-                    hoverColor: '{surface.0}',
+                    hoverColor: '#43c7ff',
                     mutedColor: '{surface.400}',
                     hoverMutedColor: '{surface.300}',
                 },
@@ -654,6 +652,26 @@ export const iaPreset = definePreset(Aura, {
                         color: '{surface.500}',
                         focusColor: '{surface.400}',
                         activeColor: '{surface.400}',
+                    },
+                },
+            },
+        },
+    },
+    components: {
+        menubar: {
+            colorScheme: {
+                light: {
+                    background: '{primary.color}',
+                    color: '{primary.contrastColor}',
+                    item: {
+                        color: '{primary.contrastColor}',
+                    },
+                },
+                dark: {
+                    background: '{primary.color}',
+                    color: '{primary.contrastColor}',
+                    item: {
+                        color: '{primary.contrastColor}',
                     },
                 },
             },

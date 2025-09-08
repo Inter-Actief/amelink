@@ -1,6 +1,6 @@
 <template>
     <!-- TODO: Remake header with primevue menubar https://primevue.org/menubar/ -->
-    <header id="header" :class="[isDesktop ? '' : 'mobile']" class="bg-primary text-primary-contrast">
+    <header class="bg-primary text-primary-contrast z-20">
         <div class="flex flex-row gap-4 pt-10 pl-10 pr-10 pb-6">
             <div id="header_logo" class="basis-1/5">
                 <Logo />
