@@ -1,5 +1,5 @@
 <template>
-    <!-- TODO: Remake header with primevue menubar https://primevue.org/menubar/ -->
+    <!-- TODO: Make header menubar styling better (regarding hover states etc)-->
     <header class="bg-primary text-primary-contrast z-20">
         <div class="flex flex-row gap-4 pt-10 pl-10 pr-10 pb-6">
             <div id="header_logo" class="basis-1/5">
@@ -26,16 +26,17 @@
 
         </div>
 
-        <div id="header_menu" class="pl-10 pr-10 pb-4 sticky top-0">
-            <Menubar :model="items">
-                <template #item="{ item, props, hasSubmenu, root }">
+        <div class="pl-10 pr-10 pb-4">
+            <Menubar :model="items" class="p-0 sticky top-0 z-50">
+                <template #item="{ item, props, hasSubmenu, root }"
+                    :class="{ 'hover:bg-primary-600 active:bg-primary-600 rounded-lg': root }">
                     <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
                         <a v-ripple :href="href" v-bind="props.action" @click="navigate">
-                            <span>{{ item.label }}</span>
+                            <span :class="{ 'text-color': !root, }">{{ item.label }}</span>
                         </a>
                     </router-link>
                     <a v-else v-ripple :href="item.url" :target="item.target" v-bind="props.action">
-                        <span>{{ item.label }}</span>
+                        <span :class="{ 'text-color': !root }">{{ item.label }}</span>
                         <template v-if="hasSubmenu">
                             <ChevronDown v-if="root" />
                             <ChevronRight v-else />

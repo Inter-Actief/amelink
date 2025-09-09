@@ -665,6 +665,14 @@ export const iaPreset = definePreset(Lara, {
                     color: '{primary.contrastColor}',
                     item: {
                         color: '{primary.contrastColor}',
+                        focus: {
+                            color: '{primary.contrastColor}',
+                            background: '{primary.600}',
+                        },
+                        active: {
+                            color: '{primary.contrastColor}',
+                            background: '{primary.600}',
+                        },
                     },
                 },
                 dark: {
@@ -672,6 +680,14 @@ export const iaPreset = definePreset(Lara, {
                     color: '{primary.contrastColor}',
                     item: {
                         color: '{primary.contrastColor}',
+                        focus: {
+                            color: '{primary.contrastColor}',
+                            background: '{primary.600}',
+                        },
+                        active: {
+                            color: '{primary.contrastColor}',
+                            background: '{primary.600}',
+                        },
                     },
                 },
             },

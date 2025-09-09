@@ -3,7 +3,6 @@
         <div class="ia_row">
             <div class="ia_column span8">
                 <h1>{{ $gettext("Activities you don't want to miss") }}</h1>
-
                 <OverviewActivities />
             </div>
 
