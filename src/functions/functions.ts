@@ -110,6 +110,9 @@ function capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+// getItemValue is a way to get the value of an item where there only exists
+// (for example) nameNl or nameEn and not name. (This is a backend issue, but
+// we resolve it on the frontend)
 export const getItemValue = <T>(item: T, key: string) => {
     if (!item) {
         return ''

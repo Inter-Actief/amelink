@@ -1,7 +1,9 @@
 <template>
-    <TextCard title="Een activiteit" subtitle="Dinsdag 25 November 2025" />
+    <TextCard title="Een activiteit" subtitle="Dinsdag 25 November 2025"
+        :routerLink="{ to: { name: 'singleactivities', params: { id: 7635 } } }"
+        :label="{ color: '1d428a', text: 'Heyo' }" />
 
-    <div id="activities" class="activities cards">
+    <div id=" activities" class="activities cards">
         <ProgressSpinner v-if="loading" />
         <div class="item" v-else-if="newsItems !== null" v-for="item in newsItems" :key="item?.id">
             <template v-if="item">
@@ -24,7 +26,6 @@
                         {{ $gettext('Read more') }}
                     </EpaButton>
                 </router-link>
-
             </template>
         </div>
     </div>
