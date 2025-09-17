@@ -1,4 +1,6 @@
 <template>
+    <TextCard title="Een activiteit" subtitle="Dinsdag 25 November 2025" />
+
     <div id="activities" class="activities cards">
         <ProgressSpinner v-if="loading" />
         <div class="item" v-else-if="newsItems !== null" v-for="item in newsItems" :key="item?.id">
@@ -22,6 +24,7 @@
                         {{ $gettext('Read more') }}
                     </EpaButton>
                 </router-link>
+
             </template>
         </div>
     </div>
@@ -38,6 +41,7 @@ import ProgressSpinner from 'primevue/progressspinner';
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
 import { useQueryStore } from '@/stores/queryStore'
+import TextCard from '../ui/TextCard.vue';
 
 const { $gettext } = useGettext();
 const route = useRoute()

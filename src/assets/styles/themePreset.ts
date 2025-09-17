@@ -658,6 +658,13 @@ export const iaPreset = definePreset(Lara, {
         },
     },
     components: {
+        card: {
+            colorScheme: {
+                light: {
+                    background: '#1d428a0d',
+                },
+            },
+        },
         menubar: {
             colorScheme: {
                 light: {
