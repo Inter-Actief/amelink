@@ -8,4 +8,5 @@ export default {
     },
     plugins: [PrimeUI],
     darkMode: ['selector', '[class~="dark"]'], // dark mode configuration
+    important: true,
 }
