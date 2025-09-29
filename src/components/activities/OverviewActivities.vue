@@ -1,31 +1,13 @@
 <template>
-    <TextCard title="Een activiteit" subtitle="Dinsdag 25 November 2025"
-        :routerLink="{ to: { name: 'singleactivities', params: { id: 7635 } } }"
-        :label="{ color: '1d428a', text: 'Heyo' }" />
-
-    <div id=" activities" class="activities cards">
+    <div id="activities" class="activities cards">
         <ProgressSpinner v-if="loading" />
-        <div class="item" v-else-if="newsItems !== null" v-for="item in newsItems" :key="item?.id">
+        <div v-if="!loading && newsItems" v-for="item in newsItems" :key="item?.id">
             <template v-if="item">
-                <router-link :to="{ name: 'singleactivities', params: { id: item.id } }">
-                    <div class="body">
-                        <div class="info">
-                            <div class="title">
-                                <h2>{{ getItemValue(item, 'summary') }}</h2>
-                                <div class="label" :style="[`background-color: #${item.activityLabel.color}`]">
-                                    {{ getItemValue(item.activityLabel, 'name') }}
-                                </div>
-                            </div>
-                            <div class="date">{{ formattedData(item.begin) }}</div>
-                        </div>
-
-                        <div class="excerpt">{{ excerptText(getItemValue(item, 'description')) }}</div>
-                    </div>
-
-                    <EpaButton class="link readmore" icon="readmore">
-                        {{ $gettext('Read more') }}
-                    </EpaButton>
-                </router-link>
+                <TextCard :title="getItemValue(item, 'summary')" subtitle="Dinsdag 25 November 2025"
+                    :routerLink="{ to: { name: 'singleactivities', params: { id: 7635 } } }"
+                    :label="{ color: item.activityLabel.color, text: getItemValue(item.activityLabel, 'name') as string }">
+                    {{ excerptText(getItemValue(item, 'description')) }}
+                </TextCard>
             </template>
         </div>
     </div>

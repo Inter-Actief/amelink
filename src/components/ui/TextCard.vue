@@ -6,13 +6,11 @@
                 <img :src="`/src/assets/images/${props.image}`" />
             </template>
             <template #title v-if="props.title">
-                <div class="flex flex-row items-center w-full">
-                    <span class="text-5xl font-semibold text-slate-950 dark:text-color">{{ props.title }}</span>
-                    <div class="self-end">
-
-                        <Chip v-if="props.label" :label="props.label.text"
-                            :style="{ backgroundColor: `#${props.label.color}` }" class="ml-auto" />
-                    </div>
+                <div class="flex flex-row items-center w-full justify-between">
+                    <span class="!text-4xl !font-semibold">{{ props.title }}</span>
+                    <Chip v-if="props.label" :label="props.label.text"
+                        :style="{ backgroundColor: `#${props.label.color}` }"
+                        class="ml-auto !text-slate-50 !self-end" />
                 </div>
             </template>
             <template #subtitle v-if="props.subtitle">{{ props.subtitle }}</template>

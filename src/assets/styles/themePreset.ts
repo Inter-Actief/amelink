@@ -662,6 +662,10 @@ export const iaPreset = definePreset(Lara, {
             colorScheme: {
                 light: {
                     background: '#1d428a0d',
+                    color: '{surface.900}',
+                },
+                dark: {
+                    color: '{primary.contrastColor}',
                 },
             },
         },
