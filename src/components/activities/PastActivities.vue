@@ -1,4 +1,7 @@
 <template>
+    <ProgressSpinner v-if="loading" />
+    <div>{{ loading }}</div>
+    <div>{{ someResult == undefined ? 'undef' : someResult }}</div>
     <!-- TODO: Rewrite -->
     <div class="pastactivities">
         <div class="table">
@@ -50,15 +53,10 @@ import { useQueryStore } from '@/stores/queryStore'
 const { $gettext } = useGettext();
 const queries = useQueryStore();
 const route = useRoute()
-const perpage = ref(20)
-const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
+const { result, refetch, loading } = queries.getPastActivitiesQuery({ limit: 20, endDate: new Date() })
+const someResult = computed(() => result.value!)
 
-const { result, refetch } = queries.getPastActivitiesQuery({ limit: perpage.value, endDate: new Date() })
 const queryResults = computed(() => result.value?.activities)
-
-watch(() => queryResults, (v) => {
-    alert(v);
-})
 
 const queryItems = computed(() => (queryResults.value ? queryResults.value.results : []))
 </script>
