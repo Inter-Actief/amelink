@@ -1,28 +1,24 @@
 <template>
-    <div class="ia_section">
-        <div class="ia_row">
-            <div class="ia_column">
-                <template v-if="item">
-                    <h1>{{ getItemValue(item, 'title') }}</h1>
+    <Content>
+        <template v-if="item">
+            <h1>{{ getItemValue(item, 'title') }}</h1>
 
-                    <div class="details">
-                        <div class="author">
-                            {{ item.author }}
-                        </div>
-                        <div class="date">
-                            {{ formattedData(item.publicationDate) }}
-                        </div>
-                    </div>
-
-                    <div class="content text" v-html="processedContent"></div>
-
-                    <EpaButton :to="{ name: 'news', params: { id: item.id } }" class="link return" bicon="return">
-                        {{ $gettext('Return to overview') }}
-                    </EpaButton>
-                </template>
+            <div class="details">
+                <div class="author">
+                    {{ item.author }}
+                </div>
+                <div class="date">
+                    {{ formattedData(item.publicationDate) }}
+                </div>
             </div>
-        </div>
-    </div>
+
+            <div class="content text" v-html="processedContent"></div>
+
+            <EpaButton :to="{ name: 'news', params: { id: item.id } }" class="link return" bicon="return">
+                {{ $gettext('Return to overview') }}
+            </EpaButton>
+        </template>
+    </Content>
 </template>
 
 <script setup lang="ts">

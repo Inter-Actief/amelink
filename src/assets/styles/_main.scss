@@ -36,7 +36,7 @@ body {
 //   max-width: 100%;
 // }
 
-.ia_section {
+.ia-section {
   position: relative;
   padding: 3rem 0;
   background-position: center;
@@ -64,13 +64,13 @@ body {
 
   &.static {
     position: static;
-    .ia_row {
+    .ia-row {
       position: static;
     }
   }
 }
 
-.ia_row {
+.ia-row {
   position: relative;
   // z-index: 9;
   width: 90%;
@@ -88,7 +88,7 @@ body {
   margin: 0 auto;
 }
 
-.ia_column {
+.ia-column {
   grid-column: 1 / -1;
   min-width: 0;
   display: grid;
@@ -148,35 +148,35 @@ body {
   }
 }
 
-.ia_module {
+.ia-module {
   width: 100%;
   max-width: 100%;
 }
 
 @media only screen and (max-width: vars.$screen-lg) {
-  .ia_column.span3 {
+  .ia-column.span3 {
     grid-column: span 6;
   }
-  .ia_column.span4,
-  .ia_column.span5,
-  .ia_column.span6,
-  .ia_column.span7,
-  .ia_column.span8,
-  .ia_column.span9,
-  .ia_column.span10,
-  .ia_column.span11 {
+  .ia-column.span4,
+  .ia-column.span5,
+  .ia-column.span6,
+  .ia-column.span7,
+  .ia-column.span8,
+  .ia-column.span9,
+  .ia-column.span10,
+  .ia-column.span11 {
     grid-column: span 12;
   }
 }
 
 @media only screen and (max-width: vars.$screen-lg) {
-  .ia_row {
+  .ia-row {
     gap: vars.$gap;
   }
 }
 
 @media only screen and (max-width: vars.$screen-lm) {
-  .ia_column.ia_span3 {
+  .ia-column.ia-span3 {
     grid-column: span 12;
   }
 }

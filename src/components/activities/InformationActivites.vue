@@ -16,6 +16,7 @@
                 <div> {{ formattedData(props.item.enrollmentBegin) }} {{ $gettext('from') }}
                     {{ formattedTime(props.item.enrollmentBegin) }} {{ $gettext('until') }}
                     {{ formattedTime(props.item.enrollmentEnd) }}</div>
+                <!-- TODO: Fix label -->
                 <div>{{ props.item.activityLabel[`nameEn`] }}</div>
                 <div>
                     <template v-if="props.item.hasCosts"> {{ props.item.price }} euro </template>

@@ -1,7 +1,7 @@
 <template>
     <h1>{{ $gettext('News page') }}</h1>
 
-    <div class="grid grid-cols-2 gap-12">
+    <div class="grid grid-cols-2 gap-12 items-stretch">
         <template v-if="newsItems && processedExcerpts" v-for="item in newsItems" :key="item?.id">
             <TextCard :title="item?.title!" :subtitle="formattedData(item?.publicationDate).toString()"
                 :routerLink="{ to: { name: 'singlenews', params: { id: item?.id } } }">

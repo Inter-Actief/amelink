@@ -1,21 +1,23 @@
 <template>
-    <div class="grid gap-12 grid-cols-12 p-12 grid-rows-2" v-if="queryItem">
-        <div class="col-span-5 col-start-2 row-span-2">
-            <div class="text-5xl !font-bold">{{ getItemValue(queryItem, 'summary') }}</div>
-            <div class="pb-10">{{ formattedData(queryItem.begin) }}</div>
-            <div class="text pb-10" v-html="processedDescription"></div>
+    <Content>
+        <div class="grid gap-12 grid-cols-12 pt-12 grid-rows-2" v-if="queryItem">
+            <div class="col-span-7 row-span-2">
+                <div class="text-5xl !font-bold">{{ getItemValue(queryItem, 'summary') }}</div>
+                <div class="pb-10">{{ formattedData(queryItem.begin) }}</div>
+                <div class="text pb-10" v-html="processedDescription"></div>
 
-            <EpaButton :to="{ name: 'activities', params: { id: props.id } }" class="link return" bicon="return">
-                {{ $gettext('Return to overview') }}
-            </EpaButton>
+                <EpaButton :to="{ name: 'activities' }" class="link return" bicon="return">
+                    {{ $gettext('Return to overview') }}
+                </EpaButton>
+            </div>
+            <div class="col-span-5 row-span-1">
+                <InformationActivites :item="queryItem" />
+            </div>
+            <div class="col-span-5 row-span-1">
+                <!-- Enrollment form TODO -->
+            </div>
         </div>
-        <div class="col-span-5 row-span-1">
-            <InformationActivites :item="queryItem" />
-        </div>
-        <div class="col-span-5 row-span-1">
-            <!-- Enrollment form TODO -->
-        </div>
-    </div>
+    </Content>
 </template>
 
 <script setup lang="ts">

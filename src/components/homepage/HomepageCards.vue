@@ -3,12 +3,7 @@
         <template v-if="cards !== null" v-for="item in cards" :key="item">
             <router-link :class="['item', item.class]" :to="{ name: item.routername, params: {} }">
                 <div class="image">
-                    <img
-                        class="placeholder"
-                        width="1600"
-                        height="1067"
-                        src="@/assets/images/ia_placeholder.png"
-                    />
+                    <img class="placeholder" width="1600" height="1067" src="@/assets/images/ia-placeholder.png" />
                 </div>
 
                 <div class="content">

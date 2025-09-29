@@ -1,4 +1,5 @@
 <template>
+    <!-- TODO: Rewrite -->
     <div class="pastactivities">
         <div class="table">
             <div class="item head">
@@ -38,7 +39,7 @@
 
 <script setup lang="ts">
 import { useQuery } from '@vue/apollo-composable'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { formattedDataShort, getItemValue } from '@/functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
@@ -54,6 +55,11 @@ const page = ref(route.query.page && typeof route.query.page === 'string' ? pars
 
 const { result, refetch } = queries.getPastActivitiesQuery({ limit: perpage.value, endDate: new Date() })
 const queryResults = computed(() => result.value?.activities)
+
+watch(() => queryResults, (v) => {
+    alert(v);
+})
+
 const queryItems = computed(() => (queryResults.value ? queryResults.value.results : []))
 </script>
 

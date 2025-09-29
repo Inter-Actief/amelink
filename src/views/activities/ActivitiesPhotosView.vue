@@ -1,11 +1,7 @@
 <template>
-    <div class="ia_section static">
-        <div class="ia_row">
-            <div class="ia_column">
-                <PhotosActivities :id="props.id" />
-            </div>
-        </div>
-    </div>
+    <Content>
+        <PhotosActivities :id="props.id" />
+    </Content>
 </template>
 
 <script setup lang="ts">

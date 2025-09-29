@@ -1,46 +1,46 @@
 <template>
-    <footer id="footer" class="ia_section">
-        <div class="ia_row">
-            <div class="ia_column span3">
-                <div class="ia_module">
+    <footer id="footer" class="ia-section">
+        <div class="ia-row">
+            <div class="ia-column span3">
+                <div class="ia-module">
                     <Logo />
                 </div>
 
-                <div class="ia_module">
+                <div class="ia-module">
                     {{ $gettext('footer.text') }}
                 </div>
             </div>
-            <div class="ia_column span3">
-                <div class="ia_module">
+            <div class="ia-column span3">
+                <div class="ia-module">
                     <FooterMenu title="Custom" />
                 </div>
 
-                <div class="ia_module">
-                    <FooterMenu title="Custom" />
-                </div>
-            </div>
-            <div class="ia_column span3">
-                <div class="ia_module">
-                    <ContactUs />
-                </div>
-
-                <div class="ia_module">
+                <div class="ia-module">
                     <FooterMenu title="Custom" />
                 </div>
             </div>
-            <div class="ia_column span3">
-                <div class="ia_module">
+            <div class="ia-column span3">
+                <div class="ia-module">
                     <ContactUs />
                 </div>
 
-                <div class="ia_module">
+                <div class="ia-module">
+                    <FooterMenu title="Custom" />
+                </div>
+            </div>
+            <div class="ia-column span3">
+                <div class="ia-module">
+                    <ContactUs />
+                </div>
+
+                <div class="ia-module">
                     <OpenMaps />
                 </div>
             </div>
         </div>
 
-        <div class="ia_row">
-            <div class="ia_column">{{ currentYear }} | Inter-Actief</div>
+        <div class="ia-row">
+            <div class="ia-column">{{ currentYear }} | Inter-Actief</div>
         </div>
 
         <GoogleMaps v-if="isDesktop" />
@@ -98,13 +98,13 @@ const currentYear = ref(new Date().getFullYear())
 
 #footer {
     @media screen and (max-width: $screen-lg) {
-        .ia_column.span3 {
+        .ia-column.span3 {
             grid-column: span 6;
         }
     }
 
     @media screen and (max-width: $screen-lm) {
-        .ia_column.span3 {
+        .ia-column.span3 {
             grid-column: span 12;
         }
     }

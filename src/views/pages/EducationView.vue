@@ -1,7 +1,7 @@
 <template>
-    <div class="ia_section">
-        <div class="ia_row">
-            <div class="ia_column span4 heightauto">
+    <div class="ia-section">
+        <div class="ia-row">
+            <div class="ia-column span4 heightauto">
                 <div class="education_sidebar sticky top-4">
                     <div class="head">{{ $gettext('Information') }}</div>
                     <div class="education_menu">
@@ -20,7 +20,7 @@
                 </div>
             </div>
 
-            <div class="ia_column span8">
+            <div class="ia-column span8">
                 <div class="education">
                     <div class="item" v-for="item in queryItems" :key="item?.id" :id="`item_${item?.id}`">
                         <div class="title">

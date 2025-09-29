@@ -34,7 +34,7 @@
     }
 }
 
-.ia_section.googlemaps {
+.ia-section.googlemaps {
     padding: 0;
 
     .footer_googlemaps {

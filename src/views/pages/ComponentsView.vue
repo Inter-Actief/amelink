@@ -1,35 +1,35 @@
 <template>
-    <div class="ia_section">
-        <div class="ia_row">
-            <div class="ia_column">
+    <div class="ia-section">
+        <div class="ia-row">
+            <div class="ia-column">
                 <h1>{{ $gettext('Demo Table') }}</h1>
                 <DemoTable />
             </div>
         </div>
 
-        <div class="ia_row">
-            <div class="ia_column span6">
+        <div class="ia-row">
+            <div class="ia-column span6">
                 <h1>{{ $gettext('Latest News') }}</h1>
                 <LatestNews />
             </div>
-            <div class="ia_column span6">
+            <div class="ia-column span6">
                 <h1>{{ $gettext('Upcoming Activities') }}</h1>
                 <UpcomingActivities />
             </div>
         </div>
 
-        <div class="ia_row">
-            <div class="ia_column">
+        <div class="ia-row">
+            <div class="ia-column">
                 <h1>{{ $gettext('Latest Activities') }}</h1>
                 <LatestActivities />
             </div>
-            <div class="ia_column">
+            <div class="ia-column">
                 <h1>{{ $gettext('Editor') }}</h1>
             </div>
         </div>
 
-        <div class="ia_row">
-            <div class="ia_column">
+        <div class="ia-row">
+            <div class="ia-column">
                 <h1>{{ $gettext('Demo overview') }}</h1>
                 <DemoOverviewActivities />
             </div>

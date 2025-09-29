@@ -1,7 +1,7 @@
 <template>
-    <div class="ia_section gray">
-        <div class="ia_row">
-            <div class="ia_column">
+    <div class="ia-section gray">
+        <div class="ia-row">
+            <div class="ia-column">
                 <template v-if="item">
                     <div class="text" v-html="processedContent"></div>
                 </template>

@@ -14,6 +14,7 @@ declare module 'vue' {
     Cards: typeof import('./src/components/ui/Cards.vue')['default']
     ContactForm: typeof import('./src/components/forms/ContactForm.vue')['default']
     ContactUs: typeof import('./src/components/footer/ContactUs.vue')['default']
+    Content: typeof import('./src/components/ui/Content.vue')['default']
     DemoOverviewActivities: typeof import('./src/components/activities/demo/DemoOverviewActivities.vue')['default']
     DemoTable: typeof import('./src/components/demo/DemoTable.vue')['default']
     DynamicTable: typeof import('./src/components/ui/DynamicTable.vue')['default']

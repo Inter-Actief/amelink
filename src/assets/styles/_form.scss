@@ -1,7 +1,7 @@
 @use './variables' as vars;
 
 /*Forms*/
-.ia_form {
+.ia-form {
   display: grid;
   gap: vars.$gap_sm;
 
@@ -127,7 +127,7 @@
   }
 }
 
-.ia_form .fields .field {
+.ia-form .fields .field {
   &.span1 {
     grid-column: span 1;
   }

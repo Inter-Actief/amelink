@@ -7,29 +7,29 @@ import ActivitiesSliderCard from '@/components/homepage/ActivitiesSliderCard.vue
 
 <template>
     <main>
-        <div class="ia_section clean">
+        <div class="ia-section clean">
             <HomepageSlider />
         </div>
 
-        <div class="ia_section light">
-            <div class="ia_row">
-                <div class="ia_column">
+        <div class="ia-section light">
+            <div class="ia-row">
+                <div class="ia-column">
                     <LogoSlider />
                 </div>
             </div>
         </div>
 
-        <div class="ia_section">
-            <div class="ia_row">
-                <div class="ia_column">
+        <div class="ia-section">
+            <div class="ia-row">
+                <div class="ia-column">
                     <ActivitiesSliderCard />
                 </div>
             </div>
         </div>
 
-        <div class="ia_section light">
-            <div class="ia_row">
-                <div class="ia_column">
+        <div class="ia-section light">
+            <div class="ia-row">
+                <div class="ia-column">
                     <HomepageCards />
                 </div>
             </div>

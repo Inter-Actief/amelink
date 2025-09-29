@@ -1,7 +1,7 @@
 <template>
-    <div class="ia_section">
-        <div class="ia_row">
-            <div class="ia_column span6">
+    <div class="ia-section">
+        <div class="ia-row">
+            <div class="ia-column span6">
                 <div>
                     <h4>Contact us</h4>
                     <ul>
@@ -12,13 +12,13 @@
                     </ul>
                 </div>
             </div>
-            <div class="ia_column span6">
+            <div class="ia-column span6">
                 <ContactForm />
             </div>
         </div>
     </div>
 
-    <div class="ia_section googlemaps">
+    <div class="ia-section googlemaps">
         <GoogleMaps />
     </div>
 </template>
