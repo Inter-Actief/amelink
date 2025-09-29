@@ -10,7 +10,6 @@ import type { PaginatedQueryReturn } from '@/stores/queryStore';
 const props = defineProps<PaginatedQueryReturn<any, any>>()
 
 const handlePage = (e: PageState) => {
-    console.log(e)
     // Watch will refetch
     props.selectedPage.value = e.page
 }
