@@ -34,7 +34,7 @@ query OverviewActivitiesQuery($limit: Int, $offset: Int, $startDate: DateTime!) 
   }
 }
 
-query PastActivitesQuery($limit: Int, $endDate: DateTime) {
+query PastActivitiesQuery($limit: Int, $endDate: DateTime) {
   activities(limit: $limit, ordering: "begin,desc", begin_Lt: $endDate) {
     results {
       id
@@ -42,9 +42,6 @@ query PastActivitesQuery($limit: Int, $endDate: DateTime) {
       description
       summary
       photos {
-        thumbMedium
-        thumbMediumHeight
-        thumbMediumWidth
         caption
       }
     }

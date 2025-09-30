@@ -31,8 +31,8 @@ import {
     type OverviewNewsQueryQueryVariables,
     type PageViewQueryQuery,
     type PageViewQueryQueryVariables,
-    type PastActivitesQueryQuery,
-    type PastActivitesQueryQueryVariables,
+    type PastActivitiesQueryQuery,
+    type PastActivitiesQueryQueryVariables,
     type PhotosActivitiesQueryQuery,
     type PhotosActivitiesQueryQueryVariables,
     type SetLanguageMutationMutationVariables,
@@ -71,6 +71,10 @@ export const useQueryStore = defineStore('queryStore', () => {
         query: DocumentParameter<TQuery, V>,
         variables: V,
     ): PaginatedQueryReturn<TQuery, V> {
+        if (query == undefined) {
+            throw new Error('Query must not be undefined')
+        }
+
         provideApolloClient(apolloClient)
         // Default selectedpage
         let selectedPage = ref(0)
@@ -149,8 +153,8 @@ export const useQueryStore = defineStore('queryStore', () => {
         )
     }
 
-    function getPastActivitiesQuery(variables: PastActivitesQueryQueryVariables) {
-        return fetchQuery<PastActivitesQueryQuery, PastActivitesQueryQueryVariables>(
+    function getPastActivitiesQuery(variables: PastActivitiesQueryQueryVariables) {
+        return fetchQuery<PastActivitiesQueryQuery, PastActivitiesQueryQueryVariables>(
             _queries.PastActivitiesQuery,
             variables,
         )

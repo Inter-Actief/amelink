@@ -425,6 +425,7 @@ export const iaPreset = definePreset(Lara, {
                     contrastColor: '#fafafa',
                     hoverColor: '{primary.600}',
                     activeColor: '{primary.700}',
+                    transparent: '#1d428a0d',
                 },
                 highlight: {
                     background: '{primary.50}',
@@ -550,6 +551,7 @@ export const iaPreset = definePreset(Lara, {
                     contrastColor: '{surface.50}',
                     hoverColor: '{primary.300}',
                     activeColor: '{primary.200}',
+                    transparent: '#1d428a2d',
                 },
                 highlight: {
                     background: 'color-mix(in srgb, {primary.400}, transparent 84%)',
@@ -661,11 +663,12 @@ export const iaPreset = definePreset(Lara, {
         card: {
             colorScheme: {
                 light: {
-                    background: '#1d428a0d',
+                    background: '{primary.transparent}',
                     color: '{surface.900}',
                 },
                 dark: {
                     color: '{primary.contrastColor}',
+                    background: '{primary.transparent}',
                 },
             },
         },
@@ -700,6 +703,20 @@ export const iaPreset = definePreset(Lara, {
                             background: '{primary.600}',
                         },
                     },
+                },
+            },
+        },
+        datatable: {
+            colorScheme: {
+                light: {
+                    'header.cell.background': '{primary.color}',
+                    'header.cell.color': '{primary.contrastColor}',
+                    'row.striped.background': '{primary.transparent}',
+                },
+                dark: {
+                    'header.cell.background': '{primary.color}',
+                    'header.cell.color': '{primary.contrastColor}',
+                    'row.striped.background': '{primary.transparent}',
                 },
             },
         },

@@ -1,12 +1,12 @@
 <template>
     <Content>
-        <div class="grid grid-cols-3 gap-12">
-            <div class="col-span-2">
+        <div class="grid grid-cols-7 gap-12">
+            <div class="col-span-4">
                 <h1 class="pb-4">{{ $gettext("Activities you don't want to miss") }}</h1>
                 <OverviewActivities />
             </div>
 
-            <div class="col-span-1">
+            <div class="col-span-3">
                 <h2 class="pb-4">{{ $gettext('Past activities') }}</h2>
                 <PastActivities />
             </div>

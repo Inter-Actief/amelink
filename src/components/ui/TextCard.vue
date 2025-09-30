@@ -1,6 +1,5 @@
 <template>
     <component :is="props.routerLink ? RouterLink : 'div'" v-bind="props.routerLink ? props.routerLink : {}">
-        <template></template>
         <Card class="p-4 text-card" style="height: 100%;">
             <template #header v-if="props.image">
                 <img :src="`/src/assets/images/${props.image}`" />

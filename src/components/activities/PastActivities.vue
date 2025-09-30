@@ -1,133 +1,59 @@
 <template>
     <ProgressSpinner v-if="loading" />
-    <div>{{ loading }}</div>
-    <div>{{ someResult == undefined ? 'undef' : someResult }}</div>
-    <!-- TODO: Rewrite -->
-    <div class="pastactivities">
-        <div class="table">
-            <div class="item head">
-                <div class="date">{{ $gettext('Date') }}</div>
-                <div class="activity">
-                    {{ $gettext('Activity') }}
-                </div>
-                <div class="photos">{{ $gettext('Photos') }}</div>
-            </div>
-
-            <template v-if="queryItems">
-                <template v-for="item in queryItems" :key="item">
-                    <div class="item">
-                        <div class="date">
-                            {{ formattedDataShort(item?.begin) }}
-                        </div>
-                        <div class="activity">
-                            <EpaButton class="link" :to="{ name: 'singleactivities', params: { id: item?.id } }">
-                                <span class="title">
-                                    {{ getItemValue(item, 'summary') }}
-                                </span>
-                            </EpaButton>
-                        </div>
-                        <div class="photos">
-                            <EpaButton v-if="item?.photos?.length ? item.photos.length > 0 : false"
-                                :to="{ name: 'singleactivitiesphotos', params: { id: item?.id } }"
-                                class="link readmore">
-                                {{ $gettext('Photos') }}
-                            </EpaButton>
-                        </div>
-                    </div>
-                </template>
+    <DataTable size="large" stripedRows v-if="queryItems" :value="queryItems" tableStyle="">
+        <Column field="startDate" :header="$gettext('Date')"></Column>
+        <Column field="summary" :header="$gettext('Activity')">
+            <template #body="props">
+                <EpaButton class="link" :to="{ name: 'singleactivities', params: { id: props.data.id } }">
+                    {{ props.data.summary }}
+                </EpaButton>
             </template>
-        </div>
-    </div>
+        </Column>
+        <Column field="hasPhotos">
+            <template #header>
+                <Camera />
+            </template>
+            <template #body="props">
+                <div v-if="props.data.hasPhotos">
+                    <EpaButton :to="{ name: 'singleactivitiesphotos', params: { id: props.data.id } }"
+                        class="link readmore">
+                        {{ $gettext("Photos") }}
+                    </EpaButton>
+                </div>
+            </template>
+        </Column>
+    </DataTable>
 </template>
 
 <script setup lang="ts">
-import { useQuery } from '@vue/apollo-composable'
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
 import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { formattedDataShort, getItemValue } from '@/functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
-import { graphql } from '@/gql'
 import { useQueryStore } from '@/stores/queryStore'
+import { Camera } from 'lucide-vue-next';
 
 const { $gettext } = useGettext();
 const queries = useQueryStore();
 const route = useRoute()
 const { result, refetch, loading } = queries.getPastActivitiesQuery({ limit: 20, endDate: new Date() })
-const someResult = computed(() => result.value!)
 
-const queryResults = computed(() => result.value?.activities)
+const queryItems = computed(() => {
+    return result.value?.activities?.results.map(r => {
+        return {
+            id: r?.id,
+            description: r?.description,
+            startDate: formattedDataShort(r?.begin),
+            summary: getItemValue(r, 'summary'),
+            hasPhotos: (r?.photos == undefined) ? false : (r?.photos.length > 0),
+        }
+    })
+})
 
-const queryItems = computed(() => (queryResults.value ? queryResults.value.results : []))
+// const queryItems = computed(() => (queryResults.value ? queryResults.value.results : []))
 </script>
 
-<style lang="scss" scoped>
-.pastactivities {
-    background: #fff;
-    border-radius: $border-radius $border-radius 0 0;
-    display: grid;
-    width: 100%;
-
-    .item {
-        display: grid;
-        grid-template-columns: 8rem auto 8rem;
-        gap: $gap_sm;
-        padding: 1.5rem 2rem;
-        align-items: center;
-
-        &.head {
-            font-weight: 700;
-            background-color: $primary-color;
-            color: #fff;
-            border-radius: $border-radius $border-radius 0 0;
-        }
-
-        &:nth-child(even) {
-            background-color: $card_background_color;
-        }
-
-        &:not(.head) {
-            .date {
-                font-size: 2.4rem;
-            }
-
-            .photos {
-                background: linear-gradient(currentColor, currentColor) bottom / 0 0.2rem no-repeat;
-                background-position: left bottom;
-                transition: 300ms;
-                width: fit-content;
-                cursor: pointer;
-
-                &:hover {
-                    background-size: 100% 0.2rem;
-                }
-            }
-        }
-
-        .activity {
-            display: flex;
-            justify-content: space-between;
-        }
-    }
-
-    @media only screen and (max-width: $screen-lg) {
-        overflow-y: auto;
-
-        .table {
-            min-width: 40rem;
-
-            .item {
-                padding: 1rem 1.5rem;
-                grid-template-columns: 7rem auto 7rem;
-                gap: $gap_xs;
-
-                &:not(.head) {
-                    .date {
-                        font-size: 2rem;
-                    }
-                }
-            }
-        }
-    }
-}
-</style>
+<style lang="scss" scoped></style>

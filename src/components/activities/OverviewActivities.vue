@@ -2,11 +2,14 @@
     <ProgressSpinner v-if="loading" />
     <div v-if="!loading && newsItems" v-for="item in newsItems" :key="item?.id">
         <template v-if="item">
-            <TextCard :title="getItemValue(item, 'summary')" subtitle="Dinsdag 25 November 2025"
-                :routerLink="{ to: { name: 'singleactivities', params: { id: item.id } } }"
-                :label="{ color: item.activityLabel.color, text: getItemValue(item.activityLabel, 'name') as string }">
-                {{ excerptText(getItemValue(item, 'description')) }}
-            </TextCard>
+            <div class="pb-12">
+
+                <TextCard :title="getItemValue(item, 'summary')" subtitle="Dinsdag 25 November 2025"
+                    :routerLink="{ to: { name: 'singleactivities', params: { id: item.id } } }"
+                    :label="{ color: item.activityLabel.color, text: getItemValue(item.activityLabel, 'name') as string }">
+                    {{ excerptText(getItemValue(item, 'description')) }}
+                </TextCard>
+            </div>
         </template>
     </div>
 
