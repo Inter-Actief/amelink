@@ -28,3 +28,7 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Generated types (run `yarn codegen` to generate)
+/src/gql/graphql.ts
+/src/gql/gql.ts
