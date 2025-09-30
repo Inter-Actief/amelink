@@ -22,6 +22,12 @@ yarn
 
 ### Compile and Hot-Reload for Development
 
+Firstly, it's important to generate the correct TypeScript types from our GraphQL API. For that, run
+
+```sh
+yarn codegen
+```
+
 ```sh
 yarn dev
 ```
