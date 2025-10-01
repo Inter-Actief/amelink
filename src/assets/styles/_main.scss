@@ -5,6 +5,17 @@ html {
   // Primevue uses this to control size
 }
 
+// Make datatable edges rounded
+/* Top Left */
+.p-datatable-table > thead > tr:first-of-type > th:first-of-type {
+  border-radius: vars.$border-radius 0 0 0 !important;
+}
+
+/* Top Right */
+.p-datatable-table > thead > tr:first-of-type > th:last-of-type {
+  border-radius: 0 vars.$border-radius 0 0 !important;
+}
+
 .p-component,
 .p-component * {
   font-size: 100%;

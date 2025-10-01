@@ -1,7 +1,7 @@
 <template>
     <ProgressSpinner v-if="loading" />
     <DataTable size="large" stripedRows v-if="queryItems" :value="queryItems" tableStyle="">
-        <Column field="startDate" :header="$gettext('Date')"></Column>
+        <Column field="startDate" :header="$gettext('Date')" style="width: 15%;" class="font-mono font-bold"></Column>
         <Column field="summary" :header="$gettext('Activity')">
             <template #body="props">
                 <EpaButton class="link" :to="{ name: 'singleactivities', params: { id: props.data.id } }">
@@ -9,7 +9,7 @@
                 </EpaButton>
             </template>
         </Column>
-        <Column field="hasPhotos">
+        <Column field="hasPhotos" style="width: 10%;">
             <template #header>
                 <Camera />
             </template>
@@ -52,8 +52,6 @@ const queryItems = computed(() => {
         }
     })
 })
-
-// const queryItems = computed(() => (queryResults.value ? queryResults.value.results : []))
 </script>
 
 <style lang="scss" scoped></style>

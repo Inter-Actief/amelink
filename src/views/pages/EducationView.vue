@@ -1,4 +1,11 @@
 <template>
+    <Content>
+        <div class="grid grid-cols-3">
+            <!-- TODO! -->
+        </div>
+    </Content>
+    <TextCard></TextCard>
+
     <div class="ia-section">
         <div class="ia-row">
             <div class="ia-column span4 heightauto">
@@ -42,6 +49,8 @@ import { computed, ref, watch } from 'vue'
 import { getItemValue, markedText } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext'
 import { useQueryStore } from '@/stores/queryStore'
+import TextCard from '@/components/ui/TextCard.vue';
+import Content from '@/components/ui/Content.vue';
 
 const queries = useQueryStore();
 const { $gettext } = useGettext();

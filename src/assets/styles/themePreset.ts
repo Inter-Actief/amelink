@@ -551,7 +551,7 @@ export const iaPreset = definePreset(Lara, {
                     contrastColor: '{surface.50}',
                     hoverColor: '{primary.300}',
                     activeColor: '{primary.200}',
-                    transparent: '#1d428a2d',
+                    transparent: '#1d428a3f',
                 },
                 highlight: {
                     background: 'color-mix(in srgb, {primary.400}, transparent 84%)',
