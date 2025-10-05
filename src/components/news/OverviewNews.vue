@@ -11,12 +11,11 @@
         </template>
     </div>
 
-    <Pagination v-bind="query" />
+    <Pagination v-bind="query" :totalCount="totalCount!" />
 </template>
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
 import { formattedData, getItemValue, markedText } from '@/functions/functions.ts'
 import { useGettext } from 'vue3-gettext'
 import { useQueryStore } from '@/stores/queryStore'
@@ -24,19 +23,15 @@ import Pagination from '../ui/Pagination.vue'
 import TextCard from '../ui/TextCard.vue'
 
 const { $gettext } = useGettext();
-const route = useRoute()
 const queries = useQueryStore();
-const perpage = ref(10)
-const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
-const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
-const query = queries.getOverviewNewsQuery({ limit: perpage.value, offset: offset.value });
-const { result, refetch, loading, selectedPage } = query
+const query = queries.getOverviewNewsQuery({ limit: 10, offset: 0 });
+const { result } = query
 
 const queryResults = computed(() => result.value?.newsItems)
 
 const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
-const totalCount = computed(() => (queryResults.value ? queryResults.value.totalCount : null))
+const totalCount = computed(() => (queryResults.value ? queryResults.value.totalCount : 0))
 
 const processedExcerpts = ref<Record<string, string>>({})
 

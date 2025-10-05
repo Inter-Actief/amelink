@@ -51,12 +51,13 @@ export interface PaginatedQueryReturn<TResult, TVariables extends OperationVaria
     extends UseQueryReturn<TResult, TVariables> {
     /** Tracks the currently selected page based on offset and limit */
     selectedPage: Ref<number>
+    selectedLimit: Ref<number>
 }
-
 export interface PaginatedMutationReturn<TResult, TVariables extends OperationVariables>
     extends UseMutationReturn<TResult, TVariables> {
     /** Tracks the currently selected page based on offset and limit */
     selectedPage: Ref<number>
+    selectedLimit: Ref<number>
 }
 
 export const useQueryStore = defineStore('queryStore', () => {
@@ -78,6 +79,7 @@ export const useQueryStore = defineStore('queryStore', () => {
         provideApolloClient(apolloClient)
         // Default selectedpage
         let selectedPage = ref(0)
+        let selectedLimit = ref(10)
 
         const queryResult = useQuery<TQuery, V>(query, variables, {
             fetchPolicy: 'network-only',
@@ -88,22 +90,34 @@ export const useQueryStore = defineStore('queryStore', () => {
             typeof (variables as any).limit === 'number' &&
             typeof (variables as any).offset === 'number'
         ) {
+            selectedLimit.value = (variables as any).limit
             selectedPage.value = Math.floor((variables as any).offset / (variables as any).limit)
 
             // Watch to update in case of pagination
             watch(
                 () => selectedPage.value,
                 (newValue) => {
-                    if (newValue == undefined) {
-                        return
-                    }
-
                     const newOffset = newValue * (variables as any).limit
 
                     // refetch with new variables for the limit and offset determined by page
                     queryResult.refetch({
                         ...variables,
                         offset: newOffset,
+                        // limit: selectedLimit.value,
+                    })
+                },
+            )
+
+            // Watch to update in case of pagination row count adjustment
+            // Watch to update in case of pagination
+            watch(
+                () => selectedLimit.value,
+                (newValue) => {
+                    // refetch with new variables for the limit and offset determined by page
+                    queryResult.refetch({
+                        ...variables,
+                        // offset: newOffset,
+                        limit: newValue,
                     })
                 },
             )
@@ -112,6 +126,7 @@ export const useQueryStore = defineStore('queryStore', () => {
         return {
             ...queryResult,
             selectedPage,
+            selectedLimit,
         }
     }
 
@@ -123,7 +138,8 @@ export const useQueryStore = defineStore('queryStore', () => {
 
         // selectedPage is -1; not supported yet
         let selectedPage = ref(-1)
-        return { ...queryResult, selectedPage }
+        let selectedLimit = ref(-1)
+        return { ...queryResult, selectedPage, selectedLimit }
     }
 
     function setLanguageMutation(
