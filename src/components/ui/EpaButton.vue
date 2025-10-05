@@ -1,14 +1,6 @@
 <template>
-    <component
-        :is="htmlElement()"
-        :to="props.to"
-        :href="href"
-        :class="['epa_button', props.class]"
-        :type="type"
-        :disabled="props.disabled"
-        :target="props.target"
-        :rel="props.rel"
-    >
+    <component :is="htmlElement()" :to="props.to" :href="href" :class="['epa_button', props.class]" :type="type"
+        :disabled="props.disabled" :target="props.target" :rel="props.rel">
         <EpaIcon v-if="props.bicon" :icon="props.bicon" />
         <template v-else></template>
 
@@ -25,6 +17,7 @@
 <script setup lang="ts">
 import EpaIcon from './EpaIcon.vue'
 
+// TODO: Convert props to TS or create new Button component
 const props = defineProps([
     'icon',
     'bicon',
@@ -142,7 +135,7 @@ const htmlElement = () => {
         transition: 300ms;
         color: inherit;
 
-        > span {
+        >span {
             font-weight: inherit;
         }
 

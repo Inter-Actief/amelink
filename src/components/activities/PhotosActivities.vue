@@ -1,6 +1,6 @@
 <template>
-    <EpaButton :to="{ name: 'singleactivities', params: { id: props.id } }" class="link return" bicon="return">
-        {{ $gettext('Back to activity') }}
+    <EpaButton @click="router.go(-1)" class="link return" bicon="return">
+        {{ $gettext('Back') }}
     </EpaButton>
 
     <h1>{{ title }}</h1>
@@ -17,8 +17,8 @@
             @hide="handleHide" />
     </div>
 
-    <EpaButton :to="{ name: 'singleactivities', params: { id: props.id } }" class="link return" bicon="return">
-        {{ $gettext('Back to activity') }}
+    <EpaButton @click="router.go(-1)" class="link return" bicon="return">
+        {{ $gettext('Back') }}
     </EpaButton>
 </template>
 
@@ -29,7 +29,9 @@ import VueEasyLightbox from 'vue-easy-lightbox'
 import { useGettext } from 'vue3-gettext'
 import { getItemValue } from '@/functions/functions'
 import { useQueryStore } from '@/stores/queryStore'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const queries = useQueryStore();
 const { $gettext } = useGettext();
 const props = defineProps(['id'])
@@ -57,6 +59,7 @@ const imagePhotosUrls = () => {
 
 const showImage = (index: number) => {
     currentIndex.value = index
+    visible.value = true;
 }
 
 const handleHide = () => {

@@ -56,7 +56,6 @@
 
 <script setup lang="ts">
 import Logo from '@/components/ui/Logo.vue'
-import MainMenu from '@/components/menu/MainMenu.vue'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import Menubar from 'primevue/menubar';
 import { isDesktop, isTablet, openMobileMenu, toggleMobileMenu } from '@/functions/functions'

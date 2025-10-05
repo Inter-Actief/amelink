@@ -6,9 +6,15 @@
                 <div class="pb-10">{{ formattedData(queryItem.begin) }}</div>
                 <div class="text pb-10" v-html="processedDescription"></div>
 
+                <EpaButton v-if="queryItem.photos.length > 0"
+                    :to="{ name: 'singleactivitiesphotos', params: { id: queryItem.id } }" class="link" bicon="return">
+                    {{ $gettext('View photos') }}
+                </EpaButton>
+
                 <EpaButton :to="{ name: 'activities' }" class="link return" bicon="return">
                     {{ $gettext('Return to overview') }}
                 </EpaButton>
+
             </div>
             <div class="col-span-5 row-span-1">
                 <InformationActivites :item="queryItem" />
