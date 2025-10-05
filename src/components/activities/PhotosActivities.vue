@@ -5,17 +5,14 @@
 
     <h1>{{ title }}</h1>
 
-    <div class="photo_albums">
+    <div class="grid grid-cols-3 gap-4">
         <template v-if="queryItem?.photos" v-for="(photo, index) in queryItem.photos" :key="photo">
-            <div>
-                <img v-if="photo?.thumbMedium" :src="`https://media.ia.utwente.nl/amelie/${photo?.thumbMedium}`"
-                    @click="showImage(index)" />
-            </div>
+            <img class="w-full h-full object-cover object-center cursor-pointer aspect-5/3" v-if="photo?.thumbMedium"
+                :src="`https://media.ia.utwente.nl/amelie/${photo?.thumbMedium}`" @click="showImage(index)" />
         </template>
-
-        <VueEasyLightbox v-if="queryItem?.photos" :visible="visible" :imgs="imagePhotosUrls()" :index="currentIndex"
-            @hide="handleHide" />
     </div>
+    <VueEasyLightbox v-if="queryItem?.photos" :visible="visible" :imgs="imagePhotosUrls()" :index="currentIndex"
+        @hide="handleHide" />
 
     <EpaButton @click="router.go(-1)" class="link return" bicon="return">
         {{ $gettext('Back') }}
@@ -41,7 +38,7 @@ const queryResults = computed(() => result.value?.activity)
 const queryItem = computed(() => (queryResults.value ? queryResults.value : null))
 
 const title = computed(() => {
-    getItemValue(queryResults.value, 'summary');
+    return getItemValue(queryResults.value, 'summary');
 })
 
 const visible = ref(false)
@@ -67,38 +64,4 @@ const handleHide = () => {
 }
 </script>
 
-<style scoped lang="scss">
-.photo_albums {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: $gap_xs;
-
-    div {
-        overflow: hidden;
-        height: 20vw;
-        max-height: 40rem;
-
-        img {
-            max-width: initial;
-            cursor: pointer;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-    }
-
-    @media screen and (max-width: $screen-xl) {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    @media screen and (max-width: $screen-sm) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .vel-modal {
-        height: 100vh;
-        max-height: initial;
-    }
-}
-</style>
+<style scoped lang="scss"></style>

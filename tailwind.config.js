@@ -4,7 +4,11 @@ import PrimeUI from 'tailwindcss-primeui'
 export default {
     content: ['./index.html', './src/**/*.{vue,js,ts}'],
     theme: {
-        extend: {},
+        extend: {
+            aspectRatio: {
+                '5/3': '5 / 3', // To be removed in tailwind4 (only needed in tw3)
+            },
+        },
     },
     plugins: [PrimeUI],
     darkMode: ['selector', '[class~="dark"]'], // dark mode configuration
