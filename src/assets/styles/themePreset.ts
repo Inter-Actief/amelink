@@ -720,5 +720,15 @@ export const iaPreset = definePreset(Lara, {
                 },
             },
         },
+        divider: {
+            colorScheme: {
+                light: {
+                    'border.color': '{primary.200}',
+                },
+                dark: {
+                    'border.color': '{primary.color}',
+                },
+            },
+        },
     },
 })
