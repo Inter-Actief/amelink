@@ -1,6 +1,6 @@
 <template>
     <ProgressSpinner v-if="loading" />
-    <DataTable size="large" stripedRows v-if="queryItems" :value="queryItems" tableStyle="">
+    <DataTable size="large" stripedRows v-if="queryItems" :value="queryItems">
         <Column field="startDate" :header="$gettext('Date')" style="width: 15%;" class="font-mono font-bold"></Column>
         <Column field="summary" :header="$gettext('Activity')">
             <template #body="props">
@@ -22,11 +22,14 @@
                 </div>
             </template>
         </Column>
+        <template #footer>
+            <Pagination v-bind="query" :totalCount="count!" />
+        </template>
     </DataTable>
 </template>
 
 <script setup lang="ts">
-import DataTable from 'primevue/datatable';
+import DataTable, { type DataTablePageEvent } from 'primevue/datatable';
 import Column from 'primevue/column';
 import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
@@ -38,8 +41,11 @@ import { Camera } from 'lucide-vue-next';
 
 const { $gettext } = useGettext();
 const queries = useQueryStore();
-const route = useRoute()
-const { result, refetch, loading } = queries.getPastActivitiesQuery({ limit: 20, endDate: new Date() })
+const query = queries.getPastActivitiesQuery({ limit: 20, endDate: new Date() })
+const { result, refetch, loading } = query;
+const count = computed(() => {
+    return result.value?.activities?.totalCount;
+})
 
 const queryItems = computed(() => {
     return result.value?.activities?.results.map(r => {
