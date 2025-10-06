@@ -1,6 +1,7 @@
 <template>
     <ProgressSpinner v-if="loading" />
-    <DataTable size="large" stripedRows v-if="queryItems" :value="queryItems">
+    <DataTable size="large" stripedRows v-if="queryItems" :value="queryItems" paginator :rows="20"
+        :totalRecords="count!" lazy @page="onPage">
         <Column field="startDate" :header="$gettext('Date')" style="width: 15%;" class="font-mono font-bold"></Column>
         <Column field="summary" :header="$gettext('Activity')">
             <template #body="props">
@@ -22,9 +23,6 @@
                 </div>
             </template>
         </Column>
-        <template #footer>
-            <Pagination v-bind="query" :totalCount="count!" />
-        </template>
     </DataTable>
 </template>
 
@@ -32,7 +30,6 @@
 import DataTable, { type DataTablePageEvent } from 'primevue/datatable';
 import Column from 'primevue/column';
 import { computed, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
 import { formattedDataShort, getItemValue } from '@/functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
@@ -47,6 +44,8 @@ const count = computed(() => {
     return result.value?.activities?.totalCount;
 })
 
+const first = ref(0) // first record index
+
 const queryItems = computed(() => {
     return result.value?.activities?.results.map(r => {
         return {
@@ -58,6 +57,17 @@ const queryItems = computed(() => {
         }
     })
 })
+
+// Custom page event handler
+const onPage = async (event: DataTablePageEvent) => {
+    first.value = event.first
+    // rows.value = event.rows
+    await refetch({
+        limit: event.rows,
+        offset: event.first,
+        endDate: new Date(),
+    })
+}
 </script>
 
 <style lang="scss" scoped></style>

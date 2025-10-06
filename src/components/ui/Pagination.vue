@@ -1,19 +1,20 @@
 <template>
-    <Paginator :rows="limit" :totalRecords="totalCount" :rowsPerPageOptions="rowsPerpageOptions" @page="handlePage"
-        @update:rows="handleRows" />
+    <Paginator :rows="limit" :totalRecords="totalCount" :rowsPerPageOptions="rowsPerpageOptions" @page="handlePage" />
 </template>
 
 <script lang="ts" setup>
+import type { UseQueryReturn } from '@vue/apollo-composable';
 import Paginator, { type PageState } from 'primevue/paginator';
-import type { PaginatedQueryReturn } from '@/stores/queryStore';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 // Accept necessary props
 //TODO: Type according to query definition
-const props = defineProps<PaginatedQueryReturn<any, any> & {
-    totalCount: number
+const props = defineProps<UseQueryReturn<any, any> & {
+    totalCount: number,
+    limit: number,
 }>()
 
-const limit = computed(() => props.selectedLimit.value)
+const limit = ref(props.limit)
+const page = ref(0);
 
 let rowsPerpageOptions = [10, 20, 30, 50]
 rowsPerpageOptions.push(limit.value);
@@ -22,12 +23,14 @@ rowsPerpageOptions = [...new Set(rowsPerpageOptions)]; // make unique
 
 const handlePage = (e: PageState) => {
     // Watch will refetch
-    props.selectedPage.value = e.page
+    page.value = e.page
+    limit.value = e.rows
+    props.refetch({
+        limit: limit.value,
+        offset: limit.value * e.page
+    })
 }
 
-const handleRows = (value: number) => {
-    props.selectedLimit.value = value;
-}
 </script>
 
 <style></style>

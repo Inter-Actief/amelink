@@ -11,7 +11,7 @@
         </template>
     </div>
 
-    <Pagination v-bind="query" :totalCount="totalCount!" />
+    <Pagination v-bind="query" :totalCount="totalCount!" :limit="10" />
 </template>
 
 <script setup lang="ts">
