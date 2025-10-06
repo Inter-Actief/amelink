@@ -2,7 +2,6 @@
     <component :is="htmlElement()" :to="props.to" :href="href" :class="['epa_button', props.class]" :type="type"
         :disabled="props.disabled" :target="props.target" :rel="props.rel">
         <EpaIcon v-if="props.bicon" :icon="props.bicon" />
-        <template v-else></template>
 
         <span>
             <slot></slot>
@@ -10,7 +9,6 @@
 
         <EpaIcon v-if="props.loading && props.disabled" icon="loading" />
         <EpaIcon v-else-if="props.icon" :icon="props.icon" />
-        <template v-else></template>
     </component>
 </template>
 
@@ -32,7 +30,7 @@ const props = defineProps([
 ])
 
 const htmlElement = () => {
-    return props.to ? 'router-link' : props.href ? 'a' : 'button'
+    return props.to ? 'router-link' : (props.href ? 'a' : 'button')
 }
 </script>
 

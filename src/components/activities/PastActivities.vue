@@ -1,13 +1,14 @@
 <template>
-    <ProgressSpinner v-if="loading" />
-    <DataTable size="large" stripedRows v-if="queryItems" :value="queryItems" paginator :rows="20"
-        :totalRecords="count!" lazy @page="onPage">
-        <Column field="startDate" :header="$gettext('Date')" style="width: 15%;" class="font-mono font-bold"></Column>
+    <ProgressSpinner v-if="loading && loadCounter == 0" />
+    <DataTable :loading="loading" size="large" stripedRows v-if="queryItems" :value="queryItems" paginator :rows="limit"
+        :totalRecords="count!" lazy @page="onPage" :rowsPerPageOptions="[10, 20, 30, 50, 100]">
+        <Column field="startDate" :header="$gettext('Date')" style="width: 15%;" class="font-mono font-bold">
+        </Column>
         <Column field="summary" :header="$gettext('Activity')">
             <template #body="props">
-                <EpaButton class="link" :to="{ name: 'singleactivities', params: { id: props.data.id } }">
-                    {{ props.data.summary }}
-                </EpaButton>
+                <RouterLink :to="{ name: 'singleactivities', params: { id: props.data.id } }">
+                    <span class="link">{{ props.data.summary }}</span>
+                </RouterLink>
             </template>
         </Column>
         <Column field="hasPhotos" style="width: 10%;">
@@ -16,10 +17,9 @@
             </template>
             <template #body="props">
                 <div v-if="props.data.hasPhotos">
-                    <EpaButton :to="{ name: 'singleactivitiesphotos', params: { id: props.data.id } }"
-                        class="link readmore">
-                        {{ $gettext("Photos") }}
-                    </EpaButton>
+                    <RouterLink :to="{ name: 'singleactivitiesphotos', params: { id: props.data.id } }">
+                        <span class="link">{{ $gettext("Photos") }}</span>
+                    </RouterLink>
                 </div>
             </template>
         </Column>
@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import DataTable, { type DataTablePageEvent } from 'primevue/datatable';
 import Column from 'primevue/column';
-import { computed, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { formattedDataShort, getItemValue } from '@/functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
@@ -37,14 +37,20 @@ import { useQueryStore } from '@/stores/queryStore'
 import { Camera } from 'lucide-vue-next';
 
 const { $gettext } = useGettext();
+const limit = ref(20);
 const queries = useQueryStore();
-const query = queries.getPastActivitiesQuery({ limit: 20, endDate: new Date() })
+const query = queries.getPastActivitiesQuery({ limit: limit.value, endDate: new Date() })
 const { result, refetch, loading } = query;
 const count = computed(() => {
     return result.value?.activities?.totalCount;
 })
 
 const first = ref(0) // first record index
+const loadCounter = ref(0);
+
+query.onResult(() => {
+    loadCounter.value += 1;
+})
 
 const queryItems = computed(() => {
     return result.value?.activities?.results.map(r => {
