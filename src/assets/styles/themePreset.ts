@@ -730,5 +730,15 @@ export const iaPreset = definePreset(Lara, {
                 },
             },
         },
+        paginator: {
+            colorScheme: {
+                light: {
+                    background: '{content.background}',
+                },
+                dark: {
+                    background: '{content.background}',
+                },
+            },
+        },
     },
 })
