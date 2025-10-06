@@ -22,10 +22,15 @@ themeStore.initialiseTheme();
 </script>
 
 <style lang="scss">
+html,
+body {
+    background-color: var(--p-page-background);
+}
+
 /* Enter and leave transitions */
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.5s ease;
+    transition: opacity 0.2s ease;
 }
 
 .fade-enter-from,

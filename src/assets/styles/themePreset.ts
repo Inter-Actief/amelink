@@ -530,6 +530,9 @@ export const iaPreset = definePreset(Lara, {
                         activeColor: '{surface.500}',
                     },
                 },
+                page: {
+                    background: '{surface.0}',
+                },
             },
             dark: {
                 surface: {
@@ -655,6 +658,9 @@ export const iaPreset = definePreset(Lara, {
                         focusColor: '{surface.400}',
                         activeColor: '{surface.400}',
                     },
+                },
+                page: {
+                    background: '{surface.900}',
                 },
             },
         },
