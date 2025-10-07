@@ -2,7 +2,8 @@
     <Content>
         <SectionCard :name="$gettext('Publications')">
             <template #content>
-                <div class="grid grid-cols-5 gap-10 pb-4">
+                <ProgressSpinner v-if="loading" />
+                <div v-else class="grid grid-cols-5 gap-10 pb-4">
                     <!-- Using custom card (not TextCard) since we want a vertical image -->
                     <a :href="publicationUrl(item?.file!)" v-for="item in queryItems" :key="item?.id">
                         <Card class="text-card">
@@ -33,7 +34,6 @@
 <script setup lang="ts">
 import Content from '@/components/ui/Content.vue';
 import SectionCard from '@/components/ui/SectionCard.vue';
-import TextCard from '@/components/ui/TextCard.vue';
 import { useQueryStore } from '@/stores/queryStore';
 import { computed, ref } from 'vue';
 import { useGettext } from 'vue3-gettext';
@@ -49,6 +49,7 @@ const totalCount = computed(() => query.result.value?.publications?.totalCount);
 const queryItems = computed(() => {
     return query.result.value?.publications?.results;
 })
+const { loading } = query;
 </script>
 
 <style scoped>
