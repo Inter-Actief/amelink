@@ -62,12 +62,12 @@ import { isDesktop, isTablet, openMobileMenu, toggleMobileMenu } from '@/functio
 import EpaIcon from '@/components/ui/EpaIcon.vue'
 import SearchToggle from '@/components/ui/SearchToggle.vue'
 import { useGettext } from 'vue3-gettext'
-import { ref } from 'vue';
+import { computed, reactive, ref } from 'vue';
 import { ChevronDown, ChevronRight, Icon } from 'lucide-vue-next';
 const { $gettext } = useGettext();
 
 // TODO: Translate menu bar
-const items = ref([
+const items = computed(() => [
     {
         label: $gettext('Home'),
         icon: 'home',

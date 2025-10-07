@@ -1,7 +1,7 @@
 <template>
     <!-- Latest activities are the most recent activities with pictures -->
     <!-- Component can be borrowed / modified to do upcoming activities as well (with a different query) -->
-    <SectionCard :name="$gettext('Latest activities')" pageBg>
+    <SectionCard :name="$gettext('Latest Activities')" pageBg>
         <template #info>
             <RouterLink :to="{ name: 'activities', params: {} }" class="link">
                 {{ $gettext('View all activities') }}

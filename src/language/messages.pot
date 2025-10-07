@@ -89,15 +89,15 @@ msgstr ""
 msgid "Enroll now!"
 msgstr ""
 
-#: src\components\demo\DemoTable.vue:12
+#: src\components\demo\DemoTable.vue:14
 msgid "Name"
 msgstr ""
 
-#: src\components\demo\DemoTable.vue:13
+#: src\components\demo\DemoTable.vue:15
 msgid "Age"
 msgstr ""
 
-#: src\components\demo\DemoTable.vue:14
+#: src\components\demo\DemoTable.vue:16
 msgid "Email"
 msgstr ""
 

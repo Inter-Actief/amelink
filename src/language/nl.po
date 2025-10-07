@@ -82,7 +82,7 @@ msgstr "Foto's"
 #: src\components\activities\PhotosActivities.vue:3
 #: src\components\activities\PhotosActivities.vue:18
 msgid "Back"
-msgstr "Teug"
+msgstr "Terug"
 
 #: src\components\activities\UpcomingActivities.vue:4
 #: src\views\pages\ComponentsView.vue:16
@@ -97,15 +97,15 @@ msgstr "Soort"
 msgid "Enroll now!"
 msgstr "Schrijf je nu in!"
 
-#: src\components\demo\DemoTable.vue:12
+#: src\components\demo\DemoTable.vue:14
 msgid "Name"
 msgstr "Naam"
 
-#: src\components\demo\DemoTable.vue:13
+#: src\components\demo\DemoTable.vue:15
 msgid "Age"
 msgstr "Leeftijd"
 
-#: src\components\demo\DemoTable.vue:14
+#: src\components\demo\DemoTable.vue:16
 msgid "Email"
 msgstr "E-mail"
 
