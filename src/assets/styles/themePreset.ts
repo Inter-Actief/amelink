@@ -739,10 +739,12 @@ export const iaPreset = definePreset(Lara, {
         paginator: {
             colorScheme: {
                 light: {
-                    background: '{content.background}',
+                    // Paginator uses a transparent background since it should use the same background given by the page or card or whatever.
+                    // Custom background can be set via tailwind if needed
+                    background: '#ffffff00',
                 },
                 dark: {
-                    background: '{content.background}',
+                    background: '#ffffff00',
                 },
             },
         },

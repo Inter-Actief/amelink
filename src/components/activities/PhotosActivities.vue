@@ -1,7 +1,7 @@
 <template>
-    <EpaButton @click="router.go(-1)" class="link return" bicon="return">
-        {{ $gettext('Back') }}
-    </EpaButton>
+    <RouterLink class="link flex flex-row" :to="{ name: 'singleactivities', params: { id: queryItem?.id } }">
+        <ArrowLeft />{{ $gettext('Go to activity') }}
+    </RouterLink>
 
     <h1>{{ title }}</h1>
 
@@ -14,21 +14,19 @@
     <VueEasyLightbox v-if="queryItem?.photos" :visible="visible" :imgs="imagePhotosUrls()" :index="currentIndex"
         @hide="handleHide" />
 
-    <EpaButton @click="router.go(-1)" class="link return" bicon="return">
-        {{ $gettext('Back') }}
-    </EpaButton>
+    <RouterLink class="link flex flex-row" :to="{ name: 'singleactivities', params: { id: queryItem?.id } }">
+        <ArrowLeft />{{ $gettext('Go to activity') }}
+    </RouterLink>
 </template>
 
 <script setup lang="ts">
+import { ArrowLeft } from 'lucide-vue-next';
 import { computed, ref, watch } from 'vue'
-import EpaButton from '@/components/ui/EpaButton.vue'
 import VueEasyLightbox from 'vue-easy-lightbox'
 import { useGettext } from 'vue3-gettext'
 import { getItemValue } from '@/functions/functions'
 import { useQueryStore } from '@/stores/queryStore'
-import { useRouter } from 'vue-router'
 
-const router = useRouter()
 const queries = useQueryStore();
 const { $gettext } = useGettext();
 const props = defineProps(['id'])

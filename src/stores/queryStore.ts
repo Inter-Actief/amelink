@@ -42,9 +42,10 @@ import {
     type SingleNewsQueryQueryVariables,
     type UpcomingActivitiesQueryQuery,
     type UpcomingActivitiesQueryQueryVariables,
+    type PublicationOverviewQueryVariables,
+    type PublicationOverviewQuery,
 } from '@/gql/graphql'
 import type { DocumentNode, OperationVariables, ApolloQueryResult } from '@apollo/client/core'
-import { useLanguageStore } from './languageStore'
 import type { DocumentParameter, OptionsParameter } from '@vue/apollo-composable/dist/useQuery.js'
 
 export const useQueryStore = defineStore('queryStore', () => {
@@ -188,6 +189,13 @@ export const useQueryStore = defineStore('queryStore', () => {
         )
     }
 
+    function getPublicationOverview(variables: PublicationOverviewQueryVariables) {
+        return fetchQuery<PublicationOverviewQuery, PublicationOverviewQueryVariables>(
+            _queries.PublicationOverview,
+            variables,
+        )
+    }
+
     return {
         fetchQuery,
         mutate,
@@ -205,7 +213,7 @@ export const useQueryStore = defineStore('queryStore', () => {
         getSingleNewsQuery,
         getEducationViewQuery,
         getPageViewQuery,
-
+        getPublicationOverview,
         setLanguageMutation,
     }
 })

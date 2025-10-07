@@ -56,8 +56,8 @@ msgid "Free"
 msgstr "Free"
 
 #: src\components\activities\LatestActivities.vue:4
-#, fuzzy
-msgid "Latest activities"
+#: src\views\pages\ComponentsView.vue:23
+msgid "Latest Activities"
 msgstr "Latest Activities"
 
 #: src\components\activities\LatestActivities.vue:7
@@ -81,8 +81,9 @@ msgstr "Photos"
 
 #: src\components\activities\PhotosActivities.vue:3
 #: src\components\activities\PhotosActivities.vue:18
-msgid "Back"
-msgstr ""
+#, fuzzy
+msgid "Go to activity"
+msgstr "Back to activity"
 
 #: src\components\activities\UpcomingActivities.vue:4
 #: src\views\pages\ComponentsView.vue:16
@@ -152,79 +153,83 @@ msgstr "News page"
 msgid "Components"
 msgstr "Components"
 
-#: src\components\header\Header.vue:89
+#: src\components\header\Header.vue:89 src\views\pages\PublicationView.vue:3
+msgid "Publications"
+msgstr "Publications"
+
+#: src\components\header\Header.vue:93
 msgid "Association"
 msgstr "Association"
 
-#: src\components\header\Header.vue:92
+#: src\components\header\Header.vue:96
 msgid "Inter-Actief"
 msgstr "Inter-Actief"
 
-#: src\components\header\Header.vue:96
+#: src\components\header\Header.vue:100
 msgid "Board"
 msgstr "Board"
 
-#: src\components\header\Header.vue:100
+#: src\components\header\Header.vue:104
 msgid "Former boards"
 msgstr "Former boards"
 
-#: src\components\header\Header.vue:104
+#: src\components\header\Header.vue:108
 msgid "Honorary members"
 msgstr "Honorary members"
 
-#: src\components\header\Header.vue:108
+#: src\components\header\Header.vue:112
 msgid "Members of Merit"
 msgstr "Members of Merit"
 
-#: src\components\header\Header.vue:112
+#: src\components\header\Header.vue:116
 msgid "Committees"
 msgstr "Committees"
 
-#: src\components\header\Header.vue:116
+#: src\components\header\Header.vue:120
 msgid "Membership"
 msgstr "Membership"
 
-#: src\components\header\Header.vue:120
+#: src\components\header\Header.vue:124
 msgid "(Graduation) drink"
 msgstr "(Graduation) drink"
 
-#: src\components\header\Header.vue:124
+#: src\components\header\Header.vue:128
 msgid "Symposia"
 msgstr "Symposia"
 
-#: src\components\header\Header.vue:128
+#: src\components\header\Header.vue:132
 msgid "Study tours"
 msgstr "Study tours"
 
-#: src\components\header\Header.vue:132
+#: src\components\header\Header.vue:136
 msgid "Members' initiative"
 msgstr "Members' initiative"
 
-#: src\components\header\Header.vue:136
+#: src\components\header\Header.vue:140
 msgid "Association song"
 msgstr "Association song"
 
-#: src\components\header\Header.vue:140
+#: src\components\header\Header.vue:144
 msgid "Alumni Association ENIAC"
 msgstr "Alumni Association ENIAC"
 
-#: src\components\header\Header.vue:144
+#: src\components\header\Header.vue:148
 msgid "Sister associations"
 msgstr "Sister associations"
 
-#: src\components\header\Header.vue:148
+#: src\components\header\Header.vue:152
 msgid "Inter-Actief App"
 msgstr "Inter-Actief App"
 
-#: src\components\header\Header.vue:152
+#: src\components\header\Header.vue:156
 msgid "Inter-Archive"
 msgstr "Inter-Archive"
 
-#: src\components\header\Header.vue:158
+#: src\components\header\Header.vue:162
 msgid "Education"
 msgstr "Education"
 
-#: src\components\header\Header.vue:162
+#: src\components\header\Header.vue:166
 #, fuzzy
 msgid "Contact"
 msgstr "Contact"
@@ -253,7 +258,7 @@ msgstr "Past activities"
 msgid "View photos"
 msgstr "View photos"
 
-#: src\views\activities\SingleActivites.vue:15 src\views\news\SingleNews.vue:18
+#: src\views\activities\SingleActivites.vue:17 src\views\news\SingleNews.vue:18
 msgid "Return to overview"
 msgstr "Return to overview"
 
@@ -264,10 +269,6 @@ msgstr "Demo Table"
 #: src\views\pages\ComponentsView.vue:12
 msgid "Latest News"
 msgstr "Latest News"
-
-#: src\views\pages\ComponentsView.vue:23
-msgid "Latest Activities"
-msgstr "Latest Activities"
 
 #: src\views\pages\ComponentsView.vue:27
 msgid "Editor"
@@ -281,11 +282,12 @@ msgstr "Demo overview"
 msgid "Information"
 msgstr "Information"
 
+#, fuzzy
+#~ msgid "Latest activities"
+#~ msgstr "Latest Activities"
+
 #~ msgid "Actual Activities"
 #~ msgstr "Actual Activities"
-
-#~ msgid "Back to activity"
-#~ msgstr "Back to activity"
 
 #~ msgid "Send"
 #~ msgstr "Send"

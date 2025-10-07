@@ -86,6 +86,10 @@ const items = computed(() => [
         route: '/components',
     },
     {
+        label: $gettext('Publications'),
+        route: '/publications'
+    },
+    {
         label: $gettext('Association'),
         items: [
             {

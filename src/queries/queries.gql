@@ -1,5 +1,5 @@
 query LatestActivitiesQuery($limit: Int, $offset: Int, $startDate: DateTime) {
-  activities(limit: $limit, offset: $offset, begin_Lt: $startDate, ordering: "begin,desc") {
+  activities(limit: $limit, offset: $offset, end_Lt: $startDate, ordering: "begin,desc") {
     results {
       id
       description
@@ -210,6 +210,26 @@ query PageViewQuery($pageId: ID) {
     name
     slug
     content
+  }
+}
+
+query PublicationOverview($limit: Int, $offset: Int) {
+  publications(limit: $limit, offset: $offset, ordering: "datePublished,desc") {
+    results {
+      id
+      name
+      description
+      datePublished
+      publicationType {
+        typeName
+        description
+      }
+      thumbnail
+      file
+      isFeatured
+      public
+    }
+    totalCount
   }
 }
 

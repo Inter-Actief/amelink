@@ -6,15 +6,16 @@
                 <div class="pb-10">{{ formattedData(queryItem.begin) }}</div>
                 <div class="text pb-10" v-html="processedDescription"></div>
 
-                <EpaButton v-if="queryItem.photos.length > 0"
-                    :to="{ name: 'singleactivitiesphotos', params: { id: queryItem.id } }" class="link" bicon="return">
+                <RouterLink v-if="queryItem.photos.length > 0" class="link flex flex-row"
+                    :to="{ name: 'singleactivitiesphotos', params: { id: queryItem.id } }">
                     {{ $gettext('View photos') }}
-                </EpaButton>
+                    <ArrowRight />
+                </RouterLink>
 
-                <EpaButton :to="{ name: 'activities' }" class="link return" bicon="return">
+                <RouterLink v-if="queryItem.photos.length > 0" class="link flex flex-row" :to="{ name: 'activities' }">
+                    <ArrowLeft />
                     {{ $gettext('Return to overview') }}
-                </EpaButton>
-
+                </RouterLink>
             </div>
             <div class="col-span-5 row-span-1">
                 <InformationActivites :item="queryItem" />
@@ -33,6 +34,7 @@ import EpaButton from '@/components/ui/EpaButton.vue'
 import InformationActivites from '@/components/activities/InformationActivites.vue'
 import { useGettext } from 'vue3-gettext'
 import { useQueryStore } from '@/stores/queryStore'
+import { ArrowRight, ArrowLeft } from 'lucide-vue-next';
 
 const { $gettext } = useGettext();
 const props = defineProps<{ id: string }>();

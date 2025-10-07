@@ -2,7 +2,7 @@
     <component :is="props.routerLink ? RouterLink : 'div'" v-bind="props.routerLink ? props.routerLink : {}">
         <Card class="text-card" style="height: 100%;">
             <template #header v-if="props.image">
-                <img class="format rounded-t-lg" :src="props.image" />
+                <img class="format rounded-t-lg" :class="`aspect-[${props.imageAspect}]`" :src="props.image" />
             </template>
             <template #title v-if="props.title">
                 <div class="flex flex-row items-center w-full justify-between pt-4 pl-4">
@@ -45,6 +45,7 @@ const { $gettext } = useGettext();
 
 interface Props {
     image?: string,
+    imageAspect?: string,
     title?: string,
     subtitle?: string,
     label?: {
@@ -56,7 +57,8 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    readmore: false
+    readmore: false,
+    imageAspect: '5/3'
 })
 
 const showReadMore = computed(() => {
