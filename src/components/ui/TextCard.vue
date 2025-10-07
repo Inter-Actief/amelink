@@ -40,6 +40,9 @@ import { RouterLink } from 'vue-router';
 import Card from 'primevue/card';
 import type { _RouterLinkI, RouteLocationRaw, RouterLinkProps } from 'vue-router';
 import { computed } from 'vue';
+import { useGettext } from 'vue3-gettext';
+const { $gettext } = useGettext();
+
 interface Props {
     image?: string,
     title?: string,

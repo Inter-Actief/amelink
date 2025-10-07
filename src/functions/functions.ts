@@ -84,10 +84,20 @@ export const markedText = async (text: string) => {
     if (text === undefined) {
         return text
     }
+    console.log(text)
 
     let markedtext: string = await marked(text)
-    let sanitized = sanitizeHtml(markedtext)
-    sanitized = sanitized.replace(/src="\//g, 'src="https://www.inter-actief.utwente.nl/')
+
+    // Custom sanitisation options to allow img
+    let sanitized = sanitizeHtml(markedtext, {
+        allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+        allowedAttributes: {
+            ...sanitizeHtml.defaults.allowedAttributes,
+            img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
+        },
+    })
+    console.log(sanitized)
+    sanitized = sanitized.replace(/src="\//g, `src="${import.meta.env.VITE_AMELIE_BASE_URL}`)
 
     return sanitized
 }

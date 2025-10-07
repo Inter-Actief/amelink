@@ -66,43 +66,100 @@ import { ref } from 'vue';
 import { ChevronDown, ChevronRight, Icon } from 'lucide-vue-next';
 const { $gettext } = useGettext();
 
+// TODO: Translate menu bar
 const items = ref([
     {
-        label: 'Home',
+        label: $gettext('Home'),
         icon: 'home',
         route: '/'
     },
     {
-        label: 'Activities',
+        label: $gettext('Activities'),
         route: '/activities'
     },
     {
-        label: 'News',
+        label: $gettext('News'),
         route: '/News',
     },
     {
-        label: 'Components',
+        label: $gettext('Components'),
         route: '/components',
     },
     {
-        label: 'Association',
+        label: $gettext('Association'),
         items: [
             {
-                label: 'Inter-Actief',
+                label: $gettext('Inter-Actief'),
                 route: '/about/1/about-the-association-inter-actief'
             },
             {
-                label: 'Board',
+                label: $gettext('Board'),
                 route: '/about/2/board'
             },
+            {
+                label: $gettext('Former boards'),
+                route: '/about/6/former-boards'
+            },
+            {
+                label: $gettext('Honorary members'),
+                route: '/about/8/honorary-members/'
+            },
+            {
+                label: $gettext('Members of Merit'),
+                route: '/about/19/members-of-merit/'
+            },
+            {
+                label: $gettext('Committees'),
+                route: '/'
+            },
+            {
+                label: $gettext('Membership'),
+                route: '/about/3/membership/'
+            },
+            {
+                label: $gettext('(Graduation) drink'),
+                route: '/about/26/graduation-drink/'
+            },
+            {
+                label: $gettext('Symposia'),
+                route: '/about/20/symposia/'
+            },
+            {
+                label: $gettext('Study tours'),
+                route: '/about/28/study-tours/'
+            },
+            {
+                label: $gettext("Members' initiative"),
+                route: '/about/14/members-initiative/'
+            },
+            {
+                label: $gettext('Association song'),
+                route: '/about/5/association-song/'
+            },
+            {
+                label: $gettext('Alumni Association ENIAC'),
+                route: '/about/16/alumni-association-eniac/'
+            },
+            {
+                label: $gettext('Sister associations'),
+                route: '/about/4/sister-associations/'
+            },
+            {
+                label: $gettext('Inter-Actief App'),
+                route: '/about/27/the-inter-actief-app/'
+            },
+            {
+                label: $gettext('Inter-Archive'),
+                url: 'https://inter-archief.net/'
+            }
         ]
     },
     {
-        label: 'Education',
+        label: $gettext('Education'),
         route: '/education'
     },
     {
-        label: 'Contact',
+        label: $gettext('Contact'),
         route: '/contact'
     }
 ]);

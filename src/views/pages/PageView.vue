@@ -1,19 +1,21 @@
 <template>
-    <div class="ia-section gray">
-        <div class="ia-row">
-            <div class="ia-column">
-                <template v-if="item">
+    <Content>
+        <template v-if="item">
+            <SectionCard :name="item.name!">
+                <template #content>
                     <div class="text" v-html="processedContent"></div>
                 </template>
-            </div>
-        </div>
-    </div>
+            </SectionCard>
+        </template>
+    </Content>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { markedText } from '@/functions/functions'
 import { useQueryStore } from '@/stores/queryStore'
+import Content from '@/components/ui/Content.vue';
+import SectionCard from '@/components/ui/SectionCard.vue';
 
 const queryStore = useQueryStore();
 const props = defineProps<{ id: string, slug?: string }>();
