@@ -31,7 +31,6 @@ import DataTable, { type DataTablePageEvent } from 'primevue/datatable';
 import Column from 'primevue/column';
 import { computed, onMounted, ref, watch } from 'vue'
 import { formattedDataShort, getItemValue } from '@/functions/functions.ts'
-import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
 import { useQueryStore } from '@/stores/queryStore'
 import { Camera } from 'lucide-vue-next';

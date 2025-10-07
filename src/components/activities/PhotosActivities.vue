@@ -7,8 +7,8 @@
 
     <div class="grid grid-cols-3 gap-4">
         <template v-if="queryItem?.photos" v-for="(photo, index) in queryItem.photos" :key="photo">
-            <img class="w-full h-full object-cover object-center cursor-pointer aspect-5/3" v-if="photo?.thumbMedium"
-                :src="`https://media.ia.utwente.nl/amelie/${photo?.thumbMedium}`" @click="showImage(index)" />
+            <img class="format cursor-pointer" v-if="photo?.thumbMedium" :src="`${mediaUrl}${photo?.thumbMedium}`"
+                @click="showImage(index)" />
         </template>
     </div>
     <VueEasyLightbox v-if="queryItem?.photos" :visible="visible" :imgs="imagePhotosUrls()" :index="currentIndex"
@@ -44,11 +44,12 @@ const title = computed(() => {
 const visible = ref(false)
 const currentIndex = ref(0)
 const imageUrls = ref<string[]>([])
+const mediaUrl = import.meta.env.VITE_AMELIE_MEDIA_URL
 
 const imagePhotosUrls = () => {
     if (queryResults.value?.photos) {
         imageUrls.value = queryResults.value.photos.map(
-            photo => `https://media.ia.utwente.nl/amelie/${photo.thumbLarge}`,
+            photo => `${mediaUrl}${photo.thumbLarge}`,
         );
     }
     return imageUrls.value

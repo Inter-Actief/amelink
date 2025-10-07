@@ -8,7 +8,7 @@
                 <router-link :to="{ name: 'singleactivities', params: { id: item?.id } }">
                     <div class="image">
                         <img v-if="item?.photos?.[0]?.thumbMedium"
-                            :src="`https://media.ia.utwente.nl/amelie/${item.photos?.[0]?.thumbMedium}`" />
+                            :src="`${mediaUrl}${item.photos?.[0]?.thumbMedium}`" />
                         <img class="placeholder" v-else src="@/assets/images/placeholder.jpg" />
                     </div>
 
@@ -43,6 +43,7 @@ const queries = useQueryStore();
 const swiperModules = [Navigation, Autoplay]
 const route = useRoute()
 const perpage = ref(5)
+const mediaUrl = import.meta.env.VITE_AMELIE_MEDIA_URL
 
 const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
 const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)

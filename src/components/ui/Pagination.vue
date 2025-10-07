@@ -11,12 +11,13 @@ import { computed, ref } from 'vue';
 const props = defineProps<UseQueryReturn<any, any> & {
     totalCount: number,
     limit: number,
+    rowsPerPage?: Array<number>
 }>()
 
 const limit = ref(props.limit)
 const page = ref(0);
 
-let rowsPerpageOptions = [10, 20, 30, 50]
+let rowsPerpageOptions = props.rowsPerPage ?? [10, 20, 30, 50]
 rowsPerpageOptions.push(limit.value);
 rowsPerpageOptions = rowsPerpageOptions.sort((a, b) => a - b)
 rowsPerpageOptions = [...new Set(rowsPerpageOptions)]; // make unique
@@ -25,6 +26,10 @@ const handlePage = (e: PageState) => {
     // Watch will refetch
     page.value = e.page
     limit.value = e.rows
+    console.log({
+        limit: limit.value,
+        offset: limit.value * e.page
+    })
     props.refetch({
         limit: limit.value,
         offset: limit.value * e.page

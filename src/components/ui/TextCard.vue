@@ -1,25 +1,29 @@
 <template>
     <component :is="props.routerLink ? RouterLink : 'div'" v-bind="props.routerLink ? props.routerLink : {}">
-        <Card class="p-4 text-card" style="height: 100%;">
+        <Card class="text-card" style="height: 100%;">
             <template #header v-if="props.image">
-                <img :src="`/src/assets/images/${props.image}`" />
+                <img class="format rounded-t-lg" :src="props.image" />
             </template>
             <template #title v-if="props.title">
-                <div class="flex flex-row items-center w-full justify-between">
+                <div class="flex flex-row items-center w-full justify-between pt-4 pl-4">
                     <span class="!text-4xl !font-semibold">{{ props.title }}</span>
                     <Chip v-if="props.label" :label="props.label.text"
                         :style="{ backgroundColor: `#${props.label.color}` }"
                         class="ml-auto !text-slate-50 !self-end" />
                 </div>
             </template>
-            <template #subtitle v-if="props.subtitle">{{ props.subtitle }}</template>
+            <template #subtitle v-if="props.subtitle">
+                <div class="pl-4 pr-4">
+                    {{ props.subtitle }}
+                </div>
+            </template>
             <template #content>
-                <p class="m-0">
+                <p class="m-0 pl-4 pr-4">
                     <slot />
                 </p>
             </template>
             <template #footer>
-                <div class="flex gap-4 mt-1">
+                <div class="flex gap-4 mt-1 pl-4 pr-4 pb-4">
                     <slot name="footer"></slot>
                     <EpaButton v-if="showReadMore" class="link readmore" icon="readmore">
                         {{ $gettext('Read more') }}

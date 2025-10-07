@@ -38,8 +38,8 @@ const imagesPerSlide = 3
 const dots = ref<number[]>([])
 const totalSliderWidth = ref(0)
 
-const BASE_URL = 'https://media.ia.utwente.nl/amelie/' //TODO: move to .env or main.ts
-const endGtDate = new Date() //TODO: change to date NOW()
+const mediaUrl = import.meta.env.VITE_AMELIE_MEDIA_URL
+const endGtDate = new Date()
 
 
 const { result, loading } = queries.getActivitiesSliderCardQuery({ endgt: endGtDate })
@@ -48,7 +48,7 @@ watch(result, (newValue) => {
     images.value =
         newValue?.activities?.results
             ?.flatMap(activity =>
-                activity?.photos.map((photo: any) => photo ? { url: BASE_URL + photo.thumbMedium } : undefined),
+                activity?.photos.map((photo: any) => photo ? { url: mediaUrl + photo.thumbMedium } : undefined),
             )
             .filter((photo): photo is { url: string } => photo !== undefined)
             .slice(0, 20) ?? []

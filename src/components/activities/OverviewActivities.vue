@@ -4,7 +4,7 @@
         <template v-if="item">
             <div class="pb-12">
 
-                <TextCard :title="getItemValue(item, 'summary')" subtitle="Dinsdag 25 November 2025"
+                <TextCard :title="getItemValue(item, 'summary')" :subtitle="formattedData(item.begin)"
                     :routerLink="{ to: { name: 'singleactivities', params: { id: item.id } } }"
                     :label="{ color: item.activityLabel.color, text: getItemValue(item.activityLabel, 'name') as string }">
                     {{ excerptText(getItemValue(item, 'description')) }}

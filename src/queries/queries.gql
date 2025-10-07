@@ -1,15 +1,19 @@
-query LatestActivitiesQuery($limit: Int, $startDate: DateTime) {
-  activities(limit: $limit, begin_Gt: $startDate) {
+query LatestActivitiesQuery($limit: Int, $offset: Int, $startDate: DateTime) {
+  activities(limit: $limit, offset: $offset, begin_Lt: $startDate, ordering: "begin,desc") {
     results {
       id
       description
       summary
       begin
+      imageIcon
+      activityLabel {
+        nameNl
+        nameEn
+        color
+        active
+      }
       photos {
-        caption
         thumbMedium
-        thumbMediumHeight
-        thumbMediumWidth
       }
     }
     totalCount
@@ -17,7 +21,7 @@ query LatestActivitiesQuery($limit: Int, $startDate: DateTime) {
 }
 
 query OverviewActivitiesQuery($limit: Int, $offset: Int, $startDate: DateTime!) {
-  activities(limit: $limit, offset: $offset, begin_Gt: $startDate, ordering: "begin,desc") {
+  activities(limit: $limit, offset: $offset, begin_Gt: $startDate, ordering: "begin,asc") {
     results {
       id
       begin

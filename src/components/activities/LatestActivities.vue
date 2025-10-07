@@ -1,99 +1,76 @@
 <template>
-    <div class="latestactivities">
-        <div class="bar">
-            <span>{{ $gettext('Actual Activities') }}</span>
-            <EpaButton :to="{ name: 'activities', params: {} }" class="link small">
+    <!-- Latest activities are the most recent activities with pictures -->
+    <!-- Component can be borrowed / modified to do upcoming activities as well (with a different query) -->
+    <SectionCard :name="$gettext('Latest activities')" pageBg>
+        <template #info>
+            <RouterLink :to="{ name: 'activities', params: {} }" class="link">
                 {{ $gettext('View all activities') }}
-            </EpaButton>
-        </div>
-
-        <div class="items">
-            <div v-if="newsItems !== null">
-                <template v-for="item in newsItems" :key="item">
-                    <template v-if="item">
-                        <Cards :title="item?.summary ? item.summary : ''" :date="formattedData(item.begin)"
-                            :text="excerptText(item?.description ? item.description : '')"
-                            :to="{ name: 'singleactivities', params: { id: item.id } }" buttonText="Enroll now!"
-                            :imageSrc="imageSrc(item.photos?.[0]?.thumbMedium)"
-                            :imageAlt="item?.summary ? item?.summary : ''" :imageHeight="item.photos?.[0]?.thumbMediumHeight
-                                ? item.photos?.[0]?.thumbMediumHeight
-                                : 0
-                                " :imageWidth="item.photos?.[0]?.thumbMediumWidth
-                                    ? item.photos?.[0]?.thumbMediumWidth
-                                    : 0
-                                    " />
-                    </template>
+            </RouterLink>
+        </template>
+        <template #content>
+            <ProgressSpinner v-if="loading" />
+            <div class="grid gap-10 grid-cols-3 pb-10">
+                <template v-for="item in activityItems" :key="item.id">
+                    <TextCard :image="getItemRandomPhoto(item!)" :title="item!.summary ?? ''"
+                        :routerLink="getRouterLinkTo(item!)" :subtitle="formattedData(item!.begin)"
+                        :label="{ color: item!.activityLabel.color, text: getItemValue(item!.activityLabel, 'name') as string }">
+                        {{ excerptText(getItemValue(item, 'description')) }}
+                    </TextCard>
                 </template>
             </div>
-        </div>
-    </div>
+            <Pagination v-if="totalCount" v-bind="query" :totalCount="totalCount!" :limit="perpage"
+                :rowsPerPage="[3, 6, 9, 12, 15]" />
+        </template>
+    </SectionCard>
 </template>
 
 <script setup lang="ts">
-import { useQuery } from '@vue/apollo-composable'
 import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
-import EpaButton from '@/components/ui/EpaButton.vue'
-import { excerptText, formattedData, getItemValue } from '../../functions/functions.ts'
-import Cards from '@/components/ui/Cards.vue'
 import { useGettext } from 'vue3-gettext'
 import { useQueryStore } from '@/stores/queryStore.ts'
+import SectionCard from '../ui/SectionCard.vue'
+import Pagination from '../ui/Pagination.vue'
+import TextCard from '../ui/TextCard.vue'
+import { formattedData, excerptText, getItemValue } from '@/functions/functions.ts'
+import type { LatestActivitiesQueryQuery } from '@/gql/graphql'
 const { $gettext } = useGettext();
 const queries = useQueryStore();
-const route = useRoute()
-const perpage = ref(5)
+const perpage = ref(6)
 
-//TODO: Create a global
-const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
-const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
-
-//, begin_Gt: "${new Date().toISOString()}"
-//TODO: Begin_gt new date()
-
-const { result, refetch } = queries.getLatestActivities({ limit: perpage.value, startDate: new Date() });
+const query = queries.getLatestActivities({ limit: perpage.value, startDate: new Date() });
+const { result, refetch, loading } = query;
 const queryResults = computed(() => result.value?.activities)
-const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
-const totalCount = computed(() => (queryResults.value ? queryResults.value.totalCount : null))
+const activityItems = computed(() => (queryResults.value ? queryResults.value.results : null))
+const totalCount = computed(() => queryResults.value?.totalCount)
 
-const date = new Date()
+type ActivityItemType = NonNullable<
+    NonNullable<LatestActivitiesQueryQuery["activities"]>["results"][number]
+>;
+
+const getRouterLinkTo = (item: ActivityItemType) => {
+    if (item.photos.length == 0) {
+        return { to: { name: 'singleactivities', params: { id: item!.id } } }
+    }
+
+    return { to: { name: 'singleactivitiesphotos', params: { id: item!.id } } }
+}
+
+const getItemRandomPhoto = (item: ActivityItemType) => {
+    if (item.photos.length == 0) {
+        return '/src/assets/images/placeholder.jpg'
+    }
+
+    const photoSrc = item.photos[Math.floor(Math.random() * item.photos.length)].thumbMedium!
+    return imageSrc(photoSrc);
+}
 
 const imageSrc = (src: string | null | undefined) => {
     if (!src) {
         return '/src/assets/images/placeholder.jpg'
     }
 
-    return `https://media.ia.utwente.nl/amelie/${src}`
+    return `${import.meta.env.VITE_AMELIE_MEDIA_URL}${src}`
 }
 </script>
 
-<style scoped lang="scss">
-.latestactivities {
-    border-radius: $border-radius $border-radius 0 0;
-    color: #000;
-    display: grid;
-    gap: $gap_sm;
-
-    .bar {
-        background-color: #1d428a;
-        color: #fff;
-        border-radius: $border-radius $border-radius 0 0;
-        padding: 1.5rem;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .items {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: $gap_sm;
-
-        @media only screen and (max-width: $screen-lg) {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        @media only screen and (max-width: $screen-lm) {
-            grid-template-columns: repeat(1, minmax(0, 1fr));
-        }
-    }
-}
-</style>
+<style scoped lang="scss"></style>
