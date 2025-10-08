@@ -30,8 +30,11 @@ const router = createRouter({
         {
             path: '/contact',
             name: 'contact',
-            component: () => import('@/views/pages/ContactView.vue'),
-            props: true,
+            component: () => import('@/views/pages/PageView.vue'),
+            props: {
+                id: 7,
+                slug: 'contact',
+            },
         },
         {
             path: '/components',
