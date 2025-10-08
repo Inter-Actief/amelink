@@ -323,6 +323,7 @@ export const iaPreset = definePreset(Lara, {
             900: '#0c1a37',
             950: '#071123',
         },
+        emphasize: '#43c7ff',
         formField: {
             paddingX: '0.75rem',
             paddingY: '0.5rem',
@@ -747,6 +748,32 @@ export const iaPreset = definePreset(Lara, {
                 },
                 dark: {
                     background: '#ffffff00',
+                },
+            },
+        },
+        button: {
+            colorScheme: {
+                light: {
+                    'secondary.color': '{primary.color}',
+                    'secondary.background': '{primary.contrastColor}',
+                    'secondary.border.color': '{transparent}',
+                    'secondary.hover.color': '{primary.color}',
+                    'secondary.hover.border.color': '{transparent}',
+                    'secondary.hover.background': '{surface.200}',
+                    'secondary.active.background': '{primary.color}',
+                    'secondary.active.color': '{primary.contrastColor}',
+                    'secondary.active.border.color': '{primary.contrastColor}',
+                },
+                dark: {
+                    'secondary.color': '{primary.color}',
+                    'secondary.background': '{primary.contrastColor}',
+                    'secondary.border.color': '{transparent}',
+                    'secondary.hover.color': '{primary.color}',
+                    'secondary.hover.border.color': '{transparent}',
+                    'secondary.hover.background': '{surface.200}',
+                    'secondary.active.background': '{primary.color}',
+                    'secondary.active.color': '{primary.contrastColor}',
+                    'secondary.active.border.color': '{primary.contrastColor}',
                 },
             },
         },

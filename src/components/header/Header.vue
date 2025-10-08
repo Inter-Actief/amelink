@@ -6,22 +6,14 @@
                 <Logo />
             </div>
 
-            <div id="header_info" class="basis-4/5 justify-self-end flex flex-row justify-end gap-4">
-                <SearchToggle v-if="isDesktop" />
-
-                <EpaButton v-if="isTablet || isDesktop" href="https://www.inter-actief.utwente.nl/oidc/authenticate/"
-                    target="_blank" :class="['white', isTablet ? 'small' : '']">
-                    {{ $gettext('Become a member') }}
-                </EpaButton>
-
-                <EpaButton v-if="isTablet || isDesktop" href="https://www.inter-actief.utwente.nl/oidc/authenticate/"
-                    target="_blank" :class="['white', isTablet ? 'small' : '']">
-                    {{ $gettext('Sign-in') }}
-                </EpaButton>
-
-                <button class="mobilemenubutton" v-if="!isDesktop" @click="toggleMobileMenu()">
-                    <EpaIcon icon="menu" />
-                </button>
+            <div class="basis-4/5 justify-self-end flex flex-row justify-end gap-4">
+                <!-- <SearchToggle v-if="isDesktop" /> -->
+                <Button as="a" :label="$gettext('Become a member')" severity="secondary"
+                    href="https://www.inter-actief.utwente.nl/oidc/authenticate/">
+                </Button>
+                <Button as="a" :label="$gettext('Sign-in')" severity="secondary"
+                    href="https://www.inter-actief.utwente.nl/oidc/authenticate/">
+                </Button>
             </div>
 
         </div>
