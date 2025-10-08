@@ -12,7 +12,7 @@
                     <ArrowRight />
                 </RouterLink>
 
-                <RouterLink v-if="queryItem.photos.length > 0" class="link flex flex-row" :to="{ name: 'activities' }">
+                <RouterLink class="link flex flex-row" :to="{ name: 'activities' }">
                     <ArrowLeft />
                     {{ $gettext('Return to overview') }}
                 </RouterLink>
