@@ -26,10 +26,6 @@ const handlePage = (e: PageState) => {
     // Watch will refetch
     page.value = e.page
     limit.value = e.rows
-    console.log({
-        limit: limit.value,
-        offset: limit.value * e.page
-    })
     props.refetch({
         limit: limit.value,
         offset: limit.value * e.page

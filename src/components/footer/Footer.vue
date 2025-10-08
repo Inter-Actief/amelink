@@ -1,112 +1,65 @@
 <template>
-    <footer id="footer" class="ia-section">
-        <div class="ia-row">
-            <div class="ia-column span3">
-                <div class="ia-module">
-                    <Logo />
-                </div>
+    <div class="w-100 bg-primary grid grid-cols-12 gap-20 text-primary-contrast py-20">
+        <div class="col-span-3 col-start-2">
+            <Logo class="pb-4" />
+            <div class="pb-8">{{ $gettext('footer.text') }}</div>
+            <div class="align-bottom">{{ currentYear }} | Inter-Actief</div>
+        </div>
 
-                <div class="ia-module">
-                    {{ $gettext('footer.text') }}
-                </div>
-            </div>
-            <div class="ia-column span3">
-                <div class="ia-module">
-                    <FooterMenu title="Custom" />
-                </div>
-
-                <div class="ia-module">
-                    <FooterMenu title="Custom" />
-                </div>
-            </div>
-            <div class="ia-column span3">
-                <div class="ia-module">
-                    <ContactUs />
-                </div>
-
-                <div class="ia-module">
-                    <FooterMenu title="Custom" />
-                </div>
-            </div>
-            <div class="ia-column span3">
-                <div class="ia-module">
-                    <ContactUs />
-                </div>
-
-                <div class="ia-module">
-                    <OpenMaps />
-                </div>
+        <div class="col-span-2">
+            <div class="font-bold pb-2">Pages</div>
+            <div v-for="item in pages" :key="item.name" class="py-1">
+                <RouterLink :to="{ name: item.page }" class="link">{{ item.name }}</RouterLink>
             </div>
         </div>
 
-        <div class="ia-row">
-            <div class="ia-column">{{ currentYear }} | Inter-Actief</div>
+        <div class="col-span-2">
+            Nog wat tekst
+
+            Nog wat tekst
         </div>
 
-        <GoogleMaps v-if="isDesktop" />
-    </footer>
+        <div class="col-span-2">
+            <h4>{{ $gettext('Contact us') }}</h4>
+
+            <ul>
+                <li>Zilverling, kamer E208</li>
+                <li>Drienerlolaan 5</li>
+                <li>7522 NB Enschede</li>
+                <li>The Netherlands</li>
+            </ul>
+        </div>
+    </div>
 </template>
 
 <script setup lang="ts">
 import Logo from '@/components/ui/Logo.vue'
-import FooterMenu from '@/components/menu/FooterMenu.vue'
-import ContactUs from '@/components/footer/ContactUs.vue'
-import GoogleMaps from '@/components/footer/GoogleMaps.vue'
-import OpenMaps from '@/components/footer/OpenMaps.vue'
+// import FooterMenu from '@/components/menu/FooterMenu.vue'
 import { isDesktop } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 const { $gettext } = useGettext();
 const currentYear = ref(new Date().getFullYear())
 
+const pages = computed(() => [
+    {
+        name: $gettext('Activities'),
+        page: 'activities'
+    },
+    {
+        name: $gettext('News'),
+        page: 'news'
+    },
+    {
+        name: $gettext('Publications'),
+        page: 'publications'
+    },
+    {
+        name: $gettext('Education'),
+        page: 'education'
+    }
+])
+
 </script>
 
-<style lang="scss">
-#footer {
-    background-color: $primary-color;
-    color: $text-color-light;
-
-    h4 {
-        padding-bottom: 1rem;
-        font-weight: bold;
-    }
-
-    ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    a {
-        color: inherit;
-        text-decoration: none;
-        position: relative;
-        transition: 300ms;
-        background: linear-gradient(currentColor, currentColor) bottom / 0 2px no-repeat;
-        background-position: left bottom;
-
-        &:hover {
-            background-size: 100% 0.2rem;
-            color: #43c7ff;
-            opacity: 1;
-        }
-    }
-
-    .footer_googlemaps iframe {
-        display: block;
-    }
-}
-
-#footer {
-    @media screen and (max-width: $screen-lg) {
-        .ia-column.span3 {
-            grid-column: span 6;
-        }
-    }
-
-    @media screen and (max-width: $screen-lm) {
-        .ia-column.span3 {
-            grid-column: span 12;
-        }
-    }
-}
-</style>
+<style lang="scss"></style>

@@ -1,11 +1,7 @@
 <template>
-    <div class="ia-section gray">
-        <div class="ia-row">
-            <div class="ia-column">
-                <OverviewNews />
-            </div>
-        </div>
-    </div>
+    <Content>
+        <OverviewNews />
+    </Content>
 </template>
 
 <script setup lang="ts">

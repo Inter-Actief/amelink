@@ -532,6 +532,7 @@ export const iaPreset = definePreset(Lara, {
                 },
                 page: {
                     background: '{surface.0}',
+                    highlight: '#1d428a0d',
                 },
             },
             dark: {
@@ -661,6 +662,7 @@ export const iaPreset = definePreset(Lara, {
                 },
                 page: {
                     background: '{surface.900}',
+                    highlight: '#1d428a0d',
                 },
             },
         },

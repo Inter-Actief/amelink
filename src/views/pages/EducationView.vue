@@ -2,10 +2,12 @@
     <Content>
         <div class="flex flex-row gap-12 justify-start items-start">
             <SectionCard :name="$gettext('Information')" class="basis-1/3 sticky top-12">
-                <template v-for="item in queryItems" :key="item?.id">
-                    <div class="link" @click="scrolltop(`item_${item?.id}`)">
-                        {{ getItemValue(item, 'name') }}
-                    </div>
+                <template #content>
+                    <template v-for="item in queryItems" :key="item?.id">
+                        <div class="link" @click="scrolltop(`item_${item?.id}`)">
+                            {{ getItemValue(item, 'name') }}
+                        </div>
+                    </template>
                 </template>
             </SectionCard>
             <div class="basis-2/3 flex flex-col gap-12">
@@ -63,7 +65,6 @@ watch(queryItems, async (newItems) => {
 }, { immediate: true });
 
 function scrolltop(item: string) {
-    console.log(`Scrolling to ${item}`)
     if (item === null) {
         return
     }

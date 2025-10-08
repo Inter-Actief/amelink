@@ -26,7 +26,6 @@ const selectedLanguage = ref<string>(gettext.current);
 const langs = ref(['en', 'nl']);
 
 watch(selectedLanguage, () => {
-    console.log('Changed language')
     changeLanguage(selectedLanguage.value);
 })
 

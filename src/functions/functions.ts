@@ -84,8 +84,6 @@ export const markedText = async (text: string) => {
     if (text === undefined) {
         return text
     }
-    console.log(text)
-
     let markedtext: string = await marked(text)
 
     // Custom sanitisation options to allow img
@@ -96,7 +94,6 @@ export const markedText = async (text: string) => {
             img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
         },
     })
-    console.log(sanitized)
     sanitized = sanitized.replace(/src="\//g, `src="${import.meta.env.VITE_AMELIE_BASE_URL}`)
 
     return sanitized

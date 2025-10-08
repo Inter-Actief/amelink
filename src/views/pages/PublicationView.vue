@@ -6,7 +6,7 @@
                 <div v-else class="grid grid-cols-5 gap-10 pb-4">
                     <!-- Using custom card (not TextCard) since we want a vertical image -->
                     <a :href="publicationUrl(item?.file!)" v-for="item in queryItems" :key="item?.id">
-                        <Card class="text-card">
+                        <Card class="text-card" style="height: 100%;">
                             <template #header>
                                 <img class="aspect-a4 rounded-t-lg" :src="item?.thumbnail!" />
                             </template>
