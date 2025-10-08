@@ -55,6 +55,7 @@ msgstr ""
 
 #: src\components\activities\LatestActivities.vue:7
 #: src\components\activities\UpcomingActivities.vue:6
+#: src\components\activities\UpcomingActivitiesCards.vue:5
 msgid "View all activities"
 msgstr ""
 
@@ -78,6 +79,7 @@ msgid "Go to activity"
 msgstr ""
 
 #: src\components\activities\UpcomingActivities.vue:4
+#: src\components\activities\UpcomingActivitiesCards.vue:2
 #: src\views\pages\ComponentsView.vue:16
 msgid "Upcoming Activities"
 msgstr ""
@@ -102,121 +104,142 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: src\components\footer\ContactUs.vue:3
-msgid "Contact us"
-msgstr ""
-
-#: src\components\footer\Footer.vue:10
+#: src\components\footer\Footer.vue:5
 msgid "footer.text"
 msgstr ""
 
-#: src\components\footer\OpenMaps.vue:2
-msgid "Open maps"
+#: src\components\footer\Footer.vue:10
+msgid "Pages"
 msgstr ""
 
-#: src\components\header\Header.vue:14
-msgid "Become a member"
+#: src\components\footer\Footer.vue:17
+msgid "Important information"
 msgstr ""
 
-#: src\components\header\Header.vue:19
-msgid "Sign-in"
+#: src\components\footer\Footer.vue:18
+msgid "Privacy policy"
 msgstr ""
 
-#: src\components\header\Header.vue:72
-msgid "Home"
+#: src\components\footer\Footer.vue:20
+#: src\components\header\Header.vue:158
+msgid "Contact"
 msgstr ""
 
-#: src\components\header\Header.vue:77
+#: src\components\footer\Footer.vue:23
+msgid "Report a problem"
+msgstr ""
+
+#: src\components\footer\Footer.vue:26
+msgid "CVD Policy"
+msgstr ""
+
+#: src\components\footer\Footer.vue:31
+msgid "Contact us"
+msgstr ""
+
+#: src\components\footer\Footer.vue:51
+#: src\components\header\Header.vue:69
 msgid "Activities"
 msgstr ""
 
-#: src\components\header\Header.vue:81
+#: src\components\footer\Footer.vue:55
+#: src\components\header\Header.vue:73
 msgid "News"
 msgstr ""
 
-#: src\components\header\Header.vue:85
-msgid "Components"
-msgstr ""
-
-#: src\components\header\Header.vue:89
+#: src\components\footer\Footer.vue:59
+#: src\components\header\Header.vue:81
 #: src\views\pages\PublicationView.vue:3
 msgid "Publications"
 msgstr ""
 
-#: src\components\header\Header.vue:93
-msgid "Association"
-msgstr ""
-
-#: src\components\header\Header.vue:96
-msgid "Inter-Actief"
-msgstr ""
-
-#: src\components\header\Header.vue:100
-msgid "Board"
-msgstr ""
-
-#: src\components\header\Header.vue:104
-msgid "Former boards"
-msgstr ""
-
-#: src\components\header\Header.vue:108
-msgid "Honorary members"
-msgstr ""
-
-#: src\components\header\Header.vue:112
-msgid "Members of Merit"
-msgstr ""
-
-#: src\components\header\Header.vue:116
-msgid "Committees"
-msgstr ""
-
-#: src\components\header\Header.vue:120
-msgid "Membership"
-msgstr ""
-
-#: src\components\header\Header.vue:124
-msgid "(Graduation) drink"
-msgstr ""
-
-#: src\components\header\Header.vue:128
-msgid "Symposia"
-msgstr ""
-
-#: src\components\header\Header.vue:132
-msgid "Study tours"
-msgstr ""
-
-#: src\components\header\Header.vue:136
-msgid "Members' initiative"
-msgstr ""
-
-#: src\components\header\Header.vue:140
-msgid "Association song"
-msgstr ""
-
-#: src\components\header\Header.vue:144
-msgid "Alumni Association ENIAC"
-msgstr ""
-
-#: src\components\header\Header.vue:148
-msgid "Sister associations"
-msgstr ""
-
-#: src\components\header\Header.vue:152
-msgid "Inter-Actief App"
-msgstr ""
-
-#: src\components\header\Header.vue:156
-msgid "Inter-Archive"
-msgstr ""
-
-#: src\components\header\Header.vue:162
+#: src\components\footer\Footer.vue:63
+#: src\components\header\Header.vue:154
 msgid "Education"
 msgstr ""
 
-#: src\components\header\Header.vue:166
-msgid "Contact"
+#: src\components\header\Header.vue:11
+msgid "Become a member"
+msgstr ""
+
+#: src\components\header\Header.vue:14
+msgid "Sign-in"
+msgstr ""
+
+#: src\components\header\Header.vue:64
+msgid "Home"
+msgstr ""
+
+#: src\components\header\Header.vue:77
+msgid "Components"
+msgstr ""
+
+#: src\components\header\Header.vue:85
+msgid "Association"
+msgstr ""
+
+#: src\components\header\Header.vue:88
+msgid "Inter-Actief"
+msgstr ""
+
+#: src\components\header\Header.vue:92
+msgid "Board"
+msgstr ""
+
+#: src\components\header\Header.vue:96
+msgid "Former boards"
+msgstr ""
+
+#: src\components\header\Header.vue:100
+msgid "Honorary members"
+msgstr ""
+
+#: src\components\header\Header.vue:104
+msgid "Members of Merit"
+msgstr ""
+
+#: src\components\header\Header.vue:108
+msgid "Committees"
+msgstr ""
+
+#: src\components\header\Header.vue:112
+msgid "Membership"
+msgstr ""
+
+#: src\components\header\Header.vue:116
+msgid "(Graduation) drink"
+msgstr ""
+
+#: src\components\header\Header.vue:120
+msgid "Symposia"
+msgstr ""
+
+#: src\components\header\Header.vue:124
+msgid "Study tours"
+msgstr ""
+
+#: src\components\header\Header.vue:128
+msgid "Members' initiative"
+msgstr ""
+
+#: src\components\header\Header.vue:132
+msgid "Association song"
+msgstr ""
+
+#: src\components\header\Header.vue:136
+msgid "Alumni Association ENIAC"
+msgstr ""
+
+#: src\components\header\Header.vue:140
+msgid "Sister associations"
+msgstr ""
+
+#: src\components\header\Header.vue:144
+msgid "Inter-Actief App"
+msgstr ""
+
+#: src\components\header\Header.vue:148
+msgid "Inter-Archive"
 msgstr ""
 
 #: src\components\news\LatestNews.vue:4
