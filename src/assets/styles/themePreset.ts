@@ -777,5 +777,21 @@ export const iaPreset = definePreset(Lara, {
                 },
             },
         },
+        galleria: {
+            colorScheme: {
+                light: {
+                    'nav.button.color': '{primary.contrastColor}',
+                    'nav.button.background': '{primary.color}',
+                    'nav.button.hover.color': '{primary.contrastColor}',
+                    'nav.button.hover.background': '{primary.color}',
+                },
+                dark: {
+                    'nav.button.color': '{primary.contrastColor}',
+                    'nav.button.background': '{primary.color}',
+                    'nav.button.hover.color': '{primary.contrastColor}',
+                    'nav.button.hover.background': '{primary.color}',
+                },
+            },
+        },
     },
 })

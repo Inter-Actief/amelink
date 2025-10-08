@@ -117,17 +117,14 @@ query ActivitiesSliderCardQuery($endgt: DateTime, $limit: Int) {
 }
 
 query HomepageSliderQuery($limit: Int, $beginDate: DateTime) {
-  activities(limit: $limit, begin_Gt: $beginDate) {
+  activities(limit: $limit, begin_Lt: $beginDate, ordering: "begin,desc") {
     results {
       id
       description
       summary
       begin
       photos {
-        caption
-        thumbMedium
-        thumbMediumHeight
-        thumbMediumWidth
+        thumbLarge
       }
     }
     totalCount

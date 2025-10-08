@@ -24,6 +24,7 @@ declare module 'vue' {
     Footer: typeof import('./src/components/footer/Footer.vue')['default']
     FooterMenu: typeof import('./src/components/menu/FooterMenu.vue')['default']
     Form: typeof import('@primevue/forms/form')['default']
+    Galleria: typeof import('primevue/galleria')['default']
     GoogleMaps: typeof import('./src/components/footer/GoogleMaps.vue')['default']
     Header: typeof import('./src/components/header/Header.vue')['default']
     HomepageCards: typeof import('./src/components/homepage/HomepageCards.vue')['default']
