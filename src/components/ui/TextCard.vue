@@ -5,7 +5,7 @@
                 <img class="format rounded-t-lg" :class="`aspect-[${props.imageAspect}]`" :src="props.image" />
             </template>
             <template #title v-if="props.title">
-                <div class="flex flex-row items-center w-full justify-between pt-4 pl-4">
+                <div class="flex flex-row items-center gap-2 w-full justify-between pt-4 pl-4">
                     <span class="!text-4xl !font-semibold">{{ props.title }}</span>
                     <Chip v-if="props.label" :label="props.label.text"
                         :style="{ backgroundColor: `#${props.label.color}` }"

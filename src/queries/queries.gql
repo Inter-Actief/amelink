@@ -68,13 +68,14 @@ query PhotosActivitiesQuery($id: ID) {
   }
 }
 
-query UpcomingActivitiesQuery($limit: Int, $beginDate: DateTime) {
-  activities(limit: $limit, begin_Gt: $beginDate) {
+query UpcomingActivitiesQuery($limit: Int, $offset: Int, $beginDate: DateTime) {
+  activities(limit: $limit, offset: $offset, begin_Gt: $beginDate, ordering: "begin,asc") {
     results {
       id
       begin
       description
       summary
+      imageIcon
       activityLabel {
         nameNl
         nameEn

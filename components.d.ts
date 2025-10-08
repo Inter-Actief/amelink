@@ -54,6 +54,7 @@ declare module 'vue' {
     TextCard: typeof import('./src/components/ui/TextCard.vue')['default']
     ThemeSwitcher: typeof import('./src/components/ui/ThemeSwitcher.vue')['default']
     UpcomingActivities: typeof import('./src/components/activities/UpcomingActivities.vue')['default']
+    UpcomingActivitiesCards: typeof import('./src/components/activities/UpcomingActivitiesCards.vue')['default']
   }
   export interface ComponentCustomProperties {
     Ripple: typeof import('primevue/ripple')['default']

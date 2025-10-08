@@ -2,7 +2,7 @@
 import LogoSlider from '@/components/logos/LogoSlider.vue'
 import HomepageSlider from '@/components/homepage/HomepageSlider.vue'
 import HomepageCards from '@/components/homepage/HomepageCards.vue'
-import ActivitiesSliderCard from '@/components/homepage/ActivitiesSliderCard.vue'
+import UpcomingActivitiesCards from '@/components/activities/UpcomingActivitiesCards.vue';
 </script>
 
 <template>
@@ -16,7 +16,7 @@ import ActivitiesSliderCard from '@/components/homepage/ActivitiesSliderCard.vue
         </Content>
 
         <Content>
-            <ActivitiesSliderCard />
+            <UpcomingActivitiesCards />
         </Content>
 
         <Content light>
