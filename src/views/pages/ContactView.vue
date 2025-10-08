@@ -17,10 +17,6 @@
             </div>
         </div>
     </div>
-
-    <div class="ia-section googlemaps">
-        <GoogleMaps />
-    </div>
 </template>
 
 <script setup lang="ts">
