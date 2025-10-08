@@ -7,7 +7,7 @@
             </div>
 
             <div class="col-span-3">
-                <h2 class="pb-4">{{ $gettext('Past activities') }}</h2>
+
                 <PastActivities />
             </div>
         </div>

@@ -1,7 +1,13 @@
 <template>
+    <div class="flex pb-4 justify-between items-end">
+        <h2>{{ $gettext('Past activities') }}</h2>
+        <InputText v-model="filters['global'].value" :placeholder="$gettext('Zoek activiteiten')" />
+        <!-- TODO: InputText implementation -->
+    </div>
     <ProgressSpinner v-if="loading && loadCounter == 0" />
-    <DataTable :loading="loading" size="large" stripedRows v-if="queryItems" :value="queryItems" paginator :rows="limit"
-        :totalRecords="count!" lazy @page="onPage" :rowsPerPageOptions="[10, 20, 30, 50, 100]">
+    <DataTable v-model:filters="filters" filterDisplay="menu" :loading="loading" size="large" stripedRows
+        v-if="queryItems" :value="queryItems" paginator :rows="limit" :totalRecords="count!" lazy @page="onPage"
+        :rowsPerPageOptions="[10, 20, 30, 50, 100]">
         <Column field="startDate" :header="$gettext('Date')" style="width: 15%;" class="font-mono font-bold">
         </Column>
         <Column field="summary" :header="$gettext('Activity')">
@@ -29,6 +35,7 @@
 <script setup lang="ts">
 import DataTable, { type DataTablePageEvent } from 'primevue/datatable';
 import Column from 'primevue/column';
+import { FilterMatchMode } from '@primevue/core/api';
 import { computed, onMounted, ref, watch } from 'vue'
 import { formattedDataShort, getItemValue } from '@/functions/functions.ts'
 import { useGettext } from 'vue3-gettext'
@@ -73,6 +80,11 @@ const onPage = async (event: DataTablePageEvent) => {
         endDate: new Date(),
     })
 }
+
+const filters = ref({
+    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    // verified: { value: null, matchMode: FilterMatchMode.EQUALS }
+});
 </script>
 
 <style lang="scss" scoped></style>
