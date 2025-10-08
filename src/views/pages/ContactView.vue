@@ -25,5 +25,4 @@
 
 <script setup lang="ts">
 import ContactForm from '@/components/forms/ContactForm.vue'
-import GoogleMaps from '@/components/footer/GoogleMaps.vue'
 </script>
