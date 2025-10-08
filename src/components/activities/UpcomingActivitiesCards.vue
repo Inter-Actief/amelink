@@ -13,7 +13,7 @@
                         :routerLink="{ to: { name: 'singleactivities', params: { id: item!.id } } }"
                         :subtitle="formattedData(item!.begin)"
                         :label="{ color: item!.activityLabel.color, text: getItemValue(item!.activityLabel, 'name') as string }">
-                        {{ excerptText(getItemValue(item, 'description')) }}
+                        <!-- {{ excerptText(getItemValue(item, 'description')) }} -->
                     </TextCard>
                 </template>
             </div>

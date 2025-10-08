@@ -12,14 +12,10 @@ import UpcomingActivitiesCards from '@/components/activities/UpcomingActivitiesC
         </div>
 
         <Content light>
-            <LogoSlider />
-        </Content>
-
-        <Content>
             <UpcomingActivitiesCards />
         </Content>
 
-        <Content light>
+        <Content>
             <HomepageCards />
         </Content>
     </main>

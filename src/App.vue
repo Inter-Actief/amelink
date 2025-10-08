@@ -3,6 +3,9 @@
         <Toast />
         <Header />
         <RouterView />
+        <Content light>
+            <LogoSlider />
+        </Content>
         <Footer />
     </div>
 </template>
