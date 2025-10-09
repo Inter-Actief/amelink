@@ -150,8 +150,62 @@ const items = computed(() => [
         ]
     },
     {
+        label: $gettext('For members'),
+        items: [
+            {
+                label: $gettext('Azure Dev Tools'),
+                route: '/about/24/azure-dev-tools-for-teaching/'
+            },
+            // {
+            //     label: $gettext('GMM documents'),
+            //     route: '/gmm'
+            // },
+            {
+                label: $gettext('Assignments by the UT'),
+                route: '/about/18/assignments-ut/'
+            },
+            {
+                label: $gettext('Corporate identity'),
+                url: 'https://huisstijl.ia.utwente.nl/'
+            },
+            {
+                label: $gettext('Old privacy policies'),
+                route: '/about/25/old-privacy-policies/'
+            },
+            {
+                label: $gettext('Social media'),
+                route: '/about/31/social-media/'
+            },
+            {
+                label: $gettext('Mental health'),
+                route: '/about/34/mental-health/'
+            },
+            // {
+            //     label: $gettext('Do groups'),
+            //     route: '/members/dogroups/'
+            // }
+        ]
+    },
+    {
         label: $gettext('Education'),
-        route: '/education'
+        items: [
+            {
+                label: $gettext('Information'),
+                route: '/education'
+            },
+            {
+                label: $gettext('Books'),
+                url: import.meta.env.VITE_WO4YOU_URL
+            },
+            {
+                label: $gettext('Summaries'),
+                url: 'https://summaries.ia.utwente.nl/'
+            },
+            {
+                label: $gettext('Tutoring'),
+                route: '/about/29/tutoring/'
+            }
+        ]
     },
     {
         label: $gettext('Contact'),
