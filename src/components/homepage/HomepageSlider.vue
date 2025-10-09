@@ -9,8 +9,8 @@
         </template>
         <template #caption="slotProps">
             <RouterLink :to="{ name: 'singleactivitiesphotos', params: { id: slotProps.item.id! } }">
-                <div class="text-5xl mb-2 font-bold">{{ slotProps.item.summary }}</div>
-                <p class="text-white">{{ formattedData(slotProps.item.begin) }}</p>
+                <div class="text-5xl mb-2 font-bold pl-4">{{ slotProps.item.summary }}</div>
+                <p class="text-white pl-4">{{ formattedData(slotProps.item.begin) }}</p>
             </RouterLink>
         </template>
     </Galleria>
