@@ -1,40 +1,31 @@
 <template>
-    <div class="ia-section">
-        <div class="ia-row">
-            <div class="ia-column">
-                <h1>{{ $gettext('Demo Table') }}</h1>
-                <DemoTable />
-            </div>
-        </div>
+    <Content>
+        <h1>{{ $gettext('Demo Table') }}</h1>
+        <DemoTable />
+    </Content>
 
-        <div class="ia-row">
-            <div class="ia-column span6">
+    <Content>
+        <div class="grid grid-cols-2 gap-12">
+            <div>
                 <h1>{{ $gettext('Latest News') }}</h1>
                 <LatestNews />
             </div>
-            <div class="ia-column span6">
+            <div>
                 <h1>{{ $gettext('Upcoming Activities') }}</h1>
                 <UpcomingActivities />
             </div>
         </div>
+    </Content>
 
-        <div class="ia-row">
-            <div class="ia-column">
-                <h1>{{ $gettext('Latest Activities') }}</h1>
-                <LatestActivities />
-            </div>
-            <div class="ia-column">
-                <h1>{{ $gettext('Editor') }}</h1>
-            </div>
-        </div>
+    <Content>
+        <h1>{{ $gettext('Latest Activities') }}</h1>
+        <LatestActivities />
+    </Content>
 
-        <div class="ia-row">
-            <div class="ia-column">
-                <h1>{{ $gettext('Demo overview') }}</h1>
-                <DemoOverviewActivities />
-            </div>
-        </div>
-    </div>
+    <Content>
+        <h1>{{ $gettext('Demo overview') }}</h1>
+        <DemoOverviewActivities />
+    </Content>
 </template>
 
 <script setup lang="ts">
@@ -45,5 +36,4 @@ import DemoOverviewActivities from '@/components/activities/demo/DemoOverviewAct
 import DemoTable from '@/components/demo/DemoTable.vue'
 import { useGettext } from 'vue3-gettext'
 const { $gettext } = useGettext();
-
 </script>
