@@ -20,17 +20,16 @@
 
         <div class="pl-10 pr-10 pb-4">
             <Menubar :model="items" class="p-0 sticky top-0 z-50">
-                <template #item="{ item, props, hasSubmenu, root }"
-                    :class="{ 'hover:bg-primary-600 active:bg-primary-600 rounded-lg': root }">
+                <template #item="{ item, props, hasSubmenu, root }" :class="{ 'rounded-lg': root }">
                     <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
                         <a v-ripple :href="href" v-bind="props.action" @click="navigate">
-                            <span :class="{ 'text-color': !root, }">{{ item.label }}</span>
+                            <span :class="{ 'text-primary-contrast': root, }">{{ item.label }}</span>
                         </a>
                     </router-link>
                     <a v-else v-ripple :href="item.url" :target="item.target" v-bind="props.action">
-                        <span :class="{ 'text-color': !root }">{{ item.label }}</span>
+                        <span :class="{ 'text-primary-contrast': root, }">{{ item.label }}</span>
                         <template v-if="hasSubmenu">
-                            <ChevronDown v-if="root" />
+                            <ChevronDown v-if="root" class="text-primary-contrast" />
                             <ChevronRight v-else />
                         </template>
                     </a>

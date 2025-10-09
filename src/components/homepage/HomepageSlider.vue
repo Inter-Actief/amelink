@@ -3,19 +3,22 @@
         :transitionInterval="3000">
         <template #item="slotProps" :circular="true">
             <div class="w-full overflow-hidden">
-                <img class="kenburns object-cover w-full h-[40vh]"
+                <img class="kenburns object-cover w-full h-[30vw]"
                     :src="imageSrc(randomItem(slotProps.item.photos).thumbLarge)" />
             </div>
         </template>
         <template #caption="slotProps">
-            <div class="text-5xl mb-2 font-bold">{{ slotProps.item.summary }}</div>
-            <p class="text-white">{{ formattedData(slotProps.item.begin) }}</p>
+            <RouterLink :to="{ name: 'singleactivitiesphotos', params: { id: slotProps.item.id! } }">
+                <div class="text-5xl mb-2 font-bold">{{ slotProps.item.summary }}</div>
+                <p class="text-white">{{ formattedData(slotProps.item.begin) }}</p>
+            </RouterLink>
         </template>
     </Galleria>
 </template>
 
 <script setup lang="ts">
 import Galleria from 'primevue/galleria';
+import { RouterLink } from 'vue-router';
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { formattedData, excerptText } from '@/functions/functions.ts'
