@@ -35,7 +35,7 @@
                     </a>
                 </template>
                 <template #end>
-                    <div class="flex flex-row items-center gap-4">
+                    <div class="flex flex-row items-center gap-4 text-primary-contrast">
                         <LanguageSwitcher />
                         <ThemeSwitcher />
                     </div>
