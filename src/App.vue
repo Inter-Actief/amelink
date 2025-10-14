@@ -3,7 +3,7 @@
         <Toast />
         <Header />
         <RouterView />
-        <Content light>
+        <Content light v-if="router.currentRoute.value.name != 'home'">
             <LogoSlider />
         </Content>
         <Footer />
@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { RouterView, useRouter } from 'vue-router'
 import Header from '@/components/header/Header.vue'
 import Footer from '@/components/footer/Footer.vue'
 import Toast from 'primevue/toast';
@@ -20,6 +20,7 @@ import { useThemeStore } from './stores/themeStore';
 
 const languageStore = useLanguageStore();
 const themeStore = useThemeStore();
+const router = useRouter();
 languageStore.loadLanguage();
 themeStore.initialiseTheme();
 </script>

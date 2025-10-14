@@ -22,4 +22,7 @@
 }
 
 // Apply styling after tailwind classes here:
-// @import './post_tailwind.scss';
+// Make all images pretty
+img.format {
+  @apply aspect-5/3 w-full h-full object-cover object-center;
+}
