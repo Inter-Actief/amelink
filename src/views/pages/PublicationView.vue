@@ -8,7 +8,7 @@
                     <a :href="publicationUrl(item?.file!)" v-for="item in queryItems" :key="item?.id">
                         <Card class="text-card" style="height: 100%;">
                             <template #header>
-                                <img class="aspect-a4 rounded-t-lg" :src="item?.thumbnail!" />
+                                <img class="aspect-a4 rounded-t-lg w-full" :src="item?.thumbnail!" />
                             </template>
                             <template #title>
                                 <div
