@@ -232,8 +232,8 @@ query PublicationOverview($limit: Int, $offset: Int) {
 }
 
 query CommitteeOverview {
-  committees(includeAbolished: false, limit:500) {
-    results{
+  committees(includeAbolished: false, limit: 500) {
+    results {
       name
       slug
       id

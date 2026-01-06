@@ -79,6 +79,11 @@ const router = createRouter({
             name: 'publications',
             component: () => import('@/views/pages/PublicationView.vue'),
         },
+        {
+            path: '/committees',
+            name: 'committees',
+            component: () => import('@/views/pages/CommitteesView.vue'),
+        },
     ],
 })
 
