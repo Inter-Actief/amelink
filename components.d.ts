@@ -8,10 +8,14 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ActivitiesSliderCard: typeof import('./src/components/homepage/ActivitiesSliderCard.vue')['default']
+    Avatar: typeof import('primevue/avatar')['default']
+    Badge: typeof import('primevue/badge')['default']
     Button: typeof import('primevue/button')['default']
+    Card: typeof import('primevue/card')['default']
     Cards: typeof import('./src/components/ui/Cards.vue')['default']
     ContactForm: typeof import('./src/components/forms/ContactForm.vue')['default']
     ContactUs: typeof import('./src/components/footer/ContactUs.vue')['default']
+    Content: typeof import('./src/components/ui/Content.vue')['default']
     DemoOverviewActivities: typeof import('./src/components/activities/demo/DemoOverviewActivities.vue')['default']
     DemoTable: typeof import('./src/components/demo/DemoTable.vue')['default']
     DynamicTable: typeof import('./src/components/ui/DynamicTable.vue')['default']
@@ -20,11 +24,14 @@ declare module 'vue' {
     Footer: typeof import('./src/components/footer/Footer.vue')['default']
     FooterMenu: typeof import('./src/components/menu/FooterMenu.vue')['default']
     Form: typeof import('@primevue/forms/form')['default']
+    Galleria: typeof import('primevue/galleria')['default']
     GoogleMaps: typeof import('./src/components/footer/GoogleMaps.vue')['default']
     Header: typeof import('./src/components/header/Header.vue')['default']
     HomepageCards: typeof import('./src/components/homepage/HomepageCards.vue')['default']
     HomepageSlider: typeof import('./src/components/homepage/HomepageSlider.vue')['default']
+    IconField: typeof import('primevue/iconfield')['default']
     InformationActivites: typeof import('./src/components/activities/InformationActivites.vue')['default']
+    InputIcon: typeof import('primevue/inputicon')['default']
     InputText: typeof import('primevue/inputtext')['default']
     LanguageSwitcher: typeof import('./src/components/ui/LanguageSwitcher.vue')['default']
     LatestActivities: typeof import('./src/components/activities/LatestActivities.vue')['default']
@@ -46,7 +53,13 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     Search: typeof import('./src/components/ui/Search.vue')['default']
     SearchToggle: typeof import('./src/components/ui/SearchToggle.vue')['default']
+    SectionCard: typeof import('./src/components/ui/SectionCard.vue')['default']
+    TextCard: typeof import('./src/components/ui/TextCard.vue')['default']
     ThemeSwitcher: typeof import('./src/components/ui/ThemeSwitcher.vue')['default']
     UpcomingActivities: typeof import('./src/components/activities/UpcomingActivities.vue')['default']
+    UpcomingActivitiesCards: typeof import('./src/components/activities/UpcomingActivitiesCards.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    Ripple: typeof import('primevue/ripple')['default']
   }
 }

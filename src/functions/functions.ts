@@ -84,10 +84,17 @@ export const markedText = async (text: string) => {
     if (text === undefined) {
         return text
     }
-
     let markedtext: string = await marked(text)
-    let sanitized = sanitizeHtml(markedtext)
-    sanitized = sanitized.replace(/src="\//g, 'src="https://www.inter-actief.utwente.nl/')
+
+    // Custom sanitisation options to allow img
+    let sanitized = sanitizeHtml(markedtext, {
+        allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+        allowedAttributes: {
+            ...sanitizeHtml.defaults.allowedAttributes,
+            img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
+        },
+    })
+    sanitized = sanitized.replace(/src="\//g, `src="${import.meta.env.VITE_AMELIE_BASE_URL}`)
 
     return sanitized
 }
@@ -110,6 +117,9 @@ function capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+// getItemValue is a way to get the value of an item where there only exists
+// (for example) nameNl or nameEn and not name. (This is a backend issue, but
+// we resolve it on the frontend)
 export const getItemValue = <T>(item: T, key: string) => {
     if (!item) {
         return ''

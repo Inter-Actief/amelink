@@ -7,11 +7,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import DynamicTable from '@/components/ui/DynamicTable.vue'
+import { useGettext } from 'vue3-gettext';
+const { $gettext } = useGettext();
 
 const columns = ref([
-    { key: 'name', label: 'Name', minWidth: 10 },
-    { key: 'age', label: 'Age', width: 5 },
-    { key: 'email', label: 'Email' },
+    { key: 'name', label: $gettext('Name'), minWidth: 10 },
+    { key: 'age', label: $gettext('Age'), width: 5 },
+    { key: 'email', label: $gettext('Email') },
 ])
 
 const rows = ref([

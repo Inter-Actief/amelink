@@ -3,57 +3,59 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 
 #: src\components\activities\demo\DemoOverviewActivities.vue:21
-#: src\components\activities\OverviewActivities.vue:21
-#: src\components\news\OverviewNews.vue:17
+#: src\components\ui\TextCard.vue:29
 msgid "Read more"
 msgstr ""
 
-#: src\components\activities\InformationActivites.vue:3
+#: src\components\activities\InformationActivites.vue:2
 msgid "Who, what, where, when..."
 msgstr ""
 
-#: src\components\activities\InformationActivites.vue:6
+#: src\components\activities\InformationActivites.vue:5
+#: src\components\activities\InformationActivites.vue:45
 msgid "Who"
 msgstr ""
 
-#: src\components\activities\InformationActivites.vue:11
+#: src\components\activities\InformationActivites.vue:6
 msgid "What"
 msgstr ""
 
-#: src\components\activities\InformationActivites.vue:18
+#: src\components\activities\InformationActivites.vue:7
 msgid "Where"
 msgstr ""
 
-#: src\components\activities\InformationActivites.vue:23
+#: src\components\activities\InformationActivites.vue:8
 msgid "When"
 msgstr ""
 
-#: src\components\activities\InformationActivites.vue:25
-msgid "from"
-msgstr ""
-
-#: src\components\activities\InformationActivites.vue:26
-msgid "until"
-msgstr ""
-
-#: src\components\activities\InformationActivites.vue:32
+#: src\components\activities\InformationActivites.vue:9
 msgid "Label"
 msgstr ""
 
-#: src\components\activities\InformationActivites.vue:37
+#: src\components\activities\InformationActivites.vue:10
 msgid "Costs"
 msgstr ""
 
-#: src\components\activities\InformationActivites.vue:41
+#: src\components\activities\InformationActivites.vue:16
+msgid "from"
+msgstr ""
+
+#: src\components\activities\InformationActivites.vue:17
+msgid "until"
+msgstr ""
+
+#: src\components\activities\InformationActivites.vue:24
 msgid "Free"
 msgstr ""
 
 #: src\components\activities\LatestActivities.vue:4
-msgid "Actual Activities"
+#: src\views\pages\ComponentsView.vue:23
+msgid "Latest Activities"
 msgstr ""
 
-#: src\components\activities\LatestActivities.vue:6
+#: src\components\activities\LatestActivities.vue:7
 #: src\components\activities\UpcomingActivities.vue:6
+#: src\components\activities\UpcomingActivitiesCards.vue:5
 msgid "View all activities"
 msgstr ""
 
@@ -67,17 +69,17 @@ msgstr ""
 msgid "Activity"
 msgstr ""
 
-#: src\components\activities\PastActivities.vue:9
-#: src\components\activities\PastActivities.vue:29
+#: src\components\activities\PastActivities.vue:21
 msgid "Photos"
 msgstr ""
 
 #: src\components\activities\PhotosActivities.vue:3
-#: src\components\activities\PhotosActivities.vue:21
-msgid "Back to activity"
+#: src\components\activities\PhotosActivities.vue:18
+msgid "Go to activity"
 msgstr ""
 
 #: src\components\activities\UpcomingActivities.vue:4
+#: src\components\activities\UpcomingActivitiesCards.vue:2
 #: src\views\pages\ComponentsView.vue:16
 msgid "Upcoming Activities"
 msgstr ""
@@ -90,26 +92,154 @@ msgstr ""
 msgid "Enroll now!"
 msgstr ""
 
-#: src\components\footer\ContactUs.vue:3
-msgid "Contact us"
+#: src\components\demo\DemoTable.vue:14
+msgid "Name"
 msgstr ""
 
-#: src\components\footer\Footer.vue:10
+#: src\components\demo\DemoTable.vue:15
+msgid "Age"
+msgstr ""
+
+#: src\components\demo\DemoTable.vue:16
+msgid "Email"
+msgstr ""
+
+#: src\components\footer\Footer.vue:5
 msgid "footer.text"
 msgstr ""
 
-#: src\components\footer\OpenMaps.vue:2
-msgid "Open maps"
+#: src\components\footer\Footer.vue:10
+msgid "Pages"
 msgstr ""
 
-#: src\components\header\Header.vue:15
-#: src\components\menu\MenuInfo.vue:5
+#: src\components\footer\Footer.vue:17
+msgid "Important information"
+msgstr ""
+
+#: src\components\footer\Footer.vue:18
+msgid "Privacy policy"
+msgstr ""
+
+#: src\components\footer\Footer.vue:20
+#: src\components\header\Header.vue:158
+msgid "Contact"
+msgstr ""
+
+#: src\components\footer\Footer.vue:23
+msgid "Report a problem"
+msgstr ""
+
+#: src\components\footer\Footer.vue:26
+msgid "CVD Policy"
+msgstr ""
+
+#: src\components\footer\Footer.vue:31
+msgid "Contact us"
+msgstr ""
+
+#: src\components\footer\Footer.vue:51
+#: src\components\header\Header.vue:69
+msgid "Activities"
+msgstr ""
+
+#: src\components\footer\Footer.vue:55
+#: src\components\header\Header.vue:73
+msgid "News"
+msgstr ""
+
+#: src\components\footer\Footer.vue:59
+#: src\components\header\Header.vue:81
+#: src\views\pages\PublicationView.vue:3
+msgid "Publications"
+msgstr ""
+
+#: src\components\footer\Footer.vue:63
+#: src\components\header\Header.vue:154
+msgid "Education"
+msgstr ""
+
+#: src\components\header\Header.vue:11
 msgid "Become a member"
 msgstr ""
 
-#: src\components\header\Header.vue:21
-#: src\components\menu\MenuInfo.vue:10
+#: src\components\header\Header.vue:14
 msgid "Sign-in"
+msgstr ""
+
+#: src\components\header\Header.vue:64
+msgid "Home"
+msgstr ""
+
+#: src\components\header\Header.vue:77
+msgid "Components"
+msgstr ""
+
+#: src\components\header\Header.vue:85
+msgid "Association"
+msgstr ""
+
+#: src\components\header\Header.vue:88
+msgid "Inter-Actief"
+msgstr ""
+
+#: src\components\header\Header.vue:92
+msgid "Board"
+msgstr ""
+
+#: src\components\header\Header.vue:96
+msgid "Former boards"
+msgstr ""
+
+#: src\components\header\Header.vue:100
+msgid "Honorary members"
+msgstr ""
+
+#: src\components\header\Header.vue:104
+msgid "Members of Merit"
+msgstr ""
+
+#: src\components\header\Header.vue:108
+msgid "Committees"
+msgstr ""
+
+#: src\components\header\Header.vue:112
+msgid "Membership"
+msgstr ""
+
+#: src\components\header\Header.vue:116
+msgid "(Graduation) drink"
+msgstr ""
+
+#: src\components\header\Header.vue:120
+msgid "Symposia"
+msgstr ""
+
+#: src\components\header\Header.vue:124
+msgid "Study tours"
+msgstr ""
+
+#: src\components\header\Header.vue:128
+msgid "Members' initiative"
+msgstr ""
+
+#: src\components\header\Header.vue:132
+msgid "Association song"
+msgstr ""
+
+#: src\components\header\Header.vue:136
+msgid "Alumni Association ENIAC"
+msgstr ""
+
+#: src\components\header\Header.vue:140
+msgid "Sister associations"
+msgstr ""
+
+#: src\components\header\Header.vue:144
+msgid "Inter-Actief App"
+msgstr ""
+
+#: src\components\header\Header.vue:148
+msgid "Inter-Archive"
 msgstr ""
 
 #: src\components\news\LatestNews.vue:4
@@ -124,43 +254,20 @@ msgstr ""
 msgid "News page"
 msgstr ""
 
-#: src\components\ui\Cards.vue:14
-msgstr ""
-
-#: src\components\ui\Pagination.vue:6
-msgid "First"
-msgstr ""
-
-#: src\components\ui\Pagination.vue:20
-msgid "Last"
-msgstr ""
-
-#: src\components\ui\PaginationNext.vue:6
-msgid "Previous"
-msgstr ""
-
-#: src\components\ui\PaginationNext.vue:11
-msgid "Page"
-msgstr ""
-
-#: src\components\ui\PaginationNext.vue:16
-msgid "Next"
-msgstr ""
-
 #: src\views\activities\ActivitiesView.vue:5
 msgid "Activities you don't want to miss"
 msgstr ""
 
-#: src\views\activities\ActivitiesView.vue:11
+#: src\views\activities\ActivitiesView.vue:10
 msgid "Past activities"
 msgstr ""
 
-#: src\views\activities\SingleActivites.vue:20
+#: src\views\activities\SingleActivites.vue:11
 msgid "View photos"
 msgstr ""
 
-#: src\views\activities\SingleActivites.vue:25
-#: src\views\news\SingleNews.vue:20
+#: src\views\activities\SingleActivites.vue:17
+#: src\views\news\SingleNews.vue:18
 msgid "Return to overview"
 msgstr ""
 
@@ -172,22 +279,14 @@ msgstr ""
 msgid "Latest News"
 msgstr ""
 
-#: src\views\pages\ComponentsView.vue:23
-msgid "Latest Activities"
-msgstr ""
-
 #: src\views\pages\ComponentsView.vue:27
 msgid "Editor"
 msgstr ""
 
-#: src\views\pages\ComponentsView.vue:34
+#: src\views\pages\ComponentsView.vue:33
 msgid "Demo overview"
 msgstr ""
 
-#: src\views\pages\EducationView.vue:6
+#: src\views\pages\EducationView.vue:4
 msgid "Information"
-msgstr ""
-
-#: src\views\pages\EducationView.vue:10
-msgid "General"
 msgstr ""

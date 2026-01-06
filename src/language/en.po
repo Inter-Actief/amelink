@@ -1,66 +1,68 @@
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=UTF-8\n"
 "Project-Id-Version: PACKAGE VERSION\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src\components\activities\demo\DemoOverviewActivities.vue:21
-#: src\components\activities\OverviewActivities.vue:20
-#: src\components\news\OverviewNews.vue:17
+#: src\components\ui\TextCard.vue:29
 msgid "Read more"
 msgstr "Read more"
 
-#: src\components\activities\InformationActivites.vue:3
+#: src\components\activities\InformationActivites.vue:2
 msgid "Who, what, where, when..."
 msgstr "Who, what, where, when..."
 
-#: src\components\activities\InformationActivites.vue:6
+#: src\components\activities\InformationActivites.vue:5
+#: src\components\activities\InformationActivites.vue:45
 msgid "Who"
 msgstr "Who"
 
-#: src\components\activities\InformationActivites.vue:11
+#: src\components\activities\InformationActivites.vue:6
 msgid "What"
 msgstr "What"
 
-#: src\components\activities\InformationActivites.vue:18
+#: src\components\activities\InformationActivites.vue:7
 msgid "Where"
 msgstr "Where"
 
-#: src\components\activities\InformationActivites.vue:23
+#: src\components\activities\InformationActivites.vue:8
 msgid "When"
 msgstr "When"
 
-#: src\components\activities\InformationActivites.vue:25
-msgid "from"
-msgstr "from"
-
-#: src\components\activities\InformationActivites.vue:26
-msgid "until"
-msgstr "until"
-
-#: src\components\activities\InformationActivites.vue:32
+#: src\components\activities\InformationActivites.vue:9
 msgid "Label"
 msgstr "Label"
 
-#: src\components\activities\InformationActivites.vue:37
+#: src\components\activities\InformationActivites.vue:10
 msgid "Costs"
 msgstr "Costs"
 
-#: src\components\activities\InformationActivites.vue:41
+#: src\components\activities\InformationActivites.vue:16
+msgid "from"
+msgstr "from"
+
+#: src\components\activities\InformationActivites.vue:17
+msgid "until"
+msgstr "until"
+
+#: src\components\activities\InformationActivites.vue:24
 msgid "Free"
 msgstr "Free"
 
 #: src\components\activities\LatestActivities.vue:4
-msgid "Actual Activities"
-msgstr "Actual Activities"
+#: src\views\pages\ComponentsView.vue:23
+msgid "Latest Activities"
+msgstr "Latest Activities"
 
-#: src\components\activities\LatestActivities.vue:6
+#: src\components\activities\LatestActivities.vue:7
 #: src\components\activities\UpcomingActivities.vue:6
+#: src\components\activities\UpcomingActivitiesCards.vue:5
 msgid "View all activities"
 msgstr "View all activities"
 
@@ -74,17 +76,18 @@ msgstr "Date"
 msgid "Activity"
 msgstr "Activity"
 
-#: src\components\activities\PastActivities.vue:9
-#: src\components\activities\PastActivities.vue:27
+#: src\components\activities\PastActivities.vue:21
 msgid "Photos"
 msgstr "Photos"
 
 #: src\components\activities\PhotosActivities.vue:3
-#: src\components\activities\PhotosActivities.vue:21
-msgid "Back to activity"
+#: src\components\activities\PhotosActivities.vue:18
+#, fuzzy
+msgid "Go to activity"
 msgstr "Back to activity"
 
 #: src\components\activities\UpcomingActivities.vue:4
+#: src\components\activities\UpcomingActivitiesCards.vue:2
 #: src\views\pages\ComponentsView.vue:16
 msgid "Upcoming Activities"
 msgstr "Upcoming Activities"
@@ -93,34 +96,163 @@ msgstr "Upcoming Activities"
 msgid "Type"
 msgstr "Type"
 
-#: src\components\activities\UpcomingActivities.vue:35
+#: src\components\activities\UpcomingActivities.vue:37
 msgid "Enroll now!"
 msgstr "Enroll now!"
 
-#: src\components\footer\ContactUs.vue:3
+#: src\components\demo\DemoTable.vue:14
+msgid "Name"
+msgstr "Name"
+
+#: src\components\demo\DemoTable.vue:15
+msgid "Age"
+msgstr "Age"
+
+#: src\components\demo\DemoTable.vue:16
+msgid "Email"
+msgstr "Email"
+
+#: src\components\footer\Footer.vue:5
+msgid "footer.text"
+msgstr ""
+"I.C.T.S.V. Inter-Actief is the study association for the studies Technical "
+"Computer Science, Business Information Technology and the corresponding "
+"masters at the University of Twente. Inter-Actief was founded on the 12th of "
+"March 1981 and has approximately 1400 members, making her the largest ICT-"
+"study association in the Netherlands."
+
+#: src\components\footer\Footer.vue:10
+#, fuzzy
+msgid "Pages"
+msgstr "Page"
+
+#: src\components\footer\Footer.vue:17
+#, fuzzy
+msgid "Important information"
+msgstr "Information"
+
+#: src\components\footer\Footer.vue:18
+msgid "Privacy policy"
+msgstr "Privacy policy"
+
+#: src\components\footer\Footer.vue:20 src\components\header\Header.vue:158
+#, fuzzy
+msgid "Contact"
+msgstr "Contact"
+
+#: src\components\footer\Footer.vue:23
+msgid "Report a problem"
+msgstr "Report a problem"
+
+#: src\components\footer\Footer.vue:26
+msgid "CVD Policy"
+msgstr "CVD Policy"
+
+#: src\components\footer\Footer.vue:31
 msgid "Contact us"
 msgstr "Contact us"
 
-#: src\components\footer\Footer.vue:10
-msgid "footer.text"
-msgstr "footer.text"
+#: src\components\footer\Footer.vue:51 src\components\header\Header.vue:69
+#, fuzzy
+msgid "Activities"
+msgstr "Activity"
 
-#: src\components\footer\OpenMaps.vue:2
-msgid "Open maps"
-msgstr "Open maps"
+#: src\components\footer\Footer.vue:55 src\components\header\Header.vue:73
+msgid "News"
+msgstr "News"
 
-#: src\components\forms\ContactForm.vue:8 src\components\forms\EditorForm.vue:8
-#: src\components\forms\EnrollForm.vue:8
-msgid "Send"
-msgstr "Send"
+#: src\components\footer\Footer.vue:59 src\components\header\Header.vue:81
+#: src\views\pages\PublicationView.vue:3
+msgid "Publications"
+msgstr "Publications"
 
-#: src\components\header\Header.vue:15 src\components\menu\MenuInfo.vue:5
+#: src\components\footer\Footer.vue:63 src\components\header\Header.vue:154
+msgid "Education"
+msgstr "Education"
+
+#: src\components\header\Header.vue:11
 msgid "Become a member"
 msgstr "Become a member"
 
-#: src\components\header\Header.vue:21 src\components\menu\MenuInfo.vue:10
+#: src\components\header\Header.vue:14
 msgid "Sign-in"
 msgstr "Sign-in"
+
+#: src\components\header\Header.vue:64
+msgid "Home"
+msgstr "Home"
+
+#: src\components\header\Header.vue:77
+msgid "Components"
+msgstr "Components"
+
+#: src\components\header\Header.vue:85
+msgid "Association"
+msgstr "Association"
+
+#: src\components\header\Header.vue:88
+msgid "Inter-Actief"
+msgstr "Inter-Actief"
+
+#: src\components\header\Header.vue:92
+msgid "Board"
+msgstr "Board"
+
+#: src\components\header\Header.vue:96
+msgid "Former boards"
+msgstr "Former boards"
+
+#: src\components\header\Header.vue:100
+msgid "Honorary members"
+msgstr "Honorary members"
+
+#: src\components\header\Header.vue:104
+msgid "Members of Merit"
+msgstr "Members of Merit"
+
+#: src\components\header\Header.vue:108
+msgid "Committees"
+msgstr "Committees"
+
+#: src\components\header\Header.vue:112
+msgid "Membership"
+msgstr "Membership"
+
+#: src\components\header\Header.vue:116
+msgid "(Graduation) drink"
+msgstr "(Graduation) drink"
+
+#: src\components\header\Header.vue:120
+msgid "Symposia"
+msgstr "Symposia"
+
+#: src\components\header\Header.vue:124
+msgid "Study tours"
+msgstr "Study tours"
+
+#: src\components\header\Header.vue:128
+msgid "Members' initiative"
+msgstr "Members' initiative"
+
+#: src\components\header\Header.vue:132
+msgid "Association song"
+msgstr "Association song"
+
+#: src\components\header\Header.vue:136
+msgid "Alumni Association ENIAC"
+msgstr "Alumni Association ENIAC"
+
+#: src\components\header\Header.vue:140
+msgid "Sister associations"
+msgstr "Sister associations"
+
+#: src\components\header\Header.vue:144
+msgid "Inter-Actief App"
+msgstr "Inter-Actief App"
+
+#: src\components\header\Header.vue:148
+msgid "Inter-Archive"
+msgstr "Inter-Archive"
 
 #: src\components\news\LatestNews.vue:4
 msgid "News & Announcements"
@@ -134,35 +266,19 @@ msgstr "View all news"
 msgid "News page"
 msgstr "News page"
 
-#: src\components\ui\Pagination.vue:6
-msgid "First"
-msgstr "First"
+#: src\views\activities\ActivitiesView.vue:5
+msgid "Activities you don't want to miss"
+msgstr "Activities you don't want to miss"
 
-#: src\components\ui\Pagination.vue:20
-msgid "Last"
-msgstr "Last"
-
-#: src\components\ui\PaginationNext.vue:6
-msgid "Previous"
-msgstr "Previous"
-
-#: src\components\ui\PaginationNext.vue:11
-msgid "Page"
-msgstr "Page"
-
-#: src\components\ui\PaginationNext.vue:16
-msgid "Next"
-msgstr "Next"
-
-#: src\views\activities\ActivitiesView.vue:11
+#: src\views\activities\ActivitiesView.vue:10
 msgid "Past activities"
 msgstr "Past activities"
 
-#: src\views\activities\SingleActivites.vue:20
+#: src\views\activities\SingleActivites.vue:11
 msgid "View photos"
 msgstr "View photos"
 
-#: src\views\activities\SingleActivites.vue:26 src\views\news\SingleNews.vue:20
+#: src\views\activities\SingleActivites.vue:17 src\views\news\SingleNews.vue:18
 msgid "Return to overview"
 msgstr "Return to overview"
 
@@ -174,22 +290,42 @@ msgstr "Demo Table"
 msgid "Latest News"
 msgstr "Latest News"
 
-#: src\views\pages\ComponentsView.vue:23
-msgid "Latest Activities"
-msgstr "Latest Activities"
-
 #: src\views\pages\ComponentsView.vue:27
 msgid "Editor"
 msgstr "Editor"
 
-#: src\views\pages\ComponentsView.vue:34
+#: src\views\pages\ComponentsView.vue:33
 msgid "Demo overview"
 msgstr "Demo overview"
 
-#: src\views\pages\EducationView.vue:6
+#: src\views\pages\EducationView.vue:4
 msgid "Information"
 msgstr "Information"
 
-#: src\views\pages\EducationView.vue:10
-msgid "General"
-msgstr "General"
+#~ msgid "Open maps"
+#~ msgstr "Open maps"
+
+#, fuzzy
+#~ msgid "Latest activities"
+#~ msgstr "Latest Activities"
+
+#~ msgid "Actual Activities"
+#~ msgstr "Actual Activities"
+
+#~ msgid "Send"
+#~ msgstr "Send"
+
+#~ msgid "First"
+#~ msgstr "First"
+
+#~ msgid "Last"
+#~ msgstr "Last"
+
+#~ msgid "Previous"
+#~ msgstr "Previous"
+
+#~ msgid "Next"
+#~ msgstr "Next"
+
+#~ msgid "General"
+#~ msgstr "General"

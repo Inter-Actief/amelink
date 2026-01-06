@@ -1,77 +1,50 @@
 <template>
-    <div class="activity_information" v-if="props.item">
-        <h2>{{ $gettext('Who, what, where, when...') }}</h2>
-
-        <div class="item">
-            <div class="key">{{ $gettext('Who') }}</div>
-            <div class="value">{{ props.item.organizer.name }}</div>
-        </div>
-
-        <div class="item">
-            <div class="key">{{ $gettext('What') }}</div>
-            <div class="value">
-                {{ getItemValue(props.item.activityLabel, 'explanation') }}
+    <TextCard :title="$gettext('Who, what, where, when...')">
+        <div class="grid grid-cols-12 pt-4">
+            <div class="col-span-2">
+                <div class="font-bold">{{ $gettext('Who') }}</div>
+                <div class="font-bold">{{ $gettext('What') }}</div>
+                <div class="font-bold">{{ $gettext('Where') }}</div>
+                <div class="font-bold">{{ $gettext('When') }}</div>
+                <div class="font-bold">{{ $gettext('Label') }}</div>
+                <div class="font-bold">{{ $gettext('Costs') }}</div>
+            </div>
+            <div class="col-span-10">
+                <div>{{ props.item.organizer.name }}</div>
+                <div>{{ getItemValue(props.item.activityLabel, 'explanation') }}</div>
+                <div>{{ props.item.location }}</div>
+                <div> {{ formattedData(props.item.enrollmentBegin) }} {{ $gettext('from') }}
+                    {{ formattedTime(props.item.enrollmentBegin) }} {{ $gettext('until') }}
+                    {{ formattedTime(props.item.enrollmentEnd) }}</div>
+                <!-- TODO: Fix label -->
+                <div>{{ props.item.activityLabel[`nameEn`] }}</div>
+                <div>
+                    <template v-if="props.item.hasCosts"> {{ props.item.price }} euro </template>
+                    <template v-else>
+                        {{ $gettext('Free') }}
+                    </template>
+                </div>
             </div>
         </div>
-
-        <div class="item">
-            <div class="key">{{ $gettext('Where') }}</div>
-            <div class="value">{{ props.item.location }}</div>
-        </div>
-
-        <div class="item">
-            <div class="key">{{ $gettext('When') }}</div>
-            <div class="value">
-                {{ formattedData(props.item.enrollmentBegin) }} {{ $gettext('from') }}
-                {{ formattedTime(props.item.enrollmentBegin) }} {{ $gettext('until') }}
-                {{ formattedTime(props.item.enrollmentEnd) }}
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="key">{{ $gettext('Label') }}</div>
-            <div class="value">{{ props.item.activityLabel[`nameEn`] }}</div>
-        </div>
-
-        <div class="item">
-            <div class="key">{{ $gettext('Costs') }}</div>
-            <div class="value">
-                <template v-if="props.item.hasCosts"> {{ props.item.price }} euro </template>
-                <template v-else>
-                    {{ $gettext('Free') }}
-                </template>
-            </div>
-        </div>
-    </div>
+    </TextCard>
 </template>
 
 <script setup lang="ts">
 import { formattedData, formattedTime, getItemValue } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext';
+import TextCard from '../ui/TextCard.vue';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import { reactive } from 'vue';
 const gettext = useGettext();
 
 const { $gettext } = gettext;
 const props = defineProps(['item'])
+
+const data = reactive([{
+    name: $gettext('Who'),
+    value: props.item.organizer.name
+}])
 </script>
 
-<style scoped lang="scss">
-.activity_information {
-    width: 100%;
-    padding: 4rem;
-    background-color: $color_light2;
-    border-radius: $border-radius;
-
-    h2 {
-        padding-bottom: 2rem;
-    }
-
-    .item {
-        display: grid;
-        grid-template-columns: 10rem auto;
-
-        .key {
-            font-weight: 700;
-        }
-    }
-}
-</style>
+<style scoped lang="scss"></style>

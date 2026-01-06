@@ -1,15 +1,19 @@
-query LatestActivitiesQuery($limit: Int, $startDate: DateTime) {
-  activities(limit: $limit, begin_Gt: $startDate) {
+query LatestActivitiesQuery($limit: Int, $offset: Int, $startDate: DateTime) {
+  activities(limit: $limit, offset: $offset, end_Lt: $startDate, ordering: "begin,desc") {
     results {
       id
       description
       summary
       begin
+      imageIcon
+      activityLabel {
+        nameNl
+        nameEn
+        color
+        active
+      }
       photos {
-        caption
         thumbMedium
-        thumbMediumHeight
-        thumbMediumWidth
       }
     }
     totalCount
@@ -17,7 +21,7 @@ query LatestActivitiesQuery($limit: Int, $startDate: DateTime) {
 }
 
 query OverviewActivitiesQuery($limit: Int, $offset: Int, $startDate: DateTime!) {
-  activities(limit: $limit, offset: $offset, begin_Gt: $startDate, ordering: "begin,desc") {
+  activities(limit: $limit, offset: $offset, begin_Gt: $startDate, ordering: "begin,asc") {
     results {
       id
       begin
@@ -34,17 +38,15 @@ query OverviewActivitiesQuery($limit: Int, $offset: Int, $startDate: DateTime!) 
   }
 }
 
-query PastActivitesQuery($limit: Int, $endDate: DateTime) {
-  activities(limit: $limit, ordering: "begin,desc", begin_Lt: $endDate) {
+query PastActivitiesQuery($limit: Int, $offset: Int, $endDate: DateTime) {
+  activities(limit: $limit, offset: $offset, ordering: "begin,desc", begin_Lt: $endDate) {
+    totalCount
     results {
       id
       begin
       description
       summary
       photos {
-        thumbMedium
-        thumbMediumHeight
-        thumbMediumWidth
         caption
       }
     }
@@ -66,13 +68,14 @@ query PhotosActivitiesQuery($id: ID) {
   }
 }
 
-query UpcomingActivitiesQuery($limit: Int, $beginDate: DateTime) {
-  activities(limit: $limit, begin_Gt: $beginDate) {
+query UpcomingActivitiesQuery($limit: Int, $offset: Int, $beginDate: DateTime) {
+  activities(limit: $limit, offset: $offset, begin_Gt: $beginDate, ordering: "begin,asc") {
     results {
       id
       begin
       description
       summary
+      imageIcon
       activityLabel {
         nameNl
         nameEn
@@ -114,17 +117,14 @@ query ActivitiesSliderCardQuery($endgt: DateTime, $limit: Int) {
 }
 
 query HomepageSliderQuery($limit: Int, $beginDate: DateTime) {
-  activities(limit: $limit, begin_Gt: $beginDate) {
+  activities(limit: $limit, begin_Lt: $beginDate, ordering: "begin,desc") {
     results {
       id
       description
       summary
       begin
       photos {
-        caption
-        thumbMedium
-        thumbMediumHeight
-        thumbMediumWidth
+        thumbLarge
       }
     }
     totalCount
@@ -208,6 +208,26 @@ query PageViewQuery($pageId: ID) {
     name
     slug
     content
+  }
+}
+
+query PublicationOverview($limit: Int, $offset: Int) {
+  publications(limit: $limit, offset: $offset, ordering: "datePublished,desc") {
+    results {
+      id
+      name
+      description
+      datePublished
+      publicationType {
+        typeName
+        description
+      }
+      thumbnail
+      file
+      isFeatured
+      public
+    }
+    totalCount
   }
 }
 

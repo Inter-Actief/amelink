@@ -1,7 +1,7 @@
 import { definePreset } from '@primevue/themes'
-import Aura from '@primevue/themes/aura'
+import Lara from '@primevue/themes/lara'
 
-export const iaPreset = definePreset(Aura, {
+export const iaPreset = definePreset(Lara, {
     primitive: {
         borderRadius: {
             none: '0',
@@ -323,6 +323,7 @@ export const iaPreset = definePreset(Aura, {
             900: '#0c1a37',
             950: '#071123',
         },
+        emphasize: '#43c7ff',
         formField: {
             paddingX: '0.75rem',
             paddingY: '0.5rem',
@@ -421,10 +422,11 @@ export const iaPreset = definePreset(Aura, {
                     950: '#020617',
                 },
                 primary: {
-                    color: '{primary.500}',
-                    contrastColor: '#ffffff',
+                    color: '#1d428a',
+                    contrastColor: '#fafafa',
                     hoverColor: '{primary.600}',
                     activeColor: '{primary.700}',
+                    transparent: '#1d428a0d',
                 },
                 highlight: {
                     background: '{primary.50}',
@@ -459,7 +461,7 @@ export const iaPreset = definePreset(Aura, {
                 },
                 text: {
                     color: '{surface.700}',
-                    hoverColor: '{surface.800}',
+                    hoverColor: '#43c7ff',
                     mutedColor: '{surface.500}',
                     hoverMutedColor: '{surface.600}',
                 },
@@ -508,7 +510,7 @@ export const iaPreset = definePreset(Aura, {
                 },
                 navigation: {
                     item: {
-                        focusBackground: '{surface.100}',
+                        focusBackground: '{surface.1000}',
                         activeBackground: '{surface.100}',
                         color: '{text.color}',
                         focusColor: '{text.hover.color}',
@@ -529,6 +531,10 @@ export const iaPreset = definePreset(Aura, {
                         activeColor: '{surface.500}',
                     },
                 },
+                page: {
+                    background: '{surface.0}',
+                    highlight: '#1d428a0d',
+                },
             },
             dark: {
                 surface: {
@@ -546,10 +552,11 @@ export const iaPreset = definePreset(Aura, {
                     950: '#09090b',
                 },
                 primary: {
-                    color: '{primary.400}',
-                    contrastColor: '{surface.900}',
+                    color: '#1d428a',
+                    contrastColor: '{surface.50}',
                     hoverColor: '{primary.300}',
                     activeColor: '{primary.200}',
+                    transparent: '#1d428a3f',
                 },
                 highlight: {
                     background: 'color-mix(in srgb, {primary.400}, transparent 84%)',
@@ -584,7 +591,7 @@ export const iaPreset = definePreset(Aura, {
                 },
                 text: {
                     color: '{surface.0}',
-                    hoverColor: '{surface.0}',
+                    hoverColor: '#43c7ff',
                     mutedColor: '{surface.400}',
                     hoverMutedColor: '{surface.300}',
                 },
@@ -653,6 +660,141 @@ export const iaPreset = definePreset(Aura, {
                         focusColor: '{surface.400}',
                         activeColor: '{surface.400}',
                     },
+                },
+                page: {
+                    background: '{surface.900}',
+                    highlight: '#1d428a0d',
+                },
+            },
+        },
+    },
+    components: {
+        card: {
+            colorScheme: {
+                light: {
+                    background: '{primary.transparent}',
+                    color: '{surface.900}',
+                },
+                dark: {
+                    color: '{primary.contrastColor}',
+                    background: '{primary.transparent}',
+                },
+            },
+        },
+        menubar: {
+            colorScheme: {
+                light: {
+                    background: '{primary.color}',
+                    color: '{primary.color}',
+                    'item.color': '{primary.color}',
+                    'item.focus.color': '{primary.contrastColor}',
+                    'item.focus.background': '{primary.600}',
+                    'item.active.color': '{primary.contrastColor}',
+                    'item.active.background': '{primary.600}',
+                    // item: {
+                    //     color: '{primary.contrastColor}',
+                    //     focus: {
+                    //         color: '{primary.contrastColor}',
+                    //         background: '{primary.color}',
+                    //     },
+                    //     active: {
+                    //         color: '{primary.contrastColor}',
+                    //         background: '{primary.color}',
+                    //     },
+                    // },
+                },
+                dark: {
+                    background: '{primary.color}',
+                    color: '{primary.contrastColor}',
+                    item: {
+                        color: '{primary.contrastColor}',
+                        focus: {
+                            color: '{primary.contrastColor}',
+                            background: '{primary.600}',
+                        },
+                        active: {
+                            color: '{primary.contrastColor}',
+                            background: '{primary.600}',
+                        },
+                    },
+                },
+            },
+        },
+        datatable: {
+            colorScheme: {
+                light: {
+                    'header.cell.background': '{primary.color}',
+                    'header.cell.color': '{primary.contrastColor}',
+                    'row.striped.background': '{primary.transparent}',
+                },
+                dark: {
+                    'header.cell.background': '{primary.color}',
+                    'header.cell.color': '{primary.contrastColor}',
+                    'row.striped.background': '{primary.transparent}',
+                },
+            },
+        },
+        divider: {
+            colorScheme: {
+                light: {
+                    'border.color': '{primary.200}',
+                },
+                dark: {
+                    'border.color': '{primary.color}',
+                },
+            },
+        },
+        paginator: {
+            colorScheme: {
+                light: {
+                    // Paginator uses a transparent background since it should use the same background given by the page or card or whatever.
+                    // Custom background can be set via tailwind if needed
+                    background: '#ffffff00',
+                },
+                dark: {
+                    background: '#ffffff00',
+                },
+            },
+        },
+        button: {
+            colorScheme: {
+                light: {
+                    'secondary.color': '{primary.color}',
+                    'secondary.background': '{primary.contrastColor}',
+                    'secondary.border.color': '{transparent}',
+                    'secondary.hover.color': '{primary.color}',
+                    'secondary.hover.border.color': '{transparent}',
+                    'secondary.hover.background': '{surface.200}',
+                    'secondary.active.background': '{primary.color}',
+                    'secondary.active.color': '{primary.contrastColor}',
+                    'secondary.active.border.color': '{primary.contrastColor}',
+                },
+                dark: {
+                    'secondary.color': '{primary.color}',
+                    'secondary.background': '{primary.contrastColor}',
+                    'secondary.border.color': '{transparent}',
+                    'secondary.hover.color': '{primary.color}',
+                    'secondary.hover.border.color': '{transparent}',
+                    'secondary.hover.background': '{surface.200}',
+                    'secondary.active.background': '{primary.color}',
+                    'secondary.active.color': '{primary.contrastColor}',
+                    'secondary.active.border.color': '{primary.contrastColor}',
+                },
+            },
+        },
+        galleria: {
+            colorScheme: {
+                light: {
+                    'nav.button.color': '{primary.contrastColor}',
+                    'nav.button.background': '{primary.color}',
+                    'nav.button.hover.color': '{primary.contrastColor}',
+                    'nav.button.hover.background': '{primary.color}',
+                },
+                dark: {
+                    'nav.button.color': '{primary.contrastColor}',
+                    'nav.button.background': '{primary.color}',
+                    'nav.button.hover.color': '{primary.contrastColor}',
+                    'nav.button.hover.background': '{primary.color}',
                 },
             },
         },

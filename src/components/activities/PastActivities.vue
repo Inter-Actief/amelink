@@ -1,129 +1,90 @@
 <template>
-    <div class="pastactivities">
-        <div class="table">
-            <div class="item head">
-                <div class="date">{{ $gettext('Date') }}</div>
-                <div class="activity">
-                    {{ $gettext('Activity') }}
-                </div>
-                <div class="photos">{{ $gettext('Photos') }}</div>
-            </div>
-
-            <template v-if="queryItems">
-                <template v-for="item in queryItems" :key="item">
-                    <div class="item">
-                        <div class="date">
-                            {{ formattedDataShort(item?.begin) }}
-                        </div>
-                        <div class="activity">
-                            <EpaButton class="link" :to="{ name: 'singleactivities', params: { id: item?.id } }">
-                                <span class="title">
-                                    {{ getItemValue(item, 'summary') }}
-                                </span>
-                            </EpaButton>
-                        </div>
-                        <div class="photos">
-                            <EpaButton v-if="item?.photos?.length ? item.photos.length > 0 : false"
-                                :to="{ name: 'singleactivitiesphotos', params: { id: item?.id } }"
-                                class="link readmore">
-                                {{ $gettext('Photos') }}
-                            </EpaButton>
-                        </div>
-                    </div>
-                </template>
-            </template>
-        </div>
+    <div class="flex pb-4 justify-between items-end">
+        <h2>{{ $gettext('Past activities') }}</h2>
+        <InputText v-model="filters['global'].value" :placeholder="$gettext('Zoek activiteiten')" />
+        <!-- TODO: InputText implementation -->
     </div>
+    <ProgressSpinner v-if="loading && loadCounter == 0" />
+    <DataTable v-model:filters="filters" filterDisplay="menu" :loading="loading" size="large" stripedRows
+        v-if="queryItems" :value="queryItems" paginator :rows="limit" :totalRecords="count!" lazy @page="onPage"
+        :rowsPerPageOptions="[10, 20, 30, 50, 100]">
+        <Column field="startDate" :header="$gettext('Date')" style="width: 15%;" class="font-mono font-bold">
+        </Column>
+        <Column field="summary" :header="$gettext('Activity')">
+            <template #body="props">
+                <RouterLink :to="{ name: 'singleactivities', params: { id: props.data.id } }">
+                    <span class="link">{{ props.data.summary }}</span>
+                </RouterLink>
+            </template>
+        </Column>
+        <Column field="hasPhotos" style="width: 10%;">
+            <template #header>
+                <Camera />
+            </template>
+            <template #body="props">
+                <div v-if="props.data.hasPhotos">
+                    <RouterLink :to="{ name: 'singleactivitiesphotos', params: { id: props.data.id } }">
+                        <span class="link">{{ $gettext("Photos") }}</span>
+                    </RouterLink>
+                </div>
+            </template>
+        </Column>
+    </DataTable>
 </template>
 
 <script setup lang="ts">
-import { useQuery } from '@vue/apollo-composable'
-import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import DataTable, { type DataTablePageEvent } from 'primevue/datatable';
+import Column from 'primevue/column';
+import { FilterMatchMode } from '@primevue/core/api';
+import { computed, onMounted, ref, watch } from 'vue'
 import { formattedDataShort, getItemValue } from '@/functions/functions.ts'
-import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
-import { graphql } from '@/gql'
 import { useQueryStore } from '@/stores/queryStore'
+import { Camera } from 'lucide-vue-next';
 
 const { $gettext } = useGettext();
+const limit = ref(20);
 const queries = useQueryStore();
-const route = useRoute()
-const perpage = ref(20)
-const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
+const query = queries.getPastActivitiesQuery({ limit: limit.value, endDate: new Date() })
+const { result, refetch, loading } = query;
+const count = computed(() => {
+    return result.value?.activities?.totalCount;
+})
 
-const { result, refetch } = queries.getPastActivitiesQuery({ limit: perpage.value, endDate: new Date() })
-const queryResults = computed(() => result.value?.activities)
-const queryItems = computed(() => (queryResults.value ? queryResults.value.results : []))
+const first = ref(0) // first record index
+const loadCounter = ref(0);
+
+query.onResult(() => {
+    loadCounter.value += 1;
+})
+
+const queryItems = computed(() => {
+    return result.value?.activities?.results.map(r => {
+        return {
+            id: r?.id,
+            description: r?.description,
+            startDate: formattedDataShort(r?.begin),
+            summary: getItemValue(r, 'summary'),
+            hasPhotos: (r?.photos == undefined) ? false : (r?.photos.length > 0),
+        }
+    })
+})
+
+// Custom page event handler
+const onPage = async (event: DataTablePageEvent) => {
+    first.value = event.first
+    // rows.value = event.rows
+    await refetch({
+        limit: event.rows,
+        offset: event.first,
+        endDate: new Date(),
+    })
+}
+
+const filters = ref({
+    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    // verified: { value: null, matchMode: FilterMatchMode.EQUALS }
+});
 </script>
 
-<style lang="scss" scoped>
-.pastactivities {
-    background: #fff;
-    border-radius: $border-radius $border-radius 0 0;
-    display: grid;
-    width: 100%;
-
-    .item {
-        display: grid;
-        grid-template-columns: 8rem auto 8rem;
-        gap: $gap_sm;
-        padding: 1.5rem 2rem;
-        align-items: center;
-
-        &.head {
-            font-weight: 700;
-            background-color: $primary-color;
-            color: #fff;
-            border-radius: $border-radius $border-radius 0 0;
-        }
-
-        &:nth-child(even) {
-            background-color: $card_background_color;
-        }
-
-        &:not(.head) {
-            .date {
-                font-size: 2.4rem;
-            }
-
-            .photos {
-                background: linear-gradient(currentColor, currentColor) bottom / 0 0.2rem no-repeat;
-                background-position: left bottom;
-                transition: 300ms;
-                width: fit-content;
-                cursor: pointer;
-
-                &:hover {
-                    background-size: 100% 0.2rem;
-                }
-            }
-        }
-
-        .activity {
-            display: flex;
-            justify-content: space-between;
-        }
-    }
-
-    @media only screen and (max-width: $screen-lg) {
-        overflow-y: auto;
-
-        .table {
-            min-width: 40rem;
-
-            .item {
-                padding: 1rem 1.5rem;
-                grid-template-columns: 7rem auto 7rem;
-                gap: $gap_xs;
-
-                &:not(.head) {
-                    .date {
-                        font-size: 2rem;
-                    }
-                }
-            }
-        }
-    }
-}
-</style>
+<style lang="scss" scoped></style>

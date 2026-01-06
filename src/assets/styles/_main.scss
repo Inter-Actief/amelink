@@ -5,13 +5,38 @@ html {
   // Primevue uses this to control size
 }
 
+// Make datatable edges rounded
+/* Top Left */
+.p-datatable-table > thead > tr:first-of-type > th:first-of-type {
+  border-radius: vars.$border-radius 0 0 0 !important;
+}
+
+/* Top Right */
+.p-datatable-table > thead > tr:first-of-type > th:last-of-type {
+  border-radius: 0 vars.$border-radius 0 0 !important;
+}
+
 .p-component,
 .p-component * {
   font-size: 100%;
 }
 
+// Makes link hover nice
+.link {
+  padding: 0.3rem 0;
+  cursor: pointer;
+  width: fit-content;
+  transition: 300ms;
+  background: linear-gradient(currentColor, currentColor) bottom / 0 0.2rem no-repeat;
+  background-position: left bottom;
+
+  &:hover {
+    background-size: 100% 0.2rem;
+  }
+}
+
 body {
-  color: #1d428a;
+  // color: #1d428a;
   font-family: Inter;
   font-size: 1.8rem;
   font-style: normal;
@@ -29,154 +54,4 @@ body {
   box-sizing: border-box;
   margin: 0;
   font-weight: normal;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-}
-
-.ia_section {
-  position: relative;
-  padding: 3rem 0;
-  background-position: center;
-  background-size: cover;
-
-  &.clean {
-    padding: 0;
-  }
-
-  &.light {
-    background-color: vars.$color_light2;
-  }
-
-  &.blue {
-    background-color: vars.$color_blue;
-  }
-
-  &.lightblue {
-    background-color: vars.$color_lightblue;
-  }
-
-  &.darkblue {
-    background-color: vars.$color_darkblue;
-  }
-
-  &.static {
-    position: static;
-    .ia_row {
-      position: static;
-    }
-  }
-}
-
-.ia_row {
-  position: relative;
-  z-index: 9;
-  width: 90%;
-  max-width: vars.$row-max-width;
-  margin: 0 auto;
-  padding: 3rem 0;
-  gap: vars.$gap_l;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-}
-
-.container {
-  width: 90%;
-  max-width: vars.$row-max-width;
-  margin: 0 auto;
-}
-
-.ia_column {
-  grid-column: 1 / -1;
-  min-width: 0;
-  display: grid;
-  gap: vars.$gap;
-  height: fit-content;
-
-  &.heightauto {
-    height: auto;
-  }
-
-  &.span1 {
-    grid-column: span 1;
-  }
-
-  &.span2 {
-    grid-column: span 2;
-  }
-
-  &.span3 {
-    grid-column: span 3;
-  }
-
-  &.span4 {
-    grid-column: span 4;
-  }
-
-  &.span5 {
-    grid-column: span 5;
-  }
-
-  &.span6 {
-    grid-column: span 6;
-  }
-
-  &.span7 {
-    grid-column: span 7;
-  }
-
-  &.span8 {
-    grid-column: span 8;
-  }
-
-  &.span9 {
-    grid-column: span 9;
-  }
-
-  &.span10 {
-    grid-column: span 10;
-  }
-
-  &.span11 {
-    grid-column: span 11;
-  }
-
-  &.span12 {
-    grid-column: span 12;
-  }
-}
-
-.ia_module {
-  width: 100%;
-  max-width: 100%;
-}
-
-@media only screen and (max-width: vars.$screen-lg) {
-  .ia_column.span3 {
-    grid-column: span 6;
-  }
-  .ia_column.span4,
-  .ia_column.span5,
-  .ia_column.span6,
-  .ia_column.span7,
-  .ia_column.span8,
-  .ia_column.span9,
-  .ia_column.span10,
-  .ia_column.span11 {
-    grid-column: span 12;
-  }
-}
-
-@media only screen and (max-width: vars.$screen-lg) {
-  .ia_row {
-    gap: vars.$gap;
-  }
-}
-
-@media only screen and (max-width: vars.$screen-lm) {
-  .ia_column.ia_span3 {
-    grid-column: span 12;
-  }
 }

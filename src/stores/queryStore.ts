@@ -31,8 +31,8 @@ import {
     type OverviewNewsQueryQueryVariables,
     type PageViewQueryQuery,
     type PageViewQueryQueryVariables,
-    type PastActivitesQueryQuery,
-    type PastActivitesQueryQueryVariables,
+    type PastActivitiesQueryQuery,
+    type PastActivitiesQueryQueryVariables,
     type PhotosActivitiesQueryQuery,
     type PhotosActivitiesQueryQueryVariables,
     type SetLanguageMutationMutationVariables,
@@ -42,22 +42,11 @@ import {
     type SingleNewsQueryQueryVariables,
     type UpcomingActivitiesQueryQuery,
     type UpcomingActivitiesQueryQueryVariables,
+    type PublicationOverviewQueryVariables,
+    type PublicationOverviewQuery,
 } from '@/gql/graphql'
 import type { DocumentNode, OperationVariables, ApolloQueryResult } from '@apollo/client/core'
-import { useLanguageStore } from './languageStore'
 import type { DocumentParameter, OptionsParameter } from '@vue/apollo-composable/dist/useQuery.js'
-
-export interface PaginatedQueryReturn<TResult, TVariables extends OperationVariables>
-    extends UseQueryReturn<TResult, TVariables> {
-    /** Tracks the currently selected page based on offset and limit */
-    selectedPage: Ref<number>
-}
-
-export interface PaginatedMutationReturn<TResult, TVariables extends OperationVariables>
-    extends UseMutationReturn<TResult, TVariables> {
-    /** Tracks the currently selected page based on offset and limit */
-    selectedPage: Ref<number>
-}
 
 export const useQueryStore = defineStore('queryStore', () => {
     // TODO: Use caching, pagination, language and markedText with html-escape
@@ -70,56 +59,23 @@ export const useQueryStore = defineStore('queryStore', () => {
     function fetchQuery<TQuery, V extends OperationVariables>(
         query: DocumentParameter<TQuery, V>,
         variables: V,
-    ): PaginatedQueryReturn<TQuery, V> {
-        provideApolloClient(apolloClient)
-        // Default selectedpage
-        let selectedPage = ref(0)
+    ): UseQueryReturn<TQuery, V> {
+        if (query == undefined) {
+            throw new Error('Query must not be undefined')
+        }
 
-        const queryResult = useQuery<TQuery, V>(query, variables, {
+        provideApolloClient(apolloClient)
+
+        return useQuery<TQuery, V>(query, variables, {
             fetchPolicy: 'network-only',
         })
-
-        // Using pagination?
-        if (
-            typeof (variables as any).limit === 'number' &&
-            typeof (variables as any).offset === 'number'
-        ) {
-            selectedPage.value = Math.floor((variables as any).offset / (variables as any).limit)
-
-            // Watch to update in case of pagination
-            watch(
-                () => selectedPage.value,
-                (newValue) => {
-                    if (newValue == undefined) {
-                        return
-                    }
-
-                    const newOffset = newValue * (variables as any).limit
-
-                    // refetch with new variables for the limit and offset determined by page
-                    queryResult.refetch({
-                        ...variables,
-                        offset: newOffset,
-                    })
-                },
-            )
-        }
-
-        return {
-            ...queryResult,
-            selectedPage,
-        }
     }
 
     function mutate<TQuery, V extends OperationVariables>(
         mutation: DocumentNode,
         options?: UseMutationOptions<TQuery, V>,
-    ): PaginatedMutationReturn<TQuery, V> {
-        const queryResult = useMutation<TQuery, V>(mutation, options)
-
-        // selectedPage is -1; not supported yet
-        let selectedPage = ref(-1)
-        return { ...queryResult, selectedPage }
+    ): UseMutationReturn<TQuery, V> {
+        return useMutation<TQuery, V>(mutation, options)
     }
 
     function setLanguageMutation(
@@ -149,8 +105,8 @@ export const useQueryStore = defineStore('queryStore', () => {
         )
     }
 
-    function getPastActivitiesQuery(variables: PastActivitesQueryQueryVariables) {
-        return fetchQuery<PastActivitesQueryQuery, PastActivitesQueryQueryVariables>(
+    function getPastActivitiesQuery(variables: PastActivitiesQueryQueryVariables) {
+        return fetchQuery<PastActivitiesQueryQuery, PastActivitiesQueryQueryVariables>(
             _queries.PastActivitiesQuery,
             variables,
         )
@@ -233,6 +189,13 @@ export const useQueryStore = defineStore('queryStore', () => {
         )
     }
 
+    function getPublicationOverview(variables: PublicationOverviewQueryVariables) {
+        return fetchQuery<PublicationOverviewQuery, PublicationOverviewQueryVariables>(
+            _queries.PublicationOverview,
+            variables,
+        )
+    }
+
     return {
         fetchQuery,
         mutate,
@@ -250,7 +213,7 @@ export const useQueryStore = defineStore('queryStore', () => {
         getSingleNewsQuery,
         getEducationViewQuery,
         getPageViewQuery,
-
+        getPublicationOverview,
         setLanguageMutation,
     }
 })

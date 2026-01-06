@@ -22,7 +22,8 @@ export const useThemeStore = defineStore('themeStore', () => {
         theme.value = theme.value == 'light' ? 'dark' : 'light'
 
         // Update document root
-        document.documentElement.className = theme.value
+        document.documentElement.classList.toggle('light')
+        document.documentElement.classList.toggle('dark')
 
         // Update localstorage
         localStorage.setItem('theme', theme.value)

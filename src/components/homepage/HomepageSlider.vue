@@ -1,100 +1,69 @@
 <template>
-    <swiper :slidesPerView="1" :spaceBetween="0" :autoplay="{
-        delay: 5000,
-        disableOnInteraction: false,
-    }" :navigation="true" :modules="swiperModules" class="homepageslider">
-        <template v-if="newsItems !== null" v-for="item in newsItems" :key="item">
-            <swiper-slide class="item">
-                <router-link :to="{ name: 'singleactivities', params: { id: item?.id } }">
-                    <div class="image">
-                        <img v-if="item?.photos?.[0]?.thumbMedium"
-                            :src="`https://media.ia.utwente.nl/amelie/${item.photos?.[0]?.thumbMedium}`" />
-                        <img class="placeholder" v-else src="@/assets/images/placeholder.jpg" />
-                    </div>
-
-                    <div class="content">
-                        <div class="container">
-                            <div class="title">{{ item?.summary }}</div>
-                            <div class="date">{{ formattedData(item?.begin) }}</div>
-                        </div>
-                    </div>
-                </router-link>
-            </swiper-slide>
+    <Galleria :value="queryResults" showItemNavigators :showThumbnails="false" autoPlay circular
+        :transitionInterval="3000">
+        <template #item="slotProps" :circular="true">
+            <div class="w-full overflow-hidden">
+                <img class="kenburns object-cover w-full h-[30vw]"
+                    :src="imageSrc(randomItem(slotProps.item.photos).thumbLarge)" />
+            </div>
         </template>
-    </swiper>
+        <template #caption="slotProps">
+            <RouterLink :to="{ name: 'singleactivitiesphotos', params: { id: slotProps.item.id! } }">
+                <div class="text-5xl mb-2 font-bold pl-4">{{ slotProps.item.summary }}</div>
+                <p class="text-white pl-4">{{ formattedData(slotProps.item.begin) }}</p>
+            </RouterLink>
+        </template>
+    </Galleria>
 </template>
 
 <script setup lang="ts">
-import { useQuery } from '@vue/apollo-composable'
+import Galleria from 'primevue/galleria';
+import { RouterLink } from 'vue-router';
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Navigation, EffectFade, Autoplay } from 'swiper/modules'
 import { formattedData, excerptText } from '@/functions/functions.ts'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-import { useGettext } from 'vue3-gettext'
-import { graphql } from '@/gql'
 import { useQueryStore } from '@/stores/queryStore'
 
-const gettext = useGettext();
 const queries = useQueryStore();
-const swiperModules = [Navigation, Autoplay]
 const route = useRoute()
-const perpage = ref(5)
+const limit = ref(50);
 
-const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
-const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
+// TODO: Actually filter on activities with pictures
+const { result, refetch } = queries.getHomepageSliderQuery({ limit: limit.value, beginDate: new Date() });
 
-const { result, refetch } = queries.getHomepageSliderQuery({ limit: perpage.value });
+const queryResults = computed(() => {
+    return result.value?.activities?.results.filter(x => (x?.photos ?? []).length > 0)
+})
 
-const queryResults = computed(() => result.value?.activities)
+const randomItem = (items: Array<any>) => {
+    return items[Math.floor(Math.random() * items.length)];
+}
 
-const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
-const totalCount = computed(() => (queryResults.value ? queryResults.value.totalCount : null))
+const imageSrc = (src: string | null | undefined) => {
+    if (!src) {
+        return '/src/assets/images/placeholder.jpg'
+    }
+
+    return `${import.meta.env.VITE_AMELIE_MEDIA_URL}${src}`
+}
 </script>
 
 <style scoped lang="scss">
-.homepageslider {
-    .item {
-        color: inherit;
+.kenburns {
+    transform: translateY(10%);
+    animation: panUp 3s ease-in-out infinite alternate;
+}
 
-        a {
-            position: relative;
-            display: block;
-        }
+@keyframes panUp {
+    0% {
+        transform: scale(1.1) translateY(10%);
+    }
 
-        .image {
-            width: 100%;
-            height: 100vw;
-            max-height: 60rem;
-            overflow: hidden;
-
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-            }
-        }
-
-        .content {
-            position: absolute;
-            bottom: 0;
-            padding: 3rem 0;
-            background-color: rgba(0, 0, 0, 0.6);
-            width: 100%;
-            color: #fff;
-
-            .title {
-                font-weight: 700;
-            }
-
-            .date {
-                font-size: 1.6rem;
-            }
-        }
+    100% {
+        transform: scale(1.1) translateY(-10%);
     }
 }
 </style>

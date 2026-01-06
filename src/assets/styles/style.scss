@@ -1,7 +1,6 @@
 @forward './variables';
 @forward './fonts';
 @forward './main';
-@forward './form';
 @forward './swiper';
 
 // Tailwind CSS
@@ -20,4 +19,10 @@
 @layer tailwind-utilities {
   @tailwind components;
   @tailwind utilities;
+}
+
+// Apply styling after tailwind classes here:
+// Make all images pretty
+img.format {
+  @apply aspect-5/3 w-full h-full object-cover object-center;
 }
