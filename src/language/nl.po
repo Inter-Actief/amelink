@@ -1,13 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-01-07 20:36+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Dutch <https://weblate.ia.utwente.nl/projects/amelie/amelink/"
+"nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.9.1\n"
 
 #: src\components\activities\demo\DemoOverviewActivities.vue:21
 #: src\components\ui\TextCard.vue:29
@@ -113,6 +116,7 @@ msgid "Email"
 msgstr "E-mail"
 
 #: src\components\footer\Footer.vue:5
+#, fuzzy
 msgid "footer.text"
 msgstr ""
 "I.C.T.S.V. Inter-Actief is de studievereniging voor de studies Technical "
