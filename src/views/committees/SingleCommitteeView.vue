@@ -29,11 +29,11 @@
                                     E-mail:
                                     <a class="link" :href="`mailto:${committee.email}`">{{ committee.email }}</a>
                                 </div>
-                                <div v-if="committee.founded" class="text">
-                                    Founded: {{ committee.founded }}
-                                </div>
                                 <div v-if="committee.website" class="text">
                                     Website: <a class="link" :href="committee.website">{{ committee.website }}</a>
+                                </div>
+                                <div v-if="committee.founded" class="text">
+                                    Founded: {{ committee.founded }}
                                 </div>
                             </div>
                             <div v-if="committee.logo" :class="{'col-span-1': hasLogo}">
