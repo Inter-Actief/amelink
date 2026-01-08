@@ -2,6 +2,7 @@
     <Galleria
         :value="queryResults"
         showItemNavigators
+        @update:activeIndex="resetAnimation()"
         :showThumbnails="false"
         autoPlay
         circular
@@ -11,7 +12,7 @@
             <div class="w-full h-[30vw] container">
                 <img
                     class="w-full"
-                    :key="slotProps.item.id"
+                    ref="gallery-image"
                     :src="imageSrc(randomItem(slotProps.item.photos).thumbLarge)"
                 />
             </div>
@@ -30,7 +31,7 @@
 <script setup lang="ts">
 import Galleria from 'primevue/galleria'
 import { RouterLink } from 'vue-router'
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, nextTick, ref, useTemplateRef, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { formattedData, excerptText } from '@/functions/functions.ts'
 import 'swiper/css'
@@ -41,12 +42,20 @@ import { useQueryStore } from '@/stores/queryStore'
 const queries = useQueryStore()
 const route = useRoute()
 const limit = ref(50)
+const imageRef = useTemplateRef('gallery-image')
 
 // TODO: Actually filter on activities with pictures
 const { result, refetch } = queries.getHomepageSliderQuery({
     limit: limit.value,
     beginDate: new Date(),
 })
+function resetAnimation() {
+    if (imageRef.value) {
+        imageRef.value.style.animation = 'none'
+        imageRef.value.offsetHeight
+        imageRef.value.style.animation = ''
+    }
+}
 
 const queryResults = computed(() => {
     console.log(result.value?.activities?.results)
