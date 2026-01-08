@@ -1,8 +1,8 @@
 <template>
     <Content>
         <ProgressSpinner v-if="loading" />
-        <div v-if="!loading && committee" class="grid grid-cols-8 gap-12">
-            <div class="col-span-5">
+        <div v-if="!loading && committee" class="grid sm:grid-cols-1 md:grid-cols-8 gap-12">
+            <div class="sm:col-span1 md:col-span-5">
                 <!-- Committee! -->
                 <SectionCard :name="committee!.name">
                     <template #content>
@@ -15,11 +15,11 @@
                     </template>
                 </SectionCard>
             </div>
-            <div class="col-span-3">
+            <div class="sm:col-span-1 md:col-span-3">
                 <SectionCard :name="$gettext('Committee information')" class="pb-12">
                     <template #content>
-                        <div v-if="committee.logo" class="grid grid-cols-3 gap-8">
-                            <div class="col-span-2">
+                        <div v-if="committee.logo" class="grid grid-cols-4 gap-8">
+                            <div class="col-span-3">
                                 <div v-if="committee.email" class="text">
                                     E-mail:
                                     <a class="link" :href="`mailto:${committee.email}`">{{ committee.email }}</a>

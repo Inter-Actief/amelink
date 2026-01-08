@@ -1,7 +1,7 @@
 <template>
     <Content>
         <h1 class="pb-4">{{ $gettext("Our committees") }}</h1>
-        <div class="grid grid-cols-3 gap-12">
+        <div class="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12">
             <template v-for="committeeCategory in categories" :key="committeeCategory.category">
                 <SectionCard :name="committeeCategory.category">
                     <template #content>
