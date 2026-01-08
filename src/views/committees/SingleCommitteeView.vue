@@ -18,8 +18,13 @@
             <div class="sm:col-span-1 md:col-span-3">
                 <SectionCard :name="$gettext('Committee information')" class="pb-12">
                     <template #content>
-                        <div v-if="committee.logo" class="grid grid-cols-4 gap-8">
-                            <div class="col-span-3">
+                        <div class="grid"
+                            :class="{
+                                'grid-cols-1': !hasLogo,
+                                'grid-cols-4': hasLogo,
+                                'gap-8': hasLogo,
+                            }">
+                            <div :class="{'col-span-3': hasLogo}">
                                 <div v-if="committee.email" class="text">
                                     E-mail:
                                     <a class="link" :href="`mailto:${committee.email}`">{{ committee.email }}</a>
@@ -27,21 +32,14 @@
                                 <div v-if="committee.founded" class="text">
                                     Founded: {{ committee.founded }}
                                 </div>
+                                <div v-if="committee.website" class="text">
+                                    Website: <a class="link" :href="committee.website">{{ committee.website }}</a>
+                                </div>
                             </div>
-                            <div class="col-span-1">
+                            <div v-if="committee.logo" :class="{'col-span-1': hasLogo}">
                                 <img class="rounded-lg" :src="logo" />
                             </div>
                         </div>
-                        <template v-else>
-                            <!-- No logo -->
-                            <div v-if="committee.email" class="text">
-                                E-mail:
-                                <a class="link" :href="`mailto:${committee.email}`">{{ committee.email }}</a>
-                            </div>
-                            <div v-if="committee.founded" class="text">
-                                Founded: {{ committee.founded }}
-                            </div>
-                        </template>
                     </template>
                 </SectionCard>
 
@@ -76,8 +74,9 @@ const queries = useQueryStore();
 const { result, loading } = queries.getSingleCommittee({ committeeId: props.id });
 const queryResults = computed(() => result.value?.committees?.results[0]);
 const committee = computed(() => (queryResults.value));
-let picture = computed(() => `${import.meta.env.VITE_AMELIE_MEDIA_URL}${committee.value!.groupPicture!}`)
-let logo = computed(() => `${import.meta.env.VITE_AMELIE_MEDIA_URL}${committee.value!.logo!}`)
+const picture = computed(() => `${import.meta.env.VITE_AMELIE_MEDIA_URL}${committee.value!.groupPicture!}`)
+const logo = computed(() => `${import.meta.env.VITE_AMELIE_MEDIA_URL}${committee.value!.logo!}`)
+const hasLogo = computed(() => (committee.value!.logo != null || committee.value!.logo != undefined))
 
 const processedContent = ref<string>('');
 
