@@ -1,10 +1,17 @@
 <template>
     <Content>
         <ProgressSpinner v-if="loading" />
+        <div v-if="!loading && !committee">
+            <h2>{{ $gettext("We could not find this committee.") }}</h2>
+            <RouterLink :to="{ name: 'committees',  }" class="link flex flex-row">
+                <ArrowLeft />
+                {{ $gettext('View all committees') }}
+            </RouterLink>
+        </div>
         <div v-if="!loading && committee" class="grid sm:grid-cols-1 md:grid-cols-8 gap-12">
             <div class="sm:col-span1 md:col-span-5">
                 <!-- Committee! -->
-                <SectionCard :name="committee!.name">
+                <SectionCard :name="committee!.name" class="pb-4">
                     <template #content>
                         <div class="text" v-html="processedContent">
                         </div>
@@ -14,6 +21,10 @@
                         </template>
                     </template>
                 </SectionCard>
+                <RouterLink :to="{ name: 'committees',  }" class="link flex flex-row">
+                    <ArrowLeft />
+                    {{ $gettext('View all committees') }}
+                </RouterLink>
             </div>
             <div class="sm:col-span-1 md:col-span-3">
                 <SectionCard :name="$gettext('Committee information')" class="pb-12">
@@ -66,8 +77,9 @@ import { useQueryStore } from '@/stores/queryStore';
 import { computed, ref, watch } from 'vue';
 import { useGettext } from 'vue3-gettext';
 import { markedText } from '@/functions/functions';
+import { ArrowLeft } from 'lucide-vue-next';
 
-const props = defineProps<{ id: string }>();
+const props = defineProps<{ id: string, slug: string }>();
 const { $gettext } = useGettext();
 const queries = useQueryStore();
 
