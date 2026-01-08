@@ -1,0 +1,97 @@
+<template>
+    <Content>
+        <ProgressSpinner v-if="loading" />
+        <div v-if="!loading && committee" class="grid grid-cols-8 gap-12">
+            <div class="col-span-5">
+                <!-- Committee! -->
+                <SectionCard :name="committee!.name">
+                    <template #content>
+                        <div class="text" v-html="processedContent">
+                        </div>
+
+                        <template v-if="committee.groupPicture">
+                            <img class="format rounded-lg mt-10" :src="picture" />
+                        </template>
+                    </template>
+                </SectionCard>
+            </div>
+            <div class="col-span-3">
+                <SectionCard :name="$gettext('Committee information')" class="pb-12">
+                    <template #content>
+                        <div v-if="committee.logo" class="grid grid-cols-3 gap-8">
+                            <div class="col-span-2">
+                                <div v-if="committee.email" class="text">
+                                    E-mail:
+                                    <a class="link" :href="`mailto:${committee.email}`">{{ committee.email }}</a>
+                                </div>
+                                <div v-if="committee.founded" class="text">
+                                    Founded: {{ committee.founded }}
+                                </div>
+                            </div>
+                            <div class="col-span-1">
+                                <img class="rounded-lg" :src="logo" />
+                            </div>
+                        </div>
+                        <template v-else>
+                            <!-- No logo -->
+                            <div v-if="committee.email" class="text">
+                                E-mail:
+                                <a class="link" :href="`mailto:${committee.email}`">{{ committee.email }}</a>
+                            </div>
+                            <div v-if="committee.founded" class="text">
+                                Founded: {{ committee.founded }}
+                            </div>
+                        </template>
+                    </template>
+                </SectionCard>
+
+                <SectionCard :name="$gettext('Committee members')">
+                    <template #content>
+                        <div class="flex flex-row gap-2 justify-between" v-for="member in members"
+                            :key="member?.person!">
+                            <div class="flex flex-row gap-2">
+                                <UserStar /><span>{{ member!.person! }}</span>
+                            </div>
+                            <span class="italic">{{ member!.function }}</span>
+                        </div>
+                    </template>
+                </SectionCard>
+            </div>
+        </div>
+    </Content>
+</template>
+
+<script lang="ts" setup>
+import Content from '@/components/ui/Content.vue';
+import { UserStar } from 'lucide-vue-next';
+import { useQueryStore } from '@/stores/queryStore';
+import { computed, ref, watch } from 'vue';
+import { useGettext } from 'vue3-gettext';
+import { markedText } from '@/functions/functions';
+
+const props = defineProps<{ id: string }>();
+const { $gettext } = useGettext();
+const queries = useQueryStore();
+
+const { result, loading } = queries.getSingleCommittee({ committeeId: props.id });
+const queryResults = computed(() => result.value?.committees?.results[0]);
+const committee = computed(() => (queryResults.value));
+let picture = computed(() => `${import.meta.env.VITE_AMELIE_MEDIA_URL}${committee.value!.groupPicture!}`)
+let logo = computed(() => `${import.meta.env.VITE_AMELIE_MEDIA_URL}${committee.value!.logo!}`)
+
+const processedContent = ref<string>('');
+
+// Process the `content` field when `item` changes
+watch(committee, async (newItem) => {
+    if (committee.value && committee.value?.information) {
+        processedContent.value = await markedText(committee.value.information!);
+    } else {
+        processedContent.value = $gettext("This committee does not have a description");
+    }
+}, { immediate: true });
+
+let members = computed(() => (committee.value!.functionSet!))
+
+</script>
+
+<style></style>

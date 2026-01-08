@@ -244,6 +244,30 @@ query CommitteeOverview {
   }
 }
 
+query SingleCommittee($committeeId: ID) {
+  committees(includeAbolished: false, id: $committeeId) {
+    results {
+      name
+      slug
+      id
+      email
+      founded
+      website
+      information
+      groupPicture
+      logo
+      abolished
+      category {
+        name
+      }
+      functionSet {
+        person
+        function
+      }
+    }
+  }
+}
+
 mutation SetLanguageMutation($languageCode: String!) {
   setLanguage(languageCode: $languageCode) {
     language

@@ -6,7 +6,7 @@
                 <SectionCard :name="committeeCategory.category">
                     <template #content>
                         <RouterLink v-for="committee in committeeCategory.committees" class="link flex flex-row"
-                            :to="{ name: 'activities' }">
+                            :to="{ name: 'singlecommittee', params: { id: committee.id } }">
                             {{ committee!.name }}
                         </RouterLink>
                     </template>
@@ -21,19 +21,24 @@ import SectionCard from '@/components/ui/SectionCard.vue';
 import { useQueryStore } from '@/stores/queryStore';
 import { computed, type ComputedRef, type Ref } from 'vue';
 const queries = useQueryStore();
+import Content from '@/components/ui/Content.vue';
 
 // getCommitteeOverview
 const { result, refetch, loading } = queries.getCommitteeOverview({})
 const queryResults = computed(() => result.value?.committees)
 const committees = computed(() => (queryResults.value ? queryResults.value.results : []))
 
-
 const categories = computed(() => {
     type Committee = NonNullable<typeof committees.value[number]>
 
     return committees.value.reduce<{ category: string; committees: Committee[] }[]>(
         (acc, committee) => {
-            const name = committee!.category?.name ?? "Other Category"
+            // Skip committees with no category name
+            if (!committee!.category?.name) {
+                return acc
+            }
+
+            const name = committee!.category.name
 
             // Try to find existing category in accumulator
             const existing = acc.find(c => c.category === name)

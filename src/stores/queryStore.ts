@@ -46,6 +46,8 @@ import {
     type PublicationOverviewQuery,
     type CommitteeOverviewQueryVariables,
     type CommitteeOverviewQuery,
+    type SingleCommitteeQuery,
+    type SingleCommitteeQueryVariables,
 } from '@/gql/graphql'
 import type { DocumentNode, OperationVariables, ApolloQueryResult } from '@apollo/client/core'
 import type { DocumentParameter, OptionsParameter } from '@vue/apollo-composable/dist/useQuery.js'
@@ -205,6 +207,13 @@ export const useQueryStore = defineStore('queryStore', () => {
         )
     }
 
+    function getSingleCommittee(variables: SingleCommitteeQueryVariables) {
+        return fetchQuery<SingleCommitteeQuery, SingleCommitteeQueryVariables>(
+            _queries.SingleCommittee,
+            variables,
+        )
+    }
+
     return {
         fetchQuery,
         mutate,
@@ -225,5 +234,6 @@ export const useQueryStore = defineStore('queryStore', () => {
         getPublicationOverview,
         setLanguageMutation,
         getCommitteeOverview,
+        getSingleCommittee,
     }
 })

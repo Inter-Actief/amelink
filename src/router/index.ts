@@ -64,7 +64,6 @@ const router = createRouter({
             path: '/education/',
             name: 'education',
             component: () => import('@/views/pages/EducationView.vue'),
-            props: true,
         },
         {
             path: '/search',
@@ -82,7 +81,13 @@ const router = createRouter({
         {
             path: '/committees',
             name: 'committees',
-            component: () => import('@/views/pages/CommitteesView.vue'),
+            component: () => import('@/views/committees/CommitteesView.vue'),
+        },
+        {
+            path: '/committees/:id',
+            name: 'singlecommittee',
+            component: () => import('@/views/committees/SingleCommitteeView.vue'),
+            props: true,
         },
     ],
 })
