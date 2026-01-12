@@ -231,6 +231,43 @@ query PublicationOverview($limit: Int, $offset: Int) {
   }
 }
 
+query CommitteeOverview {
+  committees(includeAbolished: false, limit: 500) {
+    results {
+      name
+      slug
+      id
+      category {
+        name
+      }
+    }
+  }
+}
+
+query SingleCommittee($committeeId: ID) {
+  committees(includeAbolished: false, id: $committeeId) {
+    results {
+      name
+      slug
+      id
+      email
+      founded
+      website
+      information
+      groupPicture
+      logo
+      abolished
+      category {
+        name
+      }
+      functionSet {
+        person
+        function
+      }
+    }
+  }
+}
+
 mutation SetLanguageMutation($languageCode: String!) {
   setLanguage(languageCode: $languageCode) {
     language
