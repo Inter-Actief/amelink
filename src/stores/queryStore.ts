@@ -13,35 +13,35 @@ import { apolloClient } from '@/main' // Ensure this is exported from main.ts
 
 import {
     type SetLanguageMutation,
-    type ActivitiesSliderCardQueryQuery,
-    type ActivitiesSliderCardQueryQueryVariables,
-    type DemoOverviewActivitiesQueryQuery,
-    type DemoOverviewActivitiesQueryQueryVariables,
-    type EducationViewQueryQuery,
-    type EducationViewQueryQueryVariables,
-    type HomepageSliderQueryQuery,
-    type HomepageSliderQueryQueryVariables,
-    type LatestActivitiesQueryQuery,
-    type LatestActivitiesQueryQueryVariables,
-    type LatestNewsQueryQuery,
-    type LatestNewsQueryQueryVariables,
-    type OverviewActivitiesQueryQuery,
-    type OverviewActivitiesQueryQueryVariables,
-    type OverviewNewsQueryQuery,
-    type OverviewNewsQueryQueryVariables,
-    type PageViewQueryQuery,
-    type PageViewQueryQueryVariables,
-    type PastActivitiesQueryQuery,
-    type PastActivitiesQueryQueryVariables,
-    type PhotosActivitiesQueryQuery,
-    type PhotosActivitiesQueryQueryVariables,
+    type ActivitiesSliderCardQuery,
+    type ActivitiesSliderCardQueryVariables,
+    type DemoOverviewActivitiesQuery,
+    type DemoOverviewActivitiesQueryVariables,
+    type EducationViewQuery,
+    type EducationViewQueryVariables,
+    type HomepageSliderQuery,
+    type HomepageSliderQueryVariables,
+    type LatestActivitiesQuery,
+    type LatestActivitiesQueryVariables,
+    type LatestNewsQuery,
+    type LatestNewsQueryVariables,
+    type OverviewActivitiesQuery,
+    type OverviewActivitiesQueryVariables,
+    type OverviewNewsQuery,
+    type OverviewNewsQueryVariables,
+    type PageViewQuery,
+    type PageViewQueryVariables,
+    type PastActivitiesQuery,
+    type PastActivitiesQueryVariables,
+    type PhotosActivitiesQuery,
+    type PhotosActivitiesQueryVariables,
     type SetLanguageMutationMutationVariables,
-    type SingleActivitiesQueryQuery,
-    type SingleActivitiesQueryQueryVariables,
-    type SingleNewsQueryQuery,
-    type SingleNewsQueryQueryVariables,
-    type UpcomingActivitiesQueryQuery,
-    type UpcomingActivitiesQueryQueryVariables,
+    type SingleActivitiesQuery,
+    type SingleActivitiesQueryVariables,
+    type SingleNewsQuery,
+    type SingleNewsQueryVariables,
+    type UpcomingActivitiesQuery,
+    type UpcomingActivitiesQueryVariables,
     type PublicationOverviewQueryVariables,
     type PublicationOverviewQuery,
 } from '@/gql/graphql'
@@ -60,8 +60,8 @@ export const useQueryStore = defineStore('queryStore', () => {
         query: DocumentParameter<TQuery, V>,
         variables: V,
     ): UseQueryReturn<TQuery, V> {
-        if (query == undefined) {
-            throw new Error('Query must not be undefined')
+        if (query === undefined) {
+            throw new Error('Query must not be undefined, maybe you made a typo?')
         }
 
         provideApolloClient(apolloClient)
@@ -91,100 +91,100 @@ export const useQueryStore = defineStore('queryStore', () => {
     }
 
     // Specific query functions using fetchQuery
-    function getLatestActivities(variables: LatestActivitiesQueryQueryVariables) {
-        return fetchQuery<LatestActivitiesQueryQuery, LatestActivitiesQueryQueryVariables>(
-            _queries.LatestActivitiesQuery,
+    function getLatestActivities(variables: LatestActivitiesQueryVariables) {
+        return fetchQuery<LatestActivitiesQuery, LatestActivitiesQueryVariables>(
+            _queries.LatestActivities,
             variables,
         )
     }
 
-    function getOverviewActivities(variables: OverviewActivitiesQueryQueryVariables) {
-        return fetchQuery<OverviewActivitiesQueryQuery, OverviewActivitiesQueryQueryVariables>(
-            _queries.OverviewActivitiesQuery,
+    function getOverviewActivities(variables: OverviewActivitiesQueryVariables) {
+        return fetchQuery<OverviewActivitiesQuery, OverviewActivitiesQueryVariables>(
+            _queries.OverviewActivities,
             variables,
         )
     }
 
-    function getPastActivitiesQuery(variables: PastActivitiesQueryQueryVariables) {
-        return fetchQuery<PastActivitiesQueryQuery, PastActivitiesQueryQueryVariables>(
-            _queries.PastActivitiesQuery,
+    function getPastActivitiesQuery(variables: PastActivitiesQueryVariables) {
+        return fetchQuery<PastActivitiesQuery, PastActivitiesQueryVariables>(
+            _queries.PastActivities,
             variables,
         )
     }
 
-    function getPhotosActivitiesQuery(variables: PhotosActivitiesQueryQueryVariables) {
-        return fetchQuery<PhotosActivitiesQueryQuery, PhotosActivitiesQueryQueryVariables>(
-            _queries.PhotosActivitiesQuery,
+    function getPhotosActivitiesQuery(variables: PhotosActivitiesQueryVariables) {
+        return fetchQuery<PhotosActivitiesQuery, PhotosActivitiesQueryVariables>(
+            _queries.PhotosActivities,
             variables,
         )
     }
 
-    function getUpcomingActivitiesQuery(variables: UpcomingActivitiesQueryQueryVariables) {
-        return fetchQuery<UpcomingActivitiesQueryQuery, UpcomingActivitiesQueryQueryVariables>(
-            _queries.UpcomingActivitiesQuery,
+    function getUpcomingActivitiesQuery(variables: UpcomingActivitiesQueryVariables) {
+        return fetchQuery<UpcomingActivitiesQuery, UpcomingActivitiesQueryVariables>(
+            _queries.UpcomingActivities,
             variables,
         )
     }
 
-    function getDemoOverviewActivitiesQuery(variables: DemoOverviewActivitiesQueryQueryVariables) {
+    function getDemoOverviewActivitiesQuery(variables: DemoOverviewActivitiesQueryVariables) {
         return fetchQuery<
-            DemoOverviewActivitiesQueryQuery,
-            DemoOverviewActivitiesQueryQueryVariables
-        >(_queries.DemoOverviewActivitiesQuery, variables)
+            DemoOverviewActivitiesQuery,
+            DemoOverviewActivitiesQueryVariables
+        >(_queries.DemoOverviewActivities, variables)
     }
 
-    function getActivitiesSliderCardQuery(variables: ActivitiesSliderCardQueryQueryVariables) {
-        return fetchQuery<ActivitiesSliderCardQueryQuery, ActivitiesSliderCardQueryQueryVariables>(
-            _queries.ActivitiesSliderCardQuery,
+    function getActivitiesSliderCardQuery(variables: ActivitiesSliderCardQueryVariables) {
+        return fetchQuery<ActivitiesSliderCardQuery, ActivitiesSliderCardQueryVariables>(
+            _queries.ActivitiesSliderCard,
             variables,
         )
     }
 
-    function getHomepageSliderQuery(variables: HomepageSliderQueryQueryVariables) {
-        return fetchQuery<HomepageSliderQueryQuery, HomepageSliderQueryQueryVariables>(
-            _queries.HomepageSliderQuery,
+    function getHomepageSliderQuery(variables: HomepageSliderQueryVariables) {
+        return fetchQuery<HomepageSliderQuery, HomepageSliderQueryVariables>(
+            _queries.HomepageSlider,
             variables,
         )
     }
 
-    function getLatestNewsQuery(variables: LatestNewsQueryQueryVariables) {
-        return fetchQuery<LatestNewsQueryQuery, LatestNewsQueryQueryVariables>(
-            _queries.LatestNewsQuery,
+    function getLatestNewsQuery(variables: LatestNewsQueryVariables) {
+        return fetchQuery<LatestNewsQuery, LatestNewsQueryVariables>(
+            _queries.LatestNews,
             variables,
         )
     }
 
-    function getOverviewNewsQuery(variables: OverviewNewsQueryQueryVariables) {
-        return fetchQuery<OverviewNewsQueryQuery, OverviewNewsQueryQueryVariables>(
-            _queries.OverviewNewsQuery,
+    function getOverviewNewsQuery(variables: OverviewNewsQueryVariables) {
+        return fetchQuery<OverviewNewsQuery, OverviewNewsQueryVariables>(
+            _queries.OverviewNews,
             variables,
         )
     }
 
-    function getSingleActivitiesQuery(variables: SingleActivitiesQueryQueryVariables) {
-        return fetchQuery<SingleActivitiesQueryQuery, SingleActivitiesQueryQueryVariables>(
-            _queries.SingleActivitiesQuery,
+    function getSingleActivitiesQuery(variables: SingleActivitiesQueryVariables) {
+        return fetchQuery<SingleActivitiesQuery, SingleActivitiesQueryVariables>(
+            _queries.SingleActivities,
             variables,
         )
     }
 
-    function getSingleNewsQuery(variables: SingleNewsQueryQueryVariables) {
-        return fetchQuery<SingleNewsQueryQuery, SingleNewsQueryQueryVariables>(
-            _queries.SingleNewsQuery,
+    function getSingleNewsQuery(variables: SingleNewsQueryVariables) {
+        return fetchQuery<SingleNewsQuery, SingleNewsQueryVariables>(
+            _queries.SingleNews,
             variables,
         )
     }
 
-    function getEducationViewQuery(variables: EducationViewQueryQueryVariables) {
-        return fetchQuery<EducationViewQueryQuery, EducationViewQueryQueryVariables>(
-            _queries.EducationViewQuery,
+    function getEducationViewQuery(variables: EducationViewQueryVariables) {
+        return fetchQuery<EducationViewQuery, EducationViewQueryVariables>(
+            _queries.EducationView,
             variables,
         )
     }
 
-    function getPageViewQuery(variables: PageViewQueryQueryVariables) {
-        return fetchQuery<PageViewQueryQuery, PageViewQueryQueryVariables>(
-            _queries.PageViewQuery,
+    function getPageViewQuery(variables: PageViewQueryVariables) {
+        return fetchQuery<PageViewQuery, PageViewQueryVariables>(
+            _queries.PageView,
             variables,
         )
     }
