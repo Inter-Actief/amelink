@@ -2,12 +2,12 @@
     <Select v-model="selectedLanguage" :options="langs" optionLabel="name" placeholder="" class="w-full">
         <template #value="slotProps">
             <div class="flex items-center p-1">
-                <img :src="`/src/assets/images/flags/${selectedLanguage}.svg`" class="mr-2" />
+                <img :src="`/images/flags/${selectedLanguage}.svg`" class="mr-2" />
             </div>
         </template>
         <template #option="slotProps">
             <div class="flex items-center">
-                <img :alt="slotProps.option" :src="`/src/assets/images/flags/${slotProps.option}.svg`" class="mr-2" />
+                <img :alt="slotProps.option" :src="`/images/flags/${slotProps.option}.svg`" class="mr-2" />
             </div>
         </template>
     </Select>

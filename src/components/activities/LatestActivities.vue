@@ -57,7 +57,7 @@ const getRouterLinkTo = (item: ActivityItemType) => {
 
 const getItemRandomPhoto = (item: ActivityItemType) => {
     if (item.photos.length == 0) {
-        return '/src/assets/images/placeholder.jpg'
+        return '/images/placeholder.jpg'
     }
 
     const photoSrc = item.photos[Math.floor(Math.random() * item.photos.length)].thumbMedium!
@@ -66,7 +66,7 @@ const getItemRandomPhoto = (item: ActivityItemType) => {
 
 const imageSrc = (src: string | null | undefined) => {
     if (!src) {
-        return '/src/assets/images/placeholder.jpg'
+        return '/images/placeholder.jpg'
     }
 
     return `${import.meta.env.VITE_AMELIE_MEDIA_URL}${src}`
