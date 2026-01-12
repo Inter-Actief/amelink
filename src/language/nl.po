@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2026-01-07 20:36+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2026-01-12 15:26+0000\n"
+"Last-Translator: Daniel Danny Jonker <jonkerdd@inter-actief.net>\n"
 "Language-Team: Dutch <https://weblate.ia.utwente.nl/projects/amelie/amelink/"
 "nl/>\n"
 "Language: nl\n"
@@ -85,9 +85,8 @@ msgstr "Foto's"
 
 #: src\components\activities\PhotosActivities.vue:3
 #: src\components\activities\PhotosActivities.vue:18
-#, fuzzy
 msgid "Go to activity"
-msgstr "Terug naar activiteit"
+msgstr "Ga naar activiteit"
 
 #: src\components\activities\UpcomingActivities.vue:4
 #: src\components\activities\UpcomingActivitiesCards.vue:2
@@ -116,7 +115,6 @@ msgid "Email"
 msgstr "E-mail"
 
 #: src\components\footer\Footer.vue:5
-#, fuzzy
 msgid "footer.text"
 msgstr ""
 "I.C.T.S.V. Inter-Actief is de studievereniging voor de studies Technical "
@@ -126,21 +124,18 @@ msgstr ""
 "van Nederland is."
 
 #: src\components\footer\Footer.vue:10
-#, fuzzy
 msgid "Pages"
-msgstr "Pagina"
+msgstr "Pagina's"
 
 #: src\components\footer\Footer.vue:17
-#, fuzzy
 msgid "Important information"
-msgstr "Informatie"
+msgstr "Belangrijke informatie"
 
 #: src\components\footer\Footer.vue:18
 msgid "Privacy policy"
 msgstr "Privacybeleid"
 
 #: src\components\footer\Footer.vue:20 src\components\header\Header.vue:158
-#, fuzzy
 msgid "Contact"
 msgstr "Contact"
 
@@ -157,14 +152,12 @@ msgid "Contact us"
 msgstr "Neem contact op"
 
 #: src\components\footer\Footer.vue:51 src\components\header\Header.vue:69
-#, fuzzy
 msgid "Activities"
-msgstr "Activiteit"
+msgstr "Activiteiten"
 
 #: src\components\footer\Footer.vue:55 src\components\header\Header.vue:73
-#, fuzzy
 msgid "News"
-msgstr "Nieuws pagina"
+msgstr "Nieuws"
 
 #: src\components\footer\Footer.vue:59 src\components\header\Header.vue:81
 #: src\views\pages\PublicationView.vue:3
