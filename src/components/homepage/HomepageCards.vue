@@ -2,7 +2,7 @@
     <div class="grid grid-cols-4 grid-rows-2 gap-12 pb-12">
         <RouterLink :to="{ name: 'activities' }">
             <div class="relative">
-                <img class="format rounded-lg w-full h-auto" src="@/assets/images/ia-placeholder.png" />
+                <img class="format rounded-lg w-full h-auto" src="/images/ia-placeholder.png" />
                 <div
                     class="absolute bottom-0 left-0 w-full bg-opacity-30 text-white p-4 rounded-b-lg transition duration-300 bg-slate-800 hover:bg-purple-800">
                     <p class="text-3xl">{{ $gettext('Activities') }}</p>
@@ -11,7 +11,7 @@
         </RouterLink>
         <RouterLink :to="{ name: 'news' }">
             <div class="relative">
-                <img class="format rounded-lg w-full h-auto" src="@/assets/images/ia-placeholder.png" />
+                <img class="format rounded-lg w-full h-auto" src="/images/ia-placeholder.png" />
                 <div
                     class="absolute bottom-0 left-0 w-full bg-opacity-30 text-white p-4 rounded-b-lg transition duration-300 bg-slate-800 hover:bg-purple-800">
                     <p class="text-3xl">{{ $gettext('News') }}</p>
@@ -20,7 +20,7 @@
         </RouterLink>
         <RouterLink :to="{ name: 'education' }">
             <div class="relative col-start-2 row-start-2">
-                <img class="format rounded-lg w-full h-auto" src="@/assets/images/ia-placeholder.png" />
+                <img class="format rounded-lg w-full h-auto" src="/images/ia-placeholder.png" />
                 <div
                     class="absolute bottom-0 left-0 w-full bg-opacity-30 text-white p-4 rounded-b-lg transition duration-300 bg-slate-800 hover:bg-purple-800">
                     <p class="text-3xl">{{ $gettext('Education') }}</p>
@@ -29,7 +29,7 @@
         </RouterLink>
         <RouterLink :to="{ name: 'home' }">
             <div class="relative col-start-1 row-start-2">
-                <img class="format rounded-lg w-full h-auto" src="@/assets/images/ia-placeholder.png" />
+                <img class="format rounded-lg w-full h-auto" src="/images/ia-placeholder.png" />
                 <div
                     class="absolute bottom-0 left-0 w-full bg-opacity-30 text-white p-4 rounded-b-lg transition duration-300 bg-slate-800 hover:bg-purple-800">
                     <p class="text-3xl">{{ $gettext('Companies') }}</p>

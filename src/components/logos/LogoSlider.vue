@@ -15,7 +15,7 @@
             ><img
                 width="114"
                 height="32"
-                src="@/assets/images/logos/ASML.svg"
+                src="/images/logos/ASML.svg"
                 alt="ASML logo"
                 aria-label="ASML logo"
         /></swiper-slide>
@@ -23,7 +23,7 @@
             ><img
                 width="185"
                 height="32"
-                src="@/assets/images/logos/BetterBe.svg"
+                src="/images/logos/BetterBe.svg"
                 alt="BetterBe logo"
                 aria-label="BetterBe logo"
         /></swiper-slide>
@@ -31,7 +31,7 @@
             ><img
                 width="202"
                 height="32"
-                src="@/assets/images/logos/epartment.svg"
+                src="/images/logos/epartment.svg"
                 alt="Epartment logo"
                 aria-label="Epartment logo"
         /></swiper-slide>
@@ -39,7 +39,7 @@
             ><img
                 width="148"
                 height="32"
-                src="@/assets/images/logos/Voortman.svg"
+                src="/images/logos/Voortman.svg"
                 alt="Voortman logo"
                 aria-label="Voortman logo"
         /></swiper-slide>

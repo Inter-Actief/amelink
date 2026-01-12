@@ -1,4 +1,4 @@
-query LatestActivitiesQuery($limit: Int, $offset: Int, $startDate: DateTime) {
+query LatestActivities($limit: Int, $offset: Int, $startDate: DateTime) {
   activities(limit: $limit, offset: $offset, end_Lt: $startDate, ordering: "begin,desc") {
     results {
       id
@@ -20,7 +20,7 @@ query LatestActivitiesQuery($limit: Int, $offset: Int, $startDate: DateTime) {
   }
 }
 
-query OverviewActivitiesQuery($limit: Int, $offset: Int, $startDate: DateTime!) {
+query OverviewActivities($limit: Int, $offset: Int, $startDate: DateTime!) {
   activities(limit: $limit, offset: $offset, begin_Gt: $startDate, ordering: "begin,asc") {
     results {
       id
@@ -38,7 +38,7 @@ query OverviewActivitiesQuery($limit: Int, $offset: Int, $startDate: DateTime!) 
   }
 }
 
-query PastActivitiesQuery($limit: Int, $offset: Int, $endDate: DateTime) {
+query PastActivities($limit: Int, $offset: Int, $endDate: DateTime) {
   activities(limit: $limit, offset: $offset, ordering: "begin,desc", begin_Lt: $endDate) {
     totalCount
     results {
@@ -53,7 +53,7 @@ query PastActivitiesQuery($limit: Int, $offset: Int, $endDate: DateTime) {
   }
 }
 
-query PhotosActivitiesQuery($id: ID) {
+query PhotosActivities($id: ID) {
   activity(id: $id) {
     summary
     begin
@@ -68,7 +68,7 @@ query PhotosActivitiesQuery($id: ID) {
   }
 }
 
-query UpcomingActivitiesQuery($limit: Int, $offset: Int, $beginDate: DateTime) {
+query UpcomingActivities($limit: Int, $offset: Int, $beginDate: DateTime) {
   activities(limit: $limit, offset: $offset, begin_Gt: $beginDate, ordering: "begin,asc") {
     results {
       id
@@ -87,7 +87,7 @@ query UpcomingActivitiesQuery($limit: Int, $offset: Int, $beginDate: DateTime) {
   }
 }
 
-query DemoOverviewActivitiesQuery($limit: Int, $offset: Int, $beginDate: DateTime) {
+query DemoOverviewActivities($limit: Int, $offset: Int, $beginDate: DateTime) {
   activities(limit: $limit, offset: $offset, begin_Gt: $beginDate, ordering: "begin,desc") {
     results {
       id
@@ -106,7 +106,7 @@ query DemoOverviewActivitiesQuery($limit: Int, $offset: Int, $beginDate: DateTim
   }
 }
 
-query ActivitiesSliderCardQuery($endgt: DateTime, $limit: Int) {
+query ActivitiesSliderCard($endgt: DateTime, $limit: Int) {
   activities(end_Gt: $endgt, limit: $limit) {
     results {
       photos {
@@ -116,7 +116,7 @@ query ActivitiesSliderCardQuery($endgt: DateTime, $limit: Int) {
   }
 }
 
-query HomepageSliderQuery($limit: Int, $beginDate: DateTime) {
+query HomepageSlider($limit: Int, $beginDate: DateTime) {
   activities(limit: $limit, begin_Lt: $beginDate, ordering: "begin,desc") {
     results {
       id
@@ -131,7 +131,7 @@ query HomepageSliderQuery($limit: Int, $beginDate: DateTime) {
   }
 }
 
-query LatestNewsQuery($limit: Int) {
+query LatestNews($limit: Int) {
   newsItems(limit: $limit) {
     results {
       id
@@ -144,7 +144,7 @@ query LatestNewsQuery($limit: Int) {
   }
 }
 
-query OverviewNewsQuery($limit: Int, $offset: Int) {
+query OverviewNews($limit: Int, $offset: Int) {
   newsItems(limit: $limit, offset: $offset) {
     results {
       id
@@ -156,7 +156,7 @@ query OverviewNewsQuery($limit: Int, $offset: Int) {
   }
 }
 
-query SingleActivitiesQuery($id: ID) {
+query SingleActivities($id: ID) {
   activity(id: $id) {
     begin
     id
@@ -182,7 +182,7 @@ query SingleActivitiesQuery($id: ID) {
   }
 }
 
-query SingleNewsQuery($id: ID) {
+query SingleNews($id: ID) {
   newsItem(id: $id) {
     content
     title
@@ -192,7 +192,7 @@ query SingleNewsQuery($id: ID) {
   }
 }
 
-query EducationViewQuery {
+query EducationView {
   educationpages {
     results {
       id
@@ -203,7 +203,7 @@ query EducationViewQuery {
   }
 }
 
-query PageViewQuery($pageId: ID) {
+query PageView($pageId: ID) {
   page(id: $pageId) {
     name
     slug
