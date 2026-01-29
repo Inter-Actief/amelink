@@ -2,11 +2,6 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 
-#: src/components/activities/demo/DemoOverviewActivities.vue:21
-#: src/components/ui/TextCard.vue:29
-msgid "Read more"
-msgstr ""
-
 #: src/components/activities/InformationActivites.vue:2
 msgid "Who, what, where, when..."
 msgstr ""
@@ -310,16 +305,20 @@ msgstr ""
 msgid "Companies"
 msgstr ""
 
-#: src/components/news/LatestNews.vue:4
+#: src/components/news/LatestNews.vue:5
 msgid "News & Announcements"
 msgstr ""
 
-#: src/components/news/LatestNews.vue:6
+#: src/components/news/LatestNews.vue:7
 msgid "View all news"
 msgstr ""
 
 #: src/components/news/OverviewNews.vue:2
 msgid "News page"
+msgstr ""
+
+#: src/components/ui/TextCard.vue:29
+msgid "Read more"
 msgstr ""
 
 #: src/views/activities/ActivitiesView.vue:5
@@ -356,7 +355,7 @@ msgstr ""
 msgid "Committee members"
 msgstr ""
 
-#: src/views/committees/SingleCommitteeView.vue:100
+#: src/views/committees/SingleCommitteeView.vue:99
 msgid "This committee does not have a description"
 msgstr ""
 
@@ -366,8 +365,4 @@ msgstr ""
 
 #: src/views/pages/ComponentsView.vue:10
 msgid "Latest News"
-msgstr ""
-
-#: src/views/pages/ComponentsView.vue:26
-msgid "Demo overview"
 msgstr ""

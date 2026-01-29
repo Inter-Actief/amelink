@@ -9,11 +9,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/components/activities/demo/DemoOverviewActivities.vue:21
-#: src/components/ui/TextCard.vue:29
-msgid "Read more"
-msgstr "Read more"
-
 #: src/components/activities/InformationActivites.vue:2
 msgid "Who, what, where, when..."
 msgstr "Who, what, where, when..."
@@ -325,17 +320,21 @@ msgstr ""
 msgid "Companies"
 msgstr "Components"
 
-#: src/components/news/LatestNews.vue:4
+#: src/components/news/LatestNews.vue:5
 msgid "News & Announcements"
 msgstr "News & Announcements"
 
-#: src/components/news/LatestNews.vue:6
+#: src/components/news/LatestNews.vue:7
 msgid "View all news"
 msgstr "View all news"
 
 #: src/components/news/OverviewNews.vue:2
 msgid "News page"
 msgstr "News page"
+
+#: src/components/ui/TextCard.vue:29
+msgid "Read more"
+msgstr "Read more"
 
 #: src/views/activities/ActivitiesView.vue:5
 msgid "Activities you don't want to miss"
@@ -374,7 +373,7 @@ msgstr "Information"
 msgid "Committee members"
 msgstr "Committees"
 
-#: src/views/committees/SingleCommitteeView.vue:100
+#: src/views/committees/SingleCommitteeView.vue:99
 msgid "This committee does not have a description"
 msgstr ""
 
@@ -386,9 +385,8 @@ msgstr "Demo Table"
 msgid "Latest News"
 msgstr "Latest News"
 
-#: src/views/pages/ComponentsView.vue:26
-msgid "Demo overview"
-msgstr "Demo overview"
+#~ msgid "Demo overview"
+#~ msgstr "Demo overview"
 
 #~ msgid "Editor"
 #~ msgstr "Editor"
