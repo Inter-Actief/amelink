@@ -3,15 +3,16 @@
 </template>
 
 <script lang="ts" setup>
-import type { UseQueryReturn } from '@vue/apollo-composable';
 import Paginator, { type PageState } from 'primevue/paginator';
-import { computed, ref } from 'vue';
-// Accept necessary props
-//TODO: Type according to query definition
-const props = defineProps<UseQueryReturn<any, any> & {
+import { ref } from 'vue';
+
+type RefetchFunction = (params: { limit: number; offset: number; page?: number }) => Promise<any> | void
+
+const props = defineProps<{
     totalCount: number,
     limit: number,
-    rowsPerPage?: Array<number>
+    rowsPerPage?: Array<number>,
+    refetch: RefetchFunction
 }>()
 
 const limit = ref(props.limit)
@@ -22,7 +23,7 @@ rowsPerpageOptions.push(limit.value);
 rowsPerpageOptions = rowsPerpageOptions.sort((a, b) => a - b)
 rowsPerpageOptions = [...new Set(rowsPerpageOptions)]; // make unique
 
-const handlePage = (e: PageState) => {
+const handlePage = async (e: PageState) => {
     // Watch will refetch
     page.value = e.page
     limit.value = e.rows

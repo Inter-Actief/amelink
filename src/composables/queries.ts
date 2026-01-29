@@ -2,6 +2,7 @@ import { useQuery as useApolloQuery, useMutation as useApolloMutation } from '@v
 import * as gql from '@/gql/graphql'
 import type { ApolloQueryResult, TypedDocumentNode } from '@apollo/client/core/types'
 import { apolloClient } from '@/main'
+import { ref, type ComputedRef, type Ref, computed } from 'vue'
 
 /**
  * Query registry
@@ -68,7 +69,7 @@ export function useQuery<
     )
 }
 
-export async function useQueryAsync<
+async function _useQueryAsync<
     TKey extends keyof typeof queries
 >(
     key: TKey,
@@ -83,6 +84,50 @@ export async function useQueryAsync<
         variables,
         fetchPolicy: 'cache-first',
     })
+}
+
+/**
+ * Uses a query async and wraps result objects to include refetch
+ * @param key The query to use
+ * @param variables The variables of the query
+ * @returns Apollo object
+ */
+export function useQueryAsync<TKey extends keyof typeof queries>
+(
+    key: TKey,
+    variables: VariablesOf<typeof queries[TKey]>
+): {
+    result: ComputedRef<ResultOf<typeof queries[TKey]> | null>
+    loading: Ref<boolean>
+    error: Ref<Error | null>
+    refetch: (newVariables: VariablesOf<typeof queries[TKey]>) => Promise<void>
+} {
+    const result = ref<ResultOf<typeof queries[TKey]> | null>(null)
+    const loading = ref(true)
+    const error = ref<Error | null>(null)
+
+    const refetch = async (newVariables: VariablesOf<typeof queries[TKey]>) => {
+        loading.value = true
+        try {
+            const response = await _useQueryAsync(key, newVariables)
+            result.value = response.data
+            error.value = null
+        } catch (err) {
+            error.value = err as Error
+        } finally {
+            loading.value = false
+        }
+    }
+
+    // Initial fetch
+    refetch(variables)
+
+    return {
+        result: computed(() => result.value),
+        loading,
+        error,
+        refetch,
+    }
 }
 
 export function useMutation<
