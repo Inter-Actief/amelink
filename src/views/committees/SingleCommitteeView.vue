@@ -73,17 +73,16 @@
 <script lang="ts" setup>
 import Content from '@/components/ui/Content.vue';
 import { UserStar } from 'lucide-vue-next';
-import { useQueryStore } from '@/stores/queryStore';
 import { computed, ref, watch } from 'vue';
 import { useGettext } from 'vue3-gettext';
 import { markedText } from '@/functions/functions';
 import { ArrowLeft } from 'lucide-vue-next';
+import { useQuery } from '@/composables/queries';
 
 const props = defineProps<{ id: string, slug: string }>();
 const { $gettext } = useGettext();
-const queries = useQueryStore();
 
-const { result, loading } = queries.getSingleCommittee({ committeeId: props.id });
+const { result, loading } = useQuery('singleCommittee', { committeeId: props.id });
 const queryResults = computed(() => result.value?.committees?.results[0]);
 const committee = computed(() => (queryResults.value));
 const picture = computed(() => `${import.meta.env.VITE_AMELIE_MEDIA_URL}${committee.value!.groupPicture!}`)

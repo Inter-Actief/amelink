@@ -21,13 +21,12 @@
 
 <script lang="ts" setup>
 import SectionCard from '@/components/ui/SectionCard.vue';
-import { useQueryStore } from '@/stores/queryStore';
 import { computed, type ComputedRef, type Ref } from 'vue';
-const queries = useQueryStore();
 import Content from '@/components/ui/Content.vue';
+import { useQuery } from '@/composables/queries';
 
 // getCommitteeOverview
-const { result, refetch, loading } = queries.getCommitteeOverview({})
+const { result, loading } = useQuery('committeeOverview', {})
 const queryResults = computed(() => result.value?.committees)
 const committees = computed(() => (queryResults.value ? queryResults.value.results : []))
 
