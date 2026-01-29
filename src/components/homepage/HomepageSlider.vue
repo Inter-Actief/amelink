@@ -20,19 +20,16 @@
 import Galleria from 'primevue/galleria';
 import { RouterLink } from 'vue-router';
 import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
 import { formattedData, excerptText } from '@/functions/functions.ts'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-import { useQueryStore } from '@/stores/queryStore'
+import { useQuery } from '@/composables/queries';
 
-const queries = useQueryStore();
-const route = useRoute()
 const limit = ref(50);
 
 // TODO: Actually filter on activities with pictures
-const { result, refetch } = queries.getHomepageSliderQuery({ limit: limit.value, beginDate: new Date() });
+const { result } = useQuery('homepageSlider', { limit: limit.value, beginDate: new Date() });
 
 const queryResults = computed(() => {
     return result.value?.activities?.results.filter(x => (x?.photos ?? []).length > 0)

@@ -36,16 +36,15 @@
 import DataTable, { type DataTablePageEvent } from 'primevue/datatable';
 import Column from 'primevue/column';
 import { FilterMatchMode } from '@primevue/core/api';
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { formattedDataShort, getItemValue } from '@/functions/functions.ts'
 import { useGettext } from 'vue3-gettext'
-import { useQueryStore } from '@/stores/queryStore'
 import { Camera } from 'lucide-vue-next';
+import { useQuery } from '@/composables/queries';
 
 const { $gettext } = useGettext();
 const limit = ref(20);
-const queries = useQueryStore();
-const query = queries.getPastActivitiesQuery({ limit: limit.value, endDate: new Date() })
+const query = useQuery('pastActivities', { limit: limit.value, endDate: new Date() })
 const { result, refetch, loading } = query;
 const count = computed(() => {
     return result.value?.activities?.totalCount;

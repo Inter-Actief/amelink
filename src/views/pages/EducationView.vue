@@ -34,14 +34,13 @@
 import { computed, ref, watch } from 'vue'
 import { getItemValue, markedText } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext'
-import { useQueryStore } from '@/stores/queryStore'
 import Divider from 'primevue/divider';
 import Content from '@/components/ui/Content.vue';
+import { useQuery } from '@/composables/queries';
 
-const queries = useQueryStore();
 const { $gettext } = useGettext();
 
-const { result } = queries.getEducationViewQuery({});
+const { result } = useQuery('educationView', {})
 
 const processedContent = ref<{ [key: string]: string }>({})
 const queryResults = computed(() => result.value?.educationpages)
