@@ -1,26 +1,13 @@
 <template>
-    <Galleria
-        :value="queryResults"
-        showItemNavigators
-        @update:activeIndex="resetAnimation()"
-        :showThumbnails="false"
-        autoPlay
-        circular
-        :transitionInterval="7000"
-    >
+    <Galleria :value="queryResults" showItemNavigators @update:activeIndex="resetAnimation()" :showThumbnails="false"
+        autoPlay circular :transitionInterval="7000">
         <template #item="slotProps" :circular="true">
             <div class="w-full h-[30vw] container">
-                <img
-                    class="w-full"
-                    ref="gallery-image"
-                    :src="imageSrc(randomItem(slotProps.item.photos).thumbLarge)"
-                />
+                <img class="w-full" ref="gallery-image" :src="imageSrc(randomItem(slotProps.item.photos).thumbLarge)" />
             </div>
         </template>
         <template #caption="slotProps">
-            <RouterLink
-                :to="{ name: 'singleactivitiesphotos', params: { id: slotProps.item.id! } }"
-            >
+            <RouterLink :to="{ name: 'singleactivitiesphotos', params: { id: slotProps.item.id! } }">
                 <div class="text-5xl mb-2 font-bold pl-4">{{ slotProps.item.summary }}</div>
                 <p class="text-white pl-4">{{ formattedData(slotProps.item.begin) }}</p>
             </RouterLink>
@@ -37,18 +24,14 @@ import { formattedData, excerptText } from '@/functions/functions.ts'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-import { useQueryStore } from '@/stores/queryStore'
+import { useQuery } from '@/composables/queries';
 
-const queries = useQueryStore()
 const route = useRoute()
 const limit = ref(50)
 const imageRef = useTemplateRef('gallery-image')
 
 // TODO: Actually filter on activities with pictures
-const { result, refetch } = queries.getHomepageSliderQuery({
-    limit: limit.value,
-    beginDate: new Date(),
-})
+const { result } = useQuery('homepageSlider', { limit: limit.value, beginDate: new Date() });
 function resetAnimation() {
     if (imageRef.value) {
         imageRef.value.style.animation = 'none'
@@ -110,6 +93,7 @@ const imageSrc = (src: string | null | undefined) => {
     from {
         object-position: bottom center;
     }
+
     to {
         object-position: top center;
     }

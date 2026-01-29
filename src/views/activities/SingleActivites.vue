@@ -32,14 +32,13 @@ import { computed, ref, watch } from 'vue'
 import { formattedData, getItemValue, markedText } from '@/functions/functions'
 import InformationActivites from '@/components/activities/InformationActivites.vue'
 import { useGettext } from 'vue3-gettext'
-import { useQueryStore } from '@/stores/queryStore'
 import { ArrowRight, ArrowLeft } from 'lucide-vue-next';
+import { useQuery } from '@/composables/queries';
 
 const { $gettext } = useGettext();
 const props = defineProps<{ id: string }>();
-const queries = useQueryStore();
 
-const { result, refetch } = queries.getSingleActivitiesQuery({ id: props.id });
+const { result, refetch } = useQuery('singleActivites', { id: props.id });
 const queryResults = computed(() => result.value?.activity);
 const queryItem = computed(() => (queryResults.value ? queryResults.value : null));
 

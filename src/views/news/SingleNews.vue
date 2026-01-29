@@ -26,13 +26,12 @@ import { computed, ref, watch } from 'vue'
 import { formattedData, getItemValue, markedText } from '@/functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
-import { useQueryStore } from '@/stores/queryStore'
+import { useQuery } from '@/composables/queries';
 
 const { $gettext } = useGettext();
-const queries = useQueryStore();
 const props = defineProps<{ id: string }>();
 
-const { result, refetch } = queries.getSingleNewsQuery({ id: props.id });
+const { result, refetch } = useQuery('singleNews', { id: props.id })
 const queryResults = computed(() => result.value?.newsItem);
 const item = computed(() => (queryResults.value ? queryResults.value : null));
 
