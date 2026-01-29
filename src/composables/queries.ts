@@ -21,7 +21,9 @@ export const queries = {
     publicationOverview: gql.PublicationOverviewDocument,
     activitiesSliderCard: gql.ActivitiesSliderCardDocument,
     homepageSlider: gql.HomepageSliderDocument,
-    singleActivites: gql.SingleActivitiesDocument
+    singleActivites: gql.SingleActivitiesDocument,
+    committeeOverview: gql.CommitteeOverviewDocument,
+    singleCommittee: gql.SingleCommitteeDocument
 } as const
 
 /**

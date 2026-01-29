@@ -105,7 +105,7 @@ const items = computed(() => [
             },
             {
                 label: $gettext('Committees'),
-                route: '/'
+                route: '/committees/'
             },
             {
                 label: $gettext('Membership'),
