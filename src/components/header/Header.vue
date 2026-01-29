@@ -20,6 +20,7 @@
 
         <div class="pl-10 pr-10 pb-4">
             <Menubar :model="items" class="p-0 sticky top-0 z-50">
+                <template #start></template>
                 <template #item="{ item, props, hasSubmenu, root }">
                     <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
                         <a v-ripple :href="href" v-bind="props.action" @click="navigate">
