@@ -18,14 +18,13 @@
 import { computed, ref, watch } from 'vue'
 import { formattedData, getItemValue, markedText } from '@/functions/functions.ts'
 import { useGettext } from 'vue3-gettext'
-import { useQueryStore } from '@/stores/queryStore'
 import Pagination from '../ui/Pagination.vue'
 import TextCard from '../ui/TextCard.vue'
+import { useQuery } from '@/composables/queries'
 
 const { $gettext } = useGettext();
-const queries = useQueryStore();
 
-const query = queries.getOverviewNewsQuery({ limit: 10, offset: 0 });
+const query = useQuery('overviewNews', { limit: 10, offset: 0 })
 const { result } = query
 
 const queryResults = computed(() => result.value?.newsItems)

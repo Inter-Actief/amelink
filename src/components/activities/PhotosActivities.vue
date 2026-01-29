@@ -25,13 +25,12 @@ import { computed, ref, watch } from 'vue'
 import VueEasyLightbox from 'vue-easy-lightbox'
 import { useGettext } from 'vue3-gettext'
 import { getItemValue } from '@/functions/functions'
-import { useQueryStore } from '@/stores/queryStore'
+import { useQuery } from '@/composables/queries';
 
-const queries = useQueryStore();
 const { $gettext } = useGettext();
 const props = defineProps(['id'])
 
-const { result, refetch } = queries.getPhotosActivitiesQuery({ id: props.id });
+const {result, refetch } = useQuery("photosActivities", {id: props.id}) 
 const queryResults = computed(() => result.value?.activity)
 const queryItem = computed(() => (queryResults.value ? queryResults.value : null))
 

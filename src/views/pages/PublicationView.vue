@@ -34,17 +34,16 @@
 <script setup lang="ts">
 import Content from '@/components/ui/Content.vue';
 import SectionCard from '@/components/ui/SectionCard.vue';
-import { useQueryStore } from '@/stores/queryStore';
 import { computed, ref } from 'vue';
 import { useGettext } from 'vue3-gettext';
 const { $gettext } = useGettext();
-const queries = useQueryStore();
 import { formattedData } from '@/functions/functions.ts'
 import Pagination from '@/components/ui/Pagination.vue';
+import { useQuery } from '@/composables/queries';
 
 const publicationUrl = (url: string) => `${import.meta.env.VITE_AMELIE_MEDIA_URL}${url}`;
 const limit = ref(10)
-const query = queries.getPublicationOverview({ limit: limit.value });
+const query = useQuery('publicationOverview', { limit: limit.value });
 const totalCount = computed(() => query.result.value?.publications?.totalCount);
 const queryItems = computed(() => {
     return query.result.value?.publications?.results;

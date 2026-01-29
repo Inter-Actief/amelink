@@ -1,3 +1,4 @@
+<!-- OLD COMPONENT, NOT USED ANYMORE -->
 <template>
     <div class="latestnews">
         <div class="bar">
@@ -8,7 +9,7 @@
         </div>
 
         <div class="items">
-            <template v-if="newsItems !== null" v-for="item in newsItems" :key="item">
+            <template v-if="newsItems !== null" v-for="item in newsItems" :key="item!.id">
                 <div class="item">
                     <div class="info">
                         <div class="date">{{ formattedDataShort(item?.publicationDate) }}</div>
@@ -24,21 +25,15 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
 import { formattedDataShort, getItemValue } from '../../functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
-import { useQueryStore } from '@/stores/queryStore.ts'
+import { useQuery } from '@/composables/queries.ts'
 
 const { $gettext } = useGettext();
-const route = useRoute()
 const perpage = ref(5)
-const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
-const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
-const queries = useQueryStore();
-
-const { result } = queries.getLatestNewsQuery({ limit: perpage.value });
+const { result } = useQuery('latestNews',{ limit: perpage.value });
 const queryResults = computed(() => result.value?.newsItems)
 const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 </script>
