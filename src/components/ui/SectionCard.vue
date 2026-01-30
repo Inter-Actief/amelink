@@ -3,7 +3,7 @@
     <div>
         <Card :style="{ overflow: 'hidden', background: bg, height: props.maxHeight ? '100%' : undefined }">
             <template #header v-if="props.name">
-                <div class="bg-primary w-100 h-100 p-8 mb-0 flex flex-row justify-between">
+                <div class="bg-primary w-full h-100 p-8 mb-0 flex flex-row justify-between">
                     <div class="font-extrabold text-4xl text-primary-contrast">
                         {{ props.name }}
                     </div>
@@ -24,6 +24,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
+import Card from 'primevue/card';
 
 interface Props {
     name?: string,
