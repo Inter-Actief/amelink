@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
+/* @layer theme, base, primevue, components, utilities; */
 @import './variables.css';
 @import './fonts.css';
 @import './main.css';
@@ -7,4 +6,5 @@
 
 @import 'tailwindcss';
 @import 'tailwindcss-primeui';
-@custom-variant dark (&:where(.dark, .dark *)); 
+
+@custom-variant dark (&:where(.dark, .dark *));
