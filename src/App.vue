@@ -5,7 +5,7 @@
         <Suspense>
             <RouterView />
             <template #fallback>
-                <div class="bg-red-500 w-full h-100"></div>
+                <div class="bg-red-500 w-full h-full"></div>
             </template>
         </Suspense>
         <Content light v-if="router.currentRoute.value.name != 'home'">
