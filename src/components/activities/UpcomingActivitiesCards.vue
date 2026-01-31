@@ -7,7 +7,6 @@
         </template>
         <template #content>
             <!-- <ProgressSpinner v-if="loading" /> -->
-             {{ result }}
             <div class="grid gap-10 grid-cols-4 pb-10">
                 <template v-for="item in activityItems" :key="item!.id">
                     <TextCard :image="imageSrc(item?.imageIcon!)" :title="item!.summary ?? ''"

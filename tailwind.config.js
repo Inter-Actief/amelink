@@ -13,5 +13,5 @@ export default {
         },
     },
     darkMode: ['selector', '[class~="dark"]'], // dark mode configuration
-    important: true,
+    // important: true,
 }
