@@ -9,6 +9,10 @@ interface ImportMetaEnv {
     readonly VITE_AMELIE_MEDIA_URL: string
     readonly VITE_AMELIE_BASE_URL: string
     readonly VITE_WO4YOU_URL: string
+    readonly VITE_OIDC_CLIENT: string
+    readonly VITE_OIDC_URL: string
+    readonly VITE_OIDC_REDIR_URL: string
+    readonly VITE_BASE_URL: string
 }
 
 interface ImportMeta {

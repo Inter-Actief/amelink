@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useOidcStore } from '@/stores/oidcStore'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -88,6 +89,26 @@ const router = createRouter({
             name: 'singlecommittee',
             component: () => import('@/views/committees/SingleCommitteeView.vue'),
             props: true,
+        },
+        {
+            path: '/auth/state',
+            name: 'authstate',
+            component: () => import('@/views/pages/StateView.vue'),
+        },
+        {
+            path: '/auth/win',
+            name: 'callbackwin',
+            component: { template: '<div></div>' },
+            beforeEnter: async (to, from, next) => {
+                const oidcStore = useOidcStore()
+                try {
+                    await oidcStore.handleCallback()
+                    next('/')
+                } catch (error) {
+                    console.error('Auth callback failed:', error)
+                    next('/')
+                }
+            },
         },
     ],
 })
