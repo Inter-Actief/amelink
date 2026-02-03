@@ -8,7 +8,7 @@
         <template #content>
             <!-- <ProgressSpinner v-if="loading" /> -->
             <div class="grid gap-10 grid-cols-4 pb-10">
-                <template v-for="item in activityItems" :key="item.id">
+                <template v-for="item in activityItems" :key="item!.id">
                     <TextCard :image="imageSrc(item?.imageIcon!)" :title="item!.summary ?? ''"
                         :routerLink="{ to: { name: 'singleactivities', params: { id: item!.id } } }"
                         :subtitle="formattedData(item!.begin)"
@@ -26,24 +26,23 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useGettext } from 'vue3-gettext'
-import { useQueryStore } from '@/stores/queryStore.ts'
 import SectionCard from '../ui/SectionCard.vue'
 import Pagination from '../ui/Pagination.vue'
 import TextCard from '../ui/TextCard.vue'
 import { formattedData, excerptText, getItemValue } from '@/functions/functions.ts'
-import type { LatestActivitiesQueryQuery } from '@/gql/graphql'
+import type { LatestActivitiesQuery } from '@/gql/graphql'
+import { useQuery } from '@/composables/queries'
 const { $gettext } = useGettext();
-const queries = useQueryStore();
 const perpage = ref(4)
 
-const query = queries.getUpcomingActivitiesQuery({ limit: perpage.value, beginDate: new Date() });
-const { result, refetch, loading } = query;
+const query = useQuery("upcomingActivities", { limit: perpage.value, beginDate: new Date() })
+const { result } = query;
 const queryResults = computed(() => result.value?.activities)
 const activityItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 const totalCount = computed(() => queryResults.value?.totalCount)
 
 type ActivityItemType = NonNullable<
-    NonNullable<LatestActivitiesQueryQuery["activities"]>["results"][number]
+    NonNullable<LatestActivitiesQuery["activities"]>["results"][number]
 >;
 
 const imageSrc = (src: string | null | undefined) => {

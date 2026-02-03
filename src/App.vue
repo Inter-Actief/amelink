@@ -2,7 +2,12 @@
     <div>
         <Toast />
         <Header />
-        <RouterView />
+        <Suspense>
+            <RouterView />
+            <template #fallback>
+                <div class="bg-red w-100 h-100"></div>
+            </template>
+        </Suspense>
         <Content light v-if="router.currentRoute.value.name != 'home'">
             <LogoSlider />
         </Content>

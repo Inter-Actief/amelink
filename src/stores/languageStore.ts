@@ -1,12 +1,11 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import gettext from '@/gettext'
-import { useQueryStore } from '@/stores/queryStore'
 import { provideApolloClient } from '@vue/apollo-composable'
 import { apolloClient } from '@/main' // Ensure this is exported from main.ts
+import { useMutation } from '@/composables/queries'
 
 export const useLanguageStore = defineStore('languageStore', () => {
-    const queryStore = useQueryStore()
     const currentLanguage = ref(gettext.current)
     const availableLanguages = Object.keys(gettext.available)
 
@@ -33,9 +32,7 @@ export const useLanguageStore = defineStore('languageStore', () => {
         // Provide Apollo Client context
         provideApolloClient(apolloClient)
 
-        const { mutate, loading, onDone } = queryStore.setLanguageMutation({
-            // refetchQueries: 'active',
-        })
+        const { mutate, loading, onDone } = useMutation('setLanguage')
 
         onDone(async (returned) => {
             //TODO: This type does not correspond to the actual type of the returned data

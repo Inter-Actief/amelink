@@ -45,23 +45,16 @@
 </template>
 
 <script setup lang="ts">
-import { useQuery } from '@vue/apollo-composable'
 import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { excerptText, formattedDataShort, getItemValue } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext'
-import { graphql } from '@/gql'
-import { useQueryStore } from '@/stores/queryStore'
+import { useQuery } from '@/composables/queries'
 
 const { $gettext } = useGettext();
-const route = useRoute()
-const queries = useQueryStore();
 const perpage = ref(5)
-const page = ref(route.query.page && typeof route.query.page === 'string' ? parseInt(route.query.page) : 1)
-const offset = ref(page.value > 1 ? (page.value - 1) * perpage.value : 0)
 
-const { result, refetch } = queries.getUpcomingActivitiesQuery({ limit: perpage.value });
+const { result, refetch } = useQuery("upcomingActivities", { limit: perpage.value });
 const queryResults = computed(() => result.value?.activities)
 const items = computed(() => (queryResults.value ? queryResults.value.results : null))
 </script>

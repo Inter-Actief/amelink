@@ -27,9 +27,8 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch, type Ref } from 'vue'
-import { useQueryStore } from '@/stores/queryStore'
+import { useQuery } from '@/composables/queries';
 
-const queries = useQueryStore();
 const currentSlideIndex = ref(0)
 const images: Ref<{
     url: string
@@ -41,8 +40,7 @@ const totalSliderWidth = ref(0)
 const mediaUrl = import.meta.env.VITE_AMELIE_MEDIA_URL
 const endGtDate = new Date()
 
-
-const { result, loading } = queries.getActivitiesSliderCardQuery({ endgt: endGtDate })
+const { result, loading } = useQuery('activitiesSliderCard',{ endgt: endGtDate })
 
 watch(result, (newValue) => {
     images.value =
