@@ -72,7 +72,7 @@ export type ActivityType = {
   enrollment: Scalars['Boolean']['output'];
   /** Of deze activiteit bijna vol zit (<= 10 plaatsen over). */
   enrollmentAlmostFull?: Maybe<Scalars['Boolean']['output']>;
-  /** If you want to add options, make sure your activity isn't open for enrollment right away */
+  /** Als je nog opties wil toevoegen, zorg ervoor dat de inschrijving dan niet meteen open is */
   enrollmentBegin?: Maybe<Scalars['DateTime']['output']>;
   /** Of mensen zich niet meer kunnen inschrijven voor deze activiteit. */
   enrollmentClosed?: Maybe<Scalars['Boolean']['output']>;
@@ -87,7 +87,7 @@ export type ActivityType = {
   /** Of er inschrijfopties zijn. */
   hasEnrollmentOptions?: Maybe<Scalars['Boolean']['output']>;
   id: Scalars['ID']['output'];
-  /** Image of 175 by 275 pixels. */
+  /** Afbeelding van 175 bij 275 pixels. */
   imageIcon?: Maybe<Scalars['String']['output']>;
   location: Scalars['String']['output'];
   maximum?: Maybe<Scalars['Int']['output']>;
@@ -98,9 +98,9 @@ export type ActivityType = {
   price: Scalars['Decimal']['output'];
   /** Promotietekst voor deze activiteit, in de voorkeurstaal van de gebruiker. */
   promo?: Maybe<Scalars['String']['output']>;
-  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
+  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
   promoEn: Scalars['String']['output'];
-  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
+  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
   promoNl: Scalars['String']['output'];
   public: Scalars['Boolean']['output'];
   /** Een URL naar een willekeurige foto die gemaakt is bij deze activiteit. */
@@ -240,9 +240,9 @@ export type CompanyEventType = {
   organizer: CommitteeType;
   /** Promotietekst voor deze activiteit, in de voorkeurstaal van de gebruiker. */
   promo?: Maybe<Scalars['String']['output']>;
-  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
+  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
   promoEn: Scalars['String']['output'];
-  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
+  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
   promoNl: Scalars['String']['output'];
   public: Scalars['Boolean']['output'];
   /** Een samenvatting van deze activiteit in de voorkeurstaal van de gebruiker. */
@@ -297,6 +297,59 @@ export type CompanyTypeNodeConnection = {
   totalCount?: Maybe<Scalars['Int']['output']>;
 };
 
+/** Debugging information for the current query. */
+export type DjangoDebug = {
+  __typename?: 'DjangoDebug';
+  /** Raise exceptions for this API query. */
+  exceptions?: Maybe<Array<Maybe<DjangoDebugException>>>;
+  /** Executed SQL queries for this API query. */
+  sql?: Maybe<Array<Maybe<DjangoDebugSql>>>;
+};
+
+/** Represents a single exception raised. */
+export type DjangoDebugException = {
+  __typename?: 'DjangoDebugException';
+  /** The class of the exception */
+  excType: Scalars['String']['output'];
+  /** The message of the exception */
+  message: Scalars['String']['output'];
+  /** The stack trace */
+  stack: Scalars['String']['output'];
+};
+
+/** Represents a single database query made to a Django managed DB. */
+export type DjangoDebugSql = {
+  __typename?: 'DjangoDebugSQL';
+  /** The Django database alias (e.g. 'default'). */
+  alias: Scalars['String']['output'];
+  /** Duration of this database query in seconds. */
+  duration: Scalars['Float']['output'];
+  /** Postgres connection encoding if available. */
+  encoding?: Maybe<Scalars['String']['output']>;
+  /** Whether this database query was a SELECT. */
+  isSelect: Scalars['Boolean']['output'];
+  /** Whether this database query took more than 10 seconds. */
+  isSlow: Scalars['Boolean']['output'];
+  /** Postgres isolation level if available. */
+  isoLevel?: Maybe<Scalars['String']['output']>;
+  /** JSON encoded database query parameters. */
+  params: Scalars['String']['output'];
+  /** The raw SQL of this query, without params. */
+  rawSql: Scalars['String']['output'];
+  /** The actual SQL sent to this database. */
+  sql?: Maybe<Scalars['String']['output']>;
+  /** Start time of this database query. */
+  startTime: Scalars['Float']['output'];
+  /** Stop time of this database query. */
+  stopTime: Scalars['Float']['output'];
+  /** Postgres transaction ID if available. */
+  transId?: Maybe<Scalars['String']['output']>;
+  /** Postgres transaction status if available. */
+  transStatus?: Maybe<Scalars['String']['output']>;
+  /** The type of database being used (e.g. postrgesql, mysql, sqlite). */
+  vendor: Scalars['String']['output'];
+};
+
 export type EducationEventType = {
   __typename?: 'EducationEventType';
   /** The absolute URL to this event */
@@ -322,9 +375,9 @@ export type EducationEventType = {
   organizer: CommitteeType;
   /** Promotietekst voor deze activiteit, in de voorkeurstaal van de gebruiker. */
   promo?: Maybe<Scalars['String']['output']>;
-  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
+  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
   promoEn: Scalars['String']['output'];
-  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
+  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
   promoNl: Scalars['String']['output'];
   public: Scalars['Boolean']['output'];
   /** Een samenvatting van deze activiteit in de voorkeurstaal van de gebruiker. */
@@ -391,9 +444,9 @@ export type EducationPageTypeNodeConnection = {
 
 export type EducationalBouquetMutationInput = {
   author: Scalars['String']['input'];
-  /** The response to the captcha challenge */
+  /** Het antwoord op de CAPTCHA challenge */
   captcha: Scalars['String']['input'];
-  /** The key that uniquely identifies this captcha test */
+  /** De sleutel die deze CAPTCHA-test uniek identificeert */
   captchaHash: Scalars['String']['input'];
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   course: Scalars['String']['input'];
@@ -405,9 +458,9 @@ export type EducationalBouquetMutationInput = {
 export type EducationalBouquetMutationPayload = {
   __typename?: 'EducationalBouquetMutationPayload';
   author: Scalars['String']['output'];
-  /** The response to the captcha challenge */
+  /** Het antwoord op de CAPTCHA challenge */
   captcha: Scalars['String']['output'];
-  /** The key that uniquely identifies this captcha test */
+  /** De sleutel die deze CAPTCHA-test uniek identificeert */
   captchaHash: Scalars['String']['output'];
   clientMutationId?: Maybe<Scalars['String']['output']>;
   course: Scalars['String']['output'];
@@ -461,6 +514,7 @@ export type GraphQlMutationVerifyTokenArgs = {
 
 export type GraphQlQuery = {
   __typename?: 'GraphQLQuery';
+  _debug?: Maybe<DjangoDebug>;
   activities?: Maybe<ActivityTypeNodeConnection>;
   activity?: Maybe<ActivityType>;
   attachment?: Maybe<AttachmentType>;
@@ -487,6 +541,7 @@ export type GraphQlQuery = {
   newsItems?: Maybe<NewsItemTypeNodeConnection>;
   page?: Maybe<PageType>;
   publication?: Maybe<PublicationItemType>;
+  publicationTypes?: Maybe<Array<Maybe<PublicationTypeType>>>;
   publications?: Maybe<PublicationItemTypeNodeConnection>;
   televisionBanner?: Maybe<TelevisionBannerType>;
   televisionBanners?: Maybe<TelevisionBannerTypeNodeConnection>;
@@ -855,7 +910,7 @@ export type NewsItemType = {
   introduction?: Maybe<Scalars['String']['output']>;
   introductionEn?: Maybe<Scalars['String']['output']>;
   introductionNl: Scalars['String']['output'];
-  /** Choose this option to pin the news item */
+  /** Kies deze optie om dit nieuwsbericht vast te zetten */
   pinned: Scalars['Boolean']['output'];
   publicationDate: Scalars['DateTime']['output'];
   /** Publicerende commissie */
@@ -972,15 +1027,15 @@ export type UserType = {
   email: Scalars['String']['output'];
   firstName: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  /** Designates whether this user should be treated as active. Unselect this instead of deleting accounts. */
+  /** Bepaalt of deze gebruiker als actief dient te worden behandeld. U kunt dit uitvinken in plaats van een gebruiker te verwijderen. */
   isActive: Scalars['Boolean']['output'];
-  /** Designates whether the user can log into this admin site. */
+  /** Bepaalt of de gebruiker zich op deze beheerwebsite kan aanmelden. */
   isStaff: Scalars['Boolean']['output'];
-  /** Designates that this user has all permissions without explicitly assigning them. */
+  /** Bepaalt dat deze gebruiker alle rechten heeft, zonder deze expliciet toe te wijzen. */
   isSuperuser: Scalars['Boolean']['output'];
   lastLogin?: Maybe<Scalars['DateTime']['output']>;
   lastName: Scalars['String']['output'];
-  /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
+  /** Vereist. 150 tekens of minder. Alleen letters, cijfers en de tekens @/,/+/-/_ zijn toegestaan. */
   username: Scalars['String']['output'];
 };
 
@@ -1166,10 +1221,11 @@ export type PageViewQuery = { __typename?: 'GraphQLQuery', page?: { __typename?:
 export type PublicationOverviewQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type PublicationOverviewQuery = { __typename?: 'GraphQLQuery', publications?: { __typename?: 'PublicationItemTypeNodeConnection', totalCount?: number | null, results: Array<{ __typename?: 'PublicationItemType', id: string, name: string, description?: string | null, datePublished: any, thumbnail?: string | null, file: string, isFeatured: boolean, public: boolean, publicationType: { __typename?: 'PublicationTypeType', typeName: string, description?: string | null } } | null> } | null };
+export type PublicationOverviewQuery = { __typename?: 'GraphQLQuery', publicationTypes?: Array<{ __typename?: 'PublicationTypeType', typeName: string } | null> | null, publications?: { __typename?: 'PublicationItemTypeNodeConnection', totalCount?: number | null, results: Array<{ __typename?: 'PublicationItemType', id: string, name: string, description?: string | null, datePublished: any, thumbnail?: string | null, file: string, isFeatured: boolean, public: boolean, publicationType: { __typename?: 'PublicationTypeType', typeName: string, description?: string | null } } | null> } | null };
 
 export type CommitteeOverviewQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1205,7 +1261,7 @@ export const SingleActivitiesDocument = {"kind":"Document","definitions":[{"kind
 export const SingleNewsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SingleNews"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"newsItem"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"publicationDate"}},{"kind":"Field","name":{"kind":"Name","value":"author"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<SingleNewsQuery, SingleNewsQueryVariables>;
 export const EducationViewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"EducationView"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"educationpages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"content"}}]}}]}}]}}]} as unknown as DocumentNode<EducationViewQuery, EducationViewQueryVariables>;
 export const PageViewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PageView"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"pageId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"pageId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"content"}}]}}]}}]} as unknown as DocumentNode<PageViewQuery, PageViewQueryVariables>;
-export const PublicationOverviewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PublicationOverview"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publications"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"ordering"},"value":{"kind":"StringValue","value":"datePublished,desc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"datePublished"}},{"kind":"Field","name":{"kind":"Name","value":"publicationType"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"typeName"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"}},{"kind":"Field","name":{"kind":"Name","value":"file"}},{"kind":"Field","name":{"kind":"Name","value":"isFeatured"}},{"kind":"Field","name":{"kind":"Name","value":"public"}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}}]}}]} as unknown as DocumentNode<PublicationOverviewQuery, PublicationOverviewQueryVariables>;
+export const PublicationOverviewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PublicationOverview"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"type"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publicationTypes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"typeName"}}]}},{"kind":"Field","name":{"kind":"Name","value":"publications"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"ordering"},"value":{"kind":"StringValue","value":"datePublished,desc","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"publicationType_TypeName_Iexact"},"value":{"kind":"Variable","name":{"kind":"Name","value":"type"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"datePublished"}},{"kind":"Field","name":{"kind":"Name","value":"publicationType"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"typeName"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"}},{"kind":"Field","name":{"kind":"Name","value":"file"}},{"kind":"Field","name":{"kind":"Name","value":"isFeatured"}},{"kind":"Field","name":{"kind":"Name","value":"public"}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}}]}}]} as unknown as DocumentNode<PublicationOverviewQuery, PublicationOverviewQueryVariables>;
 export const CommitteeOverviewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CommitteeOverview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"committees"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"includeAbolished"},"value":{"kind":"BooleanValue","value":false}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"500"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<CommitteeOverviewQuery, CommitteeOverviewQueryVariables>;
 export const SingleCommitteeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SingleCommittee"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"committeeId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"committees"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"includeAbolished"},"value":{"kind":"BooleanValue","value":false}},{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"committeeId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"founded"}},{"kind":"Field","name":{"kind":"Name","value":"website"}},{"kind":"Field","name":{"kind":"Name","value":"information"}},{"kind":"Field","name":{"kind":"Name","value":"groupPicture"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"abolished"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"functionSet"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"person"}},{"kind":"Field","name":{"kind":"Name","value":"function"}}]}}]}}]}}]}}]} as unknown as DocumentNode<SingleCommitteeQuery, SingleCommitteeQueryVariables>;
 export const SetLanguageMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SetLanguageMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"setLanguage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"languageCode"},"value":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"result"}}]}}]}}]} as unknown as DocumentNode<SetLanguageMutationMutation, SetLanguageMutationMutationVariables>;
