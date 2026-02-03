@@ -88,12 +88,12 @@ const router = createRouter({
         {
             path: '/companies',
             name: 'companies',
-            component: () => import('@/views/pages/CompanyCornerPage.vue'),
+            component: () => import('@/views/companies/CompaniesView.vue'),
         },
         {
             path: '/company/:slug',
             name: 'company',
-            component: () => import('@/views/pages/CompanyPage.vue'),
+            component: () => import('@/views/companies/CompanyView.vue'),
             props: true,
         },
         {

@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import { useQuery } from '@/composables/queries';
 import { imageSrc } from '@/composables/util';
+import { computed } from 'vue';
 
 const breakpoints = {
     1200: {
@@ -23,7 +24,7 @@ const breakpoints = {
 }
 
 const query = useQuery("frontPageBanners", {});
-const banners = query.result.value?.websiteBanners?.results?.filter(b => !!b) ?? [];
+const banners = computed(() => query.result.value?.websiteBanners?.results?.filter(b => !!b) ?? []);
 </script>
 
 <template>
