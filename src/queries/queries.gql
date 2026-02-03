@@ -211,8 +211,11 @@ query PageView($pageId: ID) {
   }
 }
 
-query PublicationOverview($limit: Int, $offset: Int) {
-  publications(limit: $limit, offset: $offset, ordering: "datePublished,desc") {
+query PublicationOverview($limit: Int, $offset: Int, $type: String) {
+  publicationTypes {
+    typeName
+  }
+  publications(limit: $limit, offset: $offset, ordering: "datePublished,desc", publicationType_TypeName_Iexact: $type) {
     results {
       id
       name
