@@ -28,7 +28,7 @@
     "@vue/apollo-composable": "^4.2.1",
     "@vuepic/vue-datepicker": "^11.0.1",
     "autoprefixer": "^10.4.21",
-    "dotenv": "^16.4.7",
+    "dotenv-flow": "^4.1.0",
     "graphql": "^16.10.0",
     "lucide-vue-next": "^0.542.0",
     "marked": "^15.0.6",
