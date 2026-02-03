@@ -1,56 +1,11 @@
-<template>
-    <swiper
-        :slidesPerView="1"
-        :spaceBetween="30"
-        :loop="true"
-        class="logoswiper"
-        :autoplay="{
-            delay: 4000,
-            disableOnInteraction: false,
-        }"
-        :modules="swiperModules"
-        :breakpoints="breakpoints"
-    >
-        <swiper-slide
-            ><img
-                width="114"
-                height="32"
-                src="/images/logos/ASML.svg"
-                alt="ASML logo"
-                aria-label="ASML logo"
-        /></swiper-slide>
-        <swiper-slide
-            ><img
-                width="185"
-                height="32"
-                src="/images/logos/BetterBe.svg"
-                alt="BetterBe logo"
-                aria-label="BetterBe logo"
-        /></swiper-slide>
-        <swiper-slide
-            ><img
-                width="202"
-                height="32"
-                src="/images/logos/epartment.svg"
-                alt="Epartment logo"
-                aria-label="Epartment logo"
-        /></swiper-slide>
-        <swiper-slide
-            ><img
-                width="148"
-                height="32"
-                src="/images/logos/Voortman.svg"
-                alt="Voortman logo"
-                aria-label="Voortman logo"
-        /></swiper-slide>
-    </swiper>
-</template>
 <script setup lang="ts">
-import { Autoplay } from 'swiper/modules'
+import { Autoplay } from 'swiper/modules';
 
-const swiperModules = [Autoplay]
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import 'swiper/css'
+const swiperModules = [Autoplay];
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import { useQuery } from '@/composables/queries';
+import { imageSrc } from '@/composables/util';
 
 const breakpoints = {
     1200: {
@@ -66,7 +21,23 @@ const breakpoints = {
         slidesPerView: 2,
     },
 }
+
+const query = useQuery("frontPageBanners", {});
+const banners = query.result.value?.websiteBanners?.results?.filter(b => !!b) ?? [];
 </script>
+
+<template>
+    <swiper :slidesPerView="1" :spaceBetween="30" :loop="true" class="logoswiper" :autoplay="{
+        delay: 4000,
+        disableOnInteraction: false,
+    }" :modules="swiperModules" :breakpoints="breakpoints">
+        <swiper-slide v-for="banner in banners" class="my-auto">
+            <a :href="banner.url">
+                <img :src="imageSrc(banner.picture)" :alt="banner.name" :aria-label="banner.name" />
+            </a>
+        </swiper-slide>
+    </swiper>
+</template>
 
 <style scoped>
 .logoswiper {
