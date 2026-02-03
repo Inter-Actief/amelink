@@ -1,7 +1,7 @@
 import { useQuery as useApolloQuery, useMutation as useApolloMutation } from '@vue/apollo-composable'
 import * as gql from '@/gql/graphql'
 import type { ApolloQueryResult, TypedDocumentNode } from '@apollo/client/core/types'
-import { apolloClient } from '@/main'
+import { apolloClient } from '@/apollo'
 import { ref, type ComputedRef, type Ref, computed } from 'vue'
 
 /**

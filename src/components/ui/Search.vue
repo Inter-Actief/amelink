@@ -29,36 +29,36 @@ import { closeMobileMenu } from '@/functions/functions.ts'
 const search = ref('')
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .searchbar {
     transition: 500ms;
-    border-radius: $border-radius;
+    border-radius: var(--border-radius);
     display: flex;
+}
 
-    .epa_button {
-        background-color: $color_white;
-        text-decoration: none;
-        padding: 1rem 1.5rem;
-        border-radius: 0 $border-radius $border-radius 0;
-        border: 0;
-        border-left: 0.1rem solid #eee;
-        font-size: inherit;
-        font-weight: inherit;
-        cursor: pointer;
-        line-height: 0;
-        color: $primary-color;
-    }
+.searchbar .epa_button {
+    background-color: var(--color-white);
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    border: 0;
+    border-left: 0.1rem solid #eee;
+    font-size: inherit;
+    font-weight: inherit;
+    cursor: pointer;
+    line-height: 0;
+    color: var(--primary-color);
+}
 
-    input {
-        border-radius: $border-radius 0 0 $border-radius;
-        border: 0;
-        margin: 0;
-        background-color: #fff;
-        padding: 1rem 1rem;
-        font-size: inherit;
-        line-height: inherit;
-        font-weight: inherit;
-        width: 100%;
-    }
+.searchbar input {
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    border: 0;
+    margin: 0;
+    background-color: #fff;
+    padding: 1rem 1rem;
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    width: 100%;
 }
 </style>

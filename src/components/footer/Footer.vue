@@ -1,5 +1,5 @@
 <template>
-    <div class="w-100 bg-primary grid grid-cols-12 gap-20 text-primary-contrast py-20">
+    <div class="w-full bg-primary grid grid-cols-12 gap-20 text-primary-contrast py-20">
         <div class="col-span-3 col-start-2">
             <Logo class="pb-8" />
             <div class="pb-8">{{ $gettext('footer.text') }}</div>
@@ -67,4 +67,4 @@ const pages = computed(() => [
 
 </script>
 
-<style lang="scss"></style>
+<style></style>

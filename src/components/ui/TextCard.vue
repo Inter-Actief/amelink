@@ -37,6 +37,7 @@
 <script setup lang="ts">
 import Chip from 'primevue/chip';
 import { RouterLink } from 'vue-router';
+import EpaButton from './EpaButton.vue';
 import Card from 'primevue/card';
 import type { _RouterLinkI, RouteLocationRaw, RouterLinkProps } from 'vue-router';
 import { computed } from 'vue';
@@ -67,10 +68,8 @@ const showReadMore = computed(() => {
 
 </script>
 
-<style scoped lang="scss">
-.text-card {
-    &:hover .readmore {
-        background-size: 100% 0.2rem;
-    }
+<style scoped>
+.text-card:hover .readmore {
+    background-size: 100% 0.2rem;
 }
 </style>

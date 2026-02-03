@@ -60,52 +60,53 @@ const tableStyle = computed(() => ({
 }))
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .table-container {
     display: grid;
+}
 
-    .inner {
-        overflow-x: auto;
+.table-container .inner {
+    overflow-x: auto;
+}
 
-        table {
-            page-break-inside: avoid;
-            width: 100%;
-            border-collapse: collapse;
+.table-container .inner table {
+    page-break-inside: avoid;
+    width: 100%;
+    border-collapse: collapse;
+}
 
-            th,
-            td {
-                border: 0;
-                padding: 1.5rem 2rem;
-                text-align: left;
+.table-container .inner table th,
+.table-container .inner table td {
+    border: 0;
+    padding: 1.5rem 2rem;
+    text-align: left;
+}
 
-                &.sticky {
-                    position: sticky;
-                    left: 0;
-                    z-index: 1;
-                }
-            }
+.table-container .inner table th.sticky,
+.table-container .inner table td.sticky {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+}
 
-            th {
-                background-color: $primary-color;
-                color: $text-color-light;
+.table-container .inner table th {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+}
 
-                &:first-child {
-                    border-radius: $border-radius 0 0 0;
-                }
+.table-container .inner table th:first-child {
+    border-radius: var(--border-radius) 0 0 0;
+}
 
-                &:last-child {
-                    border-radius: 0 $border-radius 0 0;
-                }
-            }
+.table-container .inner table th:last-child {
+    border-radius: 0 var(--border-radius) 0 0;
+}
 
-            tr:nth-child(odd) td {
-                background-color: $color_white;
-            }
+.table-container .inner table tr:nth-child(odd) td {
+    background-color: var(--color-white);
+}
 
-            tr:nth-child(even) td {
-                background-color: $color_light;
-            }
-        }
-    }
+.table-container .inner table tr:nth-child(even) td {
+    background-color: var(--color-light);
 }
 </style>

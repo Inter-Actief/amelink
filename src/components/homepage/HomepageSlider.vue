@@ -48,7 +48,7 @@ const imageSrc = (src: string | null | undefined) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .kenburns {
     transform: translateY(10%);
     animation: panUp 3s ease-in-out infinite alternate;

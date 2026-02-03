@@ -62,4 +62,4 @@ const handleHide = () => {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>

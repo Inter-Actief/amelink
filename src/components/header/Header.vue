@@ -47,11 +47,7 @@
 
 <script setup lang="ts">
 import Logo from '@/components/ui/Logo.vue'
-import EpaButton from '@/components/ui/EpaButton.vue'
 import Menubar from 'primevue/menubar';
-import { isDesktop, isTablet, openMobileMenu, toggleMobileMenu } from '@/functions/functions'
-import EpaIcon from '@/components/ui/EpaIcon.vue'
-import SearchToggle from '@/components/ui/SearchToggle.vue'
 import { useGettext } from 'vue3-gettext'
 import { computed, reactive, ref } from 'vue';
 import { ChevronDown, ChevronRight, Icon } from 'lucide-vue-next';
@@ -216,4 +212,4 @@ const items = computed(() => [
 
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>
