@@ -5,7 +5,7 @@
         <Suspense>
             <RouterView />
             <template #fallback>
-                <div class="bg-red w-100 h-100"></div>
+                <div class="bg-red-500 w-full h-full"></div>
             </template>
         </Suspense>
         <Content light v-if="router.currentRoute.value.name != 'home'">
@@ -22,6 +22,8 @@ import Footer from '@/components/footer/Footer.vue'
 import Toast from 'primevue/toast';
 import { useLanguageStore } from './stores/languageStore';
 import { useThemeStore } from './stores/themeStore';
+import LogoSlider from './components/logos/LogoSlider.vue';
+import Content from './components/ui/Content.vue';
 
 const languageStore = useLanguageStore();
 const themeStore = useThemeStore();
@@ -30,7 +32,7 @@ languageStore.loadLanguage();
 themeStore.initialiseTheme();
 </script>
 
-<style lang="scss">
+<style>
 html,
 body {
     background-color: var(--p-page-background);

@@ -34,128 +34,126 @@ const htmlElement = () => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .epa_button {
     padding: 1rem 2.5rem;
-    border-radius: $button-border-radius;
-    background-color: $button-background-color;
+    border-radius: var(--button-border-radius);
+    background-color: var(--button-background-color);
     display: flex;
     align-items: center;
-    gap: $gap_xs;
+    gap: var(--gap-xs);
     outline: 0;
     border: 0;
-    color: $button-text-color;
+    color: var(--button-text-color);
     cursor: pointer;
     transition: 300ms;
     width: fit-content;
     text-decoration: none;
     font-family: inherit;
     font-size: inherit;
+}
 
-    .active,
-    &:hover {
-        background-color: $button-background-color-hover;
-    }
+.epa_button .active,
+.epa_button:hover {
+    background-color: var(--button-background-color-hover);
+}
 
-    svg {
-        width: 2.2rem;
-        height: 2.2rem;
+.epa_button svg {
+    width: 2.2rem;
+    height: 2.2rem;
+}
 
-        &.loading {
-            animation-name: buttonloading;
-            animation-duration: 0.5s;
-            animation-iteration-count: infinite;
-            animation-timing-function: ease-in-out;
-            animation-fill-mode: both;
-            animation-delay: 0s;
-        }
-    }
+.epa_button svg.loading {
+    animation-name: buttonloading;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+    animation-delay: 0s;
+}
 
-    &.form {
-        width: 100%;
-        max-width: 30rem;
-        margin: 0 auto;
-        justify-content: center;
-    }
+.epa_button.form {
+    width: 100%;
+    max-width: 30rem;
+    margin: 0 auto;
+    justify-content: center;
+}
 
-    &.center {
-        justify-content: center;
-    }
+.epa_button.center {
+    justify-content: center;
+}
 
-    &.small {
-        font-size: $font-size-small;
-    }
+.epa_button.small {
+    font-size: var(--font-size-small);
+}
 
-    &.extrasmall {
-        font-size: 70%;
-    }
+.epa_button.extrasmall {
+    font-size: 70%;
+}
 
-    &.full {
-        width: 100%;
-        justify-content: space-between;
-    }
+.epa_button.full {
+    width: 100%;
+    justify-content: space-between;
+}
 
-    &.bottom {
-        margin-top: auto;
-    }
+.epa_button.bottom {
+    margin-top: auto;
+}
 
-    &:not(.link) {
-        &.white {
-            color: $primary-color;
-            background-color: $color_white;
+.epa_button:not(.link).white {
+    color: var(--primary-color);
+    background-color: var(--color-white);
+}
 
-            .active,
-            &:hover {
-                color: $text-color-light;
-                background-color: $button-background-color-hover;
-            }
-        }
+.epa_button:not(.link).white .active,
+.epa_button:not(.link).white:hover {
+    color: var(--text-color-light);
+    background-color: var(--button-background-color-hover);
+}
 
-        &.primary {
-            color: $primary-color;
-            background-color: $color_white;
+.epa_button:not(.link).primary {
+    color: var(--primary-color);
+    background-color: var(--color-white);
+}
 
-            .active,
-            &:hover {
-                color: $text-color-light;
-                background-color: $button-background-color-hover;
-            }
-        }
-    }
+.epa_button:not(.link).primary .active,
+.epa_button:not(.link).primary:hover {
+    color: var(--text-color-light);
+    background-color: var(--button-background-color-hover);
+}
 
-    &.link {
-        padding: 0;
-        border-radius: 0;
-        text-decoration: none;
-        position: relative;
-        background: linear-gradient(currentColor, currentColor) bottom / 0 0.2rem no-repeat;
-        background-position: left bottom;
-        transition: 300ms;
-        color: inherit;
+.epa_button.link {
+    padding: 0;
+    border-radius: 0;
+    text-decoration: none;
+    position: relative;
+    background: linear-gradient(currentColor, currentColor) bottom / 0 0.2rem no-repeat;
+    background-position: left bottom;
+    transition: 300ms;
+    color: inherit;
+}
 
-        >span {
-            font-weight: inherit;
-        }
+.epa_button.link > span {
+    font-weight: inherit;
+}
 
-        .active,
-        &:hover {
-            background-size: 100% 0.2rem;
-            opacity: 1;
-        }
+.epa_button.link .active,
+.epa_button.link:hover {
+    background-size: 100% 0.2rem;
+    opacity: 1;
+}
 
-        &.primary {
-            color: $primary-color;
-        }
+.epa_button.link.primary {
+    color: var(--primary-color);
+}
 
-        &.return svg:first-child {
-            transform: rotate(180deg);
-        }
-    }
+.epa_button.link.return svg:first-child {
+    transform: rotate(180deg);
+}
 
-    &:disabled {
-        pointer-events: none;
-        opacity: 0.5;
-    }
+.epa_button:disabled {
+    pointer-events: none;
+    opacity: 0.5;
 }
 
 @keyframes buttonloading {

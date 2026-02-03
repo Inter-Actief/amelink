@@ -1,0 +1,74 @@
+/* CSS custom properties (converted from SCSS variables) */
+:root {
+	/* Screen */
+	--screen-xs: 38rem;
+	--screen-sm: 48rem;
+	--screen-lm: 64rem;
+	--screen-md: 76.8rem;
+	--screen-lg: 98rem;
+	--screen-xl: 120rem;
+	--screen-xxl: 140rem;
+	--screen-xxxl: 192rem;
+
+	/* Colors */
+	--color-white: #fff;
+	--color-light: #ededed;
+	--color-purple: #dd53ff;
+	--color-blue: #1d428a;
+	--color-darkblue: #354786;
+	--color-lightblue: #43c7ff;
+	--color-red: #da5f5f;
+	--color-dark: #0d1016;
+	--color-dark-hover: #24262b;
+	--color-black: #000;
+
+	/* Derived */
+	--color-light2: rgba(29, 66, 138, 0.05);
+	--border-color: rgba(29, 66, 138, 0.5);
+	--card-background-color: rgba(29, 66, 138, 0.05);
+	--card-border-color: rgba(29, 66, 138, 0.5);
+
+	/* Theme colors */
+	--primary-color: var(--color-blue);
+	--secondary-color: var(--color-lightblue);
+	--background-color: var(--color-light);
+
+	/* Layout */
+	--row-extra-small: 80rem;
+	--row-small: 100rem;
+	--row-default: 120rem;
+	--row-large: 150rem;
+	--row-big: 160rem;
+	--row-full: 100%;
+
+	--row-width: 90%;
+	--row-max-width: var(--row-large);
+
+	--gap-l: 6rem;
+	--gap: 3rem;
+	--gap-sm: 1.5rem;
+	--gap-xs: 1rem;
+	--gap-xxs: 0.5rem;
+
+	--border-radius: 0.8rem;
+	--border-radius-full: 100%;
+
+	/* Fonts */
+	--font-family: 'Inter';
+	--font-size: 1.8rem;
+	--font-size-small: 1.5rem;
+	--font-size-extra-small: 1.3rem;
+	--font-size-large: 2rem;
+	--line-height: 2.52rem;
+	--text-color: #1e1e1e;
+	--text-color-light: #fff;
+
+	/* Buttons */
+	--button-background-color: var(--primary-color);
+	--button-background-color-hover: var(--secondary-color);
+	--button-text-color: var(--text-color-light);
+	--button-border-radius: var(--border-radius);
+
+	/* Typography spacing */
+	--p-spacing: 1.8rem;
+}

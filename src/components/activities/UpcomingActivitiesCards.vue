@@ -54,4 +54,4 @@ const imageSrc = (src: string | null | undefined) => {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>
