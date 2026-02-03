@@ -11,12 +11,7 @@
                 <Button as="a" :label="$gettext('Become a member')" severity="secondary"
                     href="https://www.inter-actief.utwente.nl/oidc/authenticate/">
                 </Button>
-                <!-- <Button as="a" :label="$gettext('Sign-in')" severity="secondary"
-                    href="https://www.inter-actief.utwente.nl/oidc/authenticate/">
-                </Button> -->
-
-                <Button as="div" :label="$gettext('Sign-in')" severity="secondary" @click="oidc.login">
-                </Button>
+                <UserButton></UserButton>
             </div>
 
         </div>
@@ -54,9 +49,8 @@ import Menubar from 'primevue/menubar';
 import { useGettext } from 'vue3-gettext'
 import { computed, reactive, ref } from 'vue';
 import { ChevronDown, ChevronRight, Icon } from 'lucide-vue-next';
-import { useOidcStore } from '@/stores/oidcStore';
+import UserButton from './UserButton.vue';
 const { $gettext } = useGettext();
-const oidc = useOidcStore()
 
 // TODO: Translate menu bar
 const items = computed(() => [

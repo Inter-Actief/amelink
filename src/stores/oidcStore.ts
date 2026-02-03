@@ -9,7 +9,7 @@ export const useOidcStore = defineStore('oidcStore', () => {
         authority: import.meta.env.VITE_OIDC_URL,
         redirect_uri: `${import.meta.env.VITE_BASE_URL}/auth/win`,
         response_type: 'code',
-        scope: 'openid profile email',
+        scope: 'openid profile email ia-email-and-username-as-oidc',
         loadUserInfo: true,
     }
     
@@ -62,9 +62,6 @@ export const useOidcStore = defineStore('oidcStore', () => {
     async function handleCallback() {
         try {
             user.value = await userManager.signinRedirectCallback()
-
-            console.log("Handled callback!")
-            alert("Handled callback")
         } catch (err) {
             error.value = err as Error
             console.error('Failed to handle auth callback:', err)
