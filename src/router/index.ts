@@ -85,6 +85,17 @@ const router = createRouter({
             component: () => import('@/views/pages/PublicationView.vue'),
         },
         {
+            path: '/companies',
+            name: 'companies',
+            component: () => import('@/views/pages/CompanyCornerPage.vue'),
+        },
+        {
+            path: '/company/:slug',
+            name: 'company',
+            component: () => import('@/views/pages/CompanyPage.vue'),
+            props: true,
+        },
+        {
             path: '/committees',
             name: 'committees',
             component: () => import('@/views/committees/CommitteesView.vue'),

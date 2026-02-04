@@ -274,3 +274,37 @@ mutation SetLanguageMutation($languageCode: String!) {
     result
   }
 }
+
+query FrontPageBanners {
+  websiteBanners {
+    results {
+      name
+      picture
+      url
+    }
+  }
+}
+
+query CompanyCorner($limit: Int, $offset: Int) {
+  companies(limit: $limit, offset: $offset) {
+    results {
+      name
+      slug
+      url
+      logo
+      logoWidth
+      logoHeight
+      shortDescription
+    }
+    totalCount
+  }
+}
+
+query Company($slug: String!) {
+  company(slug: $slug) {
+    name
+    url
+    logo
+    profile
+  }
+}
