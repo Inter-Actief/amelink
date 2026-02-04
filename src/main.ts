@@ -46,7 +46,6 @@ app.use(PrimeVue, {
 
 // Initialize OIDC
 const oidcStore = useOidcStore()
-oidcStore.initializeAuth()
 
 // Sentry
 if (import.meta.env.VITE_SENTRY_DSN) {
@@ -60,4 +59,7 @@ if (import.meta.env.VITE_SENTRY_DSN) {
     })
 }
 
-app.mount('#app')
+// Wait for auth to initialize before mounting
+oidcStore.initializeAuth().then(() => {
+    app.mount('#app')
+})

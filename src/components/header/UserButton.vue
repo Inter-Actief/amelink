@@ -12,8 +12,8 @@
 import { useOidcStore } from '@/stores/oidcStore';
 import { UserIcon } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
-const oidc = useOidcStore()
 
+const oidc = useOidcStore()
 const menu = ref();
 const items = computed(() => [
     {
