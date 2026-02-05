@@ -11,7 +11,7 @@ interface ImportMetaEnv {
     readonly VITE_WO4YOU_URL: string
     readonly VITE_OIDC_CLIENT: string
     readonly VITE_OIDC_URL: string
-    readonly VITE_OIDC_REDIR_URL: string
+    readonly VITE_OIDC_SCOPE: string
     readonly VITE_BASE_URL: string
 }
 

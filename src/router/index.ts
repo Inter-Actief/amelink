@@ -96,8 +96,8 @@ const router = createRouter({
             component: () => import('@/views/pages/StateView.vue'),
         },
         {
-            path: '/auth/win',
-            name: 'callbackwin',
+            path: '/auth/callback',
+            name: 'authcallback',
             component: { template: '<div></div>' },
             beforeEnter: async (to, from, next) => {
                 const oidcStore = useOidcStore()

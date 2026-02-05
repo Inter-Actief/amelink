@@ -7,9 +7,9 @@ export const useOidcStore = defineStore('oidcStore', () => {
     const config: UserManagerSettings = {
         client_id: import.meta.env.VITE_OIDC_CLIENT,
         authority: import.meta.env.VITE_OIDC_URL,
-        redirect_uri: `${import.meta.env.VITE_BASE_URL}/auth/win`,
+        redirect_uri: `${import.meta.env.VITE_BASE_URL}/auth/callback`,
         response_type: 'code',
-        scope: 'openid profile email ia-email-and-username-as-oidc',
+        scope: import.meta.env.VITE_OIDC_SCOPE,
         loadUserInfo: true,
     }
     
