@@ -20,6 +20,7 @@ declare module 'vue' {
     Header: typeof import('./src/components/header/Header.vue')['default']
     HomepageCards: typeof import('./src/components/homepage/HomepageCards.vue')['default']
     HomepageSlider: typeof import('./src/components/homepage/HomepageSlider.vue')['default']
+    IconField: typeof import('primevue/iconfield')['default']
     InformationActivites: typeof import('./src/components/activities/InformationActivites.vue')['default']
     InputText: typeof import('primevue/inputtext')['default']
     LanguageSwitcher: typeof import('./src/components/ui/LanguageSwitcher.vue')['default']
