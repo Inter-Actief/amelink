@@ -1,5 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useOidcStore } from '@/stores/oidcStore'
+import HomePage from '@/views/pages/HomeView.vue'
+import Page from '@/views/pages/PageView.vue'
+import SingleNews from '@/views/news/SingleNews.vue'
+import SingleActivities from '@/views/activities/SingleActivites.vue'
+import ActivitiesPhotosView from '@/views/activities/ActivitiesPhotosView.vue'
+import SingleCommittee from '@/views/committees/SingleCommitteeView.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,13 +13,13 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: () => import('@/views/pages/HomeView.vue'),
+            component: () => HomePage,
             props: true,
         },
         {
             path: '/about/:id/:slug',
             name: 'page',
-            component: () => import('@/views/pages/PageView.vue'),
+            component: () => Page,
             props: true,
         },
         {
@@ -25,7 +31,7 @@ const router = createRouter({
         {
             path: '/news/:id',
             name: 'singlenews',
-            component: () => import('@/views/news/SingleNews.vue'),
+            component: () => SingleNews,
             props: true,
         },
         {
@@ -52,13 +58,13 @@ const router = createRouter({
         {
             path: '/activities/:id',
             name: 'singleactivities',
-            component: () => import('@/views/activities/SingleActivites.vue'),
+            component: () => SingleActivities,
             props: true,
         },
         {
             path: '/activities/:id/photos',
             name: 'singleactivitiesphotos',
-            component: () => import('@/views/activities/ActivitiesPhotosView.vue'),
+            component: () => ActivitiesPhotosView,
             props: true,
         },
         {
@@ -87,7 +93,7 @@ const router = createRouter({
         {
             path: '/committees/:id/:slug',
             name: 'singlecommittee',
-            component: () => import('@/views/committees/SingleCommitteeView.vue'),
+            component: () => SingleCommittee,
             props: true,
         },
         {
