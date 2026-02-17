@@ -25,7 +25,7 @@ const companies = computed(() => query.result.value?.companies?.results?.filter(
                     <RouterLink :to="{ name: 'company', params: { slug: company.slug } }" v-for="company in companies">
                         <Card class="text-card" style="height: 100%;">
                             <template #header v-if="company.logo">
-                                <img class="aspect-a4 rounded-t-lg w-full p-12" :src="imageSrc(company.logo)" />
+                                <img class="rounded-t-lg w-auto mx-auto p-12 max-h-80" :src="imageSrc(company.logo)" />
                             </template>
                             <template #title>
                                 <div
