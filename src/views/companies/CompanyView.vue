@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import Content from '@/components/ui/Content.vue';
 import SectionCard from '@/components/ui/SectionCard.vue';
@@ -26,14 +25,30 @@ watch(result, async (newResult) => {
 <template>
     <Content>
         <ProgressSpinner v-if="loading" />
-        <SectionCard v-else :name="result?.company?.name!">
-            <template #info>
-                <Button variant="link" as="a" class="text-white" :href="result?.company?.url">{{ $gettext("Website") }} <ArrowUpRight /></Button>
-            </template>
-            <template #content>
-                <img :src="imageSrc(result?.company?.logo)" class="p-12 max-h-80 mx-auto" />
-                <div v-html="body" class="text"></div>
-            </template>
-        </SectionCard>
+        <div v-else class="grid sm:grid-cols-1 md:grid-cols-8 gap-12">
+            <div class="sm:col-span1 md:col-span-5">
+                <SectionCard :name="$gettext('Company profile')">
+                    <template #info>
+                    </template>
+                    <template #content>
+                        <div v-html="body" class="text"></div>
+                    </template>
+                </SectionCard>
+            </div>
+            <div class="sm:col-span-1 md:col-span-3">
+                <SectionCard :name="result?.company?.name!">
+                    <template #content>
+                        <img :src="imageSrc(result?.company?.logo)" class="p-12 max-h-80 mx-auto" />
+
+                        <Button :href="result?.company?.url">{{
+                            $gettext("Website") }}
+                            <ArrowUpRight />
+                        </Button>
+
+                        <p class="py-5 text font-semibold">{{ result?.company?.shortDescription ?? "" }}</p>
+                    </template>
+                </SectionCard>
+            </div>
+        </div>
     </Content>
 </template>

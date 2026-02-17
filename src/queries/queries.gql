@@ -314,5 +314,6 @@ query Company($slug: String!) {
     url
     logo
     profile
+    shortDescription
   }
 }
