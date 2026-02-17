@@ -31,7 +31,7 @@ watch(result, async (newResult) => {
                 <Button variant="link" as="a" class="text-white" :href="result?.company?.url">{{ $gettext("Website") }} <ArrowUpRight /></Button>
             </template>
             <template #content>
-                <img :src="imageSrc(result?.company?.logo)" class="p-12 max-h-128 mx-auto" />
+                <img :src="imageSrc(result?.company?.logo)" class="p-12 max-h-80 mx-auto" />
                 <div v-html="body"></div>
             </template>
         </SectionCard>
