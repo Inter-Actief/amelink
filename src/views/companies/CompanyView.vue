@@ -32,7 +32,7 @@ watch(result, async (newResult) => {
             </template>
             <template #content>
                 <img :src="imageSrc(result?.company?.logo)" class="p-12 max-h-80 mx-auto" />
-                <div v-html="body"></div>
+                <div v-html="body" class="text"></div>
             </template>
         </SectionCard>
     </Content>
