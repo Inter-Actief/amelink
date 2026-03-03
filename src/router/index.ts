@@ -43,12 +43,6 @@ const router = createRouter({
             },
         },
         {
-            path: '/components',
-            name: 'components',
-            component: () => import('@/views/pages/ComponentsView.vue'),
-            props: true,
-        },
-        {
             path: '/activities',
             name: 'activities',
             component: () => import('@/views/activities/ActivitiesView.vue'),
