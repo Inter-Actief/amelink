@@ -24,7 +24,11 @@ export const queries = {
     homepageSlider: gql.HomepageSliderDocument,
     singleActivites: gql.SingleActivitiesDocument,
     committeeOverview: gql.CommitteeOverviewDocument,
-    singleCommittee: gql.SingleCommitteeDocument
+    singleCommittee: gql.SingleCommitteeDocument,
+    currentUser: gql.CurrentUserDocument,
+    frontPageBanners: gql.FrontPageBannersDocument,
+    companyCorner: gql.CompanyCornerDocument,
+    company: gql.CompanyDocument
 } as const
 
 /**
@@ -92,16 +96,16 @@ async function _useQueryAsync<
  * @param variables The variables of the query
  * @returns Apollo object
  */
-export function useQueryAsync<TKey extends keyof typeof queries>
+export async function useQueryAsync<TKey extends keyof typeof queries>
 (
     key: TKey,
     variables: VariablesOf<typeof queries[TKey]>
-): {
+): Promise<{
     result: ComputedRef<ResultOf<typeof queries[TKey]> | null>
     loading: Ref<boolean>
     error: Ref<Error | null>
     refetch: (newVariables: VariablesOf<typeof queries[TKey]>) => Promise<void>
-} {
+}> {
     const result = ref<ResultOf<typeof queries[TKey]> | null>(null)
     const loading = ref(true)
     const error = ref<Error | null>(null)
@@ -120,7 +124,7 @@ export function useQueryAsync<TKey extends keyof typeof queries>
     }
 
     // Initial fetch
-    refetch(variables)
+    await refetch(variables)
 
     return {
         result: computed(() => result.value),

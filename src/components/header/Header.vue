@@ -11,15 +11,14 @@
                 <Button as="a" :label="$gettext('Become a member')" severity="secondary"
                     href="https://www.inter-actief.utwente.nl/oidc/authenticate/">
                 </Button>
-                <Button as="a" :label="$gettext('Sign-in')" severity="secondary"
-                    href="https://www.inter-actief.utwente.nl/oidc/authenticate/">
-                </Button>
+                <UserButton></UserButton>
             </div>
 
         </div>
 
         <div class="pl-10 pr-10 pb-4">
             <Menubar :model="items" class="p-0 sticky top-0 z-50">
+                <template #start></template>
                 <template #item="{ item, props, hasSubmenu, root }">
                     <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
                         <a v-ripple :href="href" v-bind="props.action" @click="navigate">
@@ -51,6 +50,7 @@ import Menubar from 'primevue/menubar';
 import { useGettext } from 'vue3-gettext'
 import { computed, reactive, ref } from 'vue';
 import { ChevronDown, ChevronRight, Icon } from 'lucide-vue-next';
+import UserButton from './UserButton.vue';
 const { $gettext } = useGettext();
 
 // TODO: Translate menu bar
@@ -69,12 +69,12 @@ const items = computed(() => [
         route: '/News',
     },
     {
-        label: $gettext('Components'),
-        route: '/components',
-    },
-    {
         label: $gettext('Publications'),
         route: '/publications'
+    },
+    {
+        label: $gettext('Companies'),
+        route: '/companies'
     },
     {
         label: $gettext('Association'),
