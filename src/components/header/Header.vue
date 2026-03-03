@@ -77,6 +77,10 @@ const items = computed(() => [
         route: '/companies'
     },
     {
+        label: $gettext('Videos'),
+        route: '/videos'
+    },
+    {
         label: $gettext('Association'),
         items: [
             {
