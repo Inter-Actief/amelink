@@ -13,6 +13,8 @@ interface ImportMetaEnv {
     readonly VITE_OIDC_URL: string
     readonly VITE_OIDC_SCOPE: string
     readonly VITE_BASE_URL: string
+    readonly VITE_STREAMING_BASE_URL: string
+    readonly VITE_PEERTUBE_BASE_URL: string
 }
 
 interface ImportMeta {
