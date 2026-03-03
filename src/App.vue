@@ -5,7 +5,9 @@
         <Suspense>
             <RouterView />
             <template #fallback>
-                <div class="bg-red-500 w-full h-full"></div>
+                <div class="suspense-loading">
+                    <div class="loading-spinner"></div>
+                </div>
             </template>
         </Suspense>
         <Content light v-if="router.currentRoute.value.name != 'home'">
@@ -47,5 +49,32 @@ body {
 .fade-enter-from,
 .fade-leave-to {
     opacity: 0;
+}
+
+/* Suspense loading state */
+.suspense-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: var(--p-primary-color, #7c3aed);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 </style>

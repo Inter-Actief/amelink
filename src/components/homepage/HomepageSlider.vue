@@ -24,14 +24,14 @@ import { formattedData, excerptText } from '@/functions/functions.ts'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-import { useQuery } from '@/composables/queries';
+import { useQueryAsync } from '@/composables/queries';
 
 const route = useRoute()
 const limit = ref(50)
 const imageRef = useTemplateRef('gallery-image')
 
 // TODO: Actually filter on activities with pictures
-const { result } = useQuery('homepageSlider', { limit: limit.value, beginDate: new Date() });
+const { result } = await useQueryAsync('homepageSlider', { limit: limit.value, beginDate: new Date() });
 function resetAnimation() {
     if (imageRef.value) {
         imageRef.value.style.animation = 'none'

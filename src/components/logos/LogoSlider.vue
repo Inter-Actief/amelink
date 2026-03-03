@@ -4,7 +4,7 @@ import { Autoplay } from 'swiper/modules';
 const swiperModules = [Autoplay];
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
-import { useQuery } from '@/composables/queries';
+import { useQuery, useQueryAsync } from '@/composables/queries';
 import { imageSrc } from '@/composables/util';
 import { computed } from 'vue';
 
@@ -23,7 +23,7 @@ const breakpoints = {
     },
 }
 
-const query = useQuery("frontPageBanners", {});
+const query = await useQueryAsync("frontPageBanners", {});
 const banners = computed(() => query.result.value?.websiteBanners?.results?.filter(b => !!b) ?? []);
 </script>
 

@@ -30,12 +30,12 @@ import SectionCard from '../ui/SectionCard.vue'
 import Pagination from '../ui/Pagination.vue'
 import TextCard from '../ui/TextCard.vue'
 import { formattedData, getItemValue } from '@/functions/functions.ts'
-import { useQuery } from '@/composables/queries'
+import { useQuery, useQueryAsync } from '@/composables/queries'
 import { imageSrc } from '@/composables/util'
 const { $gettext } = useGettext();
 const perpage = ref(4)
 
-const query = useQuery("upcomingActivities", { limit: perpage.value, beginDate: new Date() })
+const query = await useQueryAsync("upcomingActivities", { limit: perpage.value, beginDate: new Date() })
 const { result } = query;
 const queryResults = computed(() => result.value?.activities)
 const activityItems = computed(() => (queryResults.value ? queryResults.value.results : null))
