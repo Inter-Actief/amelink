@@ -47,4 +47,4 @@ watch(newsItems, async (newItems: any) => {
 }, { immediate: true })
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>

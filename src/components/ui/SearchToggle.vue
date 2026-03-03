@@ -40,63 +40,63 @@ const search_toggle = () => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .search {
     position: relative;
     display: flex;
     gap: 1rem;
+}
 
-    > button {
-        background: transparent;
-        outline: 0;
-        padding: 0;
-        border: 0;
-        cursor: pointer;
-    }
+.search > button {
+    background: transparent;
+    outline: 0;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+}
 
-    .searchbar {
-        overflow: hidden;
-    }
+.search .searchbar {
+    overflow: hidden;
+}
 
-    .searchbar a {
-        background-color: $color_light;
-        text-decoration: none;
-        color: $text-color;
-        padding: 1rem 2.5rem;
-        border-radius: 0 $border-radius $border-radius 0;
-        border: 0;
-        border-left: 0.1rem solid #eee;
-        font-size: inherit;
-        line-height: inherit;
-        font-weight: inherit;
-        cursor: pointer;
-    }
+.search .searchbar a {
+    background-color: var(--color-light);
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 1rem 2.5rem;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    border: 0;
+    border-left: 0.1rem solid #eee;
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    cursor: pointer;
+}
 
-    .searchbar input {
-        border-radius: $border-radius 0 0 $border-radius;
-        border: 0;
-        margin: 0;
-        background-color: #fff;
-        padding: 1rem 1rem;
-        font-size: inherit;
-        line-height: inherit;
-        font-weight: inherit;
-    }
+.search .searchbar input {
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    border: 0;
+    margin: 0;
+    background-color: #fff;
+    padding: 1rem 1rem;
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+}
 
-    .searchbar_inner {
-        opacity: 0;
-        pointer-events: none;
-        transform: translateX(100%);
-        transition: 500ms;
-        border-radius: $border-radius;
-        display: flex;
-        align-items: center;
-    }
+.search .searchbar_inner {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
+    transition: 500ms;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+}
 
-    &.open .searchbar_inner {
-        transform: translateX(0);
-        pointer-events: initial;
-        opacity: 1;
-    }
+.search.open .searchbar_inner {
+    transform: translateX(0);
+    pointer-events: initial;
+    opacity: 1;
 }
 </style>

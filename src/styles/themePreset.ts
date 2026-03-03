@@ -1,5 +1,5 @@
-import { definePreset } from '@primevue/themes'
-import Lara from '@primevue/themes/lara'
+import { definePreset } from '@primeuix/themes'
+import Lara from '@primeuix/themes/lara'
 
 export const iaPreset = definePreset(Lara, {
     primitive: {
@@ -305,7 +305,6 @@ export const iaPreset = definePreset(Lara, {
             style: 'solid',
             color: '{primary.color}',
             offset: '2px',
-            shadow: 'none',
         },
         disabledOpacity: '0.6',
         iconSize: '1rem',
@@ -426,7 +425,6 @@ export const iaPreset = definePreset(Lara, {
                     contrastColor: '#fafafa',
                     hoverColor: '{primary.600}',
                     activeColor: '{primary.700}',
-                    transparent: '#1d428a0d',
                 },
                 highlight: {
                     background: '{primary.50}',
@@ -556,7 +554,6 @@ export const iaPreset = definePreset(Lara, {
                     contrastColor: '{surface.50}',
                     hoverColor: '{primary.300}',
                     activeColor: '{primary.200}',
-                    transparent: '#1d428a3f',
                 },
                 highlight: {
                     background: 'color-mix(in srgb, {primary.400}, transparent 84%)',
@@ -663,7 +660,7 @@ export const iaPreset = definePreset(Lara, {
                 },
                 page: {
                     background: '{surface.900}',
-                    highlight: '#1d428a0d',
+                    highlight: '#1d428a3f',
                 },
             },
         },
@@ -672,25 +669,33 @@ export const iaPreset = definePreset(Lara, {
         card: {
             colorScheme: {
                 light: {
-                    background: '{primary.transparent}',
-                    color: '{surface.900}',
+                    root: {
+                        background: '{page.highlight}',
+                        color: '{surface.900}',
+                    },
                 },
                 dark: {
-                    color: '{primary.contrastColor}',
-                    background: '{primary.transparent}',
+                    root: {
+                        background: '{page.highlight}',
+                        color: '{primary.contrastColor}',
+                    },
                 },
             },
         },
         menubar: {
             colorScheme: {
                 light: {
-                    background: '{primary.color}',
-                    color: '{primary.color}',
-                    'item.color': '{primary.color}',
-                    'item.focus.color': '{primary.contrastColor}',
-                    'item.focus.background': '{primary.600}',
-                    'item.active.color': '{primary.contrastColor}',
-                    'item.active.background': '{primary.600}',
+                    root: {
+                        background: '{primary.color}',
+                        color: '{primary.color}',
+                    },
+                    item: {
+                        color: '{primary.color}',
+                        focusColor: '{primary.contrastColor}',
+                        focusBackground: '{primary.600}',
+                        activeColor: '{primary.contrastColor}',
+                        activeBackground: '{primary.600}',
+                    },
                     // item: {
                     //     color: '{primary.contrastColor}',
                     //     focus: {
@@ -704,18 +709,16 @@ export const iaPreset = definePreset(Lara, {
                     // },
                 },
                 dark: {
-                    background: '{primary.color}',
-                    color: '{primary.contrastColor}',
+                    root: {
+                        background: '{primary.color}',
+                        color: '{primary.contrastColor}',
+                    },
                     item: {
                         color: '{primary.contrastColor}',
-                        focus: {
-                            color: '{primary.contrastColor}',
-                            background: '{primary.600}',
-                        },
-                        active: {
-                            color: '{primary.contrastColor}',
-                            background: '{primary.600}',
-                        },
+                        focusColor: '{primary.contrastColor}',
+                        focusBackground: '{primary.600}',
+                        activeColor: '{primary.contrastColor}',
+                        activeBackground: '{primary.600}',
                     },
                 },
             },
@@ -723,24 +726,36 @@ export const iaPreset = definePreset(Lara, {
         datatable: {
             colorScheme: {
                 light: {
-                    'header.cell.background': '{primary.color}',
-                    'header.cell.color': '{primary.contrastColor}',
-                    'row.striped.background': '{primary.transparent}',
+                    headerCell: {
+                        background: '{primary.color}',
+                        color: '{primary.contrastColor}',
+                    },
+                    row: {
+                        stripedBackground: '{page.highlight}',
+                    },
                 },
                 dark: {
-                    'header.cell.background': '{primary.color}',
-                    'header.cell.color': '{primary.contrastColor}',
-                    'row.striped.background': '{primary.transparent}',
+                    headerCell: {
+                        background: '{primary.color}',
+                        color: '{primary.contrastColor}',
+                    },
+                    row: {
+                        stripedBackground: '{page.highlight}',
+                    },
                 },
             },
         },
         divider: {
             colorScheme: {
                 light: {
-                    'border.color': '{primary.200}',
+                    root: {
+                        borderColor: '{primary.200}',
+                    },
                 },
                 dark: {
-                    'border.color': '{primary.color}',
+                    root: {
+                        borderColor: '{primary.color}',
+                    },
                 },
             },
         },
@@ -749,52 +764,68 @@ export const iaPreset = definePreset(Lara, {
                 light: {
                     // Paginator uses a transparent background since it should use the same background given by the page or card or whatever.
                     // Custom background can be set via tailwind if needed
-                    background: '#ffffff00',
+                    root: {
+                        background: '#ffffff00',
+                    },
                 },
                 dark: {
-                    background: '#ffffff00',
+                    root: {
+                        background: '#ffffff00',
+                    },
                 },
             },
         },
         button: {
             colorScheme: {
                 light: {
-                    'secondary.color': '{primary.color}',
-                    'secondary.background': '{primary.contrastColor}',
-                    'secondary.border.color': '{transparent}',
-                    'secondary.hover.color': '{primary.color}',
-                    'secondary.hover.border.color': '{transparent}',
-                    'secondary.hover.background': '{surface.200}',
-                    'secondary.active.background': '{primary.color}',
-                    'secondary.active.color': '{primary.contrastColor}',
-                    'secondary.active.border.color': '{primary.contrastColor}',
+                    root: {
+                        secondary: {
+                            color: '{primary.color}',
+                            background: '{primary.contrastColor}',
+                            borderColor: '{transparent}',
+                            hoverColor: '{primary.color}',
+                            hoverBorderColor: '{transparent}',
+                            hoverBackground: '{surface.200}',
+                            activeBackground: '{primary.color}',
+                            activeColor: '{primary.contrastColor}',
+                            activeBorderColor: '{primary.contrastColor}',
+                        },
+                    },
                 },
                 dark: {
-                    'secondary.color': '{primary.color}',
-                    'secondary.background': '{primary.contrastColor}',
-                    'secondary.border.color': '{transparent}',
-                    'secondary.hover.color': '{primary.color}',
-                    'secondary.hover.border.color': '{transparent}',
-                    'secondary.hover.background': '{surface.200}',
-                    'secondary.active.background': '{primary.color}',
-                    'secondary.active.color': '{primary.contrastColor}',
-                    'secondary.active.border.color': '{primary.contrastColor}',
+                    root: {
+                        secondary: {
+                            color: '{primary.color}',
+                            background: '{primary.contrastColor}',
+                            borderColor: '{transparent}',
+                            hoverColor: '{primary.color}',
+                            hoverBorderColor: '{transparent}',
+                            hoverBackground: '{surface.200}',
+                            activeBackground: '{primary.color}',
+                            activeColor: '{primary.contrastColor}',
+                            activeBorderColor: '{primary.contrastColor}',
+                        },
+                    },
                 },
             },
         },
         galleria: {
             colorScheme: {
                 light: {
-                    'nav.button.color': '{primary.contrastColor}',
-                    'nav.button.background': '{primary.color}',
-                    'nav.button.hover.color': '{primary.contrastColor}',
-                    'nav.button.hover.background': '{primary.color}',
+                    navButton: {
+                        color: '{primary.contrastColor}',
+                        background: '{primary.color}',
+                        hoverColor: '{primary.contrastColor}',
+                        hoverBackground: '{primary.color}',
+                    },
                 },
                 dark: {
-                    'nav.button.color': '{primary.contrastColor}',
-                    'nav.button.background': '{primary.color}',
-                    'nav.button.hover.color': '{primary.contrastColor}',
-                    'nav.button.hover.background': '{primary.color}',
+                    navButton: {
+                        color: '{primary.contrastColor}',
+                        background: '{primary.color}',
+                        hoverColor: '{primary.contrastColor}',
+                        hoverBackground: '{primary.color}',
+                    },
                 },
             },
         },

@@ -91,7 +91,7 @@ onMounted(() => {
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .slider-container {
     position: relative;
     width: 100%;

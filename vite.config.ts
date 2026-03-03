@@ -4,8 +4,9 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import graphqlLoader from 'vite-plugin-graphql-loader'
-import Components from 'unplugin-vue-components/vite'
-import { PrimeVueResolver } from '@primevue/auto-import-resolver'
+import tailwindcss from '@tailwindcss/vite'
+import Components from 'unplugin-vue-components/vite';
+import { PrimeVueResolver } from '@primevue/auto-import-resolver';
 
 // https://vite.dev/config/
 /** @type {import('vite').UserConfig} */
@@ -14,18 +15,17 @@ export default defineConfig({
         vue(),
         vueDevTools(),
         graphqlLoader(),
-        Components({ resolvers: [PrimeVueResolver()] }),
+        tailwindcss(),
+        Components({
+            resolvers: [
+                PrimeVueResolver()
+            ]
+        })
     ],
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url)),
         },
     },
-    css: {
-        preprocessorOptions: {
-            scss: {
-                additionalData: `@use "@/styles/style.scss" as *;`,
-            },
-        },
-    },
+    css: {},
 })

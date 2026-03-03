@@ -31,4 +31,4 @@ const queryResults = computed(() => result.value?.activities)
 const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>

@@ -1,0 +1,10 @@
+/* @layer theme, base, primevue, components, utilities; */
+@import './variables.css';
+@import './fonts.css';
+@import './main.css';
+@import './swiper.css';
+
+@import 'tailwindcss';
+@import 'tailwindcss-primeui';
+
+@custom-variant dark (&:where(.dark, .dark *));

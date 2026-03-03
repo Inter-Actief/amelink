@@ -35,4 +35,4 @@ function changeLanguage(newLanguage: string) {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>

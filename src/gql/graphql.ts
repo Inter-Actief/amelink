@@ -72,7 +72,7 @@ export type ActivityType = {
   enrollment: Scalars['Boolean']['output'];
   /** Of deze activiteit bijna vol zit (<= 10 plaatsen over). */
   enrollmentAlmostFull?: Maybe<Scalars['Boolean']['output']>;
-  /** If you want to add options, make sure your activity isn't open for enrollment right away */
+  /** Als je nog opties wil toevoegen, zorg ervoor dat de inschrijving dan niet meteen open is */
   enrollmentBegin?: Maybe<Scalars['DateTime']['output']>;
   /** Of mensen zich niet meer kunnen inschrijven voor deze activiteit. */
   enrollmentClosed?: Maybe<Scalars['Boolean']['output']>;
@@ -87,7 +87,7 @@ export type ActivityType = {
   /** Of er inschrijfopties zijn. */
   hasEnrollmentOptions?: Maybe<Scalars['Boolean']['output']>;
   id: Scalars['ID']['output'];
-  /** Image of 175 by 275 pixels. */
+  /** Afbeelding van 175 bij 275 pixels. */
   imageIcon?: Maybe<Scalars['String']['output']>;
   location: Scalars['String']['output'];
   maximum?: Maybe<Scalars['Int']['output']>;
@@ -98,9 +98,9 @@ export type ActivityType = {
   price: Scalars['Decimal']['output'];
   /** Promotietekst voor deze activiteit, in de voorkeurstaal van de gebruiker. */
   promo?: Maybe<Scalars['String']['output']>;
-  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
+  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
   promoEn: Scalars['String']['output'];
-  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
+  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
   promoNl: Scalars['String']['output'];
   public: Scalars['Boolean']['output'];
   /** Een URL naar een willekeurige foto die gemaakt is bij deze activiteit. */
@@ -240,9 +240,9 @@ export type CompanyEventType = {
   organizer: CommitteeType;
   /** Promotietekst voor deze activiteit, in de voorkeurstaal van de gebruiker. */
   promo?: Maybe<Scalars['String']['output']>;
-  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
+  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
   promoEn: Scalars['String']['output'];
-  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
+  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
   promoNl: Scalars['String']['output'];
   public: Scalars['Boolean']['output'];
   /** Een samenvatting van deze activiteit in de voorkeurstaal van de gebruiker. */
@@ -322,9 +322,9 @@ export type EducationEventType = {
   organizer: CommitteeType;
   /** Promotietekst voor deze activiteit, in de voorkeurstaal van de gebruiker. */
   promo?: Maybe<Scalars['String']['output']>;
-  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
+  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
   promoEn: Scalars['String']['output'];
-  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
+  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
   promoNl: Scalars['String']['output'];
   public: Scalars['Boolean']['output'];
   /** Een samenvatting van deze activiteit in de voorkeurstaal van de gebruiker. */
@@ -391,9 +391,9 @@ export type EducationPageTypeNodeConnection = {
 
 export type EducationalBouquetMutationInput = {
   author: Scalars['String']['input'];
-  /** The response to the captcha challenge */
+  /** Het antwoord op de CAPTCHA challenge */
   captcha: Scalars['String']['input'];
-  /** The key that uniquely identifies this captcha test */
+  /** De sleutel die deze CAPTCHA-test uniek identificeert */
   captchaHash: Scalars['String']['input'];
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   course: Scalars['String']['input'];
@@ -405,9 +405,9 @@ export type EducationalBouquetMutationInput = {
 export type EducationalBouquetMutationPayload = {
   __typename?: 'EducationalBouquetMutationPayload';
   author: Scalars['String']['output'];
-  /** The response to the captcha challenge */
+  /** Het antwoord op de CAPTCHA challenge */
   captcha: Scalars['String']['output'];
-  /** The key that uniquely identifies this captcha test */
+  /** De sleutel die deze CAPTCHA-test uniek identificeert */
   captchaHash: Scalars['String']['output'];
   clientMutationId?: Maybe<Scalars['String']['output']>;
   course: Scalars['String']['output'];
@@ -855,7 +855,7 @@ export type NewsItemType = {
   introduction?: Maybe<Scalars['String']['output']>;
   introductionEn?: Maybe<Scalars['String']['output']>;
   introductionNl: Scalars['String']['output'];
-  /** Choose this option to pin the news item */
+  /** Kies deze optie om dit nieuwsbericht vast te zetten */
   pinned: Scalars['Boolean']['output'];
   publicationDate: Scalars['DateTime']['output'];
   /** Publicerende commissie */
@@ -972,15 +972,15 @@ export type UserType = {
   email: Scalars['String']['output'];
   firstName: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  /** Designates whether this user should be treated as active. Unselect this instead of deleting accounts. */
+  /** Bepaalt of deze gebruiker als actief dient te worden behandeld. U kunt dit uitvinken in plaats van een gebruiker te verwijderen. */
   isActive: Scalars['Boolean']['output'];
-  /** Designates whether the user can log into this admin site. */
+  /** Bepaalt of de gebruiker zich op deze beheerwebsite kan aanmelden. */
   isStaff: Scalars['Boolean']['output'];
-  /** Designates that this user has all permissions without explicitly assigning them. */
+  /** Bepaalt dat deze gebruiker alle rechten heeft, zonder deze expliciet toe te wijzen. */
   isSuperuser: Scalars['Boolean']['output'];
   lastLogin?: Maybe<Scalars['DateTime']['output']>;
   lastName: Scalars['String']['output'];
-  /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
+  /** Vereist. 150 tekens of minder. Alleen letters, cijfers en de tekens @/,/+/-/_ zijn toegestaan. */
   username: Scalars['String']['output'];
 };
 
@@ -1183,6 +1183,11 @@ export type SingleCommitteeQueryVariables = Exact<{
 
 export type SingleCommitteeQuery = { __typename?: 'GraphQLQuery', committees?: { __typename?: 'CommitteeTypeNodeConnection', results: Array<{ __typename?: 'CommitteeType', name: string, slug: string, id: string, email: string, founded: any, website: string, information?: string | null, groupPicture?: string | null, logo?: string | null, abolished?: any | null, category?: { __typename?: 'CommitteeCategoryType', name: string } | null, functionSet?: Array<{ __typename?: 'FunctionType', person?: string | null, function: string } | null> | null } | null> } | null };
 
+export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CurrentUserQuery = { __typename?: 'GraphQLQuery', me?: { __typename?: 'UserType', username: string, firstName: string, lastName: string } | null };
+
 export type SetLanguageMutationMutationVariables = Exact<{
   languageCode: Scalars['String']['input'];
 }>;
@@ -1208,4 +1213,5 @@ export const PageViewDocument = {"kind":"Document","definitions":[{"kind":"Opera
 export const PublicationOverviewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PublicationOverview"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publications"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"ordering"},"value":{"kind":"StringValue","value":"datePublished,desc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"datePublished"}},{"kind":"Field","name":{"kind":"Name","value":"publicationType"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"typeName"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"}},{"kind":"Field","name":{"kind":"Name","value":"file"}},{"kind":"Field","name":{"kind":"Name","value":"isFeatured"}},{"kind":"Field","name":{"kind":"Name","value":"public"}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}}]}}]} as unknown as DocumentNode<PublicationOverviewQuery, PublicationOverviewQueryVariables>;
 export const CommitteeOverviewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CommitteeOverview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"committees"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"includeAbolished"},"value":{"kind":"BooleanValue","value":false}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"500"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<CommitteeOverviewQuery, CommitteeOverviewQueryVariables>;
 export const SingleCommitteeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SingleCommittee"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"committeeId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"committees"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"includeAbolished"},"value":{"kind":"BooleanValue","value":false}},{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"committeeId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"founded"}},{"kind":"Field","name":{"kind":"Name","value":"website"}},{"kind":"Field","name":{"kind":"Name","value":"information"}},{"kind":"Field","name":{"kind":"Name","value":"groupPicture"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"abolished"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"functionSet"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"person"}},{"kind":"Field","name":{"kind":"Name","value":"function"}}]}}]}}]}}]}}]} as unknown as DocumentNode<SingleCommitteeQuery, SingleCommitteeQueryVariables>;
+export const CurrentUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CurrentUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}}]}}]}}]} as unknown as DocumentNode<CurrentUserQuery, CurrentUserQueryVariables>;
 export const SetLanguageMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SetLanguageMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"setLanguage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"languageCode"},"value":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"result"}}]}}]}}]} as unknown as DocumentNode<SetLanguageMutationMutation, SetLanguageMutationMutationVariables>;

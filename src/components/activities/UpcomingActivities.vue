@@ -59,64 +59,64 @@ const queryResults = computed(() => result.value?.activities)
 const items = computed(() => (queryResults.value ? queryResults.value.results : null))
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .upcomingactivities {
     background: #fff;
-    border-radius: $border-radius $border-radius 0 0;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
     color: #000;
     display: grid;
     width: 100%;
+}
 
-    .bar {
-        background-color: #1d428a;
-        color: #fff;
-        border-radius: $border-radius $border-radius 0 0;
-        padding: 1.5rem;
-        display: flex;
-        justify-content: space-between;
+.upcomingactivities .bar {
+    background-color: #1d428a;
+    color: #fff;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}
 
-        button {
-            cursor: pointer;
-            background-color: transparent;
-            border: 0;
-            color: #fff;
-            border-radius: $border-radius $border-radius 0 0;
-            padding: 0.5rem 1rem;
-            display: flex;
-            justify-content: space-between;
-        }
-    }
+.upcomingactivities .bar button {
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+    color: #fff;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+}
 
-    .item {
-        display: grid;
-        grid-template-columns: 6rem 10rem auto;
-        gap: $gap_sm;
-        padding: 1.5rem;
+.upcomingactivities .item {
+    display: grid;
+    grid-template-columns: 6rem 10rem auto;
+    gap: var(--gap-sm);
+    padding: 1.5rem;
+}
 
-        &.head {
-            font-weight: 700;
-        }
+.upcomingactivities .item.head {
+    font-weight: 700;
+}
 
-        &:nth-child(even) {
-            background-color: #eee;
-        }
+.upcomingactivities .item:nth-child(even) {
+    background-color: #eee;
+}
 
-        &:hover .readmore {
-            background-size: 100% 0.2rem;
-        }
+.upcomingactivities .item:hover .readmore {
+    background-size: 100% 0.2rem;
+}
 
-        .label {
-            padding: 0.3rem 1rem;
-            color: #fff;
-            font-size: $font-size-small;
-            text-align: center;
-            border-radius: $border-radius;
-        }
-    }
+.upcomingactivities .item .label {
+    padding: 0.3rem 1rem;
+    color: #fff;
+    font-size: var(--font-size-small);
+    text-align: center;
+    border-radius: var(--border-radius);
+}
 
-    .activity {
-        display: grid;
-        gap: 1rem;
-    }
+.upcomingactivities .activity {
+    display: grid;
+    gap: 1rem;
 }
 </style>

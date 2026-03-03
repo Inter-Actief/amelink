@@ -1,21 +1,18 @@
 import { createApp, h, provide } from 'vue'
-import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client/core'
 import { DefaultApolloClient } from '@vue/apollo-composable'
 import { createPinia } from 'pinia'
 import ToastService from 'primevue/toastservice'
 import PrimeVue from 'primevue/config'
 import { iaPreset } from '@/styles/themePreset'
+import '@/styles/style.css'
 import gettext from './gettext'
+import { useOidcStore } from '@/stores/oidcStore'
 import App from '@/App.vue'
 import router from './router'
 import * as Sentry from '@sentry/vue'
+import { apolloClient } from '@/apollo'
 
-const link = createHttpLink({
-    uri: import.meta.env.VITE_AMELIE_GRAPHQL_API,
-    credentials: 'include',
-})
-const cache = new InMemoryCache()
-export const apolloClient = new ApolloClient({ link, cache })
+export { apolloClient }
 
 const app = createApp({
     setup() {
@@ -41,11 +38,14 @@ app.use(PrimeVue, {
             // Allowing one to overwrite the styling of PrimeVue components using Tailwind CSS.
             cssLayer: {
                 name: 'primevue',
-                order: 'tailwind-base, primevue, tailwind-utilities'
+                order: 'theme, base, primevue, components, utilities',
             }
         },
     },
 })
+
+// Initialize OIDC
+const oidcStore = useOidcStore()
 
 // Sentry
 if (import.meta.env.VITE_SENTRY_DSN) {
@@ -59,4 +59,7 @@ if (import.meta.env.VITE_SENTRY_DSN) {
     })
 }
 
-app.mount('#app')
+// Wait for auth to initialize before mounting
+oidcStore.initializeAuth().then(() => {
+    app.mount('#app')
+})

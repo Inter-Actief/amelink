@@ -11,9 +11,7 @@
                 <Button as="a" :label="$gettext('Become a member')" severity="secondary"
                     href="https://www.inter-actief.utwente.nl/oidc/authenticate/">
                 </Button>
-                <Button as="a" :label="$gettext('Sign-in')" severity="secondary"
-                    href="https://www.inter-actief.utwente.nl/oidc/authenticate/">
-                </Button>
+                <UserButton></UserButton>
             </div>
 
         </div>
@@ -48,14 +46,11 @@
 
 <script setup lang="ts">
 import Logo from '@/components/ui/Logo.vue'
-import EpaButton from '@/components/ui/EpaButton.vue'
 import Menubar from 'primevue/menubar';
-import { isDesktop, isTablet, openMobileMenu, toggleMobileMenu } from '@/functions/functions'
-import EpaIcon from '@/components/ui/EpaIcon.vue'
-import SearchToggle from '@/components/ui/SearchToggle.vue'
 import { useGettext } from 'vue3-gettext'
 import { computed, reactive, ref } from 'vue';
 import { ChevronDown, ChevronRight, Icon } from 'lucide-vue-next';
+import UserButton from './UserButton.vue';
 const { $gettext } = useGettext();
 
 // TODO: Translate menu bar
@@ -72,10 +67,6 @@ const items = computed(() => [
     {
         label: $gettext('News'),
         route: '/News',
-    },
-    {
-        label: $gettext('Components'),
-        route: '/components',
     },
     {
         label: $gettext('Publications'),
@@ -217,4 +208,4 @@ const items = computed(() => [
 
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>

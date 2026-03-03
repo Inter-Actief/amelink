@@ -68,23 +68,23 @@ const breakpoints = {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .logoswiper {
     width: 100%;
+}
 
-    .swiper-wrapper {
-        align-items: center;
-    }
+.logoswiper .swiper-wrapper {
+    align-items: center;
+}
 
-    .swiper-slide {
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-    }
+.logoswiper .swiper-slide {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
 
-    .swiper-slide img {
-        display: block;
-        margin: 0 auto;
-    }
+.logoswiper .swiper-slide img {
+    display: block;
+    margin: 0 auto;
 }
 </style>

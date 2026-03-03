@@ -38,56 +38,56 @@ const queryResults = computed(() => result.value?.newsItems)
 const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .latestnews {
     background: #fff;
-    border-radius: $border-radius $border-radius 0 0;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
     color: #000;
     display: grid;
     width: 100%;
+}
 
-    .bar {
-        background-color: #1d428a;
-        color: #fff;
-        border-radius: $border-radius $border-radius 0 0;
-        padding: 1.5rem;
-        display: flex;
-        justify-content: space-between;
-    }
+.latestnews .bar {
+    background-color: #1d428a;
+    color: #fff;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}
 
-    .item {
-        display: grid;
-        gap: 1.5rem;
-        padding: 2rem;
-    }
+.latestnews .item {
+    display: grid;
+    gap: 1.5rem;
+    padding: 2rem;
+}
 
-    .item.head {
-        font-weight: 700;
-    }
+.latestnews .item.head {
+    font-weight: 700;
+}
 
-    .info {
-        display: grid;
-        grid-template-columns: 10rem auto;
-        gap: 1.5rem;
-    }
+.latestnews .info {
+    display: grid;
+    grid-template-columns: 10rem auto;
+    gap: 1.5rem;
+}
 
-    .title {
-        font-weight: 700;
-    }
+.latestnews .title {
+    font-weight: 700;
+}
 
-    .bar button {
-        cursor: pointer;
-        background-color: transparent;
-        border: 0;
-        color: #fff;
-        border-radius: $border-radius $border-radius 0 0;
-        padding: 0.5rem 1rem;
-        display: flex;
-        justify-content: space-between;
-    }
+.latestnews .bar button {
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+    color: #fff;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+}
 
-    .item:nth-child(even) {
-        background-color: #eee;
-    }
+.latestnews .item:nth-child(even) {
+    background-color: #eee;
 }
 </style>

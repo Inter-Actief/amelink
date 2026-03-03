@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import gettext from '@/gettext'
 import { provideApolloClient } from '@vue/apollo-composable'
-import { apolloClient } from '@/main' // Ensure this is exported from main.ts
+import { apolloClient } from '@/apollo'
 import { useMutation } from '@/composables/queries'
 
 export const useLanguageStore = defineStore('languageStore', () => {

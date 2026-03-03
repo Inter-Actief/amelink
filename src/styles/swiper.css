@@ -1,0 +1,27 @@
+.swiper:not(:hover) .swiper-button-prev,
+.swiper:not(:hover) .swiper-button-next {
+  opacity: 0;
+}
+
+.swiper .swiper-button-prev,
+.swiper .swiper-button-next {
+  transition: 300ms;
+  padding: 1.5rem;
+  background-color: var(--primary-color);
+  width: 5rem;
+  height: 5rem;
+  border-radius: var(--border-radius);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.swiper .swiper-button-prev::after,
+.swiper .swiper-button-next::after {
+  color: #fff;
+  font-size: 2rem;
+}
+
+.swiper .swiper-button-prev.swiper-button-disabled,
+.swiper .swiper-button-next.swiper-button-disabled {
+  pointer-events: none;
+}
