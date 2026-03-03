@@ -25,6 +25,13 @@ watch(result, async (newResult) => {
 <template>
     <Content>
         <ProgressSpinner v-if="loading" />
+        <div v-if="!loading && !result">
+            <h2>{{ $gettext("We could not find this company.") }}</h2>
+            <RouterLink :to="{ name: 'companies',  }" class="link flex flex-row">
+                <ArrowLeft />
+                {{ $gettext('View all companies') }}
+            </RouterLink>
+        </div>
         <div v-else class="grid sm:grid-cols-1 md:grid-cols-8 gap-12">
             <div class="sm:col-span1 md:col-span-5">
                 <SectionCard :name="$gettext('Company profile')">
