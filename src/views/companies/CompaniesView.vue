@@ -22,7 +22,7 @@ const companies = computed(() => query.result.value?.companies?.results?.filter(
             <template #content>
                 <ProgressSpinner v-if="loading" />
                 <div v-else class="grid grid-cols-5 gap-10 pb-4">
-                    <RouterLink :to="{ name: 'companies', params: { slug: company.slug } }" v-for="company in companies">
+                    <RouterLink :to="{ name: 'singlecompany', params: { slug: company.slug } }" v-for="company in companies">
                         <Card class="text-card" style="height: 100%;">
                             <template #header v-if="company.logo">
                                 <img class="rounded-t-lg w-auto mx-auto p-12 max-h-80" :src="imageSrc(company.logo)" />
