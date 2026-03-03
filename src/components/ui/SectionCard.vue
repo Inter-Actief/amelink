@@ -3,8 +3,8 @@
     <div>
         <Card :style="{ overflow: 'hidden', background: bg, height: props.maxHeight ? '100%' : undefined }">
             <template #header v-if="props.name">
-                <div class="bg-primary w-full p-8 mb-0 flex flex-row justify-between">
-                    <div class="font-extrabold text-4xl text-primary-contrast">
+                <div class="bg-primary w-full  p-8 mb-0 flex flex-row justify-between">
+                    <div class="font-extrabold text-4xl my-auto text-primary-contrast">
                         {{ props.name }}
                     </div>
                     <div class="self-end text-primary-contrast">
