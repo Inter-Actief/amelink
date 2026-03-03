@@ -40,7 +40,7 @@ watch(result, async (newResult) => {
                     <template #content>
                         <img :src="imageSrc(result?.company?.logo)" class="p-12 max-h-80 mx-auto" />
 
-                        <Button :href="result?.company?.url">{{
+                        <Button as="a" :href="result?.company?.url" target="_blank">{{
                             $gettext("Website") }}
                             <ArrowUpRight />
                         </Button>
