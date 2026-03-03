@@ -80,6 +80,17 @@ const router = createRouter({
             component: () => import('@/views/pages/PublicationView.vue'),
         },
         {
+            path: '/companies',
+            name: 'companies',
+            component: () => import('@/views/companies/CompaniesView.vue'),
+        },
+        {
+            path: '/companies/:slug',
+            name: 'singlecompany',
+            component: () => import('@/views/companies/CompanyView.vue'),
+            props: true,
+        },
+        {
             path: '/committees',
             name: 'committees',
             component: () => import('@/views/committees/CommitteesView.vue'),

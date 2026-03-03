@@ -72,7 +72,7 @@ export type ActivityType = {
   enrollment: Scalars['Boolean']['output'];
   /** Of deze activiteit bijna vol zit (<= 10 plaatsen over). */
   enrollmentAlmostFull?: Maybe<Scalars['Boolean']['output']>;
-  /** Als je nog opties wil toevoegen, zorg ervoor dat de inschrijving dan niet meteen open is */
+  /** If you want to add options, make sure your activity isn't open for enrollment right away */
   enrollmentBegin?: Maybe<Scalars['DateTime']['output']>;
   /** Of mensen zich niet meer kunnen inschrijven voor deze activiteit. */
   enrollmentClosed?: Maybe<Scalars['Boolean']['output']>;
@@ -87,7 +87,7 @@ export type ActivityType = {
   /** Of er inschrijfopties zijn. */
   hasEnrollmentOptions?: Maybe<Scalars['Boolean']['output']>;
   id: Scalars['ID']['output'];
-  /** Afbeelding van 175 bij 275 pixels. */
+  /** Image of 175 by 275 pixels. */
   imageIcon?: Maybe<Scalars['String']['output']>;
   location: Scalars['String']['output'];
   maximum?: Maybe<Scalars['Int']['output']>;
@@ -98,9 +98,9 @@ export type ActivityType = {
   price: Scalars['Decimal']['output'];
   /** Promotietekst voor deze activiteit, in de voorkeurstaal van de gebruiker. */
   promo?: Maybe<Scalars['String']['output']>;
-  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
+  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
   promoEn: Scalars['String']['output'];
-  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
+  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
   promoNl: Scalars['String']['output'];
   public: Scalars['Boolean']['output'];
   /** Een URL naar een willekeurige foto die gemaakt is bij deze activiteit. */
@@ -240,9 +240,9 @@ export type CompanyEventType = {
   organizer: CommitteeType;
   /** Promotietekst voor deze activiteit, in de voorkeurstaal van de gebruiker. */
   promo?: Maybe<Scalars['String']['output']>;
-  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
+  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
   promoEn: Scalars['String']['output'];
-  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
+  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
   promoNl: Scalars['String']['output'];
   public: Scalars['Boolean']['output'];
   /** Een samenvatting van deze activiteit in de voorkeurstaal van de gebruiker. */
@@ -322,9 +322,9 @@ export type EducationEventType = {
   organizer: CommitteeType;
   /** Promotietekst voor deze activiteit, in de voorkeurstaal van de gebruiker. */
   promo?: Maybe<Scalars['String']['output']>;
-  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
+  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
   promoEn: Scalars['String']['output'];
-  /** Deze tekst kan gebruikt worden door het bestuur voor promotie, bijvoorbeeld op onze social media kanalen of in onze weekmail. Laat het een teaser zijn, zodat mensen die geïnteresseerd zijn jouw volledige beschrijving willen lezen. */
+  /** This text can be used by the board for promotion, for example on our socials or in our weekmail. Let it be a teaser, so people would want to read your full activity description. */
   promoNl: Scalars['String']['output'];
   public: Scalars['Boolean']['output'];
   /** Een samenvatting van deze activiteit in de voorkeurstaal van de gebruiker. */
@@ -391,9 +391,9 @@ export type EducationPageTypeNodeConnection = {
 
 export type EducationalBouquetMutationInput = {
   author: Scalars['String']['input'];
-  /** Het antwoord op de CAPTCHA challenge */
+  /** The response to the captcha challenge */
   captcha: Scalars['String']['input'];
-  /** De sleutel die deze CAPTCHA-test uniek identificeert */
+  /** The key that uniquely identifies this captcha test */
   captchaHash: Scalars['String']['input'];
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   course: Scalars['String']['input'];
@@ -405,9 +405,9 @@ export type EducationalBouquetMutationInput = {
 export type EducationalBouquetMutationPayload = {
   __typename?: 'EducationalBouquetMutationPayload';
   author: Scalars['String']['output'];
-  /** Het antwoord op de CAPTCHA challenge */
+  /** The response to the captcha challenge */
   captcha: Scalars['String']['output'];
-  /** De sleutel die deze CAPTCHA-test uniek identificeert */
+  /** The key that uniquely identifies this captcha test */
   captchaHash: Scalars['String']['output'];
   clientMutationId?: Maybe<Scalars['String']['output']>;
   course: Scalars['String']['output'];
@@ -487,6 +487,7 @@ export type GraphQlQuery = {
   newsItems?: Maybe<NewsItemTypeNodeConnection>;
   page?: Maybe<PageType>;
   publication?: Maybe<PublicationItemType>;
+  publicationTypes?: Maybe<Array<Maybe<PublicationTypeType>>>;
   publications?: Maybe<PublicationItemTypeNodeConnection>;
   televisionBanner?: Maybe<TelevisionBannerType>;
   televisionBanners?: Maybe<TelevisionBannerTypeNodeConnection>;
@@ -855,7 +856,7 @@ export type NewsItemType = {
   introduction?: Maybe<Scalars['String']['output']>;
   introductionEn?: Maybe<Scalars['String']['output']>;
   introductionNl: Scalars['String']['output'];
-  /** Kies deze optie om dit nieuwsbericht vast te zetten */
+  /** Choose this option to pin the news item */
   pinned: Scalars['Boolean']['output'];
   publicationDate: Scalars['DateTime']['output'];
   /** Publicerende commissie */
@@ -972,15 +973,15 @@ export type UserType = {
   email: Scalars['String']['output'];
   firstName: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  /** Bepaalt of deze gebruiker als actief dient te worden behandeld. U kunt dit uitvinken in plaats van een gebruiker te verwijderen. */
+  /** Designates whether this user should be treated as active. Unselect this instead of deleting accounts. */
   isActive: Scalars['Boolean']['output'];
-  /** Bepaalt of de gebruiker zich op deze beheerwebsite kan aanmelden. */
+  /** Designates whether the user can log into this admin site. */
   isStaff: Scalars['Boolean']['output'];
-  /** Bepaalt dat deze gebruiker alle rechten heeft, zonder deze expliciet toe te wijzen. */
+  /** Designates that this user has all permissions without explicitly assigning them. */
   isSuperuser: Scalars['Boolean']['output'];
   lastLogin?: Maybe<Scalars['DateTime']['output']>;
   lastName: Scalars['String']['output'];
-  /** Vereist. 150 tekens of minder. Alleen letters, cijfers en de tekens @/,/+/-/_ zijn toegestaan. */
+  /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
   username: Scalars['String']['output'];
 };
 
@@ -1195,6 +1196,26 @@ export type SetLanguageMutationMutationVariables = Exact<{
 
 export type SetLanguageMutationMutation = { __typename?: 'GraphQLMutation', setLanguage?: { __typename?: 'SetLanguageMutation', language?: string | null, result?: boolean | null } | null };
 
+export type FrontPageBannersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FrontPageBannersQuery = { __typename?: 'GraphQLQuery', websiteBanners?: { __typename?: 'WebsiteBannerTypeNodeConnection', results: Array<{ __typename?: 'WebsiteBannerType', name: string, picture: string, url: string } | null> } | null };
+
+export type CompanyCornerQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type CompanyCornerQuery = { __typename?: 'GraphQLQuery', companies?: { __typename?: 'CompanyTypeNodeConnection', totalCount?: number | null, results: Array<{ __typename?: 'CompanyType', name?: string | null, slug: string, url: string, logo?: string | null, logoWidth?: number | null, logoHeight?: number | null, shortDescription?: string | null } | null> } | null };
+
+export type CompanyQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+}>;
+
+
+export type CompanyQuery = { __typename?: 'GraphQLQuery', company?: { __typename?: 'CompanyType', name?: string | null, url: string, logo?: string | null, profile?: string | null, shortDescription?: string | null } | null };
+
 
 export const LatestActivitiesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LatestActivities"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTime"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"activities"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"end_Lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}}},{"kind":"Argument","name":{"kind":"Name","value":"ordering"},"value":{"kind":"StringValue","value":"begin,desc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"summary"}},{"kind":"Field","name":{"kind":"Name","value":"begin"}},{"kind":"Field","name":{"kind":"Name","value":"imageIcon"}},{"kind":"Field","name":{"kind":"Name","value":"activityLabel"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nameNl"}},{"kind":"Field","name":{"kind":"Name","value":"nameEn"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"active"}}]}},{"kind":"Field","name":{"kind":"Name","value":"photos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"thumbMedium"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}}]}}]} as unknown as DocumentNode<LatestActivitiesQuery, LatestActivitiesQueryVariables>;
 export const OverviewActivitiesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"OverviewActivities"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTime"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"activities"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"begin_Gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}}},{"kind":"Argument","name":{"kind":"Name","value":"ordering"},"value":{"kind":"StringValue","value":"begin,asc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"begin"}},{"kind":"Field","name":{"kind":"Name","value":"summary"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"activityLabel"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nameNl"}},{"kind":"Field","name":{"kind":"Name","value":"nameEn"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"active"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}}]}}]} as unknown as DocumentNode<OverviewActivitiesQuery, OverviewActivitiesQueryVariables>;
@@ -1215,3 +1236,6 @@ export const CommitteeOverviewDocument = {"kind":"Document","definitions":[{"kin
 export const SingleCommitteeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SingleCommittee"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"committeeId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"committees"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"includeAbolished"},"value":{"kind":"BooleanValue","value":false}},{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"committeeId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"founded"}},{"kind":"Field","name":{"kind":"Name","value":"website"}},{"kind":"Field","name":{"kind":"Name","value":"information"}},{"kind":"Field","name":{"kind":"Name","value":"groupPicture"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"abolished"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"functionSet"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"person"}},{"kind":"Field","name":{"kind":"Name","value":"function"}}]}}]}}]}}]}}]} as unknown as DocumentNode<SingleCommitteeQuery, SingleCommitteeQueryVariables>;
 export const CurrentUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CurrentUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}}]}}]}}]} as unknown as DocumentNode<CurrentUserQuery, CurrentUserQueryVariables>;
 export const SetLanguageMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SetLanguageMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"setLanguage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"languageCode"},"value":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"result"}}]}}]}}]} as unknown as DocumentNode<SetLanguageMutationMutation, SetLanguageMutationMutationVariables>;
+export const FrontPageBannersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FrontPageBanners"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"websiteBanners"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"picture"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]} as unknown as DocumentNode<FrontPageBannersQuery, FrontPageBannersQueryVariables>;
+export const CompanyCornerDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CompanyCorner"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"companies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"logoWidth"}},{"kind":"Field","name":{"kind":"Name","value":"logoHeight"}},{"kind":"Field","name":{"kind":"Name","value":"shortDescription"}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}}]}}]} as unknown as DocumentNode<CompanyCornerQuery, CompanyCornerQueryVariables>;
+export const CompanyDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Company"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"company"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"profile"}},{"kind":"Field","name":{"kind":"Name","value":"shortDescription"}}]}}]}}]} as unknown as DocumentNode<CompanyQuery, CompanyQueryVariables>;

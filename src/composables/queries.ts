@@ -25,7 +25,10 @@ export const queries = {
     singleActivites: gql.SingleActivitiesDocument,
     committeeOverview: gql.CommitteeOverviewDocument,
     singleCommittee: gql.SingleCommitteeDocument,
-    currentUser: gql.CurrentUserDocument
+    currentUser: gql.CurrentUserDocument,
+    frontPageBanners: gql.FrontPageBannersDocument,
+    companyCorner: gql.CompanyCornerDocument,
+    company: gql.CompanyDocument
 } as const
 
 /**

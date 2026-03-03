@@ -29,9 +29,9 @@ import { useGettext } from 'vue3-gettext'
 import SectionCard from '../ui/SectionCard.vue'
 import Pagination from '../ui/Pagination.vue'
 import TextCard from '../ui/TextCard.vue'
-import { formattedData, excerptText, getItemValue } from '@/functions/functions.ts'
-import type { LatestActivitiesQuery } from '@/gql/graphql'
+import { formattedData, getItemValue } from '@/functions/functions.ts'
 import { useQuery } from '@/composables/queries'
+import { imageSrc } from '@/composables/util'
 const { $gettext } = useGettext();
 const perpage = ref(4)
 
@@ -40,18 +40,6 @@ const { result } = query;
 const queryResults = computed(() => result.value?.activities)
 const activityItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 const totalCount = computed(() => queryResults.value?.totalCount)
-
-type ActivityItemType = NonNullable<
-    NonNullable<LatestActivitiesQuery["activities"]>["results"][number]
->;
-
-const imageSrc = (src: string | null | undefined) => {
-    if (!src) {
-        return '/src/assets/images/placeholder.jpg'
-    }
-
-    return `${import.meta.env.VITE_AMELIE_MEDIA_URL}${src}`
-}
 </script>
 
 <style scoped></style>
