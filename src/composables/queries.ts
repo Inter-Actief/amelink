@@ -28,7 +28,9 @@ export const queries = {
     currentUser: gql.CurrentUserDocument,
     frontPageBanners: gql.FrontPageBannersDocument,
     companyCorner: gql.CompanyCornerDocument,
-    company: gql.CompanyDocument
+    company: gql.CompanyDocument,
+    videos: gql.VideosDocument,
+    video: gql.VideoDocument,
 } as const
 
 /**

@@ -320,3 +320,25 @@ query Company($slug: String!) {
     shortDescription
   }
 }
+
+query Videos($limit: Int, $offset: Int) {
+  videos(limit: $limit, offset: $offset) {
+    totalCount
+    results {
+      videoId
+      videoType
+      title
+      thumbnailUrl
+    }
+  }
+}
+
+query Video($videoId: ID!) {
+  video(videoId: $videoId) {
+    videoId
+    title
+    description
+    thumbnailUrl
+    videoType
+  }
+}
