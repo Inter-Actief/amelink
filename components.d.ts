@@ -27,6 +27,7 @@ declare module 'vue' {
     LatestNews: typeof import('./src/components/news/LatestNews.vue')['default']
     Logo: typeof import('./src/components/ui/Logo.vue')['default']
     LogoSlider: typeof import('./src/components/logos/LogoSlider.vue')['default']
+    Menu: typeof import('primevue/menu')['default']
     OverviewActivities: typeof import('./src/components/activities/OverviewActivities.vue')['default']
     OverviewNews: typeof import('./src/components/news/OverviewNews.vue')['default']
     Pagination: typeof import('./src/components/ui/Pagination.vue')['default']
@@ -38,10 +39,12 @@ declare module 'vue' {
     Search: typeof import('./src/components/ui/Search.vue')['default']
     SearchToggle: typeof import('./src/components/ui/SearchToggle.vue')['default']
     SectionCard: typeof import('./src/components/ui/SectionCard.vue')['default']
+    Select: typeof import('primevue/select')['default']
     TextCard: typeof import('./src/components/ui/TextCard.vue')['default']
     ThemeSwitcher: typeof import('./src/components/ui/ThemeSwitcher.vue')['default']
     UpcomingActivities: typeof import('./src/components/activities/UpcomingActivities.vue')['default']
     UpcomingActivitiesCards: typeof import('./src/components/activities/UpcomingActivitiesCards.vue')['default']
+    UserButton: typeof import('./src/components/header/UserButton.vue')['default']
   }
   export interface ComponentCustomProperties {
     Ripple: typeof import('primevue/ripple')['default']

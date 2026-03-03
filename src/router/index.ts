@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useOidcStore } from '@/stores/oidcStore'
 import HomePage from '@/views/pages/HomeView.vue'
 import Page from '@/views/pages/PageView.vue'
 import SingleNews from '@/views/news/SingleNews.vue'
@@ -94,6 +95,26 @@ const router = createRouter({
             name: 'singlecommittee',
             component: () => SingleCommittee,
             props: true,
+        },
+        {
+            path: '/auth/state',
+            name: 'authstate',
+            component: () => import('@/views/pages/StateView.vue'),
+        },
+        {
+            path: '/auth/callback',
+            name: 'authcallback',
+            component: { template: '<div></div>' },
+            beforeEnter: async (to, from, next) => {
+                const oidcStore = useOidcStore()
+                try {
+                    await oidcStore.handleCallback()
+                    next('/')
+                } catch (error) {
+                    console.error('Auth callback failed:', error)
+                    next('/')
+                }
+            },
         },
     ],
 })
