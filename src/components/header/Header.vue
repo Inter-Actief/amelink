@@ -8,6 +8,10 @@
 
             <div class="basis-4/5 justify-self-end flex flex-row justify-end gap-4">
                 <!-- <SearchToggle v-if="isDesktop" /> -->
+                <Button as="a" severity="secondary" :href="oldFrontendUrl">
+                    {{ $gettext('Old website') }}
+                    <ArrowUpRight />
+                </Button>
                 <Button as="a" :label="$gettext('Become a member')" severity="secondary"
                     href="https://www.inter-actief.utwente.nl/oidc/authenticate/">
                 </Button>
@@ -49,9 +53,11 @@ import Logo from '@/components/ui/Logo.vue'
 import Menubar from 'primevue/menubar';
 import { useGettext } from 'vue3-gettext'
 import { computed, reactive, ref } from 'vue';
-import { ChevronDown, ChevronRight, Icon } from 'lucide-vue-next';
+import { ArrowUpRight, ChevronDown, ChevronRight, Icon } from 'lucide-vue-next';
 import UserButton from './UserButton.vue';
 const { $gettext } = useGettext();
+
+const oldFrontendUrl = import.meta.env.VITE_OLD_FRONTEND_URL;
 
 // TODO: Translate menu bar
 const items = computed(() => [
