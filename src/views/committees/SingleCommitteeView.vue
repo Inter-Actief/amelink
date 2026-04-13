@@ -72,11 +72,11 @@
 
 <script lang="ts" setup>
 import Content from '@/components/ui/Content.vue';
-import { UserStar } from 'lucide-vue-next';
+import { UserStar } from '@lucide/vue';
 import { computed, ref, watch } from 'vue';
 import { useGettext } from 'vue3-gettext';
 import { markedText } from '@/functions/functions';
-import { ArrowLeft } from 'lucide-vue-next';
+import { ArrowLeft } from '@lucide/vue';
 import { useQuery } from '@/composables/queries';
 
 const props = defineProps<{ id: string, slug: string }>();

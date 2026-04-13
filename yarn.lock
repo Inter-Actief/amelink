@@ -2421,6 +2421,11 @@
   resolved "https://registry.yarnpkg.com/@lucide/lab/-/lab-0.1.2.tgz#1408bb0063d5f94e944d4a3ba329874785c12a7a"
   integrity sha512-VprF2BJa7ZuTGOhUd5cf8tHJXyL63wdxcGieAiVVoR9hO0YmPsnZO0AGqDiX2/br+/MC6n8BoJcmPilltOXIJA==
 
+"@lucide/vue@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@lucide/vue/-/vue-1.8.0.tgz#e5baec754a64f79d1a94850dd72a115e597e2d90"
+  integrity sha512-Rgy2rxfOx9yP6fWneE3QO6xwUbF2o7f9+MRbzGLRakee4tzUeVWHdX23uRH4ymwEzoq2+8vqRI9yGsxeZhYlWw==
+
 "@mixmark-io/domino@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@mixmark-io/domino/-/domino-2.2.0.tgz#4e8ec69bf1afeb7a14f0628b7e2c0f35bdb336c3"
@@ -5519,11 +5524,6 @@ lru-cache@^5.1.1:
   integrity sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==
   dependencies:
     yallist "^3.0.2"
-
-lucide-vue-next@^0.542.0:
-  version "0.542.0"
-  resolved "https://registry.yarnpkg.com/lucide-vue-next/-/lucide-vue-next-0.542.0.tgz#ff5287edc8da8043b716b0b91833de2fee9fc65e"
-  integrity sha512-cJfyhFoneDgYTouHwUJEutXaCW5EQuRrBsvfELudWnMiwfqvcEtpZTFZLdZ5Nrqow+znzn+Iyhu3KeYIfa3mEg==
 
 magic-string@^0.30.10, magic-string@^0.30.11, magic-string@^0.30.17, magic-string@^0.30.4:
   version "0.30.17"
