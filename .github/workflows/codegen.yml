@@ -1,0 +1,35 @@
+name: Gettext and codegen
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  gettext-and-codegen:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Extract gettext messages
+        run: yarn gettext:extract
+
+      - name: Compile gettext messages
+        run: yarn gettext:compile
+
+      - name: Generate GraphQL code
+        run: yarn codegen
