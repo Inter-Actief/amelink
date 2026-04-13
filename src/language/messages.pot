@@ -53,25 +53,25 @@ msgstr ""
 msgid "View all activities"
 msgstr ""
 
-#: src/components/activities/PastActivities.vue:3
+#: src/components/activities/PastActivities.vue:52
 msgid "Past activities"
 msgstr ""
 
-#: src/components/activities/PastActivities.vue:4
+#: src/components/activities/PastActivities.vue:53
 msgid "Zoek activiteiten"
 msgstr ""
 
-#: src/components/activities/PastActivities.vue:11
+#: src/components/activities/PastActivities.vue:62
 #: src/components/activities/UpcomingActivities.vue:12
 msgid "Date"
 msgstr ""
 
-#: src/components/activities/PastActivities.vue:13
+#: src/components/activities/PastActivities.vue:65
 #: src/components/activities/UpcomingActivities.vue:14
 msgid "Activity"
 msgstr ""
 
-#: src/components/activities/PastActivities.vue:27
+#: src/components/activities/PastActivities.vue:81
 msgid "Photos"
 msgstr ""
 
