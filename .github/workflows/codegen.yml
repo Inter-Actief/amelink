@@ -43,8 +43,8 @@ jobs:
         with:
           base: main
           branch: chore/generated-files
-          commit-message: chore: update generated files
-          title: chore: update generated files
+          commit-message: "chore: update generated files"
+          title: "chore: update generated files"
           body: |
             Automated update for gettext and GraphQL generated files.
           labels: automation
