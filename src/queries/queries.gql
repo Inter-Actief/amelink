@@ -38,8 +38,8 @@ query OverviewActivities($limit: Int, $offset: Int, $startDate: DateTime!) {
   }
 }
 
-query PastActivities($limit: Int, $offset: Int, $endDate: DateTime) {
-  activities(limit: $limit, offset: $offset, ordering: "begin,desc", begin_Lt: $endDate) {
+query PastActivities($limit: Int, $offset: Int, $endDate: DateTime, $search: String) {
+  activities(limit: $limit, offset: $offset, ordering: "begin,desc", begin_Lt: $endDate, summaryNl_Icontains: $search) {
     totalCount
     results {
       id
