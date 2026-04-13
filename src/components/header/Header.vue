@@ -53,7 +53,7 @@ import Logo from '@/components/ui/Logo.vue'
 import Menubar from 'primevue/menubar';
 import { useGettext } from 'vue3-gettext'
 import { computed, reactive, ref } from 'vue';
-import { ArrowUpRight, ChevronDown, ChevronRight, Icon } from 'lucide-vue-next';
+import { ArrowUpRight, ChevronDown, ChevronRight, Icon } from '@lucide/vue';
 import UserButton from './UserButton.vue';
 const { $gettext } = useGettext();
 

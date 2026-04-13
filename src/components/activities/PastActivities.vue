@@ -5,7 +5,7 @@ import { FilterMatchMode } from '@primevue/core/api';
 import { computed, ref, watch } from 'vue'
 import { formattedDataShort, getItemValue } from '@/functions/functions.ts'
 import { useGettext } from 'vue3-gettext'
-import { Camera } from 'lucide-vue-next';
+import { Camera } from '@lucide/vue';
 import { useQuery } from '@/composables/queries';
 
 const { $gettext } = useGettext();
