@@ -324,6 +324,18 @@ msgstr "News page"
 msgid "Read more"
 msgstr "Read more"
 
+#: src/views/404.vue:13
+msgid "404, not found!"
+msgstr ""
+
+#: src/views/404.vue:14
+msgid "We could not find the following page: "
+msgstr ""
+
+#: src/views/404.vue:16
+msgid "Back to home"
+msgstr ""
+
 #: src/views/activities/ActivitiesView.vue:5
 msgid "Activities you don't want to miss"
 msgstr "Activities you don't want to miss"
