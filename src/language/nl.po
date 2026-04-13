@@ -51,7 +51,6 @@ msgid "Free"
 msgstr "Gratis"
 
 #: src/components/activities/LatestActivities.vue:4
-#: src/views/pages/ComponentsView.vue:21
 msgid "Latest Activities"
 msgstr "Laatste activiteiten"
 
@@ -92,7 +91,6 @@ msgstr "Terug naar activiteit"
 
 #: src/components/activities/UpcomingActivities.vue:4
 #: src/components/activities/UpcomingActivitiesCards.vue:2
-#: src/views/pages/ComponentsView.vue:14
 msgid "Upcoming Activities"
 msgstr "Aankomende activiteiten"
 
@@ -103,18 +101,6 @@ msgstr "Soort"
 #: src/components/activities/UpcomingActivities.vue:37
 msgid "Enroll now!"
 msgstr "Schrijf je nu in!"
-
-#: src/components/demo/DemoTable.vue:14
-msgid "Name"
-msgstr "Naam"
-
-#: src/components/demo/DemoTable.vue:15
-msgid "Age"
-msgstr "Leeftijd"
-
-#: src/components/demo/DemoTable.vue:16
-msgid "Email"
-msgstr "E-mail"
 
 #: src/components/footer/Footer.vue:5
 msgid "footer.text"
@@ -139,7 +125,7 @@ msgstr "Informatie"
 msgid "Privacy policy"
 msgstr "Privacybeleid"
 
-#: src/components/footer/Footer.vue:20 src/components/header/Header.vue:211
+#: src/components/footer/Footer.vue:20 src/components/header/Header.vue:207
 #, fuzzy
 msgid "Contact"
 msgstr "Contact"
@@ -156,24 +142,24 @@ msgstr "CVD-beleid"
 msgid "Contact us"
 msgstr "Neem contact op"
 
-#: src/components/footer/Footer.vue:51 src/components/header/Header.vue:68
+#: src/components/footer/Footer.vue:51 src/components/header/Header.vue:64
 #: src/components/homepage/HomepageCards.vue:8
 #, fuzzy
 msgid "Activities"
 msgstr "Activiteit"
 
-#: src/components/footer/Footer.vue:55 src/components/header/Header.vue:72
+#: src/components/footer/Footer.vue:55 src/components/header/Header.vue:68
 #: src/components/homepage/HomepageCards.vue:17
 #, fuzzy
 msgid "News"
 msgstr "Nieuws pagina"
 
-#: src/components/footer/Footer.vue:59 src/components/header/Header.vue:80
-#: src/views/pages/PublicationView.vue:3
+#: src/components/footer/Footer.vue:59 src/components/header/Header.vue:72
+#: src/views/pages/PublicationView.vue:34
 msgid "Publications"
 msgstr "Publicaties"
 
-#: src/components/footer/Footer.vue:63 src/components/header/Header.vue:190
+#: src/components/footer/Footer.vue:63 src/components/header/Header.vue:186
 #: src/components/homepage/HomepageCards.vue:26
 msgid "Education"
 msgstr "Onderwijs"
@@ -182,144 +168,142 @@ msgstr "Onderwijs"
 msgid "Become a member"
 msgstr "Word lid"
 
-#: src/components/header/Header.vue:14
-msgid "Sign-in"
-msgstr "Inloggen"
-
-#: src/components/header/Header.vue:63
+#: src/components/header/Header.vue:59
 msgid "Home"
 msgstr "Home"
 
 #: src/components/header/Header.vue:76
-msgid "Components"
+#: src/components/homepage/HomepageCards.vue:35
+#: src/views/companies/CompaniesView.vue:21
+#, fuzzy
+msgid "Companies"
 msgstr "Components"
 
-#: src/components/header/Header.vue:84
+#: src/components/header/Header.vue:80
 msgid "Association"
 msgstr "Vereniging"
 
-#: src/components/header/Header.vue:87
+#: src/components/header/Header.vue:83
 msgid "Inter-Actief"
 msgstr "Inter-Actief"
 
-#: src/components/header/Header.vue:91
+#: src/components/header/Header.vue:87
 msgid "Board"
 msgstr "Bestuur"
 
-#: src/components/header/Header.vue:95
+#: src/components/header/Header.vue:91
 msgid "Former boards"
 msgstr "Oud-besturen"
 
-#: src/components/header/Header.vue:99
+#: src/components/header/Header.vue:95
 msgid "Honorary members"
 msgstr "Ereleden"
 
-#: src/components/header/Header.vue:103
+#: src/components/header/Header.vue:99
 msgid "Members of Merit"
 msgstr "Leden van Verdienste"
 
-#: src/components/header/Header.vue:107
+#: src/components/header/Header.vue:103
 msgid "Committees"
 msgstr "Commissies"
 
-#: src/components/header/Header.vue:111
+#: src/components/header/Header.vue:107
 msgid "Membership"
 msgstr "Lidmaatschap"
 
-#: src/components/header/Header.vue:115
+#: src/components/header/Header.vue:111
 msgid "(Graduation) drink"
 msgstr "(Afstudeer)borrel"
 
-#: src/components/header/Header.vue:119
+#: src/components/header/Header.vue:115
 msgid "Symposia"
 msgstr "Symposia"
 
-#: src/components/header/Header.vue:123
+#: src/components/header/Header.vue:119
 msgid "Study tours"
 msgstr "Studiereizen"
 
-#: src/components/header/Header.vue:127
+#: src/components/header/Header.vue:123
 msgid "Members' initiative"
 msgstr "Ledeninitiatief"
 
-#: src/components/header/Header.vue:131
+#: src/components/header/Header.vue:127
 msgid "Association song"
 msgstr "Verenigingslied"
 
-#: src/components/header/Header.vue:135
+#: src/components/header/Header.vue:131
 msgid "Alumni Association ENIAC"
 msgstr "Alumnivereniging ENIAC"
 
-#: src/components/header/Header.vue:139
+#: src/components/header/Header.vue:135
 msgid "Sister associations"
 msgstr "Zusterverenigingen"
 
-#: src/components/header/Header.vue:143
+#: src/components/header/Header.vue:139
 msgid "Inter-Actief App"
 msgstr "Inter-Actief App"
 
-#: src/components/header/Header.vue:147
+#: src/components/header/Header.vue:143
 msgid "Inter-Archive"
 msgstr "Inter-Archief"
 
-#: src/components/header/Header.vue:153
+#: src/components/header/Header.vue:149
 #, fuzzy
 msgid "For members"
 msgstr "Ereleden"
 
-#: src/components/header/Header.vue:156
+#: src/components/header/Header.vue:152
 msgid "Azure Dev Tools"
 msgstr ""
 
-#: src/components/header/Header.vue:160
+#: src/components/header/Header.vue:156
 msgid "GMM documents"
 msgstr ""
 
-#: src/components/header/Header.vue:164
+#: src/components/header/Header.vue:160
 msgid "Assignments by the UT"
 msgstr ""
 
-#: src/components/header/Header.vue:168
+#: src/components/header/Header.vue:164
 msgid "Corporate identity"
 msgstr ""
 
-#: src/components/header/Header.vue:172
+#: src/components/header/Header.vue:168
 #, fuzzy
 msgid "Old privacy policies"
 msgstr "Privacybeleid"
 
-#: src/components/header/Header.vue:176
+#: src/components/header/Header.vue:172
 msgid "Social media"
 msgstr ""
 
-#: src/components/header/Header.vue:180
+#: src/components/header/Header.vue:176
 msgid "Mental health"
 msgstr ""
 
-#: src/components/header/Header.vue:184
+#: src/components/header/Header.vue:180
 msgid "Do groups"
 msgstr ""
 
-#: src/components/header/Header.vue:193 src/views/pages/EducationView.vue:4
+#: src/components/header/Header.vue:189 src/views/pages/EducationView.vue:4
 msgid "Information"
 msgstr "Informatie"
 
-#: src/components/header/Header.vue:197
+#: src/components/header/Header.vue:193
 msgid "Books"
 msgstr ""
 
-#: src/components/header/Header.vue:201
+#: src/components/header/Header.vue:197
 msgid "Summaries"
 msgstr ""
 
-#: src/components/header/Header.vue:205
+#: src/components/header/Header.vue:201
 msgid "Tutoring"
 msgstr ""
 
-#: src/components/homepage/HomepageCards.vue:35
-#, fuzzy
-msgid "Companies"
-msgstr "Components"
+#: src/components/header/UserButton.vue:2
+msgid "Sign-in"
+msgstr "Inloggen"
 
 #: src/components/news/LatestNews.vue:5
 msgid "News & Announcements"
@@ -336,6 +320,18 @@ msgstr "Nieuws pagina"
 #: src/components/ui/TextCard.vue:29
 msgid "Read more"
 msgstr "Lees meer"
+
+#: src/views/404.vue:13
+msgid "404, not found!"
+msgstr ""
+
+#: src/views/404.vue:14
+msgid "We could not find the following page: "
+msgstr ""
+
+#: src/views/404.vue:16
+msgid "Back to home"
+msgstr ""
 
 #: src/views/activities/ActivitiesView.vue:5
 msgid "Activities you don't want to miss"
@@ -378,13 +374,41 @@ msgstr "Commissies"
 msgid "This committee does not have a description"
 msgstr ""
 
-#: src/views/pages/ComponentsView.vue:3
-msgid "Demo Table"
-msgstr "Demo Tabel"
+#: src/views/companies/CompanyView.vue:29
+msgid "We could not find this company."
+msgstr ""
 
-#: src/views/pages/ComponentsView.vue:10
-msgid "Latest News"
-msgstr "Laatste nieuws"
+#: src/views/companies/CompanyView.vue:32
+#, fuzzy
+msgid "View all companies"
+msgstr "Alle activiteiten bekijken"
+
+#: src/views/companies/CompanyView.vue:37
+#, fuzzy
+msgid "Company profile"
+msgstr "Components"
+
+#: src/views/companies/CompanyView.vue:51
+msgid "Website"
+msgstr ""
+
+#~ msgid "Name"
+#~ msgstr "Naam"
+
+#~ msgid "Age"
+#~ msgstr "Leeftijd"
+
+#~ msgid "Email"
+#~ msgstr "E-mail"
+
+#~ msgid "Components"
+#~ msgstr "Components"
+
+#~ msgid "Demo Table"
+#~ msgstr "Demo Tabel"
+
+#~ msgid "Latest News"
+#~ msgstr "Laatste nieuws"
 
 #~ msgid "Demo overview"
 #~ msgstr "Demo overzicht"
