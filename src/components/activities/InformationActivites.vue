@@ -13,9 +13,11 @@
                 <div>{{ props.item.organizer.name }}</div>
                 <div>{{ getItemValue(props.item.activityLabel, 'explanation') }}</div>
                 <div>{{ props.item.location }}</div>
-                <div> {{ formattedData(props.item.enrollmentBegin) }} {{ $gettext('from') }}
+                <div>
+                    {{ formattedDate(props.item.enrollmentBegin) }} {{ $gettext('from') }}
                     {{ formattedTime(props.item.enrollmentBegin) }} {{ $gettext('until') }}
-                    {{ formattedTime(props.item.enrollmentEnd) }}</div>
+                    {{ formattedTime(props.item.enrollmentEnd) }}
+                </div>
                 <!-- TODO: Fix label -->
                 <div>{{ props.item.activityLabel[`nameEn`] }}</div>
                 <div>
@@ -30,21 +32,23 @@
 </template>
 
 <script setup lang="ts">
-import { formattedData, formattedTime, getItemValue } from '@/functions/functions'
-import { useGettext } from 'vue3-gettext';
-import TextCard from '../ui/TextCard.vue';
-import DataTable from 'primevue/datatable';
-import Column from 'primevue/column';
-import { reactive } from 'vue';
-const gettext = useGettext();
+import { formattedDate, formattedTime, getItemValue } from '@/functions/functions'
+import { useGettext } from 'vue3-gettext'
+import TextCard from '../ui/TextCard.vue'
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
+import { reactive } from 'vue'
+const gettext = useGettext()
 
-const { $gettext } = gettext;
+const { $gettext } = gettext
 const props = defineProps(['item'])
 
-const data = reactive([{
-    name: $gettext('Who'),
-    value: props.item.organizer.name
-}])
+const data = reactive([
+    {
+        name: $gettext('Who'),
+        value: props.item.organizer.name,
+    },
+])
 </script>
 
 <style scoped></style>

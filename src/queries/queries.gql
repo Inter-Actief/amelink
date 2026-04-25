@@ -39,7 +39,13 @@ query OverviewActivities($limit: Int, $offset: Int, $startDate: DateTime!) {
 }
 
 query PastActivities($limit: Int, $offset: Int, $endDate: DateTime, $search: String) {
-  activities(limit: $limit, offset: $offset, ordering: "begin,desc", begin_Lt: $endDate, summaryNl_Icontains: $search) {
+  activities(
+    limit: $limit
+    offset: $offset
+    ordering: "begin,desc"
+    begin_Lt: $endDate
+    summaryNl_Icontains: $search
+  ) {
     totalCount
     results {
       id
@@ -131,14 +137,15 @@ query HomepageSlider($limit: Int, $beginDate: DateTime) {
   }
 }
 
-query LatestNews($limit: Int) {
-  newsItems(limit: $limit) {
+query LatestNews($limit: Int, $pinnedOnTop: Boolean) {
+  newsItems(limit: $limit, pinnedOnTop: $pinnedOnTop) {
     results {
       id
       title
       introduction
       introduction
       publicationDate
+      pinned
     }
     totalCount
   }
@@ -215,7 +222,12 @@ query PublicationOverview($limit: Int, $offset: Int, $type: String) {
   publicationTypes {
     typeName
   }
-  publications(limit: $limit, offset: $offset, ordering: "datePublished,desc", publicationType_TypeName_Iexact: $type) {
+  publications(
+    limit: $limit
+    offset: $offset
+    ordering: "datePublished,desc"
+    publicationType_TypeName_Iexact: $type
+  ) {
     results {
       id
       name
@@ -273,8 +285,8 @@ query SingleCommittee($committeeId: ID) {
 
 query CurrentUser {
   me {
-    username,
-    firstName,
+    username
+    firstName
     lastName
   }
 }

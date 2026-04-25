@@ -1,15 +1,28 @@
 <template>
-    <Galleria :value="queryResults" showItemNavigators @update:activeIndex="resetAnimation()" :showThumbnails="false"
-        autoPlay circular :transitionInterval="7000">
+    <Galleria
+        :value="queryResults"
+        showItemNavigators
+        @update:activeIndex="resetAnimation()"
+        :showThumbnails="false"
+        autoPlay
+        circular
+        :transitionInterval="7000"
+    >
         <template #item="slotProps" :circular="true">
             <div class="w-full h-[30vw] container">
-                <img class="w-full" ref="gallery-image" :src="imageSrc(randomItem(slotProps.item.photos).thumbLarge)" />
+                <img
+                    class="w-full"
+                    ref="gallery-image"
+                    :src="imageSrc(randomItem(slotProps.item.photos).thumbLarge)"
+                />
             </div>
         </template>
         <template #caption="slotProps">
-            <RouterLink :to="{ name: 'singleactivitiesphotos', params: { id: slotProps.item.id! } }">
+            <RouterLink
+                :to="{ name: 'singleactivitiesphotos', params: { id: slotProps.item.id! } }"
+            >
                 <div class="text-5xl mb-2 font-bold pl-4">{{ slotProps.item.summary }}</div>
-                <p class="text-white pl-4">{{ formattedData(slotProps.item.begin) }}</p>
+                <p class="text-white pl-4">{{ formattedDate(slotProps.item.begin) }}</p>
             </RouterLink>
         </template>
     </Galleria>
@@ -20,18 +33,18 @@ import Galleria from 'primevue/galleria'
 import { RouterLink } from 'vue-router'
 import { computed, nextTick, ref, useTemplateRef, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { formattedData, excerptText } from '@/functions/functions.ts'
+import { formattedDate, excerptText } from '@/functions/functions.ts'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-import { useQuery } from '@/composables/queries';
+import { useQuery } from '@/composables/queries'
 
 const route = useRoute()
 const limit = ref(50)
 const imageRef = useTemplateRef('gallery-image')
 
 // TODO: Actually filter on activities with pictures
-const { result } = useQuery('homepageSlider', { limit: limit.value, beginDate: new Date() });
+const { result } = useQuery('homepageSlider', { limit: limit.value, beginDate: new Date() })
 function resetAnimation() {
     if (imageRef.value) {
         imageRef.value.style.animation = 'none'
@@ -41,7 +54,6 @@ function resetAnimation() {
 }
 
 const queryResults = computed(() => {
-    console.log(result.value?.activities?.results)
     return (
         result.value?.activities?.results.filter((x) => (x?.photos ?? []).length > 0) ?? [
             {

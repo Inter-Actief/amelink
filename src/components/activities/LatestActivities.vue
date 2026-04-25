@@ -11,15 +11,27 @@
             <ProgressSpinner v-if="loading" />
             <div class="grid gap-10 grid-cols-3 pb-10">
                 <template v-for="item in activityItems" :key="item!.id">
-                    <TextCard :image="getItemRandomPhoto(item!)" :title="item!.summary ?? ''"
-                        :routerLink="getRouterLinkTo(item!)" :subtitle="formattedData(item!.begin)"
-                        :label="{ color: item!.activityLabel.color, text: getItemValue(item!.activityLabel, 'name') as string }">
+                    <TextCard
+                        :image="getItemRandomPhoto(item!)"
+                        :title="item!.summary ?? ''"
+                        :routerLink="getRouterLinkTo(item!)"
+                        :subtitle="formattedDate(item!.begin)"
+                        :label="{
+                            color: item!.activityLabel.color,
+                            text: getItemValue(item!.activityLabel, 'name') as string,
+                        }"
+                    >
                         {{ excerptText(getItemValue(item, 'description')) }}
                     </TextCard>
                 </template>
             </div>
-            <Pagination v-if="totalCount" v-bind="query" :totalCount="totalCount!" :limit="perpage"
-                :rowsPerPage="[3, 6, 9, 12, 15]" />
+            <Pagination
+                v-if="totalCount"
+                v-bind="query"
+                :totalCount="totalCount!"
+                :limit="perpage"
+                :rowsPerPage="[3, 6, 9, 12, 15]"
+            />
         </template>
     </SectionCard>
 </template>
@@ -30,21 +42,21 @@ import { useGettext } from 'vue3-gettext'
 import SectionCard from '../ui/SectionCard.vue'
 import Pagination from '../ui/Pagination.vue'
 import TextCard from '../ui/TextCard.vue'
-import { formattedData, excerptText, getItemValue } from '@/functions/functions.ts'
+import { formattedDate, excerptText, getItemValue } from '@/functions/functions.ts'
 import type { LatestActivitiesQuery } from '@/gql/graphql'
 import { useQuery } from '@/composables/queries'
-const { $gettext } = useGettext();
+const { $gettext } = useGettext()
 const perpage = ref(6)
 
-const query = useQuery("latestActivities", { limit: perpage.value, startDate: new Date() });
-const { result, refetch, loading } = query;
+const query = useQuery('latestActivities', { limit: perpage.value, startDate: new Date() })
+const { result, refetch, loading } = query
 const queryResults = computed(() => result.value?.activities)
 const activityItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 const totalCount = computed(() => queryResults.value?.totalCount)
 
 type ActivityItemType = NonNullable<
-    NonNullable<LatestActivitiesQuery["activities"]>["results"][number]
->;
+    NonNullable<LatestActivitiesQuery['activities']>['results'][number]
+>
 
 const getRouterLinkTo = (item: ActivityItemType) => {
     if (item.photos.length == 0) {
@@ -60,7 +72,7 @@ const getItemRandomPhoto = (item: ActivityItemType) => {
     }
 
     const photoSrc = item.photos[Math.floor(Math.random() * item.photos.length)].thumbMedium!
-    return imageSrc(photoSrc);
+    return imageSrc(photoSrc)
 }
 
 const imageSrc = (src: string | null | undefined) => {

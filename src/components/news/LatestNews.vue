@@ -12,7 +12,7 @@
             <template v-if="newsItems !== null" v-for="item in newsItems" :key="item!.id">
                 <div class="item">
                     <div class="info">
-                        <div class="date">{{ formattedDataShort(item?.publicationDate) }}</div>
+                        <div class="date">{{ formattedDateShort(item?.publicationDate) }}</div>
                         <div class="title">{{ getItemValue(item, 'title') }}</div>
                     </div>
 
@@ -25,15 +25,15 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { formattedDataShort, getItemValue } from '../../functions/functions.ts'
+import { formattedDateShort, getItemValue } from '../../functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
 import { useQuery } from '@/composables/queries.ts'
 
-const { $gettext } = useGettext();
+const { $gettext } = useGettext()
 const perpage = ref(5)
 
-const { result } = useQuery('latestNews',{ limit: perpage.value });
+const { result } = useQuery('latestNews', { limit: perpage.value, pinnedOnTop: false })
 const queryResults = computed(() => result.value?.newsItems)
 const newsItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 </script>

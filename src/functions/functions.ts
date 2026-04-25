@@ -4,7 +4,7 @@ import gettext from '@/gettext'
 import sanitizeHtml from 'sanitize-html'
 
 // TODO: Test if timestamp type is indeed a number
-export const formattedData = (timestamp: number, lang = 'En') => {
+export const formattedDate = (timestamp: number, lang = 'En') => {
     const date = new Date(timestamp)
 
     const day = String(date.getDate()).padStart(2, '0')
@@ -59,7 +59,7 @@ export const formattedData = (timestamp: number, lang = 'En') => {
     return `${daysOfWeek[dayOfWeekIndex]} ${day} ${months[monthIndex]} ${year}`
 }
 
-export const formattedDataShort = (timestamp: number) => {
+export const formattedDateShort = (timestamp: number) => {
     const date = new Date(timestamp)
 
     const day = String(date.getDate()).padStart(2, '0')

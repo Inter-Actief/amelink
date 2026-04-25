@@ -9,16 +9,26 @@
             <!-- <ProgressSpinner v-if="loading" /> -->
             <div class="grid gap-10 grid-cols-4 pb-10">
                 <template v-for="item in activityItems" :key="item!.id">
-                    <TextCard :image="imageSrc(item?.imageIcon!)" :title="item!.summary ?? ''"
+                    <TextCard
+                        :image="imageSrc(item?.imageIcon!)"
+                        :title="item!.summary ?? ''"
                         :routerLink="{ to: { name: 'singleactivities', params: { id: item!.id } } }"
-                        :subtitle="formattedData(item!.begin)"
-                        :label="{ color: item!.activityLabel.color, text: getItemValue(item!.activityLabel, 'name') as string }">
-                        <!-- {{ excerptText(getItemValue(item, 'description')) }} -->
+                        :subtitle="formattedDate(item!.begin)"
+                        :label="{
+                            color: item!.activityLabel.color,
+                            text: getItemValue(item!.activityLabel, 'name') as string,
+                        }"
+                    >
                     </TextCard>
                 </template>
             </div>
-            <Pagination v-if="totalCount" v-bind="query" :totalCount="totalCount!" :limit="perpage"
-                :rowsPerPage="[4]" />
+            <Pagination
+                v-if="totalCount"
+                v-bind="query"
+                :totalCount="totalCount!"
+                :limit="perpage"
+                :rowsPerPage="[4]"
+            />
         </template>
     </SectionCard>
 </template>
@@ -29,14 +39,14 @@ import { useGettext } from 'vue3-gettext'
 import SectionCard from '../ui/SectionCard.vue'
 import Pagination from '../ui/Pagination.vue'
 import TextCard from '../ui/TextCard.vue'
-import { formattedData, getItemValue } from '@/functions/functions.ts'
+import { formattedDate, getItemValue } from '@/functions/functions.ts'
 import { useQuery } from '@/composables/queries'
 import { imageSrc } from '@/composables/util'
-const { $gettext } = useGettext();
+const { $gettext } = useGettext()
 const perpage = ref(4)
 
-const query = useQuery("upcomingActivities", { limit: perpage.value, beginDate: new Date() })
-const { result } = query;
+const query = useQuery('upcomingActivities', { limit: perpage.value, beginDate: new Date() })
+const { result } = query
 const queryResults = computed(() => result.value?.activities)
 const activityItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 const totalCount = computed(() => queryResults.value?.totalCount)
