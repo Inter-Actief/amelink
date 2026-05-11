@@ -20,19 +20,6 @@ watch(result, async (newResult) => {
     if (!newResult) return;
     body.value = await markedText(newResult.video?.description ?? "");
 }, { immediate: true });
-
-const embedUrl = computed(() => {
-    switch (result.value?.video?.videoType) {
-        case undefined:
-            return undefined;
-        case "youtube":
-            return `https://www.youtube-nocookie.com/embed/${result.value.video.videoId}?modestbranding=0&amp;rel=0&amp;showinfo=0&amp;vq=hd1080`;
-        case "streamingia":
-            return `${import.meta.env.VITE_STREAMING_BASE_URL}/play/${result.value.video.videoId}?embedded=True&autoplay=False`;
-        case "peertubeia":
-            return `${import.meta.env.VITE_PEERTUBE_BASE_URL}/videos/embed/${result.value.video.videoId}?title=0&warningTitle=0&peertubeLink=0&p2p=0`;
-    }
-});
 </script>
 
 <template>
@@ -49,9 +36,8 @@ const embedUrl = computed(() => {
             <div class="sm:col-span1 md:col-span-5">
                 <SectionCard :name="result?.video?.title!">
                     <template #content>
-                        <iframe v-if="embedUrl" class="w-full aspect-video" :src="embedUrl" frameborder="0"
+                        <iframe class="w-full aspect-video" :src="result?.video?.embedUrl!" frameborder="0"
                             allowfullscreen />
-                        <span v-else>{{ $gettext("This video is not embeddable") }}</span>
                     </template>
                 </SectionCard>
             </div>
