@@ -4,7 +4,7 @@ import { useGettext } from 'vue3-gettext';
 import { useQuery } from '@/composables/queries';
 import { computed, ref, watch } from 'vue';
 import { markedText } from '@/functions/functions';
-import { ArrowLeft } from 'lucide-vue-next';
+import { ArrowLeft } from '@lucide/vue';
 import SectionCard from '@/components/ui/SectionCard.vue';
 
 const { $gettext } = useGettext();
