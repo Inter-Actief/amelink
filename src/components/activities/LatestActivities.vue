@@ -13,8 +13,8 @@
                 <template v-for="item in activityItems" :key="item!.id">
                     <TextCard :image="getItemRandomPhoto(item!)" :title="item!.summary ?? ''"
                         :routerLink="getRouterLinkTo(item!)" :subtitle="formattedData(item!.begin)"
-                        :label="{ color: item!.activityLabel.color, text: getItemValue(item!.activityLabel, 'name') as string }">
-                        {{ excerptText(getItemValue(item, 'description')) }}
+                        :label="{ color: item!.activityLabel.color, text: item!.activityLabel!.name! }">
+                        {{ excerptText(item!.description!)) }}
                     </TextCard>
                 </template>
             </div>
@@ -30,7 +30,7 @@ import { useGettext } from 'vue3-gettext'
 import SectionCard from '../ui/SectionCard.vue'
 import Pagination from '../ui/Pagination.vue'
 import TextCard from '../ui/TextCard.vue'
-import { formattedData, excerptText, getItemValue } from '@/functions/functions.ts'
+import { formattedData, excerptText  } from '@/functions/functions.ts'
 import type { LatestActivitiesQuery } from '@/gql/graphql'
 import { useQuery } from '@/composables/queries'
 const { $gettext } = useGettext();

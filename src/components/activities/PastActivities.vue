@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import DataTable, { type DataTablePageEvent } from 'primevue/datatable';
 import Column from 'primevue/column';
-import { FilterMatchMode } from '@primevue/core/api';
 import { computed, ref, watch } from 'vue'
-import { formattedDataShort, getItemValue } from '@/functions/functions.ts'
+import { formattedDataShort } from '@/functions/functions.ts'
 import { useGettext } from 'vue3-gettext'
 import { Camera } from '@lucide/vue';
 import { useQuery } from '@/composables/queries';
@@ -26,7 +25,7 @@ const queryItems = computed(() => result.value?.activities?.results.map(r => ({
     id: r?.id,
     description: r?.description,
     startDate: formattedDataShort(r?.begin),
-    summary: getItemValue(r, 'summary'),
+    summary: r?.summary,
     hasPhotos: (r?.photos == undefined) ? false : (r?.photos.length > 0),
 })));
 

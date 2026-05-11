@@ -12,8 +12,7 @@
                     <TextCard :image="imageSrc(item?.imageIcon!)" :title="item!.summary ?? ''"
                         :routerLink="{ to: { name: 'singleactivities', params: { id: item!.id } } }"
                         :subtitle="formattedData(item!.begin)"
-                        :label="{ color: item!.activityLabel.color, text: getItemValue(item!.activityLabel, 'name') as string }">
-                        <!-- {{ excerptText(getItemValue(item, 'description')) }} -->
+                        :label="{ color: item!.activityLabel.color, text: item!.activityLabel!.name! }">
                     </TextCard>
                 </template>
             </div>
@@ -29,7 +28,7 @@ import { useGettext } from 'vue3-gettext'
 import SectionCard from '../ui/SectionCard.vue'
 import Pagination from '../ui/Pagination.vue'
 import TextCard from '../ui/TextCard.vue'
-import { formattedData, getItemValue } from '@/functions/functions.ts'
+import { formattedData } from '@/functions/functions.ts'
 import { useQuery } from '@/composables/queries'
 import { imageSrc } from '@/composables/util'
 const { $gettext } = useGettext();

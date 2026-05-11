@@ -21,7 +21,7 @@
                         <div class="date">{{ formattedDataShort(item.begin) }}</div>
                         <div class="type">
                             <div class="label" :style="[`background-color: #${item.activityLabel.color}`]">
-                                {{ getItemValue(item.activityLabel, 'name') }}
+                                {{ item.activityLabel.name }}
                             </div>
                         </div>
 
@@ -47,7 +47,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import EpaButton from '@/components/ui/EpaButton.vue'
-import { excerptText, formattedDataShort, getItemValue } from '@/functions/functions'
+import { excerptText, formattedDataShort } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext'
 import { useQuery } from '@/composables/queries'
 

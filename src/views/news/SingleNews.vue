@@ -1,7 +1,7 @@
 <template>
     <Content>
         <template v-if="item">
-            <h1>{{ getItemValue(item, 'title') }}</h1>
+            <h1>{{ item.title }}</h1>
 
             <div class="details">
                 <div class="author">
@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { formattedData, getItemValue, markedText } from '@/functions/functions.ts'
+import { formattedData, markedText } from '@/functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
 import { useQuery } from '@/composables/queries';
@@ -40,7 +40,7 @@ const processedContent = ref<string>('');
 // Process the `content` field when `item` changes
 watch(item, async (newItem) => {
     if (newItem) {
-        processedContent.value = await markedText(getItemValue(newItem, 'content'));
+        processedContent.value = await markedText(newItem!.content!);
     }
 }, { immediate: true });
 </script>

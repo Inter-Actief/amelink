@@ -13,10 +13,10 @@
                 <div class="item">
                     <div class="info">
                         <div class="date">{{ formattedDataShort(item?.publicationDate) }}</div>
-                        <div class="title">{{ getItemValue(item, 'title') }}</div>
+                        <div class="title">{{ item!.title! }}</div>
                     </div>
 
-                    <div class="text">{{ getItemValue(item, 'introduction') }}</div>
+                    <div class="text">{{ item!.introduction! }}</div>
                 </div>
             </template>
         </div>
@@ -24,8 +24,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
-import { formattedDataShort, getItemValue } from '../../functions/functions.ts'
+import { computed, ref } from 'vue'
+import { formattedDataShort } from '../../functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
 import { useQuery } from '@/composables/queries.ts'

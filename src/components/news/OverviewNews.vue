@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { formattedData, getItemValue, markedText } from '@/functions/functions.ts'
+import { formattedData, markedText } from '@/functions/functions.ts'
 import { useGettext } from 'vue3-gettext'
 import Pagination from '../ui/Pagination.vue'
 import TextCard from '../ui/TextCard.vue'
