@@ -7,8 +7,7 @@ query LatestActivities($limit: Int, $offset: Int, $startDate: DateTime) {
       begin
       imageIcon
       activityLabel {
-        nameNl
-        nameEn
+        name
         color
         active
       }
@@ -28,8 +27,7 @@ query OverviewActivities($limit: Int, $offset: Int, $startDate: DateTime!) {
       summary
       description
       activityLabel {
-        nameNl
-        nameEn
+        name
         color
         active
       }
@@ -77,8 +75,7 @@ query UpcomingActivities($limit: Int, $offset: Int, $beginDate: DateTime) {
       summary
       imageIcon
       activityLabel {
-        nameNl
-        nameEn
+        name
         color
         active
       }
@@ -96,8 +93,7 @@ query DemoOverviewActivities($limit: Int, $offset: Int, $beginDate: DateTime) {
       summary
       description
       activityLabel {
-        nameNl
-        nameEn
+        name
         color
         active
       }

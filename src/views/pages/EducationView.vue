@@ -5,7 +5,7 @@
                 <template #content>
                     <template v-for="item in queryItems" :key="item?.id">
                         <div class="link" @click="scrolltop(`item_${item?.id}`)">
-                            {{ getItemValue(item, 'name') }}
+                            {{ item!.name! }}
                         </div>
                     </template>
                 </template>
@@ -16,7 +16,7 @@
                     <Card class="p-4">
                         <template #title>
                             <div class="text-5xl font-extrabold pb-2">
-                                {{ getItemValue(item, 'name') }}
+                                {{ item!.name! }}
                             </div>
                             <Divider class="pb-8" />
                         </template>
@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { getItemValue, markedText } from '@/functions/functions'
+import { markedText } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext'
 import Divider from 'primevue/divider';
 import Content from '@/components/ui/Content.vue';
@@ -53,7 +53,7 @@ watch(queryItems, async (newItems) => {
 
     for (const item of newItems) {
         if (item?.id) {
-            const newContent = getItemValue(item, 'content');
+            const newContent = item.content!;
             if (newContent && !contentMap[item.id] || contentMap[item.id] !== newContent) {
                 contentMap[item.id] = await markedText(newContent!);
             }

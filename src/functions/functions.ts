@@ -113,29 +113,6 @@ export const excerptText = (text: string) => {
     return text
 }
 
-function capitalizeFirstLetter(str: string): string {
-    return str.charAt(0).toUpperCase() + str.slice(1)
-}
-
-// getItemValue is a way to get the value of an item where there only exists
-// (for example) nameNl or nameEn and not name. (This is a backend issue, but
-// we resolve it on the frontend)
-export const getItemValue = <T>(item: T, key: string) => {
-    if (!item) {
-        return ''
-    }
-
-    const capitalizedKey = `${key}${capitalizeFirstLetter(gettext.current)}` as keyof T
-    if (item.hasOwnProperty(capitalizedKey)) {
-        return item[capitalizedKey as keyof T]
-    }
-    if (item.hasOwnProperty(key)) {
-        return item[key as keyof T]
-    }
-
-    return ''
-}
-
 export const isDesktop = ref(window.innerWidth >= 980)
 export const isTablet = ref(window.innerWidth < 980 && window.innerWidth >= 640)
 

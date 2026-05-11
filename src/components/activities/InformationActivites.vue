@@ -11,7 +11,7 @@
             </div>
             <div class="col-span-10">
                 <div>{{ props.item.organizer.name }}</div>
-                <div>{{ getItemValue(props.item.activityLabel, 'explanation') }}</div>
+                <div>{{ props.item.activityLabel.explanation }}</div>
                 <div>{{ props.item.location }}</div>
                 <div> {{ formattedData(props.item.enrollmentBegin) }} {{ $gettext('from') }}
                     {{ formattedTime(props.item.enrollmentBegin) }} {{ $gettext('until') }}
@@ -30,12 +30,11 @@
 </template>
 
 <script setup lang="ts">
-import { formattedData, formattedTime, getItemValue } from '@/functions/functions'
+import { formattedData, formattedTime } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext';
 import TextCard from '../ui/TextCard.vue';
-import DataTable from 'primevue/datatable';
-import Column from 'primevue/column';
 import { reactive } from 'vue';
+
 const gettext = useGettext();
 
 const { $gettext } = gettext;
