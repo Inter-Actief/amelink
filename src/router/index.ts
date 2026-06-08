@@ -96,6 +96,17 @@ const router = createRouter({
             props: true,
         },
         {
+            path: '/videos',
+            name: 'videos',
+            component: () => import('@/views/videos/VideosView.vue'),
+        },
+        {
+            path: '/videos/:type/:id',
+            name: 'singlevideo',
+            component: () => import('@/views/videos/VideoView.vue'),
+            props: true,
+        },
+        {
             path: '/committees',
             name: 'committees',
             component: () => import('@/views/committees/CommitteesView.vue'),
