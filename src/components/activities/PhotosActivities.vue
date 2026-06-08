@@ -4,6 +4,12 @@
     </RouterLink>
 
     <h1>{{ title }}</h1>
+    <template v-if="photographers.length == 1">
+        <p>{{ $gettext('Pictures by') }} {{ photographers[0]! }}</p>
+    </template>
+    <template v-else-if="photographers.length > 1">
+        <p>{{ $gettext('Pictures by') }} {{ photographers.slice(0, photographers.length - 1).join(", ") }} & {{ photographers[photographers.length - 1] }}</p>
+    </template>
 
     <div class="grid grid-cols-3 gap-4">
         <template v-if="queryItem?.photos" v-for="(photo, index) in queryItem.photos" :key="photo">
@@ -38,16 +44,29 @@ const title = computed(() => {
     return getItemValue(queryResults.value, 'summary');
 })
 
+type EasyLightboxImage = {
+    src: string, 
+    title?: string, 
+    alt?: string 
+}
+
 const visible = ref(false)
 const currentIndex = ref(0)
-const imageUrls = ref<string[]>([])
+const imageUrls = ref<EasyLightboxImage[]>([])
 const mediaUrl = import.meta.env.VITE_AMELIE_MEDIA_URL
+
+const photographers = computed(() => {
+    return Array.from(new Set(queryItem.value?.photos.map(x => x.owner?.name)))
+})
 
 const imagePhotosUrls = () => {
     if (queryResults.value?.photos) {
-        imageUrls.value = queryResults.value.photos.map(
-            photo => `${mediaUrl}${photo.thumbLarge}`,
-        );
+        imageUrls.value = queryResults.value.photos.map(photo => {
+            return {
+                src: `${mediaUrl}${photo.thumbLarge}`,
+                title: `${$gettext('Photo by ')}${photo.owner?.name ?? ''}. ${$gettext('If you want to have this photo removed, please contact the board')}`,
+            }
+        });
     }
     return imageUrls.value
 }
