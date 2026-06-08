@@ -12,11 +12,8 @@ yes/no
 **Does your PR include any updates of packages?**
 yes/no
 
-**Does your PR include the proper translations (did you add translations for new/modified strings)?**
-
-
-**If so, did you also run `yarn gettext:extract` ?**
-yes, I have included the translations / no, my PR does not include translations
+**Does your PR allow support for translation?**
+yes, I have used $gettext around my strings / no, my PR does not include translations
 
 **Does your PR change routing?**
 yes/no

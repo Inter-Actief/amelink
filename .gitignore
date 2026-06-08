@@ -31,3 +31,7 @@ coverage
 
 # Generated types (run `yarn codegen` to generate)
 /src/gql/*
+
+# Language things, ignored on development
+/src/language/*.po
+/src/language/*.pot

@@ -32,7 +32,7 @@ import { computed, ref, watch } from 'vue'
 import { formattedData, getItemValue, markedText } from '@/functions/functions'
 import InformationActivites from '@/components/activities/InformationActivites.vue'
 import { useGettext } from 'vue3-gettext'
-import { ArrowRight, ArrowLeft } from 'lucide-vue-next';
+import { ArrowRight, ArrowLeft } from '@lucide/vue';
 import { useQuery } from '@/composables/queries';
 
 const { $gettext } = useGettext();

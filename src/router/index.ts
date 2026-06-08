@@ -11,6 +11,11 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
+            path: "/:path(.*)*",
+            name: "notfound",
+            component: () => import('@/views/404.vue')
+        },
+        {
             path: '/',
             name: 'home',
             component: () => HomePage,
@@ -88,6 +93,17 @@ const router = createRouter({
             path: '/companies/:slug',
             name: 'singlecompany',
             component: () => import('@/views/companies/CompanyView.vue'),
+            props: true,
+        },
+        {
+            path: '/videos',
+            name: 'videos',
+            component: () => import('@/views/videos/VideosView.vue'),
+        },
+        {
+            path: '/videos/:type/:id',
+            name: 'singlevideo',
+            component: () => import('@/views/videos/VideoView.vue'),
             props: true,
         },
         {

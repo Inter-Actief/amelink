@@ -6,7 +6,7 @@ import { useGettext } from 'vue3-gettext';
 import { useQuery } from '@/composables/queries';
 import { markedText } from '@/functions/functions';
 import { imageSrc } from '@/composables/util';
-import { ArrowUpRight } from 'lucide-vue-next';
+import { ArrowUpRight } from '@lucide/vue';
 
 const { $gettext } = useGettext();
 const props = defineProps({

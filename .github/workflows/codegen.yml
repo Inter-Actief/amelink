@@ -1,0 +1,51 @@
+name: Gettext and codegen
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  gettext-and-codegen:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Extract gettext messages
+        run: yarn gettext:extract
+
+      - name: Compile gettext messages
+        run: yarn gettext:compile
+
+      - name: Generate GraphQL code
+        run: yarn codegen
+
+      - name: Create pull request with generated files
+        if: github.event_name == 'push'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          base: main
+          branch: chore/generated-files
+          commit-message: "chore: update generated files"
+          title: "chore: update generated files"
+          body: |
+            Automated update for gettext and GraphQL generated files.
+          labels: automation
+          delete-branch: true

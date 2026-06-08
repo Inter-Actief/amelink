@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 import { useOidcStore } from '@/stores/oidcStore';
-import { UserIcon } from 'lucide-vue-next';
+import { UserIcon } from '@lucide/vue';
 import { computed, ref } from 'vue';
 
 const oidc = useOidcStore()
