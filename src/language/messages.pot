@@ -110,7 +110,7 @@ msgid "Privacy policy"
 msgstr ""
 
 #: src/components/footer/Footer.vue:20
-#: src/components/header/Header.vue:213
+#: src/components/header/Header.vue:217
 msgid "Contact"
 msgstr ""
 
@@ -145,7 +145,7 @@ msgid "Publications"
 msgstr ""
 
 #: src/components/footer/Footer.vue:63
-#: src/components/header/Header.vue:192
+#: src/components/header/Header.vue:196
 #: src/components/homepage/HomepageCards.vue:26
 msgid "Education"
 msgstr ""
@@ -169,123 +169,128 @@ msgid "Companies"
 msgstr ""
 
 #: src/components/header/Header.vue:86
+#: src/views/videos/VideosView.vue:20
+msgid "Videos"
+msgstr ""
+
+#: src/components/header/Header.vue:90
 msgid "Association"
 msgstr ""
 
-#: src/components/header/Header.vue:89
+#: src/components/header/Header.vue:93
 msgid "Inter-Actief"
 msgstr ""
 
-#: src/components/header/Header.vue:93
+#: src/components/header/Header.vue:97
 msgid "Board"
 msgstr ""
 
-#: src/components/header/Header.vue:97
+#: src/components/header/Header.vue:101
 msgid "Former boards"
 msgstr ""
 
-#: src/components/header/Header.vue:101
+#: src/components/header/Header.vue:105
 msgid "Honorary members"
 msgstr ""
 
-#: src/components/header/Header.vue:105
+#: src/components/header/Header.vue:109
 msgid "Members of Merit"
 msgstr ""
 
-#: src/components/header/Header.vue:109
+#: src/components/header/Header.vue:113
 msgid "Committees"
 msgstr ""
 
-#: src/components/header/Header.vue:113
+#: src/components/header/Header.vue:117
 msgid "Membership"
 msgstr ""
 
-#: src/components/header/Header.vue:117
+#: src/components/header/Header.vue:121
 msgid "(Graduation) drink"
 msgstr ""
 
-#: src/components/header/Header.vue:121
+#: src/components/header/Header.vue:125
 msgid "Symposia"
 msgstr ""
 
-#: src/components/header/Header.vue:125
+#: src/components/header/Header.vue:129
 msgid "Study tours"
 msgstr ""
 
-#: src/components/header/Header.vue:129
+#: src/components/header/Header.vue:133
 msgid "Members' initiative"
 msgstr ""
 
-#: src/components/header/Header.vue:133
+#: src/components/header/Header.vue:137
 msgid "Association song"
 msgstr ""
 
-#: src/components/header/Header.vue:137
+#: src/components/header/Header.vue:141
 msgid "Alumni Association ENIAC"
 msgstr ""
 
-#: src/components/header/Header.vue:141
+#: src/components/header/Header.vue:145
 msgid "Sister associations"
 msgstr ""
 
-#: src/components/header/Header.vue:145
+#: src/components/header/Header.vue:149
 msgid "Inter-Actief App"
 msgstr ""
 
-#: src/components/header/Header.vue:149
+#: src/components/header/Header.vue:153
 msgid "Inter-Archive"
 msgstr ""
 
-#: src/components/header/Header.vue:155
+#: src/components/header/Header.vue:159
 msgid "For members"
 msgstr ""
 
-#: src/components/header/Header.vue:158
+#: src/components/header/Header.vue:162
 msgid "Azure Dev Tools"
 msgstr ""
 
-#: src/components/header/Header.vue:162
+#: src/components/header/Header.vue:166
 msgid "GMM documents"
 msgstr ""
 
-#: src/components/header/Header.vue:166
+#: src/components/header/Header.vue:170
 msgid "Assignments by the UT"
 msgstr ""
 
-#: src/components/header/Header.vue:170
+#: src/components/header/Header.vue:174
 msgid "Corporate identity"
 msgstr ""
 
-#: src/components/header/Header.vue:174
+#: src/components/header/Header.vue:178
 msgid "Old privacy policies"
 msgstr ""
 
-#: src/components/header/Header.vue:178
+#: src/components/header/Header.vue:182
 msgid "Social media"
 msgstr ""
 
-#: src/components/header/Header.vue:182
+#: src/components/header/Header.vue:186
 msgid "Mental health"
 msgstr ""
 
-#: src/components/header/Header.vue:186
+#: src/components/header/Header.vue:190
 msgid "Do groups"
 msgstr ""
 
-#: src/components/header/Header.vue:195
+#: src/components/header/Header.vue:199
 #: src/views/pages/EducationView.vue:4
 msgid "Information"
 msgstr ""
 
-#: src/components/header/Header.vue:199
+#: src/components/header/Header.vue:203
 msgid "Books"
 msgstr ""
 
-#: src/components/header/Header.vue:203
+#: src/components/header/Header.vue:207
 msgid "Summaries"
 msgstr ""
 
-#: src/components/header/Header.vue:207
+#: src/components/header/Header.vue:211
 msgid "Tutoring"
 msgstr ""
 
@@ -373,4 +378,16 @@ msgstr ""
 
 #: src/views/companies/CompanyView.vue:51
 msgid "Website"
+msgstr ""
+
+#: src/views/videos/VideoView.vue:29
+msgid "We could not find this video."
+msgstr ""
+
+#: src/views/videos/VideoView.vue:32
+msgid "View all videos"
+msgstr ""
+
+#: src/views/videos/VideoView.vue:45
+msgid "Description"
 msgstr ""
