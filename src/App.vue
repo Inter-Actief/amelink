@@ -4,7 +4,7 @@
     <div>
         <Toast />
         <Header />
-        <Suspense @resolve="onSuspenseResolve" @fallback="onSuspenseFallback">
+        <Suspense>
             <template #default>
                 <Transition name="route-fade" mode="out-in">
                     <RouterView :key="router.currentRoute.value.fullPath" />
