@@ -1,7 +1,7 @@
 <template>
     <h1 class="pb-4">{{ $gettext('News page') }}</h1>
 
-    <div class="grid grid-cols-2 gap-12 items-stretch pb-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch pb-4">
         <div v-for="_ in 10" v-if="loading">
             <TextCard loading :loadingOpts="{
                 readmore: true,

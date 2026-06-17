@@ -7,7 +7,7 @@
         </template>
         <template #content>
             <Transition name="fade" mode="out-in">
-                <div v-if="loading" class="grid gap-10 grid-cols-4 pb-10">
+                <div v-if="loading" class="grid gap-10 grid-cols-1 md:grid-cols-2 xl:grid-cols-4 pb-10">
                     <template v-for="_ in 4">
                         <TextCard :loading="true" :loadingOpts="{
                             image: true,
@@ -20,7 +20,7 @@
                     </template>
                 </div>
 
-                <div v-else class="grid gap-10 grid-cols-4 pb-10">
+                <div v-else class="grid gap-10 grid-cols-1 md:grid-cols-2 xl:grid-cols-4 pb-10">
                     <template v-for="item in activityItems" :key="item!.id">
                         <TextCard :image="imageSrc(item?.imageIcon!)" :title="item!.summary ?? ''"
                             :routerLink="{ to: { name: 'singleactivities', params: { id: item!.id } } }"

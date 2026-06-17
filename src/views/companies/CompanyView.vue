@@ -32,8 +32,8 @@ watch(result, async (newResult) => {
                 {{ $gettext('View all companies') }}
             </RouterLink>
         </div>
-        <div v-else class="grid sm:grid-cols-1 md:grid-cols-8 gap-12">
-            <div class="sm:col-span1 md:col-span-5">
+        <div v-else class="grid grid-cols-1 lg:grid-cols-8 gap-12">
+            <div class="col-span1 lg:col-span-5 order-2 lg:order-0">
                 <SectionCard :name="$gettext('Company profile')">
                     <template #info>
                     </template>
@@ -42,17 +42,15 @@ watch(result, async (newResult) => {
                     </template>
                 </SectionCard>
             </div>
-            <div class="sm:col-span-1 md:col-span-3">
+            <div class="col-span-1 lg:col-span-3 order-1 lg:order-0">
                 <SectionCard :name="result?.company?.name!">
                     <template #content>
                         <img v-image-error :src="imageSrc(result?.company?.logo)" class="p-12 max-h-80 mx-auto" />
-
+                        <p class="py-5 text font-semibold">{{ result?.company?.shortDescription ?? "" }}</p>
                         <Button as="a" :href="result?.company?.url" target="_blank">{{
                             $gettext("Website") }}
                             <ArrowUpRight />
                         </Button>
-
-                        <p class="py-5 text font-semibold">{{ result?.company?.shortDescription ?? "" }}</p>
                     </template>
                 </SectionCard>
             </div>

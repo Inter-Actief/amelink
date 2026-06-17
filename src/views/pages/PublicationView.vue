@@ -49,7 +49,7 @@ const selectedRows = ref(limit)
                 </Select>
             </template>
             <template #content>
-                <div class="grid grid-cols-5 gap-10 pb-4">
+                <div class="grid grid-cards-wide gap-10 pb-4">
                     <PublicationPlaceholder v-if="loading" v-for="_ in selectedRows" />
                     <a v-else :href="publicationUrl(item?.file!)" v-for="item in queryItems" :key="item?.id">
                         <Card class="text-card" style="height: 100%;">

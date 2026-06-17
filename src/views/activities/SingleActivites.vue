@@ -1,7 +1,7 @@
 <template>
     <Content>
         <div class="grid gap-12 grid-cols-12 pt-12 grid-rows-2">
-            <div class="col-span-7 row-span-2">
+            <div class="col-span-12 lg:col-span-7 row-span-2">
                 <Skeleton height="4rem" v-if="loading" />
                 <div class="text-5xl font-bold" v-if="queryItem">{{ getItemValue(queryItem, 'summary') }}</div>
 
@@ -30,7 +30,7 @@
                     {{ $gettext('Return to overview') }}
                 </RouterLink>
             </div>
-            <div class="col-span-5 row-span-1">
+            <div class="col-span-12 lg:col-span-5 row-span-1">
                 <InformationActivites :loading="loading" v-if="queryItem" :item="queryItem" />
             </div>
             <div class="col-span-5 row-span-1">
