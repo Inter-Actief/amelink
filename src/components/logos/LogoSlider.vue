@@ -34,7 +34,7 @@ const banners = computed(() => query.result.value?.websiteBanners?.results?.filt
     }" :modules="swiperModules" :breakpoints="breakpoints">
         <swiper-slide v-for="banner in banners" class="my-auto">
             <a :href="banner.url">
-                <img :src="imageSrc(banner.picture)" :alt="banner.name" :aria-label="banner.name" />
+                <img v-image-error :src="imageSrc(banner.picture)" :alt="banner.name" :aria-label="banner.name" />
             </a>
         </swiper-slide>
     </swiper>

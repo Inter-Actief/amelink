@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import Content from '@/components/ui/Content.vue';
 import SectionCard from '@/components/ui/SectionCard.vue';
@@ -8,6 +7,7 @@ const { $gettext } = useGettext();
 import Pagination from '@/components/ui/Pagination.vue';
 import { useQuery } from '@/composables/queries';
 import { imageSrc } from '@/composables/util';
+import CompanyPlaceholder from '@/components/placeholder/CompanyPlaceholder.vue';
 
 const limit = ref(20);
 const query = useQuery('companyCorner', { limit: limit.value });
@@ -20,12 +20,16 @@ const companies = computed(() => query.result.value?.companies?.results?.filter(
     <Content>
         <SectionCard :name="$gettext('Companies')">
             <template #content>
-                <ProgressSpinner v-if="loading" />
+                <div v-if="loading" class="grid grid-cols-5 gap-10 pb-8">
+                    <CompanyPlaceholder v-for="_ in 15" />
+                </div>
                 <div v-else class="grid grid-cols-5 gap-10 pb-4">
-                    <RouterLink :to="{ name: 'singlecompany', params: { slug: company.slug } }" v-for="company in companies">
+                    <RouterLink :to="{ name: 'singlecompany', params: { slug: company.slug } }"
+                        v-for="company in companies">
                         <Card class="text-card" style="height: 100%;">
                             <template #header v-if="company.logo">
-                                <img class="rounded-t-lg w-auto mx-auto p-12 max-h-80" :src="imageSrc(company.logo)" />
+                                <img v-image-error class="rounded-t-lg w-auto mx-auto p-12 max-h-80"
+                                    :src="imageSrc(company.logo)" />
                             </template>
                             <template #title>
                                 <div

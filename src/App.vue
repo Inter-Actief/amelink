@@ -6,7 +6,9 @@
         <Header />
         <Suspense @resolve="onSuspenseResolve" @fallback="onSuspenseFallback">
             <template #default>
-                <RouterView :key="router.currentRoute.value.fullPath" />
+                <Transition name="route-fade" mode="out-in">
+                    <RouterView :key="router.currentRoute.value.fullPath" />
+                </Transition>
             </template>
             <template #fallback>
                 <div class="suspense-loading">

@@ -11,7 +11,7 @@
                 }">
                     <div v-for="(image, index) in images" :key="index" class="slide">
                         <div class="slide-content">
-                            <img :src="image.url" :alt="'Slide ' + (index + 1)" class="slide-image" />
+                            <img v-image-error :src="image.url" :alt="'Slide ' + (index + 1)" class="slide-image" />
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@ const totalSliderWidth = ref(0)
 const mediaUrl = import.meta.env.VITE_AMELIE_MEDIA_URL
 const endGtDate = new Date()
 
-const { result, loading } = useQuery('activitiesSliderCard',{ endgt: endGtDate })
+const { result, loading } = useQuery('activitiesSliderCard', { endgt: endGtDate })
 
 watch(result, (newValue) => {
     images.value =

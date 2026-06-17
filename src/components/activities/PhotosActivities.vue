@@ -7,8 +7,8 @@
 
     <div class="grid grid-cols-3 gap-4">
         <template v-if="queryItem?.photos" v-for="(photo, index) in queryItem.photos" :key="photo">
-            <img class="format cursor-pointer" v-if="photo?.thumbMedium" :src="`${mediaUrl}${photo?.thumbMedium}`"
-                @click="showImage(index)" />
+            <img class="format cursor-pointer" v-if="photo?.thumbMedium" v-image-error
+                :src="`${mediaUrl}${photo?.thumbMedium}`" @click="showImage(index)" />
         </template>
     </div>
     <VueEasyLightbox v-if="queryItem?.photos" :visible="visible" :imgs="imagePhotosUrls()" :index="currentIndex"
@@ -30,7 +30,7 @@ import { useQuery } from '@/composables/queries';
 const { $gettext } = useGettext();
 const props = defineProps(['id'])
 
-const {result, refetch } = useQuery("photosActivities", {id: props.id}) 
+const { result, refetch } = useQuery("photosActivities", { id: props.id })
 const queryResults = computed(() => result.value?.activity)
 const queryItem = computed(() => (queryResults.value ? queryResults.value : null))
 

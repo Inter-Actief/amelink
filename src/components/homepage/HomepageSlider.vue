@@ -3,7 +3,8 @@
         autoPlay circular :transitionInterval="7000">
         <template #item="slotProps" :circular="true">
             <div class="w-full h-[30vw] container">
-                <img class="w-full" ref="gallery-image" :src="imageSrc(randomItem(slotProps.item.photos).thumbLarge)" />
+                <img class="w-full" v-image-error ref="gallery-image"
+                    :src="imageSrc(randomItem(slotProps.item.photos).thumbLarge)" />
             </div>
         </template>
         <template #caption="slotProps">

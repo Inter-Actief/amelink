@@ -1,7 +1,14 @@
 <template>
     <template v-if="loading">
-        <div v-for="i in Array(5).keys()" :key="i" class="m-5">
-            <Skeleton class="w-full h-[150px]! pb-12" />
+        <div v-for="_ in 20">
+            <div class="pb-12">
+                <TextCard loading :loadingOpts="{
+                    title: true,
+                    label: true,
+                    subtitle: true,
+                    readmore: true
+                }" />
+            </div>
         </div>
     </template>
 

@@ -27,7 +27,7 @@ watch(result, async (newResult) => {
         <ProgressSpinner v-if="loading" />
         <div v-if="!loading && !result">
             <h2>{{ $gettext("We could not find this company.") }}</h2>
-            <RouterLink :to="{ name: 'companies',  }" class="link flex flex-row">
+            <RouterLink :to="{ name: 'companies', }" class="link flex flex-row">
                 <ArrowLeft />
                 {{ $gettext('View all companies') }}
             </RouterLink>
@@ -45,7 +45,7 @@ watch(result, async (newResult) => {
             <div class="sm:col-span-1 md:col-span-3">
                 <SectionCard :name="result?.company?.name!">
                     <template #content>
-                        <img :src="imageSrc(result?.company?.logo)" class="p-12 max-h-80 mx-auto" />
+                        <img v-image-error :src="imageSrc(result?.company?.logo)" class="p-12 max-h-80 mx-auto" />
 
                         <Button as="a" :href="result?.company?.url" target="_blank">{{
                             $gettext("Website") }}
