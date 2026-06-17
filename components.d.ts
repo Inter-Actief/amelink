@@ -53,6 +53,7 @@ declare module 'vue' {
     UpcomingActivities: typeof import('./src/components/activities/UpcomingActivities.vue')['default']
     UpcomingActivitiesCards: typeof import('./src/components/activities/UpcomingActivitiesCards.vue')['default']
     UserButton: typeof import('./src/components/header/UserButton.vue')['default']
+    VideoPlaceholder: typeof import('./src/components/placeholder/VideoPlaceholder.vue')['default']
   }
   export interface ComponentCustomProperties {
     Ripple: typeof import('primevue/ripple')['default']

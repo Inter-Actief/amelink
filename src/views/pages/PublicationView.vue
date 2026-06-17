@@ -10,7 +10,7 @@ import { useQuery } from '@/composables/queries';
 import PublicationPlaceholder from '@/components/placeholder/PublicationPlaceholder.vue';
 
 const publicationUrl = (url: string) => `${import.meta.env.VITE_AMELIE_MEDIA_URL}${url}`;
-const limit = ref(100);
+const limit = ref(50);
 const type = ref<string | undefined>(undefined);
 const query = useQuery('publicationOverview', { limit: limit.value, type: type.value });
 const totalCount = computed(() => query.result.value?.publications?.totalCount);
@@ -20,6 +20,7 @@ const types = computed(() => query.result.value?.publicationTypes?.map(p => p?.t
 effect(() => {
     refetch({ limit: limit.value, type: type.value });
 });
+const selectedRows = ref(limit)
 </script>
 
 <style scoped>
@@ -49,12 +50,13 @@ effect(() => {
             </template>
             <template #content>
                 <div class="grid grid-cols-5 gap-10 pb-4">
-                    <PublicationPlaceholder v-if="loading" v-for="_ in 15" />
+                    <PublicationPlaceholder v-if="loading" v-for="_ in selectedRows" />
                     <a v-else :href="publicationUrl(item?.file!)" v-for="item in queryItems" :key="item?.id">
                         <Card class="text-card" style="height: 100%;">
                             <template #header>
+                                <!-- TODO book.svg have similar style -->
                                 <img v-image-error="'/images/placeholder/book.svg'"
-                                    class="aspect-a4 rounded-t-lg w-full" :src="item?.thumbnail!" />
+                                    class="aspect-a4 object-cover rounded-t-lg w-full" :src="item?.thumbnail!" />
                             </template>
                             <template #title>
                                 <div
@@ -71,7 +73,9 @@ effect(() => {
                     </a>
 
                 </div>
-                <Pagination v-if="!loading" v-bind="query" :limit="limit" :total-count="totalCount!"></Pagination>
+                <Pagination v-bind="query" :limit="limit" :total-count="totalCount!"
+                    @update:rows="(rows) => selectedRows = rows">
+                </Pagination>
             </template>
         </SectionCard>
     </Content>

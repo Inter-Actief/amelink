@@ -15,6 +15,10 @@ const props = defineProps<{
     refetch: RefetchFunction
 }>()
 
+const emit = defineEmits<{
+    'update:rows': [rows: number]
+}>()
+
 const limit = ref(props.limit)
 const page = ref(0);
 
@@ -27,6 +31,7 @@ const handlePage = async (e: PageState) => {
     // Watch will refetch
     page.value = e.page
     limit.value = e.rows
+    emit('update:rows', e.rows)
     props.refetch({
         limit: limit.value,
         offset: limit.value * e.page

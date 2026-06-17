@@ -6,17 +6,31 @@
             </RouterLink>
         </template>
         <template #content>
-            <!-- <ProgressSpinner v-if="loading" /> -->
-            <div class="grid gap-10 grid-cols-4 pb-10">
-                <template v-for="item in activityItems" :key="item!.id">
-                    <TextCard :image="imageSrc(item?.imageIcon!)" :title="item!.summary ?? ''"
-                        :routerLink="{ to: { name: 'singleactivities', params: { id: item!.id } } }"
-                        :subtitle="formattedData(item!.begin)"
-                        :label="{ color: item!.activityLabel.color, text: getItemValue(item!.activityLabel, 'name') as string }">
-                        <!-- {{ excerptText(getItemValue(item, 'description')) }} -->
-                    </TextCard>
-                </template>
-            </div>
+            <Transition name="fade" mode="out-in">
+                <div v-if="loading" class="grid gap-10 grid-cols-4 pb-10">
+                    <template v-for="_ in 4">
+                        <TextCard :loading="true" :loadingOpts="{
+                            image: true,
+                            title: true,
+                            readmore: true,
+                            subtitle: true,
+                            contentLines: 0,
+                            label: true
+                        }" />
+                    </template>
+                </div>
+
+                <div v-else class="grid gap-10 grid-cols-4 pb-10">
+                    <template v-for="item in activityItems" :key="item!.id">
+                        <TextCard :image="imageSrc(item?.imageIcon!)" :title="item!.summary ?? ''"
+                            :routerLink="{ to: { name: 'singleactivities', params: { id: item!.id } } }"
+                            :subtitle="formattedData(item!.begin)"
+                            :label="{ color: item!.activityLabel.color, text: getItemValue(item!.activityLabel, 'name') as string }">
+                            <!-- {{ excerptText(getItemValue(item, 'description')) }} -->
+                        </TextCard>
+                    </template>
+                </div>
+            </Transition>
             <Pagination v-if="totalCount" v-bind="query" :totalCount="totalCount!" :limit="perpage"
                 :rowsPerPage="[4]" />
         </template>
@@ -36,10 +50,10 @@ const { $gettext } = useGettext();
 const perpage = ref(4)
 
 const query = useQuery("upcomingActivities", { limit: perpage.value, beginDate: new Date() })
-const { result } = query;
+const { result, loading } = query;
 const queryResults = computed(() => result.value?.activities)
 const activityItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 const totalCount = computed(() => queryResults.value?.totalCount)
 </script>
 
-<style scoped></style>
+<style></style>

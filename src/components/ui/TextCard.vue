@@ -1,13 +1,18 @@
 <template>
     <component :is="props.routerLink ? RouterLink : 'div'" v-bind="props.routerLink ? props.routerLink : {}">
         <Card class="text-card" style="height: 100%;">
-            <template #header v-if="props.image || (props.loadingOpts?.imageUrl && props.loadingOpts.aspect)">
-                <img v-if="props.image" v-image-error class="format rounded-t-lg"
+            <template #header v-if="props.image ||
+                (props.loadingOpts?.imageUrl && props.loadingOpts.aspect) ||
+                (props.loading && props.loadingOpts.image)">
+                <img v-if="props.image" v-image-error class="object-cover format rounded-t-lg"
                     :class="`aspect-[${props.imageAspect}]`" :src="props.image" />
 
-                <img v-if="props.loadingOpts?.imageUrl" v-image-error class="format rounded-t-lg"
-                    :class="`aspect-[${props.loadingOpts.aspect}]`" :src="props.loadingOpts?.imageUrl" />
+                <div v-if="props.loading && props.loadingOpts.image">
+                    <Skeleton height="38rem" />
+                </div>
 
+                <img v-if="props.loadingOpts?.imageUrl" v-image-error class="object-cover format rounded-t-lg"
+                    :class="`aspect-[${props.loadingOpts.aspect}]`" :src="props.loadingOpts?.imageUrl" />
             </template>
             <template #title v-if="props.title || (props.loading && props.loadingOpts.title)">
                 <div class="flex flex-row items-center gap-2 w-full justify-between pt-4 pl-4">
@@ -19,7 +24,9 @@
                 <div v-if="props.loading">
                     <div class="flex flex-row items-center gap-4 w-full justify-between pt-4 pl-4">
                         <Skeleton height="4rem" width="60rem" />
-                        <Skeleton v-if="props.loadingOpts.label" height="4rem" width="10rem" />
+                        <div>
+                            <Skeleton v-if="props.loadingOpts.label" height="4rem" width="8rem" />
+                        </div>
                     </div>
                 </div>
             </template>
@@ -72,6 +79,7 @@ interface Props {
     loading?: boolean,
     loadingOpts?: {
         label?: boolean,
+        image?: boolean,
         imageUrl?: string,
         aspect?: string,
         title?: boolean,
@@ -96,6 +104,7 @@ const props = withDefaults(defineProps<Props>(), {
     imageAspect: '5/3',
     loading: false,
     loadingOpts: () => ({
+        image: false,
         label: false,
         title: true,
         subtitle: true,

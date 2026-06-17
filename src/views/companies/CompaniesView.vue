@@ -14,6 +14,7 @@ const query = useQuery('companyCorner', { limit: limit.value });
 const { loading } = query;
 const totalCount = computed(() => query.result.value?.companies?.totalCount ?? 0);
 const companies = computed(() => query.result.value?.companies?.results?.filter(c => !!c) ?? []);
+const selectedRows = ref(limit)
 </script>
 
 <template>
@@ -21,7 +22,7 @@ const companies = computed(() => query.result.value?.companies?.results?.filter(
         <SectionCard :name="$gettext('Companies')">
             <template #content>
                 <div v-if="loading" class="grid grid-cols-5 gap-10 pb-8">
-                    <CompanyPlaceholder v-for="_ in 15" />
+                    <CompanyPlaceholder v-for="_ in selectedRows" />
                 </div>
                 <div v-else class="grid grid-cols-5 gap-10 pb-4">
                     <RouterLink :to="{ name: 'singlecompany', params: { slug: company.slug } }"
@@ -45,7 +46,9 @@ const companies = computed(() => query.result.value?.companies?.results?.filter(
                         </Card>
                     </RouterLink>
                 </div>
-                <Pagination v-bind="query" :limit="limit" :total-count="totalCount!"></Pagination>
+                <Pagination v-bind="query" :limit="limit" :total-count="totalCount!"
+                    @update:rows="(rows) => selectedRows = rows">
+                </Pagination>
             </template>
         </SectionCard>
     </Content>
