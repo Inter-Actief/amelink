@@ -5,9 +5,9 @@
 
     <h1>{{ title }}</h1>
 
-    <div class="grid grid-cols-3 gap-4">
+    <div class="grid grid-cards-wide gap-4">
         <template v-if="queryItem?.photos" v-for="(photo, index) in queryItem.photos" :key="photo">
-            <img class="format cursor-pointer" v-if="photo?.thumbMedium" v-image-error
+            <img class="format aspect-square object-cover cursor-pointer" v-if="photo?.thumbMedium" v-image-error
                 :src="`${mediaUrl}${photo?.thumbMedium}`" @click="showImage(index)" />
         </template>
     </div>

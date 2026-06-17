@@ -21,10 +21,10 @@ const selectedRows = ref(limit)
     <Content>
         <SectionCard :name="$gettext('Companies')">
             <template #content>
-                <div v-if="loading" class="grid grid-cols-5 gap-10 pb-8">
+                <div v-if="loading" class="grid grid-cards-wide gap-10 pb-8">
                     <CompanyPlaceholder v-for="_ in selectedRows" />
                 </div>
-                <div v-else class="grid grid-cols-5 gap-10 pb-4">
+                <div v-else class="grid grid-cards-wide gap-10 pb-4">
                     <RouterLink :to="{ name: 'singlecompany', params: { slug: company.slug } }"
                         v-for="company in companies">
                         <Card class="text-card" style="height: 100%;">

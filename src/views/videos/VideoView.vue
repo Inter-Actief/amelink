@@ -32,8 +32,8 @@ watch(result, async (newResult) => {
                 {{ $gettext('View all videos') }}
             </RouterLink>
         </div>
-        <div v-else class="grid sm:grid-cols-1 md:grid-cols-8 gap-12">
-            <div class="sm:col-span1 md:col-span-5">
+        <div v-else class="grid grid-cols-1 lg:grid-cols-8 gap-12">
+            <div class="col-span1 lg:col-span-4 xl:col-span-5">
                 <SectionCard :name="result?.video?.title!">
                     <template #content>
                         <iframe class="w-full aspect-video" :src="result?.video?.embedUrl!" frameborder="0"
@@ -41,7 +41,7 @@ watch(result, async (newResult) => {
                     </template>
                 </SectionCard>
             </div>
-            <div class="sm:col-span-1 md:col-span-3">
+            <div class="col-span-1 lg:col-span-4 xl:col-span-3">
                 <SectionCard :name="$gettext('Description')">
                     <template #info>
                     </template>
