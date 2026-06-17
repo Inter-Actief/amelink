@@ -7,6 +7,7 @@ import { formattedDataShort, getItemValue } from '@/functions/functions.ts'
 import { useGettext } from 'vue3-gettext'
 import { Camera } from '@lucide/vue';
 import { useQuery } from '@/composables/queries';
+import PastActivitiesPlaceholder from '../placeholder/PastActivitiesPlaceholder.vue';
 
 const { $gettext } = useGettext();
 const limit = ref(20);
@@ -53,11 +54,11 @@ const onPage = async (event: DataTablePageEvent) => {
         <InputText v-model="searchQuery" :placeholder="$gettext('Zoek activiteiten')" />
     </div>
 
-    <ProgressSpinner v-if="loading && loadCounter == 0" />
-<!-- v-model:filters="filters"  -->
-    <DataTable filterDisplay="menu" :loading="loading" size="large" stripedRows
-        v-if="queryItems" :value="queryItems" paginator :rows="limit" :totalRecords="count!" lazy @page="onPage"
-        :rowsPerPageOptions="[10, 20, 30, 50, 100]">
+    <!-- Past activites placeholder only show on first load, changing pagination activates dataTable loading -->
+    <PastActivitiesPlaceholder v-if="loading && !queryItems" />
+    <!-- v-model:filters="filters"  -->
+    <DataTable filterDisplay="menu" :loading="loading" size="large" stripedRows v-if="queryItems" :value="queryItems"
+        paginator :rows="limit" :totalRecords="count!" lazy @page="onPage" :rowsPerPageOptions="[10, 20, 30, 50, 100]">
 
         <Column field="startDate" :header="$gettext('Date')" style="width: 15%;" class="font-mono font-bold">
         </Column>

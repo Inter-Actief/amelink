@@ -4,6 +4,7 @@ import HomepageSlider from '@/components/homepage/HomepageSlider.vue'
 import HomepageCards from '@/components/homepage/HomepageCards.vue'
 import UpcomingActivitiesCards from '@/components/activities/UpcomingActivitiesCards.vue';
 import Content from '@/components/ui/Content.vue';
+
 </script>
 
 <template>

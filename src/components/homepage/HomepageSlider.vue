@@ -3,7 +3,8 @@
         autoPlay circular :transitionInterval="7000">
         <template #item="slotProps" :circular="true">
             <div class="w-full h-[30vw] container">
-                <img class="w-full" ref="gallery-image" :src="imageSrc(randomItem(slotProps.item.photos).thumbLarge)" />
+                <img class="w-full" v-image-error ref="gallery-image"
+                    :src="imageSrc(randomItem(slotProps.item.photos).thumbLarge)" />
             </div>
         </template>
         <template #caption="slotProps">
@@ -24,7 +25,7 @@ import { formattedData, excerptText } from '@/functions/functions.ts'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-import { useQuery } from '@/composables/queries';
+import { useQuery, useQueryAsync } from '@/composables/queries';
 
 const route = useRoute()
 const limit = ref(50)
@@ -41,7 +42,6 @@ function resetAnimation() {
 }
 
 const queryResults = computed(() => {
-    console.log(result.value?.activities?.results)
     return (
         result.value?.activities?.results.filter((x) => (x?.photos ?? []).length > 0) ?? [
             {

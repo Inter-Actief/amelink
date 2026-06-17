@@ -6,25 +6,28 @@ import SingleNews from '@/views/news/SingleNews.vue'
 import SingleActivities from '@/views/activities/SingleActivites.vue'
 import ActivitiesPhotosView from '@/views/activities/ActivitiesPhotosView.vue'
 import SingleCommittee from '@/views/committees/SingleCommitteeView.vue'
+import { useLoadingStore } from '@/stores/loadingStore'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition
+        } else {
+            return { top: 0, behavior: 'smooth' }
+        }
+    },
     routes: [
-        {
-            path: "/:path(.*)*",
-            name: "notfound",
-            component: () => import('@/views/404.vue')
-        },
         {
             path: '/',
             name: 'home',
-            component: () => HomePage,
+            component: HomePage,
             props: true,
         },
         {
             path: '/about/:id/:slug',
             name: 'page',
-            component: () => Page,
+            component: Page,
             props: true,
         },
         {
@@ -137,7 +140,28 @@ const router = createRouter({
                 }
             },
         },
+        {
+            path: '/:path(.*)*',
+            name: 'notfound',
+            component: () => import('@/views/404.vue'),
+        },
     ],
+})
+
+// Loading bar - reset on route completion to avoid stale state
+router.beforeEach(() => {
+    // Don't reset here - it interferes with queries in flight
+})
+
+router.afterEach(() => {
+    const loading = useLoadingStore()
+    // After route completes, reset any orphaned state after a small delay
+    setTimeout(() => {
+        if (loading.activeRequests > 0) {
+            console.warn(`Stale loading state detected: ${loading.activeRequests} active requests`)
+            loading.reset()
+        }
+    }, 3000) // 3 second timeout for all queries to complete
 })
 
 export default router

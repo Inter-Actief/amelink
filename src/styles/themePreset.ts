@@ -829,5 +829,13 @@ export const iaPreset = definePreset(Lara, {
                 },
             },
         },
+        progressbar: {
+            root: {
+                background: '{primary.500}',
+            },
+            value: {
+                background: '{primary.200}',
+            },
+        },
     },
 })
