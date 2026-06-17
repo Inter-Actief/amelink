@@ -42,7 +42,6 @@ function resetAnimation() {
 }
 
 const queryResults = computed(() => {
-    console.log(result.value?.activities?.results)
     return (
         result.value?.activities?.results.filter((x) => (x?.photos ?? []).length > 0) ?? [
             {

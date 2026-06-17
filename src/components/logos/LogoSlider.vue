@@ -24,11 +24,17 @@ const breakpoints = {
 }
 
 const query = useQuery("frontPageBanners", {});
+const { loading } = query;
 const banners = computed(() => query.result.value?.websiteBanners?.results?.filter(b => !!b) ?? []);
 </script>
 
 <template>
-    <swiper :slidesPerView="1" :spaceBetween="30" :loop="true" class="logoswiper" :autoplay="{
+
+    <div v-if="loading" class="flex flex-row gap-12">
+        <skeleton height="15rem" v-for="_ in 4" />
+    </div>
+
+    <swiper v-if="!loading" :slidesPerView="1" :spaceBetween="30" :loop="true" class="logoswiper" :autoplay="{
         delay: 4000,
         disableOnInteraction: false,
     }" :modules="swiperModules" :breakpoints="breakpoints">
@@ -55,7 +61,7 @@ const banners = computed(() => query.result.value?.websiteBanners?.results?.filt
     align-items: center;
 }
 
-.logoswiper .swiper-slide img {
+.logoswiper .swiper-slide a {
     display: block;
     margin: 0 auto;
 }

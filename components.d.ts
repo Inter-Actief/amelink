@@ -24,6 +24,7 @@ declare module 'vue' {
     HomepageCards: typeof import('./src/components/homepage/HomepageCards.vue')['default']
     HomepageSlider: typeof import('./src/components/homepage/HomepageSlider.vue')['default']
     InformationActivites: typeof import('./src/components/activities/InformationActivites.vue')['default']
+    InformationActivitiesPlaceholder: typeof import('./src/components/placeholder/InformationActivitiesPlaceholder.vue')['default']
     InputText: typeof import('primevue/inputtext')['default']
     LanguageSwitcher: typeof import('./src/components/ui/LanguageSwitcher.vue')['default']
     LatestActivities: typeof import('./src/components/activities/LatestActivities.vue')['default']

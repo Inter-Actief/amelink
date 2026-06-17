@@ -45,31 +45,6 @@ themeStore.initialiseTheme();
 
 const loading = useLoadingStore();
 const { isLoading } = storeToRefs(loading);
-const suspenseTimeout = ref<NodeJS.Timeout | null>(null);
-
-const onSuspenseFallback = () => {
-    console.log('Suspense fallback triggered');
-    // Set a timeout to force render if Suspense takes too long
-    suspenseTimeout.value = setTimeout(() => {
-        console.warn('Suspense took too long, forcing render');
-        loading.stop();
-    }, 10000); // 10 second timeout
-};
-
-const onSuspenseResolve = () => {
-    if (suspenseTimeout.value) {
-        clearTimeout(suspenseTimeout.value);
-        suspenseTimeout.value = null;
-    }
-    console.log('Suspense resolved for route:', router.currentRoute.value.name);
-};
-
-watch(() => router.currentRoute.value.fullPath, () => {
-    if (suspenseTimeout.value) {
-        clearTimeout(suspenseTimeout.value);
-        suspenseTimeout.value = null;
-    }
-});
 
 </script>
 
