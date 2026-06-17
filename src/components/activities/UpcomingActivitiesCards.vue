@@ -35,7 +35,7 @@ import { imageSrc } from '@/composables/util'
 const { $gettext } = useGettext();
 const perpage = ref(4)
 
-const query = await useQueryAsync("upcomingActivities", { limit: perpage.value, beginDate: new Date() })
+const query = useQuery("upcomingActivities", { limit: perpage.value, beginDate: new Date() })
 const { result } = query;
 const queryResults = computed(() => result.value?.activities)
 const activityItems = computed(() => (queryResults.value ? queryResults.value.results : null))

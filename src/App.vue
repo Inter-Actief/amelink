@@ -1,9 +1,13 @@
 <template>
+    <ProgressBar v-if="isLoading" mode="indeterminate"
+        style="height: 6px; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999" />
     <div>
         <Toast />
         <Header />
-        <Suspense>
-            <RouterView />
+        <Suspense @resolve="onSuspenseResolve" @fallback="onSuspenseFallback">
+            <template #default>
+                <RouterView :key="router.currentRoute.value.fullPath" />
+            </template>
             <template #fallback>
                 <div class="suspense-loading">
                     <div class="loading-spinner"></div>
@@ -18,6 +22,7 @@
 </template>
 
 <script setup lang="ts">
+import ProgressBar from 'primevue/progressbar';
 import { RouterView, useRouter } from 'vue-router'
 import Header from '@/components/header/Header.vue'
 import Footer from '@/components/footer/Footer.vue'
@@ -26,12 +31,44 @@ import { useLanguageStore } from './stores/languageStore';
 import { useThemeStore } from './stores/themeStore';
 import LogoSlider from './components/logos/LogoSlider.vue';
 import Content from './components/ui/Content.vue';
+import { useLoadingStore } from './stores/loadingStore.ts';
+import { storeToRefs } from 'pinia';
+import { ref, watch } from 'vue';
 
 const languageStore = useLanguageStore();
 const themeStore = useThemeStore();
 const router = useRouter();
 languageStore.loadLanguage();
 themeStore.initialiseTheme();
+
+const loading = useLoadingStore();
+const { isLoading } = storeToRefs(loading);
+const suspenseTimeout = ref<NodeJS.Timeout | null>(null);
+
+const onSuspenseFallback = () => {
+    console.log('Suspense fallback triggered');
+    // Set a timeout to force render if Suspense takes too long
+    suspenseTimeout.value = setTimeout(() => {
+        console.warn('Suspense took too long, forcing render');
+        loading.stop();
+    }, 10000); // 10 second timeout
+};
+
+const onSuspenseResolve = () => {
+    if (suspenseTimeout.value) {
+        clearTimeout(suspenseTimeout.value);
+        suspenseTimeout.value = null;
+    }
+    console.log('Suspense resolved for route:', router.currentRoute.value.name);
+};
+
+watch(() => router.currentRoute.value.fullPath, () => {
+    if (suspenseTimeout.value) {
+        clearTimeout(suspenseTimeout.value);
+        suspenseTimeout.value = null;
+    }
+});
+
 </script>
 
 <style>
@@ -73,6 +110,7 @@ body {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }

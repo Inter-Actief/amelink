@@ -24,7 +24,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { formattedData, excerptText, getItemValue } from '@/functions/functions.ts'
-import ProgressSpinner from 'primevue/progressspinner';
 import TextCard from '../ui/TextCard.vue';
 import { useQuery } from '@/composables/queries';
 import type Skeleton from 'primevue/skeleton';

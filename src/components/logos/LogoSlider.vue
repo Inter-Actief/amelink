@@ -23,7 +23,7 @@ const breakpoints = {
     },
 }
 
-const query = await useQueryAsync("frontPageBanners", {});
+const query = useQuery("frontPageBanners", {});
 const banners = computed(() => query.result.value?.websiteBanners?.results?.filter(b => !!b) ?? []);
 </script>
 

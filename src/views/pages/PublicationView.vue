@@ -47,8 +47,7 @@ effect(() => {
                 </Select>
             </template>
             <template #content>
-                <ProgressSpinner v-if="loading" />
-                <div v-else class="grid grid-cols-5 gap-10 pb-4">
+                <div v-if="!loading" class="grid grid-cols-5 gap-10 pb-4">
                     <!-- Using custom card (not TextCard) since we want a vertical image -->
                     <a :href="publicationUrl(item?.file!)" v-for="item in queryItems" :key="item?.id">
                         <Card class="text-card" style="height: 100%;">
@@ -58,7 +57,7 @@ effect(() => {
                             <template #title>
                                 <div
                                     class="flex flex-row items-center w-full justify-between pt-4 pl-4 expand-link link">
-                                    <span class="!text-4xl !font-semibold">{{ item?.name }}</span>
+                                    <span class="text-4xl! font-semibold!">{{ item?.name }}</span>
                                 </div>
                             </template>
                             <template #subtitle>
