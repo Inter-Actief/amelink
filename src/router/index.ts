@@ -149,7 +149,15 @@ const router = createRouter({
 })
 
 // Loading bar - reset on route completion to avoid stale state
-router.beforeEach(() => {
+router.beforeEach((to, from, next) => {
+    // Check if need to redirect to old.ia if loggedin
+    if (import.meta.env.VITE_REDIRECT_LOGGEDIN) {
+        const oidcStore = useOidcStore()
+        if (oidcStore.isAuthenticated) {
+            next(import.meta.env.VITE_REDIRECT_LOGGEDIN)
+            return
+        }
+    }
     // Don't reset here - it interferes with queries in flight
 })
 
