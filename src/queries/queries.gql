@@ -62,6 +62,10 @@ query PhotosActivities($id: ID) {
       thumbMediumHeight
       thumbMediumWidth
       thumbLarge
+      created
+      owner {
+        name
+      }
     }
   }
 }
