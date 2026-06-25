@@ -2,9 +2,9 @@
     <div v-if="props.lines == 1" class="flex flex-col">
         <Skeleton height="1.5rem" />
     </div>
-    <div v-else-if="props.lines > 1" :class="`gap-${props.gap}`">
-        <Skeleton v-for="_ in (props.lines - 1)" height="1.5rem" />
-        <Skeleton height="1.5rem" width="30%" />
+    <div v-else-if="props.lines > 1" :class="`gap-${props.gap} flex flex-col`">
+        <Skeleton v-for="_ in (props.lines - 1)" height="1.6rem" />
+        <Skeleton height="1.6rem" width="30%" />
     </div>
 </template>
 

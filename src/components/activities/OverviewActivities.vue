@@ -15,22 +15,20 @@
     <div v-if="!loading && newsItems" v-for="item in newsItems" :key="item?.id">
         <template v-if="item">
             <div class="pb-12">
-                <TextCard :title="getItemValue(item, 'summary')" :subtitle="formattedData(item.begin)"
+                <TextCard :title="item!.summary!" :subtitle="formattedData(item.begin)"
                     :routerLink="{ to: { name: 'singleactivities', params: { id: item.id } } }"
-                    :label="{ color: item.activityLabel.color, text: getItemValue(item.activityLabel, 'name') as string }">
-                    {{ excerptText(getItemValue(item, 'description')) }}
+                    :label="{ color: item!.activityLabel.color, text: item!.activityLabel!.name! }">
+                    {{ excerptText(item.description!) }}
                 </TextCard>
             </div>
         </template>
     </div>
-
-    <!-- <Pagination :totalItems="totalCount" :itemsPerPage="perpage" :page="page" @next="handleNextPage"
-        @prev="handlePrevPage" @select="handleSelectPage" /> -->
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { formattedData, excerptText, getItemValue } from '@/functions/functions.ts'
+import { formattedData, excerptText } from '@/functions/functions.ts'
+import ProgressSpinner from 'primevue/progressspinner';
 import TextCard from '../ui/TextCard.vue';
 import { useQuery } from '@/composables/queries';
 import type Skeleton from 'primevue/skeleton';

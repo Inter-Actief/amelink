@@ -3,7 +3,7 @@
         <template v-if="item">
             <div>
                 <Skeleton v-if="loading" height="3rem" width="80%" />
-                <h1 v-else>{{ getItemValue(item, 'title') }}</h1>
+                <h1 v-else>{{ item.title }}</h1>
             </div>
 
             <div class="details pb-8 text-gray-500">
@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { formattedData, getItemValue, markedText } from '@/functions/functions.ts'
+import { formattedData, markedText } from '@/functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
 import { useQuery } from '@/composables/queries';
@@ -50,7 +50,7 @@ const processedContent = ref<string>('');
 // Process the `content` field when `item` changes
 watch(item, async (newItem) => {
     if (newItem) {
-        processedContent.value = await markedText(getItemValue(newItem, 'content'));
+        processedContent.value = await markedText(newItem!.content!);
     }
 }, { immediate: true });
 </script>

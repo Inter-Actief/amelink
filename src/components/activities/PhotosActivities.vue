@@ -4,11 +4,22 @@
     </RouterLink>
 
     <h1>{{ title }}</h1>
+    <template v-if="photographers.length == 1">
+        <p>{{ $gettext('Pictures by') }} {{ photographers[0]! }}</p>
+    </template>
+    <template v-else-if="photographers.length > 1">
+        <p>{{ $gettext('Pictures by') }} {{ photographers.slice(0, photographers.length - 1).join(", ") }} & {{ photographers[photographers.length - 1] }}</p>
+    </template>
 
     <div class="grid grid-cards-wide gap-4">
-        <template v-if="queryItem?.photos" v-for="(photo, index) in queryItem.photos" :key="photo">
+        <template v-if="queryItem?.photos && !loading" v-for="(photo, index) in queryItem.photos" :key="photo">
             <img class="format aspect-square object-cover cursor-pointer" v-if="photo?.thumbMedium" v-image-error
                 :src="`${mediaUrl}${photo?.thumbMedium}`" @click="showImage(index)" />
+        </template>
+        <template v-if="loading" v-for="_ in 5 * 4">
+            <div class="format aspect-square">
+                <Skeleton height="100%" />
+            </div>
         </template>
     </div>
     <VueEasyLightbox v-if="queryItem?.photos" :visible="visible" :imgs="imagePhotosUrls()" :index="currentIndex"
@@ -21,33 +32,43 @@
 
 <script setup lang="ts">
 import { ArrowLeft } from '@lucide/vue';
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import VueEasyLightbox from 'vue-easy-lightbox'
 import { useGettext } from 'vue3-gettext'
-import { getItemValue } from '@/functions/functions'
 import { useQuery } from '@/composables/queries';
+import Skeleton from 'primevue/skeleton';
 
 const { $gettext } = useGettext();
 const props = defineProps(['id'])
 
-const { result, refetch } = useQuery("photosActivities", { id: props.id })
+const { result, refetch, loading } = useQuery("photosActivities", { id: props.id })
 const queryResults = computed(() => result.value?.activity)
 const queryItem = computed(() => (queryResults.value ? queryResults.value : null))
+const title = computed(() => queryResults.value?.summary)
 
-const title = computed(() => {
-    return getItemValue(queryResults.value, 'summary');
-})
+type EasyLightboxImage = {
+    src: string, 
+    title?: string, 
+    alt?: string 
+}
 
 const visible = ref(false)
 const currentIndex = ref(0)
-const imageUrls = ref<string[]>([])
+const imageUrls = ref<EasyLightboxImage[]>([])
 const mediaUrl = import.meta.env.VITE_AMELIE_MEDIA_URL
+
+const photographers = computed(() => {
+    return Array.from(new Set(queryItem.value?.photos.map(x => x.owner?.name)))
+})
 
 const imagePhotosUrls = () => {
     if (queryResults.value?.photos) {
-        imageUrls.value = queryResults.value.photos.map(
-            photo => `${mediaUrl}${photo.thumbLarge}`,
-        );
+        imageUrls.value = queryResults.value.photos.map(photo => {
+            return {
+                src: `${mediaUrl}${photo.thumbLarge}`,
+                title: `${$gettext('Photo by ')}${photo.owner?.name ?? ''}. ${$gettext('If you want to have this photo removed, please contact the board')}`,
+            }
+        });
     }
     return imageUrls.value
 }

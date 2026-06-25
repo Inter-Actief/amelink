@@ -12,7 +12,7 @@
                 <div class="col-span-3 font-bold">{{ $gettext('What') }}</div>
                 <div class="col-span-9">
                     <Skeleton v-if="loading" width="60%" height="1.5rem"></Skeleton>
-                    <span v-else>{{ getItemValue(props.item, 'summary') }}</span>
+                    <span v-else>{{ props.item.summary }}</span>
                 </div>
             </div>
             <div class="grid grid-cols-12 gap-4">
@@ -60,7 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import { formattedData, formattedTime, getItemValue } from '@/functions/functions'
+import { formattedData, formattedTime } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext';
 import TextCard from '../ui/TextCard.vue';
 import Skeleton from 'primevue/skeleton';
