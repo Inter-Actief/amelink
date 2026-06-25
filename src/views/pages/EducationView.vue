@@ -1,7 +1,7 @@
 <template>
     <Content>
-        <div class="flex flex-row gap-12 justify-start items-start">
-            <SectionCard :name="$gettext('Information')" class="basis-1/3 sticky top-12">
+        <div class="flex flex-col lg:flex-row gap-12 justify-start items-start">
+            <SectionCard :name="$gettext('Information')" class="w-full lg:basis-1/3 lg:sticky top-12">
                 <template #content>
                     <template v-for="item in queryItems" :key="item?.id">
                         <div class="link" @click="scrolltop(`item_${item?.id}`)">
@@ -10,7 +10,7 @@
                     </template>
                 </template>
             </SectionCard>
-            <div class="basis-2/3 flex flex-col gap-12">
+            <div class="lg:basis-2/3 flex flex-col gap-12">
                 <!-- All items -->
                 <div v-for="item in queryItems" :key="item?.id" :id="`item_${item?.id}`">
                     <Card class="p-4">

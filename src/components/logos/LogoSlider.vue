@@ -4,7 +4,7 @@ import { Autoplay } from 'swiper/modules';
 const swiperModules = [Autoplay];
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
-import { useQuery } from '@/composables/queries';
+import { useQuery, useQueryAsync } from '@/composables/queries';
 import { imageSrc } from '@/composables/util';
 import { computed } from 'vue';
 
@@ -24,17 +24,23 @@ const breakpoints = {
 }
 
 const query = useQuery("frontPageBanners", {});
+const { loading } = query;
 const banners = computed(() => query.result.value?.websiteBanners?.results?.filter(b => !!b) ?? []);
 </script>
 
 <template>
-    <swiper :slidesPerView="1" :spaceBetween="30" :loop="true" class="logoswiper" :autoplay="{
+
+    <div v-if="loading" class="flex flex-row gap-12">
+        <skeleton height="15rem" v-for="_ in 4" />
+    </div>
+
+    <swiper v-if="!loading" :slidesPerView="1" :spaceBetween="30" :loop="true" class="logoswiper" :autoplay="{
         delay: 4000,
         disableOnInteraction: false,
     }" :modules="swiperModules" :breakpoints="breakpoints">
         <swiper-slide v-for="banner in banners" class="my-auto">
             <a :href="banner.url">
-                <img :src="imageSrc(banner.picture)" :alt="banner.name" :aria-label="banner.name" />
+                <img v-image-error :src="imageSrc(banner.picture)" :alt="banner.name" :aria-label="banner.name" />
             </a>
         </swiper-slide>
     </swiper>
@@ -55,7 +61,7 @@ const banners = computed(() => query.result.value?.websiteBanners?.results?.filt
     align-items: center;
 }
 
-.logoswiper .swiper-slide img {
+.logoswiper .swiper-slide a {
     display: block;
     margin: 0 auto;
 }

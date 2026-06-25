@@ -11,6 +11,7 @@ import App from '@/App.vue'
 import router from './router'
 import * as Sentry from '@sentry/vue'
 import { apolloClient } from '@/apollo'
+import { vImageError } from '@/directives/vImageError'
 
 export { apolloClient }
 
@@ -28,6 +29,9 @@ app.use(createPinia())
 app.use(router)
 app.use(gettext)
 app.use(ToastService)
+
+// Register global directives
+app.directive('image-error', vImageError)
 app.use(PrimeVue, {
     theme: {
         preset: iaPreset,
@@ -39,7 +43,7 @@ app.use(PrimeVue, {
             cssLayer: {
                 name: 'primevue',
                 order: 'theme, base, primevue, components, utilities',
-            }
+            },
         },
     },
 })

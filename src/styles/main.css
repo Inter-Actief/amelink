@@ -55,3 +55,17 @@
     background-size: 100% 0.2rem;
   }
 }
+
+/* Route Transitions */
+.route-fade-enter-active,
+.route-fade-leave-active {
+  transition: opacity 0.05s ease;
+}
+
+.route-fade-enter-from {
+  opacity: 0;
+}
+
+.route-fade-leave-to {
+  opacity: 0;
+}

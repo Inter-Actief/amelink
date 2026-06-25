@@ -1,5 +1,17 @@
 <template>
-    <ProgressSpinner v-if="loading" />
+    <template v-if="loading">
+        <div v-for="_ in 20">
+            <div class="pb-12">
+                <TextCard loading :loadingOpts="{
+                    title: true,
+                    label: true,
+                    subtitle: true,
+                    readmore: true
+                }" />
+            </div>
+        </div>
+    </template>
+
     <div v-if="!loading && newsItems" v-for="item in newsItems" :key="item?.id">
         <template v-if="item">
             <div class="pb-12">
@@ -19,6 +31,7 @@ import { formattedData, excerptText } from '@/functions/functions.ts'
 import ProgressSpinner from 'primevue/progressspinner';
 import TextCard from '../ui/TextCard.vue';
 import { useQuery } from '@/composables/queries';
+import type Skeleton from 'primevue/skeleton';
 
 const perpage = ref(10)
 
