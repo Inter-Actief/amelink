@@ -21,10 +21,9 @@
 
 <script setup lang="ts">
 import { ArrowLeft } from '@lucide/vue';
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import VueEasyLightbox from 'vue-easy-lightbox'
 import { useGettext } from 'vue3-gettext'
-import { getItemValue } from '@/functions/functions'
 import { useQuery } from '@/composables/queries';
 
 const { $gettext } = useGettext();
@@ -33,10 +32,7 @@ const props = defineProps(['id'])
 const { result, refetch } = useQuery("photosActivities", { id: props.id })
 const queryResults = computed(() => result.value?.activity)
 const queryItem = computed(() => (queryResults.value ? queryResults.value : null))
-
-const title = computed(() => {
-    return getItemValue(queryResults.value, 'summary');
-})
+const title = computed(() => queryResults.value?.summary)
 
 const visible = ref(false)
 const currentIndex = ref(0)

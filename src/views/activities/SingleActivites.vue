@@ -3,7 +3,7 @@
         <div class="grid gap-12 grid-cols-12 pt-12 grid-rows-2">
             <div class="col-span-12 lg:col-span-7 row-span-2">
                 <Skeleton height="4rem" v-if="loading" />
-                <div class="text-5xl font-bold" v-if="queryItem">{{ getItemValue(queryItem, 'summary') }}</div>
+                <div class="text-5xl font-bold" v-if="queryItem">{{ queryItem.summary! }}</div>
 
                 <div class="pb-10">
                     <Skeleton height="2rem" v-if="loading" />
@@ -42,7 +42,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { formattedData, getItemValue, markedText } from '@/functions/functions'
+import { formattedData, markedText } from '@/functions/functions'
 import InformationActivites from '@/components/activities/InformationActivites.vue'
 import { useGettext } from 'vue3-gettext'
 import { ArrowRight, ArrowLeft } from '@lucide/vue';
@@ -62,7 +62,7 @@ const processedDescription = ref<string>('');
 // Watch for changes in `queryItem` and process the description asynchronously
 watch(queryItem, async (newItem) => {
     if (newItem) {
-        processedDescription.value = await markedText(getItemValue(newItem, 'description'));
+        processedDescription.value = await markedText(newItem!.description!);
     }
 }, { immediate: true });
 </script>

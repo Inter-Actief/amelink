@@ -25,7 +25,7 @@
                         <TextCard :image="imageSrc(item?.imageIcon!)" :title="item!.summary ?? ''"
                             :routerLink="{ to: { name: 'singleactivities', params: { id: item!.id } } }"
                             :subtitle="formattedData(item!.begin)"
-                            :label="{ color: item!.activityLabel.color, text: getItemValue(item!.activityLabel, 'name') as string }">
+                            :label="{ color: item!.activityLabel.color, text: item!.activityLabel!.name! }">
                             <!-- {{ excerptText(getItemValue(item, 'description')) }} -->
                         </TextCard>
                     </template>
