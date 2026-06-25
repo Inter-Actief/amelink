@@ -43,7 +43,7 @@ import { useGettext } from 'vue3-gettext'
 import SectionCard from '../ui/SectionCard.vue'
 import Pagination from '../ui/Pagination.vue'
 import TextCard from '../ui/TextCard.vue'
-import { formattedData, getItemValue } from '@/functions/functions.ts'
+import { formattedData } from '@/functions/functions.ts'
 import { useQuery, useQueryAsync } from '@/composables/queries'
 import { imageSrc } from '@/composables/util'
 const { $gettext } = useGettext();
