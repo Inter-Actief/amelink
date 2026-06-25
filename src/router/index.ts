@@ -148,9 +148,24 @@ const router = createRouter({
     ],
 })
 
-// Loading bar - reset on route completion to avoid stale state
-router.beforeEach(() => {
-    // Don't reset here - it interferes with queries in flight
+router.beforeEach((to, from, next) => {
+    // skip auth checks on callback route to avoid interfering with OIDC state
+    if (to.name === 'authcallback') {
+        next()
+        return
+    }
+
+    // Check if need to redirect to old.ia if loggedin
+    if (import.meta.env.VITE_REDIRECT_LOGGEDIN) {
+        const oidcStore = useOidcStore()
+        if (oidcStore.isAuthenticated) {
+            window.location.href =
+                import.meta.env.VITE_REDIRECT_LOGGEDIN + to.fullPath.toLocaleLowerCase()
+            return
+        }
+    }
+
+    next()
 })
 
 router.afterEach(() => {
