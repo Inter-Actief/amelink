@@ -159,7 +159,8 @@ router.beforeEach((to, from, next) => {
     if (import.meta.env.VITE_REDIRECT_LOGGEDIN) {
         const oidcStore = useOidcStore()
         if (oidcStore.isAuthenticated) {
-            window.location.href = import.meta.env.VITE_REDIRECT_LOGGEDIN + to.fullPath
+            window.location.href =
+                import.meta.env.VITE_REDIRECT_LOGGEDIN + to.fullPath.toLocaleLowerCase()
             return
         }
     }
