@@ -4,7 +4,7 @@
         <Card :style="{ overflow: 'hidden', background: bg, height: props.maxHeight ? '100%' : undefined }">
             <template #header v-if="props.name || props.loading">
                 <div class="bg-primary w-full  p-8 mb-0 flex flex-row justify-between">
-                    <div v-if="props.name" class="font-extrabold text-4xl my-auto text-primary-contrast">
+                    <div v-if="props.name && !loading" class="font-extrabold text-4xl my-auto text-primary-contrast">
                         {{ props.name }}
                     </div>
                     <Skeleton v-if="props.loading" height="2rem" width="35%" />
