@@ -1,29 +1,36 @@
 <template>
     <Content>
-        <ProgressSpinner v-if="loading" />
-        <template v-if="!loading">
-            <h1 class="pb-4">{{ $gettext("Our committees") }}</h1>
-            <div class="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12">
-                <template v-for="committeeCategory in categories" :key="committeeCategory.category">
-                    <SectionCard :name="committeeCategory.category">
+        <h1 class="pb-4">{{ $gettext("Our committees") }}</h1>
+        <div class="sm:columns-sm md:columns-md lg:columns-lg xl:columns-xl gap-8">
+            <div v-if="!loading" v-for="committeeCategory in categories" :key="committeeCategory.category" class="pb-8">
+                <SectionCard :name="committeeCategory.category">
+                    <template #content>
+                        <RouterLink v-for="committee in committeeCategory.committees" class="link flex flex-row"
+                            :to="{ name: 'singlecommittee', params: { id: committee.id, slug: committee.slug } }">
+                            {{ committee!.name }}
+                        </RouterLink>
+                    </template>
+                </SectionCard>
+            </div>
+            <div v-else>
+                <div v-for="linesAmount in loadingLinesAmount" class="pb-8">
+                    <SectionCard :loading="true">
                         <template #content>
-                            <RouterLink v-for="committee in committeeCategory.committees" class="link flex flex-row"
-                                :to="{ name: 'singlecommittee', params: { id: committee.id, slug: committee.slug } }">
-                                {{ committee!.name }}
-                            </RouterLink>
+                            <PlaceholderText :lines="linesAmount" />
                         </template>
                     </SectionCard>
-                </template>
+                </div>
             </div>
-        </template>
+        </div>
     </Content>
 </template>
 
 <script lang="ts" setup>
 import SectionCard from '@/components/ui/SectionCard.vue';
-import { computed, type ComputedRef, type Ref } from 'vue';
+import { computed, ref, type ComputedRef, type Ref } from 'vue';
 import Content from '@/components/ui/Content.vue';
 import { useQuery } from '@/composables/queries';
+import PlaceholderText from '@/components/placeholder/PlaceholderText.vue';
 
 // getCommitteeOverview
 const { result, loading } = useQuery('committeeOverview', {})
@@ -56,6 +63,8 @@ const categories = computed(() => {
         []
     )
 })
+
+const loadingLinesAmount = [14, 3, 5, 2, 2, 3, 2]
 
 </script>
 
