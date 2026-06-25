@@ -22,6 +22,15 @@ h4 {
   font-weight: 700;
 }
 
+h1 em,
+h2 em,
+h3 em,
+h4 em,
+h5 em,
+h6 em {
+  font-weight: 700;
+}
+
 p:not(:last-child) {
   padding-bottom: var(--p-spacing);
 }
