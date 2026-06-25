@@ -70,7 +70,7 @@ export const mainMenu: MenuItem[] = [
         labelKey: 'Education',
         items: [
             { labelKey: 'Information', route: '/education' },
-            { labelKey: 'Books', url: 'VITE_WO4YOU_URL' },
+            { labelKey: 'Books', url: import.meta.env.VITE_WO4YOU_URL },
             { labelKey: 'Summaries', url: 'https://summaries.ia.utwente.nl/' },
             { labelKey: 'Tutoring', route: '/about/29/tutoring/' },
         ],
