@@ -41,7 +41,7 @@
         </div>
 
         <div class="pl-10 pr-10 pb-4">
-            <Menubar :model="items" class="p-0 sticky top-0 z-50" breakpoint="768px">
+            <Menubar :model="menuItems" class="p-0 sticky top-0 z-50" breakpoint="768px">
                 <template #start></template>
                 <template #item="{ item, props, hasSubmenu, root }">
                     <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
@@ -77,169 +77,23 @@ import { useGettext } from 'vue3-gettext'
 import { computed, reactive, ref } from 'vue';
 import { ArrowUpRight, ChevronDown, ChevronRight, Icon } from '@lucide/vue';
 import UserButton from './UserButton.vue';
+import { mainMenu } from '@/constants/pageCategories';
+
 const { $gettext } = useGettext();
 
 const oldFrontendUrl = import.meta.env.VITE_OLD_FRONTEND_URL;
 
-// TODO: Translate menu bar
-const items = computed(() => [
-    {
-        label: $gettext('Home'),
-        icon: 'home',
-        route: '/'
-    },
-    {
-        label: $gettext('Activities'),
-        route: '/activities'
-    },
-    {
-        label: $gettext('News'),
-        route: '/News',
-    },
-    {
-        label: $gettext('Publications'),
-        route: '/publications'
-    },
-    {
-        label: $gettext('Companies'),
-        route: '/companies'
-    },
-    {
-        label: $gettext('Videos'),
-        route: '/videos'
-    },
-    {
-        label: $gettext('Association'),
-        items: [
-            {
-                label: $gettext('Inter-Actief'),
-                route: '/about/1/about-the-association-inter-actief'
-            },
-            {
-                label: $gettext('Board'),
-                route: '/about/2/board'
-            },
-            {
-                label: $gettext('Former boards'),
-                route: '/about/6/former-boards'
-            },
-            {
-                label: $gettext('Honorary members'),
-                route: '/about/8/honorary-members/'
-            },
-            {
-                label: $gettext('Members of Merit'),
-                route: '/about/19/members-of-merit/'
-            },
-            {
-                label: $gettext('Committees'),
-                route: '/committees/'
-            },
-            {
-                label: $gettext('Membership'),
-                route: '/about/3/membership/'
-            },
-            {
-                label: $gettext('(Graduation) drink'),
-                route: '/about/26/graduation-drink/'
-            },
-            {
-                label: $gettext('Symposia'),
-                route: '/about/20/symposia/'
-            },
-            {
-                label: $gettext('Study tours'),
-                route: '/about/28/study-tours/'
-            },
-            {
-                label: $gettext("Members' initiative"),
-                route: '/about/14/members-initiative/'
-            },
-            {
-                label: $gettext('Association song'),
-                route: '/about/5/association-song/'
-            },
-            {
-                label: $gettext('Alumni Association ENIAC'),
-                route: '/about/16/alumni-association-eniac/'
-            },
-            {
-                label: $gettext('Sister associations'),
-                route: '/about/4/sister-associations/'
-            },
-            {
-                label: $gettext('Inter-Actief App'),
-                route: '/about/27/the-inter-actief-app/'
-            },
-            {
-                label: $gettext('Inter-Archive'),
-                url: 'https://inter-archief.net/'
-            }
-        ]
-    },
-    {
-        label: $gettext('For members'),
-        items: [
-            {
-                label: $gettext('Azure Dev Tools'),
-                route: '/about/24/azure-dev-tools-for-teaching/'
-            },
-            // {
-            //     label: $gettext('GMM documents'),
-            //     route: '/gmm'
-            // },
-            {
-                label: $gettext('Assignments by the UT'),
-                route: '/about/18/assignments-ut/'
-            },
-            {
-                label: $gettext('Corporate identity'),
-                url: 'https://huisstijl.ia.utwente.nl/'
-            },
-            {
-                label: $gettext('Old privacy policies'),
-                route: '/about/25/old-privacy-policies/'
-            },
-            {
-                label: $gettext('Social media'),
-                route: '/about/31/social-media/'
-            },
-            {
-                label: $gettext('Mental health'),
-                route: '/about/34/mental-health/'
-            },
-            // {
-            //     label: $gettext('Do groups'),
-            //     route: '/members/dogroups/'
-            // }
-        ]
-    },
-    {
-        label: $gettext('Education'),
-        items: [
-            {
-                label: $gettext('Information'),
-                route: '/education'
-            },
-            {
-                label: $gettext('Books'),
-                url: import.meta.env.VITE_WO4YOU_URL
-            },
-            {
-                label: $gettext('Summaries'),
-                url: 'https://summaries.ia.utwente.nl/'
-            },
-            {
-                label: $gettext('Tutoring'),
-                route: '/about/29/tutoring/'
-            }
-        ]
-    },
-    {
-        label: $gettext('Contact'),
-        route: '/contact'
-    }
-]);
+// Transform menu with translations
+const menuItems = computed(() => {
+    const transformMenu = (items: typeof mainMenu): typeof items => {
+        return items.map(item => ({
+            ...item,
+            label: $gettext(item.labelKey),
+            items: item.items ? transformMenu(item.items) : undefined
+        }));
+    };
+    return transformMenu(mainMenu);
+});
 
 
 </script>

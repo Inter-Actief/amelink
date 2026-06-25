@@ -27,6 +27,7 @@ declare module 'vue' {
     LatestNews: typeof import('./src/components/news/LatestNews.vue')['default']
     Logo: typeof import('./src/components/ui/Logo.vue')['default']
     LogoSlider: typeof import('./src/components/logos/LogoSlider.vue')['default']
+    Menu: typeof import('primevue/menu')['default']
     OverviewActivities: typeof import('./src/components/activities/OverviewActivities.vue')['default']
     OverviewNews: typeof import('./src/components/news/OverviewNews.vue')['default']
     Pagination: typeof import('./src/components/ui/Pagination.vue')['default']
