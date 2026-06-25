@@ -5,22 +5,26 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import graphqlLoader from 'vite-plugin-graphql-loader'
 import tailwindcss from '@tailwindcss/vite'
-import Components from 'unplugin-vue-components/vite';
-import { PrimeVueResolver } from '@primevue/auto-import-resolver';
+import Components from 'unplugin-vue-components/vite'
+import { PrimeVueResolver } from '@primevue/auto-import-resolver'
+import EnvRuntime from 'vite-plugin-env-runtime'
 
 // https://vite.dev/config/
 /** @type {import('vite').UserConfig} */
 export default defineConfig({
     plugins: [
+        EnvRuntime({
+            filename: 'config.js',
+            include: 'VITE_*',
+            name: 'AMELINK',
+        }),
         vue(),
         vueDevTools(),
         graphqlLoader(),
         tailwindcss(),
         Components({
-            resolvers: [
-                PrimeVueResolver()
-            ]
-        })
+            resolvers: [PrimeVueResolver()],
+        }),
     ],
     resolve: {
         alias: {
@@ -36,15 +40,15 @@ export default defineConfig({
             output: {
                 // Setup manual chunks such that the content is not server in one
                 manualChunks(id) {
-                    if (id.includes('@vue')) return 'vue';
-                    if (id.includes('@apollo/client')) return 'apollo';
-                    if (id.includes('@primeuix')) return 'primeui';
-                    if (id.includes('@primevue')) return 'primevue';
-                    if (id.includes('@graphql')) return 'graphql';
-                    if (id.includes('@pinia')) return 'pinia';
-                    if (id.includes('@lucide')) return 'lucide';
-                }
-            }
-        }
-    }
+                    if (id.includes('@vue')) return 'vue'
+                    if (id.includes('@apollo/client')) return 'apollo'
+                    if (id.includes('@primeuix')) return 'primeui'
+                    if (id.includes('@primevue')) return 'primevue'
+                    if (id.includes('@graphql')) return 'graphql'
+                    if (id.includes('@pinia')) return 'pinia'
+                    if (id.includes('@lucide')) return 'lucide'
+                },
+            },
+        },
+    },
 })
