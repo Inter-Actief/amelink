@@ -37,7 +37,7 @@
             </div>
         </RouterLink>
         <div
-            class="col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 lg:col-start-3 lg:row-start-1 md:order-5 lg:order-none">
+            class="col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 lg:col-start-3 lg:row-start-1 lg:self-start md:order-5 lg:order-none">
             <SectionCard :name="$gettext('Current items')" max-height>
                 <template #content>
                     <DynamicContent />

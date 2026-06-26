@@ -361,8 +361,9 @@ query DynamicContent($today: DateTime, $recency: DateTime) {
   recentNews: newsItems(publicationDate_Lt:$today, publicationDate_Gt: $recency ) {
     totalCount
     results {
+      id
       title
-      content
+      introduction
       author
       pinned
     }
@@ -372,8 +373,9 @@ query DynamicContent($today: DateTime, $recency: DateTime) {
   pinnedNews: newsItems(pinned:true) {
     totalCount
     results {
+      id
       title
-      content
+      introduction
       author
       pinned
     }
@@ -390,11 +392,12 @@ query DynamicContent($today: DateTime, $recency: DateTime) {
   }
   
 # fallback:news items
-  newsItems(limit: 5) {
+  newsItems(limit: 3) {
     totalCount
     results {
+      id
       title
-      content
+      introduction
       author
       pinned
     }
