@@ -31,6 +31,7 @@ export const queries = {
     company: gql.CompanyDocument,
     videos: gql.VideosDocument,
     video: gql.VideoDocument,
+    dynamicContent: gql.DynamicContentDocument
 } as const
 
 /**

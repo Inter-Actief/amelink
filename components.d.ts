@@ -13,6 +13,7 @@ declare module 'vue' {
     CompanyPlaceholder: typeof import('./src/components/placeholder/CompanyPlaceholder.vue')['default']
     ContactForm: typeof import('./src/components/forms/ContactForm.vue')['default']
     Content: typeof import('./src/components/ui/Content.vue')['default']
+    DynamicContent: typeof import('./src/components/homepage/DynamicContent.vue')['default']
     DynamicTable: typeof import('./src/components/ui/DynamicTable.vue')['default']
     EpaButton: typeof import('./src/components/ui/EpaButton.vue')['default']
     EpaIcon: typeof import('./src/components/ui/EpaIcon.vue')['default']

@@ -38,9 +38,9 @@
         </RouterLink>
         <div
             class="col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 lg:col-start-3 lg:row-start-1 md:order-5 lg:order-none">
-            <SectionCard name="Info" max-height>
+            <SectionCard :name="$gettext('Current items')" max-height>
                 <template #content>
-                    Content!
+                    <DynamicContent />
                 </template>
             </SectionCard>
         </div>
@@ -49,6 +49,7 @@
 
 <script setup lang="ts">
 import SectionCard from '../ui/SectionCard.vue';
+import DynamicContent from './DynamicContent.vue';
 </script>
 
 <style scoped></style>

@@ -344,3 +344,59 @@ query Video($videoId: ID!) {
     videoType
   }
 }
+
+query DynamicContent($today: DateTime, $recency: DateTime) {
+# Recent activities with pictures
+  activities(begin_Lt: $today, begin_Gt: $recency, hasPhotos:true) {
+    totalCount
+    results {
+      id
+      summary
+      # randomPhotoUrl is a JSON object and must be fetched
+      randomPhotoUrl
+    }
+  }
+
+# Recent news
+  recentNews: newsItems(publicationDate_Lt:$today, publicationDate_Gt: $recency ) {
+    totalCount
+    results {
+      title
+      content
+      author
+      pinned
+    }
+  }
+  
+# pinned news
+  pinnedNews: newsItems(pinned:true) {
+    totalCount
+    results {
+      title
+      content
+      author
+      pinned
+    }
+  }
+
+# recent publication
+  publications(datePublished_Lt:$today, datePublished_Gt:$recency) {
+    totalCount
+    results {
+      thumbnail,
+      name,
+      file
+    }
+  }
+  
+# fallback:news items
+  newsItems(limit: 5) {
+    totalCount
+    results {
+      title
+      content
+      author
+      pinned
+    }
+  }
+}
