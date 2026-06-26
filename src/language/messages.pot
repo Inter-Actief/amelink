@@ -7,39 +7,38 @@ msgid "Who, what, where, when..."
 msgstr ""
 
 #: src/components/activities/InformationActivites.vue:5
-#: src/components/activities/InformationActivites.vue:45
 msgid "Who"
 msgstr ""
 
-#: src/components/activities/InformationActivites.vue:6
+#: src/components/activities/InformationActivites.vue:12
 msgid "What"
 msgstr ""
 
-#: src/components/activities/InformationActivites.vue:7
+#: src/components/activities/InformationActivites.vue:19
 msgid "Where"
 msgstr ""
 
-#: src/components/activities/InformationActivites.vue:8
+#: src/components/activities/InformationActivites.vue:26
 msgid "When"
 msgstr ""
 
-#: src/components/activities/InformationActivites.vue:9
-msgid "Label"
-msgstr ""
-
-#: src/components/activities/InformationActivites.vue:10
-msgid "Costs"
-msgstr ""
-
-#: src/components/activities/InformationActivites.vue:16
+#: src/components/activities/InformationActivites.vue:34
 msgid "from"
 msgstr ""
 
-#: src/components/activities/InformationActivites.vue:17
+#: src/components/activities/InformationActivites.vue:35
 msgid "until"
 msgstr ""
 
-#: src/components/activities/InformationActivites.vue:24
+#: src/components/activities/InformationActivites.vue:40
+msgid "Label"
+msgstr ""
+
+#: src/components/activities/InformationActivites.vue:47
+msgid "Costs"
+msgstr ""
+
+#: src/components/activities/InformationActivites.vue:53
 msgid "Free"
 msgstr ""
 
@@ -63,11 +62,13 @@ msgstr ""
 
 #: src/components/activities/PastActivities.vue:62
 #: src/components/activities/UpcomingActivities.vue:12
+#: src/components/placeholder/PastActivitiesPlaceholder.vue:5
 msgid "Date"
 msgstr ""
 
 #: src/components/activities/PastActivities.vue:65
 #: src/components/activities/UpcomingActivities.vue:14
+#: src/components/placeholder/PastActivitiesPlaceholder.vue:11
 msgid "Activity"
 msgstr ""
 
@@ -76,8 +77,21 @@ msgid "Photos"
 msgstr ""
 
 #: src/components/activities/PhotosActivities.vue:3
-#: src/components/activities/PhotosActivities.vue:18
+#: src/components/activities/PhotosActivities.vue:29
 msgid "Go to activity"
+msgstr ""
+
+#: src/components/activities/PhotosActivities.vue:8
+#: src/components/activities/PhotosActivities.vue:11
+msgid "Pictures by"
+msgstr ""
+
+#: src/components/activities/PhotosActivities.vue:69
+msgid "Photo by "
+msgstr ""
+
+#: src/components/activities/PhotosActivities.vue:69
+msgid "If you want to have this photo removed, please contact the board"
 msgstr ""
 
 #: src/components/activities/UpcomingActivities.vue:4
@@ -93,204 +107,75 @@ msgstr ""
 msgid "Enroll now!"
 msgstr ""
 
-#: src/components/footer/Footer.vue:5
+#: src/components/footer/Footer.vue:6
 msgid "footer.text"
 msgstr ""
 
-#: src/components/footer/Footer.vue:10
+#: src/components/footer/Footer.vue:11
 msgid "Pages"
 msgstr ""
 
-#: src/components/footer/Footer.vue:17
+#: src/components/footer/Footer.vue:18
 msgid "Important information"
 msgstr ""
 
-#: src/components/footer/Footer.vue:18
+#: src/components/footer/Footer.vue:19
 msgid "Privacy policy"
 msgstr ""
 
-#: src/components/footer/Footer.vue:20
-#: src/components/header/Header.vue:213
+#: src/components/footer/Footer.vue:21
 msgid "Contact"
 msgstr ""
 
-#: src/components/footer/Footer.vue:23
+#: src/components/footer/Footer.vue:24
 msgid "Report a problem"
 msgstr ""
 
-#: src/components/footer/Footer.vue:26
+#: src/components/footer/Footer.vue:27
 msgid "CVD Policy"
 msgstr ""
 
-#: src/components/footer/Footer.vue:31
+#: src/components/footer/Footer.vue:32
 msgid "Contact us"
 msgstr ""
 
-#: src/components/footer/Footer.vue:51
-#: src/components/header/Header.vue:70
+#: src/components/footer/Footer.vue:52
 #: src/components/homepage/HomepageCards.vue:8
 msgid "Activities"
 msgstr ""
 
-#: src/components/footer/Footer.vue:55
-#: src/components/header/Header.vue:74
+#: src/components/footer/Footer.vue:56
 #: src/components/homepage/HomepageCards.vue:17
 msgid "News"
 msgstr ""
 
-#: src/components/footer/Footer.vue:59
-#: src/components/header/Header.vue:78
-#: src/views/pages/PublicationView.vue:34
+#: src/components/footer/Footer.vue:60
+#: src/views/pages/PublicationView.vue:36
 msgid "Publications"
 msgstr ""
 
-#: src/components/footer/Footer.vue:63
-#: src/components/header/Header.vue:192
+#: src/components/footer/Footer.vue:64
 #: src/components/homepage/HomepageCards.vue:26
 msgid "Education"
 msgstr ""
 
-#: src/components/header/Header.vue:12
+#: src/components/header/Header.vue:13
+#: src/components/header/Header.vue:34
 msgid "Old website"
 msgstr ""
 
-#: src/components/header/Header.vue:15
+#: src/components/header/Header.vue:16
+#: src/components/header/Header.vue:37
 msgid "Become a member"
-msgstr ""
-
-#: src/components/header/Header.vue:65
-msgid "Home"
-msgstr ""
-
-#: src/components/header/Header.vue:82
-#: src/components/homepage/HomepageCards.vue:35
-#: src/views/companies/CompaniesView.vue:21
-msgid "Companies"
-msgstr ""
-
-#: src/components/header/Header.vue:86
-msgid "Association"
-msgstr ""
-
-#: src/components/header/Header.vue:89
-msgid "Inter-Actief"
-msgstr ""
-
-#: src/components/header/Header.vue:93
-msgid "Board"
-msgstr ""
-
-#: src/components/header/Header.vue:97
-msgid "Former boards"
-msgstr ""
-
-#: src/components/header/Header.vue:101
-msgid "Honorary members"
-msgstr ""
-
-#: src/components/header/Header.vue:105
-msgid "Members of Merit"
-msgstr ""
-
-#: src/components/header/Header.vue:109
-msgid "Committees"
-msgstr ""
-
-#: src/components/header/Header.vue:113
-msgid "Membership"
-msgstr ""
-
-#: src/components/header/Header.vue:117
-msgid "(Graduation) drink"
-msgstr ""
-
-#: src/components/header/Header.vue:121
-msgid "Symposia"
-msgstr ""
-
-#: src/components/header/Header.vue:125
-msgid "Study tours"
-msgstr ""
-
-#: src/components/header/Header.vue:129
-msgid "Members' initiative"
-msgstr ""
-
-#: src/components/header/Header.vue:133
-msgid "Association song"
-msgstr ""
-
-#: src/components/header/Header.vue:137
-msgid "Alumni Association ENIAC"
-msgstr ""
-
-#: src/components/header/Header.vue:141
-msgid "Sister associations"
-msgstr ""
-
-#: src/components/header/Header.vue:145
-msgid "Inter-Actief App"
-msgstr ""
-
-#: src/components/header/Header.vue:149
-msgid "Inter-Archive"
-msgstr ""
-
-#: src/components/header/Header.vue:155
-msgid "For members"
-msgstr ""
-
-#: src/components/header/Header.vue:158
-msgid "Azure Dev Tools"
-msgstr ""
-
-#: src/components/header/Header.vue:162
-msgid "GMM documents"
-msgstr ""
-
-#: src/components/header/Header.vue:166
-msgid "Assignments by the UT"
-msgstr ""
-
-#: src/components/header/Header.vue:170
-msgid "Corporate identity"
-msgstr ""
-
-#: src/components/header/Header.vue:174
-msgid "Old privacy policies"
-msgstr ""
-
-#: src/components/header/Header.vue:178
-msgid "Social media"
-msgstr ""
-
-#: src/components/header/Header.vue:182
-msgid "Mental health"
-msgstr ""
-
-#: src/components/header/Header.vue:186
-msgid "Do groups"
-msgstr ""
-
-#: src/components/header/Header.vue:195
-#: src/views/pages/EducationView.vue:4
-msgid "Information"
-msgstr ""
-
-#: src/components/header/Header.vue:199
-msgid "Books"
-msgstr ""
-
-#: src/components/header/Header.vue:203
-msgid "Summaries"
-msgstr ""
-
-#: src/components/header/Header.vue:207
-msgid "Tutoring"
 msgstr ""
 
 #: src/components/header/UserButton.vue:2
 msgid "Sign-in"
+msgstr ""
+
+#: src/components/homepage/HomepageCards.vue:35
+#: src/views/companies/CompaniesView.vue:22
+msgid "Companies"
 msgstr ""
 
 #: src/components/news/LatestNews.vue:5
@@ -305,7 +190,7 @@ msgstr ""
 msgid "News page"
 msgstr ""
 
-#: src/components/ui/TextCard.vue:29
+#: src/components/ui/TextCard.vue:55
 msgid "Read more"
 msgstr ""
 
@@ -325,16 +210,16 @@ msgstr ""
 msgid "Activities you don't want to miss"
 msgstr ""
 
-#: src/views/activities/SingleActivites.vue:11
+#: src/views/activities/SingleActivites.vue:24
 msgid "View photos"
 msgstr ""
 
-#: src/views/activities/SingleActivites.vue:17
-#: src/views/news/SingleNews.vue:18
+#: src/views/activities/SingleActivites.vue:30
+#: src/views/news/SingleNews.vue:26
 msgid "Return to overview"
 msgstr ""
 
-#: src/views/committees/CommitteesView.vue:5
+#: src/views/committees/CommitteesView.vue:3
 msgid "Our committees"
 msgstr ""
 
@@ -373,4 +258,24 @@ msgstr ""
 
 #: src/views/companies/CompanyView.vue:51
 msgid "Website"
+msgstr ""
+
+#: src/views/pages/EducationView.vue:4
+msgid "Information"
+msgstr ""
+
+#: src/views/videos/VideosView.vue:21
+msgid "Videos"
+msgstr ""
+
+#: src/views/videos/VideoView.vue:29
+msgid "We could not find this video."
+msgstr ""
+
+#: src/views/videos/VideoView.vue:32
+msgid "View all videos"
+msgstr ""
+
+#: src/views/videos/VideoView.vue:45
+msgid "Description"
 msgstr ""
