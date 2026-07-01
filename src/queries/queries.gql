@@ -347,7 +347,7 @@ query Video($videoId: ID!) {
 
 query DynamicContent($today: DateTime, $recency: DateTime) {
 # Recent activities with pictures
-  activities(begin_Lt: $today, begin_Gt: $recency, hasPhotos:true) {
+  activities(begin_Lt: $today, begin_Gt: $recency, hasPhotos:true, limit: 3) {
     totalCount
     results {
       id
@@ -358,7 +358,7 @@ query DynamicContent($today: DateTime, $recency: DateTime) {
   }
 
 # Recent news
-  recentNews: newsItems(publicationDate_Lt:$today, publicationDate_Gt: $recency ) {
+  recentNews: newsItems(publicationDate_Lt:$today, publicationDate_Gt: $recency, limit: 3) {
     totalCount
     results {
       id
@@ -370,7 +370,7 @@ query DynamicContent($today: DateTime, $recency: DateTime) {
   }
   
 # pinned news
-  pinnedNews: newsItems(pinned:true) {
+  pinnedNews: newsItems(pinned:true, limit: 3) {
     totalCount
     results {
       id

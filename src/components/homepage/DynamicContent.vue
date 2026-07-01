@@ -25,7 +25,24 @@
             </template>
             <template v-else-if="slotProps.data.typeName == 'activities'">
                 <h2 class="pb-4">{{ $gettext('Recent Activity Pictures') }}</h2>
-                <img v-for="pic in newActivityPictures" :src="pic"/>
+                <div class="grid grid-cols-1 gap-12">
+                    <div class="flex flex-row" v-for="act in slotProps.data.results" :key="act.id">
+                        <div class="basis-2/3 flex-1">
+                            <Card :pt="{
+                                body: {
+                                    class: 'mb-auto'
+                                }
+                            }">
+                                <template #content>
+                                    {{ act.summary }}
+                                </template>
+                            </Card>
+                        </div>
+                        <div class="basis-1/3">
+                            <img :src="newActivityPictures[act.id]" class="format aspect-[4/3] object-cover" />
+                        </div>
+                    </div>
+                </div>
             </template>
             <template v-else-if="slotProps.data.typeName == 'publications'">
                 Publications
@@ -105,12 +122,23 @@ watch(() => result.value, async (newResult: any) => {
             for (const item of newResult.activities?.results) {
                 // Fetch activity photo randomPhotoUrl
                 const randomPhotoEndpointUrl = `${import.meta.env.VITE_AMELIE_BASE_URL.replace(/\/$/, '')}${item.randomPhotoUrl}`
-                const response = await fetch(randomPhotoEndpointUrl)
-                const photoUrl = await response.json().then(obj => {
-                    return obj.url ?? '/images/placeholder/photo.jpg'
-                })
+                console.log(randomPhotoEndpointUrl)
 
-                newActivityPictures.value[item.id!] = photoUrl
+                fetch(randomPhotoEndpointUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            console.error(`Failed to fetch photo: ${response.status}`)
+                            return Promise.reject(new Error(`HTTP ${response.status}`))
+                        }
+                        return response.json()
+                    })
+                    .then(obj => {
+                        newActivityPictures.value[item.id!] = obj.url ?? '/images/placeholder/photo.jpg'
+                    })
+                    .catch(error => {
+                        console.error('Error fetching activity photo:', error)
+                        newActivityPictures.value[item.id!] = '/images/placeholder/photo.jpg'
+                    })
             }
         }
     }
