@@ -158,3 +158,5 @@ export const getFormFieldID = () => {
     formfieldindexer.value++
     return formfieldindexer.value
 }
+
+export const publicationUrl = (url: string) => `${import.meta.env.VITE_AMELIE_MEDIA_URL}${url}`

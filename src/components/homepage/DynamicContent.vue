@@ -1,8 +1,14 @@
 <template>
+    <div v-if="loading" class="grid grid-cols-1 gap-12 mx-12 my-4">
+        <TextCard loading v-for="_ in 3" />
+    </div>
     <Carousel v-if="!loading && result" :value="carouselItems" :num-visible="1" :num-scroll="1">
         <template #item="slotProps">
             <template v-if="slotProps.data.typeName == 'pinnedNews'">
-                <h2 class="pb-4">{{ $gettext('Pinned news') }}</h2>
+                <h2 class="pb-4 flex gap-4 items-center">
+                    <Pin :size="30" />
+                    {{ $gettext('Pinned news') }}
+                </h2>
                 <div class="grid grid-cols-1 gap-12 items-stretch">
                     <template v-if="slotProps.data.results" v-for="item in slotProps.data.results" :key="item?.id">
                         <TextCard :title="item?.title!" :subtitle="item?.author || ''"
@@ -13,7 +19,10 @@
                 </div>
             </template>
             <template v-else-if="slotProps.data.typeName == 'recentNews'">
-                <h2 class="pb-4">{{ $gettext('Recent news') }}</h2>
+                <h2 class="pb-4 flex gap-4 items-center">
+                    <Mailbox :size="30" />
+                    {{ $gettext('Recent news') }}
+                </h2>
                 <div class="grid grid-cols-1 gap-12 items-stretch">
                     <template v-if="slotProps.data.results" v-for="item in slotProps.data.results" :key="item?.id">
                         <TextCard :title="item?.title!" :subtitle="item?.author || ''"
@@ -24,31 +33,63 @@
                 </div>
             </template>
             <template v-else-if="slotProps.data.typeName == 'activities'">
-                <h2 class="pb-4">{{ $gettext('Recent Activity Pictures') }}</h2>
+                <h2 class="pb-4 flex gap-4 items-center">
+                    <Camera :size="30" />
+                    {{ $gettext('Recent Activity Pictures') }}
+                </h2>
                 <div class="grid grid-cols-1 gap-12">
-                    <div class="flex flex-row" v-for="act in slotProps.data.results" :key="act.id">
-                        <div class="basis-2/3 flex-1">
-                            <Card :pt="{
-                                body: {
-                                    class: 'mb-auto'
-                                }
-                            }">
-                                <template #content>
-                                    {{ act.summary }}
-                                </template>
-                            </Card>
+                    <RouterLink :to="{ name: 'singleactivitiesphotos', params: { id: act.id } }"
+                        v-for="act in slotProps.data.results" :key="act.id">
+                        <div class="flex flex-row items-stretch gotopic min-h-80">
+                            <div class="basis-2/5 flex-1">
+                                <Card class="" :pt="{
+                                    root: {
+                                        class: 'rounded-br-none rounded-tr-none h-full'
+                                    }
+                                }">
+                                    <template #title>
+                                        <p class="text-4xl font-semibold">
+                                            {{ act.summary }}
+                                        </p>
+                                    </template>
+                                    <template #subtitle>
+                                        <PicturesBy :photographers="pictureTakers[act.id]" />
+                                    </template>
+                                    <template #footer>
+                                        <EpaButton class="link readmore" icon="readmore">
+                                            {{ $gettext('View photos') }}
+                                        </EpaButton>
+                                    </template>
+                                </Card>
+                            </div>
+                            <div class="basis-3/5 relative overflow-hidden">
+                                <img :src="newActivityPictures[act.id]"
+                                    class="absolute inset-0 object-cover w-full h-full rounded-tr-xl rounded-br-xl" />
+                            </div>
                         </div>
-                        <div class="basis-1/3">
-                            <img :src="newActivityPictures[act.id]" class="format aspect-[4/3] object-cover" />
-                        </div>
-                    </div>
+                    </RouterLink>
                 </div>
             </template>
             <template v-else-if="slotProps.data.typeName == 'publications'">
-                Publications
+                <h2 class="pb-4 flex gap-4 items-center">
+                    <BookOpenText :size="30" />
+                    {{ $gettext('Recent publication') }}
+                </h2>
+                <a :href="publicationUrl(slotProps.data.results[0].file!)">
+                    <TextCard :title="slotProps.data.results[0].name">
+                        <template #default>
+                            <img v-image-error="'/images/placeholder/book.svg'"
+                                class="max-h-240 aspect-a4 object-cover rounded-t-lg w-full"
+                                :src="slotProps.data.results[0].thumbnail" />
+                        </template>
+                    </TextCard>
+                </a>
             </template>
             <template v-else-if="slotProps.data.typeName == 'newsItems'">
-                <h2 class="pb-4">{{ $gettext('All news') }}</h2>
+                <h2 class="pb-4 flex gap-4 items-center">
+                    <Newspaper :size="30" />
+                    {{ $gettext('All news') }}
+                </h2>
                 <div class="grid grid-cols-1 gap-12 items-stretch">
                     <template v-if="slotProps.data.results" v-for="item in slotProps.data.results" :key="item?.id">
                         <TextCard :title="item?.title!" :subtitle="item?.author || ''"
@@ -64,17 +105,19 @@
 
 <script lang="ts" setup>
 import { useQuery } from '@/composables/queries';
-import { markedText } from '@/functions/functions';
+import { markedText, publicationUrl } from '@/functions/functions';
 import { useGettext } from 'vue3-gettext';
 import Carousel from 'primevue/carousel';
 import TextCard from '../ui/TextCard.vue';
 import { computed, ref, watch } from 'vue';
+import PicturesBy from '../photos/PicturesBy.vue';
+import { BookOpenText, Camera, Mailbox, Newspaper, Pin } from '@lucide/vue';
 
 const { $gettext } = useGettext();
 
 const today = new Date()
 const weekAgo = new Date(today)
-weekAgo.setDate(today.getDate() - 100)
+weekAgo.setDate(today.getDate() - 300)
 
 const { result, loading } = useQuery('dynamicContent', {
     today: today.toISOString(),
@@ -83,8 +126,9 @@ const { result, loading } = useQuery('dynamicContent', {
 
 const processedExcerpts = ref<Record<string, string>>({})
 const newActivityPictures = ref<Record<string, string>>({})
+const pictureTakers = ref<Record<string, Array<string>>>({})
 
-watch(() => result.value, async (newResult: any) => {
+watch(() => result.value, async (newResult) => {
     if (newResult) {
         const excerpts: Record<string, string> = {}
 
@@ -106,24 +150,14 @@ watch(() => result.value, async (newResult: any) => {
             }
         }
 
-        // Process news items excerpts
-        if (newResult.newsItems?.results) {
-            for (const item of newResult.newsItems.results) {
-                if (item?.introduction) {
-                    excerpts['newsItems_' + item.id] = await markedText(item.introduction)
-                }
-            }
-        }
-
         processedExcerpts.value = excerpts
 
         // Process activities
         if (newResult.activities?.results) {
             for (const item of newResult.activities?.results) {
                 // Fetch activity photo randomPhotoUrl
-                const randomPhotoEndpointUrl = `${import.meta.env.VITE_AMELIE_BASE_URL.replace(/\/$/, '')}${item.randomPhotoUrl}`
-                console.log(randomPhotoEndpointUrl)
-
+                const randomPhotoEndpointUrl = `${import.meta.env.VITE_AMELIE_BASE_URL.replace(/\/$/, '')}${item!.randomPhotoUrl}`
+                pictureTakers.value[item!.id] = Array.from(new Set(item!.photos.map(x => x.owner?.name!)))
                 fetch(randomPhotoEndpointUrl)
                     .then(response => {
                         if (!response.ok) {
@@ -133,11 +167,11 @@ watch(() => result.value, async (newResult: any) => {
                         return response.json()
                     })
                     .then(obj => {
-                        newActivityPictures.value[item.id!] = obj.url ?? '/images/placeholder/photo.jpg'
+                        newActivityPictures.value[item!.id!] = obj.url ?? '/images/placeholder/photo.jpg'
                     })
                     .catch(error => {
                         console.error('Error fetching activity photo:', error)
-                        newActivityPictures.value[item.id!] = '/images/placeholder/photo.jpg'
+                        newActivityPictures.value[item!.id!] = '/images/placeholder/photo.jpg'
                     })
             }
         }
@@ -153,25 +187,25 @@ const carouselItems = computed(() => {
             typeName: "activities"
         },
         {
-            ...result.value?.pinnedNews,
-            typeName: "pinnedNews"
-        },
-        {
             ...result.value?.publications,
             typeName: "publications"
+        },
+        {
+            ...result.value?.pinnedNews,
+            typeName: "pinnedNews"
         },
         {
             ...result.value?.recentNews,
             typeName: "recentNews"
         },
-        {
-            ...result.value?.newsItems,
-            typeName: "newsItems"
-        }
     ].filter(x => (x.totalCount ?? 0) > 0) // Only show full items
 })
 
 
 </script>
 
-<style></style>
+<style scoped>
+.gotopic:hover .readmore {
+    background-size: 100% 0.2rem;
+}
+</style>

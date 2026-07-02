@@ -37,7 +37,13 @@ query OverviewActivities($limit: Int, $offset: Int, $startDate: DateTime!) {
 }
 
 query PastActivities($limit: Int, $offset: Int, $endDate: DateTime, $search: String) {
-  activities(limit: $limit, offset: $offset, ordering: "begin,desc", begin_Lt: $endDate, summaryNl_Icontains: $search) {
+  activities(
+    limit: $limit
+    offset: $offset
+    ordering: "begin,desc"
+    begin_Lt: $endDate
+    summaryNl_Icontains: $search
+  ) {
     totalCount
     results {
       id
@@ -215,7 +221,12 @@ query PublicationOverview($limit: Int, $offset: Int, $type: String) {
   publicationTypes {
     typeName
   }
-  publications(limit: $limit, offset: $offset, ordering: "datePublished,desc", publicationType_TypeName_Iexact: $type) {
+  publications(
+    limit: $limit
+    offset: $offset
+    ordering: "datePublished,desc"
+    publicationType_TypeName_Iexact: $type
+  ) {
     results {
       id
       name
@@ -273,8 +284,8 @@ query SingleCommittee($committeeId: ID) {
 
 query CurrentUser {
   me {
-    username,
-    firstName,
+    username
+    firstName
     lastName
   }
 }
@@ -346,19 +357,36 @@ query Video($videoId: ID!) {
 }
 
 query DynamicContent($today: DateTime, $recency: DateTime) {
-# Recent activities with pictures
-  activities(begin_Lt: $today, begin_Gt: $recency, hasPhotos:true, limit: 3) {
+  # Recent activities with pictures
+  activities(
+    begin_Lt: $today
+    begin_Gt: $recency
+    hasPhotos: true
+    limit: 3
+    ordering: "begin,desc"
+  ) {
     totalCount
     results {
       id
       summary
       # randomPhotoUrl is a JSON object and must be fetched
       randomPhotoUrl
+      descriptionShort
+      photos {
+        owner {
+          name
+        }
+      }
     }
   }
 
-# Recent news
-  recentNews: newsItems(publicationDate_Lt:$today, publicationDate_Gt: $recency, limit: 3) {
+  # Recent news
+  recentNews: newsItems(
+    publicationDate_Lt: $today
+    # publicationDate_Gt: $recency
+    limit: 3
+    ordering: "publication_date,desc"
+  ) {
     totalCount
     results {
       id
@@ -368,9 +396,9 @@ query DynamicContent($today: DateTime, $recency: DateTime) {
       pinned
     }
   }
-  
-# pinned news
-  pinnedNews: newsItems(pinned:true, limit: 3) {
+
+  # pinned news
+  pinnedNews: newsItems(pinned: true, limit: 3, ordering: "publication_date,desc") {
     totalCount
     results {
       id
@@ -381,25 +409,18 @@ query DynamicContent($today: DateTime, $recency: DateTime) {
     }
   }
 
-# recent publication
-  publications(datePublished_Lt:$today, datePublished_Gt:$recency) {
+  # recent publication
+  publications(
+    datePublished_Lt: $today
+    datePublished_Gt: $recency
+    ordering: "date_published,desc"
+    limit: 1
+  ) {
     totalCount
     results {
-      thumbnail,
-      name,
+      thumbnail
+      name
       file
-    }
-  }
-  
-# fallback:news items
-  newsItems(limit: 3) {
-    totalCount
-    results {
-      id
-      title
-      introduction
-      author
-      pinned
     }
   }
 }

@@ -4,12 +4,11 @@ import SectionCard from '@/components/ui/SectionCard.vue';
 import { computed, ref, effect } from 'vue';
 import { useGettext } from 'vue3-gettext';
 const { $gettext } = useGettext();
-import { formattedData } from '@/functions/functions.ts'
+import { formattedData, publicationUrl } from '@/functions/functions.ts'
 import Pagination from '@/components/ui/Pagination.vue';
 import { useQuery } from '@/composables/queries';
 import PublicationPlaceholder from '@/components/placeholder/PublicationPlaceholder.vue';
 
-const publicationUrl = (url: string) => `${import.meta.env.VITE_AMELIE_MEDIA_URL}${url}`;
 const limit = ref(50);
 const type = ref<string | undefined>(undefined);
 const query = useQuery('publicationOverview', { limit: limit.value, type: type.value });
