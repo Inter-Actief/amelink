@@ -357,29 +357,6 @@ query Video($videoId: ID!) {
 }
 
 query DynamicContent($today: DateTime, $recency: DateTime) {
-  # Recent activities with pictures
-  activities(
-    begin_Lt: $today
-    begin_Gt: $recency
-    hasPhotos: true
-    limit: 3
-    ordering: "begin,desc"
-  ) {
-    totalCount
-    results {
-      id
-      summary
-      # randomPhotoUrl is a JSON object and must be fetched
-      randomPhotoUrl
-      descriptionShort
-      photos {
-        owner {
-          name
-        }
-      }
-    }
-  }
-
   # Recent news
   recentNews: newsItems(
     publicationDate_Lt: $today

@@ -32,44 +32,6 @@
                     </template>
                 </div>
             </template>
-            <template v-else-if="slotProps.data.typeName == 'activities'">
-                <h2 class="pb-4 flex gap-4 items-center">
-                    <Camera :size="30" />
-                    {{ $gettext('Recent Activity Pictures') }}
-                </h2>
-                <div class="grid grid-cols-1 gap-12">
-                    <RouterLink :to="{ name: 'singleactivitiesphotos', params: { id: act.id } }"
-                        v-for="act in slotProps.data.results" :key="act.id">
-                        <div class="flex flex-row items-stretch gotopic min-h-80">
-                            <div class="basis-2/5 flex-1">
-                                <Card class="" :pt="{
-                                    root: {
-                                        class: 'rounded-br-none rounded-tr-none h-full'
-                                    }
-                                }">
-                                    <template #title>
-                                        <p class="text-4xl font-semibold">
-                                            {{ act.summary }}
-                                        </p>
-                                    </template>
-                                    <template #subtitle>
-                                        <PicturesBy :photographers="pictureTakers[act.id]" />
-                                    </template>
-                                    <template #footer>
-                                        <EpaButton class="link readmore" icon="readmore">
-                                            {{ $gettext('View photos') }}
-                                        </EpaButton>
-                                    </template>
-                                </Card>
-                            </div>
-                            <div class="basis-3/5 relative overflow-hidden">
-                                <img :src="newActivityPictures[act.id]"
-                                    class="absolute inset-0 object-cover w-full h-full rounded-tr-xl rounded-br-xl" />
-                            </div>
-                        </div>
-                    </RouterLink>
-                </div>
-            </template>
             <template v-else-if="slotProps.data.typeName == 'publications'">
                 <h2 class="pb-4 flex gap-4 items-center">
                     <BookOpenText :size="30" />
@@ -151,41 +113,11 @@ watch(() => result.value, async (newResult) => {
         }
 
         processedExcerpts.value = excerpts
-
-        // Process activities
-        if (newResult.activities?.results) {
-            for (const item of newResult.activities?.results) {
-                // Fetch activity photo randomPhotoUrl
-                const randomPhotoEndpointUrl = `${import.meta.env.VITE_AMELIE_BASE_URL.replace(/\/$/, '')}${item!.randomPhotoUrl}`
-                pictureTakers.value[item!.id] = Array.from(new Set(item!.photos.map(x => x.owner?.name!)))
-                fetch(randomPhotoEndpointUrl)
-                    .then(response => {
-                        if (!response.ok) {
-                            console.error(`Failed to fetch photo: ${response.status}`)
-                            return Promise.reject(new Error(`HTTP ${response.status}`))
-                        }
-                        return response.json()
-                    })
-                    .then(obj => {
-                        newActivityPictures.value[item!.id!] = obj.url ?? '/images/placeholder/photo.jpg'
-                    })
-                    .catch(error => {
-                        console.error('Error fetching activity photo:', error)
-                        newActivityPictures.value[item!.id!] = '/images/placeholder/photo.jpg'
-                    })
-            }
-        }
     }
 }, { immediate: true })
 
 const carouselItems = computed(() => {
     return [
-        // Control order of importance
-        // Most interesting when new activites are launched
-        {
-            ...result.value?.activities,
-            typeName: "activities"
-        },
         {
             ...result.value?.publications,
             typeName: "publications"
