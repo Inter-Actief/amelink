@@ -113,7 +113,7 @@ query DemoOverviewActivities($limit: Int, $offset: Int, $beginDate: DateTime) {
 }
 
 query ActivitiesSliderCard($endgt: DateTime, $limit: Int) {
-  activities(end_Gt: $endgt, limit: $limit) {
+  activities(end_Gt: $endgt, limit: $limit, hasPhotos: true) {
     results {
       photos {
         thumbMedium
