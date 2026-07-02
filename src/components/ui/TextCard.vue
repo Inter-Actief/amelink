@@ -4,15 +4,18 @@
             <template #header v-if="props.image ||
                 (props.loadingOpts?.imageUrl && props.loadingOpts.aspect) ||
                 (props.loading && props.loadingOpts.image)">
-                <img v-if="props.image" v-image-error class="object-cover format rounded-t-lg"
+                <div class="mb-auto">
+
+                    <img v-if="props.image" v-image-error class="object-cover format rounded-t-lg"
                     :class="`aspect-[${props.imageAspect}]`" :src="props.image" />
-
-                <div v-if="props.loading && props.loadingOpts.image">
-                    <Skeleton height="38rem" />
-                </div>
-
-                <img v-if="props.loadingOpts?.imageUrl" v-image-error class="object-cover format rounded-t-lg"
+                    
+                    <div v-if="props.loading && props.loadingOpts.image">
+                        <Skeleton height="38rem" />
+                    </div>
+                    
+                    <img v-if="props.loadingOpts?.imageUrl" v-image-error class="object-cover format rounded-t-lg"
                     :class="`aspect-[${props.loadingOpts.aspect}]`" :src="props.loadingOpts?.imageUrl" />
+                </div>
             </template>
             <template #title v-if="props.title || (props.loading && props.loadingOpts.title)">
                 <div class="flex flex-row items-center gap-2 w-full justify-between pt-4 pl-4">

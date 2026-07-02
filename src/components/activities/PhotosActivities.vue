@@ -4,12 +4,7 @@
     </RouterLink>
 
     <h1>{{ title }}</h1>
-    <template v-if="photographers.length == 1">
-        <p>{{ $gettext('Pictures by') }} {{ photographers[0]! }}</p>
-    </template>
-    <template v-else-if="photographers.length > 1">
-        <p>{{ $gettext('Pictures by') }} {{ photographers.slice(0, photographers.length - 1).join(", ") }} & {{ photographers[photographers.length - 1] }}</p>
-    </template>
+    <PicturesBy :photographers="photographers" />
 
     <div class="grid grid-cards-wide gap-4">
         <template v-if="queryItem?.photos && !loading" v-for="(photo, index) in queryItem.photos" :key="photo">
@@ -37,6 +32,7 @@ import VueEasyLightbox from 'vue-easy-lightbox'
 import { useGettext } from 'vue3-gettext'
 import { useQuery } from '@/composables/queries';
 import Skeleton from 'primevue/skeleton';
+import PicturesBy from '../photos/PicturesBy.vue';
 
 const { $gettext } = useGettext();
 const props = defineProps(['id'])
@@ -47,9 +43,9 @@ const queryItem = computed(() => (queryResults.value ? queryResults.value : null
 const title = computed(() => queryResults.value?.summary)
 
 type EasyLightboxImage = {
-    src: string, 
-    title?: string, 
-    alt?: string 
+    src: string,
+    title?: string,
+    alt?: string
 }
 
 const visible = ref(false)

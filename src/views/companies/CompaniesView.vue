@@ -34,7 +34,7 @@ const selectedRows = ref(limit)
                             </template>
                             <template #title>
                                 <div
-                                    class="flex flex-row items-center w-full justify-between pt-4 pl-4 expand-link link">
+                                    class="flex flex-row items-center w-full justify-between pt-4 pl-4 expand-link link mt">
                                     <span class="text-4xl font-semibold">{{ company.name ?? "" }}</span>
                                 </div>
                             </template>

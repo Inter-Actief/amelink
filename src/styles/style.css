@@ -9,6 +9,10 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+  --aspect-a4: 1/1.414;
+}
+
 /* @apply */
 .grid-cards-wide {
   @apply grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5;

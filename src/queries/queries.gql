@@ -37,7 +37,13 @@ query OverviewActivities($limit: Int, $offset: Int, $startDate: DateTime!) {
 }
 
 query PastActivities($limit: Int, $offset: Int, $endDate: DateTime, $search: String) {
-  activities(limit: $limit, offset: $offset, ordering: "begin,desc", begin_Lt: $endDate, summaryNl_Icontains: $search) {
+  activities(
+    limit: $limit
+    offset: $offset
+    ordering: "begin,desc"
+    begin_Lt: $endDate
+    summaryNl_Icontains: $search
+  ) {
     totalCount
     results {
       id
@@ -107,7 +113,7 @@ query DemoOverviewActivities($limit: Int, $offset: Int, $beginDate: DateTime) {
 }
 
 query ActivitiesSliderCard($endgt: DateTime, $limit: Int) {
-  activities(end_Gt: $endgt, limit: $limit) {
+  activities(end_Gt: $endgt, limit: $limit, hasPhotos: true) {
     results {
       photos {
         thumbMedium
@@ -215,7 +221,12 @@ query PublicationOverview($limit: Int, $offset: Int, $type: String) {
   publicationTypes {
     typeName
   }
-  publications(limit: $limit, offset: $offset, ordering: "datePublished,desc", publicationType_TypeName_Iexact: $type) {
+  publications(
+    limit: $limit
+    offset: $offset
+    ordering: "datePublished,desc"
+    publicationType_TypeName_Iexact: $type
+  ) {
     results {
       id
       name
@@ -273,8 +284,8 @@ query SingleCommittee($committeeId: ID) {
 
 query CurrentUser {
   me {
-    username,
-    firstName,
+    username
+    firstName
     lastName
   }
 }
@@ -342,5 +353,59 @@ query Video($videoId: ID!) {
     thumbnailUrl
     embedUrl
     videoType
+  }
+}
+
+query DynamicContent($today: DateTime) {
+  # Recent news
+  recentNews: newsItems(
+    publicationDate_Lt: $today
+    # publicationDate_Gt: $recency
+    limit: 3
+    ordering: "publication_date,desc"
+  ) {
+    totalCount
+    results {
+      id
+      title
+      introduction
+      author
+      pinned
+    }
+  }
+
+  # pinned news
+  pinnedNews: newsItems(pinned: true, limit: 3, ordering: "publication_date,desc") {
+    totalCount
+    results {
+      id
+      title
+      introduction
+      author
+      pinned
+    }
+  }
+
+  # recent publication
+  publications(ordering: "date_published,desc", limit: 1) {
+    totalCount
+    results {
+      thumbnail
+      name
+      file
+      datePublished
+    }
+  }
+
+  videos(limit: 1, ordering: "date_published,desc") {
+    totalCount
+    results {
+      videoId
+      videoType
+      title
+      embedUrl
+      thumbnailUrl
+      datePublished
+    }
   }
 }
