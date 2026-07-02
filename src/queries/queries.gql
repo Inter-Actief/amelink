@@ -356,7 +356,7 @@ query Video($videoId: ID!) {
   }
 }
 
-query DynamicContent($today: DateTime, $recency: DateTime) {
+query DynamicContent($today: DateTime) {
   # Recent news
   recentNews: newsItems(
     publicationDate_Lt: $today
@@ -387,17 +387,25 @@ query DynamicContent($today: DateTime, $recency: DateTime) {
   }
 
   # recent publication
-  publications(
-    datePublished_Lt: $today
-    datePublished_Gt: $recency
-    ordering: "date_published,desc"
-    limit: 1
-  ) {
+  publications(ordering: "date_published,desc", limit: 1) {
     totalCount
     results {
       thumbnail
       name
       file
+      datePublished
+    }
+  }
+
+  videos(limit: 1, ordering: "date_published,desc") {
+    totalCount
+    results {
+      videoId
+      videoType
+      title
+      embedUrl
+      thumbnailUrl
+      datePublished
     }
   }
 }

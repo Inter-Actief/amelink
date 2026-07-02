@@ -35,10 +35,11 @@
             <template v-else-if="slotProps.data.typeName == 'publications'">
                 <h2 class="pb-4 flex gap-4 items-center">
                     <BookOpenText :size="30" />
-                    {{ $gettext('Recent publication') }}
+                    {{ $gettext('Latest publication') }}
                 </h2>
                 <a :href="publicationUrl(slotProps.data.results[0].file!)">
-                    <TextCard :title="slotProps.data.results[0].name">
+                    <TextCard :title="slotProps.data.results[0].name"
+                        :subtitle="formattedData(slotProps.data.results[0].datePublished)">
                         <template #default>
                             <img v-image-error="'/images/placeholder/book.svg'"
                                 class="max-h-240 aspect-a4 object-cover rounded-t-lg w-full"
@@ -46,6 +47,25 @@
                         </template>
                     </TextCard>
                 </a>
+            </template>
+            <template v-else-if="slotProps.data.typeName == 'videos'">
+                <h2 class="pb-4 flex gap-4 items-center">
+                    <BookOpenText :size="30" />
+                    {{ $gettext('Latest video') }}
+                </h2>
+                <RouterLink :to="{
+                    name: 'singlevideo',
+                    params: { id: slotProps.data.results[0].videoId, type: slotProps.data.results[0].videoType }
+
+                }">
+                    <TextCard :title="slotProps.data.results[0].title"
+                        :subtitle="formattedData(slotProps.data.results[0].datePublished)">
+                        <template #default>
+                            <img v-image-error class="max-h-180 aspect-video object-cover rounded-t-lg w-full"
+                                :src="slotProps.data.results[0].thumbnailUrl" />
+                        </template>
+                    </TextCard>
+                </RouterLink>
             </template>
             <template v-else-if="slotProps.data.typeName == 'newsItems'">
                 <h2 class="pb-4 flex gap-4 items-center">
@@ -67,12 +87,11 @@
 
 <script lang="ts" setup>
 import { useQuery } from '@/composables/queries';
-import { markedText, publicationUrl } from '@/functions/functions';
+import { formattedData, markedText, publicationUrl } from '@/functions/functions';
 import { useGettext } from 'vue3-gettext';
 import Carousel from 'primevue/carousel';
 import TextCard from '../ui/TextCard.vue';
 import { computed, ref, watch } from 'vue';
-import PicturesBy from '../photos/PicturesBy.vue';
 import { BookOpenText, Camera, Mailbox, Newspaper, Pin } from '@lucide/vue';
 
 const { $gettext } = useGettext();
@@ -83,12 +102,9 @@ weekAgo.setDate(today.getDate() - 300)
 
 const { result, loading } = useQuery('dynamicContent', {
     today: today.toISOString(),
-    recency: weekAgo.toISOString()
 })
 
 const processedExcerpts = ref<Record<string, string>>({})
-const newActivityPictures = ref<Record<string, string>>({})
-const pictureTakers = ref<Record<string, Array<string>>>({})
 
 watch(() => result.value, async (newResult) => {
     if (newResult) {
@@ -119,12 +135,16 @@ watch(() => result.value, async (newResult) => {
 const carouselItems = computed(() => {
     return [
         {
+            ...result.value?.pinnedNews,
+            typeName: "pinnedNews"
+        },
+        {
             ...result.value?.publications,
             typeName: "publications"
         },
         {
-            ...result.value?.pinnedNews,
-            typeName: "pinnedNews"
+            ...result.value?.videos,
+            typeName: "videos"
         },
         {
             ...result.value?.recentNews,
