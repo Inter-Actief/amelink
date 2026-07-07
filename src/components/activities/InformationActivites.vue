@@ -31,9 +31,16 @@
                             <Skeleton width="75%" height="1.5rem"></Skeleton>
                         </div>
                     </template>
-                    <span v-else>{{ formattedData(props.item.enrollmentBegin) }} {{ $gettext('from') }}
-                        {{ formattedTime(props.item.enrollmentBegin) }} {{ $gettext('until') }}
-                        {{ formattedTime(props.item.enrollmentEnd) }}</span>
+                    <span v-else>
+                        <template v-if="props.item.entireDay ?? false">
+                            {{ formattedData(props.item.begin) }}
+                        </template>
+                        <template v-else>
+                            {{ formattedData(props.item.begin) }} {{ $gettext('from') }}
+                            {{ formattedTime(props.item.begin) }} {{ $gettext('until') }}
+                            {{ formattedTime(props.item.end) }}
+                        </template>
+                    </span>
                 </div>
             </div>
             <div class="grid grid-cols-12 gap-4">

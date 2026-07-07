@@ -165,6 +165,8 @@ query OverviewNews($limit: Int, $offset: Int) {
 query SingleActivities($id: ID) {
   activity(id: $id) {
     begin
+    end
+    entireDay
     id
     summary
     description
