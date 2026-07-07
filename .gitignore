@@ -35,3 +35,4 @@ coverage
 # Language things, ignored on development
 /src/language/*.po
 /src/language/*.pot
+/stats.html
