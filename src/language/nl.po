@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "PO-Revision-Date: 2026-07-09 11:04+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Last-Translator: Daniel Danny Jonker <jonkerdd@inter-actief.net>\n"
 "Language-Team: Dutch <https://weblate.ia.utwente.nl/projects/amelie/amelink/"
 "nl/>\n"
 "Language: nl\n"
@@ -88,9 +88,8 @@ msgstr "Foto's"
 
 #: src/components/activities/PhotosActivities.vue:3
 #: src/components/activities/PhotosActivities.vue:18
-#, fuzzy
 msgid "Go to activity"
-msgstr "Terug naar activiteit"
+msgstr "Ga naar activiteit"
 
 #: src/components/activities/UpcomingActivities.vue:4
 #: src/components/activities/UpcomingActivitiesCards.vue:2
@@ -115,21 +114,18 @@ msgstr ""
 "van Nederland is."
 
 #: src/components/footer/Footer.vue:10
-#, fuzzy
 msgid "Pages"
-msgstr "Pagina"
+msgstr "Pagina's"
 
 #: src/components/footer/Footer.vue:17
-#, fuzzy
 msgid "Important information"
-msgstr "Informatie"
+msgstr "Belangrijke informatie"
 
 #: src/components/footer/Footer.vue:18
 msgid "Privacy policy"
 msgstr "Privacybeleid"
 
 #: src/components/footer/Footer.vue:20 src/components/header/Header.vue:213
-#, fuzzy
 msgid "Contact"
 msgstr "Contact"
 
@@ -147,15 +143,13 @@ msgstr "Neem contact op"
 
 #: src/components/footer/Footer.vue:51 src/components/header/Header.vue:70
 #: src/components/homepage/HomepageCards.vue:8
-#, fuzzy
 msgid "Activities"
-msgstr "Activiteit"
+msgstr "Activiteiten"
 
 #: src/components/footer/Footer.vue:55 src/components/header/Header.vue:74
 #: src/components/homepage/HomepageCards.vue:17
-#, fuzzy
 msgid "News"
-msgstr "Nieuws pagina"
+msgstr "Nieuws"
 
 #: src/components/footer/Footer.vue:59 src/components/header/Header.vue:78
 #: src/views/pages/PublicationView.vue:34
