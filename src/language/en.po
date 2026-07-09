@@ -1,13 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-07-09 11:15+0000\n"
+"Last-Translator: Kevin Alberts <albertskja@inter-actief.net>\n"
+"Language-Team: English <https://weblate.ia.utwente.nl/projects/amelie/"
+"amelink/en/>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #: src/components/activities/InformationActivites.vue:2
 msgid "Who, what, where, when..."
@@ -65,9 +68,8 @@ msgid "Past activities"
 msgstr "Past activities"
 
 #: src/components/activities/PastActivities.vue:4
-#, fuzzy
 msgid "Zoek activiteiten"
-msgstr "Latest Activities"
+msgstr "Search activities"
 
 #: src/components/activities/PastActivities.vue:11
 #: src/components/activities/UpcomingActivities.vue:12
@@ -85,9 +87,8 @@ msgstr "Photos"
 
 #: src/components/activities/PhotosActivities.vue:3
 #: src/components/activities/PhotosActivities.vue:18
-#, fuzzy
 msgid "Go to activity"
-msgstr "Back to activity"
+msgstr "Go to activity"
 
 #: src/components/activities/UpcomingActivities.vue:4
 #: src/components/activities/UpcomingActivitiesCards.vue:2
@@ -112,21 +113,18 @@ msgstr ""
 "study association in the Netherlands."
 
 #: src/components/footer/Footer.vue:10
-#, fuzzy
 msgid "Pages"
-msgstr "Page"
+msgstr "Pages"
 
 #: src/components/footer/Footer.vue:17
-#, fuzzy
 msgid "Important information"
-msgstr "Information"
+msgstr "Important information"
 
 #: src/components/footer/Footer.vue:18
 msgid "Privacy policy"
 msgstr "Privacy policy"
 
 #: src/components/footer/Footer.vue:20 src/components/header/Header.vue:213
-#, fuzzy
 msgid "Contact"
 msgstr "Contact"
 
@@ -144,9 +142,8 @@ msgstr "Contact us"
 
 #: src/components/footer/Footer.vue:51 src/components/header/Header.vue:70
 #: src/components/homepage/HomepageCards.vue:8
-#, fuzzy
 msgid "Activities"
-msgstr "Activity"
+msgstr "Activities"
 
 #: src/components/footer/Footer.vue:55 src/components/header/Header.vue:74
 #: src/components/homepage/HomepageCards.vue:17
@@ -165,7 +162,7 @@ msgstr "Education"
 
 #: src/components/header/Header.vue:12
 msgid "Old website"
-msgstr ""
+msgstr "Old website"
 
 #: src/components/header/Header.vue:15
 msgid "Become a member"
@@ -178,9 +175,8 @@ msgstr "Home"
 #: src/components/header/Header.vue:82
 #: src/components/homepage/HomepageCards.vue:35
 #: src/views/companies/CompaniesView.vue:21
-#, fuzzy
 msgid "Companies"
-msgstr "Components"
+msgstr "Companies"
 
 #: src/components/header/Header.vue:86
 msgid "Association"
@@ -251,42 +247,40 @@ msgid "Inter-Archive"
 msgstr "Inter-Archive"
 
 #: src/components/header/Header.vue:155
-#, fuzzy
 msgid "For members"
-msgstr "Honorary members"
+msgstr "For members"
 
 #: src/components/header/Header.vue:158
 msgid "Azure Dev Tools"
-msgstr ""
+msgstr "Azure Dev Tools"
 
 #: src/components/header/Header.vue:162
 msgid "GMM documents"
-msgstr ""
+msgstr "GMM documents"
 
 #: src/components/header/Header.vue:166
 msgid "Assignments by the UT"
-msgstr ""
+msgstr "Assignments by the UT"
 
 #: src/components/header/Header.vue:170
 msgid "Corporate identity"
-msgstr ""
+msgstr "Corporate identity"
 
 #: src/components/header/Header.vue:174
-#, fuzzy
 msgid "Old privacy policies"
-msgstr "Privacy policy"
+msgstr "Old privacy policies"
 
 #: src/components/header/Header.vue:178
 msgid "Social media"
-msgstr ""
+msgstr "Social media"
 
 #: src/components/header/Header.vue:182
 msgid "Mental health"
-msgstr ""
+msgstr "Mental health"
 
 #: src/components/header/Header.vue:186
 msgid "Do groups"
-msgstr ""
+msgstr "Do groups"
 
 #: src/components/header/Header.vue:195 src/views/pages/EducationView.vue:4
 msgid "Information"
@@ -294,15 +288,15 @@ msgstr "Information"
 
 #: src/components/header/Header.vue:199
 msgid "Books"
-msgstr ""
+msgstr "Books"
 
 #: src/components/header/Header.vue:203
 msgid "Summaries"
-msgstr ""
+msgstr "Summaries"
 
 #: src/components/header/Header.vue:207
 msgid "Tutoring"
-msgstr ""
+msgstr "Tutoring"
 
 #: src/components/header/UserButton.vue:2
 msgid "Sign-in"
@@ -326,15 +320,15 @@ msgstr "Read more"
 
 #: src/views/404.vue:13
 msgid "404, not found!"
-msgstr ""
+msgstr "404, not found!"
 
 #: src/views/404.vue:14
 msgid "We could not find the following page: "
-msgstr ""
+msgstr "We could not find the following page: "
 
 #: src/views/404.vue:16
 msgid "Back to home"
-msgstr ""
+msgstr "Back to home"
 
 #: src/views/activities/ActivitiesView.vue:5
 msgid "Activities you don't want to miss"
@@ -349,51 +343,45 @@ msgid "Return to overview"
 msgstr "Return to overview"
 
 #: src/views/committees/CommitteesView.vue:5
-#, fuzzy
 msgid "Our committees"
-msgstr "Committees"
+msgstr "Our committees"
 
 #: src/views/committees/SingleCommitteeView.vue:5
 msgid "We could not find this committee."
-msgstr ""
+msgstr "We could not find this committee."
 
 #: src/views/committees/SingleCommitteeView.vue:8
 #: src/views/committees/SingleCommitteeView.vue:26
-#, fuzzy
 msgid "View all committees"
-msgstr "View all activities"
+msgstr "View all committees"
 
 #: src/views/committees/SingleCommitteeView.vue:30
-#, fuzzy
 msgid "Committee information"
-msgstr "Information"
+msgstr "Committee information"
 
 #: src/views/committees/SingleCommitteeView.vue:57
-#, fuzzy
 msgid "Committee members"
-msgstr "Committees"
+msgstr "Committee members"
 
 #: src/views/committees/SingleCommitteeView.vue:99
 msgid "This committee does not have a description"
-msgstr ""
+msgstr "This committee does not have a description"
 
 #: src/views/companies/CompanyView.vue:29
 msgid "We could not find this company."
-msgstr ""
+msgstr "We could not find this company."
 
 #: src/views/companies/CompanyView.vue:32
-#, fuzzy
 msgid "View all companies"
-msgstr "View all activities"
+msgstr "View all companies"
 
 #: src/views/companies/CompanyView.vue:37
-#, fuzzy
 msgid "Company profile"
-msgstr "Components"
+msgstr "Company profile"
 
 #: src/views/companies/CompanyView.vue:51
 msgid "Website"
-msgstr ""
+msgstr "Website"
 
 #~ msgid "Name"
 #~ msgstr "Name"
