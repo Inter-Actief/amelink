@@ -1,4 +1,4 @@
-FROM node:lts-alpine as build
+FROM node:24.18.0-alpine as build
 RUN mkdir /app
 WORKDIR /app
 COPY . .
@@ -12,7 +12,8 @@ RUN echo "Installing required Alpine packages..." && \
     yarn gettext:compile && \
     echo "Building application..." && \
     yarn build
-FROM nginxinc/nginx-unprivileged:stable
+
+FROM nginxinc/nginx-unprivileged:1.30.3
 COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
