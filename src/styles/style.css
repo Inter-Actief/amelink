@@ -17,3 +17,13 @@
 .grid-cards-wide {
   @apply grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5;
 }
+
+@utility bg-hazard-staging {
+  background-image: repeating-linear-gradient(
+    -55deg,
+    var(--color-primary),
+    var(--color-primary) 20px,
+    var(--color-blue-300) 20px,
+    var(--color-blue-300) 40px
+  );
+}

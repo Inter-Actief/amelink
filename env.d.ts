@@ -15,6 +15,7 @@ interface ImportMetaEnv {
     readonly VITE_BASE_URL: string
     readonly VITE_OLD_FRONTEND_URL: string
     readonly VITE_REDIRECT_LOGGEDIN?: string
+    readonly VITE_ENV: string
 }
 
 interface ImportMeta {

@@ -1,6 +1,9 @@
 <template>
     <!-- TODO: Make header menubar styling better (regarding hover states etc)-->
-    <header class="bg-primary text-primary-contrast z-20">
+    <header class="text-primary-contrast z-20" :class="{
+        'bg-primary': mode != 'staging',
+        'bg-hazard-staging': mode == 'staging'
+    }">
         <!-- Desktop: Logo and buttons on same row -->
         <div class="hidden md:flex flex-row gap-4 pt-10 pl-10 pr-10 pb-6">
             <div id="header_logo" class="basis-1/5">
@@ -80,7 +83,7 @@ import UserButton from './UserButton.vue';
 import { mainMenu } from '@/constants/pageCategories';
 
 const { $gettext } = useGettext();
-
+const mode = import.meta.env.VITE_ENV
 const oldFrontendUrl = import.meta.env.VITE_OLD_FRONTEND_URL;
 
 // Transform menu with translations
