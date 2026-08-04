@@ -1,4 +1,6 @@
 FROM node:24.18.0-alpine as build
+ARG BUILD_SOURCEMAP=false
+ENV BUILD_SOURCEMAP=$BUILD_SOURCEMAP
 RUN mkdir /app
 WORKDIR /app
 COPY . .
