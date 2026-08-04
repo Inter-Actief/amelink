@@ -60,6 +60,7 @@ if (import.meta.env.VITE_SENTRY_DSN) {
         tracesSampleRate: 0.0,
         sendDefaultPii: true,
         environment: import.meta.env.VITE_SENTRY_ENVIRONMENT,
+        release: '0.0.1',  // placeholder
     })
 }
 
