@@ -13,17 +13,27 @@ const themeStore = useThemeStore()
 const theme = computed(() => themeStore.theme)
 const { switchTheme } = themeStore
 
-const icon = computed(() =>
-    theme.value === 'light' ? Sun : theme.value === 'dark' ? Moon : MonitorCog
-)
+const icon = computed(() => {
+    switch (theme.value) {
+        case 'light':
+            return Sun
+        case 'dark':
+            return Moon
+        default:
+            return MonitorCog
+    }
+})
 
-const title = computed(() =>
-    theme.value === 'light'
-        ? 'Light mode'
-        : theme.value === 'dark'
-        ? 'Dark mode'
-        : 'Use system theme'
-)
+const title = computed(() => {
+    switch (theme.value) {
+        case 'light':
+            return 'Light mode'
+        case 'dark':
+            return 'Dark mode'
+        default:
+            return 'Use system theme'
+    }
+})
 </script>
 
 <style scoped>
