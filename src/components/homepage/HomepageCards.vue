@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </RouterLink>
-            <RouterLink :to="{ name: 'home' }" class="md:order-3 lg:col-start-1 lg:row-start-2 lg:order-none">
+            <RouterLink :to="{ name: 'companies' }" class="md:order-3 lg:col-start-1 lg:row-start-2 lg:order-none">
                 <div class="relative">
                     <ImageFade :images="careerImages" :interval="10_000" />
                     <div
