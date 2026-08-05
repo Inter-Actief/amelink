@@ -1,32 +1,57 @@
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { ref, watch } from 'vue'
 
-type ThemeType = 'light' | 'dark'
+type ThemeOption = 'light' | 'dark' | 'system'
+type EffectiveTheme = 'light' | 'dark'
+
+const themes: ThemeOption[] = ['dark', 'system', 'light']
+
+const getSystemTheme = (): EffectiveTheme =>
+    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+
+const applyTheme = (theme: ThemeOption) => {
+    const effectiveTheme: EffectiveTheme = theme === 'system' ? getSystemTheme() : theme
+
+    document.documentElement.classList.toggle('dark', effectiveTheme === 'dark')
+    document.documentElement.classList.toggle('light', effectiveTheme === 'light')
+}
 
 export const useThemeStore = defineStore('themeStore', () => {
+    const theme = ref<ThemeOption>('system')
+
+    watch(theme, (value) => {
+        localStorage.setItem('theme', value)
+        applyTheme(value)
+    })
+
     const initialiseTheme = () => {
-        let storedTheme = localStorage.getItem('theme') ?? 'light'
+        const storedTheme = localStorage.getItem('theme')
+        theme.value = themes.includes(storedTheme as ThemeOption) ? (storedTheme as ThemeOption) : 'system'
+        // localStorage.setItem('theme', theme.value)
+        // applyTheme(theme.value)
 
-        const isValidTheme = (value: string): value is ThemeType =>
-            value === 'light' || value === 'dark'
+        type MediaQueryListWithDeprecatedListener = MediaQueryList & {
+            addListener(listener: (this: MediaQueryList, ev: MediaQueryListEvent) => void): void
+        }
 
-        theme.value = isValidTheme(storedTheme) ? storedTheme : 'light'
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+        const handleSystemChange = () => {
+            if (theme.value === 'system') {
+                applyTheme('system')
+            }
+        }
 
-        // Update document root
-        document.documentElement.className = theme.value
+        if ('addEventListener' in mediaQuery) {
+            mediaQuery.addEventListener('change', handleSystemChange)
+        } else if ('addListener' in mediaQuery) {
+            const legacyMediaQuery = mediaQuery as MediaQueryListWithDeprecatedListener
+            legacyMediaQuery.addListener(handleSystemChange)
+        }
     }
 
-    const theme = ref<ThemeType>('light')
-
     const switchTheme = () => {
-        theme.value = theme.value == 'light' ? 'dark' : 'light'
-
-        // Update document root
-        document.documentElement.classList.toggle('light')
-        document.documentElement.classList.toggle('dark')
-
-        // Update localstorage
-        localStorage.setItem('theme', theme.value)
+        const nextIndex = (themes.indexOf(theme.value) + 1) % themes.length
+        theme.value = themes[nextIndex]
     }
 
     return { theme, switchTheme, initialiseTheme }
