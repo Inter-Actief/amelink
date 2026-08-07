@@ -36,6 +36,8 @@ import Content from './components/ui/Content.vue';
 import { useLoadingStore } from './stores/loadingStore.ts';
 import { storeToRefs } from 'pinia';
 import { ref, watch } from 'vue';
+import { registerToast } from './services/toast.ts';
+import { useToast } from 'primevue/usetoast';
 
 const languageStore = useLanguageStore();
 const themeStore = useThemeStore();
@@ -46,6 +48,7 @@ themeStore.initialiseTheme();
 const loading = useLoadingStore();
 const { isLoading } = storeToRefs(loading);
 
+registerToast(useToast())
 </script>
 
 <style>
