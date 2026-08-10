@@ -39,7 +39,7 @@ const router = createRouter({
         {
             path: '/news/:id',
             name: 'singlenews',
-            component: () => SingleNews,
+            component: SingleNews,
             props: true,
         },
         {
@@ -60,13 +60,13 @@ const router = createRouter({
         {
             path: '/activities/:id',
             name: 'singleactivities',
-            component: () => SingleActivities,
+            component: SingleActivities,
             props: true,
         },
         {
             path: '/activities/:id/photos',
             name: 'singleactivitiesphotos',
-            component: () => ActivitiesPhotosView,
+            component: ActivitiesPhotosView,
             props: true,
         },
         {
@@ -117,7 +117,7 @@ const router = createRouter({
         {
             path: '/committees/:id/:slug',
             name: 'singlecommittee',
-            component: () => SingleCommittee,
+            component: SingleCommittee,
             props: true,
         },
         {
