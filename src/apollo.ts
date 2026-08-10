@@ -3,6 +3,7 @@ import { setContext } from '@apollo/client/link/context'
 import { useOidcStore } from '@/stores/oidcStore'
 import { useLoadingStore } from './stores/loadingStore'
 import { onError } from '@apollo/client/link/error'
+import { showError } from './services/toast'
 
 const httpLink = createHttpLink({
     uri: import.meta.env.VITE_AMELIE_GRAPHQL_API,
@@ -42,8 +43,16 @@ export const errorLink = onError(({ networkError, graphQLErrors }) => {
     }
     loading.stop()
 
-    if (graphQLErrors) graphQLErrors.forEach((err) => console.error('GraphQL error:', err))
-    if (networkError) console.error('Network error:', networkError)
+    if (graphQLErrors) {  
+        graphQLErrors.forEach((err) => console.error('GraphQL error:', err))
+        for (const err of graphQLErrors) {
+            showError(err.message);
+        }
+    }
+    if (networkError) {
+        console.error('Network error:', networkError)
+        showError('Network error. Please try again.')
+    }
 })
 
 const cache = new InMemoryCache()

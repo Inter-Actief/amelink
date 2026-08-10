@@ -12,6 +12,7 @@ import router from './router'
 import * as Sentry from '@sentry/vue'
 import { apolloClient } from '@/apollo'
 import { vImageError } from '@/directives/vImageError'
+import { showError } from './services/toast'
 
 export { apolloClient }
 
@@ -51,6 +52,7 @@ app.use(PrimeVue, {
 // Initialize OIDC
 const oidcStore = useOidcStore()
 
+let sentryErrorHandler = null
 // Sentry
 if (import.meta.env.VITE_SENTRY_DSN) {
     Sentry.init({
@@ -62,6 +64,22 @@ if (import.meta.env.VITE_SENTRY_DSN) {
         environment: import.meta.env.VITE_SENTRY_ENVIRONMENT,
         release: '0.0.1',  // placeholder
     })
+
+    // Set error handler (updated by sentry)
+    sentryErrorHandler = app.config.errorHandler
+}
+
+
+// Global error handling toast
+app.config.errorHandler = (err, instance, info) => {
+    showError(
+        err instanceof Error
+            ? err.message
+            : 'An unexpected error occurred.'
+    )
+
+    // Call sentry's error handler
+    sentryErrorHandler?.(err, instance, info)
 }
 
 // Wait for auth to initialize before mounting
