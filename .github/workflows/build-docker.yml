@@ -31,7 +31,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args: BUILD_SOURCEMAP=${{ github.ref_name != 'production' }}
+          build-args: BUILD_OBFUSCATE=${{ github.ref_name == 'production' }}
       - name: Cleanup untagged images older than 1 week
         uses: snok/container-retention-policy@v2
         with:
