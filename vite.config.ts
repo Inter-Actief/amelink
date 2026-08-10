@@ -38,7 +38,8 @@ export default defineConfig({
         // Target should be es2020 or above (if want to use import.meta)
         // https://esbuild.github.io/content-types/#javascript
         target: 'esnext', // Newest JS
-        sourcemap: process.env.BUILD_SOURCEMAP != 'false',
+        minify: process.env.BUILD_OBFUSCATE?.toLocaleLowerCase() != 'false',
+        sourcemap: process.env.BUILD_OBFUSCATE?.toLocaleLowerCase() == 'false',
         rollupOptions: {
             output: {
                 manualChunks(id) {
