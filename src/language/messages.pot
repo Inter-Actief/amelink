@@ -154,13 +154,13 @@ msgstr ""
 msgid "Education"
 msgstr ""
 
-#: src/components/header/Header.vue:13
-#: src/components/header/Header.vue:34
+#: src/components/header/Header.vue:16
+#: src/components/header/Header.vue:37
 msgid "Old website"
 msgstr ""
 
-#: src/components/header/Header.vue:16
-#: src/components/header/Header.vue:37
+#: src/components/header/Header.vue:19
+#: src/components/header/Header.vue:40
 msgid "Become a member"
 msgstr ""
 
@@ -216,6 +216,18 @@ msgstr ""
 
 #: src/components/ui/TextCard.vue:58
 msgid "Read more"
+msgstr ""
+
+#: src/components/ui/ThemeSwitcher.vue:33
+msgid "Light mode"
+msgstr ""
+
+#: src/components/ui/ThemeSwitcher.vue:35
+msgid "Dark mode"
+msgstr ""
+
+#: src/components/ui/ThemeSwitcher.vue:37
+msgid "Use system theme"
 msgstr ""
 
 #: src/views/404.vue:13
