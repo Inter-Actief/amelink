@@ -15,9 +15,7 @@
                 </div>
             </template>
             <template #content>
-                <p class="p-4">
-                    <slot name="content" />
-                </p>
+                <slot name="content" />
             </template>
         </Card>
     </div>

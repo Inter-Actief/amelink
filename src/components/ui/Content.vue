@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full py-16" :style="props.light ? 'background: var(--p-page-highlight);' : ''">
+    <div class="w-full py-8" :style="props.light ? 'background: var(--p-page-highlight);' : ''">
         <div class="mx-10 md:mx-32">
             <slot />
         </div>
