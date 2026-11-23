@@ -59,6 +59,28 @@ theme, base, primevue, components, utilities
 ```
 This allows Tailwind utilities to override PrimeVue component styles cleanly.
 
+### Shared Style Primitives Have One Implementation
+
+The animated link underline exists once, as `.link` in `src/styles/main.css`
+(an `::after` bar sliding in from the left); Markdown links use `.text a` in
+`fonts.css`. Never redeclare `background`, `background-size` or
+`text-decoration` for either in a `<style scoped>` block — scoped selectors
+outrank the global class and silently reset the effect.
+
+Text sizes come from the semantic tokens in the `@theme` block of
+`src/styles/style.css` (`text-page-title` 25px, `text-section` 21.6px,
+`text-card-title` 18.2px, `text-body` 15.4px, `text-meta` 13.4px). `html` is at
+`60%`, so Tailwind's own `text-*` scale lands below the body size and inverts
+the hierarchy.
+
+## Verifying UI Changes
+
+`yarn type-check` cannot see CSS or the rendered result, so it is not evidence
+that a UI change works. Reproduce on the reported revision, check one element
+of every distinct call site of a shared class, assert the property you care
+about (e.g. `::after` transform reaching `scaleX(1)`, not "something changed"),
+and say what you covered. Probe recipes are in the amelink skill.
+
 ## Directory Guide
 
 | Path | Purpose |
@@ -127,3 +149,5 @@ All public env vars must be prefixed with `VITE_`.
 8. **The legacy SCSS file** `src/styles/style_old.scss` exists but is not actively used for new work.
 9. **If adding a large npm dependency**, check `vite.config.ts` manual chunks. Adding it to an existing chunk (or creating a new one) keeps the bundle strategy healthy.
 10. **Auth callback route (`/auth/callback`) must stay lightweight.** Do not add route guards or loading states that could interfere with OIDC state parsing.
+11. **`yarn lint` is currently broken.** A stale `eslint.config.js` shadows `eslint.config.ts` and crashes on load (`Named export 'rules' not found` from the CJS `eslint-plugin-vue`). Deleting the `.js` lets ESLint load the TS config but surfaces ~108 pre-existing errors. Also note it runs with `--fix`: it rewrites files *before* failing.
+12. **Heading sizes are set by unlayered `fonts.css`.** Its `h1`–`h4` rules beat any Tailwind utility, so overriding a heading's size with a token utility needs the important modifier (`text-card-title!`).

@@ -103,8 +103,8 @@ const items = computed(() => (queryResults.value ? queryResults.value.results : 
     background-color: #eee;
 }
 
-.upcomingactivities .item:hover .readmore {
-    background-size: 100% 0.2rem;
+.upcomingactivities .item:hover .readmore::after {
+    transform: scaleX(1);
 }
 
 .upcomingactivities .item .label {

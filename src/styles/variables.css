@@ -44,9 +44,12 @@
 	--row-width: 90%;
 	--row-max-width: var(--row-large);
 
-	--gap-l: 6rem;
-	--gap: 3rem;
-	--gap-sm: 1.5rem;
+	/* Content is capped so lines stay readable and the layout stays dense on wide screens */
+	--content-max-width: 140rem;
+
+	--gap-l: 3.5rem;
+	--gap: 2rem;
+	--gap-sm: 1rem;
 	--gap-xs: 1rem;
 	--gap-xxs: 0.5rem;
 
@@ -55,11 +58,11 @@
 
 	/* Fonts */
 	--font-family: 'Inter';
-	--font-size: 1.8rem;
-	--font-size-small: 1.5rem;
-	--font-size-extra-small: 1.3rem;
-	--font-size-large: 2rem;
-	--line-height: 2.52rem;
+	--font-size: 1.6rem;
+	--font-size-small: 1.35rem;
+	--font-size-extra-small: 1.15rem;
+	--font-size-large: 1.8rem;
+	--line-height: 2.2rem;
 	--text-color: #1e1e1e;
 	--text-color-light: #fff;
 
@@ -70,5 +73,5 @@
 	--button-border-radius: var(--border-radius);
 
 	/* Typography spacing */
-	--p-spacing: 1.8rem;
+	--p-spacing: 1.1rem;
 }

@@ -343,6 +343,7 @@ query Videos($limit: Int, $offset: Int) {
       title
       embedUrl
       thumbnailUrl
+      datePublished
     }
   }
 }
@@ -355,6 +356,7 @@ query Video($videoId: ID!) {
     thumbnailUrl
     embedUrl
     videoType
+    datePublished
   }
 }
 

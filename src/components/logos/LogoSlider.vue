@@ -30,11 +30,11 @@ const banners = computed(() => query.result.value?.websiteBanners?.results?.filt
 
 <template>
 
-    <div v-if="loading" class="flex flex-row gap-12">
+    <div v-if="loading" class="flex flex-row md:gap-5">
         <skeleton height="15rem" v-for="_ in 4" />
     </div>
 
-    <swiper v-if="!loading" :slidesPerView="1" :spaceBetween="30" :loop="true" class="logoswiper" :autoplay="{
+    <swiper v-if="!loading" :slidesPerView="1" :spaceBetween="20" :loop="true" class="logoswiper" :autoplay="{
         delay: 4000,
         disableOnInteraction: false,
     }" :modules="swiperModules" :breakpoints="breakpoints">
@@ -64,5 +64,15 @@ const banners = computed(() => query.result.value?.websiteBanners?.results?.filt
 .logoswiper .swiper-slide a {
     display: block;
     margin: 0 auto;
+    padding-inline: 0.6rem;
+}
+
+/* Banner images ship at wildly different sizes; cap them so the band stays short
+   and letterbox them so nothing gets cut off */
+.logoswiper .swiper-slide img {
+    height: 5rem;
+    width: 100%;
+    object-fit: contain;
+    margin-inline: auto;
 }
 </style>

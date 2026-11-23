@@ -1,15 +1,15 @@
 <template>
-    <div v-if="loading" class="grid grid-cols-1 gap-12 mx-12 my-4">
+    <div v-if="loading" class="grid grid-cols-1 gap-3 mx-2 my-2">
         <TextCard loading v-for="_ in 3" />
     </div>
     <Carousel v-if="!loading && result" :value="carouselItems" :num-visible="1" :num-scroll="1">
         <template #item="slotProps">
             <template v-if="slotProps.data.typeName == 'pinnedNews'">
-                <h2 class="pb-4 flex gap-4 items-center">
-                    <Pin :size="30" />
+                <h2 class="pb-2 flex gap-2 items-center text-card-title!">
+                    <Pin :size="20" />
                     {{ $gettext('Pinned news') }}
                 </h2>
-                <div class="grid grid-cols-1 gap-12 items-stretch">
+                <div class="grid grid-cols-1 gap-3 items-stretch">
                     <template v-if="slotProps.data.results" v-for="item in slotProps.data.results" :key="item?.id">
                         <TextCard :title="item?.title!" :subtitle="item?.author || ''"
                             :routerLink="{ to: { name: 'singlenews', params: { id: item?.id } } }">
@@ -19,11 +19,11 @@
                 </div>
             </template>
             <template v-else-if="slotProps.data.typeName == 'recentNews'">
-                <h2 class="pb-4 flex gap-4 items-center">
-                    <Mailbox :size="30" />
+                <h2 class="pb-2 flex gap-2 items-center text-card-title!">
+                    <Mailbox :size="20" />
                     {{ $gettext('Recent news') }}
                 </h2>
-                <div class="grid grid-cols-1 gap-12 items-stretch">
+                <div class="grid grid-cols-1 gap-3 items-stretch">
                     <template v-if="slotProps.data.results" v-for="item in slotProps.data.results" :key="item?.id">
                         <TextCard :title="item?.title!" :subtitle="item?.author || ''"
                             :routerLink="{ to: { name: 'singlenews', params: { id: item?.id } } }">
@@ -33,8 +33,8 @@
                 </div>
             </template>
             <template v-else-if="slotProps.data.typeName == 'publications'">
-                <h2 class="pb-4 flex gap-4 items-center">
-                    <BookOpenText :size="30" />
+                <h2 class="pb-2 flex gap-2 items-center text-card-title!">
+                    <BookOpenText :size="20" />
                     {{ $gettext('Latest publication') }}
                 </h2>
                 <a :href="publicationUrl(slotProps.data.results[0].file!)">
@@ -42,15 +42,15 @@
                         :subtitle="formattedData(slotProps.data.results[0].datePublished)">
                         <template #default>
                             <img v-image-error="'/images/placeholder/book.svg'"
-                                class="max-h-240 aspect-a4 object-cover object-top rounded-t-lg w-full"
+                                class="max-h-180 aspect-a4 object-cover object-top rounded-t-lg w-full"
                                 :src="slotProps.data.results[0].thumbnail" />
                         </template>
                     </TextCard>
                 </a>
             </template>
             <template v-else-if="slotProps.data.typeName == 'videos'">
-                <h2 class="pb-4 flex gap-4 items-center">
-                    <BookOpenText :size="30" />
+                <h2 class="pb-2 flex gap-2 items-center text-card-title!">
+                    <BookOpenText :size="20" />
                     {{ $gettext('Latest video') }}
                 </h2>
                 <RouterLink :to="{
@@ -61,18 +61,18 @@
                     <TextCard :title="slotProps.data.results[0].title"
                         :subtitle="formattedData(slotProps.data.results[0].datePublished)">
                         <template #default>
-                            <img v-image-error class="max-h-180 aspect-video object-cover rounded-t-lg w-full"
+                            <img v-image-error class="max-h-140 aspect-video object-cover rounded-lg w-full"
                                 :src="slotProps.data.results[0].thumbnailUrl" />
                         </template>
                     </TextCard>
                 </RouterLink>
             </template>
             <template v-else-if="slotProps.data.typeName == 'newsItems'">
-                <h2 class="pb-4 flex gap-4 items-center">
-                    <Newspaper :size="30" />
+                <h2 class="pb-2 flex gap-2 items-center text-card-title!">
+                    <Newspaper :size="20" />
                     {{ $gettext('All news') }}
                 </h2>
-                <div class="grid grid-cols-1 gap-12 items-stretch">
+                <div class="grid grid-cols-1 gap-3 items-stretch">
                     <template v-if="slotProps.data.results" v-for="item in slotProps.data.results" :key="item?.id">
                         <TextCard :title="item?.title!" :subtitle="item?.author || ''"
                             :routerLink="{ to: { name: 'singlenews', params: { id: item?.id } } }">
@@ -157,7 +157,7 @@ const carouselItems = computed(() => {
 </script>
 
 <style scoped>
-.gotopic:hover .readmore {
-    background-size: 100% 0.2rem;
+.gotopic:hover .readmore::after {
+    transform: scaleX(1);
 }
 </style>

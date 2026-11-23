@@ -5,7 +5,7 @@
             <skeleton :height="`${randomheight}rem`"></skeleton>
         </template>
         <template #title>
-            <div class="flex flex-row items-center w-full justify-between pt-4 pl-4 expand-link link">
+            <div class="flex flex-row items-center w-full justify-between pt-2 px-3 expand-link link">
                 <Skeleton height="4rem"></Skeleton>
             </div>
         </template>

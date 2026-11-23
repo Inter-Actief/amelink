@@ -17,39 +17,38 @@ msgid "Who, what, where, when..."
 msgstr "Who, what, where, when..."
 
 #: src/components/activities/InformationActivites.vue:5
-#: src/components/activities/InformationActivites.vue:45
 msgid "Who"
 msgstr "Who"
 
-#: src/components/activities/InformationActivites.vue:6
+#: src/components/activities/InformationActivites.vue:12
 msgid "What"
 msgstr "What"
 
-#: src/components/activities/InformationActivites.vue:7
+#: src/components/activities/InformationActivites.vue:19
 msgid "Where"
 msgstr "Where"
 
-#: src/components/activities/InformationActivites.vue:8
+#: src/components/activities/InformationActivites.vue:26
 msgid "When"
 msgstr "When"
 
-#: src/components/activities/InformationActivites.vue:9
-msgid "Label"
-msgstr "Label"
-
-#: src/components/activities/InformationActivites.vue:10
-msgid "Costs"
-msgstr "Costs"
-
-#: src/components/activities/InformationActivites.vue:16
+#: src/components/activities/InformationActivites.vue:39
 msgid "from"
 msgstr "from"
 
-#: src/components/activities/InformationActivites.vue:17
+#: src/components/activities/InformationActivites.vue:40
 msgid "until"
 msgstr "until"
 
-#: src/components/activities/InformationActivites.vue:24
+#: src/components/activities/InformationActivites.vue:47
+msgid "Label"
+msgstr "Label"
+
+#: src/components/activities/InformationActivites.vue:54
+msgid "Costs"
+msgstr "Costs"
+
+#: src/components/activities/InformationActivites.vue:60
 msgid "Free"
 msgstr "Free"
 
@@ -63,32 +62,43 @@ msgstr "Latest Activities"
 msgid "View all activities"
 msgstr "View all activities"
 
-#: src/components/activities/PastActivities.vue:3
+#: src/components/activities/PastActivities.vue:52
 msgid "Past activities"
 msgstr "Past activities"
 
-#: src/components/activities/PastActivities.vue:4
+#: src/components/activities/PastActivities.vue:54
 msgid "Zoek activiteiten"
 msgstr "Search activities"
 
-#: src/components/activities/PastActivities.vue:11
+#: src/components/activities/PastActivities.vue:64
 #: src/components/activities/UpcomingActivities.vue:12
+#: src/components/placeholder/PastActivitiesPlaceholder.vue:5
 msgid "Date"
 msgstr "Date"
 
-#: src/components/activities/PastActivities.vue:13
+#: src/components/activities/PastActivities.vue:67
 #: src/components/activities/UpcomingActivities.vue:14
+#: src/components/placeholder/PastActivitiesPlaceholder.vue:11
 msgid "Activity"
 msgstr "Activity"
 
-#: src/components/activities/PastActivities.vue:27
+#: src/components/activities/PastActivities.vue:83
 msgid "Photos"
 msgstr "Photos"
 
 #: src/components/activities/PhotosActivities.vue:3
-#: src/components/activities/PhotosActivities.vue:18
+#: src/components/activities/PhotosActivities.vue:24
 msgid "Go to activity"
 msgstr "Go to activity"
+
+#: src/components/activities/PhotosActivities.vue:65
+#, fuzzy
+msgid "Photo by "
+msgstr "Photos"
+
+#: src/components/activities/PhotosActivities.vue:65
+msgid "If you want to have this photo removed, please contact the board"
+msgstr ""
 
 #: src/components/activities/UpcomingActivities.vue:4
 #: src/components/activities/UpcomingActivitiesCards.vue:2
@@ -103,7 +113,7 @@ msgstr "Type"
 msgid "Enroll now!"
 msgstr "Enroll now!"
 
-#: src/components/footer/Footer.vue:5
+#: src/components/footer/Footer.vue:6
 msgid "footer.text"
 msgstr ""
 "I.C.T.S.V. Inter-Actief is the study association for the studies Technical "
@@ -112,195 +122,96 @@ msgstr ""
 "March 1981 and has approximately 1400 members, making her the largest ICT-"
 "study association in the Netherlands."
 
-#: src/components/footer/Footer.vue:10
+#: src/components/footer/Footer.vue:11
 msgid "Pages"
 msgstr "Pages"
 
-#: src/components/footer/Footer.vue:17
+#: src/components/footer/Footer.vue:18
 msgid "Important information"
 msgstr "Important information"
 
-#: src/components/footer/Footer.vue:18
+#: src/components/footer/Footer.vue:19
 msgid "Privacy policy"
 msgstr "Privacy policy"
 
-#: src/components/footer/Footer.vue:20 src/components/header/Header.vue:213
+#: src/components/footer/Footer.vue:21
 msgid "Contact"
 msgstr "Contact"
 
-#: src/components/footer/Footer.vue:23
+#: src/components/footer/Footer.vue:24
 msgid "Report a problem"
 msgstr "Report a problem"
 
-#: src/components/footer/Footer.vue:26
+#: src/components/footer/Footer.vue:27
 msgid "CVD Policy"
 msgstr "CVD Policy"
 
-#: src/components/footer/Footer.vue:31
+#: src/components/footer/Footer.vue:32
 msgid "Contact us"
 msgstr "Contact us"
 
-#: src/components/footer/Footer.vue:51 src/components/header/Header.vue:70
-#: src/components/homepage/HomepageCards.vue:8
+#: src/components/footer/Footer.vue:52
+#: src/components/homepage/HomepageCards.vue:10
 msgid "Activities"
 msgstr "Activities"
 
-#: src/components/footer/Footer.vue:55 src/components/header/Header.vue:74
-#: src/components/homepage/HomepageCards.vue:17
+#: src/components/footer/Footer.vue:56
+#: src/components/homepage/HomepageCards.vue:19
 msgid "News"
 msgstr "News"
 
-#: src/components/footer/Footer.vue:59 src/components/header/Header.vue:78
-#: src/views/pages/PublicationView.vue:34
+#: src/components/footer/Footer.vue:60 src/views/pages/PublicationView.vue:35
 msgid "Publications"
 msgstr "Publications"
 
-#: src/components/footer/Footer.vue:63 src/components/header/Header.vue:192
-#: src/components/homepage/HomepageCards.vue:26
+#: src/components/footer/Footer.vue:64
+#: src/components/homepage/HomepageCards.vue:28
 msgid "Education"
 msgstr "Education"
 
-#: src/components/header/Header.vue:12
+#: src/components/header/Header.vue:16 src/components/header/Header.vue:37
 msgid "Old website"
 msgstr "Old website"
 
-#: src/components/header/Header.vue:15
+#: src/components/header/Header.vue:19 src/components/header/Header.vue:40
 msgid "Become a member"
 msgstr "Become a member"
-
-#: src/components/header/Header.vue:65
-msgid "Home"
-msgstr "Home"
-
-#: src/components/header/Header.vue:82
-#: src/components/homepage/HomepageCards.vue:35
-#: src/views/companies/CompaniesView.vue:21
-msgid "Companies"
-msgstr "Companies"
-
-#: src/components/header/Header.vue:86
-msgid "Association"
-msgstr "Association"
-
-#: src/components/header/Header.vue:89
-msgid "Inter-Actief"
-msgstr "Inter-Actief"
-
-#: src/components/header/Header.vue:93
-msgid "Board"
-msgstr "Board"
-
-#: src/components/header/Header.vue:97
-msgid "Former boards"
-msgstr "Former boards"
-
-#: src/components/header/Header.vue:101
-msgid "Honorary members"
-msgstr "Honorary members"
-
-#: src/components/header/Header.vue:105
-msgid "Members of Merit"
-msgstr "Members of Merit"
-
-#: src/components/header/Header.vue:109
-msgid "Committees"
-msgstr "Committees"
-
-#: src/components/header/Header.vue:113
-msgid "Membership"
-msgstr "Membership"
-
-#: src/components/header/Header.vue:117
-msgid "(Graduation) drink"
-msgstr "(Graduation) drink"
-
-#: src/components/header/Header.vue:121
-msgid "Symposia"
-msgstr "Symposia"
-
-#: src/components/header/Header.vue:125
-msgid "Study tours"
-msgstr "Study tours"
-
-#: src/components/header/Header.vue:129
-msgid "Members' initiative"
-msgstr "Members' initiative"
-
-#: src/components/header/Header.vue:133
-msgid "Association song"
-msgstr "Association song"
-
-#: src/components/header/Header.vue:137
-msgid "Alumni Association ENIAC"
-msgstr "Alumni Association ENIAC"
-
-#: src/components/header/Header.vue:141
-msgid "Sister associations"
-msgstr "Sister associations"
-
-#: src/components/header/Header.vue:145
-msgid "Inter-Actief App"
-msgstr "Inter-Actief App"
-
-#: src/components/header/Header.vue:149
-msgid "Inter-Archive"
-msgstr "Inter-Archive"
-
-#: src/components/header/Header.vue:155
-msgid "For members"
-msgstr "For members"
-
-#: src/components/header/Header.vue:158
-msgid "Azure Dev Tools"
-msgstr "Azure Dev Tools"
-
-#: src/components/header/Header.vue:162
-msgid "GMM documents"
-msgstr "GMM documents"
-
-#: src/components/header/Header.vue:166
-msgid "Assignments by the UT"
-msgstr "Assignments by the UT"
-
-#: src/components/header/Header.vue:170
-msgid "Corporate identity"
-msgstr "Corporate identity"
-
-#: src/components/header/Header.vue:174
-msgid "Old privacy policies"
-msgstr "Old privacy policies"
-
-#: src/components/header/Header.vue:178
-msgid "Social media"
-msgstr "Social media"
-
-#: src/components/header/Header.vue:182
-msgid "Mental health"
-msgstr "Mental health"
-
-#: src/components/header/Header.vue:186
-msgid "Do groups"
-msgstr "Do groups"
-
-#: src/components/header/Header.vue:195 src/views/pages/EducationView.vue:4
-msgid "Information"
-msgstr "Information"
-
-#: src/components/header/Header.vue:199
-msgid "Books"
-msgstr "Books"
-
-#: src/components/header/Header.vue:203
-msgid "Summaries"
-msgstr "Summaries"
-
-#: src/components/header/Header.vue:207
-msgid "Tutoring"
-msgstr "Tutoring"
 
 #: src/components/header/UserButton.vue:2
 msgid "Sign-in"
 msgstr "Sign-in"
+
+#: src/components/homepage/DynamicContent.vue:10
+msgid "Pinned news"
+msgstr ""
+
+#: src/components/homepage/DynamicContent.vue:24
+msgid "Recent news"
+msgstr ""
+
+#: src/components/homepage/DynamicContent.vue:38
+#, fuzzy
+msgid "Latest publication"
+msgstr "Publications"
+
+#: src/components/homepage/DynamicContent.vue:54
+#, fuzzy
+msgid "Latest video"
+msgstr "Latest News"
+
+#: src/components/homepage/DynamicContent.vue:73
+#, fuzzy
+msgid "All news"
+msgstr "View all news"
+
+#: src/components/homepage/HomepageCards.vue:37
+#: src/views/companies/CompaniesView.vue:22
+msgid "Companies"
+msgstr "Companies"
+
+#: src/components/homepage/HomepageCards.vue:43
+msgid "Current items"
+msgstr ""
 
 #: src/components/news/LatestNews.vue:5
 msgid "News & Announcements"
@@ -314,9 +225,30 @@ msgstr "View all news"
 msgid "News page"
 msgstr "News page"
 
-#: src/components/ui/TextCard.vue:29
+#: src/components/photos/PicturesBy.vue:3
+#: src/components/photos/PicturesBy.vue:6
+msgid "Pictures by"
+msgstr ""
+
+#: src/components/ui/HorizontalCard.vue:18 src/components/ui/TextCard.vue:58
 msgid "Read more"
 msgstr "Read more"
+
+#: src/components/ui/ThemeSwitcher.vue:33
+msgid "Light mode"
+msgstr ""
+
+#: src/components/ui/ThemeSwitcher.vue:35
+msgid "Dark mode"
+msgstr ""
+
+#: src/components/ui/ThemeSwitcher.vue:37
+msgid "Use system theme"
+msgstr ""
+
+#: src/functions/functions.ts:61
+msgid "%{weekday} %{month} %{day}%{ordinal} %{year}"
+msgstr "%{weekday} %{month} %{day}%{ordinal} %{year}"
 
 #: src/views/404.vue:13
 msgid "404, not found!"
@@ -334,15 +266,15 @@ msgstr "Back to home"
 msgid "Activities you don't want to miss"
 msgstr "Activities you don't want to miss"
 
-#: src/views/activities/SingleActivites.vue:11
+#: src/views/activities/SingleActivites.vue:24
 msgid "View photos"
 msgstr "View photos"
 
-#: src/views/activities/SingleActivites.vue:17 src/views/news/SingleNews.vue:18
+#: src/views/activities/SingleActivites.vue:30 src/views/news/SingleNews.vue:26
 msgid "Return to overview"
 msgstr "Return to overview"
 
-#: src/views/committees/CommitteesView.vue:5
+#: src/views/committees/CommitteesView.vue:3
 msgid "Our committees"
 msgstr "Our committees"
 
@@ -383,6 +315,121 @@ msgstr "Company profile"
 msgid "Website"
 msgstr "Website"
 
+#: src/views/pages/EducationView.vue:4
+msgid "Information"
+msgstr "Information"
+
+#: src/views/videos/VideosView.vue:22
+msgid "Videos"
+msgstr ""
+
+#: src/views/videos/VideoView.vue:29
+#, fuzzy
+msgid "We could not find this video."
+msgstr "We could not find this committee."
+
+#: src/views/videos/VideoView.vue:32
+#, fuzzy
+msgid "View all videos"
+msgstr "View all news"
+
+#: src/views/videos/VideoView.vue:45
+#, fuzzy
+msgid "Description"
+msgstr "Association"
+
+#: src/views/videos/VideoView.vue:55
+#, fuzzy
+msgid "Return to videos"
+msgstr "Return to overview"
+
+#~ msgid "Home"
+#~ msgstr "Home"
+
+#~ msgid "Inter-Actief"
+#~ msgstr "Inter-Actief"
+
+#~ msgid "Board"
+#~ msgstr "Board"
+
+#~ msgid "Former boards"
+#~ msgstr "Former boards"
+
+#~ msgid "Honorary members"
+#~ msgstr "Honorary members"
+
+#~ msgid "Members of Merit"
+#~ msgstr "Members of Merit"
+
+#~ msgid "Committees"
+#~ msgstr "Committees"
+
+#~ msgid "Membership"
+#~ msgstr "Membership"
+
+#~ msgid "(Graduation) drink"
+#~ msgstr "(Graduation) drink"
+
+#~ msgid "Symposia"
+#~ msgstr "Symposia"
+
+#~ msgid "Study tours"
+#~ msgstr "Study tours"
+
+#~ msgid "Members' initiative"
+#~ msgstr "Members' initiative"
+
+#~ msgid "Association song"
+#~ msgstr "Association song"
+
+#~ msgid "Alumni Association ENIAC"
+#~ msgstr "Alumni Association ENIAC"
+
+#~ msgid "Sister associations"
+#~ msgstr "Sister associations"
+
+#~ msgid "Inter-Actief App"
+#~ msgstr "Inter-Actief App"
+
+#~ msgid "Inter-Archive"
+#~ msgstr "Inter-Archive"
+
+#~ msgid "For members"
+#~ msgstr "For members"
+
+#~ msgid "Azure Dev Tools"
+#~ msgstr "Azure Dev Tools"
+
+#~ msgid "GMM documents"
+#~ msgstr "GMM documents"
+
+#~ msgid "Assignments by the UT"
+#~ msgstr "Assignments by the UT"
+
+#~ msgid "Corporate identity"
+#~ msgstr "Corporate identity"
+
+#~ msgid "Old privacy policies"
+#~ msgstr "Old privacy policies"
+
+#~ msgid "Social media"
+#~ msgstr "Social media"
+
+#~ msgid "Mental health"
+#~ msgstr "Mental health"
+
+#~ msgid "Do groups"
+#~ msgstr "Do groups"
+
+#~ msgid "Books"
+#~ msgstr "Books"
+
+#~ msgid "Summaries"
+#~ msgstr "Summaries"
+
+#~ msgid "Tutoring"
+#~ msgstr "Tutoring"
+
 #~ msgid "Name"
 #~ msgstr "Name"
 
@@ -397,9 +444,6 @@ msgstr "Website"
 
 #~ msgid "Demo Table"
 #~ msgstr "Demo Table"
-
-#~ msgid "Latest News"
-#~ msgstr "Latest News"
 
 #~ msgid "Demo overview"
 #~ msgstr "Demo overview"

@@ -184,6 +184,27 @@ can drift. `router.afterEach()` has a 3-second safety reset.
   in Tailwind.
 - **Avoid** adding styles to `src/styles/style_old.scss` — it is legacy.
 
+### Type Scale and Link Underlines
+
+`html` is `60%`, so `1rem = 9.6px` and Tailwind's own `text-*` scale lands
+below body copy (`text-2xl` is 14.4px). Size text with the tokens from the
+`@theme` block in `src/styles/style.css`: `text-page-title` 25px,
+`text-section` 21.6px, `text-card-title` 18.2px, `text-body` 15.4px,
+`text-meta` 13.4px. `src/styles/fonts.css` maps `h1`–`h4` onto the same tokens
+but is unlayered, so resizing a heading element with a utility needs the
+important modifier (`text-card-title!`).
+
+The underline exists once: `.link` in `src/styles/main.css` slides an `::after`
+bar in with `scaleX(0) → scaleX(1)`. Markdown links use `.text a` in
+`fonts.css` (a `background-size` gradient, because inline links must wrap).
+Never redeclare `background`, `background-size` or `text-decoration` for
+either inside a `<style scoped>` block: scoped selectors outrank the global
+class and silently kill the animation.
+
+`yarn type-check` cannot see CSS, so a style change is only checked once you
+have hovered it in a browser (`yarn dev`, then one element of each distinct
+kind of `class="link"` caller).
+
 ## Routing
 
 - History mode router (`createWebHistory`).
@@ -249,8 +270,9 @@ Key variables:
 1. **GraphQL types and codegen**: `src/gql/` is fully generated. Never hand-edit
    files in that directory.
 2. **Date formatting**: Use `formattedData()` or `formattedTime()` from
-   `src/functions/functions.ts`. They handle the `nl`/`en` locale switch
-   manually (not via `Intl.DateTimeFormat`).
+   `src/functions/functions.ts`. `formattedData` takes weekday/month names from
+   `Intl.DateTimeFormat` and the order of the parts from a gettext msgid, so a
+   new language needs no name tables, just a translation.
 3. **Markdown rendering**: Rich text fields from the API are Markdown. Use
    `markedText()` from `src/functions/functions.ts`; it runs `marked()` +
    `sanitize-html`. It is **async** because `marked` v15 returns a Promise.
@@ -301,9 +323,13 @@ The repo uses **Prettier** + **ESLint** with the following conventions:
 
 Run before committing:
 ```bash
-yarn lint
 yarn format
+# yarn lint is currently broken, see below
 ```
+
+> **`yarn lint` currently crashes on config load**: the stale
+> `eslint.config.js` shadows `eslint.config.ts`. It runs with `--fix`, so it
+> can rewrite files before failing. `yarn type-check` is the working gate.
 
 ESLint intentionally disables these rules:
 - `no-unused-vars` / `@typescript-eslint/no-unused-vars` — off

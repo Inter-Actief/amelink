@@ -6,6 +6,7 @@ import { useGettext } from 'vue3-gettext';
 const { $gettext } = useGettext();
 import Pagination from '@/components/ui/Pagination.vue';
 import { useQuery } from '@/composables/queries';
+import { formattedData } from '@/functions/functions.ts';
 import VideoPlaceholder from '@/components/placeholder/VideoPlaceholder.vue';
 
 const limit = ref(20);
@@ -20,12 +21,12 @@ const selectedRows = ref(limit)
     <Content>
         <SectionCard :name="$gettext('Videos')">
             <template #content>
-                <div class="grid grid-cards-wide gap-10 pb-4">
+                <div class="grid grid-cards-wide gap-4 pb-4">
                     <div v-if="loading" v-for="_ in selectedRows">
                         <VideoPlaceholder />
                     </div>
                 </div>
-                <div v-if="!loading" class="grid grid-cards-wide gap-10 pb-4">
+                <div v-if="!loading" class="grid grid-cards-wide gap-4 pb-4">
                     <RouterLink :to="{ name: 'singlevideo', params: { id: video.videoId, type: video.videoType } }"
                         v-for="video in videos">
                         <Card class="text-card" style="height: 100%;">
@@ -34,8 +35,11 @@ const selectedRows = ref(limit)
                                     :src="video.thumbnailUrl" />
                             </template>
                             <template #footer>
-                                <div class="flex flex-row items-center w-full justify-between pt-4 expand-link link">
-                                    <span class="text-4xl font-semibold">{{ video.title }}</span>
+                                <div class="flex flex-row items-center w-full justify-between pt-2 px-3 expand-link link">
+                                    <span class="text-card-title font-semibold">{{ video.title }}</span>
+                                </div>
+                                <div class="px-3 text-meta">
+                                    {{ formattedData(video.datePublished) }}
                                 </div>
                             </template>
                         </Card>
@@ -51,8 +55,8 @@ const selectedRows = ref(limit)
 
 <style scoped>
 .text-card {
-    &:hover .expand-link {
-        background-size: 100% 0.2rem;
+    &:hover .expand-link::after {
+        transform: scaleX(1);
     }
 }
 </style>

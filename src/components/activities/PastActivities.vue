@@ -48,9 +48,11 @@ const onPage = async (event: DataTablePageEvent) => {
 </script>
 
 <template>
-    <div class="flex pb-4 justify-between items-end">
-        <h2>{{ $gettext('Past activities') }}</h2>
-        <InputText v-model="searchQuery" :placeholder="$gettext('Zoek activiteiten')" />
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 pb-4">
+        <h2 class="flex-1 sm:flex-none">{{ $gettext('Past activities') }}</h2>
+        <div class="w-full sm:w-auto">
+            <InputText v-model="searchQuery" :placeholder="$gettext('Zoek activiteiten')" />
+        </div>
     </div>
 
     <!-- Past activites placeholder only show on first load, changing pagination activates dataTable loading -->

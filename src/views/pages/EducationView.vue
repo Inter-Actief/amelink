@@ -1,24 +1,26 @@
 <template>
     <Content>
-        <div class="flex flex-col lg:flex-row gap-12 justify-start items-start">
+        <div class="flex flex-col lg:flex-row gap-5 justify-start items-start">
             <SectionCard :name="$gettext('Information')" class="w-full lg:basis-1/3 lg:sticky top-12">
                 <template #content>
-                    <template v-for="item in queryItems" :key="item?.id">
-                        <div class="link" @click="scrolltop(`item_${item?.id}`)">
-                            {{ item!.name! }}
-                        </div>
-                    </template>
-                </template>
-            </SectionCard>
-            <div class="lg:basis-2/3 flex flex-col gap-12">
-                <!-- All items -->
-                <div v-for="item in queryItems" :key="item?.id" :id="`item_${item?.id}`">
-                    <Card class="p-4">
-                        <template #title>
-                            <div class="text-5xl font-extrabold pb-2">
+                    <div class="flex flex-col gap-2">
+                        <template v-for="item in queryItems" :key="item?.id">
+                            <div class="link" @click="scrolltop(`item_${item?.id}`)">
                                 {{ item!.name! }}
                             </div>
-                            <Divider class="pb-8" />
+                        </template>
+                    </div>
+                </template>
+            </SectionCard>
+            <div class="lg:basis-2/3 flex flex-col gap-5">
+                <!-- All items -->
+                <div v-for="item in queryItems" :key="item?.id" :id="`item_${item?.id}`">
+                    <Card>
+                        <template #title>
+                            <div class="text-section font-extrabold pt-4 pb-2">
+                                {{ item!.name! }}
+                            </div>
+                            <Divider class="my-4!" />
                         </template>
                         <template #content>
                             <div class="text" v-html="processedContent[item?.id!]"></div>

@@ -17,39 +17,38 @@ msgid "Who, what, where, when..."
 msgstr "Wie, wat, waar, wanneer..."
 
 #: src/components/activities/InformationActivites.vue:5
-#: src/components/activities/InformationActivites.vue:45
 msgid "Who"
 msgstr "Wie"
 
-#: src/components/activities/InformationActivites.vue:6
+#: src/components/activities/InformationActivites.vue:12
 msgid "What"
 msgstr "Wat"
 
-#: src/components/activities/InformationActivites.vue:7
+#: src/components/activities/InformationActivites.vue:19
 msgid "Where"
 msgstr "Waar"
 
-#: src/components/activities/InformationActivites.vue:8
+#: src/components/activities/InformationActivites.vue:26
 msgid "When"
 msgstr "Wanneer"
 
-#: src/components/activities/InformationActivites.vue:9
-msgid "Label"
-msgstr "Label"
-
-#: src/components/activities/InformationActivites.vue:10
-msgid "Costs"
-msgstr "Kosten"
-
-#: src/components/activities/InformationActivites.vue:16
+#: src/components/activities/InformationActivites.vue:39
 msgid "from"
 msgstr "van"
 
-#: src/components/activities/InformationActivites.vue:17
+#: src/components/activities/InformationActivites.vue:40
 msgid "until"
 msgstr "tot"
 
-#: src/components/activities/InformationActivites.vue:24
+#: src/components/activities/InformationActivites.vue:47
+msgid "Label"
+msgstr "Label"
+
+#: src/components/activities/InformationActivites.vue:54
+msgid "Costs"
+msgstr "Kosten"
+
+#: src/components/activities/InformationActivites.vue:60
 msgid "Free"
 msgstr "Gratis"
 
@@ -63,32 +62,43 @@ msgstr "Laatste activiteiten"
 msgid "View all activities"
 msgstr "Alle activiteiten bekijken"
 
-#: src/components/activities/PastActivities.vue:3
+#: src/components/activities/PastActivities.vue:52
 msgid "Past activities"
 msgstr "Afgelopen activiteiten"
 
-#: src/components/activities/PastActivities.vue:4
+#: src/components/activities/PastActivities.vue:54
 msgid "Zoek activiteiten"
 msgstr "Zoek activiteiten"
 
-#: src/components/activities/PastActivities.vue:11
+#: src/components/activities/PastActivities.vue:64
 #: src/components/activities/UpcomingActivities.vue:12
+#: src/components/placeholder/PastActivitiesPlaceholder.vue:5
 msgid "Date"
 msgstr "Datum"
 
-#: src/components/activities/PastActivities.vue:13
+#: src/components/activities/PastActivities.vue:67
 #: src/components/activities/UpcomingActivities.vue:14
+#: src/components/placeholder/PastActivitiesPlaceholder.vue:11
 msgid "Activity"
 msgstr "Activiteit"
 
-#: src/components/activities/PastActivities.vue:27
+#: src/components/activities/PastActivities.vue:83
 msgid "Photos"
 msgstr "Foto's"
 
 #: src/components/activities/PhotosActivities.vue:3
-#: src/components/activities/PhotosActivities.vue:18
+#: src/components/activities/PhotosActivities.vue:24
 msgid "Go to activity"
 msgstr "Ga naar activiteit"
+
+#: src/components/activities/PhotosActivities.vue:65
+#, fuzzy
+msgid "Photo by "
+msgstr "Foto's"
+
+#: src/components/activities/PhotosActivities.vue:65
+msgid "If you want to have this photo removed, please contact the board"
+msgstr ""
 
 #: src/components/activities/UpcomingActivities.vue:4
 #: src/components/activities/UpcomingActivitiesCards.vue:2
@@ -103,7 +113,7 @@ msgstr "Soort"
 msgid "Enroll now!"
 msgstr "Schrijf je nu in!"
 
-#: src/components/footer/Footer.vue:5
+#: src/components/footer/Footer.vue:6
 msgid "footer.text"
 msgstr ""
 "I.C.T.S.V. Inter-Actief is de studievereniging voor de studies Technical "
@@ -112,195 +122,96 @@ msgstr ""
 "1981 en heeft circa 1400 leden, waarmee zij de grootste ICT-studievereniging "
 "van Nederland is."
 
-#: src/components/footer/Footer.vue:10
+#: src/components/footer/Footer.vue:11
 msgid "Pages"
 msgstr "Pagina's"
 
-#: src/components/footer/Footer.vue:17
+#: src/components/footer/Footer.vue:18
 msgid "Important information"
 msgstr "Belangrijke informatie"
 
-#: src/components/footer/Footer.vue:18
+#: src/components/footer/Footer.vue:19
 msgid "Privacy policy"
 msgstr "Privacybeleid"
 
-#: src/components/footer/Footer.vue:20 src/components/header/Header.vue:213
+#: src/components/footer/Footer.vue:21
 msgid "Contact"
 msgstr "Contact"
 
-#: src/components/footer/Footer.vue:23
+#: src/components/footer/Footer.vue:24
 msgid "Report a problem"
 msgstr "Probleem melden"
 
-#: src/components/footer/Footer.vue:26
+#: src/components/footer/Footer.vue:27
 msgid "CVD Policy"
 msgstr "CVD-beleid"
 
-#: src/components/footer/Footer.vue:31
+#: src/components/footer/Footer.vue:32
 msgid "Contact us"
 msgstr "Neem contact op"
 
-#: src/components/footer/Footer.vue:51 src/components/header/Header.vue:70
-#: src/components/homepage/HomepageCards.vue:8
+#: src/components/footer/Footer.vue:52
+#: src/components/homepage/HomepageCards.vue:10
 msgid "Activities"
 msgstr "Activiteiten"
 
-#: src/components/footer/Footer.vue:55 src/components/header/Header.vue:74
-#: src/components/homepage/HomepageCards.vue:17
+#: src/components/footer/Footer.vue:56
+#: src/components/homepage/HomepageCards.vue:19
 msgid "News"
 msgstr "Nieuws"
 
-#: src/components/footer/Footer.vue:59 src/components/header/Header.vue:78
-#: src/views/pages/PublicationView.vue:34
+#: src/components/footer/Footer.vue:60 src/views/pages/PublicationView.vue:35
 msgid "Publications"
 msgstr "Publicaties"
 
-#: src/components/footer/Footer.vue:63 src/components/header/Header.vue:192
-#: src/components/homepage/HomepageCards.vue:26
+#: src/components/footer/Footer.vue:64
+#: src/components/homepage/HomepageCards.vue:28
 msgid "Education"
 msgstr "Onderwijs"
 
-#: src/components/header/Header.vue:12
+#: src/components/header/Header.vue:16 src/components/header/Header.vue:37
 msgid "Old website"
 msgstr "Oude website"
 
-#: src/components/header/Header.vue:15
+#: src/components/header/Header.vue:19 src/components/header/Header.vue:40
 msgid "Become a member"
 msgstr "Word lid"
-
-#: src/components/header/Header.vue:65
-msgid "Home"
-msgstr "Home"
-
-#: src/components/header/Header.vue:82
-#: src/components/homepage/HomepageCards.vue:35
-#: src/views/companies/CompaniesView.vue:21
-msgid "Companies"
-msgstr "Bedrijven"
-
-#: src/components/header/Header.vue:86
-msgid "Association"
-msgstr "Vereniging"
-
-#: src/components/header/Header.vue:89
-msgid "Inter-Actief"
-msgstr "Inter-Actief"
-
-#: src/components/header/Header.vue:93
-msgid "Board"
-msgstr "Bestuur"
-
-#: src/components/header/Header.vue:97
-msgid "Former boards"
-msgstr "Oud-besturen"
-
-#: src/components/header/Header.vue:101
-msgid "Honorary members"
-msgstr "Ereleden"
-
-#: src/components/header/Header.vue:105
-msgid "Members of Merit"
-msgstr "Leden van Verdienste"
-
-#: src/components/header/Header.vue:109
-msgid "Committees"
-msgstr "Commissies"
-
-#: src/components/header/Header.vue:113
-msgid "Membership"
-msgstr "Lidmaatschap"
-
-#: src/components/header/Header.vue:117
-msgid "(Graduation) drink"
-msgstr "(Afstudeer)borrel"
-
-#: src/components/header/Header.vue:121
-msgid "Symposia"
-msgstr "Symposia"
-
-#: src/components/header/Header.vue:125
-msgid "Study tours"
-msgstr "Studiereizen"
-
-#: src/components/header/Header.vue:129
-msgid "Members' initiative"
-msgstr "Ledeninitiatief"
-
-#: src/components/header/Header.vue:133
-msgid "Association song"
-msgstr "Verenigingslied"
-
-#: src/components/header/Header.vue:137
-msgid "Alumni Association ENIAC"
-msgstr "Alumnivereniging ENIAC"
-
-#: src/components/header/Header.vue:141
-msgid "Sister associations"
-msgstr "Zusterverenigingen"
-
-#: src/components/header/Header.vue:145
-msgid "Inter-Actief App"
-msgstr "Inter-Actief App"
-
-#: src/components/header/Header.vue:149
-msgid "Inter-Archive"
-msgstr "Inter-Archief"
-
-#: src/components/header/Header.vue:155
-msgid "For members"
-msgstr "Voor leden"
-
-#: src/components/header/Header.vue:158
-msgid "Azure Dev Tools"
-msgstr "Azure Dev Tools"
-
-#: src/components/header/Header.vue:162
-msgid "GMM documents"
-msgstr "ALV-stukken"
-
-#: src/components/header/Header.vue:166
-msgid "Assignments by the UT"
-msgstr "Opdrachten van de UT"
-
-#: src/components/header/Header.vue:170
-msgid "Corporate identity"
-msgstr "Huisstijldocument"
-
-#: src/components/header/Header.vue:174
-msgid "Old privacy policies"
-msgstr "Oude privacy policies"
-
-#: src/components/header/Header.vue:178
-msgid "Social media"
-msgstr "Sociale media"
-
-#: src/components/header/Header.vue:182
-msgid "Mental health"
-msgstr "Mentale gezondheid"
-
-#: src/components/header/Header.vue:186
-msgid "Do groups"
-msgstr "Doegroepen"
-
-#: src/components/header/Header.vue:195 src/views/pages/EducationView.vue:4
-msgid "Information"
-msgstr "Informatie"
-
-#: src/components/header/Header.vue:199
-msgid "Books"
-msgstr "Boeken"
-
-#: src/components/header/Header.vue:203
-msgid "Summaries"
-msgstr "Samenvattingen"
-
-#: src/components/header/Header.vue:207
-msgid "Tutoring"
-msgstr "Tutoring"
 
 #: src/components/header/UserButton.vue:2
 msgid "Sign-in"
 msgstr "Inloggen"
+
+#: src/components/homepage/DynamicContent.vue:10
+msgid "Pinned news"
+msgstr ""
+
+#: src/components/homepage/DynamicContent.vue:24
+msgid "Recent news"
+msgstr ""
+
+#: src/components/homepage/DynamicContent.vue:38
+#, fuzzy
+msgid "Latest publication"
+msgstr "Publicaties"
+
+#: src/components/homepage/DynamicContent.vue:54
+#, fuzzy
+msgid "Latest video"
+msgstr "Laatste nieuws"
+
+#: src/components/homepage/DynamicContent.vue:73
+#, fuzzy
+msgid "All news"
+msgstr "Al het nieuws bekijken"
+
+#: src/components/homepage/HomepageCards.vue:37
+#: src/views/companies/CompaniesView.vue:22
+msgid "Companies"
+msgstr "Bedrijven"
+
+#: src/components/homepage/HomepageCards.vue:43
+msgid "Current items"
+msgstr ""
 
 #: src/components/news/LatestNews.vue:5
 msgid "News & Announcements"
@@ -314,9 +225,30 @@ msgstr "Al het nieuws bekijken"
 msgid "News page"
 msgstr "Nieuws pagina"
 
-#: src/components/ui/TextCard.vue:29
+#: src/components/photos/PicturesBy.vue:3
+#: src/components/photos/PicturesBy.vue:6
+msgid "Pictures by"
+msgstr ""
+
+#: src/components/ui/HorizontalCard.vue:18 src/components/ui/TextCard.vue:58
 msgid "Read more"
 msgstr "Lees meer"
+
+#: src/components/ui/ThemeSwitcher.vue:33
+msgid "Light mode"
+msgstr ""
+
+#: src/components/ui/ThemeSwitcher.vue:35
+msgid "Dark mode"
+msgstr ""
+
+#: src/components/ui/ThemeSwitcher.vue:37
+msgid "Use system theme"
+msgstr ""
+
+#: src/functions/functions.ts:61
+msgid "%{weekday} %{month} %{day}%{ordinal} %{year}"
+msgstr "%{weekday} %{day} %{month} %{year}"
 
 #: src/views/404.vue:13
 msgid "404, not found!"
@@ -334,15 +266,15 @@ msgstr "Terug naar hoofdpagina"
 msgid "Activities you don't want to miss"
 msgstr "Activiteiten die je niet wilt missen"
 
-#: src/views/activities/SingleActivites.vue:11
+#: src/views/activities/SingleActivites.vue:24
 msgid "View photos"
 msgstr "Bekijk foto's"
 
-#: src/views/activities/SingleActivites.vue:17 src/views/news/SingleNews.vue:18
+#: src/views/activities/SingleActivites.vue:30 src/views/news/SingleNews.vue:26
 msgid "Return to overview"
 msgstr "Terug naar overzicht"
 
-#: src/views/committees/CommitteesView.vue:5
+#: src/views/committees/CommitteesView.vue:3
 msgid "Our committees"
 msgstr "Onze commissies"
 
@@ -383,6 +315,121 @@ msgstr "Bedrijfsprofiel"
 msgid "Website"
 msgstr "Website"
 
+#: src/views/pages/EducationView.vue:4
+msgid "Information"
+msgstr "Informatie"
+
+#: src/views/videos/VideosView.vue:22
+msgid "Videos"
+msgstr ""
+
+#: src/views/videos/VideoView.vue:29
+#, fuzzy
+msgid "We could not find this video."
+msgstr "We konden deze commissie niet vinden."
+
+#: src/views/videos/VideoView.vue:32
+#, fuzzy
+msgid "View all videos"
+msgstr "Al het nieuws bekijken"
+
+#: src/views/videos/VideoView.vue:45
+#, fuzzy
+msgid "Description"
+msgstr "Vereniging"
+
+#: src/views/videos/VideoView.vue:55
+#, fuzzy
+msgid "Return to videos"
+msgstr "Terug naar overzicht"
+
+#~ msgid "Home"
+#~ msgstr "Home"
+
+#~ msgid "Inter-Actief"
+#~ msgstr "Inter-Actief"
+
+#~ msgid "Board"
+#~ msgstr "Bestuur"
+
+#~ msgid "Former boards"
+#~ msgstr "Oud-besturen"
+
+#~ msgid "Honorary members"
+#~ msgstr "Ereleden"
+
+#~ msgid "Members of Merit"
+#~ msgstr "Leden van Verdienste"
+
+#~ msgid "Committees"
+#~ msgstr "Commissies"
+
+#~ msgid "Membership"
+#~ msgstr "Lidmaatschap"
+
+#~ msgid "(Graduation) drink"
+#~ msgstr "(Afstudeer)borrel"
+
+#~ msgid "Symposia"
+#~ msgstr "Symposia"
+
+#~ msgid "Study tours"
+#~ msgstr "Studiereizen"
+
+#~ msgid "Members' initiative"
+#~ msgstr "Ledeninitiatief"
+
+#~ msgid "Association song"
+#~ msgstr "Verenigingslied"
+
+#~ msgid "Alumni Association ENIAC"
+#~ msgstr "Alumnivereniging ENIAC"
+
+#~ msgid "Sister associations"
+#~ msgstr "Zusterverenigingen"
+
+#~ msgid "Inter-Actief App"
+#~ msgstr "Inter-Actief App"
+
+#~ msgid "Inter-Archive"
+#~ msgstr "Inter-Archief"
+
+#~ msgid "For members"
+#~ msgstr "Voor leden"
+
+#~ msgid "Azure Dev Tools"
+#~ msgstr "Azure Dev Tools"
+
+#~ msgid "GMM documents"
+#~ msgstr "ALV-stukken"
+
+#~ msgid "Assignments by the UT"
+#~ msgstr "Opdrachten van de UT"
+
+#~ msgid "Corporate identity"
+#~ msgstr "Huisstijldocument"
+
+#~ msgid "Old privacy policies"
+#~ msgstr "Oude privacy policies"
+
+#~ msgid "Social media"
+#~ msgstr "Sociale media"
+
+#~ msgid "Mental health"
+#~ msgstr "Mentale gezondheid"
+
+#~ msgid "Do groups"
+#~ msgstr "Doegroepen"
+
+#~ msgid "Books"
+#~ msgstr "Boeken"
+
+#~ msgid "Summaries"
+#~ msgstr "Samenvattingen"
+
+#~ msgid "Tutoring"
+#~ msgstr "Tutoring"
+
 #~ msgid "Name"
 #~ msgstr "Naam"
 
@@ -397,9 +444,6 @@ msgstr "Website"
 
 #~ msgid "Demo Table"
 #~ msgstr "Demo Tabel"
-
-#~ msgid "Latest News"
-#~ msgstr "Laatste nieuws"
 
 #~ msgid "Demo overview"
 #~ msgstr "Demo overzicht"

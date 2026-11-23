@@ -27,9 +27,16 @@ const props = defineProps([
     'to',
     'target',
     'rel',
+    'span',
 ])
 
 const htmlElement = () => {
+    // `span` renders the same styling as a non-interactive element, for use
+    // inside a card that is itself a link (avoids nesting interactive content).
+    if (props.span) {
+        return 'span'
+    }
+
     return props.to ? 'router-link' : (props.href ? 'a' : 'button')
 }
 </script>
@@ -48,9 +55,13 @@ const htmlElement = () => {
     cursor: pointer;
     transition: 300ms;
     width: fit-content;
-    text-decoration: none;
     font-family: inherit;
     font-size: inherit;
+}
+
+/* Real buttons never have an underline, but the `.link` variant does */
+.epa_button:not(.link) {
+    text-decoration: none;
 }
 
 .epa_button .active,
@@ -122,15 +133,18 @@ const htmlElement = () => {
     background-color: var(--button-background-color-hover);
 }
 
+/*
+ * The underline itself lives in the global `.link` class (main.css). Do not
+ * redeclare a background/text-decoration here: scoped styles beat the global
+ * class and that is what made the hover effect disappear.
+ */
 .epa_button.link {
-    padding: 0;
+    /* room for the sliding underline below the text */
+    padding: 0 0 0.15rem;
     border-radius: 0;
-    text-decoration: none;
-    position: relative;
-    background: linear-gradient(currentColor, currentColor) bottom / 0 0.2rem no-repeat;
-    background-position: left bottom;
-    transition: 300ms;
     color: inherit;
+    /* Explicitly clear the button fill, the underline is the only decoration */
+    background-color: transparent;
 }
 
 .epa_button.link > span {
@@ -139,7 +153,6 @@ const htmlElement = () => {
 
 .epa_button.link .active,
 .epa_button.link:hover {
-    background-size: 100% 0.2rem;
     opacity: 1;
 }
 

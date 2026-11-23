@@ -9,7 +9,7 @@
         </template>
         <template #content>
             <ProgressSpinner v-if="loading" />
-            <div class="grid gap-10 grid-cols-3 pb-10">
+            <div class="grid gap-4 grid-cols-3 pb-5">
                 <template v-for="item in activityItems" :key="item!.id">
                     <TextCard :image="getItemRandomPhoto(item!)" :title="item!.summary ?? ''"
                         :routerLink="getRouterLinkTo(item!)" :subtitle="formattedData(item!.begin)"

@@ -2,15 +2,15 @@
     <Galleria :value="queryResults" showItemNavigators @update:activeIndex="resetAnimation()" :showThumbnails="false"
         autoPlay circular :transitionInterval="7000">
         <template #item="slotProps" :circular="true">
-            <div class="w-full h-[30vw] container">
+            <div class="w-full h-[24rem] md:h-[28rem] lg:h-[32rem] container overflow-hidden">
                 <img class="w-full" v-image-error ref="gallery-image"
                     :src="imageSrc(randomItem(slotProps.item.photos).thumbLarge)" />
             </div>
         </template>
         <template #caption="slotProps">
             <RouterLink :to="{ name: 'singleactivitiesphotos', params: { id: slotProps.item.id! } }">
-                <div class="text-5xl mb-2 font-bold pl-4">{{ slotProps.item.summary }}</div>
-                <p class="text-white pl-4">{{ formattedData(slotProps.item.begin) }}</p>
+                <div class="text-section mb-1 font-bold px-3">{{ slotProps.item.summary }}</div>
+                <p class="text-white px-3 text-meta">{{ formattedData(slotProps.item.begin) }}</p>
             </RouterLink>
         </template>
     </Galleria>

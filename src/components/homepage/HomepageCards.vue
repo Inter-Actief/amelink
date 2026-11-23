@@ -1,13 +1,13 @@
 <template>
-    <div class="grid grid-cols-1 xl:grid-cols-2 gap-12 items-start">
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-5 items-start">
         <!-- Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <RouterLink :to="{ name: 'activities' }">
                 <div class="relative rounded-lg">
                     <ImageFade :images="activityImages" :interval="10_000" />
                     <div
-                        class="absolute bottom-0 left-0 w-full bg-opacity-30 text-white p-4 rounded-b-lg transition duration-300 bg-slate-800 hover:bg-blue-800">
-                        <p class="text-2xl md:text-2xl lg:text-3xl">{{ $gettext('Activities') }}</p>
+                        class="absolute bottom-0 left-0 w-full bg-opacity-30 text-white px-3 py-1.5 rounded-b-lg transition duration-300 bg-slate-800 hover:bg-blue-800">
+                        <p class="text-card-title font-semibold">{{ $gettext('Activities') }}</p>
                     </div>
                 </div>
             </RouterLink>
@@ -15,8 +15,8 @@
                 <div class="relative">
                     <img class="format rounded-lg w-full h-auto" src="/images/pillars/news/news0.jpg" />
                     <div
-                        class="absolute bottom-0 left-0 w-full bg-opacity-30 text-white p-4 rounded-b-lg transition duration-300 bg-slate-800 hover:bg-blue-800">
-                        <p class="text-2xl md:text-2xl lg:text-3xl">{{ $gettext('News') }}</p>
+                        class="absolute bottom-0 left-0 w-full bg-opacity-30 text-white px-3 py-1.5 rounded-b-lg transition duration-300 bg-slate-800 hover:bg-blue-800">
+                        <p class="text-card-title font-semibold">{{ $gettext('News') }}</p>
                     </div>
                 </div>
             </RouterLink>
@@ -24,8 +24,8 @@
                 <div class="relative">
                     <img class="format rounded-lg w-full h-auto" src="/images/pillars/education/education0.jpg" />
                     <div
-                        class="absolute bottom-0 left-0 w-full bg-opacity-30 text-white p-4 rounded-b-lg transition duration-300 bg-slate-800 hover:bg-blue-800">
-                        <p class="text-2xl md:text-2xl lg:text-3xl">{{ $gettext('Education') }}</p>
+                        class="absolute bottom-0 left-0 w-full bg-opacity-30 text-white px-3 py-1.5 rounded-b-lg transition duration-300 bg-slate-800 hover:bg-blue-800">
+                        <p class="text-card-title font-semibold">{{ $gettext('Education') }}</p>
                     </div>
                 </div>
             </RouterLink>
@@ -33,8 +33,8 @@
                 <div class="relative">
                     <ImageFade :images="careerImages" :interval="10_000" />
                     <div
-                        class="absolute bottom-0 left-0 w-full bg-opacity-30 text-white p-4 rounded-b-lg transition duration-300 bg-slate-800 hover:bg-blue-800">
-                        <p class="text-2xl md:text-2xl lg:text-3xl">{{ $gettext('Companies') }}</p>
+                        class="absolute bottom-0 left-0 w-full bg-opacity-30 text-white px-3 py-1.5 rounded-b-lg transition duration-300 bg-slate-800 hover:bg-blue-800">
+                        <p class="text-card-title font-semibold">{{ $gettext('Companies') }}</p>
                     </div>
                 </div>
             </RouterLink>
