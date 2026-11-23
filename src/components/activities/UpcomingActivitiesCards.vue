@@ -7,32 +7,24 @@
         </template>
         <template #content>
             <Transition name="fade" mode="out-in">
-                <div v-if="loading" class="grid gap-10 grid-cols-1 md:grid-cols-2 xl:grid-cols-4 pb-10">
-                    <template v-for="_ in 4">
-                        <TextCard :loading="true" :loadingOpts="{
-                            image: true,
-                            title: true,
-                            readmore: true,
-                            subtitle: true,
-                            contentLines: 0,
-                            label: true
-                        }" />
-                    </template>
+                <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-10">
+                    <HorizontalCard v-for="n in perpage" :key="n" :loading="true" :loadingOpts="{
+                        image: true,
+                        title: true,
+                        readmore: true,
+                        contentLines: 1
+                    }" />
                 </div>
 
-                <div v-else class="grid gap-10 grid-cols-1 md:grid-cols-2 xl:grid-cols-4 pb-10">
-                    <template v-for="item in activityItems" :key="item!.id">
-                        <TextCard :image="imageSrc(item?.imageIcon!)" :title="item!.summary ?? ''"
-                            :routerLink="{ to: { name: 'singleactivities', params: { id: item!.id } } }"
-                            :subtitle="formattedData(item!.begin)"
-                            :label="{ color: item!.activityLabel.color, text: item!.activityLabel!.name! }">
-                            <!-- {{ excerptText(getItemValue(item, 'description')) }} -->
-                        </TextCard>
-                    </template>
+                <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-10">
+                    <HorizontalCard v-for="item in activityItems" :key="item!.id"
+                        :image="imageSrc(item?.imageIcon, false)" :title="item!.summary ?? ''"
+                        :body="formattedData(item!.begin)"
+                        :to="{ name: 'singleactivities', params: { id: item!.id } }" />
                 </div>
             </Transition>
             <Pagination v-if="totalCount" v-bind="query" :totalCount="totalCount!" :limit="perpage"
-                :rowsPerPage="[4]" />
+                :rowsPerPage="[perpage, 10]" />
         </template>
     </SectionCard>
 </template>
@@ -42,12 +34,12 @@ import { computed, ref } from 'vue'
 import { useGettext } from 'vue3-gettext'
 import SectionCard from '../ui/SectionCard.vue'
 import Pagination from '../ui/Pagination.vue'
-import TextCard from '../ui/TextCard.vue'
+import HorizontalCard from '../ui/HorizontalCard.vue'
 import { formattedData } from '@/functions/functions.ts'
 import { useQuery, useQueryAsync } from '@/composables/queries'
 import { imageSrc } from '@/composables/util'
 const { $gettext } = useGettext();
-const perpage = ref(4)
+const perpage = ref(6)
 
 const query = useQuery("upcomingActivities", { limit: perpage.value, beginDate: new Date() })
 const { result, loading } = query;
