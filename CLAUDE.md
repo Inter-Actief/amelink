@@ -59,6 +59,44 @@ theme, base, primevue, components, utilities
 ```
 This allows Tailwind utilities to override PrimeVue component styles cleanly.
 
+### Shared Style Primitives Have One Implementation
+
+The animated link underline lives in exactly one place: `.link` in
+`src/styles/main.css` (a `::after` bar that slides in from the left). Links
+inside rendered Markdown use `.text a` in `src/styles/fonts.css` because they
+must stay inline to wrap.
+
+**Components must never redeclare `background`, `background-size` or
+`text-decoration` for these in a `<style scoped>` block.** Scoped selectors
+outrank the global class, and a `background` shorthand silently resets the
+bar/gradient. That is exactly how the link hover broke twice: `EpaButton.vue`
+redeclared the underline in scoped CSS, so `Read more` stopped animating while
+plain `RouterLink`s kept working.
+
+Text sizes come from the semantic tokens in the `@theme` block of
+`src/styles/style.css` — `text-page-title` (25px), `text-section` (21.6px),
+`text-card-title` (18.2px), `text-body` (15.4px), `text-meta` (13.4px).
+`html` is at `60%`, so Tailwind's own `text-*` scale (calibrated for a 16px
+root) mostly lands *below* the body text size and inverts the hierarchy —
+`text-2xl` is 14.4px against 15.4px body copy.
+
+## Verifying UI Changes
+
+`yarn type-check` cannot see CSS, class strings, or the rendered result, so it
+is not evidence that a UI change works. Before claiming a UI fix:
+
+1. Reproduce on the revision the bug was reported against, not on your HEAD.
+2. Enumerate **every** call site of a shared class (`class="link"` etc.) and
+   check each distinct element type — one representative says nothing about
+   the other 32.
+3. Assert the property you actually care about (e.g.
+   `getComputedStyle(el, '::after').transform` reaching `scaleX(1)`), not just
+   that "something changed on hover" — a fade and a slide both pass that.
+4. Say what you covered ("3 of 5 link types"), not just "verified".
+
+The concrete browser recipe (agent-browser commands, hover probes, screenshot
+limits) is in `.agents/skills/amelink/SKILL.md` under *Verifying UI Changes*.
+
 ## Directory Guide
 
 | Path | Purpose |
@@ -127,3 +165,5 @@ All public env vars must be prefixed with `VITE_`.
 8. **The legacy SCSS file** `src/styles/style_old.scss` exists but is not actively used for new work.
 9. **If adding a large npm dependency**, check `vite.config.ts` manual chunks. Adding it to an existing chunk (or creating a new one) keeps the bundle strategy healthy.
 10. **Auth callback route (`/auth/callback`) must stay lightweight.** Do not add route guards or loading states that could interfere with OIDC state parsing.
+11. **`yarn lint` is currently broken.** A stale `eslint.config.js` shadows `eslint.config.ts` and crashes on load (`Named export 'rules' not found` from the CJS `eslint-plugin-vue`). Deleting the `.js` lets ESLint load the TS config but surfaces ~108 pre-existing errors. Also note it runs with `--fix`: it rewrites files *before* failing.
+12. **Heading sizes are set by unlayered `fonts.css`.** Its `h1`–`h4` rules beat any Tailwind utility, so overriding a heading's size with a token utility needs the important modifier (`text-card-title!`).

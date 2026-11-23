@@ -184,6 +184,135 @@ can drift. `router.afterEach()` has a 3-second safety reset.
   in Tailwind.
 - **Avoid** adding styles to `src/styles/style_old.scss` — it is legacy.
 
+### Type Scale: use the tokens, not Tailwind's `text-*`
+
+`html` is set to `60%`, so `1rem = 9.6px` and Tailwind's default scale is
+*smaller than the body text*: `text-sm` 8.4px, `text-lg` 10.8px, `text-xl`
+12px, `text-2xl` 14.4px, `text-4xl` 21.6px. So `text-2xl` for a section header
+ends up *smaller* than body copy, and `text-4xl` only reaches 21.6px. Use the
+semantic tokens instead (defined in the `@theme` block of
+`src/styles/style.css`):
+
+| Utility | Token | Size | Use for |
+|---------|-------|------|---------|
+| `text-page-title` | `--text-page-title` | 25px | page `h1` |
+| `text-section` | `--text-section` | 21.6px | `SectionCard` headers, education headings |
+| `text-card-title` | `--text-card-title` | 18.2px | card / video / publication / activity titles |
+| `text-body` | `--text-body` | 15.4px | running text |
+| `text-meta` | `--text-meta` | 13.4px | dates, subtitles, captions, footer |
+
+`src/styles/fonts.css` maps `h1`–`h4` onto the same tokens. That file is
+**unlayered**, so its heading rules beat every Tailwind utility (layered) — to
+override a heading's size with a utility you need the important modifier
+(`text-card-title!`), which is why card titles in views carry the `!`.
+
+### Link underline: one implementation, opt in with `.link`
+
+| Selector | Where | Mechanism |
+|----------|-------|-----------|
+| `.link` | `src/styles/main.css` (`@layer components`) | `::after` bar, `transform: scaleX(0)` → `scaleX(1)`, `transform-origin: left`, 300ms |
+| `.link:hover::after` | same | `transform: scaleX(1)` — slides in from the left |
+| `.text a` | `src/styles/fonts.css` | `background-size: 0% → 100%` gradient; inline links must wrap per line |
+| `.text-card:hover .readmore::after`, `.horizontal-card:hover .readmore::after`, `.expand-link::after` | component `<style scoped>` | drive the same `scaleX(1)` when the *card* is hovered |
+
+Every clickable text row opts in with `class="link"` (33 call sites: plain
+`RouterLink`s, `link flex flex-row` rows, `EpaButton` with `class="link"`,
+card title rows, bare `span`s).
+
+**Never redeclare `background`, `background-size`, or `text-decoration` on a
+`.link` element inside a component's `<style scoped>`.** Scoped selectors
+outrank the global class and a `background` shorthand resets the whole effect.
+
+- `.link` must **not** be implemented as a `background` gradient — that is how
+  it originally worked and it silently died under `EpaButton`'s scoped
+  `background: linear-gradient(...)`. `Read more` stopped animating while
+  plain `RouterLink`s kept working, which looked like "the hover is broken in
+  some places".
+- `.link` must **not** be a `text-decoration` colour transition either — that
+  fades, it does not slide, and it is a different effect from the one designed.
+
+## Verifying UI Changes
+
+`yarn type-check` passes while the UI is visibly broken — it cannot see CSS,
+class strings, or the rendered result. A UI change is unverified until it has
+been inspected in a real browser.
+
+This checklist exists because a link-hover fix was reported as verified (with
+`type-check` passing) and was wrong in two different ways before it was right.
+
+### Checklist
+
+1. **Reproduce on the revision the report is about.** Check out the branch or
+   commit the reviewer/user is looking at. "Works on my HEAD" is not a
+   reproduction — that mistake made a real bug look unreproducible.
+2. **Recover the intended behaviour before changing the mechanism.**
+   `git show <rev>:src/styles/main.css` shows what the effect actually was. If
+   the mechanism changes the visual behaviour (slide → fade), say so
+   explicitly; never substitute an effect silently.
+3. **Enumerate call sites, test each distinct signature.** `grep -rn 'link'`
+   finds them; group by element type and hover one of *each*, not one total.
+   Test the ones built on `EpaButton` separately from plain `RouterLink`s —
+   that split is what hid the bug.
+4. **Assert the design property, not a style delta.** "Something changed on
+   hover" is satisfied by the wrong animation. Assert the end state:
+   `getComputedStyle(el, '::after').transform === 'matrix(1, 0, 0, 1, 0, 0)'`,
+   or `background-size: 100% 1.92px` for prose links. Mid-transition samples
+   (0.04 → 0.47 → 0.80 → 1.0) prove it slides rather than fades.
+5. **Check the states around the happy path** — mobile viewport, loading
+   skeleton, empty result, dark theme.
+6. **Report coverage, not vibes.** "Verified 3 of 5 link types at 1920 and 390"
+   invites the right kind of doubt; "verified in the browser" does not.
+
+### Browser recipe (agent-browser)
+
+```bash
+agent-browser open http://localhost:5174/committees
+agent-browser tab new http://localhost:5174/committees   # eval only works on a real tab
+agent-browser set viewport 1920 1080                     # per tab; a new tab resets it
+agent-browser mouse move 332 248                         # real hover, bare numbers only
+agent-browser eval --stdin < probe.js
+agent-browser screenshot --full /tmp/after.png            # `--full`, not `--full-page`
+```
+
+```js
+// probe.js — node identity is stable within one eval batch only
+(() => {
+    const el = [...document.querySelectorAll('.link')][0]
+    el.scrollIntoView({ block: 'center' })
+    const after = getComputedStyle(el, '::after')
+    return {
+        hovered: el.matches(':hover'),
+        after: after.content === 'none' ? 'none' : after.transform,
+        bg: getComputedStyle(el).backgroundSize,
+    }
+})()
+```
+
+Gotchas that cost time:
+
+- `eval` / `get` execute in a detached `about:blank` context until a real tab
+  exists (`tab new <url>`); otherwise DOM queries return 16px-root `about:blank`.
+- `hover "text=..."` frequently misses elements; `mouse move <x> <y>` with
+  coordinates from `getBoundingClientRect()` works.
+- Feeding `x: 332` instead of `332` makes the CLI reject the command.
+- Full-page screenshots above ~5 MiB are not attached for inspection; use a
+  viewport screenshot or crop with PIL (`Image.crop(...).resize(..., LANCZOS)`)
+  before reading the image.
+- Screenshot latency usually exceeds a 300ms transition, so read computed style
+  to prove animation, and `requestAnimationFrame` sampling to prove it slides.
+
+### What tooling can and cannot catch (as of this branch)
+
+| Command | Status | Covers |
+|---------|--------|--------|
+| `yarn type-check` | works (~4s) | TypeScript only — **no CSS, no class names, no rendering** |
+| `yarn lint` | **broken** | a stale `eslint.config.js` shadows `eslint.config.ts` and crashes on load (`Named export 'rules' not found` from CJS `eslint-plugin-vue`); deleting the `.js` makes ESLint load the TS config but surfaces ~108 pre-existing errors. It also runs with `--fix` and rewrites files *before* failing |
+| `yarn test:unit` | configured, no tests | Vitest + jsdom: no layout, no hover, cannot cover this class of bug |
+
+Until a browser test exists (Playwright is not installed), manual verification is
+the only gate for interactive styling. Do not describe a UI change as verified
+on the strength of `type-check`.
+
 ## Routing
 
 - History mode router (`createWebHistory`).
@@ -301,9 +430,16 @@ The repo uses **Prettier** + **ESLint** with the following conventions:
 
 Run before committing:
 ```bash
-yarn lint
 yarn format
+# yarn lint is currently broken, see below
 ```
+
+> **`yarn lint` crashes on config load.** `eslint.config.js` (a stale scaffold
+> leftover) shadows `eslint.config.ts` and imports a named export from the CJS
+> `eslint-plugin-vue` (`Named export 'rules' not found`). Deleting the `.js`
+> makes ESLint load the TS config, but that surfaces ~108 pre-existing errors,
+> so restoring lint is a separate cleanup. Note it runs with `--fix`: it
+> rewrites files *before* it fails.
 
 ESLint intentionally disables these rules:
 - `no-unused-vars` / `@typescript-eslint/no-unused-vars` — off
