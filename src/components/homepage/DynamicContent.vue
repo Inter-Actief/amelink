@@ -157,7 +157,7 @@ const carouselItems = computed(() => {
 </script>
 
 <style scoped>
-.gotopic:hover .readmore {
-    text-decoration-color: currentColor;
+.gotopic:hover .readmore::after {
+    transform: scaleX(1);
 }
 </style>

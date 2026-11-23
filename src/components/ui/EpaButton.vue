@@ -132,7 +132,8 @@ const htmlElement = () => {
  * class and that is what made the hover effect disappear.
  */
 .epa_button.link {
-    padding: 0;
+    /* room for the sliding underline below the text */
+    padding: 0 0 0.15rem;
     border-radius: 0;
     color: inherit;
     /* Explicitly clear the button fill, the underline is the only decoration */

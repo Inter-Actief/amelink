@@ -78,7 +78,7 @@ const showButton = computed(() => !props.loading && (props.to || props.href || p
     height: 100%;
 }
 
-.horizontal-card:hover .readmore {
-    text-decoration-color: currentColor;
+.horizontal-card:hover .readmore::after {
+    transform: scaleX(1);
 }
 </style>

@@ -55,8 +55,8 @@ const selectedRows = ref(limit)
 
 <style scoped>
 .text-card {
-    &:hover .expand-link {
-        text-decoration-color: currentColor;
+    &:hover .expand-link::after {
+        transform: scaleX(1);
     }
 }
 </style>

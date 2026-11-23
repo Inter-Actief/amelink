@@ -76,18 +76,26 @@ p:not(:last-child) {
 }
 
 /* Same underline mechanism as `.link` in main.css, see the comment there. */
+/*
+ * Links inside running text (markdown). These have to stay inline so they can
+ * wrap across lines, which rules out the absolutely positioned pseudo element
+ * used by `.link`. A repeating background gradient gives the same left to
+ * right slide and is painted per line fragment. Note the longhands: never use
+ * the `background` shorthand here, it would be overridden elsewhere.
+ */
 .text a {
-  position: relative;
   color: var(--secondary-color);
-  text-decoration-line: underline;
-  text-decoration-thickness: 0.2rem;
-  text-underline-offset: 0.3rem;
-  text-decoration-color: transparent;
-  transition: 300ms;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 0% 0.2rem;
+  transition: background-size 300ms ease;
 }
 
-.text a:hover {
-  text-decoration-color: currentColor;
+.text a:hover,
+.text a:focus-visible {
+  background-size: 100% 0.2rem;
   color: var(--secondary-color);
   opacity: 1;
 }

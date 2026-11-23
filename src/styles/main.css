@@ -98,28 +98,45 @@
   }
 
   /*
-   * Animated underline for every clickable text row.
+   * Animated underline for every clickable text row: it slides in from the
+   * left on hover.
    *
-   * This used to be a background gradient with a background-size transition.
-   * That silently broke on elements that also carry a bg-* utility or a
-   * component background (they reset `background`), which made the hover
-   * effect simply not appear. text-decoration cannot be reset that way, and
-   * it also propagates into flex rows such as "Read more ->".
+   * It is a pseudo element on purpose. The two obvious implementations both
+   * break in practice:
+   *   - a `background` gradient + `background-size` transition is silently
+   *     reset by any `background`/`bg-*` on the same element (which is what
+   *     EpaButton did in its scoped styles), so the hover does nothing;
+   *   - `text-decoration` cannot slide, it can only fade its colour.
+   * The pseudo element is positioned inside the element box, so it also
+   * survives `overflow: hidden` ancestors and scoped component styles.
    */
   .link {
+    position: relative;
+    display: inline-block;
     padding: 0.3rem 0;
     cursor: pointer;
     width: fit-content;
-    text-decoration-line: underline;
-    text-decoration-thickness: 0.2rem;
-    text-underline-offset: 0.3rem;
-    text-decoration-color: transparent;
-    transition: 300ms;
+    text-decoration: none;
+    transition: color 300ms;
   }
 
-  .link:hover,
-  .link:focus-visible {
-    text-decoration-color: currentColor;
+  .link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0.2rem;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 300ms ease;
+    pointer-events: none;
+  }
+
+  .link:hover::after,
+  .link:focus-visible::after {
+    transform: scaleX(1);
   }
 }
 

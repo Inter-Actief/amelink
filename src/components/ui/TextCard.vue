@@ -123,7 +123,7 @@ const showReadMore = computed(() => {
 </script>
 
 <style scoped>
-.text-card:hover .readmore {
-    text-decoration-color: currentColor;
+.text-card:hover .readmore::after {
+    transform: scaleX(1);
 }
 </style>
