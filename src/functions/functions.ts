@@ -3,60 +3,68 @@ import { ref } from 'vue'
 import gettext from '@/gettext'
 import sanitizeHtml from 'sanitize-html'
 
-// TODO: Test if timestamp type is indeed a number
-export const formattedData = (timestamp: number, lang = 'En') => {
-    const date = new Date(timestamp)
-
-    const day = String(date.getDate()).padStart(2, '0')
-    const month = String(date.getMonth() + 1).padStart(2, '0') // Month is zero-based
-    const year = date.getFullYear()
-
-    let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] //t('Wednesday')
-    const dayOfWeekIndex = date.getDay()
-
-    let months = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-    ]
-    const monthIndex = date.getMonth()
-
-    if (gettext.current === 'nl') {
-        daysOfWeek = [
-            'Zondag',
-            'Maandag',
-            'Dinsdag',
-            'Woensdag',
-            'Donderdag',
-            'Vrijdag',
-            'Zaterdag',
-        ]
-        months = [
-            'Januari',
-            'Februari',
-            'Maart',
-            'April',
-            'Mei',
-            'Juni',
-            'Juli',
-            'Augustus',
-            'September',
-            'Oktober',
-            'November',
-            'December',
-        ]
+/**
+ * English ordinal suffix ("1st", "2nd", "3rd", "4th", ... "11th").
+ * Only the English date template uses it; other languages omit the placeholder.
+ */
+const ordinalSuffix = (day: number) => {
+    if (day % 100 >= 11 && day % 100 <= 13) {
+        return 'th'
     }
 
-    return `${daysOfWeek[dayOfWeekIndex]} ${day} ${months[monthIndex]} ${year}`
+    switch (day % 10) {
+        case 1:
+            return 'st'
+        case 2:
+            return 'nd'
+        case 3:
+            return 'rd'
+        default:
+            return 'th'
+    }
+}
+
+const dateLocales: Record<string, string> = {
+    en: 'en-GB',
+    nl: 'nl-NL',
+}
+
+const nameFormatters = new Map<string, { weekday: Intl.DateTimeFormat, month: Intl.DateTimeFormat }>()
+
+/**
+ * Month and weekday names come from the browser's locale data, so they follow
+ * the capitalisation and spelling of the active language instead of being
+ * hardcoded here (English "October", Dutch "oktober").
+ */
+const dateFormatter = (locale: string) => {
+    let formatters = nameFormatters.get(locale)
+
+    if (!formatters) {
+        formatters = {
+            weekday: new Intl.DateTimeFormat(locale, { weekday: 'long' }),
+            month: new Intl.DateTimeFormat(locale, { month: 'long' }),
+        }
+        nameFormatters.set(locale, formatters)
+    }
+
+    return formatters
+}
+
+// TODO: Test if timestamp type is indeed a number
+export const formattedData = (timestamp: number) => {
+    const date = new Date(timestamp)
+    const formatters = dateFormatter(dateLocales[gettext.current] ?? dateLocales.en)
+    const day = date.getDate()
+
+    // The order of the parts (and the English ordinal suffix) is part of the
+    // translation, see the msgid in src/language/nl.po.
+    return gettext.$gettext('%{weekday} %{month} %{day}%{ordinal} %{year}', {
+        weekday: formatters.weekday.format(date),
+        month: formatters.month.format(date),
+        day: String(day),
+        ordinal: ordinalSuffix(day),
+        year: String(date.getFullYear()),
+    })
 }
 
 export const formattedDataShort = (timestamp: number) => {

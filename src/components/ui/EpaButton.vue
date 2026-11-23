@@ -27,9 +27,16 @@ const props = defineProps([
     'to',
     'target',
     'rel',
+    'span',
 ])
 
 const htmlElement = () => {
+    // `span` renders the same styling as a non-interactive element, for use
+    // inside a card that is itself a link (avoids nesting interactive content).
+    if (props.span) {
+        return 'span'
+    }
+
     return props.to ? 'router-link' : (props.href ? 'a' : 'button')
 }
 </script>
