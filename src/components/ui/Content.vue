@@ -1,6 +1,6 @@
 <template>
-    <div class="w-full py-8" :style="props.light ? 'background: var(--p-page-highlight);' : ''">
-        <div class="mx-10 md:mx-32">
+    <div class="w-full py-5" :style="props.light ? 'background: var(--p-page-highlight);' : ''">
+        <div class="page-container">
             <slot />
         </div>
     </div>

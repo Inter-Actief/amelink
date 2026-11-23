@@ -7,7 +7,7 @@
         </template>
         <template #content>
             <Transition name="fade" mode="out-in">
-                <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-10">
+                <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 gap-3 pb-5">
                     <HorizontalCard v-for="n in perpage" :key="n" :loading="true" :loadingOpts="{
                         image: true,
                         title: true,
@@ -16,7 +16,7 @@
                     }" />
                 </div>
 
-                <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-10">
+                <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-3 pb-5">
                     <HorizontalCard v-for="item in activityItems" :key="item!.id"
                         :image="imageSrc(item?.imageIcon, false)" :title="item!.summary ?? ''"
                         :body="formattedData(item!.begin)"

@@ -1,7 +1,7 @@
 <template>
     <template v-if="loading">
         <div v-for="_ in 20">
-            <div class="pb-12">
+            <div class="pb-5">
                 <TextCard loading :loadingOpts="{
                     title: true,
                     label: true,
@@ -14,7 +14,7 @@
 
     <div v-if="!loading && newsItems" v-for="item in newsItems" :key="item?.id">
         <template v-if="item">
-            <div class="pb-12">
+            <div class="pb-5">
                 <TextCard :title="item!.summary!" :subtitle="formattedData(item.begin)"
                     :routerLink="{ to: { name: 'singleactivities', params: { id: item.id } } }"
                     :label="{ color: item!.activityLabel.color, text: item!.activityLabel!.name! }">

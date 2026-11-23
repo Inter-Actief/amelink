@@ -1,21 +1,21 @@
 <template>
     <div <div
-        class="w-full bg-primary grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-20 text-primary-contrast px-4 py-12 md:py-20">
-        <div class="col-span-1 md:col-span-3 md:col-start-2">
-            <Logo class="pb-8" />
-            <div class="pb-8">{{ $gettext('footer.text') }}</div>
+        class="w-full bg-primary grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12 text-primary-contrast px-4 py-6 md:py-8">
+        <div class="col-span-1 md:col-span-4 md:col-start-2">
+            <Logo class="pb-3" />
+            <div class="pb-2">{{ $gettext('footer.text') }}</div>
             <div class="align-bottom text-sm">{{ currentYear }} | Inter-Actief</div>
         </div>
 
         <div class="col-span-1 md:col-span-2">
-            <div class="font-bold pb-2">{{ $gettext('Pages') }}</div>
+            <div class="font-bold pb-1">{{ $gettext('Pages') }}</div>
             <div v-for="item in pages" :key="item.name">
                 <RouterLink :to="{ name: item.page }" class="link">{{ item.name }}</RouterLink>
             </div>
         </div>
 
         <div class="col-span-1 md:col-span-2">
-            <div class="font-bold pb-2">{{ $gettext('Important information') }}</div>
+            <div class="font-bold pb-1">{{ $gettext('Important information') }}</div>
             <div><a class="link" href="https://privacy.ia.utwente.nl/">{{ $gettext('Privacy policy') }}</a></div>
             <div>
                 <RouterLink :to="{ name: 'contact' }" class="link">{{ $gettext('Contact') }}</RouterLink>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="col-span-1 md:col-span-2">
-            <div class="font-bold pb-2">{{ $gettext('Contact us') }}</div>
+            <div class="font-bold pb-1">{{ $gettext('Contact us') }}</div>
             <div>Zilverling, kamer E208</div>
             <div>Drienerlolaan 5</div>
             <div>7522 NB Enschede</div>

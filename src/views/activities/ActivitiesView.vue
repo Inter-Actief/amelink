@@ -1,6 +1,6 @@
 <template>
     <Content>
-        <div class="grid grid-cols-7 gap-12">
+        <div class="grid grid-cols-7 gap-5">
             <div class="col-span-7 lg:col-span-4">
                 <h1 class="pb-4">{{ $gettext("Activities you don't want to miss") }}</h1>
                 <OverviewActivities />

@@ -48,7 +48,7 @@ const selectedRows = ref(limit)
                 </Select>
             </template>
             <template #content>
-                <div class="grid grid-cards-wide gap-10 pb-4">
+                <div class="grid grid-cards-wide gap-4 pb-4">
                     <PublicationPlaceholder v-if="loading" v-for="_ in selectedRows" />
                     <a v-else :href="publicationUrl(item?.file!)" v-for="item in queryItems" :key="item?.id">
                         <Card class="text-card" style="height: 100%;">
@@ -59,8 +59,8 @@ const selectedRows = ref(limit)
                             </template>
                             <template #title>
                                 <div
-                                    class="flex flex-row items-center w-full justify-between pt-4 pl-4 expand-link link">
-                                    <span class="text-4xl! font-semibold!">{{ item?.name }}</span>
+                                    class="flex flex-row items-center w-full justify-between pt-2 px-3 expand-link link">
+                                    <span class="text-2xl! font-semibold!">{{ item?.name }}</span>
                                 </div>
                             </template>
                             <template #subtitle>

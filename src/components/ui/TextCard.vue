@@ -18,8 +18,8 @@
                 </div>
             </template>
             <template #title v-if="props.title || (props.loading && props.loadingOpts.title)">
-                <div class="flex flex-row items-center gap-2 w-full justify-between pt-4 pl-4">
-                    <span v-if="props.title" class="text-4xl! font-semibold!">{{ props.title }}</span>
+                <div class="flex flex-row items-center gap-2 w-full justify-between pt-2 pl-3">
+                    <span v-if="props.title" class="text-2xl! font-semibold!">{{ props.title }}</span>
                     <Chip v-if="props.label" :label="props.label.text"
                         :style="{ backgroundColor: `#${props.label.color}` }"
                         class="ml-auto text-slate-50! self-end!" />
@@ -34,7 +34,7 @@
                 </div>
             </template>
             <template #subtitle v-if="props.subtitle || (props.loading && props.loadingOpts.subtitle)">
-                <div class="pl-4 pr-4">
+                <div class="pl-3 pr-3">
                     <span v-if="props.subtitle">
                         {{ props.subtitle }}
                     </span>
@@ -44,7 +44,7 @@
                 </div>
             </template>
             <template #content>
-                <p class="m-0 pl-4 pr-4">
+                <p class="m-0 pl-3 pr-3">
                     <slot />
                 <div v-if="props.loading" class="pt-2">
                     <PlaceholderText :lines="props.loadingOpts.contentLines" />
@@ -52,7 +52,7 @@
                 </p>
             </template>
             <template #footer>
-                <div class="flex gap-4 mt-1 pl-4 pr-4 pb-4">
+                <div class="flex gap-3 mt-0 pl-3 pr-3 pb-3">
                     <slot name="footer"></slot>
                     <EpaButton v-if="showReadMore" class="link readmore" icon="readmore">
                         {{ $gettext('Read more') }}

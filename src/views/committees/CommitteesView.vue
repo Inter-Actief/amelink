@@ -1,8 +1,8 @@
 <template>
     <Content>
         <h1 class="pb-4">{{ $gettext("Our committees") }}</h1>
-        <div class="sm:columns-sm md:columns-md lg:columns-lg xl:columns-xl gap-8">
-            <div v-if="!loading" v-for="committeeCategory in categories" :key="committeeCategory.category" class="pb-8">
+        <div class="sm:columns-sm md:columns-md lg:columns-lg xl:columns-xl gap-4">
+            <div v-if="!loading" v-for="committeeCategory in categories" :key="committeeCategory.category" class="pb-4">
                 <SectionCard :name="committeeCategory.category">
                     <template #content>
                         <RouterLink v-for="committee in committeeCategory.committees" class="link flex flex-row"
@@ -13,7 +13,7 @@
                 </SectionCard>
             </div>
             <div v-else>
-                <div v-for="linesAmount in loadingLinesAmount" class="pb-8">
+                <div v-for="linesAmount in loadingLinesAmount" class="pb-4">
                     <SectionCard :loading="true">
                         <template #content>
                             <PlaceholderText :lines="linesAmount" />

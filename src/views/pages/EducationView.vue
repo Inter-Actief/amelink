@@ -1,6 +1,6 @@
 <template>
     <Content>
-        <div class="flex flex-col lg:flex-row gap-12 justify-start items-start">
+        <div class="flex flex-col lg:flex-row gap-5 justify-start items-start">
             <SectionCard :name="$gettext('Information')" class="w-full lg:basis-1/3 lg:sticky top-12">
                 <template #content>
                     <template v-for="item in queryItems" :key="item?.id">
@@ -10,15 +10,15 @@
                     </template>
                 </template>
             </SectionCard>
-            <div class="lg:basis-2/3 flex flex-col gap-12">
+            <div class="lg:basis-2/3 flex flex-col gap-5">
                 <!-- All items -->
                 <div v-for="item in queryItems" :key="item?.id" :id="`item_${item?.id}`">
-                    <Card class="p-4">
+                    <Card>
                         <template #title>
-                            <div class="text-5xl font-extrabold pb-2">
+                            <div class="text-3xl font-extrabold">
                                 {{ item!.name! }}
                             </div>
-                            <Divider class="pb-8" />
+                            <Divider class="my-2!" />
                         </template>
                         <template #content>
                             <div class="text" v-html="processedContent[item?.id!]"></div>

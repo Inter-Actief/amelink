@@ -6,7 +6,7 @@
                 <h1 v-else>{{ item.title }}</h1>
             </div>
 
-            <div class="details pb-8 text-gray-500">
+            <div class="details pb-4 text-gray-500">
                 <div class="author">
                     <Skeleton v-if="loading" height="1.5rem" width="20%" />
                     <span v-else>{{ item.author }}</span>
@@ -17,7 +17,7 @@
                 </div>
             </div>
 
-            <div class="content text pb-8">
+            <div class="content text pb-4">
                 <PlaceholderText v-if="loading" :lines="10" />
                 <div v-else v-html="processedContent"></div>
             </div>

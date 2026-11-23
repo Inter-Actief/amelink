@@ -5,12 +5,12 @@
         'bg-hazard-staging': mode == 'staging'
     }">
         <!-- Desktop: Logo and buttons on same row -->
-        <div class="hidden md:flex flex-row gap-4 pt-10 pl-10 pr-10 pb-6">
+        <div class="hidden md:flex flex-row items-center gap-4 page-container pt-4 pb-2">
             <div id="header_logo" class="basis-1/5">
                 <Logo />
             </div>
 
-            <div class="basis-4/5 justify-self-end flex flex-row justify-end gap-4">
+            <div class="basis-4/5 justify-self-end flex flex-row justify-end gap-3">
                 <!-- <SearchToggle v-if="isDesktop" /> -->
                 <Button as="a" severity="secondary" :href="oldFrontendUrl">
                     {{ $gettext('Old website') }}
@@ -25,14 +25,14 @@
         </div>
 
         <!-- Mobile: Logo on first row -->
-        <div class="md:hidden flex flex-row gap-4 pt-6 px-4 pb-4">
+        <div class="md:hidden flex flex-row gap-4 pt-3 px-3 pb-2">
             <div id="header_logo" class="flex-1">
                 <Logo />
             </div>
         </div>
 
         <!-- Mobile: Buttons on second row -->
-        <div class="md:hidden flex flex-row gap-4 px-4 pb-6">
+        <div class="md:hidden flex flex-row gap-2 px-3 pb-3">
             <Button as="a" severity="secondary" :href="oldFrontendUrl" class="flex-1">
                 {{ $gettext('Old website') }}
                 <ArrowUpRight />
@@ -43,7 +43,7 @@
             <UserButton class="flex-1"></UserButton>
         </div>
 
-        <div class="pl-10 pr-10 pb-4">
+        <div class="page-container pb-2">
             <Menubar :model="menuItems" class="p-0 sticky top-0 z-50" breakpoint="768px">
                 <template #start></template>
                 <template #item="{ item, props, hasSubmenu, root }">

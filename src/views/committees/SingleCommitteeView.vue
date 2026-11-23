@@ -8,7 +8,7 @@
                 {{ $gettext('View all committees') }}
             </RouterLink>
         </div>
-        <div v-if="!loading && committee" class="grid sm:grid-cols-1 md:grid-cols-8 gap-12">
+        <div v-if="!loading && committee" class="grid sm:grid-cols-1 md:grid-cols-8 gap-5">
             <div class="sm:col-span1 md:col-span-5">
                 <!-- Committee! -->
                 <SectionCard :name="committee!.name" class="pb-4">
@@ -17,7 +17,7 @@
                         </div>
 
                         <template v-if="committee.groupPicture">
-                            <img class="format rounded-lg mt-10" :src="picture" />
+                            <img class="format rounded-lg mt-5" :src="picture" />
                         </template>
                     </template>
                 </SectionCard>
@@ -27,13 +27,13 @@
                 </RouterLink>
             </div>
             <div class="sm:col-span-1 md:col-span-3">
-                <SectionCard :name="$gettext('Committee information')" class="pb-12">
+                <SectionCard :name="$gettext('Committee information')" class="pb-5">
                     <template #content>
                         <div class="grid"
                             :class="{
                                 'grid-cols-1': !hasLogo,
                                 'grid-cols-4': hasLogo,
-                                'gap-8': hasLogo,
+                                'gap-4': hasLogo,
                             }">
                             <div :class="{'col-span-3': hasLogo}">
                                 <div v-if="committee.email" class="text">

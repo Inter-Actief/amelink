@@ -32,7 +32,7 @@ watch(result, async (newResult) => {
                 {{ $gettext('View all videos') }}
             </RouterLink>
         </div>
-        <div v-else class="grid grid-cols-1 lg:grid-cols-8 gap-12">
+        <div v-else class="grid grid-cols-1 lg:grid-cols-8 gap-5">
             <div class="col-span1 lg:col-span-4 xl:col-span-5">
                 <SectionCard :name="result?.video?.title!">
                     <template #content>

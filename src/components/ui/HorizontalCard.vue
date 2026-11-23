@@ -1,16 +1,16 @@
 <template>
     <Card class="horizontal-card h-full overflow-hidden">
         <template #content>
-            <div class="flex flex-row h-full min-h-40">
-                <div class="flex flex-col gap-2 p-4 flex-1 min-w-0">
-                    <span v-if="props.title" class="text-2xl md:text-3xl font-semibold">{{ props.title }}</span>
+            <div class="flex flex-row h-full min-h-0">
+                <div class="flex flex-col gap-1 px-3 py-2 flex-1 min-w-0">
+                    <span v-if="props.title" class="text-xl md:text-2xl font-semibold leading-snug">{{ props.title }}</span>
                     <Skeleton v-else-if="props.loading && props.loadingOpts.title" height="2rem" width="70%" />
-                    <p v-if="props.body || $slots.default" class="m-0 text-xl md:text-2xl">
+                    <p v-if="props.body || $slots.default" class="m-0 text-xl">
                         <slot>{{ props.body }}</slot>
                     </p>
                     <PlaceholderText v-if="props.loading && props.loadingOpts.contentLines"
                         :lines="props.loadingOpts.contentLines" />
-                    <div class="mt-auto pt-2">
+                    <div class="mt-auto pt-1">
                         <EpaButton v-if="showButton" class="link readmore" icon="readmore" :to="props.to"
                             :href="props.href">
                             {{ props.buttonLabel || $gettext('Read more') }}
@@ -18,10 +18,10 @@
                         <Skeleton v-if="props.loading && props.loadingOpts.readmore" height="2rem" width="12rem" />
                     </div>
                 </div>
-                <div v-if="props.image || (props.loading && props.loadingOpts.image)" class="w-48 shrink-0">
+                <div v-if="props.image || (props.loading && props.loadingOpts.image)" class="w-24 shrink-0 self-stretch">
                     <img v-if="props.image" v-image-error :src="props.image" :alt="props.title ?? ''"
-                        class="h-40 w-full h-full object-cover aspect-square" />
-                    <Skeleton v-else height="10rem" class="h-40! sm:h-full!" />
+                        class="h-full w-full object-cover" />
+                    <Skeleton v-else height="10rem" class="h-full!" />
                 </div>
             </div>
         </template>
