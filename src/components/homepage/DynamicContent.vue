@@ -42,7 +42,7 @@
                         :subtitle="formattedData(slotProps.data.results[0].datePublished)">
                         <template #default>
                             <img v-image-error="'/images/placeholder/book.svg'"
-                                class="max-h-240 aspect-a4 object-cover rounded-t-lg w-full"
+                                class="max-h-240 aspect-a4 object-cover object-top rounded-t-lg w-full"
                                 :src="slotProps.data.results[0].thumbnail" />
                         </template>
                     </TextCard>
