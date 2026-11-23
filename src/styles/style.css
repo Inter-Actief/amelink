@@ -11,6 +11,30 @@
 
 @theme {
   --aspect-a4: 1/1.414;
+
+  /*
+   * Semantic type scale. The root font-size is 60% (9.6px), which makes
+   * Tailwind's default text-* utilities (text-sm = 8.4px, text-4xl =
+   * 21.6px) almost unusable for real typography. These tokens express the
+   * *role* of a piece of text instead, and are the only sizes to use.
+   *
+   * page-title  headings that name the whole page
+   * section     headers of a SectionCard / content block
+   * card-title  titles of a card, activity, video, publication...
+   * body        default running text (matches --font-size)
+   * meta        dates, subtitles, secondary information
+   */
+  --text-page-title: 2.6rem;
+  --text-page-title--line-height: 1.15;
+  --text-page-title--letter-spacing: -0.01em;
+  --text-section: 2.25rem;
+  --text-section--line-height: 1.2;
+  --text-card-title: 1.9rem;
+  --text-card-title--line-height: 1.28;
+  --text-body: 1.6rem;
+  --text-body--line-height: 1.45;
+  --text-meta: 1.4rem;
+  --text-meta--line-height: 1.35;
 }
 
 /* @apply */

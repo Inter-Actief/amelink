@@ -18,8 +18,8 @@
                 </div>
             </template>
             <template #title v-if="props.title || (props.loading && props.loadingOpts.title)">
-                <div class="flex flex-row items-center gap-2 w-full justify-between pt-2 pl-3">
-                    <span v-if="props.title" class="text-2xl! font-semibold!">{{ props.title }}</span>
+                <div class="flex flex-row items-center gap-2 w-full justify-between pt-2 px-3">
+                    <span v-if="props.title" class="text-card-title! font-semibold">{{ props.title }}</span>
                     <Chip v-if="props.label" :label="props.label.text"
                         :style="{ backgroundColor: `#${props.label.color}` }"
                         class="ml-auto text-slate-50! self-end!" />
@@ -34,7 +34,7 @@
                 </div>
             </template>
             <template #subtitle v-if="props.subtitle || (props.loading && props.loadingOpts.subtitle)">
-                <div class="pl-3 pr-3">
+                <div class="px-3 text-meta">
                     <span v-if="props.subtitle">
                         {{ props.subtitle }}
                     </span>
@@ -124,6 +124,6 @@ const showReadMore = computed(() => {
 
 <style scoped>
 .text-card:hover .readmore {
-    background-size: 100% 0.2rem;
+    text-decoration-color: currentColor;
 }
 </style>

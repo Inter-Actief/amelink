@@ -3,7 +3,7 @@
         <div class="grid gap-5 grid-cols-12 pt-5 grid-rows-2">
             <div class="col-span-12 lg:col-span-7 row-span-2">
                 <Skeleton height="4rem" v-if="loading" />
-                <div class="text-3xl font-bold" v-if="queryItem">{{ queryItem.summary! }}</div>
+                <div class="text-page-title font-bold" v-if="queryItem">{{ queryItem.summary! }}</div>
 
                 <div class="pb-5">
                     <Skeleton height="2rem" v-if="loading" />

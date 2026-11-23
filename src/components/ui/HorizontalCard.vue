@@ -3,9 +3,9 @@
         <template #content>
             <div class="flex flex-row h-full min-h-0">
                 <div class="flex flex-col gap-1 px-3 py-2 flex-1 min-w-0">
-                    <span v-if="props.title" class="text-xl md:text-2xl font-semibold leading-snug">{{ props.title }}</span>
+                    <span v-if="props.title" class="text-card-title font-bold leading-snug">{{ props.title }}</span>
                     <Skeleton v-else-if="props.loading && props.loadingOpts.title" height="2rem" width="70%" />
-                    <p v-if="props.body || $slots.default" class="m-0 text-xl">
+                    <p v-if="props.body || $slots.default" class="m-0 text-body">
                         <slot>{{ props.body }}</slot>
                     </p>
                     <PlaceholderText v-if="props.loading && props.loadingOpts.contentLines"
@@ -79,6 +79,6 @@ const showButton = computed(() => !props.loading && (props.to || props.href || p
 }
 
 .horizontal-card:hover .readmore {
-    background-size: 100% 0.2rem;
+    text-decoration-color: currentColor;
 }
 </style>

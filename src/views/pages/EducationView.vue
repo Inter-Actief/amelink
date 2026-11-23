@@ -15,10 +15,10 @@
                 <div v-for="item in queryItems" :key="item?.id" :id="`item_${item?.id}`">
                     <Card>
                         <template #title>
-                            <div class="text-3xl font-extrabold">
+                            <div class="text-section font-extrabold pt-2 pb-1">
                                 {{ item!.name! }}
                             </div>
-                            <Divider class="my-2!" />
+                            <Divider class="my-3!" />
                         </template>
                         <template #content>
                             <div class="text" v-html="processedContent[item?.id!]"></div>

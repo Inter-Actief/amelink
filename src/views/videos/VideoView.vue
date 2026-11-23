@@ -3,7 +3,7 @@ import Content from '@/components/ui/Content.vue';
 import { useGettext } from 'vue3-gettext';
 import { useQuery } from '@/composables/queries';
 import { computed, ref, watch } from 'vue';
-import { markedText } from '@/functions/functions';
+import { formattedData, markedText } from '@/functions/functions';
 import { ArrowLeft } from '@lucide/vue';
 import SectionCard from '@/components/ui/SectionCard.vue';
 
@@ -47,6 +47,13 @@ watch(result, async (newResult) => {
                     </template>
                     <template #content>
                         <div v-html="body" class="text"></div>
+                        <div class="text-meta pt-2">
+                            {{ formattedData(result?.video?.datePublished) }}
+                        </div>
+                        <RouterLink class="link flex flex-row mt-2" :to="{ name: 'videos' }">
+                            <ArrowLeft />
+                            {{ $gettext('Return to videos') }}
+                        </RouterLink>
                     </template>
                 </SectionCard>
             </div>

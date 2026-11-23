@@ -5,10 +5,12 @@
             <div v-if="!loading" v-for="committeeCategory in categories" :key="committeeCategory.category" class="pb-4">
                 <SectionCard :name="committeeCategory.category">
                     <template #content>
-                        <RouterLink v-for="committee in committeeCategory.committees" class="link flex flex-row"
-                            :to="{ name: 'singlecommittee', params: { id: committee.id, slug: committee.slug } }">
-                            {{ committee!.name }}
-                        </RouterLink>
+                        <div class="text">
+                            <RouterLink v-for="committee in committeeCategory.committees" class="link flex flex-row"
+                                :to="{ name: 'singlecommittee', params: { id: committee.id, slug: committee.slug } }">
+                                {{ committee!.name }}
+                            </RouterLink>
+                        </div>
                     </template>
                 </SectionCard>
             </div>

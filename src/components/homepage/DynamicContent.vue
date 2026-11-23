@@ -5,7 +5,7 @@
     <Carousel v-if="!loading && result" :value="carouselItems" :num-visible="1" :num-scroll="1">
         <template #item="slotProps">
             <template v-if="slotProps.data.typeName == 'pinnedNews'">
-                <h2 class="pb-2 flex gap-2 items-center">
+                <h2 class="pb-2 flex gap-2 items-center text-card-title!">
                     <Pin :size="20" />
                     {{ $gettext('Pinned news') }}
                 </h2>
@@ -19,7 +19,7 @@
                 </div>
             </template>
             <template v-else-if="slotProps.data.typeName == 'recentNews'">
-                <h2 class="pb-2 flex gap-2 items-center">
+                <h2 class="pb-2 flex gap-2 items-center text-card-title!">
                     <Mailbox :size="20" />
                     {{ $gettext('Recent news') }}
                 </h2>
@@ -33,7 +33,7 @@
                 </div>
             </template>
             <template v-else-if="slotProps.data.typeName == 'publications'">
-                <h2 class="pb-2 flex gap-2 items-center">
+                <h2 class="pb-2 flex gap-2 items-center text-card-title!">
                     <BookOpenText :size="20" />
                     {{ $gettext('Latest publication') }}
                 </h2>
@@ -49,7 +49,7 @@
                 </a>
             </template>
             <template v-else-if="slotProps.data.typeName == 'videos'">
-                <h2 class="pb-2 flex gap-2 items-center">
+                <h2 class="pb-2 flex gap-2 items-center text-card-title!">
                     <BookOpenText :size="20" />
                     {{ $gettext('Latest video') }}
                 </h2>
@@ -68,7 +68,7 @@
                 </RouterLink>
             </template>
             <template v-else-if="slotProps.data.typeName == 'newsItems'">
-                <h2 class="pb-2 flex gap-2 items-center">
+                <h2 class="pb-2 flex gap-2 items-center text-card-title!">
                     <Newspaper :size="20" />
                     {{ $gettext('All news') }}
                 </h2>
@@ -158,6 +158,6 @@ const carouselItems = computed(() => {
 
 <style scoped>
 .gotopic:hover .readmore {
-    background-size: 100% 0.2rem;
+    text-decoration-color: currentColor;
 }
 </style>

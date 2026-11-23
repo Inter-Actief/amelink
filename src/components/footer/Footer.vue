@@ -4,7 +4,7 @@
         <div class="col-span-1 md:col-span-4 md:col-start-2">
             <Logo class="pb-3" />
             <div class="pb-2">{{ $gettext('footer.text') }}</div>
-            <div class="align-bottom text-sm">{{ currentYear }} | Inter-Actief</div>
+            <div class="align-bottom text-meta">{{ currentYear }} | Inter-Actief</div>
         </div>
 
         <div class="col-span-1 md:col-span-2">

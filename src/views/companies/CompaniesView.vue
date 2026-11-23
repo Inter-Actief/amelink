@@ -35,7 +35,7 @@ const selectedRows = ref(limit)
                             <template #title>
                                 <div
                                     class="flex flex-row items-center w-full justify-between pt-2 px-3 expand-link link mt">
-                                    <span class="text-2xl font-semibold">{{ company.name ?? "" }}</span>
+                                    <span class="text-card-title font-semibold">{{ company.name ?? "" }}</span>
                                 </div>
                             </template>
                             <template #subtitle>
@@ -57,7 +57,7 @@ const selectedRows = ref(limit)
 <style scoped>
 .text-card {
     &:hover .expand-link {
-        background-size: 100% 0.2rem;
+        text-decoration-color: currentColor;
     }
 }
 </style>

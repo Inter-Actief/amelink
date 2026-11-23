@@ -97,18 +97,29 @@
     padding-top: 0.4rem;
   }
 
-  /* Makes link hover nice */
+  /*
+   * Animated underline for every clickable text row.
+   *
+   * This used to be a background gradient with a background-size transition.
+   * That silently broke on elements that also carry a bg-* utility or a
+   * component background (they reset `background`), which made the hover
+   * effect simply not appear. text-decoration cannot be reset that way, and
+   * it also propagates into flex rows such as "Read more ->".
+   */
   .link {
     padding: 0.3rem 0;
     cursor: pointer;
     width: fit-content;
+    text-decoration-line: underline;
+    text-decoration-thickness: 0.2rem;
+    text-underline-offset: 0.3rem;
+    text-decoration-color: transparent;
     transition: 300ms;
-    background: linear-gradient(currentColor, currentColor) bottom / 0 0.2rem no-repeat;
-    background-position: left bottom;
   }
 
-  .link:hover {
-    background-size: 100% 0.2rem;
+  .link:hover,
+  .link:focus-visible {
+    text-decoration-color: currentColor;
   }
 }
 

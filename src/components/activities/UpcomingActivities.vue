@@ -104,7 +104,7 @@ const items = computed(() => (queryResults.value ? queryResults.value.results : 
 }
 
 .upcomingactivities .item:hover .readmore {
-    background-size: 100% 0.2rem;
+    text-decoration-color: currentColor;
 }
 
 .upcomingactivities .item .label {

@@ -6,6 +6,7 @@ import { useGettext } from 'vue3-gettext';
 const { $gettext } = useGettext();
 import Pagination from '@/components/ui/Pagination.vue';
 import { useQuery } from '@/composables/queries';
+import { formattedData } from '@/functions/functions.ts';
 import VideoPlaceholder from '@/components/placeholder/VideoPlaceholder.vue';
 
 const limit = ref(20);
@@ -35,7 +36,10 @@ const selectedRows = ref(limit)
                             </template>
                             <template #footer>
                                 <div class="flex flex-row items-center w-full justify-between pt-2 px-3 expand-link link">
-                                    <span class="text-2xl font-semibold">{{ video.title }}</span>
+                                    <span class="text-card-title font-semibold">{{ video.title }}</span>
+                                </div>
+                                <div class="px-3 text-meta">
+                                    {{ formattedData(video.datePublished) }}
                                 </div>
                             </template>
                         </Card>
@@ -52,7 +56,7 @@ const selectedRows = ref(limit)
 <style scoped>
 .text-card {
     &:hover .expand-link {
-        background-size: 100% 0.2rem;
+        text-decoration-color: currentColor;
     }
 }
 </style>
