@@ -19,7 +19,7 @@
                 <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-3 pb-5">
                     <HorizontalCard v-for="item in activityItems" :key="item!.id"
                         :image="imageSrc(item?.imageIcon, false)" :title="item!.summary ?? ''"
-                        :body="formattedData(item!.begin)"
+                        :subtitle="formattedData(item!.begin)"
                         :to="{ name: 'singleactivities', params: { id: item!.id } }" />
                 </div>
             </Transition>

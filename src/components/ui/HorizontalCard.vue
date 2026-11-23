@@ -4,8 +4,9 @@
             <template #content>
                 <div class="flex flex-row h-full min-h-0">
                     <div class="flex flex-col gap-1 px-3 py-2 flex-1 min-w-0">
-                        <span v-if="props.title" class="text-card-title font-bold leading-snug">{{ props.title }}</span>
+                        <span v-if="props.title" class="text-section font-bold leading-snug">{{ props.title }}</span>
                         <Skeleton v-else-if="props.loading && props.loadingOpts.title" height="2rem" width="70%" />
+                        <p v-if="props.subtitle" class="m-0 text-meta">{{ props.subtitle }}</p>
                         <p v-if="props.body || $slots.default" class="m-0 text-body">
                             <slot>{{ props.body }}</slot>
                         </p>
@@ -53,6 +54,8 @@ interface Props {
     },
     image?: string,
     title?: string,
+    /** Secondary line, e.g. the date of an activity. Rendered smaller than `body`. */
+    subtitle?: string,
     body?: string,
     /** Shown when `to`, `href`, or `readmore` is set. Defaults to "Read more". */
     buttonLabel?: string,

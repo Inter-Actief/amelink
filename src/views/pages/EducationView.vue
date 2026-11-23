@@ -3,11 +3,13 @@
         <div class="flex flex-col lg:flex-row gap-5 justify-start items-start">
             <SectionCard :name="$gettext('Information')" class="w-full lg:basis-1/3 lg:sticky top-12">
                 <template #content>
-                    <template v-for="item in queryItems" :key="item?.id">
-                        <div class="link" @click="scrolltop(`item_${item?.id}`)">
-                            {{ item!.name! }}
-                        </div>
-                    </template>
+                    <div class="flex flex-col gap-2">
+                        <template v-for="item in queryItems" :key="item?.id">
+                            <div class="link" @click="scrolltop(`item_${item?.id}`)">
+                                {{ item!.name! }}
+                            </div>
+                        </template>
+                    </div>
                 </template>
             </SectionCard>
             <div class="lg:basis-2/3 flex flex-col gap-5">
@@ -15,10 +17,10 @@
                 <div v-for="item in queryItems" :key="item?.id" :id="`item_${item?.id}`">
                     <Card>
                         <template #title>
-                            <div class="text-section font-extrabold pt-2 pb-1">
+                            <div class="text-section font-extrabold pt-4 pb-2">
                                 {{ item!.name! }}
                             </div>
-                            <Divider class="my-3!" />
+                            <Divider class="my-4!" />
                         </template>
                         <template #content>
                             <div class="text" v-html="processedContent[item?.id!]"></div>
