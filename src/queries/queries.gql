@@ -360,12 +360,24 @@ query Video($videoId: ID!) {
   }
 }
 
-query DynamicContent($today: DateTime) {
-  # Recent news
+query Homepage($today: DateTime) {
+  # Pinned news, shown first on the homepage
+  pinnedNews: newsItems(pinned: true, limit: 2, ordering: "publication_date,desc") {
+    totalCount
+    results {
+      id
+      title
+      introduction
+      author
+      publicationDate
+      pinned
+    }
+  }
+
+  # Regular news
   recentNews: newsItems(
     publicationDate_Lt: $today
-    # publicationDate_Gt: $recency
-    limit: 3
+    limit: 4
     ordering: "publication_date,desc"
   ) {
     totalCount
@@ -374,26 +386,16 @@ query DynamicContent($today: DateTime) {
       title
       introduction
       author
+      publicationDate
       pinned
     }
   }
 
-  # pinned news
-  pinnedNews: newsItems(pinned: true, limit: 3, ordering: "publication_date,desc") {
+  # Recent publications
+  publications(ordering: "date_published,desc", limit: 4) {
     totalCount
     results {
       id
-      title
-      introduction
-      author
-      pinned
-    }
-  }
-
-  # recent publication
-  publications(ordering: "date_published,desc", limit: 1) {
-    totalCount
-    results {
       thumbnail
       name
       file
@@ -401,13 +403,13 @@ query DynamicContent($today: DateTime) {
     }
   }
 
+  # Latest video
   videos(limit: 1, ordering: "date_published,desc") {
     totalCount
     results {
       videoId
       videoType
       title
-      embedUrl
       thumbnailUrl
       datePublished
     }

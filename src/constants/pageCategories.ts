@@ -1,11 +1,13 @@
 // Main menu structure used by Header and computed by PageView
 
-type MenuItem = {
+export type MenuItem = {
     labelKey: string
     icon?: string
     route?: string
     url?: string
     items?: MenuItem[]
+    /** Pillar image; items that have one are shown as tiles in the mobile menu. */
+    image?: string
 }
 
 export const mainMenu: MenuItem[] = [
@@ -17,10 +19,12 @@ export const mainMenu: MenuItem[] = [
     {
         labelKey: 'Activities',
         route: '/activities',
+        image: '/images/pillars/activities/activities0.jpg',
     },
     {
         labelKey: 'News',
         route: '/News',
+        image: '/images/pillars/news/news0.jpg',
     },
     {
         labelKey: 'Publications',
@@ -29,6 +33,7 @@ export const mainMenu: MenuItem[] = [
     {
         labelKey: 'Companies',
         route: '/companies',
+        image: '/images/pillars/career/career0.jpg',
     },
     {
         labelKey: 'Videos',
@@ -68,6 +73,7 @@ export const mainMenu: MenuItem[] = [
     },
     {
         labelKey: 'Education',
+        image: '/images/pillars/education/education0.jpg',
         items: [
             { labelKey: 'Information', route: '/education' },
             { labelKey: 'Books', url: import.meta.env.VITE_WO4YOU_URL },
@@ -79,4 +85,10 @@ export const mainMenu: MenuItem[] = [
         labelKey: 'Contact',
         route: '/contact',
     },
-] as const
+]
+
+/** Sections that get a tile in the mobile menu instead of a plain row. */
+export const featuredSections = mainMenu.filter((item) => item.image)
+
+/** Menu entries that stay a plain row in the mobile menu. */
+export const secondaryMenu = mainMenu.filter((item) => !item.image && item.labelKey !== 'Home')

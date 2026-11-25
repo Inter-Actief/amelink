@@ -24,26 +24,29 @@
 
         </div>
 
-        <!-- Mobile: Logo on first row -->
-        <div class="md:hidden flex flex-row gap-4 pt-3 px-3 pb-2">
+        <!-- Mobile: Logo and hamburger -->
+        <div class="md:hidden flex flex-row items-center gap-4 pt-3 px-3 pb-2">
             <div id="header_logo" class="flex-1">
                 <Logo />
             </div>
+            <button type="button" class="p-2 cursor-pointer" :aria-label="$gettext('Open menu')"
+                @click="menuVisible = true">
+                <Menu :size="24" />
+            </button>
         </div>
 
         <!-- Mobile: Buttons on second row -->
         <div class="md:hidden flex flex-row gap-2 px-3 pb-3">
-            <Button as="a" severity="secondary" :href="oldFrontendUrl" class="flex-1">
-                {{ $gettext('Old website') }}
-                <ArrowUpRight />
-            </Button>
             <Button as="a" :label="$gettext('Become a member')" severity="secondary"
                 href="https://www.inter-actief.utwente.nl/oidc/authenticate/" class="flex-1">
             </Button>
             <UserButton class="flex-1"></UserButton>
         </div>
 
-        <div class="page-container pb-2">
+        <MobileMenu v-model:visible="menuVisible" />
+
+        <!-- Desktop: menu bar -->
+        <div class="hidden md:block page-container pb-2">
             <Menubar :model="menuItems" class="p-0 sticky top-0 z-50" breakpoint="768px">
                 <template #start></template>
                 <template #item="{ item, props, hasSubmenu, root }">
@@ -78,13 +81,15 @@ import Logo from '@/components/ui/Logo.vue'
 import Menubar from 'primevue/menubar';
 import { useGettext } from 'vue3-gettext'
 import { computed, reactive, ref } from 'vue';
-import { ArrowUpRight, ChevronDown, ChevronRight, Icon } from '@lucide/vue';
+import { ArrowUpRight, ChevronDown, ChevronRight, Menu } from '@lucide/vue';
 import UserButton from './UserButton.vue';
+import MobileMenu from './MobileMenu.vue';
 import { mainMenu } from '@/constants/pageCategories';
 
 const { $gettext } = useGettext();
 const mode = import.meta.env.VITE_ENV
 const oldFrontendUrl = import.meta.env.VITE_OLD_FRONTEND_URL;
+const menuVisible = ref(false);
 
 // Transform menu with translations
 const menuItems = computed(() => {
