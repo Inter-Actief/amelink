@@ -37,6 +37,6 @@ function cycleLanguage() {
     display: block;
     width: 1.8rem;
     height: auto;
-    border-radius: 0.15rem;
+    border-radius: var(--border-radius);
 }
 </style>

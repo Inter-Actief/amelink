@@ -9,6 +9,26 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+ * One radius for every boxed surface. Cards set the reference; the whole
+ * Tailwind rounded-* scale points at the same value so `rounded`,
+ * `rounded-lg` and friends cannot drift apart. `rounded-full` is still a
+ * deliberate pill/circle and is not part of this scale.
+ *
+ * `inline` makes the utilities emit `var(--border-radius)` directly.
+ */
+@theme inline {
+  --radius: var(--border-radius);
+  --radius-xs: var(--border-radius);
+  --radius-sm: var(--border-radius);
+  --radius-md: var(--border-radius);
+  --radius-lg: var(--border-radius);
+  --radius-xl: var(--border-radius);
+  --radius-2xl: var(--border-radius);
+  --radius-3xl: var(--border-radius);
+  --radius-4xl: var(--border-radius);
+}
+
 @theme {
   --aspect-a4: 1/1.414;
 

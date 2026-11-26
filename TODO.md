@@ -53,9 +53,10 @@ Its final shape:
 - "Read more" is a plain `class="link"` (site-wide sliding underline), inside
   the text column, never a nested anchor/button — the whole card is the link
 
-**Corners** — cards and titled section blocks are 4px; other page chrome stays
-square. `main.css` still has `.p-card { border-radius: 0 }`; `TileCard` and
-`SectionCard` override it locally.
+**Corners** — one 4px radius for every boxed surface: cards, section blocks,
+buttons, inputs, images and overlays. `--border-radius` is the single source;
+`main.css` gives `.p-card` that radius and the Tailwind `rounded-*` scale is
+aliased to it. Pills (`rounded-full`) and circles stay fully round.
 
 ## Next
 

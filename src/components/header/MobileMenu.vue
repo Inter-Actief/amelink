@@ -30,7 +30,7 @@
                     v-for="item in featuredSections"
                     :key="item.labelKey"
                     :to="sectionRoute(item)"
-                    class="group relative block overflow-hidden rounded-lg"
+                    class="group relative block overflow-hidden rounded"
                 >
                     <img
                         v-if="item.image"
@@ -187,7 +187,7 @@ watch(() => route.fullPath, close)
     height: 3.2rem;
     padding: 0;
     border: 0;
-    border-radius: 0.4rem;
+    border-radius: var(--border-radius);
     background: transparent;
     color: var(--p-primary-color);
     cursor: pointer;

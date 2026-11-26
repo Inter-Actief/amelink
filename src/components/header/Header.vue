@@ -321,7 +321,7 @@ function isActive(item: MenuItem) {
     place-items: center;
     width: 3.2rem;
     height: 3.2rem;
-    border-radius: 0.4rem;
+    border-radius: var(--border-radius);
     color: inherit;
     cursor: pointer;
     transition: background-color 160ms ease;
@@ -342,7 +342,7 @@ function isActive(item: MenuItem) {
     font-size: 1.4rem;
     font-weight: 500;
     border: 1px solid rgba(255, 255, 255, 0.45);
-    border-radius: 0.4rem;
+    border-radius: var(--border-radius);
     background: transparent;
     color: inherit;
     box-shadow: none;

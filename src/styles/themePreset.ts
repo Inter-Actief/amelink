@@ -3,13 +3,14 @@ import Lara from '@primeuix/themes/lara'
 
 export const iaPreset = definePreset(Lara, {
     primitive: {
+        /* Cards are the reference: all PrimeVue surfaces share one radius. */
         borderRadius: {
             none: '0',
-            xs: '2px',
+            xs: '4px',
             sm: '4px',
-            md: '6px',
-            lg: '8px',
-            xl: '12px',
+            md: '4px',
+            lg: '4px',
+            xl: '4px',
         },
         emerald: {
             50: '#ecfdf5',

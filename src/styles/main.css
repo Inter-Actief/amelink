@@ -75,10 +75,9 @@
     font-size: 100%;
   }
 
-  /* Cards are the main density lever across the site */
-  /* Square by default; TileCard and SectionCard opt into the 4px radius. */
+  /* Cards define the site radius; every card shares it. */
   .p-card {
-    border-radius: 0;
+    border-radius: var(--border-radius);
   }
 
   .p-card .p-card-body {

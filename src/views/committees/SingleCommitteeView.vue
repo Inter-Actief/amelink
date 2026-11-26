@@ -17,7 +17,7 @@
                         </div>
 
                         <template v-if="committee.groupPicture">
-                            <img class="format rounded-lg mt-5" :src="picture" />
+                            <img class="format rounded mt-5" :src="picture" />
                         </template>
                     </template>
                 </SectionCard>
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                             <div v-if="committee.logo" :class="{'col-span-1': hasLogo}">
-                                <img class="rounded-lg" :src="logo" />
+                                <img class="rounded" :src="logo" />
                             </div>
                         </div>
                     </template>

@@ -145,7 +145,7 @@ onMounted(() => {
 .slide-image {
     max-width: 100%;
     max-height: 100%;
-    border-radius: 5%;
+    border-radius: var(--border-radius);
     display: block;
     margin: 0 auto;
 }

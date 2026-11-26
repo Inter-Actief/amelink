@@ -194,7 +194,6 @@ const wrapperProps = computed(() => {
 <style scoped>
 .tile-card-inner {
     border: 1px solid #c3cad8;
-    border-radius: 4px;
     background: #fff;
     height: 100%;
     overflow: hidden;
@@ -224,7 +223,8 @@ const wrapperProps = computed(() => {
 
 .tile-media {
     position: relative;
-    border-radius: 3px 3px 0 0;
+    /* One pixel less than the card: the card's border sits outside this edge. */
+    border-radius: calc(var(--border-radius) - 1px) calc(var(--border-radius) - 1px) 0 0;
     overflow: hidden;
 }
 
@@ -390,7 +390,7 @@ const wrapperProps = computed(() => {
         width: 33%;
         max-width: 33%;
         align-self: stretch;
-        border-radius: 0 3px 3px 0;
+        border-radius: 0 calc(var(--border-radius) - 1px) calc(var(--border-radius) - 1px) 0;
         overflow: hidden;
         /* The picture fills the card, it does not size it: without this the
            image's own intrinsic height wins and a portrait upload makes the

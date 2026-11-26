@@ -5,14 +5,14 @@
       :key="'prev-' + previousImage"
       :src="previousImage"
       alt=""
-      class="absolute inset-0 w-full h-full object-cover rounded-lg"
+      class="absolute inset-0 w-full h-full object-cover rounded"
     />
     <Transition name="fade">
       <img
         :key="currentImage"
         :src="currentImage"
         alt="Slideshow image"
-        class="absolute inset-0 w-full h-full object-cover rounded-lg"
+        class="absolute inset-0 w-full h-full object-cover rounded"
       />
     </Transition>
     <!-- Invisible placeholder to maintain container height -->

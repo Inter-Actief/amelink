@@ -50,12 +50,6 @@ const bg = computed(() => (props.pageBg ? 'var(--p-page-background)' : ''))
 </script>
 
 <style scoped>
-/* The card clips its own overflow, so this rounds the blue header and the
-   content block together, exactly like TileCard. */
-:deep(.p-card) {
-    border-radius: 4px;
-}
-
 .section-bar {
     background: var(--p-primary-color);
     color: var(--p-primary-contrast-color);
