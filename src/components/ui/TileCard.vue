@@ -24,26 +24,15 @@
                         :fit="props.image ? props.fit : 'cover'"
                         :placeholder="props.placeholder"
                     />
-                    <span v-if="props.date && !props.loading" class="tile-date">
-                        <b>{{ dateParts.day }}</b>
-                        <span>{{ dateParts.monthYear }}</span>
-                    </span>
                 </div>
 
                 <div class="tile-body">
-                    <span v-if="props.date && !hasMedia && !props.loading" class="tile-date tile-date-inline">
-                        <b>{{ dateParts.day }}</b>
-                        <span>{{ dateParts.monthYear }}</span>
-                    </span>
-
                     <span v-if="props.loading" class="tile-subtitle">
                         <Skeleton height="1.4rem" width="45%" />
                     </span>
                     <span v-else-if="props.kicker && !labelText" class="tile-kicker">{{ props.kicker }}</span>
 
-                    <!-- the compact (phone) layout shows the date as a quiet line
-                         above the title instead of a block on the photo -->
-                    <span v-if="props.date && !props.loading" class="tile-date-quiet">{{ dateParts.day }} {{
+                    <span v-if="props.date && !props.loading" class="tile-date-line">{{ dateParts.day }} {{
                         dateParts.monthYear }}</span>
 
                     <div class="tile-title-row">
@@ -68,19 +57,14 @@
                     <div v-else-if="props.subtitle || $slots.default" class="tile-subtitle">
                         <slot>{{ props.subtitle }}</slot>
                     </div>
+
+                    <!-- a plain .link: the sliding underline is the site-wide one -->
+                    <span v-if="showFooter" class="link tile-foot">
+                        {{ props.actionLabel || $gettext('Read more') }}<ArrowRight class="tile-arrow" />
+                    </span>
                 </div>
             </template>
 
-            <!-- v-if belongs on the element, not on the slot template: PrimeVue
-                 checks `$slots.footer`, which a conditional template does not
-                 satisfy reliably. -->
-            <template #footer>
-                <!-- a plain .link: the sliding underline is the site-wide one, not
-                     a second implementation of it -->
-                <span v-if="showFooter" class="link tile-foot">
-                    {{ props.actionLabel || $gettext('Read more') }}<ArrowRight class="tile-arrow" />
-                </span>
-            </template>
         </Card>
     </component>
 </template>
@@ -268,41 +252,13 @@ const wrapperProps = computed(() => {
     object-fit: contain;
 }
 
-.tile-date {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    align-items: baseline;
-    gap: 0.35rem;
-    background: var(--p-primary-color);
-    color: #fff;
-    border-radius: 2px;
-    padding: 0.35rem 0.75rem;
-    font-variant-numeric: tabular-nums;
-}
-
-/* Only used by the compact layout below. */
-.tile-date-quiet {
-    display: none;
-}
-
-.tile-date-inline {
-    position: static;
-    align-self: flex-start;
-    margin: 0 0 0.4rem;
-}
-
-.tile-date b {
-    font-size: 1.9rem;
-    font-weight: 800;
-    line-height: 1;
-}
-
-.tile-date span {
-    font-size: 1.15rem;
-    letter-spacing: 0.12em;
+.tile-date-line {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
+    color: #7a839b;
+    font-variant-numeric: tabular-nums;
 }
 
 .tile-body {
@@ -388,7 +344,8 @@ const wrapperProps = computed(() => {
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    margin: 0 1rem 0.85rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
     font-size: 1.3rem;
     font-weight: 600;
     color: var(--p-primary-color);
@@ -399,8 +356,15 @@ const wrapperProps = computed(() => {
     height: 1.3rem;
 }
 
-/* ---- compact layout: on phones the photo moves to the right ---- */
-@media (max-width: 767px) {
+/* ---- compact layout: text on the left, photo on the right ----
+   Decided by the width the card actually gets, not by the viewport: a tile in a
+   five-across grid stays stacked, the same tile in a two- or three-across grid
+   (activities, homepage) becomes a row. */
+.tile-card {
+    container-type: inline-size;
+}
+
+@container (min-width: 320px) {
     .tile-card-inner:not(.tile-card-logo) :deep(.p-card-content) {
         display: flex;
         flex-direction: row-reverse;
@@ -408,8 +372,8 @@ const wrapperProps = computed(() => {
     }
 
     .tile-card-inner:not(.tile-card-logo) .tile-media {
-        flex: 0 0 32%;
-        width: 32%;
+        flex: 0 0 33%;
+        width: 33%;
         border-radius: 0 3px 3px 0;
     }
 
@@ -426,21 +390,5 @@ const wrapperProps = computed(() => {
         min-width: 0;
     }
 
-    .tile-card-inner:not(.tile-card-logo) .tile-date {
-        display: none;
-    }
-
-    .tile-card-inner:not(.tile-card-logo) .tile-date-quiet {
-        display: block;
-        font-size: 1.2rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: #7a839b;
-    }
-
-    .tile-card-inner:not(.tile-card-logo) .tile-foot {
-        margin-bottom: 0;
-    }
 }
 </style>
