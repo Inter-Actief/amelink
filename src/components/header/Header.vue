@@ -61,7 +61,7 @@
                 <Button as="a" :label="$gettext('Become a member')" class="header-cta"
                     href="https://www.inter-actief.utwente.nl/oidc/authenticate/" />
                 <UserButton />
-                <LanguageSwitcher variant="button" class="hdr-icon hidden min-[1280px]:grid place-items-center" />
+                <LanguageSwitcher class="hdr-icon hidden min-[1280px]:grid place-items-center" />
                 <ThemeSwitcher class="hdr-icon hidden min-[1280px]:grid place-items-center" />
                 <button type="button" class="hdr-icon menu-toggle grid place-items-center min-[1280px]:hidden" :aria-label="$gettext('Open menu')"
                     @click="menuVisible = true">

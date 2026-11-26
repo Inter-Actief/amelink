@@ -6,21 +6,18 @@
         :style="{ width: 'min(88vw, 340px)' }"
         :pt="{ content: { class: 'flex-1 overflow-y-auto p-0' } }"
     >
-        <div
-            class="flex items-center justify-between gap-3 px-3 py-2 bg-primary text-primary-contrast"
-        >
-            <Logo />
-            <button
-                type="button"
-                class="p-1 -mr-1 cursor-pointer"
-                :aria-label="$gettext('Close menu')"
-                @click="visible = false"
-            >
-                <X :size="22" />
-            </button>
-        </div>
-
         <div class="px-3 py-3">
+            <div class="flex justify-end pb-1">
+                <button
+                    type="button"
+                    class="menu-icon"
+                    :aria-label="$gettext('Close menu')"
+                    @click="visible = false"
+                >
+                    <X :size="22" />
+                </button>
+            </div>
+
             <!-- Sections, as tiles -->
             <div class="grid grid-cols-2 gap-2">
                 <RouterLink
@@ -43,20 +40,24 @@
                 </RouterLink>
             </div>
 
-            <!-- Sub links of a section that is itself tiled, e.g. education pages -->
-            <div v-if="educationLinks.length" class="flex flex-wrap gap-x-3 gap-y-1 mt-2">
-                <RouterLink
+            <!-- Everything that is not a pillar is a row, including the
+                 education children that used to be a line of small links. -->
+            <nav class="flex flex-col mt-3 pt-2">
+                <component
                     v-for="item in educationLinks"
+                    :is="item.url ? 'a' : RouterLink"
                     :key="item.labelKey"
-                    :to="item.route!"
-                    class="link text-meta"
+                    v-bind="
+                        item.url
+                            ? { href: item.url, target: '_blank', rel: 'noopener' }
+                            : { to: item.route }
+                    "
+                    class="link flex flex-row py-1.5"
+                    @click="close"
                 >
                     {{ label(item) }}
-                </RouterLink>
-            </div>
+                </component>
 
-            <!-- Everything else -->
-            <nav class="flex flex-col mt-3 pt-2">
                 <template v-for="item in secondaryMenu" :key="item.labelKey">
                     <RouterLink
                         v-if="item.route && !item.items"
@@ -115,9 +116,9 @@
                     {{ $gettext('Old website') }}
                     <ArrowUpRight :size="14" />
                 </a>
-                <div class="flex flex-row items-center gap-4">
-                    <LanguageSwitcher />
-                    <ThemeSwitcher />
+                <div class="flex flex-row items-center gap-2">
+                    <LanguageSwitcher class="menu-icon" />
+                    <ThemeSwitcher class="menu-icon" />
                 </div>
             </div>
         </div>
@@ -130,7 +131,6 @@ import { RouterLink, useRoute } from 'vue-router'
 import { useGettext } from 'vue3-gettext'
 import { computed, ref, watch } from 'vue'
 import { ArrowUpRight, ChevronDown, X } from '@lucide/vue'
-import Logo from '@/components/ui/Logo.vue'
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
 import ThemeSwitcher from '@/components/ui/ThemeSwitcher.vue'
 import { featuredSections, secondaryMenu, type MenuItem } from '@/constants/pageCategories'
@@ -151,7 +151,7 @@ const label = (item: MenuItem) => $gettext(item.labelKey)
  */
 const sectionRoute = (item: MenuItem) => item.route ?? item.items?.[0]?.route ?? '/'
 
-/** Children of a tiled section, shown as small links under the tiles. */
+/** Children of a tiled section, rendered as ordinary menu rows. */
 const educationLinks = computed(() =>
     featuredSections.flatMap((item) =>
         (item.items ?? []).filter((child) => child.labelKey !== 'Information'),
@@ -172,7 +172,27 @@ watch(() => route.fullPath, close)
 </script>
 
 <style scoped>
-.mobile-menu :deep(.p-drawer-content) {
+/* Close, language and theme: the same small square target in this drawer. */
+.menu-icon {
+    display: grid;
+    place-items: center;
+    width: 3.2rem;
+    height: 3.2rem;
     padding: 0;
+    border: 0;
+    border-radius: 0.4rem;
+    background: transparent;
+    color: var(--p-primary-color);
+    cursor: pointer;
+    transition: background-color 160ms ease;
+}
+
+.menu-icon:hover {
+    background: rgba(29, 66, 138, 0.07);
+}
+
+.menu-icon :deep(svg) {
+    width: 1.8rem;
+    height: 1.8rem;
 }
 </style>
