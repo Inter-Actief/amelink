@@ -61,7 +61,7 @@
                         </button>
 
                         <div
-                            class="invisible absolute left-0 top-full z-[60] min-w-[22rem] -translate-y-1 border-t-2 border-primary bg-[var(--p-content-background,#fff)] py-2 text-[var(--p-text-color,#1e1e1e)] opacity-0 shadow-xl transition-all duration-200 group-hover:visible! group-hover:translate-y-0 group-hover:opacity-100"
+                            class="invisible absolute left-0 top-full z-[60] min-w-[22rem] -translate-y-1 overflow-hidden rounded-b border-t-2 border-primary bg-[var(--p-content-background,#fff)] py-2 text-[var(--p-text-color,#1e1e1e)] opacity-0 shadow-xl transition-all duration-200 group-hover:visible! group-hover:translate-y-0 group-hover:opacity-100"
                             :class="[
                                 openMenu === item.labelKey
                                     ? 'visible! translate-y-0 opacity-100'
