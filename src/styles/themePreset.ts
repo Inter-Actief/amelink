@@ -533,6 +533,10 @@ export const iaPreset = definePreset(Lara, {
                 page: {
                     background: '{surface.0}',
                     highlight: '#1d428a0d',
+                    /* Cards (sections) sit on `highlight`, the tiles inside them on
+                       `tile`. On light they are white, so a tile still reads on top
+                       of a card. */
+                    tile: '{surface.0}',
                 },
             },
             dark: {
@@ -662,6 +666,9 @@ export const iaPreset = definePreset(Lara, {
                 page: {
                     background: '{surface.900}',
                     highlight: '#1d428a3f',
+                    /* A second, denser layer of the same brand navy. Tiles read as
+                       deeper panels both on the page and inside a card. */
+                    tile: 'rgba(29, 66, 138, 0.60)',
                 },
             },
         },
