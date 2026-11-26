@@ -53,9 +53,9 @@ Its final shape:
 - "Read more" is a plain `class="link"` (site-wide sliding underline), inside
   the text column, never a nested anchor/button — the whole card is the link
 
-**Corners** — square for cards is *not* the rule any more: cards are 4px, the
-section bars and page chrome stay square. `main.css` still has
-`.p-card { border-radius: 0 }`; `TileCard` overrides it locally.
+**Corners** — cards and titled section blocks are 4px; other page chrome stays
+square. `main.css` still has `.p-card { border-radius: 0 }`; `TileCard` and
+`SectionCard` override it locally.
 
 ## Next
 
