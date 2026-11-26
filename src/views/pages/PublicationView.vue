@@ -7,7 +7,6 @@ const { $gettext } = useGettext();
 import { publicationUrl } from '@/functions/functions.ts'
 import Pagination from '@/components/ui/Pagination.vue';
 import { useQuery } from '@/composables/queries';
-import PublicationPlaceholder from '@/components/placeholder/PublicationPlaceholder.vue';
 import TileCard from '@/components/ui/TileCard.vue';
 
 const limit = ref(50);
@@ -43,7 +42,7 @@ const selectedRows = ref(limit)
             <template #content>
                 <div class="grid grid-cards-wide gap-4 pb-4">
                     <template v-if="loading">
-                        <PublicationPlaceholder v-for="_ in selectedRows" :key="`skeleton-${_}`" />
+                        <TileCard v-for="_ in selectedRows" :key="`skeleton-${_}`" loading aspect="a4" />
                     </template>
                     <template v-else>
                         <TileCard v-for="item in queryItems" :key="item?.id"

@@ -3,8 +3,7 @@
     <div>
         <Card :style="{ overflow: 'hidden', background: bg, height: props.maxHeight ? '100%' : undefined }">
             <template #header v-if="props.name || props.loading">
-                <div class="section-bar w-full mb-0 flex flex-row items-stretch">
-                    <div v-if="props.index !== undefined" class="section-bar-num">{{ props.index }}</div>
+                <div class="section-bar w-full mb-0 flex flex-row items-center">
                     <div class="flex flex-1 min-w-0 items-center gap-3 px-3 py-2">
                         <div v-if="props.name && !loading"
                             class="font-extrabold text-section! my-auto text-primary-contrast truncate">
@@ -32,9 +31,6 @@ import Skeleton from 'primevue/skeleton';
 
 interface Props {
     name?: string,
-    /** Ordinal shown in the dark square on the left, e.g. "01". Only pass it
-     *  when the page really is a sequence of sections. */
-    index?: string | number,
     pageBg?: boolean // if the background should be of the page or of a card
     maxHeight?: boolean, // If the card should be max possible height
     loading?: boolean
@@ -59,15 +55,4 @@ const bg = computed(() => (props.pageBg ? 'var(--p-page-background)' : ''))
     color: var(--p-primary-contrast-color);
 }
 
-.section-bar-num {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 0.9rem;
-    background: rgba(0, 0, 0, 0.28);
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    font-variant-numeric: tabular-nums;
-}
 </style>

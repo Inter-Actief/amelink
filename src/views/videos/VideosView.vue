@@ -6,7 +6,6 @@ import { useGettext } from 'vue3-gettext';
 const { $gettext } = useGettext();
 import Pagination from '@/components/ui/Pagination.vue';
 import { useQuery } from '@/composables/queries';
-import VideoPlaceholder from '@/components/placeholder/VideoPlaceholder.vue';
 import TileCard from '@/components/ui/TileCard.vue';
 
 const limit = ref(20);
@@ -23,7 +22,7 @@ const selectedRows = ref(limit)
             <template #content>
                 <div class="grid grid-cards-wide gap-4 pb-4">
                     <template v-if="loading">
-                        <VideoPlaceholder v-for="_ in selectedRows" :key="`skeleton-${_}`" />
+                        <TileCard v-for="_ in selectedRows" :key="`skeleton-${_}`" loading />
                     </template>
                     <template v-else>
                         <TileCard v-for="video in videos" :key="video.videoId"

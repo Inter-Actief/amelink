@@ -1,5 +1,5 @@
 <template>
-    <SectionCard :name="$gettext('Recent publications')" index="03" pageBg>
+    <SectionCard :name="$gettext('Recent publications')" pageBg>
         <template #info>
             <RouterLink :to="{ name: 'publications' }" class="link">
                 {{ $gettext('View all') }}
