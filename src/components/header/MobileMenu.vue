@@ -6,18 +6,21 @@
         :style="{ width: 'min(88vw, 340px)' }"
         :pt="{ content: { class: 'flex-1 overflow-y-auto p-0' } }"
     >
-        <div class="px-3 py-3">
-            <div class="flex justify-end pb-1">
-                <button
-                    type="button"
-                    class="menu-icon"
-                    :aria-label="$gettext('Close menu')"
-                    @click="visible = false"
-                >
-                    <X :size="22" />
-                </button>
-            </div>
+        <div
+            class="flex items-center justify-between gap-3 px-3 py-2 bg-primary text-primary-contrast"
+        >
+            <Logo />
+            <button
+                type="button"
+                class="p-1 -mr-1 cursor-pointer"
+                :aria-label="$gettext('Close menu')"
+                @click="visible = false"
+            >
+                <X :size="22" />
+            </button>
+        </div>
 
+        <div class="px-3 py-3">
             <!-- Sections, as tiles -->
             <div class="grid grid-cols-2 gap-2">
                 <RouterLink
@@ -131,6 +134,7 @@ import { RouterLink, useRoute } from 'vue-router'
 import { useGettext } from 'vue3-gettext'
 import { computed, ref, watch } from 'vue'
 import { ArrowUpRight, ChevronDown, X } from '@lucide/vue'
+import Logo from '@/components/ui/Logo.vue'
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
 import ThemeSwitcher from '@/components/ui/ThemeSwitcher.vue'
 import { featuredSections, secondaryMenu, type MenuItem } from '@/constants/pageCategories'
