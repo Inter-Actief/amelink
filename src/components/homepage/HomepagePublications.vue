@@ -14,7 +14,15 @@
                     </div>
                 </div>
             </div>
-            <div v-else-if="publications.length" class="flex flex-col gap-1">
+            <div
+                v-else-if="publications.length"
+                class="gap-1"
+                :class="
+                    props.layout === 'columns'
+                        ? 'grid grid-cols-1 md:grid-cols-2 gap-x-5'
+                        : 'flex flex-col'
+                "
+            >
                 <a
                     v-for="item in publications"
                     :key="item.id"
@@ -53,6 +61,15 @@ import { formattedData, publicationUrl } from '@/functions/functions'
 import { useHomepageContent } from '@/composables/homepageContent'
 
 const { $gettext } = useGettext()
+
+interface Props {
+    /** One column of rows, or two columns next to each other. */
+    layout?: 'stack' | 'columns'
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    layout: 'stack',
+})
 
 const { result, loading } = useHomepageContent()
 const publications = computed(() =>

@@ -16,6 +16,7 @@ declare module 'vue' {
     Footer: typeof import('./src/components/footer/Footer.vue')['default']
     Header: typeof import('./src/components/header/Header.vue')['default']
     HomepageNews: typeof import('./src/components/homepage/HomepageNews.vue')['default']
+    HomepagePillars: typeof import('./src/components/homepage/HomepagePillars.vue')['default']
     HomepagePublications: typeof import('./src/components/homepage/HomepagePublications.vue')['default']
     HomepageSlider: typeof import('./src/components/homepage/HomepageSlider.vue')['default']
     HomepageVideo: typeof import('./src/components/homepage/HomepageVideo.vue')['default']

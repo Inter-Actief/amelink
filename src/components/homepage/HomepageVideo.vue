@@ -16,10 +16,28 @@
                     name: 'singlevideo',
                     params: { id: video.videoId, type: video.videoType },
                 }"
-                class="group flex flex-row items-center gap-4 text-inherit no-underline"
+                class="group gap-3 text-inherit no-underline"
+                :class="props.variant === 'cover' ? 'flex flex-col' : 'flex flex-row items-center'"
             >
+                <span v-if="props.variant === 'cover'" class="relative block overflow-hidden rounded">
+                    <img
+                        v-if="video.thumbnailUrl"
+                        :src="video.thumbnailUrl"
+                        :alt="video.title"
+                        class="aspect-video w-full object-cover"
+                    />
+                    <span
+                        class="absolute inset-0 grid place-items-center bg-slate-900/25 transition-colors group-hover:bg-slate-900/10"
+                    >
+                        <span
+                            class="grid size-[4.2rem] place-items-center rounded-full bg-white/90 text-primary shadow-lg"
+                        >
+                            <Play class="ml-[0.2rem] size-[2rem] fill-current" />
+                        </span>
+                    </span>
+                </span>
                 <img
-                    v-if="video.thumbnailUrl"
+                    v-else-if="video.thumbnailUrl"
                     :src="video.thumbnailUrl"
                     :alt="video.title"
                     class="aspect-video w-40 shrink-0 rounded object-cover"
@@ -45,11 +63,21 @@ import Skeleton from 'primevue/skeleton'
 import { RouterLink } from 'vue-router'
 import { useGettext } from 'vue3-gettext'
 import { computed } from 'vue'
+import { Play } from '@lucide/vue'
 import PlaceholderText from '../placeholder/PlaceholderText.vue'
 import { formattedData } from '@/functions/functions'
 import { useHomepageContent } from '@/composables/homepageContent'
 
 const { $gettext } = useGettext()
+
+interface Props {
+    /** A row with a small thumbnail, or a full-width cover with a play button. */
+    variant?: 'row' | 'cover'
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    variant: 'row',
+})
 
 const { result, loading } = useHomepageContent()
 const video = computed(() => result.value?.videos?.results?.[0] ?? undefined)

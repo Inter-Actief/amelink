@@ -8,6 +8,8 @@ export type MenuItem = {
     items?: MenuItem[]
     /** Pillar image; items that have one are shown as tiles in the mobile menu. */
     image?: string
+    /** Every picture of the pillar, ``image`` first. The homepage block cycles them. */
+    images?: string[]
 }
 
 export const mainMenu: MenuItem[] = [
@@ -20,11 +22,19 @@ export const mainMenu: MenuItem[] = [
         labelKey: 'Activities',
         route: '/activities',
         image: '/images/pillars/activities/activities0.jpg',
+        images: [
+            '/images/pillars/activities/activities0.jpg',
+            '/images/pillars/activities/activities1.jpg',
+            '/images/pillars/activities/activities2.jpg',
+            '/images/pillars/activities/activities3.jpg',
+            '/images/pillars/activities/activities4.jpg',
+        ],
     },
     {
         labelKey: 'News',
         route: '/News',
         image: '/images/pillars/news/news0.jpg',
+        images: ['/images/pillars/news/news0.jpg'],
     },
     {
         labelKey: 'Publications',
@@ -34,6 +44,11 @@ export const mainMenu: MenuItem[] = [
         labelKey: 'Companies',
         route: '/companies',
         image: '/images/pillars/career/career0.jpg',
+        images: [
+            '/images/pillars/career/career0.jpg',
+            '/images/pillars/career/career1.jpg',
+            '/images/pillars/career/career2.jpg',
+        ],
     },
     {
         labelKey: 'Videos',
@@ -74,6 +89,7 @@ export const mainMenu: MenuItem[] = [
     {
         labelKey: 'Education',
         image: '/images/pillars/education/education0.jpg',
+        images: ['/images/pillars/education/education0.jpg'],
         items: [
             { labelKey: 'Information', route: '/education' },
             { labelKey: 'Books', url: import.meta.env.VITE_WO4YOU_URL },

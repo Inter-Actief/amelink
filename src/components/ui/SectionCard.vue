@@ -13,6 +13,13 @@
                     class="mb-0 flex w-full flex-row items-center bg-primary text-primary-contrast"
                 >
                     <div class="flex min-w-0 flex-1 items-center gap-3 px-3 py-2">
+                        <component
+                            :is="props.icon"
+                            v-if="props.icon && !loading"
+                            class="size-7 shrink-0 text-primary-contrast md:size-9"
+                            :stroke-width="2.25"
+                            aria-hidden="true"
+                        />
                         <div
                             v-if="props.name && !loading"
                             class="my-auto min-w-0 font-extrabold text-[clamp(1.45rem,3.8vw,2.25rem)]! leading-tight text-primary-contrast"
@@ -35,11 +42,14 @@
 </template>
 
 <script lang="ts" setup>
+import type { Component } from 'vue'
 import Card from 'primevue/card'
 import Skeleton from 'primevue/skeleton'
 
 interface Props {
     name?: string
+    /** Lucide icon rendered in front of the section name, e.g. `Newspaper`. */
+    icon?: Component
     pageBg?: boolean // if the background should be of the page or of a card
     maxHeight?: boolean // If the card should be max possible height
     loading?: boolean
