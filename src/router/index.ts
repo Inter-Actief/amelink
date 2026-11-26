@@ -24,6 +24,17 @@ const router = createRouter({
             component: HomePage,
             props: true,
         },
+        // Development-only comparison page for design directions. Stripped from
+        // production builds because the condition is compiled away.
+        ...(import.meta.env.DEV
+            ? [
+                  {
+                      path: '/design',
+                      name: 'design',
+                      component: () => import('@/views/DesignPreviewView.vue'),
+                  },
+              ]
+            : []),
         {
             path: '/about/:id/:slug',
             name: 'page',
