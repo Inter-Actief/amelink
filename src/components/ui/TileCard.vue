@@ -2,6 +2,8 @@
     <component :is="wrapperElement" v-bind="wrapperProps" class="group @container block h-full">
         <Card
             class="h-full overflow-hidden border border-slate-300 bg-white! text-slate-900! transition-colors group-hover:border-primary"
+            :class="{ 'tile-glow': glows }"
+            :style="glowVars"
             :pt="{
                 body: { class: 'flex h-full flex-col p-0' },
                 content: { class: ['flex-1 p-0', !isLogo ? compactContentClasses : ''] },
@@ -64,7 +66,9 @@
                         >{{ props.kicker }}</span
                     >
 
-                    <!-- date on the left, activity type on the right, same line -->
+                    <!-- Date on the left, activity type on the right. The type is a
+                         plain coloured word: the colour is carried by the glow the
+                         card gets while it is hovered, not by a badge. -->
                     <div
                         v-if="!props.loading && (props.date || labelText)"
                         class="flex flex-row items-center justify-between gap-[0.6rem]"
@@ -77,7 +81,7 @@
                         </span>
                         <span
                             v-if="labelText"
-                            class="flex-none whitespace-nowrap rounded-full border border-current px-[0.55rem] py-[0.05rem] text-[0.95rem] font-semibold uppercase leading-[1.4] tracking-[0.1em]"
+                            class="text-[0.95rem] font-bold uppercase leading-[1.5] tracking-[0.12em]"
                             :style="labelStyle"
                             >{{ labelText }}</span
                         >
@@ -92,7 +96,7 @@
                         </template>
                         <span
                             v-else-if="props.title"
-                            class="min-w-0 flex-1 text-card-title font-bold leading-tight group-hover:underline group-hover:underline-offset-2"
+                            class="line-clamp-2 min-w-0 flex-1 text-card-title font-bold leading-tight group-hover:underline group-hover:underline-offset-2"
                             >{{ props.title }}</span
                         >
                         <span
@@ -237,6 +241,13 @@ const labelStyle = computed(() => (props.label ? { color: `#${props.label.color}
  * and must never introduce a nested anchor or button.
  */
 const hasLink = computed(() => Boolean(props.to || props.href))
+
+/**
+ * The type colour may not turn a grid of cards into a colour chart, so it is
+ * a plain word at rest and a short, soft shadow while the card is hovered.
+ */
+const glows = computed(() => hasLink.value && Boolean(labelText.value))
+const glowVars = computed(() => (glows.value ? { '--type': `#${props.label?.color}` } : undefined))
 const showFooter = computed(() => hasLink.value && !props.hideAction && !props.loading)
 const wrapperElement = computed(() => {
     if (props.to) {
@@ -259,3 +270,21 @@ const wrapperProps = computed(() => {
     return { class: classes }
 })
 </script>
+
+<style scoped>
+/*
+ * The activity type colour appears only here: a border tinted towards the
+ * neutral card border plus a short, soft drop shadow. Unlayered on purpose, so
+ * it wins over the group-hover border that Card gets from its utility classes.
+ */
+.tile-glow:hover {
+    border-color: color-mix(in srgb, var(--type) 45%, #cbd5e1);
+    box-shadow: 0 4px 12px -6px color-mix(in srgb, var(--type) 45%, transparent);
+}
+
+.tile-glow {
+    transition:
+        box-shadow 180ms ease,
+        border-color 180ms ease;
+}
+</style>

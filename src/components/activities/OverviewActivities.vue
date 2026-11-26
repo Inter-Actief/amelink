@@ -14,6 +14,7 @@
                     text: item!.activityLabel?.name ?? '',
                 }"
                 aspect="video"
+                hide-action
                 show-media
                 :image="imageSrc(item?.imageIcon, false)"
                 fit="contain"
@@ -21,7 +22,7 @@
                 :to="{ name: 'singleactivities', params: { id: item?.id } }"
             >
                 <div
-                    class="line-clamp-3"
+                    class="line-clamp-2"
                     v-html="processedDescriptions[item!.id!]"
                     v-if="processedDescriptions[item!.id!]"
                 ></div>

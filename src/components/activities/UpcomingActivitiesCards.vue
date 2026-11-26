@@ -27,6 +27,7 @@
                         :title="item!.summary ?? ''"
                         :date="item!.begin"
                         aspect="video"
+                        hide-action
                         show-media
                         :image="imageSrc(item?.imageIcon, false)"
                         placeholder="/images/placeholder/shape.svg"
