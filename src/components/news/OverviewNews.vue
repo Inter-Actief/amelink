@@ -1,25 +1,27 @@
 <template>
-    <h1 class="pb-4">{{ $gettext('News page') }}</h1>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 items-stretch pb-4">
-        <div v-for="_ in 10" v-if="loading">
-            <TextCard loading :loadingOpts="{
-                readmore: true,
-                title: true,
-                subtitle: true,
-                contentLines: 1
-            }" />
-        </div>
-        <template v-if="newsItems && processedExcerpts" v-for="item in newsItems" :key="item?.id">
-            <TextCard :title="item?.title!" :subtitle="formattedData(item?.publicationDate).toString()"
-                :routerLink="{ to: { name: 'singlenews', params: { id: item?.id } } }">
-                <div v-html="processedExcerpts[item!.id]">
+    <SectionCard :name="$gettext('News')">
+        <template #content>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 items-stretch pb-2">
+                <div v-for="_ in 10" v-if="loading">
+                    <TextCard loading :loadingOpts="{
+                        readmore: true,
+                        title: true,
+                        subtitle: true,
+                        contentLines: 1
+                    }" />
                 </div>
-            </TextCard>
-        </template>
-    </div>
+                <template v-if="newsItems && processedExcerpts" v-for="item in newsItems" :key="item?.id">
+                    <TextCard :title="item?.title!" :subtitle="formattedData(item?.publicationDate).toString()"
+                        :routerLink="{ to: { name: 'singlenews', params: { id: item?.id } } }">
+                        <div v-html="processedExcerpts[item!.id]">
+                        </div>
+                    </TextCard>
+                </template>
+            </div>
 
-    <Pagination v-bind="query" :totalCount="totalCount!" :limit="10" />
+            <Pagination v-bind="query" :totalCount="totalCount!" :limit="10" />
+        </template>
+    </SectionCard>
 </template>
 
 <script setup lang="ts">

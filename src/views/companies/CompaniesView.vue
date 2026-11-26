@@ -29,7 +29,7 @@ const selectedRows = ref(limit)
                         v-for="company in companies">
                         <Card class="text-card" style="height: 100%;">
                             <template #header v-if="company.logo">
-                                <img v-image-error class="rounded-t-lg w-auto mx-auto p-5 max-h-40"
+                                <img v-image-error class="w-auto mx-auto p-5 max-h-40"
                                     :src="imageSrc(company.logo)" />
                             </template>
                             <template #title>

@@ -6,14 +6,14 @@
                 (props.loading && props.loadingOpts.image)">
                 <div class="mb-auto">
 
-                    <img v-if="props.image" v-image-error class="object-cover format rounded-t-lg"
+                    <img v-if="props.image" v-image-error class="object-cover format"
                     :class="`aspect-[${props.imageAspect}]`" :src="props.image" />
                     
                     <div v-if="props.loading && props.loadingOpts.image">
                         <Skeleton height="38rem" />
                     </div>
                     
-                    <img v-if="props.loadingOpts?.imageUrl" v-image-error class="object-cover format rounded-t-lg"
+                    <img v-if="props.loadingOpts?.imageUrl" v-image-error class="object-cover format"
                     :class="`aspect-[${props.loadingOpts.aspect}]`" :src="props.loadingOpts?.imageUrl" />
                 </div>
             </template>

@@ -76,6 +76,11 @@
   }
 
   /* Cards are the main density lever across the site */
+  /* Square corners on every card: the design deliberately has no radius. */
+  .p-card {
+    border-radius: 0;
+  }
+
   .p-card .p-card-body {
     padding: 0.9rem;
   }

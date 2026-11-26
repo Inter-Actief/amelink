@@ -48,8 +48,7 @@ const onPage = async (event: DataTablePageEvent) => {
 </script>
 
 <template>
-    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 pb-4">
-        <h2 class="flex-1 sm:flex-none">{{ $gettext('Past activities') }}</h2>
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-end gap-4 pb-4">
         <div class="w-full sm:w-auto">
             <InputText v-model="searchQuery" :placeholder="$gettext('Zoek activiteiten')" />
         </div>

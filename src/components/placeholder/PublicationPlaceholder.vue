@@ -1,7 +1,7 @@
 <template>
     <Card class="text-card" style="height: 100%;">
         <template #header>
-            <Skeleton class="aspect-a4! rounded-t-lg w-full" height="40rem">
+            <Skeleton class="aspect-a4! w-full" height="40rem">
             </Skeleton>
         </template>
         <template #title>
