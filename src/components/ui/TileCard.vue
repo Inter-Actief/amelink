@@ -377,19 +377,22 @@ const wrapperProps = computed(() => {
 }
 
 @container (min-width: 320px) {
+    /* text on the left, a square picture flush to the top right: every card gets
+       the same image shape whatever the upload's own ratio is */
     .tile-card-inner:not(.tile-card-logo) :deep(.p-card-content) {
         display: flex;
         flex-direction: row-reverse;
-        align-items: stretch;
+        align-items: flex-start;
     }
 
     .tile-card-inner:not(.tile-card-logo) .tile-media {
         flex: 0 0 33%;
         width: 33%;
-        border-radius: 0 3px 3px 0;
+        aspect-ratio: 1 / 1;
+        border-radius: 3px;
+        overflow: hidden;
     }
 
-    /* the box is the row height now, so the ratio must stop reserving space */
     .tile-card-inner:not(.tile-card-logo) .tile-media img,
     .tile-card-inner:not(.tile-card-logo) .tile-media :deep(img) {
         height: 100%;
@@ -400,7 +403,7 @@ const wrapperProps = computed(() => {
     .tile-card-inner:not(.tile-card-logo) .tile-body {
         flex: 1;
         min-width: 0;
+        align-self: stretch;
     }
-
 }
 </style>
