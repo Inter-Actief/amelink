@@ -392,13 +392,33 @@ const wrapperProps = computed(() => {
         align-self: stretch;
         border-radius: 0 3px 3px 0;
         overflow: hidden;
+        /* The picture fills the card, it does not size it: without this the
+           image's own intrinsic height wins and a portrait upload makes the
+           whole row taller than the text. */
+        min-height: 0;
     }
 
+    /* Take the image out of flow so its ratio can never set the row height.
+       It is pinned to the media box, which the flex line stretches to the
+       height of the text. */
     .tile-card-inner:not(.tile-card-logo) .tile-media img,
     .tile-card-inner:not(.tile-card-logo) .tile-media :deep(img) {
+        position: absolute;
+        inset: 0;
+        width: 100%;
         height: 100%;
         aspect-ratio: auto;
         object-fit: cover;
+    }
+
+    /* The loading skeleton has to occupy the same box as the picture it
+       replaces, otherwise the placeholder reserves a bigger row than the real
+       card. */
+    .tile-card-inner:not(.tile-card-logo) .tile-media-skeleton {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        aspect-ratio: auto;
     }
 
     .tile-card-inner:not(.tile-card-logo) .tile-body {
