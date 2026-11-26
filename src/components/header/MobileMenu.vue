@@ -4,7 +4,10 @@
         position="right"
         :show-close-icon="false"
         :style="{ width: 'min(88vw, 340px)' }"
-        :pt="{ content: { class: 'flex-1 overflow-y-auto p-0' } }"
+        :pt="{
+            header: { class: 'hidden' },
+            content: { class: 'flex-1 overflow-y-auto p-0' },
+        }"
     >
         <div
             class="flex items-center justify-between gap-3 px-3 py-2 bg-primary text-primary-contrast"
