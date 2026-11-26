@@ -10,9 +10,7 @@ import Content from '@/components/ui/Content.vue'
 
 <template>
     <main>
-        <div class="ia-section clean">
-            <HomepageSlider />
-        </div>
+        <HomepageSlider />
 
         <Content light>
             <LogoSlider />

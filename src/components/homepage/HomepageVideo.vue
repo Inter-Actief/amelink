@@ -16,19 +16,20 @@
                     name: 'singlevideo',
                     params: { id: video.videoId, type: video.videoType },
                 }"
-                class="side-row flex flex-row gap-4 items-center no-underline text-inherit"
+                class="group flex flex-row items-center gap-4 text-inherit no-underline"
             >
                 <img
                     v-if="video.thumbnailUrl"
                     :src="video.thumbnailUrl"
                     :alt="video.title"
-                    class="w-40 shrink-0 aspect-video object-cover"
+                    class="aspect-video w-40 shrink-0 rounded object-cover"
                 />
-                <span class="flex flex-col min-w-0">
-                    <span class="side-row-title line-clamp-2">{{
-                        video.title
-                    }}</span>
-                    <span class="side-row-meta">{{
+                <span class="flex min-w-0 flex-col">
+                    <span
+                        class="line-clamp-2 text-[1.5rem] font-semibold leading-tight group-hover:underline group-hover:underline-offset-2"
+                        >{{ video.title }}</span
+                    >
+                    <span class="text-meta text-slate-500">{{
                         formattedData(video.datePublished)
                     }}</span>
                 </span>
@@ -53,5 +54,3 @@ const { $gettext } = useGettext()
 const { result, loading } = useHomepageContent()
 const video = computed(() => result.value?.videos?.results?.[0] ?? undefined)
 </script>
-
-<style scoped></style>

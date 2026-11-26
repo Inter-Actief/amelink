@@ -13,8 +13,6 @@ declare module 'vue' {
     ContactForm: typeof import('./src/components/forms/ContactForm.vue')['default']
     Content: typeof import('./src/components/ui/Content.vue')['default']
     DynamicTable: typeof import('./src/components/ui/DynamicTable.vue')['default']
-    EpaButton: typeof import('./src/components/ui/EpaButton.vue')['default']
-    EpaIcon: typeof import('./src/components/ui/EpaIcon.vue')['default']
     Footer: typeof import('./src/components/footer/Footer.vue')['default']
     Header: typeof import('./src/components/header/Header.vue')['default']
     HomepageNews: typeof import('./src/components/homepage/HomepageNews.vue')['default']

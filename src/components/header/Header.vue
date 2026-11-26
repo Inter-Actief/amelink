@@ -5,46 +5,89 @@
         the bar keeps the logo, the primary action and the account button, because
         ten labels plus the actions need roughly the full content width.
     -->
-    <header class="site-header text-primary-contrast" :class="{
-        'bg-primary': mode != 'staging',
-        'bg-hazard-staging': mode == 'staging'
-    }">
+    <header
+        class="sticky top-0 z-40 text-primary-contrast"
+        :class="{
+            'bg-primary': mode != 'staging',
+            'bg-hazard-staging': mode == 'staging',
+        }"
+    >
         <!-- One bar for every screen at md and up; the menu drops into the
              drawer when ten labels plus the actions no longer fit. -->
-        <div class="hidden md:flex page-container items-center gap-3 h-[64px]">
-            <Logo class="shrink-0" />
+        <div
+            class="mx-auto hidden h-[64px] w-full max-w-[var(--content-max-width)] items-center gap-3 px-[1.5rem] md:flex md:px-[2.5rem]"
+        >
+            <Logo class="shrink-0 [&_svg]:h-[3.2rem] [&_svg]:w-auto" />
 
-            <nav ref="navEl" class="mainnav hidden min-[1280px]:flex flex-1 min-w-0 items-center" :aria-label="$gettext('Main')">
-                <div v-for="item in menu" :key="item.labelKey" class="nav-item"
-                    :class="{ 'nav-item-on': isActive(item), 'nav-item-open': openMenu === item.labelKey }"
-                    @mouseenter="onItemEnter(item)">
-                    <RouterLink v-if="!item.items && item.route" class="nav-link" :to="item.route">
+            <nav
+                ref="navEl"
+                class="hidden h-full min-w-0 flex-1 items-center overflow-visible min-[1280px]:flex"
+                :aria-label="$gettext('Main')"
+            >
+                <div
+                    v-for="item in menu"
+                    :key="item.labelKey"
+                    class="group relative flex h-full items-center"
+                    @mouseenter="onItemEnter(item)"
+                >
+                    <RouterLink
+                        v-if="!item.items && item.route"
+                        :class="navLinkClasses(item)"
+                        :to="item.route"
+                    >
                         {{ $gettext(item.labelKey) }}
                     </RouterLink>
 
-                    <span v-else-if="!item.items" class="nav-link">
+                    <span v-else-if="!item.items" :class="navLinkClasses(item)">
                         {{ $gettext(item.labelKey) }}
                     </span>
 
                     <template v-else>
                         <!-- A section with children opens on click; it must not
                              navigate away before the visitor picks a child. -->
-                        <button type="button" class="nav-link nav-trigger"
-                            :aria-expanded="openMenu === item.labelKey" aria-haspopup="true"
-                            @click="toggleMenu(item.labelKey)">
+                        <button
+                            type="button"
+                            class="cursor-pointer border-0 bg-transparent text-left font-[inherit]"
+                            :class="navLinkClasses(item)"
+                            :aria-expanded="openMenu === item.labelKey"
+                            aria-haspopup="true"
+                            @click="toggleMenu(item.labelKey)"
+                        >
                             {{ $gettext(item.labelKey) }}
-                            <ChevronDown class="nav-caret"
-                                :class="{ 'nav-caret-open': openMenu === item.labelKey }" />
+                            <ChevronDown
+                                class="h-[1.4rem] w-[1.4rem] opacity-85 transition-transform duration-150"
+                                :class="{ 'rotate-180': openMenu === item.labelKey }"
+                            />
                         </button>
 
-                        <div class="nav-sub" :class="{ 'nav-sub-wide': (item.items?.length ?? 0) > 8 }">
+                        <div
+                            class="invisible absolute left-0 top-full z-[60] min-w-[22rem] -translate-y-1 border-t-2 border-primary bg-[var(--p-content-background,#fff)] py-2 text-[var(--p-text-color,#1e1e1e)] opacity-0 shadow-xl transition-all duration-200 group-hover:visible! group-hover:translate-y-0 group-hover:opacity-100"
+                            :class="[
+                                openMenu === item.labelKey
+                                    ? 'visible! translate-y-0 opacity-100'
+                                    : '',
+                                (item.items?.length ?? 0) > 8
+                                    ? 'min-w-[44rem] columns-2 gap-0'
+                                    : '',
+                            ]"
+                        >
                             <template v-for="child in item.items" :key="child.labelKey">
-                                <RouterLink v-if="child.route" :to="child.route" class="nav-sub-link"
-                                    @click="closeMenu">
+                                <RouterLink
+                                    v-if="child.route"
+                                    :to="child.route"
+                                    class="block break-inside-avoid px-[1.2rem] py-2 text-[1.4rem] text-inherit transition-colors duration-150 hover:bg-primary/[0.07] hover:text-primary"
+                                    @click="closeMenu"
+                                >
                                     {{ $gettext(child.labelKey) }}
                                 </RouterLink>
-                                <a v-else :href="child.url" target="_blank" rel="noopener" class="nav-sub-link"
-                                    @click="closeMenu">
+                                <a
+                                    v-else
+                                    :href="child.url"
+                                    target="_blank"
+                                    rel="noopener"
+                                    class="block break-inside-avoid px-[1.2rem] py-2 text-[1.4rem] text-inherit transition-colors duration-150 hover:bg-primary/[0.07] hover:text-primary"
+                                    @click="closeMenu"
+                                >
                                     {{ $gettext(child.labelKey) }}
                                 </a>
                             </template>
@@ -53,35 +96,60 @@
                 </div>
             </nav>
 
-            <div class="header-actions flex items-center gap-2 shrink-0 ml-auto">
-                <a class="hdr-icon hidden min-[1280px]:grid place-items-center" :href="oldFrontendUrl" :aria-label="$gettext('Old website')"
-                    :title="$gettext('Old website')">
+            <div class="ml-auto flex shrink-0 items-center gap-2">
+                <a
+                    class="header-icon hidden place-items-center min-[1280px]:grid"
+                    :href="oldFrontendUrl"
+                    :aria-label="$gettext('Old website')"
+                    :title="$gettext('Old website')"
+                >
                     <ArrowUpRight />
                 </a>
-                <Button as="a" :label="$gettext('Become a member')" class="header-cta"
-                    href="https://www.inter-actief.utwente.nl/oidc/authenticate/" />
+                <Button
+                    as="a"
+                    :label="$gettext('Become a member')"
+                    class="header-action header-cta"
+                    href="https://www.inter-actief.utwente.nl/oidc/authenticate/"
+                />
                 <UserButton />
-                <LanguageSwitcher class="hdr-icon hidden min-[1280px]:grid place-items-center" />
-                <ThemeSwitcher class="hdr-icon hidden min-[1280px]:grid place-items-center" />
-                <button type="button" class="hdr-icon menu-toggle grid place-items-center min-[1280px]:hidden" :aria-label="$gettext('Open menu')"
-                    @click="menuVisible = true">
+                <LanguageSwitcher class="header-icon hidden min-[1280px]:grid" />
+                <ThemeSwitcher class="header-icon hidden min-[1280px]:grid" />
+                <button
+                    type="button"
+                    class="header-icon grid min-[1280px]:hidden"
+                    :aria-label="$gettext('Open menu')"
+                    @click="menuVisible = true"
+                >
                     <Menu />
                 </button>
             </div>
         </div>
 
         <!-- Phone: logo and hamburger, then the two actions -->
-        <div class="md:hidden flex flex-row items-center gap-3 page-gutter pt-3 pb-2">
-            <Logo class="flex-1" />
-            <button type="button" class="hdr-icon grid place-items-center" :aria-label="$gettext('Open menu')" @click="menuVisible = true">
+        <div
+            class="flex flex-row items-center gap-3 px-[1.5rem] pb-2 pt-3 md:hidden md:px-[2.5rem]"
+        >
+            <Logo class="flex-1 [&_svg]:h-[3.2rem] [&_svg]:w-auto" />
+            <button
+                type="button"
+                class="header-icon grid"
+                :aria-label="$gettext('Open menu')"
+                @click="menuVisible = true"
+            >
                 <Menu />
             </button>
         </div>
 
-        <div class="md:hidden flex flex-row gap-2 page-gutter pb-3">
-            <Button as="a" :label="$gettext('Become a member')" class="header-cta flex-1"
-                href="https://www.inter-actief.utwente.nl/oidc/authenticate/" />
-            <UserButton class="flex-1" />
+        <div class="flex flex-row gap-2 px-[1.5rem] pb-3 md:hidden md:px-[2.5rem]">
+            <Button
+                as="a"
+                :label="$gettext('Become a member')"
+                class="header-action header-cta min-w-0 flex-1"
+                href="https://www.inter-actief.utwente.nl/oidc/authenticate/"
+            />
+            <div class="flex min-w-0 flex-1 [&_.p-button]:w-full">
+                <UserButton />
+            </div>
         </div>
 
         <MobileMenu v-model:visible="menuVisible" />
@@ -123,7 +191,7 @@ function closeMenu() {
 
 /**
  * Hovering another section should not leave a clicked-open menu behind it.
- * The hovered section still opens through the CSS :hover rule.
+ * The hovered section still opens through the group-hover utilities.
  */
 function onItemEnter(item: MenuItem) {
     if (openMenu.value && openMenu.value !== item.labelKey) {
@@ -172,201 +240,18 @@ function isActive(item: MenuItem) {
         return path.value === target || path.value.startsWith(`${target}/`)
     })
 }
+
+/** One visual language for every top-level item, whether it is a link or a
+ *  dropdown trigger. The underline is the same slide-in bar as `.link`. */
+const navLinkBase =
+    'relative flex h-full items-center gap-[0.3rem] whitespace-nowrap px-[clamp(0.3rem,0.35vw,0.45rem)] pt-[0.85rem] text-[clamp(1.25rem,0.9vw,1.35rem)] font-medium text-white/90 transition-colors duration-150 after:absolute after:inset-x-0 after:bottom-0 after:h-[0.3rem] after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-200 hover:text-white hover:after:scale-x-100 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-current'
+
+function navLinkClasses(item: MenuItem) {
+    return [
+        navLinkBase,
+        isActive(item) || openMenu.value === item.labelKey
+            ? 'font-bold text-white after:scale-x-100'
+            : '',
+    ]
+}
 </script>
-
-<style scoped>
-.site-header {
-    position: sticky;
-    top: 0;
-    z-index: 40;
-}
-
-.site-header :deep(.logo svg) {
-    height: 3.2rem;
-    width: auto;
-}
-
-.mainnav {
-    height: 100%;
-    /* The dropdowns hang below the bar; anything but visible clips them. */
-    overflow: visible;
-}
-
-.nav-item {
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 100%;
-}
-
-.nav-link {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    height: 100%;
-    /* The labels plus the action row need about 1300px at full size, so they
-       scale down slightly before the menu is pushed into the drawer. */
-    padding-inline: clamp(0.3rem, 0.35vw, 0.45rem);
-    /* The bar centres the logo on its box, but the wordmark's baseline sits
-       below the optical centre. Drop the label line by the same offset so both
-       baselines meet. */
-    padding-top: 0.85rem;
-    font-size: clamp(1.25rem, 0.9vw, 1.35rem);
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.92);
-    white-space: nowrap;
-    transition: color 160ms ease;
-}
-
-/* A dropdown trigger is a button, but it must look exactly like a nav link. */
-.nav-trigger {
-    background: transparent;
-    border: 0;
-    border-radius: 0;
-    font-family: inherit;
-    text-align: left;
-    cursor: pointer;
-}
-
-.nav-trigger:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: -4px;
-}
-
-/* Same slide-in underline as .link, so navigation and text links agree */
-.nav-link::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 0.3rem;
-    background: currentColor;
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 220ms ease;
-}
-
-.nav-link:hover {
-    color: #fff;
-}
-
-.nav-link:hover::after,
-.nav-item-on > .nav-link::after {
-    transform: scaleX(1);
-}
-
-.nav-item-on > .nav-link {
-    color: #fff;
-    font-weight: 700;
-}
-
-.nav-caret {
-    width: 1.4rem;
-    height: 1.4rem;
-    opacity: 0.85;
-    transition: transform 160ms ease;
-}
-
-.nav-caret-open {
-    transform: rotate(180deg);
-}
-
-.nav-sub {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 60;
-    min-width: 22rem;
-    padding-block: 0.5rem;
-    background: var(--p-content-background, #fff);
-    color: var(--p-text-color, #1e1e1e);
-    border-top: 0.2rem solid var(--p-primary-color);
-    box-shadow: 0 0.8rem 2.4rem rgba(13, 16, 22, 0.18);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-0.4rem);
-    transition: opacity 160ms ease, transform 160ms ease, visibility 160ms;
-}
-
-.nav-sub-wide {
-    min-width: 44rem;
-    columns: 2;
-    column-gap: 0;
-}
-
-.nav-item:hover .nav-sub,
-.nav-item-open .nav-sub {
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-}
-
-.nav-sub-link {
-    display: block;
-    padding: 0.5rem 1.2rem;
-    font-size: 1.4rem;
-    color: inherit;
-    break-inside: avoid;
-    transition: background-color 140ms ease, color 140ms ease;
-}
-
-.nav-sub-link:hover {
-    background: rgba(29, 66, 138, 0.07);
-    color: var(--p-primary-color);
-}
-
-.hdr-icon {
-    place-items: center;
-    width: 3.2rem;
-    height: 3.2rem;
-    border-radius: var(--border-radius);
-    color: inherit;
-    cursor: pointer;
-    transition: background-color 160ms ease;
-}
-
-.hdr-icon:hover {
-    background: rgba(255, 255, 255, 0.16);
-}
-
-.hdr-icon :deep(svg) {
-    width: 1.8rem;
-    height: 1.8rem;
-}
-
-/* The whole action row speaks one language: outline by default, one solid CTA */
-.header-actions :deep(.p-button) {
-    padding: 0.55rem 1.1rem;
-    font-size: 1.4rem;
-    font-weight: 500;
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    border-radius: var(--border-radius);
-    background: transparent;
-    color: inherit;
-    box-shadow: none;
-    transition: background-color 160ms ease;
-}
-
-.header-actions :deep(.p-button:hover) {
-    background: rgba(255, 255, 255, 0.16);
-    border-color: rgba(255, 255, 255, 0.7);
-    color: inherit;
-}
-
-.header-actions :deep(.header-cta),
-.header-cta {
-    background: #fff;
-    border: 1px solid #fff;
-    color: var(--p-primary-color);
-    font-weight: 700;
-}
-
-.header-actions :deep(.header-cta:hover),
-.header-cta:hover {
-    background: rgba(255, 255, 255, 0.86);
-    border-color: rgba(255, 255, 255, 0.86);
-    color: var(--p-primary-color);
-}
-</style>

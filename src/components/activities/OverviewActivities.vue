@@ -4,15 +4,27 @@
             <TileCard v-for="_ in perpage" :key="`skeleton-${_}`" loading />
         </template>
         <template v-else-if="activityItems">
-            <TileCard v-for="item in activityItems" :key="item?.id" :title="item!.summary ?? ''"
+            <TileCard
+                v-for="item in activityItems"
+                :key="item?.id"
+                :title="item!.summary ?? ''"
                 :date="item!.begin"
-                :label="{ color: item!.activityLabel?.color ?? '1d428a', text: item!.activityLabel?.name ?? '' }"
-                aspect="video" show-media :image="imageSrc(item?.imageIcon, false)" fit="contain"
+                :label="{
+                    color: item!.activityLabel?.color ?? '1d428a',
+                    text: item!.activityLabel?.name ?? '',
+                }"
+                aspect="video"
+                show-media
+                :image="imageSrc(item?.imageIcon, false)"
+                fit="contain"
                 placeholder="/images/placeholder/shape.svg"
-                :to="{ name: 'singleactivities', params: { id: item?.id } }">
-                <div class="line-clamp-3" v-html="processedDescriptions[item!.id!]"
-                    v-if="processedDescriptions[item!.id!]">
-                </div>
+                :to="{ name: 'singleactivities', params: { id: item?.id } }"
+            >
+                <div
+                    class="line-clamp-3"
+                    v-html="processedDescriptions[item!.id!]"
+                    v-if="processedDescriptions[item!.id!]"
+                ></div>
             </TileCard>
         </template>
     </div>
@@ -26,7 +38,6 @@ import TileCard from '../ui/TileCard.vue'
 import { imageSrc } from '@/composables/util'
 import { useQuery } from '@/composables/queries'
 
-
 const perpage = ref(10)
 const processedDescriptions = ref<Record<string, string>>({})
 const { result, loading } = useQuery('overviewActivities', {
@@ -36,14 +47,15 @@ const { result, loading } = useQuery('overviewActivities', {
 
 const queryResults = computed(() => result.value?.activities)
 const activityItems = computed(() => (queryResults.value ? queryResults.value.results : null))
-watch(queryResults, async (newItem) => {
-    if (newItem?.results) {
-        for (const item of newItem.results) {
-            processedDescriptions.value[item?.id!] = await markedText(item!.description!);
+watch(
+    queryResults,
+    async (newItem) => {
+        if (newItem?.results) {
+            for (const item of newItem.results) {
+                processedDescriptions.value[item?.id!] = await markedText(item!.description!)
+            }
         }
-    }
-}, { immediate: true });
-
+    },
+    { immediate: true },
+)
 </script>
-
-<style scoped></style>

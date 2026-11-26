@@ -1,9 +1,15 @@
 <template>
-    <div class="searchbar">
-        <input v-model="search" type="text" name="searchinput" id="searchinput" />
+    <div class="flex rounded-[var(--border-radius)] transition-all duration-500">
+        <input
+            v-model="search"
+            type="text"
+            name="searchinput"
+            id="searchinput"
+            class="w-full rounded-l-[var(--border-radius)] border-0 bg-white px-4 py-4 text-inherit"
+        />
         <router-link
             @click="closeMobileMenu"
-            class="epa_button white"
+            class="flex cursor-pointer items-center rounded-r-[var(--border-radius)] border-0 border-l border-[#eee] bg-white px-[1.5rem] py-4 text-primary no-underline"
             :to="{ name: 'search', query: { search: search } }"
         >
             <svg
@@ -28,37 +34,3 @@ import { closeMobileMenu } from '@/functions/functions.ts'
 
 const search = ref('')
 </script>
-
-<style scoped>
-.searchbar {
-    transition: 500ms;
-    border-radius: var(--border-radius);
-    display: flex;
-}
-
-.searchbar .epa_button {
-    background-color: var(--color-white);
-    text-decoration: none;
-    padding: 1rem 1.5rem;
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
-    border: 0;
-    border-left: 0.1rem solid #eee;
-    font-size: inherit;
-    font-weight: inherit;
-    cursor: pointer;
-    line-height: 0;
-    color: var(--primary-color);
-}
-
-.searchbar input {
-    border-radius: var(--border-radius) 0 0 var(--border-radius);
-    border: 0;
-    margin: 0;
-    background-color: #fff;
-    padding: 1rem 1rem;
-    font-size: inherit;
-    line-height: inherit;
-    font-weight: inherit;
-    width: 100%;
-}
-</style>

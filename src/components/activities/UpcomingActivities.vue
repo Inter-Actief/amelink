@@ -1,44 +1,52 @@
 <template>
-    <div class="upcomingactivities">
-        <div class="bar">
+    <div
+        class="grid w-full overflow-hidden rounded-t-[var(--border-radius)] bg-white text-slate-900"
+    >
+        <div class="flex justify-between bg-primary px-6 py-6 text-white">
             <span>{{ $gettext('Upcoming Activities') }}</span>
-            <EpaButton :to="{ name: 'activities', params: {} }" class="link small">
+            <RouterLink :to="{ name: 'activities' }" class="link text-meta">
                 {{ $gettext('View all activities') }}
-            </EpaButton>
+            </RouterLink>
         </div>
 
-        <div class="table">
-            <div class="item head">
-                <div class="date">{{ $gettext('Date') }}</div>
-                <div class="type">{{ $gettext('Type') }}</div>
-                <div class="activity">{{ $gettext('Activity') }}</div>
+        <div class="grid">
+            <div class="grid grid-cols-[6rem_10rem_auto] gap-4 p-6 font-bold">
+                <div>{{ $gettext('Date') }}</div>
+                <div>{{ $gettext('Type') }}</div>
+                <div>{{ $gettext('Activity') }}</div>
             </div>
 
-            <template v-if="items" v-for="item in items" :key="item">
-                <template v-if="item">
-
-                    <div class="item">
-                        <div class="date">{{ formattedDataShort(item.begin) }}</div>
-                        <div class="type">
-                            <div class="label" :style="[`background-color: #${item.activityLabel.color}`]">
-                                {{ item.activityLabel.name }}
-                            </div>
-                        </div>
-
-                        <div class="activity">
-                            <div class="content">
-                                <div class="summary">{{ item.summary }}</div>
-                                <div class="excerpt">
-                                    {{ excerptText(item?.description ? item.description : '') }}
-                                </div>
-                            </div>
-
-                            <EpaButton :to="{ name: 'singleactivities', params: { id: item.id } }" class="readmore">
-                                {{ $gettext('Enroll now!') }}
-                            </EpaButton>
+            <template v-for="item in items" :key="item?.id">
+                <div
+                    v-if="item"
+                    class="group grid grid-cols-[6rem_10rem_auto] gap-4 p-6 even:bg-slate-100"
+                >
+                    <div>{{ formattedDataShort(item.begin) }}</div>
+                    <div>
+                        <div
+                            class="rounded-[var(--border-radius)] px-4 py-1 text-center text-meta text-white"
+                            :style="[`background-color: #${item.activityLabel.color}`]"
+                        >
+                            {{ item.activityLabel.name }}
                         </div>
                     </div>
-                </template>
+
+                    <div class="grid gap-4">
+                        <div class="grid gap-4">
+                            <div>{{ item.summary }}</div>
+                            <div class="text-meta text-slate-600">
+                                {{ excerptText(item?.description ? item.description : '') }}
+                            </div>
+                        </div>
+
+                        <RouterLink
+                            :to="{ name: 'singleactivities', params: { id: item.id } }"
+                            class="link group-hover:after:scale-x-100"
+                        >
+                            {{ $gettext('Enroll now!') }}
+                        </RouterLink>
+                    </div>
+                </div>
             </template>
         </div>
     </div>
@@ -46,77 +54,15 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import EpaButton from '@/components/ui/EpaButton.vue'
+import { RouterLink } from 'vue-router'
 import { excerptText, formattedDataShort } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext'
 import { useQuery } from '@/composables/queries'
 
-const { $gettext } = useGettext();
+const { $gettext } = useGettext()
 const perpage = ref(5)
 
-const { result, refetch } = useQuery("upcomingActivities", { limit: perpage.value });
+const { result } = useQuery('upcomingActivities', { limit: perpage.value })
 const queryResults = computed(() => result.value?.activities)
 const items = computed(() => (queryResults.value ? queryResults.value.results : null))
 </script>
-
-<style scoped>
-.upcomingactivities {
-    background: #fff;
-    border-radius: var(--border-radius) var(--border-radius) 0 0;
-    color: #000;
-    display: grid;
-    width: 100%;
-}
-
-.upcomingactivities .bar {
-    background-color: #1d428a;
-    color: #fff;
-    border-radius: var(--border-radius) var(--border-radius) 0 0;
-    padding: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-}
-
-.upcomingactivities .bar button {
-    cursor: pointer;
-    background-color: transparent;
-    border: 0;
-    color: #fff;
-    border-radius: var(--border-radius) var(--border-radius) 0 0;
-    padding: 0.5rem 1rem;
-    display: flex;
-    justify-content: space-between;
-}
-
-.upcomingactivities .item {
-    display: grid;
-    grid-template-columns: 6rem 10rem auto;
-    gap: var(--gap-sm);
-    padding: 1.5rem;
-}
-
-.upcomingactivities .item.head {
-    font-weight: 700;
-}
-
-.upcomingactivities .item:nth-child(even) {
-    background-color: #eee;
-}
-
-.upcomingactivities .item:hover .readmore::after {
-    transform: scaleX(1);
-}
-
-.upcomingactivities .item .label {
-    padding: 0.3rem 1rem;
-    color: #fff;
-    font-size: var(--font-size-small);
-    text-align: center;
-    border-radius: var(--border-radius);
-}
-
-.upcomingactivities .activity {
-    display: grid;
-    gap: 1rem;
-}
-</style>

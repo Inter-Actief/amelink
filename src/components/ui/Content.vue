@@ -1,6 +1,6 @@
 <template>
-    <div class="w-full py-5" :style="props.light ? 'background: var(--p-page-highlight);' : ''">
-        <div class="page-container">
+    <div class="w-full py-5" :class="props.light ? 'bg-[var(--p-page-highlight)]' : ''">
+        <div class="mx-auto w-full max-w-[var(--content-max-width)] px-[1.5rem] md:px-[2.5rem]">
             <slot />
         </div>
     </div>
@@ -12,8 +12,6 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    light: false
+    light: false,
 })
 </script>
-
-<style scoped></style>

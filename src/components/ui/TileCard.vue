@@ -1,21 +1,42 @@
 <template>
-    <component :is="wrapperElement" v-bind="wrapperProps" class="tile-card">
-        <Card class="tile-card-inner h-full" :class="{ 'tile-card-logo': isLogo }">
+    <component :is="wrapperElement" v-bind="wrapperProps" class="group @container block h-full">
+        <Card
+            class="h-full overflow-hidden border border-slate-300 bg-white! text-slate-900! transition-colors group-hover:border-primary"
+            :pt="{
+                body: { class: 'flex h-full flex-col p-0' },
+                content: { class: ['flex-1 p-0', !isLogo ? compactContentClasses : ''] },
+                footer: { class: 'p-0' },
+            }"
+        >
             <template #content>
-                <div v-if="hasMedia" class="tile-media">
-                    <div v-if="props.loading" class="tile-media-skeleton" :class="mediaBoxClass">
-                        <Skeleton height="100%" />
-                    </div>
-                    <div v-else-if="isLogo" class="tile-logo" :class="mediaBoxClass">
+                <div
+                    v-if="hasMedia"
+                    class="relative overflow-hidden rounded-t-[calc(var(--border-radius)-1px)]"
+                    :class="!isLogo ? compactMediaClasses : ''"
+                >
+                    <div
+                        v-if="isLogo"
+                        class="flex h-[7.2rem] items-center justify-center bg-[var(--p-page-highlight)] p-[1.2rem]"
+                    >
+                        <Skeleton v-if="props.loading" height="100%" class="w-full" />
                         <img
-                            v-if="props.image"
+                            v-else-if="props.image"
                             v-image-error="props.placeholder"
                             :src="props.image"
                             :alt="props.title ?? ''"
-                            class="tile-logo-image"
+                            class="max-h-full max-w-full object-contain"
                         />
-                        <div v-else class="tile-logo-image" />
+                        <div v-else class="h-full w-full" />
                     </div>
+
+                    <div
+                        v-else-if="props.loading"
+                        class="bg-[var(--p-page-highlight)]"
+                        :class="[mediaBoxClass, compactSkeletonClasses]"
+                    >
+                        <Skeleton height="100%" />
+                    </div>
+
                     <AppImage
                         v-else
                         :src="props.image || props.placeholder"
@@ -23,52 +44,87 @@
                         :aspect="imageAspect"
                         :fit="props.image ? props.fit : 'cover'"
                         :placeholder="props.placeholder"
+                        :class="compactImageClasses"
                     />
                 </div>
 
-                <div class="tile-body">
-                    <span v-if="props.loading" class="tile-subtitle">
+                <div
+                    class="flex flex-col gap-[0.35rem] px-4 py-[0.9rem]"
+                    :class="!isLogo ? compactBodyClasses : ''"
+                >
+                    <span
+                        v-if="props.loading"
+                        class="text-[1.1rem] font-semibold uppercase tracking-[0.14em] text-slate-500"
+                    >
                         <Skeleton height="1.4rem" width="45%" />
                     </span>
-                    <span v-else-if="props.kicker && !labelText" class="tile-kicker">{{ props.kicker }}</span>
+                    <span
+                        v-else-if="props.kicker && !labelText"
+                        class="text-[1.1rem] font-semibold uppercase tracking-[0.14em] text-slate-500"
+                        >{{ props.kicker }}</span
+                    >
 
                     <!-- date on the left, activity type on the right, same line -->
-                    <div v-if="!props.loading && (props.date || labelText)" class="tile-meta-row">
-                        <span v-if="props.date" class="tile-date-line">
-                            <b>{{ dateParts.day }}</b> {{ dateParts.monthYear }}
+                    <div
+                        v-if="!props.loading && (props.date || labelText)"
+                        class="flex flex-row items-center justify-between gap-[0.6rem]"
+                    >
+                        <span
+                            v-if="props.date"
+                            class="text-[1.2rem] font-medium uppercase tracking-[0.1em] text-slate-500 tabular-nums"
+                        >
+                            {{ dateParts.day }} {{ dateParts.monthYear }}
                         </span>
-                        <span v-if="labelText" class="tile-label" :style="labelStyle">{{ labelText }}</span>
+                        <span
+                            v-if="labelText"
+                            class="flex-none whitespace-nowrap rounded-full border border-current px-[0.55rem] py-[0.05rem] text-[0.95rem] font-semibold uppercase leading-[1.4] tracking-[0.1em]"
+                            :style="labelStyle"
+                            >{{ labelText }}</span
+                        >
                     </div>
 
-                    <div class="tile-title-row">
+                    <div class="flex flex-row items-start justify-between gap-[0.5rem]">
                         <template v-if="props.loading">
                             <div class="w-full">
                                 <Skeleton height="2rem" width="90%" />
                                 <Skeleton height="1.9rem" width="55%" class="mt-1" />
                             </div>
                         </template>
-                        <span v-else-if="props.title" class="tile-title">{{ props.title }}</span>
-                        <span v-if="props.pinned" class="tile-pin">
+                        <span
+                            v-else-if="props.title"
+                            class="min-w-0 flex-1 text-card-title font-bold leading-tight group-hover:underline group-hover:underline-offset-2"
+                            >{{ props.title }}</span
+                        >
+                        <span
+                            v-if="props.pinned"
+                            class="flex shrink-0 flex-row items-center gap-[0.2rem] text-meta font-semibold uppercase tracking-[0.1em] text-primary"
+                        >
                             <Pin :size="11" />
                             {{ $gettext('Pinned') }}
                         </span>
                     </div>
 
-                    <div v-if="props.loading" class="tile-subtitle">
+                    <div v-if="props.loading" class="text-meta">
                         <Skeleton height="1.5rem" width="100%" />
                         <Skeleton height="1.5rem" width="80%" class="mt-1" />
                     </div>
-                    <div v-else-if="props.subtitle || $slots.default" class="tile-subtitle">
+                    <div
+                        v-else-if="props.subtitle || $slots.default"
+                        class="m-0 text-meta leading-[1.4] text-slate-600 [&_li]:m-0 [&_li]:inline [&_p+p]:before:content-['_'] [&_p]:m-0 [&_p]:inline"
+                    >
                         <slot>{{ props.subtitle }}</slot>
                     </div>
 
                     <!-- a plain .link: the sliding underline is the site-wide one -->
-                    <span v-if="showFooter" class="link tile-foot">
-                        {{ props.actionLabel || $gettext('Read more') }}<ArrowRight class="tile-arrow" />
+                    <span
+                        v-if="showFooter"
+                        class="link mt-auto inline-flex items-center gap-[0.35rem] pt-2 text-meta font-semibold text-primary"
+                    >
+                        {{ props.actionLabel || $gettext('Read more')
+                        }}<ArrowRight class="size-[1.3rem]" />
                     </span>
                 </div>
             </template>
-
         </Card>
     </component>
 </template>
@@ -101,7 +157,7 @@ interface Props {
     /** Small label above the title, e.g. the section an item belongs to. */
     kicker?: string
     /** Coloured label instead of `kicker` (activity type, with its own colour). */
-    label?: { text: string, color: string }
+    label?: { text: string; color: string }
     subtitle?: string
     /** Show the media box even without an image (it then shows the placeholder),
      *  for lists where some items have a picture and the grid must line up. */
@@ -136,7 +192,7 @@ const ASPECT_CLASS: Record<Aspect, string> = {
     '4/3': 'aspect-4/3',
     video: 'aspect-video',
     square: 'aspect-square',
-    logo: 'tile-logo-box',
+    logo: '',
 }
 
 const isLogo = computed(() => props.aspect === 'logo')
@@ -144,7 +200,20 @@ const hasMedia = computed(() =>
     Boolean(props.image || props.loading || isLogo.value || props.showMedia),
 )
 const mediaBoxClass = computed(() => ASPECT_CLASS[props.aspect])
-const fitClass = computed(() => (props.fit === 'contain' ? 'object-contain' : 'object-cover'))
+
+/**
+ * Above 320px of card width the card becomes a row. These variants are always
+ * prefixed so they only apply inside that container query.
+ */
+const compactContentClasses =
+    '@min-[320px]:flex @min-[320px]:flex-row-reverse @min-[320px]:items-stretch'
+const compactMediaClasses =
+    '@min-[320px]:min-h-0 @min-[320px]:w-1/3 @min-[320px]:max-w-1/3 @min-[320px]:flex-none @min-[320px]:self-stretch @min-[320px]:rounded-tl-none @min-[320px]:rounded-tr-[calc(var(--border-radius)-1px)] @min-[320px]:rounded-br-[calc(var(--border-radius)-1px)] @min-[320px]:rounded-bl-none'
+const compactBodyClasses = '@min-[320px]:min-w-0 @min-[320px]:flex-1 @min-[320px]:self-stretch'
+const compactImageClasses =
+    '@min-[320px]:absolute @min-[320px]:inset-0 @min-[320px]:h-full @min-[320px]:w-full @min-[320px]:aspect-auto! @min-[320px]:object-cover!'
+const compactSkeletonClasses =
+    '@min-[320px]:absolute @min-[320px]:inset-0 @min-[320px]:h-full @min-[320px]:aspect-auto!'
 
 /** TileCard's own aspect names mapped onto the ones AppImage knows. */
 const imageAspect = computed<ImageAspect>(() => {
@@ -190,241 +259,3 @@ const wrapperProps = computed(() => {
     return { class: classes }
 })
 </script>
-
-<style scoped>
-.tile-card-inner {
-    border: 1px solid #c3cad8;
-    background: #fff;
-    height: 100%;
-    overflow: hidden;
-}
-
-.tile-card:hover .tile-card-inner {
-    border-color: var(--p-primary-color);
-}
-
-.tile-card-inner :deep(.p-card-body),
-.tile-card-inner :deep(.p-card-content),
-.tile-card-inner :deep(.p-card-footer) {
-    padding: 0;
-}
-
-/* Column layout so the footer sits on the same baseline in every tile of a row,
-   however many lines the title takes. */
-.tile-card-inner :deep(.p-card-body) {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.tile-card-inner :deep(.p-card-content) {
-    flex: 1;
-}
-
-.tile-media {
-    position: relative;
-    /* One pixel less than the card: the card's border sits outside this edge. */
-    border-radius: calc(var(--border-radius) - 1px) calc(var(--border-radius) - 1px) 0 0;
-    overflow: hidden;
-}
-
-.tile-image {
-    display: block;
-    width: 100%;
-}
-
-.tile-image-empty,
-.tile-media-empty,
-.tile-media-skeleton {
-    background: var(--p-page-highlight);
-}
-
-.tile-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.2rem;
-}
-
-.tile-logo-box {
-    height: 7.2rem;
-}
-
-.tile-logo-image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-.tile-meta-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.6rem;
-}
-
-.tile-date-line {
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #7a839b;
-    font-variant-numeric: tabular-nums;
-}
-
-.tile-body {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    padding: 0.9rem 1rem;
-}
-
-.tile-kicker {
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #7a839b;
-}
-
-.tile-title-row {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 0.5rem;
-}
-
-.tile-title {
-    flex: 1;
-    min-width: 0;
-    font-size: var(--text-card-title);
-    font-weight: 700;
-    line-height: 1.25;
-}
-
-.tile-label {
-    flex: 0 0 auto;
-    font-size: 0.95rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    line-height: 1.4;
-    border: 1px solid currentColor;
-    border-radius: 999px;
-    padding: 0.05rem 0.55rem;
-}
-
-.tile-pin {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.2rem;
-    flex-shrink: 0;
-    font-size: var(--text-meta);
-    font-weight: 600;
-    color: var(--p-primary-color);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
-
-.tile-card:hover .tile-title {
-    text-decoration: underline;
-    text-underline-offset: 2px;
-}
-
-.tile-subtitle {
-    margin: 0;
-    font-size: 1.35rem;
-    line-height: 1.4;
-    color: #55607a;
-}
-
-.tile-subtitle :deep(p),
-.tile-subtitle :deep(li) {
-    display: inline;
-    margin: 0;
-}
-
-.tile-subtitle :deep(p + p)::before {
-    content: ' ';
-}
-
-.tile-foot {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    margin-top: auto;
-    padding-top: 0.5rem;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--p-primary-color);
-}
-
-.tile-arrow {
-    width: 1.3rem;
-    height: 1.3rem;
-}
-
-/* ---- compact layout: text on the left, photo on the right ----
-   Decided by the width the card actually gets, not by the viewport: a tile in a
-   five-across grid stays stacked, the same tile in a two- or three-across grid
-   (activities, homepage) becomes a row. */
-.tile-card {
-    container-type: inline-size;
-}
-
-@container (min-width: 320px) {
-    /* text on the left, picture on the right: it runs the full height of the card
-       but never takes more than a third of the width */
-    .tile-card-inner:not(.tile-card-logo) :deep(.p-card-content) {
-        display: flex;
-        flex-direction: row-reverse;
-        align-items: stretch;
-    }
-
-    .tile-card-inner:not(.tile-card-logo) .tile-media {
-        flex: 0 0 33%;
-        width: 33%;
-        max-width: 33%;
-        align-self: stretch;
-        border-radius: 0 calc(var(--border-radius) - 1px) calc(var(--border-radius) - 1px) 0;
-        overflow: hidden;
-        /* The picture fills the card, it does not size it: without this the
-           image's own intrinsic height wins and a portrait upload makes the
-           whole row taller than the text. */
-        min-height: 0;
-    }
-
-    /* Take the image out of flow so its ratio can never set the row height.
-       It is pinned to the media box, which the flex line stretches to the
-       height of the text. */
-    .tile-card-inner:not(.tile-card-logo) .tile-media img,
-    .tile-card-inner:not(.tile-card-logo) .tile-media :deep(img) {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        aspect-ratio: auto;
-        object-fit: cover;
-    }
-
-    /* The loading skeleton has to occupy the same box as the picture it
-       replaces, otherwise the placeholder reserves a bigger row than the real
-       card. */
-    .tile-card-inner:not(.tile-card-logo) .tile-media-skeleton {
-        position: absolute;
-        inset: 0;
-        height: 100%;
-        aspect-ratio: auto;
-    }
-
-    .tile-card-inner:not(.tile-card-logo) .tile-body {
-        flex: 1;
-        min-width: 0;
-        align-self: stretch;
-    }
-}
-</style>

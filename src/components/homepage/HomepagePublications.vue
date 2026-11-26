@@ -28,7 +28,7 @@
                         class="w-9 shrink-0 aspect-a4 object-cover object-top rounded shadow-sm"
                     />
                     <span class="flex flex-col min-w-0">
-                        <span class="text-card-title font-semibold leading-snug line-clamp-2">{{
+                        <span class="line-clamp-2 text-[1.5rem] font-semibold leading-tight">{{
                             item.name
                         }}</span>
                         <span class="text-meta text-slate-500">{{
@@ -61,5 +61,3 @@ const publications = computed(() =>
     ),
 )
 </script>
-
-<style scoped></style>

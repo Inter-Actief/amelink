@@ -1,16 +1,32 @@
 <template>
-    <Galleria :value="queryResults" showItemNavigators @update:activeIndex="resetAnimation()" :showThumbnails="false"
-        autoPlay circular :transitionInterval="7000">
+    <Galleria
+        :value="queryResults"
+        showItemNavigators
+        @update:activeIndex="resetAnimation()"
+        :showThumbnails="false"
+        autoPlay
+        circular
+        :transitionInterval="7000"
+    >
         <template #item="slotProps" :circular="true">
-            <div class="w-full h-[24rem] md:h-[28rem] lg:h-[32rem] container overflow-hidden">
-                <img class="w-full" v-image-error ref="gallery-image"
-                    :src="imageSrc(randomItem(slotProps.item.photos).thumbLarge)" />
+            <div
+                class="relative flex h-[24rem] min-w-full items-end justify-center overflow-hidden md:h-[28rem] lg:h-[32rem]"
+            >
+                <img
+                    ref="gallery-image"
+                    class="h-full w-full animate-[panUp_7s_ease-in-out_infinite_alternate] object-cover object-bottom"
+                    v-image-error
+                    :alt="slotProps.item.summary ?? ''"
+                    :src="imageSrc(randomItem(slotProps.item.photos).thumbLarge)"
+                />
             </div>
         </template>
         <template #caption="slotProps">
-            <RouterLink :to="{ name: 'singleactivitiesphotos', params: { id: slotProps.item.id! } }">
-                <div class="text-section mb-1 font-bold px-3">{{ slotProps.item.summary }}</div>
-                <p class="text-white px-3 text-meta">{{ formattedData(slotProps.item.begin) }}</p>
+            <RouterLink
+                :to="{ name: 'singleactivitiesphotos', params: { id: slotProps.item.id! } }"
+            >
+                <div class="mb-1 px-3 text-section font-bold">{{ slotProps.item.summary }}</div>
+                <p class="px-3 text-meta text-white">{{ formattedData(slotProps.item.begin) }}</p>
             </RouterLink>
         </template>
     </Galleria>
@@ -19,20 +35,18 @@
 <script setup lang="ts">
 import Galleria from 'primevue/galleria'
 import { RouterLink } from 'vue-router'
-import { computed, nextTick, ref, useTemplateRef, watch } from 'vue'
-import { useRoute } from 'vue-router'
-import { formattedData, excerptText } from '@/functions/functions.ts'
+import { computed, ref, useTemplateRef } from 'vue'
+import { formattedData } from '@/functions/functions.ts'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-import { useQuery, useQueryAsync } from '@/composables/queries';
+import { useQuery } from '@/composables/queries'
 
-const route = useRoute()
 const limit = ref(50)
 const imageRef = useTemplateRef('gallery-image')
 
 // TODO: Actually filter on activities with pictures
-const { result } = useQuery('homepageSlider', { limit: limit.value, beginDate: new Date() });
+const { result } = useQuery('homepageSlider', { limit: limit.value, beginDate: new Date() })
 function resetAnimation() {
     if (imageRef.value) {
         imageRef.value.style.animation = 'none'
@@ -71,31 +85,3 @@ const imageSrc = (src: string | null | undefined) => {
     return `${import.meta.env.VITE_AMELIE_MEDIA_URL}${src}`
 }
 </script>
-
-<style scoped lang="scss">
-.container {
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    min-width: 100%;
-}
-
-.container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: bottom center;
-    animation: panUp 7s ease-in-out infinite alternate;
-}
-
-@keyframes panUp {
-    from {
-        object-position: bottom center;
-    }
-
-    to {
-        object-position: top center;
-    }
-}
-</style>

@@ -1,16 +1,26 @@
 <template>
     <!-- Use a single div for fall-through props like class -->
     <div>
-        <Card :style="{ overflow: 'hidden', background: bg, height: props.maxHeight ? '100%' : undefined }">
+        <Card
+            class="overflow-hidden"
+            :class="[
+                props.pageBg ? 'bg-[var(--p-page-background)]' : '',
+                props.maxHeight ? 'h-full' : '',
+            ]"
+        >
             <template #header v-if="props.name || props.loading">
-                <div class="section-bar w-full mb-0 flex flex-row items-center">
-                    <div class="flex flex-1 min-w-0 items-center gap-3 px-3 py-2">
-                        <div v-if="props.name && !loading"
-                            class="font-extrabold text-section! my-auto text-primary-contrast truncate">
+                <div
+                    class="mb-0 flex w-full flex-row items-center bg-primary text-primary-contrast"
+                >
+                    <div class="flex min-w-0 flex-1 items-center gap-3 px-3 py-2">
+                        <div
+                            v-if="props.name && !loading"
+                            class="my-auto min-w-0 font-extrabold text-[clamp(1.45rem,3.8vw,2.25rem)]! leading-tight text-primary-contrast"
+                        >
                             {{ props.name }}
                         </div>
                         <Skeleton v-if="props.loading" height="2rem" width="35%" />
-                        <div class="ml-auto flex items-center text-primary-contrast">
+                        <div class="ml-auto flex items-center text-meta text-primary-contrast">
                             <!-- Put e.g. a link here -->
                             <slot name="info" />
                         </div>
@@ -25,34 +35,19 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import Card from 'primevue/card';
-import Skeleton from 'primevue/skeleton';
+import Card from 'primevue/card'
+import Skeleton from 'primevue/skeleton'
 
 interface Props {
-    name?: string,
+    name?: string
     pageBg?: boolean // if the background should be of the page or of a card
-    maxHeight?: boolean, // If the card should be max possible height
+    maxHeight?: boolean // If the card should be max possible height
     loading?: boolean
-    // class: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
     pageBg: false,
     maxHeight: false,
     loading: false,
-    // class: "",
 })
-
-
-const bg = computed(() => (props.pageBg ? 'var(--p-page-background)' : ''))
-
 </script>
-
-<style scoped>
-.section-bar {
-    background: var(--p-primary-color);
-    color: var(--p-primary-contrast-color);
-}
-
-</style>

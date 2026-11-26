@@ -10,12 +10,12 @@
         }"
     >
         <div
-            class="flex items-center justify-between gap-3 px-3 py-2 bg-primary text-primary-contrast"
+            class="flex items-center justify-between gap-3 bg-primary px-3 py-2 text-primary-contrast"
         >
-            <Logo />
+            <Logo class="[&_svg]:h-[3.2rem] [&_svg]:w-auto" />
             <button
                 type="button"
-                class="p-1 -mr-1 cursor-pointer"
+                class="header-icon grid"
                 :aria-label="$gettext('Close menu')"
                 @click="visible = false"
             >
@@ -39,7 +39,7 @@
                         class="aspect-4/3 w-full object-cover"
                     />
                     <span
-                        class="absolute bottom-0 left-0 w-full px-2 py-1 text-white text-body font-semibold bg-slate-900/60 group-hover:bg-blue-800/80 transition-colors"
+                        class="absolute bottom-0 left-0 w-full bg-slate-900/60 px-2 py-1 text-body font-semibold text-white transition-colors group-hover:bg-blue-800/80"
                     >
                         {{ label(item) }}
                     </span>
@@ -48,7 +48,7 @@
 
             <!-- Everything that is not a pillar is a row, including the
                  education children that used to be a line of small links. -->
-            <nav class="flex flex-col mt-3 pt-2">
+            <nav class="mt-3 flex flex-col pt-2">
                 <component
                     v-for="item in educationLinks"
                     :is="item.url ? 'a' : RouterLink"
@@ -77,7 +77,7 @@
                     <template v-else-if="item.items">
                         <button
                             type="button"
-                            class="link flex flex-row items-center justify-between py-1.5 cursor-pointer"
+                            class="link flex cursor-pointer flex-row items-center justify-between py-1.5"
                             :aria-expanded="expanded.includes(item.labelKey)"
                             @click="toggle(item.labelKey)"
                         >
@@ -90,7 +90,7 @@
                         </button>
                         <div
                             v-if="expanded.includes(item.labelKey)"
-                            class="flex flex-col gap-1 pl-3 pb-2"
+                            class="flex flex-col gap-1 pb-2 pl-3"
                         >
                             <component
                                 :is="item.url ? 'a' : RouterLink"
@@ -112,12 +112,12 @@
             </nav>
 
             <!-- Account / extras -->
-            <div class="flex flex-col gap-2 mt-3 pt-3">
+            <div class="mt-3 flex flex-col gap-2 pt-3">
                 <a
                     :href="oldFrontendUrl"
                     target="_blank"
                     rel="noopener"
-                    class="link text-meta flex flex-row items-center gap-1"
+                    class="link flex flex-row items-center gap-1 text-meta"
                 >
                     {{ $gettext('Old website') }}
                     <ArrowUpRight :size="14" />
@@ -177,29 +177,3 @@ const close = () => {
 
 watch(() => route.fullPath, close)
 </script>
-
-<style scoped>
-/* Close, language and theme: the same small square target in this drawer. */
-.menu-icon {
-    display: grid;
-    place-items: center;
-    width: 3.2rem;
-    height: 3.2rem;
-    padding: 0;
-    border: 0;
-    border-radius: var(--border-radius);
-    background: transparent;
-    color: var(--p-primary-color);
-    cursor: pointer;
-    transition: background-color 160ms ease;
-}
-
-.menu-icon:hover {
-    background: rgba(29, 66, 138, 0.07);
-}
-
-.menu-icon :deep(svg) {
-    width: 1.8rem;
-    height: 1.8rem;
-}
-</style>

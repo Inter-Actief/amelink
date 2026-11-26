@@ -1,18 +1,35 @@
 <template>
-    <div :class="[searchbar_open ? 'open' : '', 'search']">
-        <div class="searchbar">
-            <div class="searchbar_inner">
-                <input v-model="search" type="text" name="searchinput" id="searchinput" />
+    <div class="relative flex gap-4">
+        <div class="overflow-hidden">
+            <div
+                class="flex items-center rounded-[var(--border-radius)] transition-all duration-500"
+                :class="
+                    searchbar_open
+                        ? 'pointer-events-auto translate-x-0 opacity-100'
+                        : 'pointer-events-none translate-x-full opacity-0'
+                "
+            >
+                <input
+                    v-model="search"
+                    type="text"
+                    name="searchinput"
+                    id="searchinput"
+                    class="rounded-l-[var(--border-radius)] border-0 bg-white px-4 py-4 text-inherit"
+                />
                 <router-link
-                    class="epa_button white"
+                    class="cursor-pointer rounded-r-[var(--border-radius)] border-0 border-l border-[#eee] bg-slate-100 px-[2.5rem] py-4 text-inherit no-underline"
                     :to="{ name: 'search', query: { search: search } }"
                 >
-                    Search
+                    {{ $gettext('Search') }}
                 </router-link>
             </div>
         </div>
 
-        <button @click="search_toggle">
+        <button
+            type="button"
+            class="cursor-pointer border-0 bg-transparent p-0 outline-none"
+            @click="search_toggle"
+        >
             <svg
                 width="24"
                 height="24"
@@ -31,7 +48,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useGettext } from 'vue3-gettext'
 
+const { $gettext } = useGettext()
 const searchbar_open = ref(false)
 const search = ref('')
 
@@ -39,64 +58,3 @@ const search_toggle = () => {
     searchbar_open.value = !searchbar_open.value
 }
 </script>
-
-<style scoped>
-.search {
-    position: relative;
-    display: flex;
-    gap: 1rem;
-}
-
-.search > button {
-    background: transparent;
-    outline: 0;
-    padding: 0;
-    border: 0;
-    cursor: pointer;
-}
-
-.search .searchbar {
-    overflow: hidden;
-}
-
-.search .searchbar a {
-    background-color: var(--color-light);
-    text-decoration: none;
-    color: var(--text-color);
-    padding: 1rem 2.5rem;
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
-    border: 0;
-    border-left: 0.1rem solid #eee;
-    font-size: inherit;
-    line-height: inherit;
-    font-weight: inherit;
-    cursor: pointer;
-}
-
-.search .searchbar input {
-    border-radius: var(--border-radius) 0 0 var(--border-radius);
-    border: 0;
-    margin: 0;
-    background-color: #fff;
-    padding: 1rem 1rem;
-    font-size: inherit;
-    line-height: inherit;
-    font-weight: inherit;
-}
-
-.search .searchbar_inner {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(100%);
-    transition: 500ms;
-    border-radius: var(--border-radius);
-    display: flex;
-    align-items: center;
-}
-
-.search.open .searchbar_inner {
-    transform: translateX(0);
-    pointer-events: initial;
-    opacity: 1;
-}
-</style>

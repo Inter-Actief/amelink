@@ -7,32 +7,32 @@ Working notes for the UI pass. Written to be picked up cold — read this first.
 Branch `128-make-mobile-padding-smaller`, ~16 commits ahead of `origin/main`.
 
 **PR #139 on this branch is already MERGED.** Everything below the merge point
-(homepage rework, the new header, the card redesign) is *not* on `main` and
+(homepage rework, the new header, the card redesign) is _not_ on `main` and
 needs a **new PR against `main`**. Do not just keep pushing to this branch and
 expect the old PR to pick it up.
 
 The commits since `960ea08` (already on this branch, in order):
 
-| commit | what |
-| --- | --- |
-| `960ea08` | rework the homepage and the mobile menu around the sections |
-| `59354ff` | one sticky header deck instead of three rows |
-| `9b5f0ff` | dev-only `/design` sketch pad (deleted again, see below) |
-| `7ba0488` | square cards, one section bar |
-| `3810a1b` | docs refresh |
-| `081a4bb` | one card for every overview, framed detail pages |
-| `f6f616b` | drop section ordinals + the dead card components |
-| `3d2311b` | activity cards show the activity icon or the shared placeholder |
-| `8fbc6ca` | rounded tiles, type pill, compact on phones |
-| `dcbbd10` | compact rows with the date above the title |
-| `c6a1912` | type pill on the date line, smaller and right aligned |
-| `040f46b` / `020bd23` | picture box: square, then full card height at max 1/3 |
+| commit                | what                                                            |
+| --------------------- | --------------------------------------------------------------- |
+| `960ea08`             | rework the homepage and the mobile menu around the sections     |
+| `59354ff`             | one sticky header deck instead of three rows                    |
+| `9b5f0ff`             | dev-only `/design` sketch pad (deleted again, see below)        |
+| `7ba0488`             | square cards, one section bar                                   |
+| `3810a1b`             | docs refresh                                                    |
+| `081a4bb`             | one card for every overview, framed detail pages                |
+| `f6f616b`             | drop section ordinals + the dead card components                |
+| `3d2311b`             | activity cards show the activity icon or the shared placeholder |
+| `8fbc6ca`             | rounded tiles, type pill, compact on phones                     |
+| `dcbbd10`             | compact rows with the date above the title                      |
+| `c6a1912`             | type pill on the date line, smaller and right aligned           |
+| `040f46b` / `020bd23` | picture box: square, then full card height at max 1/3           |
 
 ## Decisions (locked — do not re-litigate without asking)
 
 **Header** — one 64px sticky deck (`h-[64px]`, not `h-16`: at the 9.6px root
 `h-16` is 38px). Full inline nav >= 1280px, hamburger + drawer below, two-row
-phone layout, `HeaderSettings` popover for language + theme.
+phone layout, flag/theme icon buttons directly in the bar (no settings popover).
 
 **Section bar** — `SectionCard` is the only implementation: blue bar, title
 from the `name` prop, `#info` slot for a link/filter, `#content` for the body.
@@ -43,7 +43,7 @@ No ordinals anywhere. A page with an "old header" is a page that never used
 Its final shape:
 
 - 4px radius, no shadows, no motion; hover = border colour + title underline
-- layout follows the width the card is *given*, not the viewport (container
+- layout follows the width the card is _given_, not the viewport (container
   query at 320px): stacked photo on top in a five-across grid, compact row
   (photo right) in two/three-across grids and on phones
 - date is a quiet uppercase line above the title, not a block on the photo
@@ -65,10 +65,9 @@ aliased to it. Pills (`rounded-full`) and circles stay fully round.
 2. Answer the remaining review threads in #139 if any are still open (the
    first batch of seven replies went out without the `[!NOTE]` attribution
    block — see the attribution convention in `.agents/skills/amelink/SKILL.md`).
-3. Homepage still mixes three card idioms: `UpcomingActivitiesCards` and
-   `HomepageNews` use `TileCard`, while the `HomepagePublications` /
-   `HomepageVideo` sidebar uses `.side-row` hairlines. That is deliberate
-   (the sidebar is a list, not cards) — either keep it and say so, or unify.
+3. The homepage sidebar (`HomepagePublications` / `HomepageVideo`) is a compact
+   list, not a grid of cards; the row styling is now inline Tailwind instead of
+   the old `.side-row` CSS.
 4. `CompaniesView` uses `TileCard` with `aspect="logo"` (contained logo in a
    padded well). Logos are much smaller than the old design; decide whether
    that is acceptable or the well needs to grow.
@@ -97,12 +96,13 @@ aliased to it. Pills (`rounded-full`) and circles stay fully round.
   and ESLint 9 loads the `.js` first. Moving it aside surfaces ~108
   pre-existing errors, and `yarn lint` runs with `--fix`.
 - `ImageFade.vue` and `ActivitiesSliderCard.vue` are dead (only referenced by
-  generated gql / the queries registry).
+  generated gql / the queries registry). They are Tailwind-only now too.
 
 ## Gotchas
 
-- Scoped SFC CSS is **unlayered**, so it beats Tailwind utilities including
-  `hidden`. Never let scoped CSS own `display` on an element Tailwind toggles.
+- **Components are Tailwind-only.** Do not add `<style scoped>` blocks to SFCs.
+  Repeated primitives live as `@utility` rules in `style.css`; page layout,
+  spacing, type, colour and state all use utilities in the template.
 - `fonts.css` is unlayered too: overriding a heading needs the `!` modifier
   (`text-card-title!`).
 - At the 9.6px root, `text-*` and `h-*` utilities are much smaller than they

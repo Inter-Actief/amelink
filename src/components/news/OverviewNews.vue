@@ -6,8 +6,13 @@
                     <TileCard v-for="_ in 10" :key="`skeleton-${_}`" loading />
                 </template>
                 <template v-else>
-                    <TileCard v-for="item in newsItems" :key="item?.id" :title="item?.title ?? ''"
-                        :date="item?.publicationDate" :to="{ name: 'singlenews', params: { id: item?.id } }">
+                    <TileCard
+                        v-for="item in newsItems"
+                        :key="item?.id"
+                        :title="item?.title ?? ''"
+                        :date="item?.publicationDate"
+                        :to="{ name: 'singlenews', params: { id: item?.id } }"
+                    >
                         <div class="line-clamp-3" v-html="processedExcerpts[item!.id]"></div>
                     </TileCard>
                 </template>
@@ -26,7 +31,7 @@ import Pagination from '../ui/Pagination.vue'
 import TileCard from '../ui/TileCard.vue'
 import { useQuery } from '@/composables/queries'
 
-const { $gettext } = useGettext();
+const { $gettext } = useGettext()
 
 const query = useQuery('overviewNews', { limit: 10, offset: 0 })
 const { result, loading } = query
@@ -38,17 +43,19 @@ const totalCount = computed(() => (queryResults.value ? queryResults.value.total
 
 const processedExcerpts = ref<Record<string, string>>({})
 
-watch(newsItems, async (newItems: any) => {
-    if (newItems) {
-        const excerpts: Record<string, string> = {}
-        for (const item of newItems) {
-            if (item?.introduction) {
-                excerpts[item.id] = await markedText(item.introduction)
+watch(
+    newsItems,
+    async (newItems: any) => {
+        if (newItems) {
+            const excerpts: Record<string, string> = {}
+            for (const item of newItems) {
+                if (item?.introduction) {
+                    excerpts[item.id] = await markedText(item.introduction)
+                }
             }
+            processedExcerpts.value = excerpts
         }
-        processedExcerpts.value = excerpts
-    }
-}, { immediate: true })
+    },
+    { immediate: true },
+)
 </script>
-
-<style scoped></style>

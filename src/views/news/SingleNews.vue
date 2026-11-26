@@ -12,9 +12,13 @@
                     <div class="content text" v-html="processedContent"></div>
 
                     <div class="pt-4">
-                        <EpaButton :to="{ name: 'news' }" class="link return" bicon="return">
+                        <RouterLink
+                            :to="{ name: 'news' }"
+                            class="link inline-flex flex-row items-center gap-2"
+                        >
+                            <ArrowLeft />
                             {{ $gettext('Return to overview') }}
-                        </EpaButton>
+                        </RouterLink>
                     </div>
                 </template>
             </template>
@@ -25,25 +29,30 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { formattedData, markedText } from '@/functions/functions.ts'
-import EpaButton from '@/components/ui/EpaButton.vue'
+import { ArrowLeft } from '@lucide/vue'
+import { RouterLink } from 'vue-router'
 import { useGettext } from 'vue3-gettext'
-import { useQuery } from '@/composables/queries';
-import PlaceholderText from '@/components/placeholder/PlaceholderText.vue';
-import SectionCard from '@/components/ui/SectionCard.vue';
+import { useQuery } from '@/composables/queries'
+import PlaceholderText from '@/components/placeholder/PlaceholderText.vue'
+import SectionCard from '@/components/ui/SectionCard.vue'
 
-const { $gettext } = useGettext();
-const props = defineProps<{ id: string }>();
+const { $gettext } = useGettext()
+const props = defineProps<{ id: string }>()
 
 const { result, refetch, loading } = useQuery('singleNews', { id: props.id })
-const queryResults = computed(() => result.value?.newsItem);
-const item = computed(() => (queryResults.value ? queryResults.value : null));
+const queryResults = computed(() => result.value?.newsItem)
+const item = computed(() => (queryResults.value ? queryResults.value : null))
 
-const processedContent = ref<string>('');
+const processedContent = ref<string>('')
 
 // Process the `content` field when `item` changes
-watch(item, async (newItem) => {
-    if (newItem) {
-        processedContent.value = await markedText(newItem!.content!);
-    }
-}, { immediate: true });
+watch(
+    item,
+    async (newItem) => {
+        if (newItem) {
+            processedContent.value = await markedText(newItem!.content!)
+        }
+    },
+    { immediate: true },
+)
 </script>
