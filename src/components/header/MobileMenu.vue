@@ -56,7 +56,7 @@
             </div>
 
             <!-- Everything else -->
-            <nav class="flex flex-col mt-3 border-t border-slate-200 pt-2">
+            <nav class="flex flex-col mt-3 pt-2">
                 <template v-for="item in secondaryMenu" :key="item.labelKey">
                     <RouterLink
                         v-if="item.route && !item.items"
@@ -105,7 +105,7 @@
             </nav>
 
             <!-- Account / extras -->
-            <div class="flex flex-col gap-2 mt-3 border-t border-slate-200 pt-3">
+            <div class="flex flex-col gap-2 mt-3 pt-3">
                 <a
                     :href="oldFrontendUrl"
                     target="_blank"
