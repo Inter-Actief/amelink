@@ -1,6 +1,6 @@
 <template>
     <component :is="wrapperElement" v-bind="wrapperProps" class="tile-card">
-        <Card class="tile-card-inner h-full">
+        <Card class="tile-card-inner h-full" :class="{ 'tile-card-logo': isLogo }">
             <template #content>
                 <div v-if="hasMedia" class="tile-media">
                     <div v-if="props.loading" class="tile-media-skeleton" :class="mediaBoxClass">
@@ -39,8 +39,12 @@
                     <span v-if="props.loading" class="tile-subtitle">
                         <Skeleton height="1.4rem" width="45%" />
                     </span>
-                    <span v-else-if="labelText" class="tile-kicker" :style="labelStyle">{{ labelText }}</span>
-                    <span v-else-if="props.kicker" class="tile-kicker">{{ props.kicker }}</span>
+                    <span v-else-if="props.kicker && !labelText" class="tile-kicker">{{ props.kicker }}</span>
+
+                    <!-- the compact (phone) layout shows the date as a quiet line
+                         above the title instead of a block on the photo -->
+                    <span v-if="props.date && !props.loading" class="tile-date-quiet">{{ dateParts.day }} {{
+                        dateParts.monthYear }}</span>
 
                     <div class="tile-title-row">
                         <template v-if="props.loading">
@@ -50,6 +54,7 @@
                             </div>
                         </template>
                         <span v-else-if="props.title" class="tile-title">{{ props.title }}</span>
+                        <span v-if="labelText" class="tile-label" :style="labelStyle">{{ labelText }}</span>
                         <span v-if="props.pinned" class="tile-pin">
                             <Pin :size="11" />
                             {{ $gettext('Pinned') }}
@@ -70,10 +75,11 @@
                  checks `$slots.footer`, which a conditional template does not
                  satisfy reliably. -->
             <template #footer>
-                <div v-if="showFooter" class="tile-foot">
-                    <span>{{ props.actionLabel || $gettext('Read more') }}</span>
-                    <ArrowRight class="tile-arrow" />
-                </div>
+                <!-- a plain .link: the sliding underline is the site-wide one, not
+                     a second implementation of it -->
+                <span v-if="showFooter" class="link tile-foot">
+                    {{ props.actionLabel || $gettext('Read more') }}<ArrowRight class="tile-arrow" />
+                </span>
             </template>
         </Card>
     </component>
@@ -200,6 +206,7 @@ const wrapperProps = computed(() => {
 <style scoped>
 .tile-card-inner {
     border: 1px solid #c3cad8;
+    border-radius: 4px;
     background: #fff;
     height: 100%;
     overflow: hidden;
@@ -229,6 +236,8 @@ const wrapperProps = computed(() => {
 
 .tile-media {
     position: relative;
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
 }
 
 .tile-image {
@@ -268,8 +277,14 @@ const wrapperProps = computed(() => {
     gap: 0.35rem;
     background: var(--p-primary-color);
     color: #fff;
+    border-radius: 2px;
     padding: 0.35rem 0.75rem;
     font-variant-numeric: tabular-nums;
+}
+
+/* Only used by the compact layout below. */
+.tile-date-quiet {
+    display: none;
 }
 
 .tile-date-inline {
@@ -314,9 +329,24 @@ const wrapperProps = computed(() => {
 }
 
 .tile-title {
+    flex: 1;
+    min-width: 0;
     font-size: var(--text-card-title);
     font-weight: 700;
     line-height: 1.25;
+}
+
+.tile-label {
+    flex: 0 0 auto;
+    align-self: baseline;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    padding: 0.15rem 0.7rem;
 }
 
 .tile-pin {
@@ -355,20 +385,62 @@ const wrapperProps = computed(() => {
 }
 
 .tile-foot {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    border-top: 1px solid #e2e6ee;
-    padding: 0.55rem 1rem;
-    font-size: 1.15rem;
+    gap: 0.35rem;
+    margin: 0 1rem 0.85rem;
+    font-size: 1.3rem;
     font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
     color: var(--p-primary-color);
 }
 
 .tile-arrow {
     width: 1.3rem;
     height: 1.3rem;
+}
+
+/* ---- compact layout: on phones the photo moves to the right ---- */
+@media (max-width: 767px) {
+    .tile-card-inner:not(.tile-card-logo) :deep(.p-card-content) {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: stretch;
+    }
+
+    .tile-card-inner:not(.tile-card-logo) .tile-media {
+        flex: 0 0 32%;
+        width: 32%;
+        border-radius: 0 3px 3px 0;
+    }
+
+    /* the box is the row height now, so the ratio must stop reserving space */
+    .tile-card-inner:not(.tile-card-logo) .tile-media img,
+    .tile-card-inner:not(.tile-card-logo) .tile-media :deep(img) {
+        height: 100%;
+        aspect-ratio: auto;
+        object-fit: cover;
+    }
+
+    .tile-card-inner:not(.tile-card-logo) .tile-body {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .tile-card-inner:not(.tile-card-logo) .tile-date {
+        display: none;
+    }
+
+    .tile-card-inner:not(.tile-card-logo) .tile-date-quiet {
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #7a839b;
+    }
+
+    .tile-card-inner:not(.tile-card-logo) .tile-foot {
+        margin-bottom: 0;
+    }
 }
 </style>
