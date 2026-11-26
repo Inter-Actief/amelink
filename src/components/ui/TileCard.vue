@@ -32,8 +32,13 @@
                     </span>
                     <span v-else-if="props.kicker && !labelText" class="tile-kicker">{{ props.kicker }}</span>
 
-                    <span v-if="props.date && !props.loading" class="tile-date-line">{{ dateParts.day }} {{
-                        dateParts.monthYear }}</span>
+                    <!-- date on the left, activity type on the right, same line -->
+                    <div v-if="!props.loading && (props.date || labelText)" class="tile-meta-row">
+                        <span v-if="props.date" class="tile-date-line">
+                            <b>{{ dateParts.day }}</b> {{ dateParts.monthYear }}
+                        </span>
+                        <span v-if="labelText" class="tile-label" :style="labelStyle">{{ labelText }}</span>
+                    </div>
 
                     <div class="tile-title-row">
                         <template v-if="props.loading">
@@ -43,7 +48,6 @@
                             </div>
                         </template>
                         <span v-else-if="props.title" class="tile-title">{{ props.title }}</span>
-                        <span v-if="labelText" class="tile-label" :style="labelStyle">{{ labelText }}</span>
                         <span v-if="props.pinned" class="tile-pin">
                             <Pin :size="11" />
                             {{ $gettext('Pinned') }}
@@ -252,6 +256,14 @@ const wrapperProps = computed(() => {
     object-fit: contain;
 }
 
+.tile-meta-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+}
+
 .tile-date-line {
     font-size: 1.2rem;
     font-weight: 700;
@@ -294,15 +306,15 @@ const wrapperProps = computed(() => {
 
 .tile-label {
     flex: 0 0 auto;
-    align-self: baseline;
-    font-size: 1.05rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     white-space: nowrap;
+    line-height: 1.4;
     border: 1px solid currentColor;
     border-radius: 999px;
-    padding: 0.15rem 0.7rem;
+    padding: 0.05rem 0.55rem;
 }
 
 .tile-pin {
