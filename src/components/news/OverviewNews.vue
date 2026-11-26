@@ -11,9 +11,12 @@
                         :key="item?.id"
                         :title="item?.title ?? ''"
                         :date="item?.publicationDate"
+                        :pinned="item?.pinned"
+                        hide-action
                         :to="{ name: 'singlenews', params: { id: item?.id } }"
                     >
-                        <div class="line-clamp-3" v-html="processedExcerpts[item!.id]"></div>
+                        <!-- Same two-line excerpt as the homepage news block. -->
+                        <div class="line-clamp-2" v-html="processedExcerpts[item!.id]"></div>
                     </TileCard>
                 </template>
             </div>

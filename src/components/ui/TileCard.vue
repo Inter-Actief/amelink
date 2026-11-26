@@ -1,9 +1,9 @@
 <template>
     <component :is="wrapperElement" v-bind="wrapperProps" class="group @container block h-full">
         <Card
-            class="h-full overflow-hidden border border-slate-300 bg-white! text-slate-900! transition-colors group-hover:border-primary"
+            class="relative h-full overflow-hidden border border-slate-300 bg-white! text-slate-900! transition-colors group-hover:border-primary dark:border-[var(--p-content-border-color)] dark:bg-[var(--p-content-hover-background)]! dark:text-[var(--p-text-color)]!"
             :class="{ 'tile-glow': glows }"
-            :style="glowVars"
+            :style="typeVars"
             :pt="{
                 body: { class: 'flex h-full flex-col p-0' },
                 content: { class: ['flex-1 p-0', !isLogo ? compactContentClasses : ''] },
@@ -11,14 +11,29 @@
             }"
         >
             <template #content>
+                <!-- Pinned is an icon in the corner: the word adds nothing and the
+                     pin already says it. It stays out of the text flow. -->
+                <span
+                    v-if="props.pinned && !props.loading"
+                    class="absolute right-[0.7rem] top-[0.65rem] z-[1] text-primary dark:text-[var(--p-primary-300)]"
+                    role="img"
+                    :aria-label="$gettext('Pinned')"
+                    :title="$gettext('Pinned')"
+                >
+                    <Pin :size="16" :stroke-width="2.5" />
+                </span>
+
                 <div
                     v-if="hasMedia"
                     class="relative overflow-hidden rounded-t-[calc(var(--border-radius)-1px)]"
                     :class="!isLogo ? compactMediaClasses : ''"
                 >
+                    <!-- Logos are drawn for paper, so the plate stays light in both
+                         themes; a dark plate makes half of them disappear. On dark it
+                         is a muted grey instead of pure white so it stops glaring. -->
                     <div
                         v-if="isLogo"
-                        class="flex h-[7.2rem] items-center justify-center bg-[var(--p-page-highlight)] p-[1.2rem]"
+                        class="flex h-[7.2rem] items-center justify-center bg-white p-[1.2rem] dark:bg-[var(--p-surface-300)]"
                     >
                         <Skeleton v-if="props.loading" height="100%" class="w-full" />
                         <img
@@ -56,13 +71,13 @@
                 >
                     <span
                         v-if="props.loading"
-                        class="text-[1.1rem] font-semibold uppercase tracking-[0.14em] text-slate-500"
+                        class="text-[1.1rem] font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-[var(--p-text-muted-color)]"
                     >
                         <Skeleton height="1.4rem" width="45%" />
                     </span>
                     <span
                         v-else-if="props.kicker && !labelText"
-                        class="text-[1.1rem] font-semibold uppercase tracking-[0.14em] text-slate-500"
+                        class="text-[1.1rem] font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-[var(--p-text-muted-color)]"
                         >{{ props.kicker }}</span
                     >
 
@@ -75,14 +90,14 @@
                     >
                         <span
                             v-if="props.date"
-                            class="text-[1.2rem] font-medium uppercase tracking-[0.1em] text-slate-500 tabular-nums"
+                            class="text-[1.2rem] font-medium uppercase tracking-[0.1em] text-slate-500 tabular-nums dark:text-[var(--p-text-muted-color)]"
                         >
                             {{ dateParts.day }} {{ dateParts.monthYear }}
                         </span>
                         <span
                             v-if="labelText"
-                            class="text-[0.95rem] font-bold uppercase leading-[1.5] tracking-[0.12em]"
-                            :style="labelStyle"
+                            class="type-label text-[0.95rem] font-bold uppercase leading-[1.5] tracking-[0.12em]"
+                            :style="typeVars"
                             >{{ labelText }}</span
                         >
                     </div>
@@ -99,13 +114,6 @@
                             class="line-clamp-2 min-w-0 flex-1 text-card-title font-bold leading-tight group-hover:underline group-hover:underline-offset-2"
                             >{{ props.title }}</span
                         >
-                        <span
-                            v-if="props.pinned"
-                            class="flex shrink-0 flex-row items-center gap-[0.2rem] text-meta font-semibold uppercase tracking-[0.1em] text-primary"
-                        >
-                            <Pin :size="11" />
-                            {{ $gettext('Pinned') }}
-                        </span>
                     </div>
 
                     <div v-if="props.loading" class="text-meta">
@@ -114,7 +122,7 @@
                     </div>
                     <div
                         v-else-if="props.subtitle || $slots.default"
-                        class="m-0 text-meta leading-[1.4] text-slate-600 [&_li]:m-0 [&_li]:inline [&_p+p]:before:content-['_'] [&_p]:m-0 [&_p]:inline"
+                        class="m-0 text-meta leading-[1.4] text-slate-600 dark:text-[var(--p-text-muted-color)] [&_li]:m-0 [&_li]:inline [&_p+p]:before:content-['_'] [&_p]:m-0 [&_p]:inline"
                     >
                         <slot>{{ props.subtitle }}</slot>
                     </div>
@@ -122,7 +130,7 @@
                     <!-- a plain .link: the sliding underline is the site-wide one -->
                     <span
                         v-if="showFooter"
-                        class="link mt-auto inline-flex items-center gap-[0.35rem] pt-2 text-meta font-semibold text-primary"
+                        class="link mt-auto inline-flex items-center gap-[0.35rem] pt-2 text-meta font-semibold text-primary dark:text-[var(--p-primary-300)]"
                     >
                         {{ props.actionLabel || $gettext('Read more')
                         }}<ArrowRight class="size-[1.3rem]" />
@@ -234,7 +242,8 @@ const imageAspect = computed<ImageAspect>(() => {
 })
 const dateParts = computed(() => formattedDateBlock(props.date ?? 0))
 const labelText = computed(() => props.label?.text ?? '')
-const labelStyle = computed(() => (props.label ? { color: `#${props.label.color}` } : {}))
+/// The card's accent: the label colour, reused by the glow and the type word.
+const typeVars = computed(() => (props.label ? { '--type': `#${props.label.color}` } : undefined))
 
 /**
  * The whole tile is the link, so the "Read more" footer is an affordance only
@@ -247,7 +256,6 @@ const hasLink = computed(() => Boolean(props.to || props.href))
  * a plain word at rest and a short, soft shadow while the card is hovered.
  */
 const glows = computed(() => hasLink.value && Boolean(labelText.value))
-const glowVars = computed(() => (glows.value ? { '--type': `#${props.label?.color}` } : undefined))
 const showFooter = computed(() => hasLink.value && !props.hideAction && !props.loading)
 const wrapperElement = computed(() => {
     if (props.to) {
@@ -272,13 +280,23 @@ const wrapperProps = computed(() => {
 </script>
 
 <style scoped>
+/* The type word carries the label colour, and the glow repeats it. */
+.type-label {
+    color: var(--type);
+}
+
+/* The same hue mixed towards white: a navy label is invisible on a dark card. */
+:global(.dark) .type-label {
+    color: color-mix(in srgb, var(--type) 45%, white);
+}
+
 /*
- * The activity type colour appears only here: a border tinted towards the
- * neutral card border plus a short, soft drop shadow. Unlayered on purpose, so
- * it wins over the group-hover border that Card gets from its utility classes.
+ * The hover border is the type colour muted towards the neutral card border,
+ * plus a short, soft shadow. Unlayered on purpose, so it wins over the
+ * group-hover border that Card gets from its utility classes.
  */
 .tile-glow:hover {
-    border-color: color-mix(in srgb, var(--type) 45%, #cbd5e1);
+    border-color: color-mix(in srgb, var(--type) 45%, var(--p-content-border-color, #cbd5e1));
     box-shadow: 0 4px 12px -6px color-mix(in srgb, var(--type) 45%, transparent);
 }
 

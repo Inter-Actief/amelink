@@ -118,12 +118,14 @@ query HomepageSlider($limit: Int, $beginDate: DateTime) {
 }
 
 query OverviewNews($limit: Int, $offset: Int) {
-  newsItems(limit: $limit, offset: $offset) {
+  # pinnedOnTop keeps pinned items first, exactly like the homepage block
+  newsItems(limit: $limit, offset: $offset, pinnedOnTop: true) {
     results {
       id
       title
       introduction
       publicationDate
+      pinned
     }
     totalCount
   }
@@ -137,6 +139,7 @@ query SingleActivities($id: ID) {
     id
     summary
     description
+    imageIcon
     photos {
       thumbMedium
       thumbMediumHeight

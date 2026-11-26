@@ -7,6 +7,7 @@
                 props.pageBg ? 'bg-[var(--p-page-background)]' : '',
                 props.maxHeight ? 'h-full' : '',
             ]"
+            :pt="flush ? { body: { class: 'p-0' }, content: { class: 'p-0' } } : undefined"
         >
             <template #header v-if="props.name || props.loading">
                 <div
@@ -53,11 +54,14 @@ interface Props {
     pageBg?: boolean // if the background should be of the page or of a card
     maxHeight?: boolean // If the card should be max possible height
     loading?: boolean
+    /** Drop the card padding so the content (e.g. a table and its toolbar) runs edge to edge. */
+    flush?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
     pageBg: false,
     maxHeight: false,
     loading: false,
+    flush: false,
 })
 </script>

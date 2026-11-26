@@ -19,7 +19,10 @@
                 class="group gap-3 text-inherit no-underline"
                 :class="props.variant === 'cover' ? 'flex flex-col' : 'flex flex-row items-center'"
             >
-                <span v-if="props.variant === 'cover'" class="relative block overflow-hidden rounded">
+                <span
+                    v-if="props.variant === 'cover'"
+                    class="relative block overflow-hidden rounded"
+                >
                     <img
                         v-if="video.thumbnailUrl"
                         :src="video.thumbnailUrl"
@@ -47,7 +50,7 @@
                         class="line-clamp-2 text-[1.5rem] font-semibold leading-tight group-hover:underline group-hover:underline-offset-2"
                         >{{ video.title }}</span
                     >
-                    <span class="text-meta text-slate-500">{{
+                    <span class="text-meta text-slate-500 dark:text-[var(--p-text-muted-color)]">{{
                         formattedData(video.datePublished)
                     }}</span>
                 </span>

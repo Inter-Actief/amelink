@@ -487,3 +487,7 @@ msgstr "Return to overview"
 
 #~ msgid "General"
 #~ msgstr "General"
+
+#: src/components/activities/PastActivities.vue:90
+msgid "Clear search"
+msgstr "Clear search"

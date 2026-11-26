@@ -10,10 +10,20 @@
                 <TileCard v-for="_ in 4" :key="`skeleton-${_}`" loading />
             </div>
             <div v-else-if="newsItems.length" class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <TileCard v-for="item in newsItems" :key="item.id" :title="item.title ?? ''"
-                    :date="item.publicationDate" :pinned="item.pinned"
-                    :to="{ name: 'singlenews', params: { id: item.id } }">
-                    <div v-if="excerpts[item.id]" class="line-clamp-2" v-html="excerpts[item.id]"></div>
+                <TileCard
+                    v-for="item in newsItems"
+                    :key="item.id"
+                    :title="item.title ?? ''"
+                    :date="item.publicationDate"
+                    :pinned="item.pinned"
+                    hide-action
+                    :to="{ name: 'singlenews', params: { id: item.id } }"
+                >
+                    <div
+                        v-if="excerpts[item.id]"
+                        class="line-clamp-2"
+                        v-html="excerpts[item.id]"
+                    ></div>
                 </TileCard>
             </div>
             <p v-else class="m-0">{{ $gettext('There is no news yet.') }}</p>
