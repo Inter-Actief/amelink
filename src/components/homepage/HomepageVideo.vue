@@ -6,9 +6,15 @@
             </RouterLink>
         </template>
         <template #content>
-            <div v-if="loading" class="flex flex-row gap-4 items-center">
-                <Skeleton width="9.6rem" height="5.4rem" />
-                <div class="flex-1"><PlaceholderText :lines="2" /></div>
+            <div v-if="loading" class="flex flex-row items-center gap-4">
+                <div class="aspect-video w-40 shrink-0">
+                    <Skeleton height="100%" />
+                </div>
+                <div class="flex min-w-0 flex-1 flex-col gap-[0.2rem]">
+                    <Skeleton height="1.6rem" width="90%" />
+                    <Skeleton height="1.6rem" width="70%" />
+                    <Skeleton height="1.6rem" width="45%" />
+                </div>
             </div>
             <RouterLink
                 v-else-if="video"
@@ -67,7 +73,6 @@ import { RouterLink } from 'vue-router'
 import { useGettext } from 'vue3-gettext'
 import { computed } from 'vue'
 import { Play } from '@lucide/vue'
-import PlaceholderText from '../placeholder/PlaceholderText.vue'
 import { formattedData } from '@/functions/functions'
 import { useHomepageContent } from '@/composables/homepageContent'
 

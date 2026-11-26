@@ -55,6 +55,8 @@ const selectedRows = ref(limit.value)
                             :key="`skeleton-${_}`"
                             loading
                             aspect="a4"
+                            show-media
+                            :skeleton-title-lines="1"
                         />
                     </template>
                     <template v-else>

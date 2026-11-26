@@ -1,7 +1,15 @@
 <template>
     <div class="grid grid-cols-1 xl:grid-cols-2 gap-3">
         <template v-if="loading">
-            <TileCard v-for="_ in perpage" :key="`skeleton-${_}`" loading />
+            <TileCard
+                v-for="_ in perpage"
+                :key="`skeleton-${_}`"
+                loading
+                aspect="video"
+                show-media
+                hide-action
+                :skeleton-lines="2"
+            />
         </template>
         <template v-else-if="activityItems">
             <TileCard

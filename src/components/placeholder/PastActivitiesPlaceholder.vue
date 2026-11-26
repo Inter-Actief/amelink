@@ -10,15 +10,22 @@
         lazy
         :rowsPerPageOptions="[10, 20, 30, 50, 100]"
     >
+        <!-- A real row is one line box plus cell padding (~48px) on a wide
+             screen and two on a phone (~65px); the wrapper reserves that, the
+             bar only stands in for the text. -->
         <Column field="startDate" :header="$gettext('Date')" style="width: 15%" class="font-mono">
             <template #body>
-                <Skeleton height="3rem" />
+                <div class="flex h-[4.8rem] md:h-[3rem] items-center">
+                    <Skeleton height="2.3rem" />
+                </div>
             </template>
         </Column>
 
         <Column field="summary" :header="$gettext('Activity')">
             <template #body>
-                <Skeleton height="3rem" />
+                <div class="flex h-[4.8rem] md:h-[3rem] items-center">
+                    <Skeleton height="2.3rem" />
+                </div>
             </template>
         </Column>
 
@@ -28,7 +35,9 @@
             </template>
 
             <template #body>
-                <Skeleton height="3rem" width="4rem" />
+                <div class="flex h-[4.8rem] md:h-[3rem] items-center">
+                    <Skeleton height="2.3rem" width="4rem" />
+                </div>
             </template>
         </Column>
     </DataTable>

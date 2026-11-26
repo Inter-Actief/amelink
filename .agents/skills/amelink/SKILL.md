@@ -171,8 +171,16 @@ can drift. `router.afterEach()` has a 3-second safety reset.
   follows the width it is given (container query at 320px): stacked photo on
   top in a five-across grid, compact row with the photo right in two- or
   three-across grids and on phones.
-- **Loading states**: Skeletons must occupy the same boxes as the real content
-  (`CardSkeleton`, `SkeletonImage`, `PlaceholderText`).
+- **Loading states**: a skeleton must occupy the same box as the content it
+  replaces. `TileCard` mirrors the loaded tile row for row, so pass loading
+  tiles the same flags as real ones (`show-media`, `hide-action`,
+  `skeleton-lines`, `skeleton-title-lines`). Bar heights are rendered line
+  boxes, not font sizes — body text has an inherited 22.3px line height at the
+  9.6px root, so a `2rem` bar is ~7px short per line. Reserve the aspect box on
+  a wrapper and let `Skeleton height="100%"` fill it; a `Skeleton` with an
+  aspect class renders at PrimeVue's inline `height: 1rem`.
+  `PlaceholderText` and `PastActivitiesPlaceholder` cover prose and the past
+  activities table.
 - **Images**: use `AppImage.vue` — it resolves `imageSrc()`, attaches
   `v-image-error`, lazy-loads below the fold and reserves the aspect box. Hero
   and slider images are the only ones that should be eager.

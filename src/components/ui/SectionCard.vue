@@ -27,7 +27,9 @@
                         >
                             {{ props.name }}
                         </div>
-                        <Skeleton v-if="props.loading" height="2rem" width="35%" />
+                        <div v-if="props.loading" class="h-[2rem] w-[35%] md:h-[2.8rem]">
+                            <Skeleton height="100%" />
+                        </div>
                         <div class="ml-auto flex items-center text-meta text-primary-contrast">
                             <!-- Put e.g. a link here -->
                             <slot name="info" />

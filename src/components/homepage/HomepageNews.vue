@@ -7,7 +7,13 @@
         </template>
         <template #content>
             <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <TileCard v-for="_ in 4" :key="`skeleton-${_}`" loading />
+                <TileCard
+                    v-for="_ in 4"
+                    :key="`skeleton-${_}`"
+                    loading
+                    hide-action
+                    :skeleton-lines="2"
+                />
             </div>
             <div v-else-if="newsItems.length" class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <TileCard

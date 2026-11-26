@@ -9,7 +9,9 @@ import { useQuery } from '@/composables/queries'
 import { imageSrc } from '@/composables/util'
 import TileCard from '@/components/ui/TileCard.vue'
 
-const limit = ref(20)
+// Two rows of the five-across grid: a page of skeletons then matches the page
+// of cards, instead of being twice as tall on the last (short) page.
+const limit = ref(10)
 const query = useQuery('companyCorner', { limit: limit.value })
 const { loading } = query
 const totalCount = computed(() => query.result.value?.companies?.totalCount ?? 0)
@@ -30,6 +32,7 @@ const selectedRows = ref(limit.value)
                             :key="`skeleton-${_}`"
                             loading
                             aspect="logo"
+                            :skeleton-lines="2"
                         />
                     </template>
                     <template v-else>

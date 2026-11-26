@@ -112,7 +112,7 @@ and say what you covered. Probe recipes are in the amelink skill.
 | `src/functions/functions.ts` | Date formatting, Markdown rendering, device detection |
 | `src/constants/pageCategories.ts` | `mainMenu` array — drives the header nav and breadcrumbs |
 | `src/components/ui/` | Reusable primitives: `Content`, `SectionCard` (page/section bar), `TileCard` (**the** card), `AppImage`, `Pagination`, `EpaButton`, `Logo`, `ImageFade`, `LanguageSwitcher`, `ThemeSwitcher` |
-| `src/components/placeholder/` | Skeletons that mirror real layouts: `CardSkeleton`, `SkeletonImage`, `PlaceholderText`, `PastActivitiesPlaceholder` |
+| `src/components/placeholder/` | Skeletons that mirror real layouts: `PlaceholderText`, `PastActivitiesPlaceholder` (cards load through `TileCard`'s own `loading` state) |
 | `src/views/` | Route-level pages |
 | `src/queries/queries.gql` | Source GraphQL operations |
 | `src/gql/` | **Generated** types and TypedDocumentNodes — do not edit |
@@ -165,3 +165,4 @@ All public env vars must be prefixed with `VITE_`.
 10. **Auth callback route (`/auth/callback`) must stay lightweight.** Do not add route guards or loading states that could interfere with OIDC state parsing.
 11. **`yarn lint` is currently broken.** A stale `eslint.config.js` shadows `eslint.config.ts` and crashes on load (`Named export 'rules' not found` from the CJS `eslint-plugin-vue`). Deleting the `.js` lets ESLint load the TS config but surfaces ~108 pre-existing errors. Also note it runs with `--fix`: it rewrites files *before* failing.
 12. **Heading sizes are set by unlayered `fonts.css`.** Its `h1`–`h4` rules beat any Tailwind utility, so overriding a heading's size with a token utility needs the important modifier (`text-card-title!`).
+13. **A skeleton must occupy the same box as the content it stands in for.** `TileCard`'s `loading` state mirrors the loaded tile row for row, so a loading tile needs the same shape flags as the real one (`show-media`, `hide-action`, `skeleton-lines`, `skeleton-title-lines`). Skeleton bar heights are *rendered line boxes*, not font sizes: body text has an inherited 22.3px line height at the 9.6px root, so a "2rem" bar is 7px short per line. Reserve the aspect box on a wrapper and let the `Skeleton` fill it (`height="100%"`); a `Skeleton` given an aspect class renders at PrimeVue's inline `height: 1rem`.

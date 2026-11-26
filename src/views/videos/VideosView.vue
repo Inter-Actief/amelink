@@ -24,7 +24,13 @@ const selectedRows = ref(limit.value)
                     class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 pb-4"
                 >
                     <template v-if="loading">
-                        <TileCard v-for="_ in selectedRows" :key="`skeleton-${_}`" loading />
+                        <TileCard
+                            v-for="_ in selectedRows"
+                            :key="`skeleton-${_}`"
+                            loading
+                            aspect="4/3"
+                            show-media
+                        />
                     </template>
                     <template v-else>
                         <TileCard

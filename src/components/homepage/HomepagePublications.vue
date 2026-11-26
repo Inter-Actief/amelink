@@ -7,10 +7,19 @@
         </template>
         <template #content>
             <div v-if="loading" class="flex flex-col gap-2">
-                <div v-for="_ in 3" :key="_" class="flex flex-row gap-4 items-center py-2">
-                    <Skeleton width="5rem" height="7rem" />
-                    <div class="flex-1">
-                        <PlaceholderText :lines="1" />
+                <div
+                    v-for="_ in 3"
+                    :key="_"
+                    class="flex flex-row items-center gap-2 rounded-[var(--border-radius)] border border-slate-300 p-2"
+                >
+                    <!-- Same box as the real cover: w-9 with the A4 ratio. -->
+                    <div class="aspect-a4 w-9 shrink-0">
+                        <Skeleton height="100%" />
+                    </div>
+                    <div class="flex min-w-0 flex-1 flex-col gap-[0.2rem]">
+                        <Skeleton height="1.6rem" width="90%" />
+                        <Skeleton height="1.6rem" width="55%" />
+                        <Skeleton height="1.6rem" width="45%" />
                     </div>
                 </div>
             </div>
@@ -57,7 +66,6 @@ import Skeleton from 'primevue/skeleton'
 import { RouterLink } from 'vue-router'
 import { useGettext } from 'vue3-gettext'
 import { computed } from 'vue'
-import PlaceholderText from '../placeholder/PlaceholderText.vue'
 import { formattedData, publicationUrl } from '@/functions/functions'
 import { useHomepageContent } from '@/composables/homepageContent'
 
