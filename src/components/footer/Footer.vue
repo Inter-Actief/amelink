@@ -1,5 +1,5 @@
 <template>
-    <div <div
+    <div
         class="w-full bg-primary grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12 text-primary-contrast px-4 py-6 md:py-8">
         <div class="col-span-1 md:col-span-4 md:col-start-2">
             <Logo class="pb-3" />
