@@ -27,7 +27,7 @@
                     v-for="item in publications"
                     :key="item.id"
                     :href="publicationUrl(item.file)"
-                    class="group flex flex-row items-center gap-2 rounded-[var(--border-radius)] border border-slate-300 bg-white p-2 transition-colors hover:border-primary dark:border-[var(--p-content-border-color)] dark:bg-[var(--p-content-hover-background)]"
+                    class="group flex flex-row items-center gap-2 rounded-[var(--border-radius)] border border-slate-300 bg-[var(--p-page-tile)] p-2 transition-colors hover:border-primary dark:border-[var(--p-content-border-color)] dark:[--p-text-muted-color:var(--p-surface-200)]"
                 >
                     <img
                         v-image-error="'/images/placeholder/book.svg'"
