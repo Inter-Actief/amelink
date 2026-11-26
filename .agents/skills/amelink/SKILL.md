@@ -171,6 +171,13 @@ can drift. `router.afterEach()` has a 3-second safety reset.
 - **Image error handling**: Use the `v-image-error` directive on `<img>` tags.
   It swaps broken images to the placeholder automatically.
 
+### Show Designs, Do Not Describe Them
+
+For any design question, render it: a dev-only `/design` route or the real page
+behind a temporary switch, with real content, screenshotted at a real viewport.
+Offer 2–4 variants side by side and let the user pick from the picture. Never
+answer a design question with prose or an ASCII sketch.
+
 ## Styling Rules
 
 - **Tailwind CSS v4** is primary. Global utilities and custom variants are in

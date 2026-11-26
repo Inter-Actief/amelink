@@ -73,6 +73,20 @@ Text sizes come from the semantic tokens in the `@theme` block of
 `60%`, so Tailwind's own `text-*` scale lands below the body size and inverts
 the hierarchy.
 
+## Design Work: Show the Thing
+
+Whenever UI or design is being discussed — layout, cards, navigation, colours,
+spacing — do not describe it in prose and do not answer with an ASCII sketch.
+Build it and put it in front of the user:
+
+1. Make the real thing render (a dev-only route such as `/design`, or the actual
+   page behind a temporary switch), with realistic content, not lorem ipsum.
+2. Screenshot it at a real viewport and show the image.
+3. Offer 2–4 concrete variants side by side, so the choice is visual.
+4. Only then ask which one to keep, and give the user the option to reply.
+
+Text descriptions of a design are treated as no answer at all.
+
 ## Verifying UI Changes
 
 `yarn type-check` cannot see CSS or the rendered result, so it is not evidence
