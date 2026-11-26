@@ -17,7 +17,6 @@ declare module 'vue' {
     EpaIcon: typeof import('./src/components/ui/EpaIcon.vue')['default']
     Footer: typeof import('./src/components/footer/Footer.vue')['default']
     Header: typeof import('./src/components/header/Header.vue')['default']
-    HeaderSettings: typeof import('./src/components/header/HeaderSettings.vue')['default']
     HomepageNews: typeof import('./src/components/homepage/HomepageNews.vue')['default']
     HomepagePublications: typeof import('./src/components/homepage/HomepagePublications.vue')['default']
     HomepageSlider: typeof import('./src/components/homepage/HomepageSlider.vue')['default']

@@ -61,7 +61,8 @@
                 <Button as="a" :label="$gettext('Become a member')" class="header-cta"
                     href="https://www.inter-actief.utwente.nl/oidc/authenticate/" />
                 <UserButton />
-                <HeaderSettings class="hidden min-[1280px]:grid place-items-center" />
+                <LanguageSwitcher variant="button" class="hdr-icon hidden min-[1280px]:grid place-items-center" />
+                <ThemeSwitcher class="hdr-icon hidden min-[1280px]:grid place-items-center" />
                 <button type="button" class="hdr-icon menu-toggle grid place-items-center min-[1280px]:hidden" :aria-label="$gettext('Open menu')"
                     @click="menuVisible = true">
                     <Menu />
@@ -96,7 +97,8 @@ import { useRoute } from 'vue-router'
 import { ArrowUpRight, ChevronDown, Menu } from '@lucide/vue'
 import UserButton from './UserButton.vue'
 import MobileMenu from './MobileMenu.vue'
-import HeaderSettings from './HeaderSettings.vue'
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
+import ThemeSwitcher from '@/components/ui/ThemeSwitcher.vue'
 import { mainMenu, type MenuItem } from '@/constants/pageCategories'
 
 const { $gettext } = useGettext()
