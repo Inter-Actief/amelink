@@ -7,7 +7,7 @@ const { $gettext } = useGettext();
 import Pagination from '@/components/ui/Pagination.vue';
 import { useQuery } from '@/composables/queries';
 import { imageSrc } from '@/composables/util';
-import CompanyPlaceholder from '@/components/placeholder/CompanyPlaceholder.vue';
+import TileCard from '@/components/ui/TileCard.vue';
 
 const limit = ref(20);
 const query = useQuery('companyCorner', { limit: limit.value });
@@ -21,30 +21,17 @@ const selectedRows = ref(limit)
     <Content>
         <SectionCard :name="$gettext('Companies')">
             <template #content>
-                <div v-if="loading" class="grid grid-cards-wide gap-4 pb-4">
-                    <CompanyPlaceholder v-for="_ in selectedRows" />
-                </div>
-                <div v-else class="grid grid-cards-wide gap-4 pb-4">
-                    <RouterLink :to="{ name: 'singlecompany', params: { slug: company.slug } }"
-                        v-for="company in companies">
-                        <Card class="text-card" style="height: 100%;">
-                            <template #header v-if="company.logo">
-                                <img v-image-error class="w-auto mx-auto p-5 max-h-40"
-                                    :src="imageSrc(company.logo)" />
-                            </template>
-                            <template #title>
-                                <div
-                                    class="flex flex-row items-center w-full justify-between pt-2 px-3 expand-link link mt">
-                                    <span class="text-card-title font-semibold">{{ company.name ?? "" }}</span>
-                                </div>
-                            </template>
-                            <template #subtitle>
-                                <div class="pl-4 pr-4">
-                                    {{ company.shortDescription ?? "" }}
-                                </div>
-                            </template>
-                        </Card>
-                    </RouterLink>
+                <div class="grid grid-cards-wide gap-4 pb-4">
+                    <template v-if="loading">
+                        <TileCard v-for="_ in selectedRows" :key="`skeleton-${_}`" loading aspect="logo" />
+                    </template>
+                    <template v-else>
+                        <TileCard v-for="company in companies" :key="company.slug"
+                            :image="company.logo ? imageSrc(company.logo) : null" aspect="logo"
+                            placeholder="/images/placeholder/shape.svg"
+                            :title="company.name ?? ''" :subtitle="company.shortDescription ?? ''"
+                            :to="{ name: 'singlecompany', params: { slug: company.slug } }" />
+                    </template>
                 </div>
                 <Pagination v-bind="query" :limit="limit" :total-count="totalCount!"
                     @update:rows="(rows) => selectedRows = rows">
@@ -53,11 +40,3 @@ const selectedRows = ref(limit)
         </SectionCard>
     </Content>
 </template>
-
-<style scoped>
-.text-card {
-    &:hover .expand-link::after {
-        transform: scaleX(1);
-    }
-}
-</style>

@@ -1,5 +1,6 @@
 <template>
-    <TextCard :title="$gettext('Who, what, where, when...')">
+    <SectionCard :name="$gettext('Who, what, where, when...')">
+        <template #content>
         <div class="space-y-3 pt-4">
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-3 font-bold">{{ $gettext('Who') }}</div>
@@ -63,13 +64,14 @@
                 </div>
             </div>
         </div>
-    </TextCard>
+        </template>
+    </SectionCard>
 </template>
 
 <script setup lang="ts">
 import { formattedData, formattedTime } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext';
-import TextCard from '../ui/TextCard.vue';
+import SectionCard from '../ui/SectionCard.vue';
 import Skeleton from 'primevue/skeleton';
 import type { SingleActivitiesQuery } from '@/gql/graphql';
 

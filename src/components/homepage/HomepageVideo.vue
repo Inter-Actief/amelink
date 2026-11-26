@@ -16,19 +16,19 @@
                     name: 'singlevideo',
                     params: { id: video.videoId, type: video.videoType },
                 }"
-                class="group flex flex-row gap-4 items-center"
+                class="side-row flex flex-row gap-4 items-center no-underline text-inherit"
             >
                 <img
                     v-if="video.thumbnailUrl"
                     :src="video.thumbnailUrl"
                     :alt="video.title"
-                    class="w-40 shrink-0 aspect-video object-cover rounded"
+                    class="w-40 shrink-0 aspect-video object-cover"
                 />
                 <span class="flex flex-col min-w-0">
-                    <span class="text-body font-semibold leading-snug line-clamp-2">{{
+                    <span class="side-row-title line-clamp-2">{{
                         video.title
                     }}</span>
-                    <span class="text-meta text-slate-500">{{
+                    <span class="side-row-meta">{{
                         formattedData(video.datePublished)
                     }}</span>
                 </span>

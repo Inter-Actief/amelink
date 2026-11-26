@@ -2,33 +2,33 @@
     <Content>
         <div class="grid gap-5 grid-cols-12 pt-5 grid-rows-2">
             <div class="col-span-12 lg:col-span-7 row-span-2">
-                <Skeleton height="4rem" v-if="loading" />
-                <div class="text-page-title font-bold" v-if="queryItem">{{ queryItem.summary! }}</div>
+                <SectionCard :name="queryItem?.summary ?? ''" :loading="loading">
+                    <template #info>
+                        <span v-if="queryItem" class="text-meta">{{ formattedData(queryItem.begin) }}</span>
+                    </template>
+                    <template #content>
+                        <div v-if="loading">
+                            <PlaceholderText :lines="10" />
+                        </div>
+                        <template v-else>
+                            <div class="text" v-html="processedDescription"></div>
 
-                <div class="pb-5">
-                    <Skeleton height="2rem" v-if="loading" />
-                    <span v-if="queryItem">
-                        {{ formattedData(queryItem.begin) }}
-                    </span>
-                </div>
+                            <div class="flex flex-col gap-2 pt-4">
+                                <RouterLink v-if="queryItem && queryItem.photos.length > 0"
+                                    class="link flex flex-row"
+                                    :to="{ name: 'singleactivitiesphotos', params: { id: queryItem.id } }">
+                                    {{ $gettext('View photos') }}
+                                    <ArrowRight />
+                                </RouterLink>
 
-                <div class="pb-5" v-if="loading">
-                    <PlaceholderText :lines="10" />
-                </div>
-                <div class="text pb-5" v-html="processedDescription"></div>
-
-                <Skeleton v-if="loading" height="3rem" width="25rem" />
-
-                <RouterLink v-if="queryItem && queryItem.photos.length > 0" class="link flex flex-row"
-                    :to="{ name: 'singleactivitiesphotos', params: { id: queryItem.id } }">
-                    {{ $gettext('View photos') }}
-                    <ArrowRight />
-                </RouterLink>
-
-                <RouterLink class="link flex flex-row" :to="{ name: 'activities' }">
-                    <ArrowLeft />
-                    {{ $gettext('Return to overview') }}
-                </RouterLink>
+                                <RouterLink class="link flex flex-row" :to="{ name: 'activities' }">
+                                    <ArrowLeft />
+                                    {{ $gettext('Return to overview') }}
+                                </RouterLink>
+                            </div>
+                        </template>
+                    </template>
+                </SectionCard>
             </div>
             <div class="col-span-12 lg:col-span-5 row-span-1">
                 <InformationActivites :loading="loading" v-if="queryItem" :item="queryItem" />
@@ -47,8 +47,8 @@ import InformationActivites from '@/components/activities/InformationActivites.v
 import { useGettext } from 'vue3-gettext'
 import { ArrowRight, ArrowLeft } from '@lucide/vue';
 import { useQuery } from '@/composables/queries';
-import type Skeleton from 'primevue/skeleton';
 import PlaceholderText from '@/components/placeholder/PlaceholderText.vue';
+import SectionCard from '@/components/ui/SectionCard.vue';
 
 const { $gettext } = useGettext();
 const props = defineProps<{ id: string }>();

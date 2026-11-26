@@ -1,31 +1,24 @@
 <template>
     <Content>
-        <template v-if="item">
-            <div>
-                <Skeleton v-if="loading" height="3rem" width="80%" />
-                <h1 v-else>{{ item.title }}</h1>
-            </div>
-
-            <div class="details pb-4 text-gray-500">
-                <div class="author">
-                    <Skeleton v-if="loading" height="1.5rem" width="20%" />
-                    <span v-else>{{ item.author }}</span>
-                </div>
-                <div class="date">
-                    <Skeleton v-if="loading" height="1.5rem" width="20%" />
-                    <span v-else>{{ formattedData(item.publicationDate) }}</span>
-                </div>
-            </div>
-
-            <div class="content text pb-4">
+        <SectionCard v-if="item" :name="item.title ?? ''" :loading="loading">
+            <template #info>
+                <span v-if="!loading" class="text-meta">
+                    {{ item.author }} &middot; {{ formattedData(item.publicationDate) }}
+                </span>
+            </template>
+            <template #content>
                 <PlaceholderText v-if="loading" :lines="10" />
-                <div v-else v-html="processedContent"></div>
-            </div>
+                <template v-else>
+                    <div class="content text" v-html="processedContent"></div>
 
-            <EpaButton :to="{ name: 'news', params: { id: item.id } }" class="link return" bicon="return">
-                {{ $gettext('Return to overview') }}
-            </EpaButton>
-        </template>
+                    <div class="pt-4">
+                        <EpaButton :to="{ name: 'news' }" class="link return" bicon="return">
+                            {{ $gettext('Return to overview') }}
+                        </EpaButton>
+                    </div>
+                </template>
+            </template>
+        </SectionCard>
     </Content>
 </template>
 
@@ -35,8 +28,8 @@ import { formattedData, markedText } from '@/functions/functions.ts'
 import EpaButton from '@/components/ui/EpaButton.vue'
 import { useGettext } from 'vue3-gettext'
 import { useQuery } from '@/composables/queries';
-import Skeleton from 'primevue/skeleton';
 import PlaceholderText from '@/components/placeholder/PlaceholderText.vue';
+import SectionCard from '@/components/ui/SectionCard.vue';
 
 const { $gettext } = useGettext();
 const props = defineProps<{ id: string }>();

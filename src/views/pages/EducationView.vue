@@ -15,17 +15,11 @@
             <div class="lg:basis-2/3 flex flex-col gap-5">
                 <!-- All items -->
                 <div v-for="item in queryItems" :key="item?.id" :id="`item_${item?.id}`">
-                    <Card>
-                        <template #title>
-                            <div class="text-section font-extrabold pt-4 pb-2">
-                                {{ item!.name! }}
-                            </div>
-                            <Divider class="my-4!" />
-                        </template>
+                    <SectionCard :name="item!.name!">
                         <template #content>
                             <div class="text" v-html="processedContent[item?.id!]"></div>
                         </template>
-                    </Card>
+                    </SectionCard>
                 </div>
             </div>
         </div>
@@ -36,8 +30,8 @@
 import { computed, ref, watch } from 'vue'
 import { markedText } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext'
-import Divider from 'primevue/divider';
 import Content from '@/components/ui/Content.vue';
+import SectionCard from '@/components/ui/SectionCard.vue';
 import { useQuery } from '@/composables/queries';
 
 const { $gettext } = useGettext();

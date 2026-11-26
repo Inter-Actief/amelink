@@ -2,29 +2,73 @@
     <component :is="wrapperElement" v-bind="wrapperProps" class="tile-card">
         <Card class="tile-card-inner h-full">
             <template #content>
-                <div class="relative">
-                    <img
-                        v-if="props.image"
-                        v-image-error="props.placeholder"
-                        :src="props.image"
-                        :alt="props.title ?? ''"
-                        class="tile-image"
-                        :class="aspectClass"
-                    />
-                    <div v-else class="tile-image tile-image-empty" :class="aspectClass" />
-                    <span v-if="props.date" class="tile-date">
+                <div v-if="hasMedia" class="tile-media">
+                    <div v-if="props.loading" class="tile-media-skeleton" :class="mediaBoxClass">
+                        <Skeleton height="100%" />
+                    </div>
+                    <div v-else-if="isLogo" class="tile-logo" :class="mediaBoxClass">
+                        <img
+                            v-if="props.image"
+                            v-image-error="props.placeholder"
+                            :src="props.image"
+                            :alt="props.title ?? ''"
+                            class="tile-logo-image"
+                        />
+                        <div v-else class="tile-logo-image" />
+                    </div>
+                    <template v-else>
+                        <img
+                            v-if="props.image"
+                            v-image-error="props.placeholder"
+                            :src="props.image"
+                            :alt="props.title ?? ''"
+                            class="tile-image"
+                            :class="[mediaBoxClass, fitClass]"
+                        />
+                        <div v-else class="tile-image tile-image-empty" :class="mediaBoxClass" />
+                    </template>
+                    <span v-if="props.date && !props.loading" class="tile-date">
                         <b>{{ dateParts.day }}</b>
                         <span>{{ dateParts.monthYear }}</span>
                     </span>
                 </div>
+
                 <div class="tile-body">
-                    <span v-if="props.kicker" class="tile-kicker">{{ props.kicker }}</span>
-                    <span v-if="props.title" class="tile-title">{{ props.title }}</span>
-                    <p v-if="props.subtitle || $slots.default" class="tile-subtitle">
+                    <span v-if="props.date && !hasMedia && !props.loading" class="tile-date tile-date-inline">
+                        <b>{{ dateParts.day }}</b>
+                        <span>{{ dateParts.monthYear }}</span>
+                    </span>
+
+                    <span v-if="props.loading" class="tile-subtitle">
+                        <Skeleton height="1.4rem" width="45%" />
+                    </span>
+                    <span v-else-if="labelText" class="tile-kicker" :style="labelStyle">{{ labelText }}</span>
+                    <span v-else-if="props.kicker" class="tile-kicker">{{ props.kicker }}</span>
+
+                    <div class="tile-title-row">
+                        <template v-if="props.loading">
+                            <div class="w-full">
+                                <Skeleton height="2rem" width="90%" />
+                                <Skeleton height="1.9rem" width="55%" class="mt-1" />
+                            </div>
+                        </template>
+                        <span v-else-if="props.title" class="tile-title">{{ props.title }}</span>
+                        <span v-if="props.pinned" class="tile-pin">
+                            <Pin :size="11" />
+                            {{ $gettext('Pinned') }}
+                        </span>
+                    </div>
+
+                    <div v-if="props.loading" class="tile-subtitle">
+                        <Skeleton height="1.5rem" width="100%" />
+                        <Skeleton height="1.5rem" width="80%" class="mt-1" />
+                    </div>
+                    <div v-else-if="props.subtitle || $slots.default" class="tile-subtitle">
                         <slot>{{ props.subtitle }}</slot>
-                    </p>
+                    </div>
                 </div>
             </template>
+
             <!-- v-if belongs on the element, not on the slot template: PrimeVue
                  checks `$slots.footer`, which a conditional template does not
                  satisfy reliably. -->
@@ -40,61 +84,80 @@
 
 <script setup lang="ts">
 import Card from 'primevue/card'
+import Skeleton from 'primevue/skeleton'
 import { RouterLink, type RouteLocationRaw } from 'vue-router'
 import { computed } from 'vue'
 import { useGettext } from 'vue3-gettext'
-import { ArrowRight } from '@lucide/vue'
+import { ArrowRight, Pin } from '@lucide/vue'
 import { formattedDateBlock } from '@/functions/functions.ts'
 
 const { $gettext } = useGettext()
 
-type Aspect = 'a4' | '4/3' | 'video'
+type Aspect = 'a4' | '4/3' | 'video' | 'square' | 'logo'
 
 interface Props {
     /** Image URL, already resolved through imageSrc(). */
     image?: string | null
     /** Shown instead of the image when it fails to load. */
     placeholder?: string
-    /** Fixed image ratio, so cards line up regardless of the upload. */
+    /** Fixed media ratio, so tiles line up regardless of the upload. `logo`
+     *  renders a contained logo well instead of a photo box. */
     aspect?: Aspect
+    /** How the image fills its box. Logos are contained, photos are covered. */
+    fit?: 'cover' | 'contain'
     title?: string
     /** Small label above the title, e.g. the section an item belongs to. */
     kicker?: string
+    /** Coloured label instead of `kicker` (activity type, with its own colour). */
+    label?: { text: string, color: string }
     subtitle?: string
-    /** Date shown in the block on the image (timestamp or ISO string). */
+    /** Date shown in the blue block, on the media or next to the title. */
     date?: number | string
+    /** Renders the pinned badge next to the title. */
+    pinned?: boolean
     to?: RouteLocationRaw
     href?: string
     /** Label of the footer affordance; defaults to "Read more". */
     actionLabel?: string
     /** Hide the footer affordance while keeping the card linkable. */
     hideAction?: boolean
+    /** Render Skeletons with the same geometry as the real tile. */
+    loading?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
     aspect: '4/3',
+    fit: 'cover',
     placeholder: '/images/placeholder/photo.jpg',
 })
 
 /**
  * Static map: Tailwind only emits classes it can find as literals, so a
  * composed class such as `aspect-${props.aspect}` would silently not exist.
+ * `logo` is not a ratio, it gets its own well.
  */
 const ASPECT_CLASS: Record<Aspect, string> = {
     a4: 'aspect-a4',
     '4/3': 'aspect-4/3',
     video: 'aspect-video',
+    square: 'aspect-square',
+    logo: 'tile-logo-box',
 }
 
-const aspectClass = computed(() => ASPECT_CLASS[props.aspect])
+const isLogo = computed(() => props.aspect === 'logo')
+const hasMedia = computed(() => Boolean(props.image || props.loading || isLogo.value))
+const mediaBoxClass = computed(() => ASPECT_CLASS[props.aspect])
+const fitClass = computed(() => (props.fit === 'contain' ? 'object-contain' : 'object-cover'))
 const dateParts = computed(() => formattedDateBlock(props.date ?? 0))
+const labelText = computed(() => props.label?.text ?? '')
+const labelStyle = computed(() => (props.label ? { color: `#${props.label.color}` } : {}))
 
 /**
  * The whole tile is the link, mirroring HorizontalCard: the footer is an
  * affordance only, never a nested anchor.
  */
 const hasLink = computed(() => Boolean(props.to || props.href))
-const showFooter = computed(() => hasLink.value && !props.hideAction)
+const showFooter = computed(() => hasLink.value && !props.hideAction && !props.loading)
 const wrapperElement = computed(() => {
     if (props.to) {
         return RouterLink
@@ -147,14 +210,35 @@ const wrapperProps = computed(() => {
     flex: 1;
 }
 
+.tile-media {
+    position: relative;
+}
+
 .tile-image {
     display: block;
     width: 100%;
-    object-fit: cover;
 }
 
-.tile-image-empty {
+.tile-image-empty,
+.tile-media-skeleton {
     background: var(--p-page-highlight);
+}
+
+.tile-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem;
+}
+
+.tile-logo-box {
+    height: 7.2rem;
+}
+
+.tile-logo-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
 .tile-date {
@@ -168,6 +252,12 @@ const wrapperProps = computed(() => {
     color: #fff;
     padding: 0.35rem 0.75rem;
     font-variant-numeric: tabular-nums;
+}
+
+.tile-date-inline {
+    position: static;
+    align-self: flex-start;
+    margin: 0 0 0.4rem;
 }
 
 .tile-date b {
@@ -186,7 +276,7 @@ const wrapperProps = computed(() => {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
-    padding: 0.9rem 1rem 0.9rem;
+    padding: 0.9rem 1rem;
 }
 
 .tile-kicker {
@@ -197,10 +287,36 @@ const wrapperProps = computed(() => {
     color: #7a839b;
 }
 
+.tile-title-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
 .tile-title {
     font-size: var(--text-card-title);
     font-weight: 700;
     line-height: 1.25;
+}
+
+.tile-pin {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.2rem;
+    flex-shrink: 0;
+    font-size: var(--text-meta);
+    font-weight: 600;
+    color: var(--p-primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.tile-card:hover .tile-title {
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
 .tile-subtitle {
@@ -210,9 +326,14 @@ const wrapperProps = computed(() => {
     color: #55607a;
 }
 
-.tile-card:hover .tile-title {
-    text-decoration: underline;
-    text-underline-offset: 2px;
+.tile-subtitle :deep(p),
+.tile-subtitle :deep(li) {
+    display: inline;
+    margin: 0;
+}
+
+.tile-subtitle :deep(p + p)::before {
+    content: ' ';
 }
 
 .tile-foot {

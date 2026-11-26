@@ -158,3 +158,30 @@
 .route-fade-leave-to {
   opacity: 0;
 }
+
+@layer components {
+  /*
+   * Compact rows used inside narrow homepage sections (recent publications,
+   * latest video). They are a list, not a grid of cards: hairlines separate the
+   * rows and nothing is boxed.
+   */
+  .side-row + .side-row {
+    border-top: 1px solid #e2e6ee;
+  }
+
+  .side-row-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .side-row-meta {
+    font-size: 1.3rem;
+    color: #7a839b;
+  }
+
+  .side-row:hover .side-row-title {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}

@@ -2,20 +2,14 @@
     <SectionCard :name="$gettext('News')">
         <template #content>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 items-stretch pb-2">
-                <div v-for="_ in 10" v-if="loading">
-                    <TextCard loading :loadingOpts="{
-                        readmore: true,
-                        title: true,
-                        subtitle: true,
-                        contentLines: 1
-                    }" />
-                </div>
-                <template v-if="newsItems && processedExcerpts" v-for="item in newsItems" :key="item?.id">
-                    <TextCard :title="item?.title!" :subtitle="formattedData(item?.publicationDate).toString()"
-                        :routerLink="{ to: { name: 'singlenews', params: { id: item?.id } } }">
-                        <div v-html="processedExcerpts[item!.id]">
-                        </div>
-                    </TextCard>
+                <template v-if="loading">
+                    <TileCard v-for="_ in 10" :key="`skeleton-${_}`" loading />
+                </template>
+                <template v-else>
+                    <TileCard v-for="item in newsItems" :key="item?.id" :title="item?.title ?? ''"
+                        :date="item?.publicationDate" :to="{ name: 'singlenews', params: { id: item?.id } }">
+                        <div class="line-clamp-3" v-html="processedExcerpts[item!.id]"></div>
+                    </TileCard>
                 </template>
             </div>
 
@@ -29,7 +23,7 @@ import { computed, ref, watch } from 'vue'
 import { formattedData, markedText } from '@/functions/functions.ts'
 import { useGettext } from 'vue3-gettext'
 import Pagination from '../ui/Pagination.vue'
-import TextCard from '../ui/TextCard.vue'
+import TileCard from '../ui/TileCard.vue'
 import { useQuery } from '@/composables/queries'
 
 const { $gettext } = useGettext();
