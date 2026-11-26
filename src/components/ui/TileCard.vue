@@ -377,19 +377,20 @@ const wrapperProps = computed(() => {
 }
 
 @container (min-width: 320px) {
-    /* text on the left, a square picture flush to the top right: every card gets
-       the same image shape whatever the upload's own ratio is */
+    /* text on the left, picture on the right: it runs the full height of the card
+       but never takes more than a third of the width */
     .tile-card-inner:not(.tile-card-logo) :deep(.p-card-content) {
         display: flex;
         flex-direction: row-reverse;
-        align-items: flex-start;
+        align-items: stretch;
     }
 
     .tile-card-inner:not(.tile-card-logo) .tile-media {
         flex: 0 0 33%;
         width: 33%;
-        aspect-ratio: 1 / 1;
-        border-radius: 3px;
+        max-width: 33%;
+        align-self: stretch;
+        border-radius: 0 3px 3px 0;
         overflow: hidden;
     }
 
