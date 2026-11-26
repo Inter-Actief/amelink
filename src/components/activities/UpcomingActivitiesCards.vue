@@ -12,10 +12,9 @@
                 </div>
 
                 <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pb-4">
-                    <!-- Most activities have no image, so the homepage list stays text
-                         tiles: one poster among five would make the grid ragged. -->
                     <TileCard v-for="item in activityItems" :key="item!.id" :title="item!.summary ?? ''"
-                        :date="item!.begin"
+                        :date="item!.begin" aspect="video" show-media :image="imageSrc(item?.imageIcon, false)"
+                        placeholder="/images/placeholder/shape.svg" fit="contain"
                         :label="{ color: item!.activityLabel?.color ?? '1d428a', text: item!.activityLabel?.name ?? '' }"
                         :to="{ name: 'singleactivities', params: { id: item!.id } }">
                         <div class="line-clamp-2" v-html="excerpts[item!.id]" v-if="excerpts[item!.id]"></div>
@@ -36,6 +35,7 @@ import Pagination from '../ui/Pagination.vue'
 import TileCard from '../ui/TileCard.vue'
 import { useQuery } from '@/composables/queries'
 import { markedText } from '@/functions/functions.ts'
+import { imageSrc } from '@/composables/util'
 const { $gettext } = useGettext();
 const perpage = ref(6)
 

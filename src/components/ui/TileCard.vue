@@ -16,17 +16,14 @@
                         />
                         <div v-else class="tile-logo-image" />
                     </div>
-                    <template v-else>
-                        <img
-                            v-if="props.image"
-                            v-image-error="props.placeholder"
-                            :src="props.image"
-                            :alt="props.title ?? ''"
-                            class="tile-image"
-                            :class="[mediaBoxClass, fitClass]"
-                        />
-                        <div v-else class="tile-image tile-image-empty" :class="mediaBoxClass" />
-                    </template>
+                    <AppImage
+                        v-else
+                        :src="props.image || props.placeholder"
+                        :alt="props.title ?? ''"
+                        :aspect="imageAspect"
+                        :fit="props.image ? props.fit : 'cover'"
+                        :placeholder="props.placeholder"
+                    />
                     <span v-if="props.date && !props.loading" class="tile-date">
                         <b>{{ dateParts.day }}</b>
                         <span>{{ dateParts.monthYear }}</span>
@@ -89,6 +86,7 @@ import { RouterLink, type RouteLocationRaw } from 'vue-router'
 import { computed } from 'vue'
 import { useGettext } from 'vue3-gettext'
 import { ArrowRight, Pin } from '@lucide/vue'
+import AppImage, { type ImageAspect } from './AppImage.vue'
 import { formattedDateBlock } from '@/functions/functions.ts'
 
 const { $gettext } = useGettext()
@@ -111,6 +109,9 @@ interface Props {
     /** Coloured label instead of `kicker` (activity type, with its own colour). */
     label?: { text: string, color: string }
     subtitle?: string
+    /** Show the media box even without an image (it then shows the placeholder),
+     *  for lists where some items have a picture and the grid must line up. */
+    showMedia?: boolean
     /** Date shown in the blue block, on the media or next to the title. */
     date?: number | string
     /** Renders the pinned badge next to the title. */
@@ -145,9 +146,25 @@ const ASPECT_CLASS: Record<Aspect, string> = {
 }
 
 const isLogo = computed(() => props.aspect === 'logo')
-const hasMedia = computed(() => Boolean(props.image || props.loading || isLogo.value))
+const hasMedia = computed(() =>
+    Boolean(props.image || props.loading || isLogo.value || props.showMedia),
+)
 const mediaBoxClass = computed(() => ASPECT_CLASS[props.aspect])
 const fitClass = computed(() => (props.fit === 'contain' ? 'object-contain' : 'object-cover'))
+
+/** TileCard's own aspect names mapped onto the ones AppImage knows. */
+const imageAspect = computed<ImageAspect>(() => {
+    switch (props.aspect) {
+        case 'a4':
+            return 'a4'
+        case 'video':
+            return '16/9'
+        case 'square':
+            return 'square'
+        default:
+            return '4/3'
+    }
+})
 const dateParts = computed(() => formattedDateBlock(props.date ?? 0))
 const labelText = computed(() => props.label?.text ?? '')
 const labelStyle = computed(() => (props.label ? { color: `#${props.label.color}` } : {}))
@@ -220,6 +237,7 @@ const wrapperProps = computed(() => {
 }
 
 .tile-image-empty,
+.tile-media-empty,
 .tile-media-skeleton {
     background: var(--p-page-highlight);
 }

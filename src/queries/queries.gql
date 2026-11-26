@@ -26,6 +26,7 @@ query OverviewActivities($limit: Int, $offset: Int, $startDate: DateTime!) {
       begin
       summary
       description
+      imageIcon
       activityLabel {
         name
         color

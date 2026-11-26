@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col gap-3">
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-3">
         <template v-if="loading">
             <TileCard v-for="_ in perpage" :key="`skeleton-${_}`" loading />
         </template>
@@ -7,6 +7,8 @@
             <TileCard v-for="item in newsItems" :key="item?.id" :title="item!.summary ?? ''"
                 :date="item!.begin"
                 :label="{ color: item!.activityLabel?.color ?? '1d428a', text: item!.activityLabel?.name ?? '' }"
+                aspect="video" show-media :image="imageSrc(item?.imageIcon, false)" fit="contain"
+                placeholder="/images/placeholder/shape.svg"
                 :to="{ name: 'singleactivities', params: { id: item?.id } }">
                 <div class="line-clamp-3" v-html="processedDescriptions[item!.id!]"
                     v-if="processedDescriptions[item!.id!]">
@@ -21,6 +23,7 @@ import { computed, ref, watch } from 'vue'
 import { formattedData, excerptText, markedText } from '@/functions/functions.ts'
 
 import TileCard from '../ui/TileCard.vue';
+import { imageSrc } from '@/composables/util';
 import { useQuery } from '@/composables/queries';
 
 
