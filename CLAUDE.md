@@ -111,8 +111,8 @@ and say what you covered. Probe recipes are in the amelink skill.
 | `src/stores/loadingStore.ts` | Global request-loading counter |
 | `src/functions/functions.ts` | Date formatting, Markdown rendering, device detection |
 | `src/constants/pageCategories.ts` | `mainMenu` array — drives the header nav and breadcrumbs |
-| `src/components/ui/` | Reusable primitives: `Content`, `SectionCard`, `TextCard`, `Pagination`, `EpaButton`, `Logo`, `ImageFade`, `LanguageSwitcher`, `ThemeSwitcher` |
-| `src/components/placeholder/` | Skeleton loaders matching real layouts |
+| `src/components/ui/` | Reusable primitives: `Content`, `SectionCard` (page/section bar), `TileCard` (**the** card), `AppImage`, `Pagination`, `EpaButton`, `Logo`, `ImageFade`, `LanguageSwitcher`, `ThemeSwitcher` |
+| `src/components/placeholder/` | Skeletons that mirror real layouts: `CardSkeleton`, `SkeletonImage`, `PlaceholderText`, `PastActivitiesPlaceholder` |
 | `src/views/` | Route-level pages |
 | `src/queries/queries.gql` | Source GraphQL operations |
 | `src/gql/` | **Generated** types and TypedDocumentNodes — do not edit |

@@ -164,8 +164,8 @@ const labelText = computed(() => props.label?.text ?? '')
 const labelStyle = computed(() => (props.label ? { color: `#${props.label.color}` } : {}))
 
 /**
- * The whole tile is the link, mirroring HorizontalCard: the footer is an
- * affordance only, never a nested anchor.
+ * The whole tile is the link, so the "Read more" footer is an affordance only
+ * and must never introduce a nested anchor or button.
  */
 const hasLink = computed(() => Boolean(props.to || props.href))
 const showFooter = computed(() => hasLink.value && !props.hideAction && !props.loading)

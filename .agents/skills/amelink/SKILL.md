@@ -160,16 +160,22 @@ can drift. `router.afterEach()` has a 3-second safety reset.
   `src/router/index.ts`.
 - **Components** (`src/components/...`) are grouped by domain
   (`activities/`, `news/`, `ui/`, `placeholder/`).
-- **UI primitives**: `Content.vue` (section wrapper), `SectionCard.vue` (named
-  PrimeVue card with header), `TextCard.vue` (image + title + subtitle card),
-  `EpaButton.vue` (legacy button — prefer PrimeVue `Button` for new work).
-- **Loading states**: Each view/component that fetches data has a skeleton
-  placeholder matching its layout (e.g., `PlaceholderText`, `CompanyPlaceholder`).
-- **Images**: Always use `imageSrc()` from `src/composables/util.ts`. It
-  prefixes media paths with `VITE_AMELIE_MEDIA_URL` and falls back to a local
-  placeholder.
-- **Image error handling**: Use the `v-image-error` directive on `<img>` tags.
-  It swaps broken images to the placeholder automatically.
+- **UI primitives**: `Content.vue` (section wrapper), `SectionCard.vue` (the
+  blue section bar: `name` prop is the title, `#info` slot takes a link or a
+  filter, `#content` the body), `TileCard.vue` (**the** card — do not hand-build
+  card markup), `EpaButton.vue` (legacy button — prefer PrimeVue `Button` for
+  new work).
+- **One card**: `TileCard` covers photo tiles, logo wells (`aspect="logo"`) and
+  media-less text tiles, and renders its own skeletons (`loading`). It is the
+  whole link, so a footer action is a `span`, never a nested button. Its layout
+  follows the width it is given (container query at 320px): stacked photo on
+  top in a five-across grid, compact row with the photo right in two- or
+  three-across grids and on phones.
+- **Loading states**: Skeletons must occupy the same boxes as the real content
+  (`CardSkeleton`, `SkeletonImage`, `PlaceholderText`).
+- **Images**: use `AppImage.vue` — it resolves `imageSrc()`, attaches
+  `v-image-error`, lazy-loads below the fold and reserves the aspect box. Hero
+  and slider images are the only ones that should be eager.
 
 ### Show Designs, Do Not Describe Them
 

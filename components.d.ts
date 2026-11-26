@@ -10,6 +10,7 @@ declare module 'vue' {
     ActivitiesSliderCard: typeof import('./src/components/homepage/ActivitiesSliderCard.vue')['default']
     AppImage: typeof import('./src/components/ui/AppImage.vue')['default']
     Button: typeof import('primevue/button')['default']
+    Card: typeof import('primevue/card')['default']
     ContactForm: typeof import('./src/components/forms/ContactForm.vue')['default']
     Content: typeof import('./src/components/ui/Content.vue')['default']
     DynamicTable: typeof import('./src/components/ui/DynamicTable.vue')['default']
@@ -51,5 +52,8 @@ declare module 'vue' {
     UpcomingActivities: typeof import('./src/components/activities/UpcomingActivities.vue')['default']
     UpcomingActivitiesCards: typeof import('./src/components/activities/UpcomingActivitiesCards.vue')['default']
     UserButton: typeof import('./src/components/header/UserButton.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    Ripple: typeof import('primevue/ripple')['default']
   }
 }

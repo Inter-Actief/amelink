@@ -1,24 +1,3 @@
-query LatestActivities($limit: Int, $offset: Int, $startDate: DateTime) {
-  activities(limit: $limit, offset: $offset, end_Lt: $startDate, ordering: "begin,desc") {
-    results {
-      id
-      description
-      summary
-      begin
-      imageIcon
-      activityLabel {
-        name
-        color
-        active
-      }
-      photos {
-        thumbMedium
-      }
-    }
-    totalCount
-  }
-}
-
 query OverviewActivities($limit: Int, $offset: Int, $startDate: DateTime!) {
   activities(limit: $limit, offset: $offset, begin_Gt: $startDate, ordering: "begin,asc") {
     results {
@@ -133,19 +112,6 @@ query HomepageSlider($limit: Int, $beginDate: DateTime) {
       photos {
         thumbLarge
       }
-    }
-    totalCount
-  }
-}
-
-query LatestNews($limit: Int) {
-  newsItems(limit: $limit) {
-    results {
-      id
-      title
-      introduction
-      introduction
-      publicationDate
     }
     totalCount
   }
