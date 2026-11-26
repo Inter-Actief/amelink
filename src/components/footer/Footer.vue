@@ -1,6 +1,7 @@
 <template>
-    <div <div
-        class="w-full bg-primary grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12 text-primary-contrast px-4 py-6 md:py-8">
+    <div
+        class="w-full bg-primary grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12 text-primary-contrast px-4 py-6 md:py-8"
+    >
         <div class="col-span-1 md:col-span-4 md:col-start-2">
             <Logo class="pb-3" />
             <div class="pb-2">{{ $gettext('footer.text') }}</div>
@@ -16,15 +17,28 @@
 
         <div class="col-span-1 md:col-span-2">
             <div class="font-bold pb-1">{{ $gettext('Important information') }}</div>
-            <div><a class="link" href="https://privacy.ia.utwente.nl/">{{ $gettext('Privacy policy') }}</a></div>
             <div>
-                <RouterLink :to="{ name: 'contact' }" class="link">{{ $gettext('Contact') }}</RouterLink>
+                <a class="link" href="https://privacy.ia.utwente.nl/">{{
+                    $gettext('Privacy policy')
+                }}</a>
             </div>
-            <div><a class="link" href="https://github.com/Inter-Actief/amelink/issues">
-                    {{ $gettext('Report a problem') }}</a></div>
             <div>
-                <RouterLink to="/about/33/coordinated-vulnerability-disclosure-policy/" class="link">
-                    {{ $gettext('CVD Policy') }}</RouterLink>
+                <RouterLink :to="{ name: 'contact' }" class="link">{{
+                    $gettext('Contact')
+                }}</RouterLink>
+            </div>
+            <div>
+                <a class="link" href="https://github.com/Inter-Actief/amelink/issues">
+                    {{ $gettext('Report a problem') }}</a
+                >
+            </div>
+            <div>
+                <RouterLink
+                    to="/about/33/coordinated-vulnerability-disclosure-policy/"
+                    class="link"
+                >
+                    {{ $gettext('CVD Policy') }}</RouterLink
+                >
             </div>
         </div>
 
@@ -40,32 +54,27 @@
 
 <script setup lang="ts">
 import Logo from '@/components/ui/Logo.vue'
-// import FooterMenu from '@/components/menu/FooterMenu.vue'
-import { isDesktop } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext'
-import { computed, ref } from 'vue'
-const { $gettext } = useGettext();
-const currentYear = ref(new Date().getFullYear())
+import { computed } from 'vue'
+const { $gettext } = useGettext()
+const currentYear = new Date().getFullYear()
 
 const pages = computed(() => [
     {
         name: $gettext('Activities'),
-        page: 'activities'
+        page: 'activities',
     },
     {
         name: $gettext('News'),
-        page: 'news'
+        page: 'news',
     },
     {
         name: $gettext('Publications'),
-        page: 'publications'
+        page: 'publications',
     },
     {
         name: $gettext('Education'),
-        page: 'education'
-    }
+        page: 'education',
+    },
 ])
-
 </script>
-
-<style></style>

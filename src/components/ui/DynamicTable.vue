@@ -1,22 +1,31 @@
 <template>
-    <div class="table-container">
-        <div class="inner">
-            <table :style="tableStyle">
+    <div class="grid">
+        <div class="overflow-x-auto">
+            <table :style="tableStyle" class="w-full break-inside-avoid border-collapse">
                 <thead>
                     <tr>
-                        <th v-for="(column, index) in columns" :key="column.key"
-                            :class="[{ sticky: index < stickyColumns }]" :style="[
+                        <th
+                            v-for="(column, index) in columns"
+                            :key="column.key"
+                            class="border-0 bg-primary px-8 py-6 text-left text-white first:rounded-tl-[var(--border-radius)] last:rounded-tr-[var(--border-radius)]"
+                            :class="{ 'sticky left-0 z-[1]': index < stickyColumns }"
+                            :style="[
                                 column.width ? `width: ${column.width}rem` : '',
                                 column.minWidth ? `min-width: ${column.minWidth}rem` : '',
-                            ]">
+                            ]"
+                        >
                             {{ column.label }}
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="row in rows" :key="row.id">
-                        <td v-for="(column, index) in columns" :key="column.key"
-                            :class="{ sticky: index < stickyColumns }">
+                    <tr v-for="row in rows" :key="row.id" class="odd:bg-white even:bg-slate-100">
+                        <td
+                            v-for="(column, index) in columns"
+                            :key="column.key"
+                            class="border-0 bg-inherit px-8 py-6 text-left"
+                            :class="{ 'sticky left-0 z-[1]': index < stickyColumns }"
+                        >
                             {{ row[column.key] }}
                         </td>
                     </tr>
@@ -30,22 +39,22 @@
 import { computed, defineProps } from 'vue'
 
 interface Column {
-    key: string;
-    label: string;
-    width?: number;
-    minWidth?: number;
+    key: string
+    label: string
+    width?: number
+    minWidth?: number
 }
 
 interface Row {
-    id: string | number;
-    [key: string]: any;
+    id: string | number
+    [key: string]: any
 }
 
 interface Props {
-    columns: Column[];
-    rows: Row[];
-    minWidth?: number;
-    stickyColumns?: number;
+    columns: Column[]
+    rows: Row[]
+    minWidth?: number
+    stickyColumns?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -59,54 +68,3 @@ const tableStyle = computed(() => ({
     'min-width': `${props.minWidth}rem`,
 }))
 </script>
-
-<style scoped>
-.table-container {
-    display: grid;
-}
-
-.table-container .inner {
-    overflow-x: auto;
-}
-
-.table-container .inner table {
-    page-break-inside: avoid;
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.table-container .inner table th,
-.table-container .inner table td {
-    border: 0;
-    padding: 1.5rem 2rem;
-    text-align: left;
-}
-
-.table-container .inner table th.sticky,
-.table-container .inner table td.sticky {
-    position: sticky;
-    left: 0;
-    z-index: 1;
-}
-
-.table-container .inner table th {
-    background-color: var(--primary-color);
-    color: var(--text-color-light);
-}
-
-.table-container .inner table th:first-child {
-    border-radius: var(--border-radius) 0 0 0;
-}
-
-.table-container .inner table th:last-child {
-    border-radius: 0 var(--border-radius) 0 0;
-}
-
-.table-container .inner table tr:nth-child(odd) td {
-    background-color: var(--color-white);
-}
-
-.table-container .inner table tr:nth-child(even) td {
-    background-color: var(--color-light);
-}
-</style>

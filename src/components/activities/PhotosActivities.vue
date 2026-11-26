@@ -1,50 +1,70 @@
 <template>
-    <RouterLink class="link flex flex-row" :to="{ name: 'singleactivities', params: { id: queryItem?.id } }">
+    <RouterLink
+        class="link flex flex-row"
+        :to="{ name: 'singleactivities', params: { id: queryItem?.id } }"
+    >
         <ArrowLeft />{{ $gettext('Go to activity') }}
     </RouterLink>
 
     <h1>{{ title }}</h1>
     <PicturesBy :photographers="photographers" />
 
-    <div class="grid grid-cards-wide gap-4">
-        <template v-if="queryItem?.photos && !loading" v-for="(photo, index) in queryItem.photos" :key="photo">
-            <img class="format aspect-square object-cover cursor-pointer" v-if="photo?.thumbMedium" v-image-error
-                :src="`${mediaUrl}${photo?.thumbMedium}`" @click="showImage(index)" />
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
+        <template
+            v-if="queryItem?.photos && !loading"
+            v-for="(photo, index) in queryItem.photos"
+            :key="photo"
+        >
+            <img
+                class="aspect-square w-full cursor-pointer rounded object-cover"
+                v-if="photo?.thumbMedium"
+                v-image-error
+                :src="`${mediaUrl}${photo?.thumbMedium}`"
+                @click="showImage(index)"
+            />
         </template>
         <template v-if="loading" v-for="_ in 5 * 4">
-            <div class="format aspect-square">
+            <div class="aspect-square rounded">
                 <Skeleton height="100%" />
             </div>
         </template>
     </div>
-    <VueEasyLightbox v-if="queryItem?.photos" :visible="visible" :imgs="imagePhotosUrls()" :index="currentIndex"
-        @hide="handleHide" />
+    <VueEasyLightbox
+        v-if="queryItem?.photos"
+        :visible="visible"
+        :imgs="imagePhotosUrls()"
+        :index="currentIndex"
+        @hide="handleHide"
+    />
 
-    <RouterLink class="link flex flex-row" :to="{ name: 'singleactivities', params: { id: queryItem?.id } }">
+    <RouterLink
+        class="link flex flex-row"
+        :to="{ name: 'singleactivities', params: { id: queryItem?.id } }"
+    >
         <ArrowLeft />{{ $gettext('Go to activity') }}
     </RouterLink>
 </template>
 
 <script setup lang="ts">
-import { ArrowLeft } from '@lucide/vue';
+import { ArrowLeft } from '@lucide/vue'
 import { computed, ref } from 'vue'
 import VueEasyLightbox from 'vue-easy-lightbox'
 import { useGettext } from 'vue3-gettext'
-import { useQuery } from '@/composables/queries';
-import Skeleton from 'primevue/skeleton';
-import PicturesBy from '../photos/PicturesBy.vue';
+import { useQuery } from '@/composables/queries'
+import Skeleton from 'primevue/skeleton'
+import PicturesBy from '../photos/PicturesBy.vue'
 
-const { $gettext } = useGettext();
+const { $gettext } = useGettext()
 const props = defineProps(['id'])
 
-const { result, refetch, loading } = useQuery("photosActivities", { id: props.id })
+const { result, refetch, loading } = useQuery('photosActivities', { id: props.id })
 const queryResults = computed(() => result.value?.activity)
 const queryItem = computed(() => (queryResults.value ? queryResults.value : null))
 const title = computed(() => queryResults.value?.summary)
 
 type EasyLightboxImage = {
-    src: string,
-    title?: string,
+    src: string
+    title?: string
     alt?: string
 }
 
@@ -54,29 +74,27 @@ const imageUrls = ref<EasyLightboxImage[]>([])
 const mediaUrl = import.meta.env.VITE_AMELIE_MEDIA_URL
 
 const photographers = computed(() => {
-    return Array.from(new Set(queryItem.value?.photos.map(x => x.owner?.name)))
+    return Array.from(new Set(queryItem.value?.photos.map((x) => x.owner?.name)))
 })
 
 const imagePhotosUrls = () => {
     if (queryResults.value?.photos) {
-        imageUrls.value = queryResults.value.photos.map(photo => {
+        imageUrls.value = queryResults.value.photos.map((photo) => {
             return {
                 src: `${mediaUrl}${photo.thumbLarge}`,
                 title: `${$gettext('Photo by ')}${photo.owner?.name ?? ''}. ${$gettext('If you want to have this photo removed, please contact the board')}`,
             }
-        });
+        })
     }
     return imageUrls.value
 }
 
 const showImage = (index: number) => {
     currentIndex.value = index
-    visible.value = true;
+    visible.value = true
 }
 
 const handleHide = () => {
     visible.value = false
 }
 </script>
-
-<style scoped></style>

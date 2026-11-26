@@ -9,5 +9,3 @@ import PhotosActivities from '@/components/activities/PhotosActivities.vue'
 
 const props = defineProps(['id'])
 </script>
-
-<style scoped></style>

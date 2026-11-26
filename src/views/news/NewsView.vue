@@ -7,5 +7,3 @@
 <script setup lang="ts">
 import OverviewNews from '@/components/news/OverviewNews.vue'
 </script>
-
-<style scoped></style>

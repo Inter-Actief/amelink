@@ -1,38 +1,29 @@
 <template>
-    <Select v-model="selectedLanguage" :options="langs" optionLabel="name" placeholder="" class="w-full">
-        <template #value="slotProps">
-            <div class="flex items-center p-1">
-                <img :src="`/images/flags/${selectedLanguage}.svg`" class="mr-2" />
-            </div>
-        </template>
-        <template #option="slotProps">
-            <div class="flex items-center">
-                <img :alt="slotProps.option" :src="`/images/flags/${slotProps.option}.svg`" class="mr-2" />
-            </div>
-        </template>
-    </Select>
+    <button
+        type="button"
+        class="cursor-pointer border-0 bg-transparent p-0 [&_img]:block [&_img]:h-auto [&_img]:w-[1.8rem] [&_img]:rounded-[var(--border-radius)]"
+        :aria-label="`${$gettext('Language')}: ${currentLanguage}`"
+        :title="`${$gettext('Language')}: ${currentLanguage}`"
+        @click="cycleLanguage"
+    >
+        <img :src="`/images/flags/${currentLanguage}.svg`" alt="" />
+    </button>
 </template>
 
 <script setup lang="ts">
 import { closeMobileMenu } from '@/functions/functions'
-import { useLanguageStore } from '@/stores/languageStore';
+import { useLanguageStore } from '@/stores/languageStore'
 import { useGettext } from 'vue3-gettext'
-import Select from 'primevue/select';
-import { ref, watch } from 'vue';
-const gettext = useGettext();
-const langStore = useLanguageStore();
+import { computed } from 'vue'
 
-const selectedLanguage = ref<string>(gettext.current);
-const langs = ref(['en', 'nl']);
+const { $gettext } = useGettext()
+const langStore = useLanguageStore()
 
-watch(selectedLanguage, () => {
-    changeLanguage(selectedLanguage.value);
-})
+const currentLanguage = computed(() => langStore.currentLanguage)
 
-function changeLanguage(newLanguage: string) {
-    langStore.switchLanguage(newLanguage);
+/** With only two languages the toggle can simply cycle to the other one. */
+function cycleLanguage() {
+    langStore.switchLanguage()
     closeMobileMenu()
 }
 </script>
-
-<style scoped></style>

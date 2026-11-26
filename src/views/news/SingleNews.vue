@@ -1,56 +1,58 @@
 <template>
     <Content>
-        <template v-if="item">
-            <div>
-                <Skeleton v-if="loading" height="3rem" width="80%" />
-                <h1 v-else>{{ item.title }}</h1>
-            </div>
-
-            <div class="details pb-4 text-gray-500">
-                <div class="author">
-                    <Skeleton v-if="loading" height="1.5rem" width="20%" />
-                    <span v-else>{{ item.author }}</span>
-                </div>
-                <div class="date">
-                    <Skeleton v-if="loading" height="1.5rem" width="20%" />
-                    <span v-else>{{ formattedData(item.publicationDate) }}</span>
-                </div>
-            </div>
-
-            <div class="content text pb-4">
+        <SectionCard v-if="item" :name="item.title ?? ''" :loading="loading">
+            <template #info>
+                <span v-if="!loading" class="text-meta">
+                    {{ item.author }} &middot; {{ formattedData(item.publicationDate) }}
+                </span>
+            </template>
+            <template #content>
                 <PlaceholderText v-if="loading" :lines="10" />
-                <div v-else v-html="processedContent"></div>
-            </div>
+                <template v-else>
+                    <div class="content text" v-html="processedContent"></div>
 
-            <EpaButton :to="{ name: 'news', params: { id: item.id } }" class="link return" bicon="return">
-                {{ $gettext('Return to overview') }}
-            </EpaButton>
-        </template>
+                    <div class="pt-4">
+                        <RouterLink
+                            :to="{ name: 'news' }"
+                            class="link inline-flex flex-row items-center gap-2"
+                        >
+                            <ArrowLeft />
+                            {{ $gettext('Return to overview') }}
+                        </RouterLink>
+                    </div>
+                </template>
+            </template>
+        </SectionCard>
     </Content>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { formattedData, markedText } from '@/functions/functions.ts'
-import EpaButton from '@/components/ui/EpaButton.vue'
+import { ArrowLeft } from '@lucide/vue'
+import { RouterLink } from 'vue-router'
 import { useGettext } from 'vue3-gettext'
-import { useQuery } from '@/composables/queries';
-import Skeleton from 'primevue/skeleton';
-import PlaceholderText from '@/components/placeholder/PlaceholderText.vue';
+import { useQuery } from '@/composables/queries'
+import PlaceholderText from '@/components/placeholder/PlaceholderText.vue'
+import SectionCard from '@/components/ui/SectionCard.vue'
 
-const { $gettext } = useGettext();
-const props = defineProps<{ id: string }>();
+const { $gettext } = useGettext()
+const props = defineProps<{ id: string }>()
 
 const { result, refetch, loading } = useQuery('singleNews', { id: props.id })
-const queryResults = computed(() => result.value?.newsItem);
-const item = computed(() => (queryResults.value ? queryResults.value : null));
+const queryResults = computed(() => result.value?.newsItem)
+const item = computed(() => (queryResults.value ? queryResults.value : null))
 
-const processedContent = ref<string>('');
+const processedContent = ref<string>('')
 
 // Process the `content` field when `item` changes
-watch(item, async (newItem) => {
-    if (newItem) {
-        processedContent.value = await markedText(newItem!.content!);
-    }
-}, { immediate: true });
+watch(
+    item,
+    async (newItem) => {
+        if (newItem) {
+            processedContent.value = await markedText(newItem!.content!)
+        }
+    },
+    { immediate: true },
+)
 </script>

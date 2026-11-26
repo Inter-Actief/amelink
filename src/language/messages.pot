@@ -135,12 +135,11 @@ msgid "Contact us"
 msgstr ""
 
 #: src/components/footer/Footer.vue:52
-#: src/components/homepage/HomepageCards.vue:10
 msgid "Activities"
 msgstr ""
 
 #: src/components/footer/Footer.vue:56
-#: src/components/homepage/HomepageCards.vue:19
+#: src/components/homepage/HomepageNews.vue:2
 msgid "News"
 msgstr ""
 
@@ -150,59 +149,67 @@ msgid "Publications"
 msgstr ""
 
 #: src/components/footer/Footer.vue:64
-#: src/components/homepage/HomepageCards.vue:28
 msgid "Education"
 msgstr ""
 
-#: src/components/header/Header.vue:16
-#: src/components/header/Header.vue:37
+#: src/components/header/Header.vue:19
+#: src/components/header/MobileMenu.vue:115
 msgid "Old website"
 msgstr ""
 
-#: src/components/header/Header.vue:19
-#: src/components/header/Header.vue:40
+#: src/components/header/Header.vue:24
+#: src/components/header/Header.vue:52
 msgid "Become a member"
+msgstr ""
+
+#: src/components/header/Header.vue:41
+msgid "Open menu"
+msgstr ""
+
+#: src/components/header/MobileMenu.vue:16
+msgid "Close menu"
 msgstr ""
 
 #: src/components/header/UserButton.vue:2
 msgid "Sign-in"
 msgstr ""
 
-#: src/components/homepage/DynamicContent.vue:10
-msgid "Pinned news"
+#: src/components/homepage/HomepageNews.vue:5
+#: src/components/news/LatestNews.vue:7
+msgid "View all news"
 msgstr ""
 
-#: src/components/homepage/DynamicContent.vue:24
-msgid "Recent news"
+#: src/components/homepage/HomepageNews.vue:32
+msgid "Pinned"
 msgstr ""
 
-#: src/components/homepage/DynamicContent.vue:38
-msgid "Latest publication"
+#: src/components/homepage/HomepageNews.vue:38
+msgid "There is no news yet."
 msgstr ""
 
-#: src/components/homepage/DynamicContent.vue:54
+#: src/components/homepage/HomepagePublications.vue:2
+msgid "Recent publications"
+msgstr ""
+
+#: src/components/homepage/HomepagePublications.vue:5
+#: src/components/homepage/HomepageVideo.vue:5
+msgid "View all"
+msgstr ""
+
+#: src/components/homepage/HomepagePublications.vue:40
+msgid "There are no publications yet."
+msgstr ""
+
+#: src/components/homepage/HomepageVideo.vue:2
 msgid "Latest video"
 msgstr ""
 
-#: src/components/homepage/DynamicContent.vue:73
-msgid "All news"
-msgstr ""
-
-#: src/components/homepage/HomepageCards.vue:37
-#: src/views/companies/CompaniesView.vue:22
-msgid "Companies"
-msgstr ""
-
-#: src/components/homepage/HomepageCards.vue:43
-msgid "Current items"
+#: src/components/homepage/HomepageVideo.vue:36
+msgid "There are no videos yet."
 msgstr ""
 
 #: src/components/news/LatestNews.vue:5
 msgid "News & Announcements"
-msgstr ""
-
-#: src/components/news/LatestNews.vue:7
-msgid "View all news"
 msgstr ""
 
 #: src/components/news/OverviewNews.vue:2
@@ -214,7 +221,7 @@ msgstr ""
 msgid "Pictures by"
 msgstr ""
 
-#: src/components/ui/HorizontalCard.vue:18
+#: src/components/ui/HorizontalCard.vue:19
 #: src/components/ui/TextCard.vue:58
 msgid "Read more"
 msgstr ""
@@ -283,6 +290,10 @@ msgstr ""
 
 #: src/views/committees/SingleCommitteeView.vue:99
 msgid "This committee does not have a description"
+msgstr ""
+
+#: src/views/companies/CompaniesView.vue:22
+msgid "Companies"
 msgstr ""
 
 #: src/views/companies/CompanyView.vue:29

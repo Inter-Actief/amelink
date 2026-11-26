@@ -29,7 +29,11 @@ const dateLocales: Record<string, string> = {
     nl: 'nl-NL',
 }
 
-const nameFormatters = new Map<string, { weekday: Intl.DateTimeFormat, month: Intl.DateTimeFormat }>()
+const nameFormatters = new Map<string, {
+    weekday: Intl.DateTimeFormat,
+    month: Intl.DateTimeFormat,
+    monthYear: Intl.DateTimeFormat,
+}>()
 
 /**
  * Month and weekday names come from the browser's locale data, so they follow
@@ -43,6 +47,7 @@ const dateFormatter = (locale: string) => {
         formatters = {
             weekday: new Intl.DateTimeFormat(locale, { weekday: 'long' }),
             month: new Intl.DateTimeFormat(locale, { month: 'long' }),
+            monthYear: new Intl.DateTimeFormat(locale, { month: 'short', year: 'numeric' }),
         }
         nameFormatters.set(locale, formatters)
     }
@@ -65,6 +70,21 @@ export const formattedData = (timestamp: number) => {
         ordinal: ordinalSuffix(day),
         year: String(date.getFullYear()),
     })
+}
+
+/**
+ * Date split into the two parts a compact card shows separately: the day on its
+ * own for large type, and "Oct 2026" / "okt 2026" beside it. Names come from
+ * the browser locale data, so this follows the active language.
+ */
+export const formattedDateBlock = (timestamp: number | string) => {
+    const date = new Date(timestamp)
+    const formatters = dateFormatter(dateLocales[gettext.current] ?? dateLocales.en)
+
+    return {
+        day: String(date.getDate()),
+        monthYear: formatters.monthYear.format(date),
+    }
 }
 
 export const formattedDataShort = (timestamp: number) => {

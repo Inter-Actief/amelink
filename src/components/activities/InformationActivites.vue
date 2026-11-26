@@ -1,91 +1,93 @@
 <template>
-    <TextCard :title="$gettext('Who, what, where, when...')">
-        <div class="space-y-3 pt-4">
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-3 font-bold">{{ $gettext('Who') }}</div>
-                <div class="col-span-9">
-                    <Skeleton v-if="loading" width="40%" height="1.5rem"></Skeleton>
-                    <span v-else>{{ props.item.organizer.name }}</span>
+    <SectionCard :name="$gettext('Who, what, where, when...')">
+        <template #content>
+            <div class="space-y-3 pt-4">
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-3 font-bold">{{ $gettext('Who') }}</div>
+                    <div class="col-span-9">
+                        <Skeleton v-if="loading" width="40%" height="1.5rem"></Skeleton>
+                        <span v-else>{{ props.item.organizer.name }}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-3 font-bold">{{ $gettext('What') }}</div>
-                <div class="col-span-9">
-                    <Skeleton v-if="loading" width="60%" height="1.5rem"></Skeleton>
-                    <span v-else>{{ props.item.summary }}</span>
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-3 font-bold">{{ $gettext('What') }}</div>
+                    <div class="col-span-9">
+                        <Skeleton v-if="loading" width="60%" height="1.5rem"></Skeleton>
+                        <span v-else>{{ props.item.summary }}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-3 font-bold">{{ $gettext('Where') }}</div>
-                <div class="col-span-9">
-                    <Skeleton v-if="loading" width="50%" height="1.5rem"></Skeleton>
-                    <span v-else>{{ props.item.location }}</span>
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-3 font-bold">{{ $gettext('Where') }}</div>
+                    <div class="col-span-9">
+                        <Skeleton v-if="loading" width="50%" height="1.5rem"></Skeleton>
+                        <span v-else>{{ props.item.location }}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-3 font-bold">{{ $gettext('When') }}</div>
-                <div class="col-span-9">
-                    <template v-if="loading">
-                        <div class="space-y-2">
-                            <Skeleton width="70%" height="1.5rem"></Skeleton>
-                            <Skeleton width="75%" height="1.5rem"></Skeleton>
-                        </div>
-                    </template>
-                    <span v-else>
-                        <template v-if="props.item.entireDay ?? false">
-                            {{ formattedData(props.item.begin) }}
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-3 font-bold">{{ $gettext('When') }}</div>
+                    <div class="col-span-9">
+                        <template v-if="loading">
+                            <div class="space-y-2">
+                                <Skeleton width="70%" height="1.5rem"></Skeleton>
+                                <Skeleton width="75%" height="1.5rem"></Skeleton>
+                            </div>
                         </template>
+                        <span v-else>
+                            <template v-if="props.item.entireDay ?? false">
+                                {{ formattedData(props.item.begin) }}
+                            </template>
+                            <template v-else>
+                                {{ formattedData(props.item.begin) }} {{ $gettext('from') }}
+                                {{ formattedTime(props.item.begin) }} {{ $gettext('until') }}
+                                {{ formattedTime(props.item.end) }}
+                            </template>
+                        </span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-3 font-bold">{{ $gettext('Label') }}</div>
+                    <div class="col-span-9">
+                        <Skeleton v-if="loading" width="35%" height="1.5rem"></Skeleton>
+                        <span v-else>{{ props.item.activityLabel[`nameEn`] }}</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-3 font-bold">{{ $gettext('Costs') }}</div>
+                    <div class="col-span-9">
+                        <Skeleton v-if="loading" width="25%" height="1.5rem"></Skeleton>
                         <template v-else>
-                            {{ formattedData(props.item.begin) }} {{ $gettext('from') }}
-                            {{ formattedTime(props.item.begin) }} {{ $gettext('until') }}
-                            {{ formattedTime(props.item.end) }}
+                            <template v-if="props.item.hasCosts">
+                                {{ props.item.price }} euro
+                            </template>
+                            <template v-else>
+                                {{ $gettext('Free') }}
+                            </template>
                         </template>
-                    </span>
+                    </div>
                 </div>
             </div>
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-3 font-bold">{{ $gettext('Label') }}</div>
-                <div class="col-span-9">
-                    <Skeleton v-if="loading" width="35%" height="1.5rem"></Skeleton>
-                    <span v-else>{{ props.item.activityLabel[`nameEn`] }}</span>
-                </div>
-            </div>
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-3 font-bold">{{ $gettext('Costs') }}</div>
-                <div class="col-span-9">
-                    <Skeleton v-if="loading" width="25%" height="1.5rem"></Skeleton>
-                    <template v-else>
-                        <template v-if="props.item.hasCosts"> {{ props.item.price }} euro </template>
-                        <template v-else>
-                            {{ $gettext('Free') }}
-                        </template>
-                    </template>
-                </div>
-            </div>
-        </div>
-    </TextCard>
+        </template>
+    </SectionCard>
 </template>
 
 <script setup lang="ts">
 import { formattedData, formattedTime } from '@/functions/functions'
-import { useGettext } from 'vue3-gettext';
-import TextCard from '../ui/TextCard.vue';
-import Skeleton from 'primevue/skeleton';
-import type { SingleActivitiesQuery } from '@/gql/graphql';
+import { useGettext } from 'vue3-gettext'
+import SectionCard from '../ui/SectionCard.vue'
+import Skeleton from 'primevue/skeleton'
+import type { SingleActivitiesQuery } from '@/gql/graphql'
 
-type Activity = NonNullable<SingleActivitiesQuery['activity']>;
+type Activity = NonNullable<SingleActivitiesQuery['activity']>
 
 interface Props {
     item: Activity
     loading?: boolean
 }
 
-const gettext = useGettext();
+const gettext = useGettext()
 
-const { $gettext } = gettext;
+const { $gettext } = gettext
 const props = withDefaults(defineProps<Props>(), {
-    loading: false
+    loading: false,
 })
 </script>
-
-<style scoped></style>

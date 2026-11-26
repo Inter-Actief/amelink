@@ -1,7 +1,10 @@
 <template>
     <Content>
         <div class="flex flex-col lg:flex-row gap-5 justify-start items-start">
-            <SectionCard :name="$gettext('Information')" class="w-full lg:basis-1/3 lg:sticky top-12">
+            <SectionCard
+                :name="$gettext('Information')"
+                class="w-full lg:basis-1/3 lg:sticky top-12"
+            >
                 <template #content>
                     <div class="flex flex-col gap-2">
                         <template v-for="item in queryItems" :key="item?.id">
@@ -15,17 +18,11 @@
             <div class="lg:basis-2/3 flex flex-col gap-5">
                 <!-- All items -->
                 <div v-for="item in queryItems" :key="item?.id" :id="`item_${item?.id}`">
-                    <Card>
-                        <template #title>
-                            <div class="text-section font-extrabold pt-4 pb-2">
-                                {{ item!.name! }}
-                            </div>
-                            <Divider class="my-4!" />
-                        </template>
+                    <SectionCard :name="item!.name!">
                         <template #content>
                             <div class="text" v-html="processedContent[item?.id!]"></div>
                         </template>
-                    </Card>
+                    </SectionCard>
                 </div>
             </div>
         </div>
@@ -36,11 +33,11 @@
 import { computed, ref, watch } from 'vue'
 import { markedText } from '@/functions/functions'
 import { useGettext } from 'vue3-gettext'
-import Divider from 'primevue/divider';
-import Content from '@/components/ui/Content.vue';
-import { useQuery } from '@/composables/queries';
+import Content from '@/components/ui/Content.vue'
+import SectionCard from '@/components/ui/SectionCard.vue'
+import { useQuery } from '@/composables/queries'
 
-const { $gettext } = useGettext();
+const { $gettext } = useGettext()
 
 const { result } = useQuery('educationView', {})
 
@@ -48,22 +45,26 @@ const processedContent = ref<{ [key: string]: string }>({})
 const queryResults = computed(() => result.value?.educationpages)
 const queryItems = computed(() => (queryResults.value ? queryResults.value.results : null))
 
-watch(queryItems, async (newItems) => {
-    if (!newItems) return;
+watch(
+    queryItems,
+    async (newItems) => {
+        if (!newItems) return
 
-    const contentMap: { [key: string]: string } = { ...processedContent.value };
+        const contentMap: { [key: string]: string } = { ...processedContent.value }
 
-    for (const item of newItems) {
-        if (item?.id) {
-            const newContent = item.content!;
-            if (newContent && !contentMap[item.id] || contentMap[item.id] !== newContent) {
-                contentMap[item.id] = await markedText(newContent!);
+        for (const item of newItems) {
+            if (item?.id) {
+                const newContent = item.content!
+                if ((newContent && !contentMap[item.id]) || contentMap[item.id] !== newContent) {
+                    contentMap[item.id] = await markedText(newContent!)
+                }
             }
         }
-    }
 
-    processedContent.value = contentMap;
-}, { immediate: true });
+        processedContent.value = contentMap
+    },
+    { immediate: true },
+)
 
 function scrolltop(item: string) {
     if (item === null) {
@@ -76,5 +77,3 @@ function scrolltop(item: string) {
     })
 }
 </script>
-
-<style scoped></style>

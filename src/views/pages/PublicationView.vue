@@ -1,43 +1,41 @@
 <script setup lang="ts">
-import Content from '@/components/ui/Content.vue';
-import SectionCard from '@/components/ui/SectionCard.vue';
-import { computed, ref, effect } from 'vue';
-import { useGettext } from 'vue3-gettext';
-const { $gettext } = useGettext();
-import { formattedData, publicationUrl } from '@/functions/functions.ts'
-import Pagination from '@/components/ui/Pagination.vue';
-import { useQuery } from '@/composables/queries';
-import PublicationPlaceholder from '@/components/placeholder/PublicationPlaceholder.vue';
+import Content from '@/components/ui/Content.vue'
+import SectionCard from '@/components/ui/SectionCard.vue'
+import { computed, ref, effect } from 'vue'
+import { useGettext } from 'vue3-gettext'
+const { $gettext } = useGettext()
+import { publicationUrl } from '@/functions/functions.ts'
+import Pagination from '@/components/ui/Pagination.vue'
+import { useQuery } from '@/composables/queries'
+import TileCard from '@/components/ui/TileCard.vue'
 
-const limit = ref(50);
-const type = ref<string | undefined>(undefined);
-const query = useQuery('publicationOverview', { limit: limit.value, type: type.value });
-const totalCount = computed(() => query.result.value?.publications?.totalCount);
-const queryItems = computed(() => query.result.value?.publications?.results);
-const { loading, refetch } = query;
-const types = computed(() => query.result.value?.publicationTypes?.map(p => p?.typeName) ?? []);
+const limit = ref(50)
+const type = ref<string | undefined>(undefined)
+const query = useQuery('publicationOverview', { limit: limit.value, type: type.value })
+const totalCount = computed(() => query.result.value?.publications?.totalCount)
+const queryItems = computed(() => query.result.value?.publications?.results)
+const { loading, refetch } = query
+const types = computed(() => query.result.value?.publicationTypes?.map((p) => p?.typeName) ?? [])
 effect(() => {
-    refetch({ limit: limit.value, type: type.value });
-});
-const selectedRows = ref(limit)
+    refetch({ limit: limit.value, type: type.value })
+})
+const selectedRows = ref(limit.value)
 </script>
-
-<style scoped>
-.text-card {
-    &:hover .expand-link::after {
-        transform: scaleX(1);
-    }
-}
-</style>
 
 <template>
     <Content>
         <SectionCard :name="$gettext('Publications')">
             <template #info>
-                <Select v-model="type" :options="types" showClear optionLabel="name" placeholder="" class="w-full">
-                    <template #value="slotProps">
+                <Select
+                    v-model="type"
+                    :options="types"
+                    showClear
+                    :placeholder="$gettext('Filter...')"
+                    class="w-full"
+                >
+                    <template #value>
                         <div class="flex items-center p-1">
-                            {{ type ? type : "Filter..." }}
+                            {{ type ? type : $gettext('Filter...') }}
                         </div>
                     </template>
                     <template #option="slotProps">
@@ -48,32 +46,36 @@ const selectedRows = ref(limit)
                 </Select>
             </template>
             <template #content>
-                <div class="grid grid-cards-wide gap-4 pb-4">
-                    <PublicationPlaceholder v-if="loading" v-for="_ in selectedRows" />
-                    <a v-else :href="publicationUrl(item?.file!)" v-for="item in queryItems" :key="item?.id">
-                        <Card class="text-card" style="height: 100%;">
-                            <template #header>
-                                <!-- TODO book.svg have similar style -->
-                                <img v-image-error="'/images/placeholder/book.svg'"
-                                    class="aspect-a4 object-cover rounded-t-lg w-full" :src="item?.thumbnail!" />
-                            </template>
-                            <template #title>
-                                <div
-                                    class="flex flex-row items-center w-full justify-between pt-2 px-3 expand-link link">
-                                    <span class="text-card-title! font-semibold!">{{ item?.name }}</span>
-                                </div>
-                            </template>
-                            <template #subtitle>
-                                <div class="px-3 text-meta">
-                                    {{ formattedData(item?.datePublished) }}
-                                </div>
-                            </template>
-                        </Card>
-                    </a>
-
+                <div
+                    class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 pb-4"
+                >
+                    <template v-if="loading">
+                        <TileCard
+                            v-for="_ in selectedRows"
+                            :key="`skeleton-${_}`"
+                            loading
+                            aspect="a4"
+                        />
+                    </template>
+                    <template v-else>
+                        <TileCard
+                            v-for="item in queryItems"
+                            :key="item?.id"
+                            :image="item?.thumbnail"
+                            :title="item?.name ?? ''"
+                            :date="item?.datePublished"
+                            aspect="a4"
+                            placeholder="/images/placeholder/book.svg"
+                            :href="publicationUrl(item?.file!)"
+                        />
+                    </template>
                 </div>
-                <Pagination v-bind="query" :limit="limit" :total-count="totalCount!"
-                    @update:rows="(rows) => selectedRows = rows">
+                <Pagination
+                    v-bind="query"
+                    :limit="limit"
+                    :total-count="totalCount!"
+                    @update:rows="(rows) => (selectedRows = rows)"
+                >
                 </Pagination>
             </template>
         </SectionCard>

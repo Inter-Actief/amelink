@@ -1,5 +1,11 @@
 <template>
-    <button class="clickable" type="button" @click="switchTheme" :aria-label="title" :title="title">
+    <button
+        type="button"
+        class="cursor-pointer border-0 bg-transparent p-0 [&_svg]:size-[1.8rem]"
+        @click="switchTheme"
+        :aria-label="title"
+        :title="title"
+    >
         <component :is="icon" />
     </button>
 </template>
@@ -13,8 +19,8 @@ import { useGettext } from 'vue3-gettext'
 const themeStore = useThemeStore()
 const theme = computed(() => themeStore.theme)
 const { switchTheme } = themeStore
-const gettext = useGettext();
-const { $gettext } = gettext;
+const gettext = useGettext()
+const { $gettext } = gettext
 
 const icon = computed(() => {
     switch (theme.value) {
@@ -38,12 +44,3 @@ const title = computed(() => {
     }
 })
 </script>
-
-<style scoped>
-.clickable {
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    padding: 0;
-}
-</style>

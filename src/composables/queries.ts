@@ -9,12 +9,10 @@ import { ref, type ComputedRef, type Ref, computed } from 'vue'
  * Add new queries here once
  */
 export const queries = {
-    latestActivities: gql.LatestActivitiesDocument,
     overviewActivities: gql.OverviewActivitiesDocument,
     pastActivities: gql.PastActivitiesDocument,
     photosActivities: gql.PhotosActivitiesDocument,
     upcomingActivities: gql.UpcomingActivitiesDocument,
-    latestNews: gql.LatestNewsDocument,
     overviewNews: gql.OverviewNewsDocument,
     singleNews: gql.SingleNewsDocument,
     pageView: gql.PageViewDocument,
@@ -31,7 +29,7 @@ export const queries = {
     company: gql.CompanyDocument,
     videos: gql.VideosDocument,
     video: gql.VideoDocument,
-    dynamicContent: gql.DynamicContentDocument
+    homepage: gql.HomepageDocument
 } as const
 
 /**

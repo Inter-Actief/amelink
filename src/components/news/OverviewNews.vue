@@ -1,25 +1,29 @@
 <template>
-    <h1 class="pb-4">{{ $gettext('News page') }}</h1>
+    <SectionCard :name="$gettext('News')">
+        <template #content>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 items-stretch pb-2">
+                <template v-if="loading">
+                    <TileCard v-for="_ in 10" :key="`skeleton-${_}`" loading />
+                </template>
+                <template v-else>
+                    <TileCard
+                        v-for="item in newsItems"
+                        :key="item?.id"
+                        :title="item?.title ?? ''"
+                        :date="item?.publicationDate"
+                        :pinned="item?.pinned"
+                        hide-action
+                        :to="{ name: 'singlenews', params: { id: item?.id } }"
+                    >
+                        <!-- Same two-line excerpt as the homepage news block. -->
+                        <div class="line-clamp-2" v-html="processedExcerpts[item!.id]"></div>
+                    </TileCard>
+                </template>
+            </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 items-stretch pb-4">
-        <div v-for="_ in 10" v-if="loading">
-            <TextCard loading :loadingOpts="{
-                readmore: true,
-                title: true,
-                subtitle: true,
-                contentLines: 1
-            }" />
-        </div>
-        <template v-if="newsItems && processedExcerpts" v-for="item in newsItems" :key="item?.id">
-            <TextCard :title="item?.title!" :subtitle="formattedData(item?.publicationDate).toString()"
-                :routerLink="{ to: { name: 'singlenews', params: { id: item?.id } } }">
-                <div v-html="processedExcerpts[item!.id]">
-                </div>
-            </TextCard>
+            <Pagination v-bind="query" :totalCount="totalCount!" :limit="10" />
         </template>
-    </div>
-
-    <Pagination v-bind="query" :totalCount="totalCount!" :limit="10" />
+    </SectionCard>
 </template>
 
 <script setup lang="ts">
@@ -27,10 +31,10 @@ import { computed, ref, watch } from 'vue'
 import { formattedData, markedText } from '@/functions/functions.ts'
 import { useGettext } from 'vue3-gettext'
 import Pagination from '../ui/Pagination.vue'
-import TextCard from '../ui/TextCard.vue'
+import TileCard from '../ui/TileCard.vue'
 import { useQuery } from '@/composables/queries'
 
-const { $gettext } = useGettext();
+const { $gettext } = useGettext()
 
 const query = useQuery('overviewNews', { limit: 10, offset: 0 })
 const { result, loading } = query
@@ -42,17 +46,19 @@ const totalCount = computed(() => (queryResults.value ? queryResults.value.total
 
 const processedExcerpts = ref<Record<string, string>>({})
 
-watch(newsItems, async (newItems: any) => {
-    if (newItems) {
-        const excerpts: Record<string, string> = {}
-        for (const item of newItems) {
-            if (item?.introduction) {
-                excerpts[item.id] = await markedText(item.introduction)
+watch(
+    newsItems,
+    async (newItems: any) => {
+        if (newItems) {
+            const excerpts: Record<string, string> = {}
+            for (const item of newItems) {
+                if (item?.introduction) {
+                    excerpts[item.id] = await markedText(item.introduction)
+                }
             }
+            processedExcerpts.value = excerpts
         }
-        processedExcerpts.value = excerpts
-    }
-}, { immediate: true })
+    },
+    { immediate: true },
+)
 </script>
-
-<style scoped></style>

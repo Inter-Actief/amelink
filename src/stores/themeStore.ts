@@ -10,7 +10,10 @@ const getSystemTheme = (): EffectiveTheme =>
     window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 
 export const useThemeStore = defineStore('themeStore', () => {
-    const theme = ref<ThemeOption>('system')
+    const storedTheme = localStorage.getItem('theme')
+    const theme = ref<ThemeOption>(
+        themes.includes(storedTheme as ThemeOption) ? (storedTheme as ThemeOption) : 'system',
+    )
     const effectiveTheme = ref<EffectiveTheme>(getSystemTheme())
 
     const applyTheme = (value: ThemeOption) => {
@@ -25,13 +28,10 @@ export const useThemeStore = defineStore('themeStore', () => {
             localStorage.setItem('theme', value)
             applyTheme(value)
         },
-        { immediate: true }
+        { immediate: true },
     )
 
     const initialiseTheme = () => {
-        const storedTheme = localStorage.getItem('theme')
-        theme.value = themes.includes(storedTheme as ThemeOption) ? (storedTheme as ThemeOption) : 'system'
-
         type MediaQueryListWithDeprecatedListener = MediaQueryList & {
             addListener(listener: (this: MediaQueryList, ev: MediaQueryListEvent) => void): void
         }

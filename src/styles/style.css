@@ -9,6 +9,26 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+ * One radius for every boxed surface. Cards set the reference; the whole
+ * Tailwind rounded-* scale points at the same value so `rounded`,
+ * `rounded-lg` and friends cannot drift apart. `rounded-full` is still a
+ * deliberate pill/circle and is not part of this scale.
+ *
+ * `inline` makes the utilities emit `var(--border-radius)` directly.
+ */
+@theme inline {
+  --radius: var(--border-radius);
+  --radius-xs: var(--border-radius);
+  --radius-sm: var(--border-radius);
+  --radius-md: var(--border-radius);
+  --radius-lg: var(--border-radius);
+  --radius-xl: var(--border-radius);
+  --radius-2xl: var(--border-radius);
+  --radius-3xl: var(--border-radius);
+  --radius-4xl: var(--border-radius);
+}
+
 @theme {
   --aspect-a4: 1/1.414;
 
@@ -37,9 +57,25 @@
   --text-meta--line-height: 1.35;
 }
 
-/* @apply */
-.grid-cards-wide {
-  @apply grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5;
+/*
+ * Small, repeated primitives. These are Tailwind utilities (not component
+ * scoped CSS) so the markup stays declarative and the shared geometry lives in
+ * one place.
+ */
+@utility header-icon {
+  @apply size-[3.2rem] cursor-pointer place-items-center rounded-[var(--border-radius)] border-0 bg-transparent p-0 text-inherit transition-colors duration-150 hover:bg-white/15 [&_svg]:size-[1.8rem];
+}
+
+@utility menu-icon {
+  @apply grid size-[3.2rem] cursor-pointer place-items-center rounded-[var(--border-radius)] border-0 bg-transparent p-0 text-primary transition-colors duration-150 hover:bg-primary/[0.07] [&_svg]:size-[1.8rem];
+}
+
+@utility header-action {
+  @apply border border-white/45 bg-transparent px-[1.1rem] py-[0.55rem] text-[1.4rem] font-medium text-inherit shadow-none transition-colors duration-150 hover:border-white/70 hover:bg-white/15;
+}
+
+@utility header-cta {
+  @apply border-white bg-white font-bold text-primary hover:border-white/85 hover:bg-white/85;
 }
 
 @utility bg-hazard-staging {

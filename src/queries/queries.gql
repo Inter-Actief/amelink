@@ -1,24 +1,3 @@
-query LatestActivities($limit: Int, $offset: Int, $startDate: DateTime) {
-  activities(limit: $limit, offset: $offset, end_Lt: $startDate, ordering: "begin,desc") {
-    results {
-      id
-      description
-      summary
-      begin
-      imageIcon
-      activityLabel {
-        name
-        color
-        active
-      }
-      photos {
-        thumbMedium
-      }
-    }
-    totalCount
-  }
-}
-
 query OverviewActivities($limit: Int, $offset: Int, $startDate: DateTime!) {
   activities(limit: $limit, offset: $offset, begin_Gt: $startDate, ordering: "begin,asc") {
     results {
@@ -26,6 +5,7 @@ query OverviewActivities($limit: Int, $offset: Int, $startDate: DateTime!) {
       begin
       summary
       description
+      imageIcon
       activityLabel {
         name
         color
@@ -137,26 +117,15 @@ query HomepageSlider($limit: Int, $beginDate: DateTime) {
   }
 }
 
-query LatestNews($limit: Int) {
-  newsItems(limit: $limit) {
-    results {
-      id
-      title
-      introduction
-      introduction
-      publicationDate
-    }
-    totalCount
-  }
-}
-
 query OverviewNews($limit: Int, $offset: Int) {
-  newsItems(limit: $limit, offset: $offset) {
+  # pinnedOnTop keeps pinned items first, exactly like the homepage block
+  newsItems(limit: $limit, offset: $offset, pinnedOnTop: true) {
     results {
       id
       title
       introduction
       publicationDate
+      pinned
     }
     totalCount
   }
@@ -170,6 +139,7 @@ query SingleActivities($id: ID) {
     id
     summary
     description
+    imageIcon
     photos {
       thumbMedium
       thumbMediumHeight
@@ -360,12 +330,24 @@ query Video($videoId: ID!) {
   }
 }
 
-query DynamicContent($today: DateTime) {
-  # Recent news
+query Homepage($today: DateTime) {
+  # Pinned news, shown first on the homepage
+  pinnedNews: newsItems(pinned: true, limit: 2, ordering: "publication_date,desc") {
+    totalCount
+    results {
+      id
+      title
+      introduction
+      author
+      publicationDate
+      pinned
+    }
+  }
+
+  # Regular news
   recentNews: newsItems(
     publicationDate_Lt: $today
-    # publicationDate_Gt: $recency
-    limit: 3
+    limit: 4
     ordering: "publication_date,desc"
   ) {
     totalCount
@@ -374,26 +356,16 @@ query DynamicContent($today: DateTime) {
       title
       introduction
       author
+      publicationDate
       pinned
     }
   }
 
-  # pinned news
-  pinnedNews: newsItems(pinned: true, limit: 3, ordering: "publication_date,desc") {
+  # Recent publications
+  publications(ordering: "date_published,desc", limit: 4) {
     totalCount
     results {
       id
-      title
-      introduction
-      author
-      pinned
-    }
-  }
-
-  # recent publication
-  publications(ordering: "date_published,desc", limit: 1) {
-    totalCount
-    results {
       thumbnail
       name
       file
@@ -401,13 +373,13 @@ query DynamicContent($today: DateTime) {
     }
   }
 
+  # Latest video
   videos(limit: 1, ordering: "date_published,desc") {
     totalCount
     results {
       videoId
       videoType
       title
-      embedUrl
       thumbnailUrl
       datePublished
     }

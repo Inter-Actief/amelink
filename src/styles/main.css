@@ -4,7 +4,7 @@
   }
 
   body {
-    /* color: #1d428a; */
+    background-color: var(--p-page-background);
     font-family: var(--font-family);
     font-size: var(--font-size);
     font-style: normal;
@@ -26,35 +26,6 @@
 }
 
 @layer components {
-  /*
-   * Shared page gutter. Caps the content width so wide desktop screens
-   * get centered, readable columns instead of edge-to-edge stretched
-   * blocks, and keeps horizontal padding small on every breakpoint.
-   */
-  .page-container {
-    width: 100%;
-    max-width: var(--content-max-width);
-    margin-inline: auto;
-    padding-inline: 1.5rem;
-  }
-
-  @media (min-width: 48rem) {
-    .page-container {
-      padding-inline: 2.5rem;
-    }
-  }
-
-  /* Horizontal padding only, for rows that already sit inside a container */
-  .page-gutter {
-    padding-inline: 1.5rem;
-  }
-
-  @media (min-width: 48rem) {
-    .page-gutter {
-      padding-inline: 2.5rem;
-    }
-  }
-
   /* Tighten the vertical rhythm of long-form rich text */
   .text > * + * {
     margin-top: 0.6rem;
@@ -75,7 +46,11 @@
     font-size: 100%;
   }
 
-  /* Cards are the main density lever across the site */
+  /* Cards define the site radius; every card shares it. */
+  .p-card {
+    border-radius: var(--border-radius);
+  }
+
   .p-card .p-card-body {
     padding: 0.9rem;
   }
@@ -104,11 +79,11 @@
    * It is a pseudo element on purpose. The two obvious implementations both
    * break in practice:
    *   - a `background` gradient + `background-size` transition is silently
-   *     reset by any `background`/`bg-*` on the same element (which is what
-   *     EpaButton did in its scoped styles), so the hover does nothing;
+   *     reset by any `background`/`bg-*` on the same element, so the hover
+   *     does nothing;
    *   - `text-decoration` cannot slide, it can only fade its colour.
    * The pseudo element is positioned inside the element box, so it also
-   * survives `overflow: hidden` ancestors and scoped component styles.
+   * survives `overflow: hidden` ancestors and component wrappers.
    */
   .link {
     position: relative;
@@ -152,4 +127,16 @@
 
 .route-fade-leave-to {
   opacity: 0;
+}
+
+/* Slow pan used by the homepage hero. Kept global so the component is just
+   Tailwind utilities. */
+@keyframes panUp {
+  from {
+    object-position: bottom center;
+  }
+
+  to {
+    object-position: top center;
+  }
 }

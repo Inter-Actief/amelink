@@ -73,6 +73,20 @@ Text sizes come from the semantic tokens in the `@theme` block of
 `60%`, so Tailwind's own `text-*` scale lands below the body size and inverts
 the hierarchy.
 
+## Design Work: Show the Thing
+
+Whenever UI or design is being discussed — layout, cards, navigation, colours,
+spacing — do not describe it in prose and do not answer with an ASCII sketch.
+Build it and put it in front of the user:
+
+1. Make the real thing render (a dev-only route such as `/design`, or the actual
+   page behind a temporary switch), with realistic content, not lorem ipsum.
+2. Screenshot it at a real viewport and show the image.
+3. Offer 2–4 concrete variants side by side, so the choice is visual.
+4. Only then ask which one to keep, and give the user the option to reply.
+
+Text descriptions of a design are treated as no answer at all.
+
 ## Verifying UI Changes
 
 `yarn type-check` cannot see CSS or the rendered result, so it is not evidence
@@ -97,8 +111,8 @@ and say what you covered. Probe recipes are in the amelink skill.
 | `src/stores/loadingStore.ts` | Global request-loading counter |
 | `src/functions/functions.ts` | Date formatting, Markdown rendering, device detection |
 | `src/constants/pageCategories.ts` | `mainMenu` array — drives the header nav and breadcrumbs |
-| `src/components/ui/` | Reusable primitives: `Content`, `SectionCard`, `TextCard`, `Pagination`, `EpaButton`, `Logo`, `ImageFade`, `LanguageSwitcher`, `ThemeSwitcher` |
-| `src/components/placeholder/` | Skeleton loaders matching real layouts |
+| `src/components/ui/` | Reusable primitives: `Content`, `SectionCard` (page/section bar), `TileCard` (**the** card), `AppImage`, `Pagination`, `EpaButton`, `Logo`, `ImageFade`, `LanguageSwitcher`, `ThemeSwitcher` |
+| `src/components/placeholder/` | Skeletons that mirror real layouts: `CardSkeleton`, `SkeletonImage`, `PlaceholderText`, `PastActivitiesPlaceholder` |
 | `src/views/` | Route-level pages |
 | `src/queries/queries.gql` | Source GraphQL operations |
 | `src/gql/` | **Generated** types and TypedDocumentNodes — do not edit |
