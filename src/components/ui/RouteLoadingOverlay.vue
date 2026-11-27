@@ -16,7 +16,7 @@
         <div class="flex flex-col items-center gap-5">
             <span
                 data-overlay-label
-                class="text-meta font-medium tracking-[0.16em] text-[var(--primary-color)]/55 dark:text-white uppercase"
+                class="text-meta font-medium tracking-[0.16em] text-[var(--primary-color)]/55 dark:text-white uppercase opacity-40 dark:opacity-20"
             >
                 {{ $gettext('Loading') }}
             </span>
