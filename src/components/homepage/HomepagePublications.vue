@@ -6,20 +6,28 @@
             </RouterLink>
         </template>
         <template #content>
-            <div v-if="loading" class="flex flex-col gap-2">
+            <!-- The placeholder takes the same shape as the list: four rows (the
+                 query asks for four) laid out the same way, with a cover box and
+                 two 1.9rem lines, which is what a one-line title plus a date
+                 actually occupy. -->
+            <div
+                v-if="loading"
+                class="gap-2"
+                :class="
+                    props.layout === 'columns' ? 'grid grid-cols-1 md:grid-cols-2' : 'flex flex-col'
+                "
+            >
                 <div
-                    v-for="_ in 3"
+                    v-for="_ in 4"
                     :key="_"
                     class="flex flex-row items-center gap-2 rounded-[var(--border-radius)] border border-slate-300 p-2"
                 >
-                    <!-- Same box as the real cover: w-9 with the A4 ratio. -->
                     <div class="aspect-a4 w-9 shrink-0">
                         <Skeleton height="100%" />
                     </div>
-                    <div class="flex min-w-0 flex-1 flex-col gap-[0.2rem]">
-                        <Skeleton height="1.6rem" width="90%" />
-                        <Skeleton height="1.6rem" width="55%" />
-                        <Skeleton height="1.6rem" width="45%" />
+                    <div class="flex min-w-0 flex-1 flex-col">
+                        <Skeleton height="1.9rem" width="90%" />
+                        <Skeleton height="1.9rem" width="50%" />
                     </div>
                 </div>
             </div>

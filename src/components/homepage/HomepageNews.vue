@@ -7,11 +7,14 @@
         </template>
         <template #content>
             <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <!-- A news title is one line in these tiles (the column is wide
+                     enough), while the excerpt does run to two. -->
                 <TileCard
                     v-for="_ in 4"
                     :key="`skeleton-${_}`"
                     loading
                     hide-action
+                    :skeleton-title-lines="1"
                     :skeleton-lines="2"
                 />
             </div>

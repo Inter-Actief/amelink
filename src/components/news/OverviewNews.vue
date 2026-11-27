@@ -8,6 +8,7 @@
                         :key="`skeleton-${_}`"
                         loading
                         hide-action
+                        :skeleton-title-lines="1"
                         :skeleton-lines="2"
                     />
                 </template>

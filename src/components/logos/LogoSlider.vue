@@ -32,9 +32,9 @@ const banners = computed(
 
 <template>
     <div v-if="loading" class="flex flex-row md:gap-5">
-        <!-- h-20 is the real banner height; a taller box pushes the page down
-             when the logos land. -->
-        <Skeleton height="8rem" class="w-full" v-for="_ in 4" />
+        <!-- h-20 is 5rem here, which is the real banner height; a taller box
+             pushes the whole page down by the difference when the logos land. -->
+        <Skeleton height="5rem" class="w-full" v-for="_ in 4" />
     </div>
 
     <swiper
