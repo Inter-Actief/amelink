@@ -32,6 +32,7 @@ declare module 'vue' {
     PastActivitiesPlaceholder: typeof import('./src/components/placeholder/PastActivitiesPlaceholder.vue')['default']
     PhotosActivities: typeof import('./src/components/activities/PhotosActivities.vue')['default']
     PicturesBy: typeof import('./src/components/photos/PicturesBy.vue')['default']
+    PinnedBadge: typeof import('./src/components/ui/PinnedBadge.vue')['default']
     PlaceholderText: typeof import('./src/components/placeholder/PlaceholderText.vue')['default']
     ProgressSpinner: typeof import('primevue/progressspinner')['default']
     RecentThings: typeof import('./src/components/homepage/RecentThings.vue')['default']

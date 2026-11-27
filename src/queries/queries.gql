@@ -332,11 +332,13 @@ query Video($videoId: ID!) {
 
 query Homepage($today: DateTime) {
   # Pinned news, shown first on the homepage
-  pinnedNews: newsItems(pinned: true, limit: 2, ordering: "publication_date,desc") {
+  # Several items may be pinned; the newest one takes the spotlight.
+  pinnedNews: newsItems(pinned: true, limit: 4, ordering: "publication_date,desc") {
     totalCount
     results {
       id
       title
+      introduction
       content
       publicationDate
       pinned
@@ -353,6 +355,7 @@ query Homepage($today: DateTime) {
     results {
       id
       title
+      introduction
       content
       publicationDate
       pinned

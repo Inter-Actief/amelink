@@ -5,12 +5,14 @@
          told apart by a glyph and a word, never by colour. -->
     <SectionCard :name="$gettext('Recent items')" pageBg>
         <template #content>
+            <!-- The skeleton copies the real geometry: same grid, same 22 rem
+                 medium, same row heights. Otherwise the block jumps on load. -->
             <div
                 v-if="loading"
                 class="grid grid-cols-1 items-start gap-4 lg:grid-cols-[1.55fr_1fr] lg:gap-6"
             >
-                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <Skeleton height="20rem" />
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)]">
+                    <Skeleton height="22rem" />
                     <div class="flex flex-col gap-2">
                         <Skeleton height="1.6rem" width="45%" />
                         <Skeleton height="2.4rem" width="90%" />
@@ -18,8 +20,9 @@
                         <Skeleton height="1.6rem" width="70%" />
                     </div>
                 </div>
-                <div class="flex flex-col gap-2">
-                    <Skeleton v-for="n in 5" :key="n" height="1.8rem" />
+                <div class="flex flex-col">
+                    <!-- 3.3 rem is exactly one queue row (32 px at the 60% root). -->
+                    <Skeleton v-for="n in 8" :key="n" height="3.3rem" />
                 </div>
             </div>
 
@@ -32,7 +35,9 @@
                     class="grid grid-cols-1 items-start gap-4"
                     :class="hasMedia ? 'sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)]' : ''"
                 >
-                    <!-- One height for every medium, so the three types agree. -->
+                    <!-- One height for every medium, so the three types agree.
+                         The photo and the document are clickable themselves; the
+                         player must stay clickable for the video instead. -->
                     <div
                         v-if="hasMedia"
                         class="flex h-[22rem] w-full items-center justify-center overflow-hidden rounded"
@@ -51,20 +56,32 @@
                             allowfullscreen
                         ></iframe>
 
-                        <img
+                        <a
                             v-else-if="spotlight.kind === 'publication' && spotlight.thumb"
-                            v-image-error="'/images/placeholder/book.svg'"
-                            :src="spotlight.thumb"
-                            :alt="spotlight.title"
-                            class="max-h-full max-w-full rounded border border-slate-300 object-contain object-top dark:border-[var(--p-content-border-color)]"
-                        />
+                            :href="spotlight.href"
+                            target="_blank"
+                            rel="noopener"
+                            class="flex h-full w-full cursor-pointer items-center justify-center"
+                        >
+                            <img
+                                v-image-error="'/images/placeholder/book.svg'"
+                                :src="spotlight.thumb"
+                                :alt="spotlight.title"
+                                class="max-h-full max-w-full rounded border border-slate-300 object-contain object-top dark:border-[var(--p-content-border-color)]"
+                            />
+                        </a>
 
-                        <img
-                            v-else-if="spotlightImage"
-                            :src="spotlightImage"
-                            :alt="spotlight.title"
-                            class="h-full w-full object-cover object-[center_30%]"
-                        />
+                        <RouterLink
+                            v-else-if="spotlight.to && spotlightImage"
+                            :to="spotlight.to"
+                            class="h-full w-full cursor-pointer"
+                        >
+                            <img
+                                :src="spotlightImage"
+                                :alt="spotlight.title"
+                                class="h-full w-full object-cover object-[center_30%]"
+                            />
+                        </RouterLink>
                     </div>
 
                     <div class="flex min-w-0 flex-col gap-1">
@@ -79,45 +96,41 @@
                             />
                             {{ kindLabel(spotlight.kind) }} ·
                             <span class="tabular-nums">{{ relativeAge(spotlight.date) }}</span>
-                            <span
-                                v-if="spotlight.pinned"
-                                class="ml-1 flex items-center border-l border-slate-300 pl-2 text-primary dark:border-[var(--p-content-border-color)] dark:text-[var(--p-primary-300)]"
-                                role="img"
-                                :aria-label="$gettext('Pinned')"
-                                :title="$gettext('Pinned')"
-                            >
-                                <Pin class="size-[1.4rem]" :stroke-width="2.25" aria-hidden="true" />
-                            </span>
+                            <PinnedBadge v-if="spotlight.pinned" />
                         </span>
 
-                        <h3 class="text-card-title! max-w-[30ch] font-extrabold leading-[1.15]">
-                            {{ spotlight.title }}
-                        </h3>
+                        <component
+                            :is="spotlight.to ? RouterLink : 'a'"
+                            v-bind="linkProps(spotlight)"
+                            class="cursor-pointer text-inherit no-underline hover:underline hover:underline-offset-2"
+                        >
+                            <h3 class="text-card-title! max-w-[30ch] font-extrabold leading-[1.15]">
+                                {{ spotlight.title }}
+                            </h3>
+                        </component>
 
+                        <!-- An introduction is written to be short, so it is
+                             printed whole. The article body stands in for one,
+                             and that does get cut off with a fade. -->
                         <div
                             v-if="spotlightBody"
-                            class="text max-h-[10rem] max-w-[56ch] overflow-hidden text-body [mask-image:linear-gradient(to_bottom,#000_76%,transparent_100%)]"
+                            class="text max-w-[56ch] text-body"
+                            :class="
+                                spotlightLead
+                                    ? ''
+                                    : 'max-h-[10rem] overflow-hidden [mask-image:linear-gradient(to_bottom,#000_76%,transparent_100%)]'
+                            "
                             v-html="spotlightBody"
                         ></div>
 
-                        <Button
-                            v-if="spotlight.to"
-                            as="router-link"
-                            :to="spotlight.to"
-                            :label="actionLabel(spotlight.kind)"
-                            size="small"
-                            class="mt-1.5 w-fit"
-                        />
-                        <Button
-                            v-else
-                            as="a"
-                            :href="spotlight.href"
-                            target="_blank"
-                            rel="noopener"
-                            :label="actionLabel(spotlight.kind)"
-                            size="small"
-                            class="mt-1.5 w-fit"
-                        />
+                        <component
+                            :is="spotlight.to ? RouterLink : 'a'"
+                            v-bind="linkProps(spotlight)"
+                            class="link mt-1.5 inline-flex w-fit items-center gap-[0.35rem] text-meta font-semibold text-primary dark:text-[var(--p-text-color)]"
+                        >
+                            {{ actionLabel(spotlight.kind) }}
+                            <ArrowRight class="size-[1.3rem]" aria-hidden="true" />
+                        </component>
                     </div>
                 </div>
 
@@ -129,12 +142,9 @@
                         :is="item.to ? RouterLink : 'a'"
                         v-for="item in queue"
                         :key="item.key"
-                        :to="item.to"
-                        :href="item.href"
-                        :target="item.to ? undefined : '_blank'"
-                        :rel="item.to ? undefined : 'noopener'"
+                        v-bind="linkProps(item)"
                         :aria-label="`${kindLabel(item.kind)}: ${item.title}`"
-                        class="group flex items-baseline justify-between gap-2 border-b border-slate-300 py-2 text-inherit no-underline last:border-b-0 dark:border-[var(--p-content-border-color)]"
+                        class="group flex cursor-pointer items-baseline justify-between gap-2 border-b border-slate-300 py-2 text-inherit no-underline last:border-b-0 dark:border-[var(--p-content-border-color)]"
                     >
                         <span
                             class="line-clamp-1 min-w-0 text-body font-semibold leading-[1.35] group-hover:underline group-hover:underline-offset-2"
@@ -151,6 +161,7 @@
                                 aria-hidden="true"
                             />
                             {{ relativeAge(item.date) }}
+                            <PinnedBadge v-if="item.pinned" />
                         </span>
                     </component>
                 </div>
@@ -166,8 +177,8 @@ import { computed, ref, watch } from 'vue'
 import { RouterLink, type RouteLocationRaw } from 'vue-router'
 import SectionCard from '../ui/SectionCard.vue'
 import Skeleton from 'primevue/skeleton'
-import Button from 'primevue/button'
-import { FileText, Newspaper, Pin, Play } from '@lucide/vue'
+import PinnedBadge from '../ui/PinnedBadge.vue'
+import { ArrowRight, FileText, Newspaper, Play } from '@lucide/vue'
 import type { Component } from 'vue'
 import { useGettext } from 'vue3-gettext'
 import { markedText, publicationUrl, relativeAge } from '@/functions/functions'
@@ -184,6 +195,8 @@ interface Entry {
     to?: RouteLocationRaw
     href?: string
     thumb?: string
+    /** The lead the editors wrote for the item, when they wrote one. */
+    introduction?: string
     article?: string
     description?: string
     embedUrl?: string
@@ -192,8 +205,8 @@ interface Entry {
 
 const { $gettext } = useGettext()
 
-/** The first image inside an article body, lifted out so it can lead the block. */
-const articles = ref<Record<string, { html: string; image?: string }>>({})
+/** The spotlight's lead and its first image, both taken from its Markdown. */
+const spotlightArticle = ref<{ html: string; image?: string; lead?: boolean } | null>(null)
 
 const { result, loading } = useHomepageContent()
 
@@ -226,6 +239,7 @@ const entries = computed<Entry[]>(() => {
             kind: 'news' as Kind,
             title: item.title ?? '',
             date: item.publicationDate,
+            introduction: item.introduction ?? undefined,
             article: item.content ?? undefined,
             to: { name: 'singlenews', params: { id: item.id } },
             pinned: item.pinned ?? false,
@@ -259,37 +273,24 @@ const entries = computed<Entry[]>(() => {
     return list.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 })
 
-/** Render the article bodies once, keeping their first image aside. */
-watch(
-    () => entries.value,
-    async (list) => {
-        const rendered: Record<string, { html: string; image?: string }> = {}
+/** The first image of a Markdown body, used when it is not the body itself. */
+const firstImage = async (markdown?: string) => {
+    if (!markdown) {
+        return undefined
+    }
 
-        for (const item of list) {
-            if (item.kind !== 'news' || !item.article) {
-                continue
-            }
+    const html = await markedText(markdown)
+    const document = new DOMParser().parseFromString(html, 'text/html')
 
-            const html = await markedText(item.article)
-            const document = new DOMParser().parseFromString(html, 'text/html')
-            const image = document.querySelector('img')?.getAttribute('src') ?? undefined
-            document.querySelectorAll('img').forEach((node) => node.remove())
+    return document.querySelector('img')?.getAttribute('src') ?? undefined
+}
 
-            rendered[item.key] = { html: document.body.innerHTML, image }
-        }
-
-        articles.value = rendered
-    },
-    { immediate: true },
-)
-
-/** A pinned news item leads; without one, the newest item of the stream does. */
+/**
+ * A pinned news item leads; with several pinned, the newest of them does, and
+ * the others stay at the head of the queue. Entries are newest first already.
+ */
 const spotlight = computed(
     () => entries.value.find((item) => item.pinned) ?? entries.value[0] ?? undefined,
-)
-
-const spotlightImage = computed(() =>
-    spotlight.value?.kind === 'news' ? articles.value[spotlight.value.key]?.image : undefined,
 )
 
 const hasMedia = computed(
@@ -299,13 +300,16 @@ const hasMedia = computed(
         spotlight.value?.kind === 'publication',
 )
 
+/** True when the printed text is the editors' introduction, not the article. */
+const spotlightLead = computed(() => !!spotlightArticle.value?.lead)
+
 const spotlightBody = computed(() => {
     if (!spotlight.value) {
         return undefined
     }
 
     if (spotlight.value.kind === 'news') {
-        return articles.value[spotlight.value.key]?.html
+        return spotlightArticle.value?.html
     }
 
     // A video description is worth printing only when it actually says something.
@@ -317,7 +321,60 @@ const spotlightBody = computed(() => {
     return /[a-z]{2,}/i.test(text) && text.length > 20 ? text : undefined
 })
 
-const queue = computed(() => entries.value.filter((item) => item.key !== spotlight.value?.key))
+/**
+ * Render the leading news item once its Markdown is available: the text it
+ * shows, and the first image, which is lifted out of the body to lead the block.
+ */
+watch(
+    spotlight,
+    async (item) => {
+        spotlightArticle.value = null
+
+        if (!item || item.kind !== 'news') {
+            return
+        }
+
+        // The introduction is written to lead the article, so it is what a
+        // reader should see first. Without one, the body stands in for it.
+        const lead = item.introduction?.trim()
+        const source = lead || item.article
+
+        if (!source) {
+            return
+        }
+
+        const html = await markedText(source)
+        const document = new DOMParser().parseFromString(html, 'text/html')
+        const image = document.querySelector('img')?.getAttribute('src') ?? undefined
+        document.querySelectorAll('img').forEach((node) => node.remove())
+
+        spotlightArticle.value = {
+            html: document.body.innerHTML,
+            lead: !!lead,
+            // A lead rarely carries a picture; the article usually does.
+            image: image ?? (lead ? await firstImage(item.article) : undefined),
+        }
+    },
+    { immediate: true },
+)
+
+const spotlightImage = computed(() => spotlightArticle.value?.image)
+
+/** Pinned items come first, then everything else; both keep the date order. */
+const queue = computed(() => {
+    const rest = entries.value.filter((item) => item.key !== spotlight.value?.key)
+
+    return [...rest.filter((item) => item.pinned), ...rest.filter((item) => !item.pinned)]
+})
+
+/**
+ * RouterLink ignores `href` and an `<a>` ignores `to`, and passing both anyway
+ * makes RouterLink drop its own href because the undefined attr wins.
+ */
+const linkProps = (entry: Entry) =>
+    entry.to
+        ? { to: entry.to }
+        : { href: entry.href, target: '_blank', rel: 'noopener' }
 
 const kindLabel = (kind: Kind) =>
     kind === 'news'
