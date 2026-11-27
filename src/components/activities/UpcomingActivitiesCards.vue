@@ -51,7 +51,7 @@
                 v-bind="query"
                 :totalCount="totalCount!"
                 :limit="perpage"
-                :rowsPerPage="[perpage, 10]"
+                :rowsPerPage="[perpage]"
             />
         </template>
     </SectionCard>

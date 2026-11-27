@@ -114,6 +114,7 @@
                 <UserButton />
                 <LanguageSwitcher class="header-icon hidden min-[1280px]:grid" />
                 <ThemeSwitcher class="header-icon hidden min-[1280px]:grid" />
+                <ReducedMotionSwitcher class="header-icon hidden min-[1280px]:grid" />
                 <button
                     type="button"
                     class="header-icon grid min-[1280px]:hidden"
@@ -167,6 +168,7 @@ import UserButton from './UserButton.vue'
 import MobileMenu from './MobileMenu.vue'
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
 import ThemeSwitcher from '@/components/ui/ThemeSwitcher.vue'
+import ReducedMotionSwitcher from '@/components/ui/ReducedMotionSwitcher.vue'
 import { mainMenu, type MenuItem } from '@/constants/pageCategories'
 
 const { $gettext } = useGettext()

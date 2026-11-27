@@ -125,7 +125,17 @@
                 <div class="flex flex-row items-center gap-2">
                     <LanguageSwitcher class="menu-icon" />
                     <ThemeSwitcher class="menu-icon" />
+                    <ReducedMotionSwitcher class="menu-icon" />
                 </div>
+                <!-- A tooltip cannot explain the disabled icon on a touch
+                     screen, so the system override is spelled out here. -->
+                <p
+                    v-if="reducedMotionLocked"
+                    class="m-0 flex flex-row items-center gap-1 text-meta text-slate-500 dark:text-[var(--p-text-muted-color)]"
+                >
+                    <Lock :size="13" />
+                    {{ $gettext('Reduced motion is set by your system') }}
+                </p>
             </div>
         </div>
     </Drawer>
@@ -136,14 +146,18 @@ import Drawer from 'primevue/drawer'
 import { RouterLink, useRoute } from 'vue-router'
 import { useGettext } from 'vue3-gettext'
 import { computed, ref, watch } from 'vue'
-import { ArrowUpRight, ChevronDown, X } from '@lucide/vue'
+import { ArrowUpRight, ChevronDown, Lock, X } from '@lucide/vue'
 import Logo from '@/components/ui/Logo.vue'
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
 import ThemeSwitcher from '@/components/ui/ThemeSwitcher.vue'
+import ReducedMotionSwitcher from '@/components/ui/ReducedMotionSwitcher.vue'
 import { featuredSections, secondaryMenu, type MenuItem } from '@/constants/pageCategories'
+import { useReducedMotionStore } from '@/stores/reducedMotionStore'
 
 const { $gettext } = useGettext()
 const route = useRoute()
+const reducedMotionStore = useReducedMotionStore()
+const reducedMotionLocked = computed(() => reducedMotionStore.locked)
 
 const visible = defineModel<boolean>('visible', { default: false })
 const expanded = ref<string[]>([])

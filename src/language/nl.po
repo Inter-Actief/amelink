@@ -16,103 +16,99 @@ msgstr ""
 msgid "Who, what, where, when..."
 msgstr "Wie, wat, waar, wanneer..."
 
-#: src/components/activities/InformationActivites.vue:5
+#: src/components/activities/InformationActivites.vue:6
 msgid "Who"
 msgstr "Wie"
 
-#: src/components/activities/InformationActivites.vue:12
+#: src/components/activities/InformationActivites.vue:13
 msgid "What"
 msgstr "Wat"
 
-#: src/components/activities/InformationActivites.vue:19
+#: src/components/activities/InformationActivites.vue:20
 msgid "Where"
 msgstr "Waar"
 
-#: src/components/activities/InformationActivites.vue:26
+#: src/components/activities/InformationActivites.vue:27
 msgid "When"
 msgstr "Wanneer"
 
-#: src/components/activities/InformationActivites.vue:39
+#: src/components/activities/InformationActivites.vue:40
 msgid "from"
 msgstr "van"
 
-#: src/components/activities/InformationActivites.vue:40
+#: src/components/activities/InformationActivites.vue:41
 msgid "until"
 msgstr "tot"
 
-#: src/components/activities/InformationActivites.vue:47
+#: src/components/activities/InformationActivites.vue:48
 msgid "Label"
 msgstr "Label"
 
-#: src/components/activities/InformationActivites.vue:54
+#: src/components/activities/InformationActivites.vue:55
 msgid "Costs"
 msgstr "Kosten"
 
-#: src/components/activities/InformationActivites.vue:60
+#: src/components/activities/InformationActivites.vue:63
 msgid "Free"
 msgstr "Gratis"
 
-#: src/components/activities/LatestActivities.vue:4
-msgid "Latest Activities"
-msgstr "Laatste activiteiten"
-
-#: src/components/activities/LatestActivities.vue:7
-#: src/components/activities/UpcomingActivities.vue:6
-#: src/components/activities/UpcomingActivitiesCards.vue:5
-msgid "View all activities"
-msgstr "Alle activiteiten bekijken"
-
-#: src/components/activities/PastActivities.vue:52
-msgid "Past activities"
-msgstr "Afgelopen activiteiten"
-
-#: src/components/activities/PastActivities.vue:54
+#: src/components/activities/PastActivities.vue:84
+#: src/components/activities/PastActivities.vue:85
 msgid "Zoek activiteiten"
 msgstr "Zoek activiteiten"
 
-#: src/components/activities/PastActivities.vue:64
-#: src/components/activities/UpcomingActivities.vue:12
-#: src/components/placeholder/PastActivitiesPlaceholder.vue:5
+#: src/components/activities/PastActivities.vue:91
+msgid "Clear search"
+msgstr "Zoekopdracht wissen"
+
+#: src/components/activities/PastActivities.vue:116
+#: src/components/activities/UpcomingActivities.vue:14
+#: src/components/placeholder/PastActivitiesPlaceholder.vue:13
 msgid "Date"
 msgstr "Datum"
 
-#: src/components/activities/PastActivities.vue:67
-#: src/components/activities/UpcomingActivities.vue:14
-#: src/components/placeholder/PastActivitiesPlaceholder.vue:11
+#: src/components/activities/PastActivities.vue:119
+#: src/components/activities/UpcomingActivities.vue:16
+#: src/components/placeholder/PastActivitiesPlaceholder.vue:19
 msgid "Activity"
 msgstr "Activiteit"
 
-#: src/components/activities/PastActivities.vue:83
+#: src/components/activities/PastActivities.vue:137
 msgid "Photos"
 msgstr "Foto's"
 
-#: src/components/activities/PhotosActivities.vue:3
-#: src/components/activities/PhotosActivities.vue:24
+#: src/components/activities/PhotosActivities.vue:6
+#: src/components/activities/PhotosActivities.vue:44
 msgid "Go to activity"
 msgstr "Ga naar activiteit"
 
-#: src/components/activities/PhotosActivities.vue:65
+#: src/components/activities/PhotosActivities.vue:85
 msgid "Photo by "
 msgstr "Foto door "
 
-#: src/components/activities/PhotosActivities.vue:65
+#: src/components/activities/PhotosActivities.vue:85
 msgid "If you want to have this photo removed, please contact the board"
 msgstr ""
 
-#: src/components/activities/UpcomingActivities.vue:4
+#: src/components/activities/UpcomingActivities.vue:6
 #: src/components/activities/UpcomingActivitiesCards.vue:2
 msgid "Upcoming Activities"
 msgstr "Aankomende activiteiten"
 
-#: src/components/activities/UpcomingActivities.vue:13
+#: src/components/activities/UpcomingActivities.vue:8
+#: src/components/activities/UpcomingActivitiesCards.vue:5
+msgid "View all activities"
+msgstr "Alle activiteiten bekijken"
+
+#: src/components/activities/UpcomingActivities.vue:15
 msgid "Type"
 msgstr "Soort"
 
-#: src/components/activities/UpcomingActivities.vue:37
+#: src/components/activities/UpcomingActivities.vue:46
 msgid "Enroll now!"
 msgstr "Schrijf je nu in!"
 
-#: src/components/footer/Footer.vue:6
+#: src/components/footer/Footer.vue:7
 msgid "footer.text"
 msgstr ""
 "I.C.T.S.V. Inter-Actief is de studievereniging voor de studies Technical "
@@ -121,81 +117,90 @@ msgstr ""
 "1981 en heeft circa 1400 leden, waarmee zij de grootste ICT-studievereniging "
 "van Nederland is."
 
-#: src/components/footer/Footer.vue:11
+#: src/components/footer/Footer.vue:12
 msgid "Pages"
 msgstr "Pagina's"
 
-#: src/components/footer/Footer.vue:18
+#: src/components/footer/Footer.vue:19
 msgid "Important information"
 msgstr "Belangrijke informatie"
 
-#: src/components/footer/Footer.vue:19
+#: src/components/footer/Footer.vue:22
 msgid "Privacy policy"
 msgstr "Privacybeleid"
 
-#: src/components/footer/Footer.vue:21
+#: src/components/footer/Footer.vue:27
 msgid "Contact"
 msgstr "Contact"
 
-#: src/components/footer/Footer.vue:24
+#: src/components/footer/Footer.vue:32
 msgid "Report a problem"
 msgstr "Probleem melden"
 
-#: src/components/footer/Footer.vue:27
+#: src/components/footer/Footer.vue:40
 msgid "CVD Policy"
 msgstr "CVD-beleid"
 
-#: src/components/footer/Footer.vue:32
+#: src/components/footer/Footer.vue:46
 msgid "Contact us"
 msgstr "Neem contact op"
 
-#: src/components/footer/Footer.vue:52
+#: src/components/footer/Footer.vue:64
 msgid "Activities"
 msgstr "Activiteiten"
 
-#: src/components/footer/Footer.vue:56
+#: src/components/footer/Footer.vue:68
 #: src/components/homepage/HomepageNews.vue:2
+#: src/components/news/OverviewNews.vue:2
 msgid "News"
 msgstr "Nieuws"
 
-#: src/components/footer/Footer.vue:60 src/views/pages/PublicationView.vue:35
+#: src/components/footer/Footer.vue:72 src/views/pages/PublicationView.vue:27
 msgid "Publications"
 msgstr "Publicaties"
 
-#: src/components/footer/Footer.vue:64
+#: src/components/footer/Footer.vue:76
 msgid "Education"
 msgstr "Onderwijs"
 
-#: src/components/header/Header.vue:19 src/components/header/MobileMenu.vue:115
+#: src/components/header/Header.vue:25
+msgid "Main"
+msgstr ""
+
+#: src/components/header/Header.vue:103 src/components/header/Header.vue:104
+#: src/components/header/MobileMenu.vue:122
 msgid "Old website"
 msgstr "Oude website"
 
-#: src/components/header/Header.vue:24 src/components/header/Header.vue:52
+#: src/components/header/Header.vue:110 src/components/header/Header.vue:147
 msgid "Become a member"
 msgstr "Word lid"
 
-#: src/components/header/Header.vue:41
+#: src/components/header/Header.vue:121 src/components/header/Header.vue:137
 msgid "Open menu"
 msgstr "Menu openen"
 
-#: src/components/header/MobileMenu.vue:16
+#: src/components/header/MobileMenu.vue:19
 msgid "Close menu"
 msgstr "Menu sluiten"
 
-#: src/components/header/UserButton.vue:2
+#: src/components/header/MobileMenu.vue:137
+msgid "Reduced motion is set by your system"
+msgstr "Beweging wordt beperkt door je systeem"
+
+#: src/components/header/UserButton.vue:6
 msgid "Sign-in"
 msgstr "Inloggen"
 
+#: src/components/header/UserButton.vue:38
+msgid "Logout"
+msgstr ""
+
 #: src/components/homepage/HomepageNews.vue:5
-#: src/components/news/LatestNews.vue:7
 msgid "View all news"
 msgstr "Al het nieuws bekijken"
 
-#: src/components/homepage/HomepageNews.vue:32
-msgid "Pinned"
-msgstr "Vastgeprikt"
-
-#: src/components/homepage/HomepageNews.vue:38
+#: src/components/homepage/HomepageNews.vue:29
 msgid "There is no news yet."
 msgstr "Er is nog geen nieuws."
 
@@ -208,7 +213,7 @@ msgstr "Recente publicaties"
 msgid "View all"
 msgstr "Bekijk alles"
 
-#: src/components/homepage/HomepagePublications.vue:40
+#: src/components/homepage/HomepagePublications.vue:49
 msgid "There are no publications yet."
 msgstr "Er zijn nog geen publicaties."
 
@@ -216,40 +221,57 @@ msgstr "Er zijn nog geen publicaties."
 msgid "Latest video"
 msgstr "Nieuwste video"
 
-#: src/components/homepage/HomepageVideo.vue:36
+#: src/components/homepage/HomepageVideo.vue:58
 msgid "There are no videos yet."
 msgstr "Er zijn nog geen video's."
 
-#: src/components/news/LatestNews.vue:5
-msgid "News & Announcements"
-msgstr "Nieuws & Mededelingen"
-
-#: src/components/news/OverviewNews.vue:2
-msgid "News page"
-msgstr "Nieuws pagina"
-
 #: src/components/photos/PicturesBy.vue:3
-#: src/components/photos/PicturesBy.vue:6
+#: src/components/photos/PicturesBy.vue:7
 msgid "Pictures by"
 msgstr ""
 
-#: src/components/ui/HorizontalCard.vue:19 src/components/ui/TextCard.vue:58
-msgid "Read more"
-msgstr "Lees meer"
+#: src/components/ui/LanguageSwitcher.vue:5
+#: src/components/ui/LanguageSwitcher.vue:6
+msgid "Language"
+msgstr ""
 
-#: src/components/ui/ThemeSwitcher.vue:33
+#: src/components/ui/ReducedMotionSwitcher.vue:37
+msgid "Reduced motion is on because your system requests it"
+msgstr "Beweging is beperkt omdat je systeem dat vraagt"
+
+#: src/components/ui/ReducedMotionSwitcher.vue:41
+msgid "Reduced motion is on"
+msgstr "Beweging is beperkt"
+
+#: src/components/ui/ReducedMotionSwitcher.vue:42
+msgid "Reduced motion is off"
+msgstr "Beweging is niet beperkt"
+
+#: src/components/ui/SearchToggle.vue:23
+msgid "Search"
+msgstr ""
+
+#: src/components/ui/ThemeSwitcher.vue:39
 msgid "Light mode"
 msgstr ""
 
-#: src/components/ui/ThemeSwitcher.vue:35
+#: src/components/ui/ThemeSwitcher.vue:41
 msgid "Dark mode"
 msgstr ""
 
-#: src/components/ui/ThemeSwitcher.vue:37
+#: src/components/ui/ThemeSwitcher.vue:43
 msgid "Use system theme"
 msgstr ""
 
-#: src/functions/functions.ts:61
+#: src/components/ui/TileCard.vue:20 src/components/ui/TileCard.vue:21
+msgid "Pinned"
+msgstr "Vastgeprikt"
+
+#: src/components/ui/TileCard.vue:135
+msgid "Read more"
+msgstr "Lees meer"
+
+#: src/functions/functions.ts:66
 msgid "%{weekday} %{month} %{day}%{ordinal} %{year}"
 msgstr "%{weekday} %{day} %{month} %{year}"
 
@@ -266,14 +288,19 @@ msgid "Back to home"
 msgstr "Terug naar hoofdpagina"
 
 #: src/views/activities/ActivitiesView.vue:5
-msgid "Activities you don't want to miss"
-msgstr "Activiteiten die je niet wilt missen"
+#, fuzzy
+msgid "Upcoming activities"
+msgstr "Aankomende activiteiten"
 
-#: src/views/activities/SingleActivites.vue:24
+#: src/views/activities/ActivitiesView.vue:13
+msgid "Past activities"
+msgstr "Afgelopen activiteiten"
+
+#: src/views/activities/SingleActivites.vue:27
 msgid "View photos"
 msgstr "Bekijk foto's"
 
-#: src/views/activities/SingleActivites.vue:30 src/views/news/SingleNews.vue:26
+#: src/views/activities/SingleActivites.vue:33 src/views/news/SingleNews.vue:20
 msgid "Return to overview"
 msgstr "Terug naar overzicht"
 
@@ -286,19 +313,19 @@ msgid "We could not find this committee."
 msgstr "We konden deze commissie niet vinden."
 
 #: src/views/committees/SingleCommitteeView.vue:8
-#: src/views/committees/SingleCommitteeView.vue:26
+#: src/views/committees/SingleCommitteeView.vue:29
 msgid "View all committees"
 msgstr "Alle commissies bekijken"
 
-#: src/views/committees/SingleCommitteeView.vue:30
+#: src/views/committees/SingleCommitteeView.vue:33
 msgid "Committee information"
 msgstr "Commissie-informatie"
 
-#: src/views/committees/SingleCommitteeView.vue:57
+#: src/views/committees/SingleCommitteeView.vue:71
 msgid "Committee members"
 msgstr "Commissieleden"
 
-#: src/views/committees/SingleCommitteeView.vue:99
+#: src/views/committees/SingleCommitteeView.vue:121
 msgid "This committee does not have a description"
 msgstr "Deze commissie heeft geen beschrijving"
 
@@ -306,45 +333,66 @@ msgstr "Deze commissie heeft geen beschrijving"
 msgid "Companies"
 msgstr "Bedrijven"
 
-#: src/views/companies/CompanyView.vue:29
+#: src/views/companies/CompanyView.vue:33
 msgid "We could not find this company."
 msgstr "We konden dit bedrijf niet vinden."
 
-#: src/views/companies/CompanyView.vue:32
+#: src/views/companies/CompanyView.vue:36
 msgid "View all companies"
 msgstr "Alle bedrijven bekijken"
 
-#: src/views/companies/CompanyView.vue:37
+#: src/views/companies/CompanyView.vue:41
 msgid "Company profile"
 msgstr "Bedrijfsprofiel"
 
-#: src/views/companies/CompanyView.vue:51
+#: src/views/companies/CompanyView.vue:61
 msgid "Website"
 msgstr "Website"
 
-#: src/views/pages/EducationView.vue:4
+#: src/views/pages/EducationView.vue:5
 msgid "Information"
 msgstr "Informatie"
 
-#: src/views/videos/VideosView.vue:22
+#: src/views/pages/PublicationView.vue:33
+#: src/views/pages/PublicationView.vue:38
+msgid "Filter..."
+msgstr ""
+
+#: src/views/pages/SearchView.vue:3
+msgid "Search Results for:"
+msgstr ""
+
+#: src/views/videos/VideosView.vue:21
 msgid "Videos"
 msgstr ""
 
-#: src/views/videos/VideoView.vue:29
+#: src/views/videos/VideoView.vue:33
 msgid "We could not find this video."
 msgstr "We konden deze video niet vinden."
 
-#: src/views/videos/VideoView.vue:32
+#: src/views/videos/VideoView.vue:36
 msgid "View all videos"
 msgstr "Bekijk alle video's"
 
-#: src/views/videos/VideoView.vue:45
+#: src/views/videos/VideoView.vue:53
 msgid "Description"
 msgstr "Beschrijving"
 
-#: src/views/videos/VideoView.vue:55
+#: src/views/videos/VideoView.vue:62
 msgid "Return to videos"
 msgstr "Terug naar video's"
+
+#~ msgid "Latest Activities"
+#~ msgstr "Laatste activiteiten"
+
+#~ msgid "News & Announcements"
+#~ msgstr "Nieuws & Mededelingen"
+
+#~ msgid "News page"
+#~ msgstr "Nieuws pagina"
+
+#~ msgid "Activities you don't want to miss"
+#~ msgstr "Activiteiten die je niet wilt missen"
 
 #, fuzzy
 #~ msgid "All news"
@@ -481,7 +529,3 @@ msgstr "Terug naar video's"
 
 #~ msgid "General"
 #~ msgstr "Algemeen"
-
-#: src/components/activities/PastActivities.vue:90
-msgid "Clear search"
-msgstr "Zoekopdracht wissen"

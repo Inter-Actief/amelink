@@ -4,7 +4,7 @@
         showItemNavigators
         @update:activeIndex="resetAnimation()"
         :showThumbnails="false"
-        autoPlay
+        :autoPlay="!reducedMotion"
         circular
         :transitionInterval="7000"
     >
@@ -41,6 +41,10 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { useQuery } from '@/composables/queries'
+import { useReducedMotionStore } from '@/stores/reducedMotionStore'
+
+const reducedMotionStore = useReducedMotionStore()
+const reducedMotion = computed(() => reducedMotionStore.reducedMotion)
 
 const limit = ref(50)
 const imageRef = useTemplateRef('gallery-image')
