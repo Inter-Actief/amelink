@@ -28,7 +28,7 @@
                 </template>
             </div>
 
-            <Pagination v-bind="query" :totalCount="totalCount!" :limit="10" />
+            <Pagination v-bind="query" :loading="loading" :totalCount="totalCount!" :limit="10" />
         </template>
     </SectionCard>
 </template>

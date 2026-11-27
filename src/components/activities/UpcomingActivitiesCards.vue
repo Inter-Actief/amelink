@@ -55,8 +55,9 @@
                 </div>
             </Transition>
             <Pagination
-                v-if="totalCount"
+                v-if="totalCount || loading"
                 v-bind="query"
+                :loading="loading"
                 :totalCount="totalCount!"
                 :limit="perpage"
                 :rowsPerPage="[perpage, 10]"

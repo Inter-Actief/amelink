@@ -50,6 +50,7 @@ const selectedRows = ref(limit.value)
                 </div>
                 <Pagination
                     v-bind="query"
+                    :loading="loading"
                     :limit="limit"
                     :total-count="totalCount!"
                     @update:rows="(rows) => (selectedRows = rows)"
