@@ -2,6 +2,7 @@
 @import './variables.css';
 @import './fonts.css';
 @import './main.css';
+@import './motion.css';
 @import './swiper.css';
 
 @import 'tailwindcss';

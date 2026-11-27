@@ -38,13 +38,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onUnmounted, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useGettext } from 'vue3-gettext'
 import { ArrowRight } from '@lucide/vue'
 import { featuredSections } from '@/constants/pageCategories'
+import { useReducedMotionStore } from '@/stores/reducedMotionStore'
 
 const { $gettext } = useGettext()
+const reducedMotionStore = useReducedMotionStore()
+const reducedMotion = computed(() => reducedMotionStore.reducedMotion)
 
 /**
  * The menu entries that carry pictures, with the section they open. Education
@@ -67,11 +70,24 @@ const STAGGER = 900
 
 let timers: number[] = []
 
-onMounted(() => {
-    active.value = pillars.value.map(() => 0)
+const stopTimers = () => {
+    timers.forEach((timer) => clearInterval(timer))
+    timers = []
+}
 
-    // A visitor who asked for less motion keeps the first picture of each pillar.
-    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+/**
+ * A visitor who asked for less motion keeps the first picture of each pillar.
+ * The store folds in the system preference, so this follows the OS setting and
+ * the switcher in the header alike.
+ */
+const startTimers = () => {
+    stopTimers()
+
+    if (active.value.length === 0) {
+        active.value = pillars.value.map(() => 0)
+    }
+
+    if (reducedMotion.value) {
         return
     }
 
@@ -80,19 +96,18 @@ onMounted(() => {
             return 0
         }
 
-        return window.setInterval(() => {
-            active.value = active.value.map((current, tile) =>
-                tile === index ? (current + 1) % pillar.images.length : current,
-            )
-        }, STEP + index * STAGGER)
+        return window.setInterval(
+            () => {
+                active.value = active.value.map((current, tile) =>
+                    tile === index ? (current + 1) % pillar.images.length : current,
+                )
+            },
+            STEP + index * STAGGER,
+        )
     })
-})
+}
 
-onUnmounted(() => {
-    timers.forEach((timer) => {
-        if (timer) {
-            clearInterval(timer)
-        }
-    })
-})
+watch(reducedMotion, startTimers, { immediate: true })
+
+onUnmounted(stopTimers)
 </script>

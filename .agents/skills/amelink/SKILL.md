@@ -24,7 +24,7 @@ Amelink is a Vue 3 + TypeScript SPA that renders content from a GraphQL API
 | Build | Vite 6 | `vite.config.ts` |
 | Styles | Tailwind CSS v4 + PrimeVue 4 (`iaPreset`) | `src/styles/themePreset.ts`, `src/styles/style.css` |
 | Data | Apollo Client 3 + GraphQL Codegen | `src/apollo.ts`, `src/queries/queries.gql`, `src/gql/` |
-| State | Pinia (4 stores) | `src/stores/` |
+| State | Pinia (5 stores) | `src/stores/` |
 | Auth | OpenID Connect (`oidc-client-ts`, PKCE) | `src/stores/oidcStore.ts` |
 | i18n | Gettext (`vue3-gettext`) | `src/language/*.po`, `src/gettext.ts` |
 | Icons | Lucide Vue | `@lucide/vue` |
@@ -218,6 +218,75 @@ class and silently kill the animation.
 have hovered it in a browser (`yarn dev`, then one element of each distinct
 kind of `class="link"` caller).
 
+## Reduced Motion
+
+A whole feature in its own right, spread over four files. Touch one, and the
+others are in the blast radius.
+
+### The preference (`src/stores/reducedMotionStore.ts`)
+
+`reducedMotion = systemReducedMotion || preferredReducedMotion`, read from the
+web API `matchMedia('(prefers-reduced-motion: reduce)')` and stored under the
+`reduced-motion` localStorage key. `locked` is true when the **system** asks
+for it: the switcher then renders a `Lock` and cannot be turned off. The store
+puts `.reduce-motion` on `<html>` and keeps that class in sync with the media
+query. `ReducedMotionSwitcher.vue` (Rabbit / Snail / Lock) sits next to the
+theme switcher in the header and in `MobileMenu`.
+
+### The clamp (`src/styles/motion.css`)
+
+Unlayered on purpose — it has to beat Tailwind utilities and scoped component
+styles. It declares the same rules twice: once in
+`@media (prefers-reduced-motion: reduce)` so the first paint is already still,
+and once as `html.reduce-motion *` so the toggle works without a reload. Keep
+both blocks identical.
+
+Animations and transitions are **shortened to 0.01ms, not removed**, because
+components wait for a `transitionend` event. But `transition-duration` alone is
+not enough: the default `transition-property: all` means a duration *creates* a
+transition on every property, including geometry. That broke PrimeVue's
+overlays — a Select/dropdown landed at `left: 0` and the page scrolled to the
+top, because the positioning pass measured the trigger mid-transition. So the
+clamp also pins `transition-property` to paint-only properties. Keep that list
+paint-only; never add `inset`, `left`, `top`, `width`, `height`, `margin`,
+`padding`, `flex-*`, `grid-*` or `scroll-*`.
+
+### The loading gate (`src/components/ui/RouteGate.vue`)
+
+With reduced motion on, a route is mounted but not painted until it is
+finished: the queries have settled, the DOM has been laid out and painted once
+(`nextTick` + two `requestAnimationFrame`s), and every `<img>` in the subtree is
+decoded (`img.decode()`, so the bitmap is ready) plus `document.fonts.ready`.
+Waiting for the images is what stops the page appearing and then popping
+pictures in. The wait is capped at `MEDIA_WAIT_MS = 4000` so a slow or broken
+image cannot hold the page forever, and reveals are tokenised so a superseded
+one cannot unhide the page.
+
+The gate is active on a route's **first** load only. Pagination and background
+refetches never blank the page again. `RouteLoadingOverlay.vue` is the static
+mark shown instead — no spinner, no shimmer. `App.vue` suppresses the global
+progress bar and the `<Suspense>` spinner in this mode.
+
+### What opts out per component
+
+Motion the CSS cannot reach is switched off in the component: `LogoSlider`
+(autoplay), `HomepageSlider` (`:autoPlay`), `HomepagePillars` (timers) and
+`MobileMenu` (the locked-preference hint). Short CSS transitions —
+`UpcomingActivitiesCards`' 75ms fade, for instance — need nothing: the clamp
+handles them. A new carousel or auto-advancing widget needs the same treatment
+as the sliders — read `reducedMotionStore.reducedMotion` and do not start its
+timer.
+
+### Verifying it
+
+Reduce motion cannot be seen in a screenshot; drive it over CDP. Set
+`Emulation.setEmulatedMedia` with `{ name: 'prefers-reduced-motion', value:
+'reduce' }` before navigating. To test the image wait, delay only image
+requests with `Fetch.enable` and `Fetch.requestPaused` (leave other types
+alone), then assert the reveal timestamp lands after the last image load. Check
+both modes: the gate must be invisible in non-reduced mode and the page must
+paint immediately.
+
 ## Routing
 
 - History mode router (`createWebHistory`).
@@ -297,6 +366,10 @@ Key variables:
    you add a large new dependency, consider adding it to the chunking strategy.
 7. **CKEditor**: Bundled as a single chunk (`ckeditor`). If you touch editor
    config, verify the build chunk does not bloat.
+8. **Reduced motion is four files**: the store, `src/styles/motion.css`,
+   `RouteGate.vue` and `RouteLoadingOverlay.vue`. See the Reduced Motion
+   section. The clamp's `transition-property` list must stay paint-only or
+   PrimeVue overlays mis-position.
 
 ## File Map for Quick Reference
 
@@ -313,11 +386,20 @@ src/
 │   ├── oidcStore.ts       # OIDC auth
 │   ├── languageStore.ts   # i18n + GraphQL language mutation
 │   ├── themeStore.ts      # light/dark/system toggle
+│   ├── reducedMotionStore.ts # reduced motion + system lock
 │   └── loadingStore.ts    # Global loading counter
+├── styles/
+│   ├── style.css          # Tailwind v4 imports, @theme tokens, utilities
+│   ├── main.css           # .link underline, route transitions
+│   ├── fonts.css          # h1–h4 tokens, markdown links (unlayered)
+│   ├── motion.css         # reduced-motion clamp (unlayered)
+│   └── themePreset.ts     # PrimeVue iaPreset
 ├── functions/functions.ts # Date format, markdown render, helpers
 ├── constants/
 │   └── pageCategories.ts  # mainMenu (Header + breadcrumb logic)
 ├── components/ui/         # Reusable primitives (Content, SectionCard, ...)
+│                          # RouteGate.vue, RouteLoadingOverlay.vue,
+│                          # ReducedMotionSwitcher.vue
 ├── components/placeholder/# Skeleton loaders
 ├── views/                 # Route pages
 └── queries/queries.gql    # Source GraphQL operations

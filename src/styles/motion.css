@@ -1,0 +1,49 @@
+/*
+ * Reduced motion.
+ *
+ * The reducedMotionStore puts `.reduce-motion` on <html> when the visitor asks
+ * for it, or when the operating system asks for it. The media query below
+ * repeats the same rule without JavaScript, so the first paint is already
+ * still and a failed script cannot leave the page animating.
+ *
+ * These rules are deliberately unlayered: they have to beat Tailwind utilities
+ * and scoped component styles, which live in layers. Transitions are shortened
+ * instead of removed so components that wait for a `transitionend` event still
+ * receive it.
+ *
+ * `transition-property` is pinned to paint-only properties on purpose. The
+ * default is `all`, so giving every element a duration would also make layout
+ * and position properties transition — `inset-inline-start`, `top`, `left`,
+ * `width`, `height`. PrimeVue positions its overlays by writing those inline
+ * and measuring the result, so a transition on them makes it measure a value
+ * mid-flight: the Select/Paginator dropdown then lands at the left edge of the
+ * page and the document scrolls to the top. Nothing that moves geometry should
+ * ever be animated, so the list stays paint-only.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    transition-property: opacity, transform, color, background-color,
+      border-color, outline-color, box-shadow, background-size,
+      background-position, fill, stroke, filter, text-decoration-color !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  transition-delay: 0ms !important;
+  transition-property: opacity, transform, color, background-color,
+    border-color, outline-color, box-shadow, background-size,
+    background-position, fill, stroke, filter, text-decoration-color !important;
+  scroll-behavior: auto !important;
+}
