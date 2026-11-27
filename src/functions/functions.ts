@@ -99,9 +99,10 @@ export const formattedDataShort = (timestamp: number) => {
 const relativeFormatters = new Map<string, Intl.RelativeTimeFormat>()
 
 /**
- * "5 weeks ago" / "5 weken geleden" — the age of an item instead of its date.
- * Homepage blocks use it where a fixed date quietly keeps passing stale content
- * off as current. Locale data comes from the browser, like the date names.
+ * "3 weeks ago" / "3 weken geleden" — the age of an item instead of its date.
+ * Homepage content rarely changes, so an age tells the truth where a fixed date
+ * quietly keeps passing old items off as current. Locale data comes from the
+ * browser, like the month and weekday names above.
  */
 export const relativeAge = (timestamp: number | string) => {
     const elapsed = new Date(timestamp).getTime() - Date.now()

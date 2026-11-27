@@ -6,239 +6,251 @@ msgstr ""
 msgid "Who, what, where, when..."
 msgstr ""
 
-#: src/components/activities/InformationActivites.vue:5
+#: src/components/activities/InformationActivites.vue:6
 msgid "Who"
 msgstr ""
 
-#: src/components/activities/InformationActivites.vue:12
+#: src/components/activities/InformationActivites.vue:13
 msgid "What"
 msgstr ""
 
-#: src/components/activities/InformationActivites.vue:19
+#: src/components/activities/InformationActivites.vue:20
 msgid "Where"
 msgstr ""
 
-#: src/components/activities/InformationActivites.vue:26
+#: src/components/activities/InformationActivites.vue:27
 msgid "When"
 msgstr ""
 
-#: src/components/activities/InformationActivites.vue:39
+#: src/components/activities/InformationActivites.vue:40
 msgid "from"
 msgstr ""
 
-#: src/components/activities/InformationActivites.vue:40
+#: src/components/activities/InformationActivites.vue:41
 msgid "until"
 msgstr ""
 
-#: src/components/activities/InformationActivites.vue:47
+#: src/components/activities/InformationActivites.vue:48
 msgid "Label"
 msgstr ""
 
-#: src/components/activities/InformationActivites.vue:54
+#: src/components/activities/InformationActivites.vue:55
 msgid "Costs"
 msgstr ""
 
-#: src/components/activities/InformationActivites.vue:60
+#: src/components/activities/InformationActivites.vue:63
 msgid "Free"
 msgstr ""
 
-#: src/components/activities/LatestActivities.vue:4
-msgid "Latest Activities"
-msgstr ""
-
-#: src/components/activities/LatestActivities.vue:7
-#: src/components/activities/UpcomingActivities.vue:6
-#: src/components/activities/UpcomingActivitiesCards.vue:5
-msgid "View all activities"
-msgstr ""
-
-#: src/components/activities/PastActivities.vue:52
-msgid "Past activities"
-msgstr ""
-
-#: src/components/activities/PastActivities.vue:54
+#: src/components/activities/PastActivities.vue:84
+#: src/components/activities/PastActivities.vue:85
 msgid "Zoek activiteiten"
 msgstr ""
 
-#: src/components/activities/PastActivities.vue:64
-#: src/components/activities/UpcomingActivities.vue:12
-#: src/components/placeholder/PastActivitiesPlaceholder.vue:5
+#: src/components/activities/PastActivities.vue:91
+msgid "Clear search"
+msgstr ""
+
+#: src/components/activities/PastActivities.vue:116
+#: src/components/activities/UpcomingActivities.vue:14
+#: src/components/placeholder/PastActivitiesPlaceholder.vue:13
 msgid "Date"
 msgstr ""
 
-#: src/components/activities/PastActivities.vue:67
-#: src/components/activities/UpcomingActivities.vue:14
-#: src/components/placeholder/PastActivitiesPlaceholder.vue:11
+#: src/components/activities/PastActivities.vue:119
+#: src/components/activities/UpcomingActivities.vue:16
+#: src/components/placeholder/PastActivitiesPlaceholder.vue:19
 msgid "Activity"
 msgstr ""
 
-#: src/components/activities/PastActivities.vue:83
+#: src/components/activities/PastActivities.vue:137
 msgid "Photos"
 msgstr ""
 
-#: src/components/activities/PhotosActivities.vue:3
-#: src/components/activities/PhotosActivities.vue:24
+#: src/components/activities/PhotosActivities.vue:6
+#: src/components/activities/PhotosActivities.vue:44
 msgid "Go to activity"
 msgstr ""
 
-#: src/components/activities/PhotosActivities.vue:65
+#: src/components/activities/PhotosActivities.vue:85
 msgid "Photo by "
 msgstr ""
 
-#: src/components/activities/PhotosActivities.vue:65
+#: src/components/activities/PhotosActivities.vue:85
 msgid "If you want to have this photo removed, please contact the board"
 msgstr ""
 
-#: src/components/activities/UpcomingActivities.vue:4
+#: src/components/activities/UpcomingActivities.vue:6
 #: src/components/activities/UpcomingActivitiesCards.vue:2
 msgid "Upcoming Activities"
 msgstr ""
 
-#: src/components/activities/UpcomingActivities.vue:13
+#: src/components/activities/UpcomingActivities.vue:8
+#: src/components/activities/UpcomingActivitiesCards.vue:5
+msgid "View all activities"
+msgstr ""
+
+#: src/components/activities/UpcomingActivities.vue:15
 msgid "Type"
 msgstr ""
 
-#: src/components/activities/UpcomingActivities.vue:37
+#: src/components/activities/UpcomingActivities.vue:46
 msgid "Enroll now!"
 msgstr ""
 
-#: src/components/footer/Footer.vue:6
+#: src/components/footer/Footer.vue:7
 msgid "footer.text"
 msgstr ""
 
-#: src/components/footer/Footer.vue:11
+#: src/components/footer/Footer.vue:12
 msgid "Pages"
 msgstr ""
 
-#: src/components/footer/Footer.vue:18
+#: src/components/footer/Footer.vue:19
 msgid "Important information"
 msgstr ""
 
-#: src/components/footer/Footer.vue:19
+#: src/components/footer/Footer.vue:22
 msgid "Privacy policy"
 msgstr ""
 
-#: src/components/footer/Footer.vue:21
+#: src/components/footer/Footer.vue:27
 msgid "Contact"
 msgstr ""
 
-#: src/components/footer/Footer.vue:24
+#: src/components/footer/Footer.vue:32
 msgid "Report a problem"
 msgstr ""
 
-#: src/components/footer/Footer.vue:27
+#: src/components/footer/Footer.vue:40
 msgid "CVD Policy"
 msgstr ""
 
-#: src/components/footer/Footer.vue:32
+#: src/components/footer/Footer.vue:46
 msgid "Contact us"
 msgstr ""
 
-#: src/components/footer/Footer.vue:52
+#: src/components/footer/Footer.vue:64
 msgid "Activities"
 msgstr ""
 
-#: src/components/footer/Footer.vue:56
-#: src/components/homepage/HomepageNews.vue:2
+#: src/components/footer/Footer.vue:68
+#: src/components/homepage/RecentThings.vue:316
+#: src/components/news/OverviewNews.vue:2
 msgid "News"
 msgstr ""
 
-#: src/components/footer/Footer.vue:60
-#: src/views/pages/PublicationView.vue:35
+#: src/components/footer/Footer.vue:72
+#: src/views/pages/PublicationView.vue:27
 msgid "Publications"
 msgstr ""
 
-#: src/components/footer/Footer.vue:64
+#: src/components/footer/Footer.vue:76
 msgid "Education"
 msgstr ""
 
-#: src/components/header/Header.vue:19
-#: src/components/header/MobileMenu.vue:115
+#: src/components/header/Header.vue:27
+msgid "Main"
+msgstr ""
+
+#: src/components/header/Header.vue:105
+#: src/components/header/Header.vue:106
+#: src/components/header/MobileMenu.vue:108
 msgid "Old website"
 msgstr ""
 
-#: src/components/header/Header.vue:24
-#: src/components/header/Header.vue:52
+#: src/components/header/Header.vue:112
+#: src/components/header/Header.vue:148
 msgid "Become a member"
 msgstr ""
 
-#: src/components/header/Header.vue:41
+#: src/components/header/Header.vue:122
+#: src/components/header/Header.vue:138
 msgid "Open menu"
 msgstr ""
 
-#: src/components/header/MobileMenu.vue:16
+#: src/components/header/MobileMenu.vue:19
 msgid "Close menu"
 msgstr ""
 
-#: src/components/header/UserButton.vue:2
+#: src/components/header/UserButton.vue:6
 msgid "Sign-in"
 msgstr ""
 
-#: src/components/homepage/HomepageNews.vue:5
-#: src/components/news/LatestNews.vue:7
+#: src/components/header/UserButton.vue:38
+msgid "Logout"
+msgstr ""
+
+#: src/components/homepage/RecentThings.vue:6
+msgid "Recent items"
+msgstr ""
+
+#: src/components/homepage/RecentThings.vue:9
 msgid "View all news"
 msgstr ""
 
-#: src/components/homepage/HomepageNews.vue:32
+#: src/components/homepage/RecentThings.vue:83
+#: src/components/homepage/RecentThings.vue:84
+#: src/components/ui/TileCard.vue:20
+#: src/components/ui/TileCard.vue:21
 msgid "Pinned"
 msgstr ""
 
-#: src/components/homepage/HomepageNews.vue:38
-msgid "There is no news yet."
+#: src/components/homepage/RecentThings.vue:150
+msgid "There is nothing new yet."
 msgstr ""
 
-#: src/components/homepage/HomepagePublications.vue:2
-msgid "Recent publications"
+#: src/components/homepage/RecentThings.vue:318
+msgid "Publication"
 msgstr ""
 
-#: src/components/homepage/HomepagePublications.vue:5
-#: src/components/homepage/HomepageVideo.vue:5
-msgid "View all"
+#: src/components/homepage/RecentThings.vue:319
+msgid "Video"
 msgstr ""
 
-#: src/components/homepage/HomepagePublications.vue:40
-msgid "There are no publications yet."
+#: src/components/homepage/RecentThings.vue:323
+msgid "Read news article"
 msgstr ""
 
-#: src/components/homepage/HomepageVideo.vue:2
-msgid "Latest video"
+#: src/components/homepage/RecentThings.vue:325
+msgid "Open publication"
 msgstr ""
 
-#: src/components/homepage/HomepageVideo.vue:36
-msgid "There are no videos yet."
-msgstr ""
-
-#: src/components/news/LatestNews.vue:5
-msgid "News & Announcements"
-msgstr ""
-
-#: src/components/news/OverviewNews.vue:2
-msgid "News page"
+#: src/components/homepage/RecentThings.vue:326
+msgid "Go to video page"
 msgstr ""
 
 #: src/components/photos/PicturesBy.vue:3
-#: src/components/photos/PicturesBy.vue:6
+#: src/components/photos/PicturesBy.vue:7
 msgid "Pictures by"
 msgstr ""
 
-#: src/components/ui/HorizontalCard.vue:19
-#: src/components/ui/TextCard.vue:58
-msgid "Read more"
+#: src/components/ui/LanguageSwitcher.vue:5
+#: src/components/ui/LanguageSwitcher.vue:6
+msgid "Language"
 msgstr ""
 
-#: src/components/ui/ThemeSwitcher.vue:33
+#: src/components/ui/SearchToggle.vue:23
+msgid "Search"
+msgstr ""
+
+#: src/components/ui/ThemeSwitcher.vue:39
 msgid "Light mode"
 msgstr ""
 
-#: src/components/ui/ThemeSwitcher.vue:35
+#: src/components/ui/ThemeSwitcher.vue:41
 msgid "Dark mode"
 msgstr ""
 
-#: src/components/ui/ThemeSwitcher.vue:37
+#: src/components/ui/ThemeSwitcher.vue:43
 msgid "Use system theme"
 msgstr ""
 
-#: src/functions/functions.ts:61
+#: src/components/ui/TileCard.vue:135
+msgid "Read more"
+msgstr ""
+
+#: src/functions/functions.ts:66
 msgid "%{weekday} %{month} %{day}%{ordinal} %{year}"
 msgstr ""
 
@@ -255,15 +267,19 @@ msgid "Back to home"
 msgstr ""
 
 #: src/views/activities/ActivitiesView.vue:5
-msgid "Activities you don't want to miss"
+msgid "Upcoming activities"
 msgstr ""
 
-#: src/views/activities/SingleActivites.vue:24
+#: src/views/activities/ActivitiesView.vue:13
+msgid "Past activities"
+msgstr ""
+
+#: src/views/activities/SingleActivites.vue:27
 msgid "View photos"
 msgstr ""
 
-#: src/views/activities/SingleActivites.vue:30
-#: src/views/news/SingleNews.vue:26
+#: src/views/activities/SingleActivites.vue:33
+#: src/views/news/SingleNews.vue:20
 msgid "Return to overview"
 msgstr ""
 
@@ -276,19 +292,19 @@ msgid "We could not find this committee."
 msgstr ""
 
 #: src/views/committees/SingleCommitteeView.vue:8
-#: src/views/committees/SingleCommitteeView.vue:26
+#: src/views/committees/SingleCommitteeView.vue:29
 msgid "View all committees"
 msgstr ""
 
-#: src/views/committees/SingleCommitteeView.vue:30
+#: src/views/committees/SingleCommitteeView.vue:33
 msgid "Committee information"
 msgstr ""
 
-#: src/views/committees/SingleCommitteeView.vue:57
+#: src/views/committees/SingleCommitteeView.vue:71
 msgid "Committee members"
 msgstr ""
 
-#: src/views/committees/SingleCommitteeView.vue:99
+#: src/views/committees/SingleCommitteeView.vue:121
 msgid "This committee does not have a description"
 msgstr ""
 
@@ -296,42 +312,51 @@ msgstr ""
 msgid "Companies"
 msgstr ""
 
-#: src/views/companies/CompanyView.vue:29
+#: src/views/companies/CompanyView.vue:33
 msgid "We could not find this company."
 msgstr ""
 
-#: src/views/companies/CompanyView.vue:32
+#: src/views/companies/CompanyView.vue:36
 msgid "View all companies"
 msgstr ""
 
-#: src/views/companies/CompanyView.vue:37
+#: src/views/companies/CompanyView.vue:41
 msgid "Company profile"
 msgstr ""
 
-#: src/views/companies/CompanyView.vue:51
+#: src/views/companies/CompanyView.vue:61
 msgid "Website"
 msgstr ""
 
-#: src/views/pages/EducationView.vue:4
+#: src/views/pages/EducationView.vue:5
 msgid "Information"
 msgstr ""
 
-#: src/views/videos/VideosView.vue:22
+#: src/views/pages/PublicationView.vue:33
+#: src/views/pages/PublicationView.vue:38
+msgid "Filter..."
+msgstr ""
+
+#: src/views/pages/SearchView.vue:3
+msgid "Search Results for:"
+msgstr ""
+
+#: src/views/videos/VideosView.vue:21
 msgid "Videos"
 msgstr ""
 
-#: src/views/videos/VideoView.vue:29
+#: src/views/videos/VideoView.vue:33
 msgid "We could not find this video."
 msgstr ""
 
-#: src/views/videos/VideoView.vue:32
+#: src/views/videos/VideoView.vue:36
 msgid "View all videos"
 msgstr ""
 
-#: src/views/videos/VideoView.vue:45
+#: src/views/videos/VideoView.vue:53
 msgid "Description"
 msgstr ""
 
-#: src/views/videos/VideoView.vue:55
+#: src/views/videos/VideoView.vue:62
 msgid "Return to videos"
 msgstr ""

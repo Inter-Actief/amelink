@@ -337,8 +337,7 @@ query Homepage($today: DateTime) {
     results {
       id
       title
-      introduction
-      author
+      content
       publicationDate
       pinned
     }
@@ -354,8 +353,7 @@ query Homepage($today: DateTime) {
     results {
       id
       title
-      introduction
-      author
+      content
       publicationDate
       pinned
     }
@@ -380,6 +378,8 @@ query Homepage($today: DateTime) {
       videoId
       videoType
       title
+      description
+      embedUrl
       thumbnailUrl
       datePublished
     }

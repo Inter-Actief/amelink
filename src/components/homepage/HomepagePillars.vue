@@ -1,8 +1,16 @@
 <template>
     <!-- The four pillar pictures from the mobile menu: each tile opens its
-         section, and the pictures of a pillar change in turn. On the stacked
-         layout they are hidden: the drawer already offers the same four. -->
-    <div class="hidden grid-cols-2 gap-2 lg:grid">
+         section, and the pictures of a pillar change in turn. `band` lays them
+         side by side under a full-width block; the default `stack` is the 2×2
+         column beside content. Both are hidden on phones: the drawer already
+         offers the same four. -->
+    <div
+        :class="
+            props.variant === 'band'
+                ? 'hidden grid-cols-2 gap-2 md:grid md:grid-cols-4'
+                : 'hidden grid-cols-2 gap-2 lg:grid'
+        "
+    >
         <RouterLink
             v-for="(pillar, index) in pillars"
             :key="pillar.labelKey"
@@ -43,6 +51,15 @@ import { RouterLink } from 'vue-router'
 import { useGettext } from 'vue3-gettext'
 import { ArrowRight } from '@lucide/vue'
 import { featuredSections } from '@/constants/pageCategories'
+
+interface Props {
+    /** `stack` is the 2×2 column beside content, `band` a row under a block. */
+    variant?: 'stack' | 'band'
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    variant: 'stack',
+})
 
 const { $gettext } = useGettext()
 
