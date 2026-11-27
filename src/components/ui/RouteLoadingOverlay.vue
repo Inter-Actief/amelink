@@ -14,13 +14,6 @@
         class="pointer-events-none fixed inset-0 z-30 flex items-center justify-center overflow-hidden"
     >
         <div class="flex flex-col items-center gap-5">
-            <LoaderCircle
-                data-overlay-icon
-                class="size-[clamp(4.5rem,12vw,7rem)] shrink-0 text-[var(--primary-color)] dark:text-white opacity-20"
-                :stroke-width="1.25"
-                aria-hidden="true"
-            />
-
             <span
                 data-overlay-label
                 class="text-meta font-medium tracking-[0.16em] text-[var(--primary-color)]/55 dark:text-white uppercase"
@@ -32,7 +25,6 @@
 </template>
 
 <script setup lang="ts">
-import { LoaderCircle } from '@lucide/vue'
 import { useGettext } from 'vue3-gettext'
 
 const { $gettext } = useGettext()
