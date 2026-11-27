@@ -96,6 +96,44 @@ export const formattedDataShort = (timestamp: number) => {
     return `${day}-${month}`
 }
 
+const relativeFormatters = new Map<string, Intl.RelativeTimeFormat>()
+
+/**
+ * "5 weeks ago" / "5 weken geleden" — the age of an item instead of its date.
+ * Homepage blocks use it where a fixed date quietly keeps passing stale content
+ * off as current. Locale data comes from the browser, like the date names.
+ */
+export const relativeAge = (timestamp: number | string) => {
+    const elapsed = new Date(timestamp).getTime() - Date.now()
+
+    if (Number.isNaN(elapsed)) {
+        return ''
+    }
+
+    const locale = dateLocales[gettext.current] ?? dateLocales.en
+    let formatter = relativeFormatters.get(locale)
+
+    if (!formatter) {
+        formatter = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' })
+        relativeFormatters.set(locale, formatter)
+    }
+
+    const days = Math.round(elapsed / 86_400_000)
+    const distance = Math.abs(days)
+
+    if (distance < 14) {
+        return formatter.format(days, 'day')
+    }
+    if (distance < 45) {
+        return formatter.format(Math.round(days / 7), 'week')
+    }
+    if (distance < 700) {
+        return formatter.format(Math.round(days / 30), 'month')
+    }
+
+    return formatter.format(Math.round(days / 365), 'year')
+}
+
 export const formattedTime = (timestamp: number) => {
     const date = new Date(timestamp)
 
