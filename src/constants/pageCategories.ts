@@ -19,40 +19,38 @@ export const mainMenu: MenuItem[] = [
         route: '/',
     },
     {
-        labelKey: 'Activities',
-        route: '/activities',
-        image: '/images/pillars/activities/activities0.jpg',
-        images: [
-            '/images/pillars/activities/activities0.jpg',
-            '/images/pillars/activities/activities1.jpg',
-            '/images/pillars/activities/activities2.jpg',
-            '/images/pillars/activities/activities3.jpg',
-            '/images/pillars/activities/activities4.jpg',
+        // What is happening now. Grouped so the header stays short; the
+        // pillar pictures stay on the children, so the mobile tiles and the
+        // homepage pillars can still find them.
+        labelKey: 'Current',
+        items: [
+            {
+                labelKey: 'Activities',
+                route: '/activities',
+                image: '/images/pillars/activities/activities0.jpg',
+                images: [
+                    '/images/pillars/activities/activities0.jpg',
+                    '/images/pillars/activities/activities1.jpg',
+                    '/images/pillars/activities/activities2.jpg',
+                    '/images/pillars/activities/activities3.jpg',
+                    '/images/pillars/activities/activities4.jpg',
+                ],
+            },
+            {
+                labelKey: 'News',
+                route: '/News',
+                image: '/images/pillars/news/news0.jpg',
+                images: ['/images/pillars/news/news0.jpg'],
+            },
+            {
+                labelKey: 'Publications',
+                route: '/publications',
+            },
+            {
+                labelKey: 'Videos',
+                route: '/videos',
+            },
         ],
-    },
-    {
-        labelKey: 'News',
-        route: '/News',
-        image: '/images/pillars/news/news0.jpg',
-        images: ['/images/pillars/news/news0.jpg'],
-    },
-    {
-        labelKey: 'Publications',
-        route: '/publications',
-    },
-    {
-        labelKey: 'Companies',
-        route: '/companies',
-        image: '/images/pillars/career/career0.jpg',
-        images: [
-            '/images/pillars/career/career0.jpg',
-            '/images/pillars/career/career1.jpg',
-            '/images/pillars/career/career2.jpg',
-        ],
-    },
-    {
-        labelKey: 'Videos',
-        route: '/videos',
     },
     {
         labelKey: 'Association',
@@ -98,13 +96,36 @@ export const mainMenu: MenuItem[] = [
         ],
     },
     {
+        labelKey: 'Companies',
+        route: '/companies',
+        image: '/images/pillars/career/career0.jpg',
+        images: [
+            '/images/pillars/career/career0.jpg',
+            '/images/pillars/career/career1.jpg',
+            '/images/pillars/career/career2.jpg',
+        ],
+    },
+    {
         labelKey: 'Contact',
         route: '/contact',
     },
 ]
 
-/** Sections that get a tile in the mobile menu instead of a plain row. */
-export const featuredSections = mainMenu.filter((item) => item.image)
+/**
+ * The sections that carry a picture, wherever they sit in the tree.
+ *
+ * These are the tiles in the mobile menu and the pillars on the homepage, so
+ * the lookup descends one level: a section that moved under a group (Current)
+ * must not lose its tile.
+ */
+export const featuredSections: MenuItem[] = mainMenu.flatMap((item) =>
+    item.image ? [item] : (item.items ?? []).filter((child) => child.image),
+)
 
-/** Menu entries that stay a plain row in the mobile menu. */
-export const secondaryMenu = mainMenu.filter((item) => !item.image && item.labelKey !== 'Home')
+/**
+ * The mobile drawer's rows: the header's menu, without Home (the drawer logo
+ * goes home). Sections that also have a tile are kept here on purpose — the
+ * drawer mirrors the header, so a visitor who expects a section in the menu
+ * finds it there too.
+ */
+export const secondaryMenu = mainMenu.filter((item) => item.labelKey !== 'Home')
