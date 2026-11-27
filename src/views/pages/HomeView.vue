@@ -20,10 +20,12 @@ import Content from '@/components/ui/Content.vue'
         </Content>
 
         <Content light>
-            <div class="flex flex-col gap-4">
-                <RecentThings />
-                <HomepagePillars variant="band" />
-            </div>
+            <HomepagePillars variant="band" />
         </Content>
+
+        <Content>
+            <RecentThings />
+        </Content>
+        
     </main>
 </template>
