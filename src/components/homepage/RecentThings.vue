@@ -178,7 +178,7 @@ import { RouterLink, type RouteLocationRaw } from 'vue-router'
 import SectionCard from '../ui/SectionCard.vue'
 import Skeleton from 'primevue/skeleton'
 import PinnedBadge from '../ui/PinnedBadge.vue'
-import { ArrowRight, FileText, Newspaper, Play } from '@lucide/vue'
+import { ArrowRight, FileText, Mailbox, Play } from '@lucide/vue'
 import type { Component } from 'vue'
 import { useGettext } from 'vue3-gettext'
 import { markedText, publicationUrl, relativeAge } from '@/functions/functions'
@@ -391,5 +391,5 @@ const actionLabel = (kind: Kind) =>
           : $gettext('Go to video page')
 
 const iconFor = (kind: Kind): Component =>
-    kind === 'news' ? Newspaper : kind === 'publication' ? FileText : Play
+    kind === 'news' ? Mailbox : kind === 'publication' ? FileText : Play
 </script>
