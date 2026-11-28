@@ -1,8 +1,7 @@
 <template>
     <component :is="wrapperElement" v-bind="wrapperProps" class="group @container block h-full">
         <Card
-            class="relative h-full overflow-hidden border border-slate-300 bg-[var(--p-page-tile)]! text-slate-900! transition-colors group-hover:border-primary dark:border-[var(--p-content-border-color)] dark:text-[var(--p-text-color)]! dark:[--p-text-muted-color:var(--p-surface-200)]"
-            :class="{ 'tile-glow': glows }"
+            class="relative h-full overflow-hidden border border-slate-300 bg-[var(--p-page-tile)]! text-slate-900! transition-colors dark:border-[var(--p-content-border-color)] dark:text-[var(--p-text-color)]! dark:[--p-text-muted-color:var(--p-surface-200)]"
             :style="typeVars"
             :pt="{
                 body: { class: 'flex h-full flex-col p-0' },
@@ -98,7 +97,7 @@
                         </div>
                         <span
                             v-else-if="props.title"
-                            class="line-clamp-2 min-w-0 text-card-title font-bold leading-tight group-hover:underline group-hover:underline-offset-2"
+                            class="tile-title line-clamp-2 min-w-0 text-card-title font-bold leading-tight"
                             >{{ props.title }}</span
                         >
 
@@ -161,7 +160,7 @@
                             </template>
                             <span
                                 v-else-if="props.title"
-                                class="line-clamp-2 min-w-0 flex-1 text-card-title font-bold leading-tight group-hover:underline group-hover:underline-offset-2"
+                                class="tile-title line-clamp-2 min-w-0 flex-1 text-card-title font-bold leading-tight"
                                 >{{ props.title }}</span
                             >
                         </div>
@@ -298,7 +297,7 @@ const imageAspect = computed<ImageAspect>(() => {
 const hasFacts = computed(() => props.facts !== undefined)
 const dateParts = computed(() => formattedDateBlock(props.date ?? 0))
 const labelText = computed(() => props.label?.text ?? '')
-/// The card's accent: the label colour, reused by the glow and the type word.
+/// The card's accent: the label colour, used by the type word.
 const typeVars = computed(() => (props.label ? { '--type': `#${props.label.color}` } : undefined))
 
 /**
@@ -308,10 +307,9 @@ const typeVars = computed(() => (props.label ? { '--type': `#${props.label.color
 const hasLink = computed(() => Boolean(props.to || props.href))
 
 /**
- * The type colour may not turn a grid of cards into a colour chart, so it is
- * a plain word at rest and a short, soft shadow while the card is hovered.
+ * The type colour may not turn a grid of cards into a colour chart: it stays a
+ * plain word on the facts line and never touches the frame.
  */
-const glows = computed(() => hasLink.value && Boolean(labelText.value))
 const showFooter = computed(() => hasLink.value && !props.hideAction && !props.loading)
 const wrapperElement = computed(() => {
     if (props.to) {
@@ -348,18 +346,36 @@ const wrapperProps = computed(() => {
 }
 
 /*
- * The hover border is the type colour muted towards the neutral card border,
- * plus a short, soft shadow. Unlayered on purpose, so it wins over the
- * group-hover border that Card gets from its utility classes.
+ * Hover, and nothing else: the frame goes to the theme's ink colour (the same
+ * declaration darkens the frame on a light card and flips it to white on a dark
+ * one) and a 2px rule grows under the title from the left. No shadow, no lift,
+ * no colour — a coloured glow is decoration that repeats the type word.
+ *
+ * The rule follows the title block rather than the words, because the title is
+ * line-clamped and cannot become an inline-block without losing the clamp.
  */
-.tile-glow:hover {
-    border-color: color-mix(in srgb, var(--type) 45%, var(--p-content-border-color, #cbd5e1));
-    box-shadow: 0 4px 12px -6px color-mix(in srgb, var(--type) 45%, transparent);
+.group:hover :deep(.p-card) {
+    border-color: var(--p-text-color);
 }
 
-.tile-glow {
-    transition:
-        box-shadow 180ms ease,
-        border-color 180ms ease;
+.tile-title {
+    position: relative;
+    padding-bottom: 0.15rem;
+}
+
+.tile-title::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 0.2rem;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 300ms ease;
+}
+
+.group:hover .tile-title::after {
+    transform: scaleX(1);
 }
 </style>
