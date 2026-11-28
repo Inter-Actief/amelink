@@ -29,11 +29,17 @@ const dateLocales: Record<string, string> = {
     nl: 'nl-NL',
 }
 
-const nameFormatters = new Map<string, {
-    weekday: Intl.DateTimeFormat,
-    month: Intl.DateTimeFormat,
-    monthYear: Intl.DateTimeFormat,
-}>()
+const nameFormatters = new Map<
+    string,
+    {
+        weekday: Intl.DateTimeFormat
+        weekdayShort: Intl.DateTimeFormat
+        month: Intl.DateTimeFormat
+        monthShort: Intl.DateTimeFormat
+        monthYear: Intl.DateTimeFormat
+        clock: Intl.DateTimeFormat
+    }
+>()
 
 /**
  * Month and weekday names come from the browser's locale data, so they follow
@@ -46,8 +52,15 @@ const dateFormatter = (locale: string) => {
     if (!formatters) {
         formatters = {
             weekday: new Intl.DateTimeFormat(locale, { weekday: 'long' }),
+            weekdayShort: new Intl.DateTimeFormat(locale, { weekday: 'short' }),
             month: new Intl.DateTimeFormat(locale, { month: 'long' }),
+            monthShort: new Intl.DateTimeFormat(locale, { month: 'short' }),
             monthYear: new Intl.DateTimeFormat(locale, { month: 'short', year: 'numeric' }),
+            clock: new Intl.DateTimeFormat(locale, {
+                hour: '2-digit',
+                minute: '2-digit',
+                hourCycle: 'h23',
+            }),
         }
         nameFormatters.set(locale, formatters)
     }
@@ -85,6 +98,36 @@ export const formattedDateBlock = (timestamp: number | string) => {
         day: String(date.getDate()),
         monthYear: formatters.monthYear.format(date),
     }
+}
+
+/**
+ * "Mon 30 Nov" — the compact day and month a card's facts row starts with.
+ * Built from parts rather than one pattern so no locale adds a comma.
+ */
+export const formattedDayMonth = (timestamp: number | string) => {
+    const date = new Date(timestamp)
+    const formatters = dateFormatter(dateLocales[gettext.current] ?? dateLocales.en)
+
+    return `${formatters.weekdayShort.format(date)} ${date.getDate()} ${formatters.monthShort.format(date)}`
+}
+
+/** "15:45" in the reader's own time zone; the API sends UTC. */
+export const formattedClock = (timestamp: number | string) => {
+    const formatters = dateFormatter(dateLocales[gettext.current] ?? dateLocales.en)
+
+    return formatters.clock.format(new Date(timestamp))
+}
+
+/**
+ * The one-line facts row on an activity card: when it starts and where it is.
+ * No labels and no end time — the detail page owns those.
+ */
+export const activityFacts = (begin: number | string, location?: string | null) => {
+    const when = `${formattedDayMonth(begin)}, ${formattedClock(begin)}`
+    // The venue is the useful half of a location; "7521 PT Enschede" is not.
+    const place = location?.split(',')[0]?.trim()
+
+    return place ? `${when} · ${place}` : when
 }
 
 export const formattedDataShort = (timestamp: number) => {

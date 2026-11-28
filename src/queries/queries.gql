@@ -5,6 +5,8 @@ query OverviewActivities($limit: Int, $offset: Int, $startDate: DateTime!) {
       begin
       summary
       description
+      promo
+      location
       imageIcon
       activityLabel {
         name
@@ -62,6 +64,8 @@ query UpcomingActivities($limit: Int, $offset: Int, $beginDate: DateTime) {
       id
       begin
       description
+      promo
+      location
       summary
       imageIcon
       activityLabel {
