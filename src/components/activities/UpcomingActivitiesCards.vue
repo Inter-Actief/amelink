@@ -17,7 +17,15 @@
                     v-if="loading"
                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pb-4"
                 >
-                    <TileCard v-for="n in perpage" :key="n" loading />
+                    <TileCard
+                        v-for="n in perpage"
+                        :key="n"
+                        loading
+                        aspect="video"
+                        show-media
+                        hide-action
+                        :skeleton-lines="2"
+                    />
                 </div>
 
                 <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pb-4">
@@ -47,8 +55,9 @@
                 </div>
             </Transition>
             <Pagination
-                v-if="totalCount"
+                v-if="totalCount || loading"
                 v-bind="query"
+                :loading="loading"
                 :totalCount="totalCount!"
                 :limit="perpage"
                 :rowsPerPage="[perpage, 10]"

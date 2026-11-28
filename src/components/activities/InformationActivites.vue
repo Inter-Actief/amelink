@@ -5,21 +5,21 @@
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-3 font-bold">{{ $gettext('Who') }}</div>
                     <div class="col-span-9">
-                        <Skeleton v-if="loading" width="40%" height="1.5rem"></Skeleton>
+                        <Skeleton v-if="loading" width="40%" height="2.2rem"></Skeleton>
                         <span v-else>{{ props.item.organizer.name }}</span>
                     </div>
                 </div>
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-3 font-bold">{{ $gettext('What') }}</div>
                     <div class="col-span-9">
-                        <Skeleton v-if="loading" width="60%" height="1.5rem"></Skeleton>
+                        <Skeleton v-if="loading" width="60%" height="2.2rem"></Skeleton>
                         <span v-else>{{ props.item.summary }}</span>
                     </div>
                 </div>
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-3 font-bold">{{ $gettext('Where') }}</div>
                     <div class="col-span-9">
-                        <Skeleton v-if="loading" width="50%" height="1.5rem"></Skeleton>
+                        <Skeleton v-if="loading" width="50%" height="2.2rem"></Skeleton>
                         <span v-else>{{ props.item.location }}</span>
                     </div>
                 </div>
@@ -28,8 +28,8 @@
                     <div class="col-span-9">
                         <template v-if="loading">
                             <div class="space-y-2">
-                                <Skeleton width="70%" height="1.5rem"></Skeleton>
-                                <Skeleton width="75%" height="1.5rem"></Skeleton>
+                                <Skeleton width="70%" height="2.2rem"></Skeleton>
+                                <Skeleton width="75%" height="2.2rem"></Skeleton>
                             </div>
                         </template>
                         <span v-else>
@@ -47,14 +47,14 @@
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-3 font-bold">{{ $gettext('Label') }}</div>
                     <div class="col-span-9">
-                        <Skeleton v-if="loading" width="35%" height="1.5rem"></Skeleton>
+                        <Skeleton v-if="loading" width="35%" height="2.2rem"></Skeleton>
                         <span v-else>{{ props.item.activityLabel[`nameEn`] }}</span>
                     </div>
                 </div>
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-3 font-bold">{{ $gettext('Costs') }}</div>
                     <div class="col-span-9">
-                        <Skeleton v-if="loading" width="25%" height="1.5rem"></Skeleton>
+                        <Skeleton v-if="loading" width="25%" height="2.2rem"></Skeleton>
                         <template v-else>
                             <template v-if="props.item.hasCosts">
                                 {{ props.item.price }} euro

@@ -21,15 +21,22 @@
                 </div>
             </template>
         </Suspense>
-        <Content light v-if="router.currentRoute.value.name != 'home'">
-            <LogoSlider />
-        </Content>
-        <Footer />
+        <!-- Only rendered once the incoming view exists. Painting these before
+             that puts the footer above the fold on a still-empty page and then
+             pushes it down when the content arrives, which was the largest
+             source of layout shift on every overview page. -->
+        <template v-if="viewResolved">
+            <Content light v-if="router.currentRoute.value.name != 'home'">
+                <LogoSlider />
+            </Content>
+            <Footer />
+        </template>
     </div>
 </template>
 
 <script setup lang="ts">
 import ProgressBar from 'primevue/progressbar'
+import { ref } from 'vue'
 import { RouterView, useRouter } from 'vue-router'
 import Header from '@/components/header/Header.vue'
 import Footer from '@/components/footer/Footer.vue'
@@ -51,6 +58,16 @@ themeStore.initialiseTheme()
 
 const loading = useLoadingStore()
 const { isLoading } = storeToRefs(loading)
+
+// The initial navigation may or may not have finished by the time this component
+// is created, so start from the router's own state instead of assuming false.
+const viewResolved = ref(router.currentRoute.value.matched.length > 0)
+router.beforeEach(() => {
+    viewResolved.value = false
+})
+router.afterEach(() => {
+    viewResolved.value = true
+})
 
 registerToast(useToast())
 </script>

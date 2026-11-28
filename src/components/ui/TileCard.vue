@@ -69,14 +69,20 @@
                     class="flex flex-col gap-[0.35rem] px-4 py-[0.9rem]"
                     :class="!isLogo ? compactBodyClasses : ''"
                 >
-                    <span
-                        v-if="props.loading"
-                        class="text-[1.1rem] font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-[var(--p-text-muted-color)]"
+                    <!-- The loading state enumerates the same rows, in the same order
+                         and at the same heights, as the loaded card below. Bar heights
+                         are the rendered line boxes, not the font sizes: a 1.2rem date
+                         sits in a ~1.7rem line box, an excerpt line in ~1.9rem. -->
+                    <div
+                        v-if="props.loading && !isLogo"
+                        class="flex flex-row items-center justify-between gap-[0.6rem]"
                     >
-                        <Skeleton height="1.4rem" width="45%" />
-                    </span>
+                        <Skeleton height="2.3rem" width="10rem" />
+                        <Skeleton v-if="props.label" height="1.7rem" width="5rem" />
+                    </div>
+
                     <span
-                        v-else-if="props.kicker && !labelText"
+                        v-if="!props.loading && props.kicker && !labelText"
                         class="text-[1.1rem] font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-[var(--p-text-muted-color)]"
                         >{{ props.kicker }}</span
                     >
@@ -103,12 +109,21 @@
                     </div>
 
                     <div class="flex flex-row items-start justify-between gap-[0.5rem]">
-                        <template v-if="props.loading">
-                            <div class="w-full">
-                                <Skeleton height="2rem" width="90%" />
-                                <Skeleton height="1.9rem" width="55%" class="mt-1" />
-                            </div>
-                        </template>
+                        <div v-if="props.loading" class="flex w-full flex-col gap-[0.2rem]">
+                            <!-- A company name is one line; an article or activity
+                                 title wraps to two, which is what the grid sizes on. -->
+                            <Skeleton height="2.3rem" width="90%" />
+                            <!-- In the row layout the title sits beside the picture
+                                 and mostly fits one line (68% of a real
+                                 publication page), so the second line is only
+                                 reserved in the column layout. -->
+                            <Skeleton
+                                v-if="!isLogo"
+                                height="2.3rem"
+                                width="55%"
+                                :class="props.skeletonTitleLines > 1 ? '' : '@min-[320px]:hidden'"
+                            />
+                        </div>
                         <span
                             v-else-if="props.title"
                             class="line-clamp-2 min-w-0 flex-1 text-card-title font-bold leading-tight group-hover:underline group-hover:underline-offset-2"
@@ -116,9 +131,13 @@
                         >
                     </div>
 
-                    <div v-if="props.loading" class="text-meta">
-                        <Skeleton height="1.5rem" width="100%" />
-                        <Skeleton height="1.5rem" width="80%" class="mt-1" />
+                    <div v-if="props.loading && props.skeletonLines > 0" class="flex flex-col">
+                        <Skeleton
+                            v-for="line in props.skeletonLines"
+                            :key="line"
+                            height="2rem"
+                            :width="line === props.skeletonLines ? '62%' : '100%'"
+                        />
                     </div>
                     <div
                         v-else-if="props.subtitle || $slots.default"
@@ -127,9 +146,19 @@
                         <slot>{{ props.subtitle }}</slot>
                     </div>
 
+                    <!-- Reserve the footer row while loading: the loaded card keeps
+                         it at the bottom (mt-auto), so dropping it would shrink the
+                         tile by a line and shift the grid when the data lands. -->
+                    <span
+                        v-if="props.loading && !props.hideAction"
+                        class="link mt-auto inline-flex items-center gap-[0.35rem] pt-2"
+                    >
+                        <Skeleton height="2.3rem" width="6rem" />
+                    </span>
+
                     <!-- a plain .link: the sliding underline is the site-wide one -->
                     <span
-                        v-if="showFooter"
+                        v-else-if="showFooter"
                         class="link mt-auto inline-flex items-center gap-[0.35rem] pt-2 text-meta font-semibold text-primary dark:text-[var(--p-text-color)]"
                     >
                         {{ props.actionLabel || $gettext('Read more')
@@ -186,12 +215,22 @@ interface Props {
     hideAction?: boolean
     /** Render Skeletons with the same geometry as the real tile. */
     loading?: boolean
+    /** Text lines the loaded tile shows (an excerpt or a subtitle), so the
+     *  skeleton reserves the same space. Grids whose cards have no second text
+     *  block leave this at 0. */
+    skeletonLines?: number
+    /** Title lines in the compact row layout, where the title sits beside the
+     *  picture. Most titles take two; a grid of short titles (publication
+     *  covers) takes one. The column layout always reserves two. */
+    skeletonTitleLines?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
     aspect: '4/3',
     fit: 'cover',
     placeholder: '/images/placeholder/photo.jpg',
+    skeletonLines: 0,
+    skeletonTitleLines: 2,
 })
 
 /**
@@ -207,10 +246,14 @@ const ASPECT_CLASS: Record<Aspect, string> = {
     logo: '',
 }
 
+/**
+ * `loading` used to imply a media box, which invented a picture on text-only
+ * cards and made them a third taller than the card they stood in for. A
+ * skeleton only shows media when the loaded tile would: it has an image, it is
+ * a logo well, or the caller opted in with `showMedia`.
+ */
 const isLogo = computed(() => props.aspect === 'logo')
-const hasMedia = computed(() =>
-    Boolean(props.image || props.loading || isLogo.value || props.showMedia),
-)
+const hasMedia = computed(() => Boolean(props.image || isLogo.value || props.showMedia))
 const mediaBoxClass = computed(() => ASPECT_CLASS[props.aspect])
 
 /**

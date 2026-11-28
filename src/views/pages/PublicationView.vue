@@ -55,6 +55,8 @@ const selectedRows = ref(limit.value)
                             :key="`skeleton-${_}`"
                             loading
                             aspect="a4"
+                            show-media
+                            :skeleton-title-lines="1"
                         />
                     </template>
                     <template v-else>
@@ -72,6 +74,7 @@ const selectedRows = ref(limit.value)
                 </div>
                 <Pagination
                     v-bind="query"
+                    :loading="loading"
                     :limit="limit"
                     :total-count="totalCount!"
                     @update:rows="(rows) => (selectedRows = rows)"

@@ -6,11 +6,30 @@
             </RouterLink>
         </template>
         <template #content>
-            <div v-if="loading" class="flex flex-col gap-2">
-                <div v-for="_ in 3" :key="_" class="flex flex-row gap-4 items-center py-2">
-                    <Skeleton width="5rem" height="7rem" />
-                    <div class="flex-1">
-                        <PlaceholderText :lines="1" />
+            <!-- The placeholder takes the same shape and the same surface as the
+                 list: four rows (the query asks for four), each a bordered little
+                 card with a cover box and two 1.9rem lines, which is what a
+                 one-line title plus a date actually occupy. The border has to
+                 follow the theme too — left at slate-300 it draws a white outline
+                 around every placeholder row on a dark card. -->
+            <div
+                v-if="loading"
+                class="gap-2"
+                :class="
+                    props.layout === 'columns' ? 'grid grid-cols-1 md:grid-cols-2' : 'flex flex-col'
+                "
+            >
+                <div
+                    v-for="_ in 4"
+                    :key="_"
+                    class="flex flex-row items-center gap-2 rounded-[var(--border-radius)] border border-slate-300 bg-[var(--p-page-tile)] p-2 dark:border-[var(--p-content-border-color)]"
+                >
+                    <div class="aspect-a4 w-9 shrink-0">
+                        <Skeleton height="100%" />
+                    </div>
+                    <div class="flex min-w-0 flex-1 flex-col">
+                        <Skeleton height="1.9rem" width="90%" />
+                        <Skeleton height="1.9rem" width="50%" />
                     </div>
                 </div>
             </div>
@@ -57,7 +76,6 @@ import Skeleton from 'primevue/skeleton'
 import { RouterLink } from 'vue-router'
 import { useGettext } from 'vue3-gettext'
 import { computed } from 'vue'
-import PlaceholderText from '../placeholder/PlaceholderText.vue'
 import { formattedData, publicationUrl } from '@/functions/functions'
 import { useHomepageContent } from '@/composables/homepageContent'
 

@@ -3,7 +3,14 @@
         <template #content>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 items-stretch pb-2">
                 <template v-if="loading">
-                    <TileCard v-for="_ in 10" :key="`skeleton-${_}`" loading />
+                    <TileCard
+                        v-for="_ in 10"
+                        :key="`skeleton-${_}`"
+                        loading
+                        hide-action
+                        :skeleton-title-lines="1"
+                        :skeleton-lines="2"
+                    />
                 </template>
                 <template v-else>
                     <TileCard
@@ -21,7 +28,7 @@
                 </template>
             </div>
 
-            <Pagination v-bind="query" :totalCount="totalCount!" :limit="10" />
+            <Pagination v-bind="query" :loading="loading" :totalCount="totalCount!" :limit="10" />
         </template>
     </SectionCard>
 </template>
