@@ -19,9 +19,11 @@
         >
             <Logo class="shrink-0 [&_svg]:h-[3.2rem] [&_svg]:w-auto" />
 
+            <!-- The gap sits between the items rather than in their padding, so
+                 the hover underline stays tight to its label. -->
             <nav
                 ref="navEl"
-                class="hidden h-full min-w-0 flex-1 items-center overflow-visible min-[1280px]:flex"
+                class="hidden h-full min-w-0 flex-1 items-center gap-4 overflow-visible min-[1280px]:flex"
                 :aria-label="$gettext('Main')"
             >
                 <div
@@ -242,16 +244,22 @@ function isActive(item: MenuItem) {
 }
 
 /** One visual language for every top-level item, whether it is a link or a
- *  dropdown trigger. The underline is the same slide-in bar as `.link`. */
-const navLinkBase =
-    'relative flex h-full items-center gap-[0.3rem] whitespace-nowrap px-[clamp(0.3rem,0.35vw,0.45rem)] pt-[0.85rem] text-[clamp(1.25rem,0.9vw,1.35rem)] font-medium text-white/90 transition-colors duration-150 after:absolute after:inset-x-0 after:bottom-0 after:h-[0.3rem] after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-200 hover:text-white hover:after:scale-x-100 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-current'
+ *  dropdown trigger. The underline is the same slide-in bar as `.link`.
+ *
+ *  The active look is NOT appended to the resting look: both set `font-weight`,
+ *  `color` and the `::after` scale, and two utilities for one property resolve
+ *  by the order they appear in the generated CSS, not by the order in the class
+ *  attribute. The resting pair therefore wins and the active state never shows.
+ *  Keep those three properties in the variants below and nowhere else. */
+const navLinkShared =
+    'relative flex h-full items-center gap-[0.3rem] whitespace-nowrap px-[clamp(0.3rem,0.35vw,0.45rem)] pt-[0.85rem] text-[clamp(1.25rem,0.9vw,1.35rem)] transition-colors duration-150 after:absolute after:inset-x-0 after:bottom-0 after:h-[0.3rem] after:origin-left after:bg-current after:transition-transform after:duration-200 hover:text-white hover:after:scale-x-100 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-current'
+
+const navLinkResting = 'font-medium text-white/90 after:scale-x-0'
+const navLinkCurrent = 'font-bold text-white after:scale-x-100'
 
 function navLinkClasses(item: MenuItem) {
-    return [
-        navLinkBase,
-        isActive(item) || openMenu.value === item.labelKey
-            ? 'font-bold text-white after:scale-x-100'
-            : '',
-    ]
+    const current = isActive(item) || openMenu.value === item.labelKey
+
+    return [navLinkShared, current ? navLinkCurrent : navLinkResting]
 }
 </script>

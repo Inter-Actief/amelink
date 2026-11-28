@@ -1,7 +1,7 @@
 <template>
     <component :is="wrapperElement" v-bind="wrapperProps" class="group @container block h-full">
         <Card
-            class="relative h-full overflow-hidden border border-slate-300 bg-white! text-slate-900! transition-colors group-hover:border-primary dark:border-[var(--p-content-border-color)] dark:bg-[var(--p-content-hover-background)]! dark:text-[var(--p-text-color)]!"
+            class="relative h-full overflow-hidden border border-slate-300 bg-[var(--p-page-tile)]! text-slate-900! transition-colors group-hover:border-primary dark:border-[var(--p-content-border-color)] dark:text-[var(--p-text-color)]! dark:[--p-text-muted-color:var(--p-surface-200)]"
             :class="{ 'tile-glow': glows }"
             :style="typeVars"
             :pt="{
@@ -159,7 +159,7 @@
                     <!-- a plain .link: the sliding underline is the site-wide one -->
                     <span
                         v-else-if="showFooter"
-                        class="link mt-auto inline-flex items-center gap-[0.35rem] pt-2 text-meta font-semibold text-primary dark:text-[var(--p-primary-300)]"
+                        class="link mt-auto inline-flex items-center gap-[0.35rem] pt-2 text-meta font-semibold text-primary dark:text-[var(--p-text-color)]"
                     >
                         {{ props.actionLabel || $gettext('Read more')
                         }}<ArrowRight class="size-[1.3rem]" />

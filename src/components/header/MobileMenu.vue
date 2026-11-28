@@ -46,24 +46,10 @@
                 </RouterLink>
             </div>
 
-            <!-- Everything that is not a pillar is a row, including the
-                 education children that used to be a line of small links. -->
+            <!-- The same rows as the header, so nothing is reachable only on a
+                 wide screen. A section that also has a tile appears here too:
+                 the tile is a shortcut, the row is the menu. -->
             <nav class="mt-3 flex flex-col pt-2">
-                <component
-                    v-for="item in educationLinks"
-                    :is="item.url ? 'a' : RouterLink"
-                    :key="item.labelKey"
-                    v-bind="
-                        item.url
-                            ? { href: item.url, target: '_blank', rel: 'noopener' }
-                            : { to: item.route }
-                    "
-                    class="link flex flex-row py-1.5"
-                    @click="close"
-                >
-                    {{ label(item) }}
-                </component>
-
                 <template v-for="item in secondaryMenu" :key="item.labelKey">
                     <RouterLink
                         v-if="item.route && !item.items"
@@ -157,13 +143,6 @@ const label = (item: MenuItem) => $gettext(item.labelKey)
  * page itself (education).
  */
 const sectionRoute = (item: MenuItem) => item.route ?? item.items?.[0]?.route ?? '/'
-
-/** Children of a tiled section, rendered as ordinary menu rows. */
-const educationLinks = computed(() =>
-    featuredSections.flatMap((item) =>
-        (item.items ?? []).filter((child) => child.labelKey !== 'Information'),
-    ),
-)
 
 const toggle = (key: string) => {
     expanded.value = expanded.value.includes(key)
