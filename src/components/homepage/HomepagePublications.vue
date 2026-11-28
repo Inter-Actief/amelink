@@ -6,10 +6,12 @@
             </RouterLink>
         </template>
         <template #content>
-            <!-- The placeholder takes the same shape as the list: four rows (the
-                 query asks for four) laid out the same way, with a cover box and
-                 two 1.9rem lines, which is what a one-line title plus a date
-                 actually occupy. -->
+            <!-- The placeholder takes the same shape and the same surface as the
+                 list: four rows (the query asks for four), each a bordered little
+                 card with a cover box and two 1.9rem lines, which is what a
+                 one-line title plus a date actually occupy. The border has to
+                 follow the theme too — left at slate-300 it draws a white outline
+                 around every placeholder row on a dark card. -->
             <div
                 v-if="loading"
                 class="gap-2"
@@ -20,7 +22,7 @@
                 <div
                     v-for="_ in 4"
                     :key="_"
-                    class="flex flex-row items-center gap-2 rounded-[var(--border-radius)] border border-slate-300 p-2"
+                    class="flex flex-row items-center gap-2 rounded-[var(--border-radius)] border border-slate-300 bg-[var(--p-page-tile)] p-2 dark:border-[var(--p-content-border-color)]"
                 >
                     <div class="aspect-a4 w-9 shrink-0">
                         <Skeleton height="100%" />
