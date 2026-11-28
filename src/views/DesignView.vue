@@ -1,574 +1,598 @@
-<!--
-  THROWAWAY design pad (dev only). Delete this file and its route once a
-  direction is picked.
+<script setup lang="ts">
+/**
+ * THROWAWAY DESIGN PAD — issue #150 "Activity card too AI like".
+ *
+ * Round 4: variant 1 was picked (one metaline, no labels, promo as teaser).
+ *
+ * Round 3: the CONTENT is settled — one metaline with no labels
+ * ("Mon 30 Nov, 15:45 · MBasement · Social"), then the title, then the promo as
+ * teaser (description as the fallback). Every card here is drawn at the
+ * homepage geometry (421x131 row) and varies the DESIGN around that content.
+ *
+ * The type colour is carried two ways, because both have to survive dark mode:
+ * as a mixed-ink word (color-mix with --p-text-color) and as a neutral word with
+ * the colour moved out of the text (dot, or edge rule).
+ *
+ * Data is real: pulled from staging GraphQL on 27 Nov 2026, including the ugly
+ * cases (empty location, "TBD", a 16-day event, a 36-character committee name,
+ * activities with no promo text and activities you cannot sign up for).
+ */
+import { imageSrc } from '@/composables/util'
 
-  The card structure is the shipping one: photo plate on the right, date row on
-  top, title, teaser. Only the typography of the date and of the activity label
-  changes between options.
--->
+type Activity = {
+    id: number
+    summary: string
+    begin: string
+    end: string
+    location: string
+    organizer: string
+    label: string
+    color: string
+    price: string
+    enrollment: boolean
+    enrollmentFull: boolean
+    enrollmentEnd: string | null
+    promo: string
+    teaser: string
+    icon?: string
+}
+
+const sample: Activity[] = [
+    {
+        id: 7967,
+        summary: 'Feutenmarathon',
+        begin: '2026-11-29T11:00:00+00:00',
+        end: '2026-11-30T00:00:00+00:00',
+        location: 'Abscint',
+        organizer: "Members' Initiative",
+        label: 'Social',
+        color: '099A2B',
+        price: '0.00',
+        enrollment: true,
+        enrollmentFull: false,
+        enrollmentEnd: '2026-11-29T19:00:00+00:00',
+        promo: '',
+        teaser: 'Thirteen hours of Mercurius: the M-Basement turns into the corporate world of Feuten, and you get lasagna out of it.',
+    },
+    {
+        id: 7975,
+        summary: 'Pepernoten Bakken Workshop',
+        begin: '2026-11-30T14:45:00+00:00',
+        end: '2026-11-30T17:00:00+00:00',
+        location: 'MBasement',
+        organizer: 'Cooking Club',
+        label: 'Social',
+        color: '099A2B',
+        price: '5.00',
+        enrollment: true,
+        enrollmentFull: false,
+        enrollmentEnd: '2026-11-28T22:59:00+00:00',
+        promo: 'Do you want to bake some yummy pepernoten, a dutch cookie-like confectionery? Enroll for the workshop and take them home.',
+        teaser: 'The Cooking Club brings the ovens and the ingredients, you bring nothing and take a bag of pepernoten home.',
+    },
+    {
+        id: 7981,
+        summary: 'Studiereis Duality Inschrijving',
+        begin: '2026-11-06T16:00:00+00:00',
+        end: '2026-11-22T22:59:00+00:00',
+        location: '',
+        organizer: 'Study Tour Committee 2027',
+        label: 'General',
+        color: '372652',
+        price: '0.00',
+        enrollment: false,
+        enrollmentFull: false,
+        enrollmentEnd: null,
+        promo: '',
+        teaser: 'Registration for the study tour of 2027 opens today and closes in three weeks. Read everything before you sign up.',
+    },
+    {
+        id: 7972,
+        summary: 'DemCon Lunchlezing',
+        begin: '2026-11-10T11:45:00+00:00',
+        end: '2026-11-10T12:30:00+00:00',
+        location: 'RA 1501',
+        organizer: 'Committee for Lectures and Excursions',
+        label: 'Career',
+        color: '2450A8',
+        price: '0.00',
+        enrollment: true,
+        enrollmentFull: false,
+        enrollmentEnd: '2026-11-06T11:00:00+00:00',
+        promo: '',
+        teaser: 'A lunch lecture by DemCon: how a steel fabricator ends up building machines, robots and software for a whole production line.',
+    },
+    {
+        id: 7978,
+        summary: 'aXi Hot ones',
+        begin: '2026-11-24T16:30:00+00:00',
+        end: '2026-11-24T17:30:00+00:00',
+        location: 'Educafe',
+        organizer: 'aXi',
+        label: 'Social',
+        color: '099A2B',
+        price: '6.00',
+        enrollment: true,
+        enrollmentFull: false,
+        enrollmentEnd: '2026-11-23T14:00:00+00:00',
+        promo: 'Do you dare tasting 10 sauces ranging from mild spicy to fire breathing on some hot chicken wings from Hot Ones?',
+        teaser: 'Ten sauces, one hour, chicken wings get progressively worse. Signed waiver is part of the joke.',
+        icon: '/images/pillars/activities/activities2.jpg',
+    },
+    {
+        id: 7950,
+        summary: 'VriMiBo',
+        begin: '2026-11-06T15:00:00+00:00',
+        end: '2026-11-06T21:00:00+00:00',
+        location: 'Abscint',
+        organizer: 'Sociëteitscommissie',
+        label: 'Social',
+        color: '099A2B',
+        price: '0.00',
+        enrollment: false,
+        enrollmentFull: false,
+        enrollmentEnd: null,
+        promo: '',
+        teaser: 'The free Friday afternoon drink of the Sociëteitscommissie. Walk in, grab a beer, no sign-up needed.',
+    },
+    {
+        id: 7984,
+        summary: 'Christmas Craft Evening',
+        begin: '2026-11-23T15:00:00+00:00',
+        end: '2026-11-23T19:00:00+00:00',
+        location: 'TBD',
+        organizer: 'Christmas Committee 2026',
+        label: 'Social',
+        color: '099A2B',
+        price: '2.00',
+        enrollment: true,
+        enrollmentFull: false,
+        enrollmentEnd: '2026-11-23T12:00:00+00:00',
+        promo: '',
+        teaser: 'Knitting, glueing and way too much glitter. Materials are included for two euro.',
+    },
+    {
+        id: 7979,
+        summary: 'Freshmen Ice Skating',
+        begin: '2026-12-02T19:00:00+00:00',
+        end: '2026-12-02T22:00:00+00:00',
+        location: 'IJsbaan Twente',
+        organizer: 'Freshmen Committee',
+        label: 'Social',
+        color: '099A2B',
+        price: '7.50',
+        enrollment: true,
+        enrollmentFull: false,
+        enrollmentEnd: '2026-12-01T23:59:00+00:00',
+        promo: 'Two hours on the ice at IJsbaan Twente, with the whole first-year cohort. Bring gloves and a beanie, hire skates there.',
+        teaser: 'Two hours on the ice at IJsbaan Twente. Bring gloves and a beanie, hire skates there.',
+        icon: 'https://media.ia.utwente.nl/amelie/activities/icon/freshman_skating_poster.png',
+    },
+]
+
+const labels = [
+    { name: 'Social', color: '099A2B' },
+    { name: 'Career', color: '2450A8' },
+    { name: 'Education', color: 'DC332E' },
+    { name: 'General', color: '372652' },
+]
+
+const pick = (...ids: number[]) => ids.map((id) => sample.find((a) => a.id === id)!)
+/** The same three cards in every section, so only the design varies. */
+const row1 = pick(7975, 7978, 7979)
+
+/* ---------- formatting: Intl only, nothing hardcoded ---------- */
+
+const LOCALE = 'en-GB'
+const dateFmt = new Intl.DateTimeFormat(LOCALE, {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+})
+const longDateFmt = new Intl.DateTimeFormat(LOCALE, {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+})
+const timeFmt = new Intl.DateTimeFormat(LOCALE, {
+    hour: '2-digit',
+    minute: '2-digit',
+    hourCycle: 'h23',
+})
+const moneyFmt = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' })
+
+const day = (iso: string) => dateFmt.format(new Date(iso))
+const dayLong = (iso: string) => longDateFmt.format(new Date(iso))
+const time = (iso: string) => timeFmt.format(new Date(iso))
+const multiDay = (a: Activity) =>
+    new Date(a.begin).toDateString() !== new Date(a.end).toDateString()
+/** Same day: a range. Over midnight: mark it. Longer than a day: both dates. */
+const when = (a: Activity) => {
+    const hours = (Date.parse(a.end) - Date.parse(a.begin)) / 3600000
+    if (!multiDay(a)) return `${day(a.begin)}, ${time(a.begin)} – ${time(a.end)}`
+    if (hours <= 24) return `${day(a.begin)}, ${time(a.begin)} – ${time(a.end)} (+1)`
+    return `${day(a.begin)}, ${time(a.begin)} → ${day(a.end)}, ${time(a.end)}`
+}
+const cost = (a: Activity) => (Number(a.price) > 0 ? moneyFmt.format(Number(a.price)) : 'Free')
+const signup = (a: Activity) => {
+    if (!a.enrollment) return 'Walk in'
+    if (a.enrollmentFull) return 'Full'
+    if (a.enrollmentEnd) return `Sign up by ${day(a.enrollmentEnd)}`
+    return 'Sign up open'
+}
+const place = (a: Activity) => a.location || 'Location to be announced'
+/** Decided: the promo is written to be a teaser, so it wins; description is the fallback. */
+const teaserOf = (a: Activity) => a.promo || a.teaser
+const photo = (a: Activity) => {
+    if (!a.icon) return '/images/placeholder/photo.jpg'
+    return a.icon.startsWith('/') || a.icon.startsWith('http') ? a.icon : imageSrc(a.icon)
+}
+const monthFmt = new Intl.DateTimeFormat(LOCALE, { month: 'short' })
+const dayNum = (iso: string) => String(new Date(iso).getDate())
+const monthShort = (iso: string) => monthFmt.format(new Date(iso))
+/** Locked: one line, no labels, start time only. */
+const lineWhen = (a: Activity) => `${day(a.begin)}, ${time(a.begin)}`
+
+/** Hover options: one signal each, on top of the card that ships today. */
+const options = [
+    {
+        n: 0,
+        name: 'Today',
+        note: 'Type-coloured border, a coloured glow, and an underline — three signals at once.',
+    },
+    { n: 1, name: 'Underline only', note: 'The frame and the shadow go away. Only the title answers.' },
+    {
+        n: 2,
+        name: 'Ink border + underline',
+        note: 'The frame goes to ink (theme text colour), the text underlines.',
+    },
+    { n: 3, name: 'Ink border only', note: 'The frame answers, the title stays still.' },
+    {
+        n: 4,
+        name: 'Sliding bar',
+        note: 'The site-wide .link bar: a 2px rule grows under the title from the left.',
+    },
+    {
+        n: 5,
+        name: 'Surface tint',
+        note: 'The paper darkens one step and the title underlines.',
+    },
+    { n: 6, name: 'Nothing but the pointer', note: 'No visual change at all. The honest minimum.' },
+    {
+        n: 7,
+        name: 'Sliding bar + ink frame',
+        note: 'The frame goes to ink, and the 2px rule grows under the title from the left.',
+    },
+]
+
+</script>
 <template>
     <div class="pad">
-        <div class="shell pad-intro">
-            <h1 class="pad-h1">Date and activity label — typography pad</h1>
-            <p class="pad-sub">
-                Same card, same six activities. Only the two small strings at the top of each card
-                are re-set. Today both are tiny wide-tracked caps, which is the loudest template
-                tell in the card.
+        <div class="shell intro">
+            <h1>Activity card · the hover effect, made quiet</h1>
+            <p>
+                What ships today does <b>three</b> things at once: the border turns the activity
+                type's colour, a coloured shadow glows underneath, and the title underlines. The
+                colour is decoration — it tells you nothing you cannot already read in the type
+                word — and a tinted glow is the loudest of the usual tells. Each option below
+                keeps <b>one</b> of those signals or replaces it — except the last, which pairs two of them. Same three activities, same
+                421×131 card. <b>The middle card of every row is the one being hovered.</b>
             </p>
         </div>
 
-        <!-- baseline: the real component, untouched -->
-        <section class="pad-opt">
-            <div class="shell">
-                <div class="head">
-                    <span class="pad-badge">OPTION 0</span>
-                    <h2 class="pad-title">Today</h2>
-                    <p class="note">
-                        “29 NOV 2026” in 11.5px caps, 0.1em tracking, over “SOCIAL” in 9.5px bold
-                        caps, 0.12em tracking. Two tracked cap strings, one above the other's
-                        shoulder.
-                    </p>
-                </div>
-
-                <SectionCard pageBg name="Upcoming Activities">
-                    <template #info>
-                        <a class="link" href="#">View all activities</a>
-                    </template>
-                    <template #content>
-                        <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-                            <TileCard
-                                v-for="item in items"
-                                :key="item.id"
-                                :title="item.title"
-                                :date="item.iso"
-                                aspect="video"
-                                hide-action
-                                show-media
-                                :image="item.image ?? undefined"
-                                placeholder="/images/placeholder/shape.svg"
-                                fit="contain"
-                                :label="{ color: item.color, text: item.type }"
-                                to="#"
-                            >
-                                <div class="line-clamp-2">{{ item.excerpt }}</div>
-                            </TileCard>
-                        </div>
-                    </template>
-                </SectionCard>
+        <section v-for="opt in options" :key="opt.n" class="opt">
+            <div class="opt-head">
+                <span class="opt-badge">{{ opt.n }}</span>
+                <span class="opt-name">{{ opt.name }}</span>
+                <span class="opt-note">{{ opt.note }}</span>
             </div>
-        </section>
 
-        <section
-            v-for="opt in options"
-            :key="opt.letter"
-            class="pad-opt"
-            :class="`pad-opt-${opt.tint}`"
-        >
-            <div class="shell">
-                <div class="head">
-                    <span class="pad-badge">OPTION {{ opt.letter }}</span>
-                    <h2 class="pad-title">{{ opt.name }}</h2>
-                    <p class="note">{{ opt.note }}</p>
-                </div>
-
-                <SectionCard pageBg name="Upcoming Activities">
-                    <template #info>
-                        <a class="link" href="#">View all activities</a>
-                    </template>
-                    <template #content>
-                        <div class="grid">
-                            <a
-                                v-for="item in items"
-                                :key="item.id"
-                                href="#"
-                                class="card"
-                                :class="`v-${opt.letter.toLowerCase()}`"
-                                :style="{ '--type': `#${item.color}` }"
-                            >
-                                <div class="media">
-                                    <img
-                                        :src="item.image ?? '/images/placeholder/shape.svg'"
-                                        :alt="item.title"
-                                    />
-                                </div>
-                                <div class="body">
-                                    <div class="meta">
-                                        <span class="date">
-                                            <span class="d">{{ item.day }}</span>
-                                            <span class="m">{{ item.month }}</span>
-                                            <span class="y">{{ item.year }}</span>
-                                            <span class="t">{{ item.time }}</span>
-                                        </span>
-                                        <span class="label">{{ item.type }}</span>
-                                    </div>
-                                    <h3 class="title">{{ item.title }}</h3>
-                                    <p class="excerpt">{{ item.excerpt }}</p>
-                                </div>
-                            </a>
-                        </div>
-                    </template>
-                </SectionCard>
-            </div>
-        </section>
-
-        <!-- detail pass: at grid size the fine differences are invisible -->
-        <section class="pad-opt pad-opt-plain">
-            <div class="shell">
-                <div class="head">
-                    <span class="pad-badge">DETAIL</span>
-                    <h2 class="pad-title">Every option, one card large</h2>
-                    <p class="note">The long title with the long label, at reading size.</p>
-                </div>
-                <div v-for="opt in options" :key="`big-${opt.letter}`" class="detail">
-                    <span class="detail-label">{{ opt.letter }}</span>
-                    <a
-                        href="#"
-                        class="card card-lg"
-                        :class="`v-${opt.letter.toLowerCase()}`"
-                        :style="{ '--type': `#${items[5].color}` }"
-                    >
-                        <div class="media">
-                            <img :src="items[5].image ?? '/images/placeholder/shape.svg'" alt="" />
-                        </div>
-                        <div class="body">
-                            <div class="meta">
-                                <span class="date">
-                                    <span class="d">{{ items[5].day }}</span>
-                                    <span class="m">{{ items[5].month }}</span>
-                                    <span class="y">{{ items[5].year }}</span>
-                                    <span class="t">{{ items[5].time }}</span>
-                                </span>
-                                <span class="label">{{ items[5].type }}</span>
-                            </div>
-                            <h3 class="title">{{ items[5].title }}</h3>
-                            <p class="excerpt">{{ items[5].excerpt }}</p>
-                        </div>
-                    </a>
-                    <a
-                        href="#"
-                        class="card card-lg"
-                        :class="`v-${opt.letter.toLowerCase()}`"
-                        :style="{ '--type': `#${items[3].color}` }"
-                    >
-                        <div class="media">
-                            <img :src="items[3].image ?? '/images/placeholder/shape.svg'" alt="" />
-                        </div>
-                        <div class="body">
-                            <div class="meta">
-                                <span class="date">
-                                    <span class="d">{{ items[3].day }}</span>
-                                    <span class="m">{{ items[3].month }}</span>
-                                    <span class="y">{{ items[3].year }}</span>
-                                    <span class="t">{{ items[3].time }}</span>
-                                </span>
-                                <span class="label">{{ items[3].type }}</span>
-                            </div>
-                            <h3 class="title">{{ items[3].title }}</h3>
-                            <p class="excerpt">{{ items[3].excerpt }}</p>
-                        </div>
-                    </a>
-                </div>
+            <div class="grid3">
+                <a
+                    v-for="a in row1"
+                    :key="a.id"
+                    href="#"
+                    class="hc"
+                    :class="`hv-${opt.n}`"
+                    :style="{ '--type': `#${a.color}` }"
+                    @click.prevent
+                >
+                    <div class="hc-photo">
+                        <img :src="photo(a)" alt="" />
+                    </div>
+                    <div class="hc-body">
+                        <span class="hc-title">{{ a.summary }}</span>
+                        <span class="hc-facts">
+                            <span class="hc-where">{{ lineWhen(a) }} · {{ place(a) }}</span>
+                            <span class="hc-dot" aria-hidden="true">·</span>
+                            <span class="hc-type" :style="{ '--type': `#${a.color}` }">{{
+                                a.label
+                            }}</span>
+                        </span>
+                        <span class="hc-teaser">{{ teaserOf(a) }}</span>
+                    </div>
+                </a>
             </div>
         </section>
     </div>
 </template>
 
-<script setup lang="ts">
-import SectionCard from '@/components/ui/SectionCard.vue'
-import TileCard from '@/components/ui/TileCard.vue'
-
-interface Option {
-    letter: string
-    name: string
-    note: string
-    tint: 'light' | 'plain'
+<style scoped>
+.pad {
+    padding-block: 2.4rem 6rem;
+    color: var(--p-text-color);
 }
 
-const options: Option[] = [
-    {
-        letter: 'A',
-        name: 'Plain sentence case',
-        note: 'Caps and tracking gone from both strings; the colour drops to a 6px dot in front of the label. Nothing is emphasised, so the title is the only loud thing.',
-        tint: 'light',
-    },
-    {
-        letter: 'B',
-        name: 'Day weighted',
-        note: 'The number carries the weight: the day at 700 and full contrast, “Nov 2026” grey, the label plain grey sentence case. Tabular figures, so the dates line up down the column.',
-        tint: 'plain',
-    },
-    {
-        letter: 'C',
-        name: 'Colour kept',
-        note: 'The label keeps the activity colour but loses the caps and the bold — 600 at 13.4px sentence case. The date stays a plain grey line.',
-        tint: 'light',
-    },
-    {
-        letter: 'D',
-        name: 'Real small caps',
-        note: 'Inter’s own small-cap glyphs (font-variant-caps), so the string is set in caps that are drawn for it, with no letter-spacing to fake it. Label in the activity colour.',
-        tint: 'plain',
-    },
-]
-
-/** Real content, pulled from staging: titles, dates, start times, type labels and colours. */
-const items = [
-    {
-        id: '7967',
-        iso: '2026-11-29T12:00:00+00:00',
-        day: 29,
-        month: 'Nov',
-        year: '2026',
-        time: '13:00',
-        type: 'Social',
-        color: '099a2b',
-        title: 'Feutenmarathon',
-        excerpt:
-            'Thirteen hours of Mercurius: the M-Basement turns into the corporate world of Feuten, and you get lasagna out of it.',
-        image: null as string | null,
-    },
-    {
-        id: '7975',
-        iso: '2026-11-30T17:00:00+00:00',
-        day: 30,
-        month: 'Nov',
-        year: '2026',
-        time: '18:00',
-        type: 'Social',
-        color: '099a2b',
-        title: 'Pepernoten Baking Workshop',
-        excerpt:
-            'The Cooking Club brings the ovens and the ingredients, you bring nothing and take a bag of pepernoten home.',
-        image: null as string | null,
-    },
-    {
-        id: '7979',
-        iso: '2026-12-02T19:00:00+00:00',
-        day: 2,
-        month: 'Dec',
-        year: '2026',
-        time: '20:00',
-        type: 'Social',
-        color: '099a2b',
-        title: 'Freshmen Ice Skating',
-        excerpt:
-            'Two hours on the ice at IJsbaan Twente. Bring gloves and a beanie, hire skates there if you have none.',
-        image: 'https://media.ia.utwente.nl/amelie/activities/icon/freshman_skating_poster.png',
-    },
-    {
-        id: '7974',
-        iso: '2026-12-03T07:30:00+00:00',
-        day: 3,
-        month: 'Dec',
-        year: '2026',
-        time: '08:30',
-        type: 'Career',
-        color: '2450a8',
-        title: 'Voortman Steel Excursion',
-        excerpt:
-            'A morning inside a steel fabricator that builds its own machines, robots and software for the whole line.',
-        image: null as string | null,
-    },
-    {
-        id: '7976',
-        iso: '2026-12-08T16:00:00+00:00',
-        day: 8,
-        month: 'Dec',
-        year: '2026',
-        time: '17:00',
-        type: 'Social',
-        color: '099a2b',
-        title: 'Sinterklaas Drink',
-        excerpt:
-            'The Saint stays a week longer for us. Sit on his lap, take a gift, complain about the poem.',
-        image: null as string | null,
-    },
-    {
-        id: '7980',
-        iso: '2026-12-09T18:30:00+00:00',
-        day: 9,
-        month: 'Dec',
-        year: '2026',
-        time: '19:30',
-        type: 'General',
-        color: '372652',
-        title: 'General Members Meeting (GMM)',
-        excerpt:
-            'The annual report of 2025-2026 gets discussed. The documents go up two weeks ahead on the GMM page.',
-        image: null as string | null,
-    },
-]
-</script>
-
-<style scoped>
-/* ---------- pad chrome: deliberately plain ---------- */
 .shell {
-    width: 100%;
     max-width: var(--content-max-width);
     margin-inline: auto;
     padding-inline: 2.5rem;
 }
 
-.pad-intro {
-    padding-block: 2.4rem 1.6rem;
-}
-
-.pad-h1 {
-    font-size: 2.6rem;
+.intro h1 {
+    font-size: var(--text-page-title);
     font-weight: 800;
+    margin-bottom: 0.9rem;
 }
 
-.pad-sub {
-    max-width: 96rem;
-    margin-top: 0.6rem;
-    font-size: 1.5rem;
+.intro p {
+    max-width: 92ch;
+    font-size: 1.45rem;
+    line-height: 1.55;
     color: var(--p-text-muted-color);
 }
 
-.pad-opt {
+.intro b {
+    color: var(--p-text-color);
+}
+
+.opt {
+    max-width: var(--content-max-width);
+    margin: 2.6rem auto 0;
+    padding: 2rem 2.5rem 2.2rem;
     border-top: 2px solid var(--p-text-color);
-    padding-block: 2.2rem 2.8rem;
 }
 
-.pad-opt-light {
-    background: var(--p-page-highlight);
+.opt:nth-of-type(even) {
+    background: var(--p-page-highlight, #f0f2f8);
 }
 
-.head {
+.opt-head {
     display: flex;
-    flex-wrap: wrap;
     align-items: baseline;
-    gap: 0.8rem;
-    margin-bottom: 1.2rem;
+    gap: 1rem;
+    margin-bottom: 1.4rem;
 }
 
-.pad-badge {
+.opt-badge {
+    flex: 0 0 auto;
     background: var(--p-text-color);
-    color: var(--p-page-background);
-    padding: 0.35rem 0.7rem;
-    font-size: 1.1rem;
+    color: var(--p-page-tile, #fff);
+    font-size: 1.15rem;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.12em;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
 }
 
-.pad-title {
-    font-size: 2.1rem;
+.opt-name {
+    font-size: var(--text-section);
     font-weight: 800;
 }
 
-.note {
-    flex-basis: 100%;
-    max-width: 100rem;
-    font-size: 1.4rem;
+.opt-note {
+    font-size: 1.35rem;
     color: var(--p-text-muted-color);
 }
 
-/* ---------- one grid for every option ---------- */
-.grid {
+.grid3 {
     display: grid;
-    gap: 0.8rem;
-    padding-bottom: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.7rem;
 }
 
-@media (min-width: 76.8rem) {
-    .grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-}
+/* ---------- the card, exactly as it ships ---------- */
 
-/* ---------- the shipping card geometry: photo plate right, text left ---------- */
-.card {
+.hc {
     display: flex;
     flex-direction: row-reverse;
-    align-items: stretch;
-    min-width: 0;
+    min-height: 13.6rem;
+    background: var(--p-page-tile, #fff);
+    border: 1px solid #c3cad8;
+    border-radius: 4px;
     overflow: hidden;
-    border: 1px solid var(--p-content-border-color);
-    border-radius: var(--border-radius);
-    background: var(--p-page-tile);
-    color: inherit;
+    color: var(--p-text-color);
     text-decoration: none;
+    cursor: pointer;
+    transition:
+        border-color 160ms ease,
+        background-color 160ms ease;
 }
 
-.media {
-    display: flex;
-    flex: none;
-    align-items: center;
-    justify-content: center;
-    width: 33.333%;
-    max-width: 33.333%;
-    background: #fff;
-    padding: 0.6rem;
+.hc-photo {
+    position: relative;
+    flex: 0 0 33%;
+    align-self: stretch;
+    background: var(--p-page-highlight, #f0f2f8);
 }
 
-.media img {
-    display: block;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+.hc-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.body {
+.hc-body {
     display: flex;
     flex: 1;
-    flex-direction: column;
     min-width: 0;
+    flex-direction: column;
     gap: 0.35rem;
     padding: 0.9rem 1rem;
 }
 
-.meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.6rem;
-}
-
-.title {
-    font-size: 1.9rem;
+.hc-title {
+    font-size: var(--text-card-title);
     font-weight: 700;
     line-height: 1.25;
-    letter-spacing: -0.005em;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    overflow: hidden;
 }
 
-.excerpt {
-    font-size: 1.4rem;
-    line-height: 1.4;
-    color: var(--p-text-muted-color);
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    overflow: hidden;
-}
-
-.card:hover .title {
-    text-decoration: underline;
-    text-underline-offset: 2px;
-}
-
-/* the parts every option shares: the date is read as one string, and the
-   label never wraps to a second line */
-.date {
+.hc-facts {
     display: flex;
-    align-items: baseline;
-    gap: 0.3rem;
+    align-items: center;
+    gap: 0.4rem;
+    overflow: hidden;
+    font-size: 1.2rem;
+    line-height: 1.35;
+    color: var(--p-text-muted-color, #475569);
+}
+
+.hc-where {
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
 }
 
-.label {
-    white-space: nowrap;
+.hc-dot {
+    flex: 0 0 auto;
+    opacity: 0.6;
 }
 
-/* ---------- A · plain sentence case ---------- */
-.v-a .date {
-    font-size: 1.4rem;
-    font-weight: 400;
-    color: var(--p-text-muted-color);
+.hc-type {
+    flex: 0 0 auto;
+    font-weight: 600;
+    color: color-mix(in srgb, var(--type) 45%, var(--p-text-color));
 }
 
-.v-a .label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.35rem;
-    font-weight: 400;
-    color: var(--p-text-muted-color);
+.hc-teaser {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    max-height: 3.64rem;
+    font-size: 1.3rem;
+    line-height: 1.4;
+    color: var(--p-text-muted-color, #55607a);
 }
 
-.v-a .label::before {
+/* ---------- 0 · what ships now: colour, glow and underline ---------- */
+
+.hv-0:hover {
+    border-color: color-mix(in srgb, var(--type) 45%, #cbd5e1);
+    box-shadow: 0 4px 12px -6px color-mix(in srgb, var(--type) 45%, transparent);
+}
+
+.hv-0:hover .hc-title {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* ---------- 1 · the title underlines, nothing else moves ---------- */
+
+.hv-1:hover .hc-title {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* ---------- 2 · the frame goes to ink, and the title underlines ---------- */
+
+.hv-2:hover {
+    border-color: var(--p-text-color);
+}
+
+.hv-2:hover .hc-title {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* ---------- 3 · the frame goes to ink, nothing else ---------- */
+
+.hv-3:hover {
+    border-color: var(--p-text-color);
+}
+
+/* ---------- 4 · the site-wide sliding bar under the title ---------- */
+
+.hv-4 .hc-title {
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+    padding-bottom: 0.2rem;
+}
+
+.hv-4 .hc-title::after {
     content: '';
-    width: 0.6rem;
-    height: 0.6rem;
-    border-radius: 100%;
-    /* mixed towards the text colour, so one declaration fits both themes */
-    background: color-mix(in srgb, var(--type) 72%, var(--p-text-color));
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 0.2rem;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 300ms ease;
 }
 
-/* ---------- B · day weighted ---------- */
-.v-b .date {
-    font-size: 1.4rem;
-    color: var(--p-text-muted-color);
+.hv-4:hover .hc-title::after {
+    transform: scaleX(1);
 }
 
-.v-b .d {
-    font-size: 1.7rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: var(--p-text-color);
+/* ---------- 5 · the paper darkens one step ---------- */
+
+.hv-5:hover {
+    background: var(--p-page-highlight, #f0f2f8);
 }
 
-.v-b .label {
-    font-size: 1.35rem;
-    font-weight: 400;
-    color: var(--p-text-muted-color);
+.hv-5:hover .hc-title {
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
-/* ---------- C · colour kept, caps dropped ---------- */
-.v-c .date {
-    font-size: 1.4rem;
-    color: var(--p-text-muted-color);
+/* ---------- 7 · sliding bar plus the ink frame ---------- */
+
+.hv-7:hover {
+    border-color: var(--p-text-color);
 }
 
-.v-c .label {
-    font-size: 1.4rem;
-    font-weight: 600;
-    /* a navy label is invisible on a navy card; mixed with the text colour it
-       darkens on light and lightens on dark without a .dark rule */
-    color: color-mix(in srgb, var(--type) 62%, var(--p-text-color));
+.hv-7 .hc-title {
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+    padding-bottom: 0.2rem;
 }
 
-/* ---------- D · real small caps ----------
-   `all-small-caps` only shrinks the lower-case letters, so a title-case
-   string sets a full-height “D” next to small “e c”. Lower-casing first is
-   what makes the run even. */
-.v-d .date,
-.v-d .label {
-    font-variant-caps: all-small-caps;
-    text-transform: lowercase;
+.hv-7 .hc-title::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 0.2rem;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 300ms ease;
 }
 
-.v-d .date {
-    font-size: 1.5rem;
-    color: var(--p-text-muted-color);
+.hv-7:hover .hc-title::after {
+    transform: scaleX(1);
 }
 
-.v-d .label {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: color-mix(in srgb, var(--type) 62%, var(--p-text-color));
+/* ---------- 6 · nothing but the pointer ---------- */
+
+.hv-6:hover {
+    border-color: #c3cad8;
 }
 
-/* ---------- detail pass ---------- */
-.detail {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 1.2rem;
-    margin-bottom: 1.6rem;
-}
+@media (max-width: 60rem) {
+    .grid3 {
+        grid-template-columns: 1fr;
+    }
 
-.detail-label {
-    width: 2.4rem;
-    flex: none;
-    padding-top: 0.4rem;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--p-text-muted-color);
-}
-
-.card-lg {
-    width: 46rem;
-    flex: none;
-}
-
-.card-lg .title {
-    font-size: 2rem;
+    .opt-head {
+        flex-wrap: wrap;
+    }
 }
 </style>
