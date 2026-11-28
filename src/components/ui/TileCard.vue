@@ -1,8 +1,7 @@
 <template>
     <component :is="wrapperElement" v-bind="wrapperProps" class="group @container block h-full">
         <Card
-            class="relative h-full overflow-hidden border border-slate-300 bg-[var(--p-page-tile)]! text-slate-900! transition-colors group-hover:border-primary dark:border-[var(--p-content-border-color)] dark:text-[var(--p-text-color)]! dark:[--p-text-muted-color:var(--p-surface-200)]"
-            :class="{ 'tile-glow': glows }"
+            class="relative h-full overflow-hidden border border-slate-300 bg-[var(--p-page-tile)]! text-slate-900! transition-colors dark:border-[var(--p-content-border-color)] dark:text-[var(--p-text-color)]! dark:[--p-text-muted-color:var(--p-surface-200)]"
             :style="typeVars"
             :pt="{
                 body: { class: 'flex h-full flex-col p-0' },
@@ -70,7 +69,7 @@
                     :class="!isLogo ? compactBodyClasses : ''"
                 >
                     <span
-                        v-if="props.loading"
+                        v-if="props.loading && !hasFacts"
                         class="text-[1.1rem] font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-[var(--p-text-muted-color)]"
                     >
                         <Skeleton height="1.4rem" width="45%" />
@@ -81,51 +80,102 @@
                         >{{ props.kicker }}</span
                     >
 
-                    <!-- Date on the left, activity type on the right. The type is a
-                         plain coloured word: the colour is carried by the glow the
-                         card gets while it is hovered, not by a badge. -->
-                    <div
-                        v-if="!props.loading && (props.date || labelText)"
-                        class="flex flex-row items-center justify-between gap-[0.6rem]"
-                    >
-                        <span
-                            v-if="props.date"
-                            class="text-[1.2rem] font-medium uppercase tracking-[0.1em] text-slate-500 tabular-nums dark:text-[var(--p-text-muted-color)]"
-                        >
-                            {{ dateParts.day }} {{ dateParts.monthYear }}
-                        </span>
-                        <span
-                            v-if="labelText"
-                            class="type-label text-[0.95rem] font-bold uppercase leading-[1.5] tracking-[0.12em]"
-                            :style="typeVars"
-                            >{{ labelText }}</span
-                        >
-                    </div>
-
-                    <div class="flex flex-row items-start justify-between gap-[0.5rem]">
-                        <template v-if="props.loading">
-                            <div class="w-full">
-                                <Skeleton height="2rem" width="90%" />
-                                <Skeleton height="1.9rem" width="55%" class="mt-1" />
-                            </div>
-                        </template>
+                    <!--
+                        An activity card leads with its title and answers "when and
+                        where" on one quiet line underneath: no field labels, no end
+                        time, start time only. The type rides that line instead of
+                        getting a row of its own.
+                    -->
+                    <template v-if="hasFacts">
+                        <!-- The bars are the rendered line boxes of the real rows, not
+                             their font sizes: a title line is ~2.4rem tall, the facts
+                             line 1.6rem, a teaser line 1.95rem. Anything smaller and the
+                             tile grows the moment the data lands. -->
+                        <div v-if="props.loading" class="w-full">
+                            <Skeleton height="2.4rem" width="90%" />
+                            <Skeleton height="2.4rem" width="55%" />
+                        </div>
                         <span
                             v-else-if="props.title"
-                            class="line-clamp-2 min-w-0 flex-1 text-card-title font-bold leading-tight group-hover:underline group-hover:underline-offset-2"
+                            class="tile-title line-clamp-2 min-w-0 text-card-title font-bold leading-tight"
                             >{{ props.title }}</span
                         >
-                    </div>
 
-                    <div v-if="props.loading" class="text-meta">
-                        <Skeleton height="1.5rem" width="100%" />
-                        <Skeleton height="1.5rem" width="80%" class="mt-1" />
-                    </div>
-                    <div
-                        v-else-if="props.subtitle || $slots.default"
-                        class="m-0 text-meta leading-[1.4] text-slate-600 dark:text-[var(--p-text-muted-color)] [&_li]:m-0 [&_li]:inline [&_p+p]:before:content-['_'] [&_p]:m-0 [&_p]:inline"
-                    >
-                        <slot>{{ props.subtitle }}</slot>
-                    </div>
+                        <div v-if="props.loading" class="w-full">
+                            <Skeleton height="1.6rem" width="70%" />
+                        </div>
+                        <div
+                            v-else
+                            class="flex flex-row items-center gap-[0.4rem] overflow-hidden text-[1.2rem] leading-[1.35] text-slate-600 dark:text-[var(--p-text-muted-color)]"
+                        >
+                            <span class="min-w-0 truncate tabular-nums">{{ props.facts }}</span>
+                            <template v-if="labelText">
+                                <span aria-hidden="true" class="shrink-0 opacity-60">·</span>
+                                <span class="type-label shrink-0 font-semibold" :style="typeVars">{{
+                                    labelText
+                                }}</span>
+                            </template>
+                        </div>
+
+                        <div v-if="props.loading" class="w-full">
+                            <Skeleton height="1.95rem" width="100%" />
+                            <Skeleton height="1.95rem" width="80%" />
+                        </div>
+                        <div
+                            v-else-if="props.subtitle || $slots.default"
+                            class="m-0 text-meta leading-[1.4] text-slate-600 dark:text-[var(--p-text-muted-color)] [&_li]:m-0 [&_li]:inline [&_p+p]:before:content-['_'] [&_p]:m-0 [&_p]:inline"
+                        >
+                            <slot>{{ props.subtitle }}</slot>
+                        </div>
+                    </template>
+
+                    <template v-else>
+                        <!-- Date on the left, activity type on the right. The type is a
+                             plain coloured word: the colour is carried by the glow the
+                             card gets while it is hovered, not by a badge. -->
+                        <div
+                            v-if="!props.loading && (props.date || labelText)"
+                            class="flex flex-row items-center justify-between gap-[0.6rem]"
+                        >
+                            <span
+                                v-if="props.date"
+                                class="text-[1.2rem] font-medium uppercase tracking-[0.1em] text-slate-500 tabular-nums dark:text-[var(--p-text-muted-color)]"
+                            >
+                                {{ dateParts.day }} {{ dateParts.monthYear }}
+                            </span>
+                            <span
+                                v-if="labelText"
+                                class="type-label text-[0.95rem] font-bold uppercase leading-[1.5] tracking-[0.12em]"
+                                :style="typeVars"
+                                >{{ labelText }}</span
+                            >
+                        </div>
+
+                        <div class="flex flex-row items-start justify-between gap-[0.5rem]">
+                            <template v-if="props.loading">
+                                <div class="w-full">
+                                    <Skeleton height="2rem" width="90%" />
+                                    <Skeleton height="1.9rem" width="55%" class="mt-1" />
+                                </div>
+                            </template>
+                            <span
+                                v-else-if="props.title"
+                                class="tile-title line-clamp-2 min-w-0 flex-1 text-card-title font-bold leading-tight"
+                                >{{ props.title }}</span
+                            >
+                        </div>
+
+                        <div v-if="props.loading" class="text-meta">
+                            <Skeleton height="1.5rem" width="100%" />
+                            <Skeleton height="1.5rem" width="80%" class="mt-1" />
+                        </div>
+                        <div
+                            v-else-if="props.subtitle || $slots.default"
+                            class="m-0 text-meta leading-[1.4] text-slate-600 dark:text-[var(--p-text-muted-color)] [&_li]:m-0 [&_li]:inline [&_p+p]:before:content-['_'] [&_p]:m-0 [&_p]:inline"
+                        >
+                            <slot>{{ props.subtitle }}</slot>
+                        </div>
+                    </template>
 
                     <!-- a plain .link: the sliding underline is the site-wide one -->
                     <span
@@ -176,6 +226,9 @@ interface Props {
     showMedia?: boolean
     /** Date shown in the blue block, on the media or next to the title. */
     date?: number | string
+    /** A single facts line under the title (when and where). When set, the title
+     *  leads the card and `date`/`label` collapse into this line instead. */
+    facts?: string
     /** Renders the pinned badge next to the title. */
     pinned?: boolean
     to?: RouteLocationRaw
@@ -240,9 +293,11 @@ const imageAspect = computed<ImageAspect>(() => {
             return '4/3'
     }
 })
+/** An empty string still selects this layout, which the loading tiles rely on. */
+const hasFacts = computed(() => props.facts !== undefined)
 const dateParts = computed(() => formattedDateBlock(props.date ?? 0))
 const labelText = computed(() => props.label?.text ?? '')
-/// The card's accent: the label colour, reused by the glow and the type word.
+/// The card's accent: the label colour, used by the type word.
 const typeVars = computed(() => (props.label ? { '--type': `#${props.label.color}` } : undefined))
 
 /**
@@ -252,10 +307,9 @@ const typeVars = computed(() => (props.label ? { '--type': `#${props.label.color
 const hasLink = computed(() => Boolean(props.to || props.href))
 
 /**
- * The type colour may not turn a grid of cards into a colour chart, so it is
- * a plain word at rest and a short, soft shadow while the card is hovered.
+ * The type colour may not turn a grid of cards into a colour chart: it stays a
+ * plain word on the facts line and never touches the frame.
  */
-const glows = computed(() => hasLink.value && Boolean(labelText.value))
 const showFooter = computed(() => hasLink.value && !props.hideAction && !props.loading)
 const wrapperElement = computed(() => {
     if (props.to) {
@@ -280,29 +334,48 @@ const wrapperProps = computed(() => {
 </script>
 
 <style scoped>
-/* The type word carries the label colour, and the glow repeats it. */
+/*
+ * The type word keeps its hue but is mixed towards the theme's own text colour:
+ * because --p-text-color flips, one declaration darkens the word on a light card
+ * and lightens it on a dark one. A `:global(.dark)` rule cannot be used for this —
+ * it is silently dropped inside a scoped block — and the raw type colour measures
+ * 1.06:1 on a dark card for a dark label such as #372652.
+ */
 .type-label {
-    color: var(--type);
-}
-
-/* The same hue mixed towards white: a navy label is invisible on a dark card. */
-:global(.dark) .type-label {
-    color: color-mix(in srgb, var(--type) 45%, white);
+    color: color-mix(in srgb, var(--type) 45%, var(--p-text-color));
 }
 
 /*
- * The hover border is the type colour muted towards the neutral card border,
- * plus a short, soft shadow. Unlayered on purpose, so it wins over the
- * group-hover border that Card gets from its utility classes.
+ * Hover, and nothing else: the frame goes to the theme's ink colour (the same
+ * declaration darkens the frame on a light card and flips it to white on a dark
+ * one) and a 2px rule grows under the title from the left. No shadow, no lift,
+ * no colour — a coloured glow is decoration that repeats the type word.
+ *
+ * The rule follows the title block rather than the words, because the title is
+ * line-clamped and cannot become an inline-block without losing the clamp.
  */
-.tile-glow:hover {
-    border-color: color-mix(in srgb, var(--type) 45%, var(--p-content-border-color, #cbd5e1));
-    box-shadow: 0 4px 12px -6px color-mix(in srgb, var(--type) 45%, transparent);
+.group:hover :deep(.p-card) {
+    border-color: var(--p-text-color);
 }
 
-.tile-glow {
-    transition:
-        box-shadow 180ms ease,
-        border-color 180ms ease;
+.tile-title {
+    position: relative;
+    padding-bottom: 0.15rem;
+}
+
+.tile-title::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 0.2rem;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 300ms ease;
+}
+
+.group:hover .tile-title::after {
+    transform: scaleX(1);
 }
 </style>

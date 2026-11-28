@@ -17,7 +17,15 @@
                     v-if="loading"
                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pb-4"
                 >
-                    <TileCard v-for="n in perpage" :key="n" loading />
+                    <TileCard
+                        v-for="n in perpage"
+                        :key="n"
+                        loading
+                        facts=""
+                        aspect="video"
+                        hide-action
+                        show-media
+                    />
                 </div>
 
                 <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pb-4">
@@ -25,7 +33,7 @@
                         v-for="item in activityItems"
                         :key="item!.id"
                         :title="item!.summary ?? ''"
-                        :date="item!.begin"
+                        :facts="activityFacts(item!.begin, item!.location)"
                         aspect="video"
                         hide-action
                         show-media
@@ -64,7 +72,7 @@ import SectionCard from '../ui/SectionCard.vue'
 import Pagination from '../ui/Pagination.vue'
 import TileCard from '../ui/TileCard.vue'
 import { useQuery } from '@/composables/queries'
-import { markedText } from '@/functions/functions.ts'
+import { activityFacts, markedText } from '@/functions/functions.ts'
 import { imageSrc } from '@/composables/util'
 const { $gettext } = useGettext()
 const perpage = ref(6)
@@ -88,8 +96,10 @@ watch(
         const rendered: Record<string, string> = {}
 
         for (const item of items) {
-            if (item?.id && item.description) {
-                rendered[item.id] = await markedText(item.description)
+            if (item?.id && (item.promo || item.description)) {
+                // the promo is written to be a teaser, so it wins; the
+                // description is the fallback when nobody wrote one
+                rendered[item.id] = await markedText(item.promo || item.description!)
             }
         }
 

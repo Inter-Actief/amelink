@@ -1,14 +1,22 @@
 <template>
     <div class="grid grid-cols-1 xl:grid-cols-2 gap-3">
         <template v-if="loading">
-            <TileCard v-for="_ in perpage" :key="`skeleton-${_}`" loading />
+            <TileCard
+                v-for="_ in perpage"
+                :key="`skeleton-${_}`"
+                loading
+                facts=""
+                aspect="video"
+                hide-action
+                show-media
+            />
         </template>
         <template v-else-if="activityItems">
             <TileCard
                 v-for="item in activityItems"
                 :key="item?.id"
                 :title="item!.summary ?? ''"
-                :date="item!.begin"
+                :facts="activityFacts(item!.begin, item!.location)"
                 :label="{
                     color: item!.activityLabel?.color ?? '1d428a',
                     text: item!.activityLabel?.name ?? '',
@@ -33,7 +41,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { markedText } from '@/functions/functions.ts'
+import { activityFacts, markedText } from '@/functions/functions.ts'
 
 import TileCard from '../ui/TileCard.vue'
 import { imageSrc } from '@/composables/util'
@@ -53,7 +61,11 @@ watch(
     async (newItem) => {
         if (newItem?.results) {
             for (const item of newItem.results) {
-                processedDescriptions.value[item?.id!] = await markedText(item!.description!)
+                // the promo is written to be a teaser, so it wins; the
+                // description is the fallback when nobody wrote one
+                processedDescriptions.value[item?.id!] = await markedText(
+                    item!.promo || item!.description!,
+                )
             }
         }
     },
