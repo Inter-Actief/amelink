@@ -140,16 +140,6 @@ const router = createRouter({
                 }
             },
         },
-        // TEMPORARY design pad — remove with src/views/DesignView.vue
-        ...(import.meta.env.DEV
-            ? [
-                  {
-                      path: '/design',
-                      name: 'design',
-                      component: () => import('@/views/DesignView.vue'),
-                  },
-              ]
-            : []),
         {
             path: '/:path(.*)*',
             name: 'notfound',
